@@ -14,6 +14,7 @@ from datetime import datetime
 from typing import List, Optional
 
 from engine.ingest.base import RawClip
+from engine.ingest.fingerprint import url_fingerprint
 
 
 DATABASE_PATH = "data/clip_empire.db"
@@ -43,6 +44,19 @@ class DedupTracker:
             )
         """)
         conn.execute("CREATE INDEX IF NOT EXISTS idx_source_clips_url_hash ON source_clips(url_hash)")
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS clip_fingerprints (
+                clip_id TEXT PRIMARY KEY,
+                channel_name TEXT,
+                url_fp TEXT,
+                visual_fp TEXT,
+                transcript_fp TEXT,
+                created_at TEXT NOT NULL
+            )
+        """)
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_clip_fp_url ON clip_fingerprints(url_fp)")
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_clip_fp_visual ON clip_fingerprints(visual_fp)")
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_clip_fp_transcript ON clip_fingerprints(transcript_fp)")
         conn.commit()
         conn.close()
 
@@ -52,19 +66,17 @@ class DedupTracker:
 
         Strips query params that don't affect identity (like ?si= tracking).
         """
-        import hashlib
         # Strip common tracking params
         import urllib.parse as up
         try:
             parsed = up.urlparse(url)
-            # Keep only path + video ID params
             qs = up.parse_qs(parsed.query)
             keep = {k: v for k, v in qs.items() if k in ("v", "list", "id")}
             clean = parsed._replace(query=up.urlencode(keep, doseq=True), fragment="")
             normalized = up.urlunparse(clean).rstrip("/")
         except Exception:
             normalized = url
-        return hashlib.sha256(normalized.encode()).hexdigest()[:16]
+        return url_fingerprint(normalized)[:16]
 
     def is_used(self, clip: RawClip, channel_name: str = "") -> bool:
         """Return True if this source URL has been used by ANY channel."""
@@ -106,6 +118,51 @@ class DedupTracker:
             result.append(clip)
         return result
 
+    def is_near_duplicate(self, clip: RawClip) -> bool:
+        """Scaffold for dedup v2.
+
+        Current behavior: exact match on any non-empty fingerprint field.
+        Future behavior can swap to distance-based visual/transcript matching.
+        """
+        fingerprints = [
+            ("url_fp", clip.url_fingerprint),
+            ("visual_fp", clip.visual_fingerprint),
+            ("transcript_fp", clip.transcript_fingerprint),
+        ]
+        conn = sqlite3.connect(self.db_path)
+        try:
+            for col, fp in fingerprints:
+                if not fp:
+                    continue
+                cur = conn.execute(f"SELECT 1 FROM clip_fingerprints WHERE {col} = ? LIMIT 1", (fp,))
+                if cur.fetchone() is not None:
+                    return True
+            return False
+        finally:
+            conn.close()
+
+    def register_fingerprint(self, clip: RawClip, channel_name: str) -> None:
+        conn = sqlite3.connect(self.db_path)
+        try:
+            conn.execute(
+                """
+                INSERT OR REPLACE INTO clip_fingerprints
+                    (clip_id, channel_name, url_fp, visual_fp, transcript_fp, created_at)
+                VALUES (?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    clip.clip_id,
+                    channel_name,
+                    clip.url_fingerprint,
+                    clip.visual_fingerprint,
+                    clip.transcript_fingerprint,
+                    datetime.utcnow().isoformat(),
+                ),
+            )
+            conn.commit()
+        finally:
+            conn.close()
+
     def mark_used(self, clip: RawClip, channel_name: str) -> None:
         """Record a clip as used by a channel."""
         url_hash = self._url_hash(clip.source_url)
@@ -133,3 +190,4 @@ class DedupTracker:
             conn.commit()
         finally:
             conn.close()
+        self.register_fingerprint(clip, channel_name)

@@ -6,6 +6,7 @@ Purpose-built content engine for the Clip Empire system (not reused from old cli
 
 1. **Ingest** source clips from multi-platform sources (YouTube/TikTok/Reddit/Twitter via `yt-dlp`)
 2. **Deduplicate globally** so a source clip is never reused across channels
+3. **Dedup v2 scaffold** stores URL + visual/transcript fingerprints for future near-dup matching
 3. **Transform** each clip:
    - 9:16 conversion (blurred background for landscape)
    - Whisper captions (GPU if available, CPU fallback)

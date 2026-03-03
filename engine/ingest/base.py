@@ -21,6 +21,9 @@ class RawClip:
     width: int = 0                  # Video width
     height: int = 0                 # Video height
     metadata: Dict[str, Any] = field(default_factory=dict)
+    url_fingerprint: str = ""
+    visual_fingerprint: str = ""
+    transcript_fingerprint: str = ""
 
     @property
     def is_vertical(self) -> bool:

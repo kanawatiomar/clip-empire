@@ -31,6 +31,7 @@ from engine.ingest.dedup import DedupTracker
 from engine.ingest.base import RawClip
 from engine.ingest.trend_radar import TrendRadar
 from engine.ingest.safety import ClipPolicyFilter
+from engine.ingest.fingerprint import url_fingerprint, visual_fingerprint
 from engine.transform.crop import CropTransform
 from engine.transform.caption import CaptionTransform
 from engine.transform.overlay import OverlayTransform
@@ -169,8 +170,13 @@ class Runner:
                 print(f"[runner] No clips from {source_config.get('url','?')[:60]}")
                 continue
 
+            for clip in raw_clips:
+                clip.url_fingerprint = url_fingerprint(clip.source_url)
+                clip.visual_fingerprint = visual_fingerprint(clip.download_path)
+
             # Filter deduplication
             fresh_clips = self.dedup.filter_unused(raw_clips, channel_name=channel_name)
+            fresh_clips = [c for c in fresh_clips if not self.dedup.is_near_duplicate(c)]
             if not fresh_clips:
                 print(f"[runner] All clips already used, trying next source")
                 continue

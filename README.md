@@ -38,3 +38,5 @@ Start here:
 - `docs/ARCHITECTURE.md`
 - `docs/OPS_RUNBOOK.md`
 - `docs/CREATIVE_SYSTEM.md`
+- `docs/OPENCLAW_AGENT_SETUP.md` (new dedicated OpenClaw operator setup)
+- `docs/DISCORD_SERVER_BLUEPRINT.md` (new Discord server/channel structure + posting rules)

@@ -5,6 +5,8 @@
 2. **System design:** `docs/ARCHITECTURE.md`
 3. **Creative + formats:** `docs/CREATIVE_SYSTEM.md`
 4. **Operations:** `docs/OPS_RUNBOOK.md`
+5. **Dedicated OpenClaw setup:** `docs/OPENCLAW_AGENT_SETUP.md`
+6. **Discord organization blueprint:** `docs/DISCORD_SERVER_BLUEPRINT.md`
 
 ## What lives where
 - Project root: `ventures/clip_empire/`

@@ -67,6 +67,7 @@ def main() -> None:
     parser.add_argument("--model", default="auto", help="Whisper model: tiny|base|small|medium|large|auto")
     parser.add_argument("--status", "-s", action="store_true", help="Show channel budget status")
     parser.add_argument("--db", default="data/clip_empire.db", help="Path to SQLite database")
+    parser.add_argument("--trend-radar", action="store_true", help="Enable trend radar supplemental sources")
 
     args = parser.parse_args()
 
@@ -84,6 +85,7 @@ def main() -> None:
         keep_intermediate=args.keep_intermediate,
         model_size=args.model,
         db_path=args.db,
+        trend_radar_enabled=args.trend_radar,
     )
 
     if args.all:

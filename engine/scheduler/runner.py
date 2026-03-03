@@ -29,6 +29,7 @@ from engine.config.sources import CHANNEL_SOURCES, SOURCE_DEFAULTS
 from engine.ingest.ytdlp import YtDlpIngester
 from engine.ingest.dedup import DedupTracker
 from engine.ingest.base import RawClip
+from engine.ingest.trend_radar import TrendRadar
 from engine.transform.crop import CropTransform
 from engine.transform.caption import CaptionTransform
 from engine.transform.overlay import OverlayTransform
@@ -54,10 +55,12 @@ class Runner:
         keep_intermediate: bool = False,
         model_size: str = "auto",
         db_path: str = "data/clip_empire.db",
+        trend_radar_enabled: bool = False,
     ):
         self.dry_run = dry_run
         self.skip_caption = skip_caption
         self.keep_intermediate = keep_intermediate
+        self.trend_radar_enabled = trend_radar_enabled
 
         # Init all pipeline components
         self.budget = BudgetManager(db_path=db_path)
@@ -66,6 +69,7 @@ class Runner:
             download_dir=RAW_DIR,
             cookies_dir=COOKIES_DIR,
         )
+        self.trend_radar = TrendRadar()
         self.crop = CropTransform(output_dir=INTERMEDIATE_DIR)
         self.caption = CaptionTransform(
             model_size=model_size,
@@ -128,6 +132,8 @@ class Runner:
 
         # Get sources for this channel
         sources = CHANNEL_SOURCES.get(channel_name, [])
+        if self.trend_radar_enabled:
+            sources = self.trend_radar.augment_sources(channel_name, list(sources))
         if not sources:
             print(f"[runner] {channel_name}: no sources configured")
             return []

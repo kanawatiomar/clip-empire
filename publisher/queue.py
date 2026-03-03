@@ -1,10 +1,12 @@
 
 import sqlite3
 import uuid
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional, Dict, Any, List
 import json
 import time
+
+from data.migrate import ensure_schema
 
 # Assuming DATABASE_PATH is defined in data/schema.py or similar
 DATABASE_PATH = "data/clip_empire.db"
@@ -20,9 +22,23 @@ def _row_to_dict(cursor: sqlite3.Cursor, row: sqlite3.Row) -> Dict[str, Any]:
     return data
 
 def get_db_connection():
+    # Ensure schema is up-to-date before any DB operations
+    ensure_schema(DATABASE_PATH)
     conn = sqlite3.connect(DATABASE_PATH)
     conn.row_factory = sqlite3.Row
     return conn
+
+
+def _to_utc_epoch_seconds(dt: datetime) -> int:
+    """Convert datetime to UTC epoch seconds.
+
+    - If dt is naive, assume it's local time.
+    - If dt is aware, convert to UTC.
+    """
+    if dt.tzinfo is None:
+        local_tz = datetime.now().astimezone().tzinfo
+        dt = dt.replace(tzinfo=local_tz)
+    return int(dt.astimezone(timezone.utc).timestamp())
 
 def add_publish_job(
     variant_id: str,
@@ -45,15 +61,20 @@ def add_publish_job(
     hashtags_json = json.dumps(hashtags)
 
     try:
+        schedule_at_ts = _to_utc_epoch_seconds(schedule_at)
+
         cursor.execute("""
             INSERT INTO publish_jobs (
                 job_id, variant_id, platform, channel_name, publisher_account, 
-                schedule_at, created_at, updated_at, caption_text, hashtags, render_path, first_frame_hook
+                schedule_at, schedule_at_ts, created_at, updated_at,
+                caption_text, hashtags, render_path, first_frame_hook
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             job_id, variant_id, platform, channel_name, publisher_account,
-            schedule_at.isoformat(), created_at, updated_at, caption_text, hashtags_json, render_path, first_frame_hook
+            schedule_at.isoformat(), schedule_at_ts,
+            created_at, updated_at,
+            caption_text, hashtags_json, render_path, first_frame_hook
         ))
         conn.commit()
         print(f"Added publish job {job_id} for {channel_name} on {platform}.")
@@ -68,28 +89,29 @@ def add_publish_job(
 def get_next_job(platform: str, channel_name: Optional[str] = None) -> Optional[Dict[str, Any]]:
     conn = get_db_connection()
     cursor = conn.cursor()
-    now = datetime.now().isoformat()
+    now_ts = int(time.time())
 
-    # Select a job that is queued, scheduled for now or past, and ready for retry
-    # Order by attempts (prioritize less-attempted) and then schedule_at (prioritize older jobs)
+    # Select a job that is queued, scheduled for now or past, and ready for retry.
+    # Use numeric epoch seconds to avoid timezone/string-compare bugs.
     query = """
-        SELECT * FROM publish_jobs 
-        WHERE status = 'queued' 
-          AND platform = ? 
-          AND schedule_at <= ? 
-          AND (next_retry_at IS NULL OR next_retry_at <= ?) 
+        SELECT pj.*, c.made_for_kids FROM publish_jobs pj
+        JOIN channels c ON pj.channel_name = c.channel_name
+        WHERE pj.status = 'queued'
+          AND pj.platform = ?
+          AND (pj.schedule_at_ts IS NULL OR pj.schedule_at_ts <= ?)
+          AND (pj.next_retry_at_ts IS NULL OR pj.next_retry_at_ts <= ?)
     """
-    params = (platform, now, now)
+    params = (platform, now_ts, now_ts)
 
     if channel_name:
-        query += " AND channel_name = ?"
+        query += " AND pj.channel_name = ?"
         params += (channel_name,)
     
     # Add render_path, caption_text, hashtags, first_frame_hook to the SELECT statement from publish_jobs table
     # if they are not already in the table definition
     # Assuming they are already in publish_jobs table as per the original schema idea. 
     
-    query += " ORDER BY attempts ASC, schedule_at ASC LIMIT 1"
+    query += " ORDER BY attempts ASC, COALESCE(schedule_at_ts, 0) ASC LIMIT 1"
 
     try:
         cursor.execute(query, params)
@@ -173,13 +195,15 @@ def fail_job(job_id: str, error_class: str, error_detail: str) -> None:
             print(f"Publish job {job_id} permanently failed after {current_attempts} attempts.")
             return
 
-        next_retry_at = (datetime.now() + timedelta(minutes=retry_after_minutes)).isoformat()
+        next_retry_dt = datetime.now().astimezone(timezone.utc) + timedelta(minutes=retry_after_minutes)
+        next_retry_at = next_retry_dt.isoformat()
+        next_retry_at_ts = int(next_retry_dt.timestamp())
         
         cursor.execute("""
             UPDATE publish_jobs 
-            SET status = 'queued', last_error = ?, next_retry_at = ?, updated_at = ? 
+            SET status = 'queued', last_error = ?, next_retry_at = ?, next_retry_at_ts = ?, updated_at = ? 
             WHERE job_id = ?
-        """, (error_detail, next_retry_at, updated_at, job_id))
+        """, (error_detail, next_retry_at, next_retry_at_ts, updated_at, job_id))
 
         # Log the failure in publish_results
         result_id = str(uuid.uuid4())

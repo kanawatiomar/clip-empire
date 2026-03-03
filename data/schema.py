@@ -17,6 +17,7 @@ def init_db():
             status TEXT NOT NULL DEFAULT 'active',
             daily_target INTEGER NOT NULL DEFAULT 3,
             format_pack_version TEXT,
+            made_for_kids BOOLEAN NOT NULL DEFAULT 0, -- New field
             created_at TEXT NOT NULL,
             updated_at TEXT NOT NULL
         )
@@ -99,10 +100,12 @@ def init_db():
             channel_name TEXT NOT NULL,
             publisher_account TEXT,
             schedule_at TEXT NOT NULL,
+            schedule_at_ts INTEGER, -- epoch seconds (UTC). Used for comparisons.
             status TEXT NOT NULL DEFAULT 'queued',
             attempts INTEGER NOT NULL DEFAULT 0,
             last_error TEXT,
             next_retry_at TEXT,
+            next_retry_at_ts INTEGER, -- epoch seconds (UTC)
             caption_text TEXT, /* New field */
             hashtags TEXT,    /* New field - stored as JSON string */
             render_path TEXT, /* New field */

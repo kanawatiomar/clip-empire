@@ -11,6 +11,7 @@ CHANNELS = {
         "content_focus": "Stock market chaos, trader breakdowns, financial disasters, massive gains/losses",
         "source_types": ["financial YouTube", "trading streams", "Wall Street drama clips"],
         "tags": ["stocks", "investing", "wallstreet", "finance", "trading", "crash"],
+        "made_for_kids": False,
     },
     "crypto_confessions": {
         "display_name": "Crypto Confessions",
@@ -19,6 +20,7 @@ CHANNELS = {
         "content_focus": "Crypto trader reactions, massive losses, NFT cringe, DeFi disasters",
         "source_types": ["crypto streams", "Twitter/X spaces", "finance YouTube"],
         "tags": ["crypto", "bitcoin", "ethereum", "nft", "defi", "blockchain"],
+        "made_for_kids": False,
     },
     "rich_or_ruined": {
         "display_name": "Rich or Ruined",
@@ -27,6 +29,7 @@ CHANNELS = {
         "content_focus": "Financial transformation stories, lottery winners, bankruptcy tales, overnight millionaires",
         "source_types": ["podcast clips", "documentary moments", "interview highlights"],
         "tags": ["money", "wealth", "finance", "millionaire", "bankrupt", "rich"],
+        "made_for_kids": False,
     },
     "startup_graveyard": {
         "display_name": "Startup Graveyard",
@@ -35,6 +38,7 @@ CHANNELS = {
         "content_focus": "Business failures, Shark Tank rejects, startup post-mortems, founder mistakes",
         "source_types": ["Shark Tank", "business YouTube", "founder interviews"],
         "tags": ["startup", "entrepreneur", "business", "sharktank", "failure", "founder"],
+        "made_for_kids": False,
     },
     "self_made_clips": {
         "display_name": "Self Made Clips",
@@ -43,6 +47,7 @@ CHANNELS = {
         "content_focus": "Alex Hormozi, Gary Vee, entrepreneur wisdom, hustle culture highlights",
         "source_types": ["podcast clips", "interview highlights", "livestreams"],
         "tags": ["motivation", "entrepreneur", "success", "hustle", "business", "mindset"],
+        "made_for_kids": False,
     },
     "ai_did_what": {
         "display_name": "AI Did What",
@@ -51,6 +56,7 @@ CHANNELS = {
         "content_focus": "AI demonstrations, tech fails, shocking AI moments, future tech reveals",
         "source_types": ["tech YouTube", "AI demo clips", "Linus/MKBHD moments"],
         "tags": ["ai", "tech", "artificial intelligence", "chatgpt", "technology", "robot"],
+        "made_for_kids": False,
     },
     "gym_moments": {
         "display_name": "Gym Moments",
@@ -59,6 +65,7 @@ CHANNELS = {
         "content_focus": "Gym fails, world record lifts, body transformation, fitness rage",
         "source_types": ["fitness YouTube", "gym POV content", "bodybuilding streams"],
         "tags": ["gym", "fitness", "workout", "bodybuilding", "gains", "fail"],
+        "made_for_kids": False,
     },
     "kitchen_chaos": {
         "display_name": "Kitchen Chaos",
@@ -67,6 +74,7 @@ CHANNELS = {
         "content_focus": "Cooking fails, Hell's Kitchen moments, food disasters, Gordon Ramsay reactions",
         "source_types": ["Kitchen Nightmares", "Hell's Kitchen", "food YouTube"],
         "tags": ["cooking", "food", "gordonramsay", "kitchen", "fail", "chef"],
+        "made_for_kids": False,
     },
     "cases_unsolved": {
         "display_name": "Cases Unsolved",
@@ -75,6 +83,7 @@ CHANNELS = {
         "content_focus": "Cold cases, shocking facts, quick case breakdowns, mystery cases",
         "source_types": ["true crime YouTube docs", "podcast clips", "case summary channels"],
         "tags": ["truecrime", "mystery", "coldcase", "unsolved", "crime", "detective"],
+        "made_for_kids": False,
     },
     "unfiltered_clips": {
         "display_name": "Unfiltered Clips",
@@ -83,5 +92,6 @@ CHANNELS = {
         "content_focus": "Viral moments, weird internet clips, unexpected reactions, oddly satisfying",
         "source_types": ["Reddit videos", "random viral moments", "social media", "anything"],
         "tags": ["viral", "funny", "weird", "unexpected", "clips", "moments"],
+        "made_for_kids": True, # Explicitly True for Experimental
     },
 }

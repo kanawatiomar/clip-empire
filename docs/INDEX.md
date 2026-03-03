@@ -8,6 +8,7 @@
 5. **Dedicated OpenClaw setup:** `docs/OPENCLAW_AGENT_SETUP.md`
 6. **Discord organization blueprint:** `docs/DISCORD_SERVER_BLUEPRINT.md`
 7. **Discord bootstrap checklist:** `docs/DISCORD_BOOTSTRAP_CHECKLIST.md`
+8. **Discord launch messages:** `docs/DISCORD_LAUNCH_MESSAGE_PACK.md`
 
 ## What lives where
 - Project root: `ventures/clip_empire/`

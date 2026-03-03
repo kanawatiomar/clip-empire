@@ -4,7 +4,12 @@ accounts/accounts.db
 profiles/
 logs/
 renders/
-data/
+# keep schema/migrations in repo; ignore runtime DB/state
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+data/*-wal
+data/*-shm
 
 # python
 __pycache__/

@@ -2,7 +2,7 @@ import os
 import time
 from dataclasses import dataclass
 from typing import Optional
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone as dt_timezone
 
 from playwright.sync_api import sync_playwright, Page, expect, TimeoutError as PWTimeout
 import pytz # Will need 'pip install pytz'
@@ -408,7 +408,7 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                 _log_step(job_id, "visibility/schedule")
                 schedule_at_dt = datetime.fromisoformat(job["schedule_at"])
                 if schedule_at_dt.tzinfo is None:
-                    schedule_at_dt = schedule_at_dt.replace(tzinfo=timezone.utc)
+                    schedule_at_dt = schedule_at_dt.replace(tzinfo=dt_timezone.utc)
 
                 publish_type = _set_visibility_and_schedule(page, cfg, schedule_at_dt, cfg.timezone)
 

@@ -137,6 +137,44 @@ def _click_upload(page: Page, cfg: YouTubeWorkerConfig) -> None:
 
     print("Upload menu clicked.")
 
+def _extract_video_url_from_dialog(page: Page) -> Optional[str]:
+    """Grab the YouTube video URL shown in the upload dialog's right panel.
+
+    Studio shows 'Video link: https://youtube.com/shorts/...' as soon as
+    the file starts uploading. This is the most reliable source of the URL.
+    """
+    try:
+        # Give the dialog a moment to show the link
+        page.wait_for_timeout(2000)
+        # Try direct anchor inside the dialog
+        for sel in [
+            "ytcp-uploads-dialog a[href*='youtube.com/shorts']",
+            "ytcp-uploads-dialog a[href*='youtube.com/watch']",
+            "ytcp-video-info-renderer a[href*='youtube.com']",
+            "a[href*='youtube.com/shorts']",
+        ]:
+            try:
+                lnk = page.locator(sel).first
+                href = lnk.get_attribute("href", timeout=3000)
+                if href and "youtube.com" in href:
+                    print(f"Video URL from dialog: {href}")
+                    return href
+            except Exception:
+                continue
+        # JS fallback
+        hrefs = page.evaluate("""() => {
+            return Array.from(document.querySelectorAll('a[href]'))
+                .map(a => a.getAttribute('href'))
+                .filter(h => h && (h.includes('youtube.com/shorts') || h.includes('youtube.com/watch')));
+        }""")
+        if hrefs:
+            print(f"Video URL from dialog (JS): {hrefs[0]}")
+            return hrefs[0]
+    except Exception as e:
+        print(f"Could not extract URL from dialog: {e}")
+    return None
+
+
 def _upload_file(page: Page, cfg: YouTubeWorkerConfig, video_path: str) -> None:
     """Set the file on the upload dialog.
 
@@ -429,7 +467,12 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                 _log_step(job_id, f"set input file: {video_file_path}")
                 _upload_file(page, cfg, video_file_path)
 
-                page.wait_for_timeout(5000)
+                # Capture the video URL early — Studio shows it in the dialog right panel
+                early_video_url = _extract_video_url_from_dialog(page)
+                if early_video_url:
+                    _log_step(job_id, f"captured video URL early: {early_video_url}")
+
+                page.wait_for_timeout(3000)
 
                 _log_step(job_id, "fill details")
                 _fill_details(page, cfg, job["caption_text"], job["caption_text"], made_for_kids_status)
@@ -443,7 +486,7 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                 publish_type = _set_visibility_and_schedule(page, cfg, schedule_at_dt, cfg.timezone)
 
                 _log_step(job_id, f"verify success ({publish_type})")
-                video_url = _verify_upload_success(page, cfg, publish_type)
+                video_url = early_video_url or _verify_upload_success(page, cfg, publish_type)
                 if not video_url:
                     raise RuntimeError("No video URL returned by verification")
 

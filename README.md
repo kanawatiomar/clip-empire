@@ -40,3 +40,4 @@ Start here:
 - `docs/CREATIVE_SYSTEM.md`
 - `docs/OPENCLAW_AGENT_SETUP.md` (new dedicated OpenClaw operator setup)
 - `docs/DISCORD_SERVER_BLUEPRINT.md` (new Discord server/channel structure + posting rules)
+- `docs/DISCORD_BOOTSTRAP_CHECKLIST.md` (step-by-step server creation checklist)

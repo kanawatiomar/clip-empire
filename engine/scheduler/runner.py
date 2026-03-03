@@ -39,6 +39,7 @@ from engine.transform.encode import EncodeTransform
 from engine.scheduler.budget import BudgetManager
 from engine.scheduler.queue_writer import QueueWriter
 from engine.ops.feedback import PerformanceFeedback
+from engine.ops.source_health import SourceHealthMonitor
 
 
 # Directories (relative to repo root)
@@ -85,6 +86,7 @@ class Runner:
         self.encode = EncodeTransform(output_dir=RENDERS_DIR)
         self.queue_writer = QueueWriter(db_path=db_path)
         self.feedback = PerformanceFeedback(db_path=db_path)
+        self.source_health = SourceHealthMonitor(db_path=db_path)
 
     def run_all(self, count_per_channel: int = 1) -> dict:
         """Run the pipeline for every active channel.
@@ -161,6 +163,11 @@ class Runner:
             if clips_produced >= effective_count:
                 break
 
+            source_key = source_config.get("url", "")
+            if not self.source_health.is_healthy(source_key):
+                print(f"[runner] Skipping unhealthy source: {source_key[:60]}")
+                continue
+
             needed = effective_count - clips_produced
             per_source = SOURCE_DEFAULTS["max_per_run"]
 
@@ -171,12 +178,16 @@ class Runner:
                     channel_name=channel_name,
                 )
             except Exception as e:
+                self.source_health.record_failure(source_key, str(e))
                 print(f"[runner] Ingest error from {source_config.get('url','?')[:60]}: {e}")
                 continue
 
             if not raw_clips:
+                self.source_health.record_failure(source_key, "no clips returned")
                 print(f"[runner] No clips from {source_config.get('url','?')[:60]}")
                 continue
+
+            self.source_health.record_success(source_key)
 
             for clip in raw_clips:
                 clip.url_fingerprint = url_fingerprint(clip.source_url)
@@ -202,10 +213,11 @@ class Runner:
                     if job_id:
                         job_ids.append(job_id)
                         self.dedup.mark_used(clip, channel_name)
-                        self.feedback.record_source_outcome(source_config.get("url", ""), success=True)
+                        self.feedback.record_source_outcome(source_key, success=True)
                         clips_produced += 1
                 except Exception as e:
-                    self.feedback.record_source_outcome(source_config.get("url", ""), success=False)
+                    self.feedback.record_source_outcome(source_key, success=False)
+                    self.source_health.record_failure(source_key, str(e))
                     print(f"[runner] Pipeline error on clip {clip.clip_id[:8]}: {e}")
                     traceback.print_exc()
 

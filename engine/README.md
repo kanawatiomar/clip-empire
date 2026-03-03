@@ -40,6 +40,7 @@ python -m engine.cli --status
 - `engine/scheduler/runner.py` — orchestrator
 - `engine/scheduler/queue_writer.py` — publish queue bridge
 - `engine/ops/feedback.py` — source/template performance scoring loop
+- `engine/ops/source_health.py` — source reliability and auto-skip monitor
 
 ## Notes
 

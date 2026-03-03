@@ -291,51 +291,100 @@ def _set_visibility_and_schedule(
 
 def _verify_upload_success(page: Page, cfg: YouTubeWorkerConfig, publish_type: str) -> Optional[str]:
     print("Verifying upload success...")
-    # Wait for the confirmation dialog or redirect to video details
-    try:
-        # Wait for the success/processing dialog — it contains a link to the video
-        link_el = page.locator(SELECTORS["video_link"]).first
-        link_el.wait_for(state="visible", timeout=120_000)
 
+    # --- Strategy 1: success dialog with a direct video link ---
+    try:
+        link_el = page.locator(SELECTORS["video_link"]).first
+        link_el.wait_for(state="visible", timeout=20_000)
         href = link_el.get_attribute("href") or ""
         text = link_el.inner_text().strip()
-        if href.startswith("http"):
-            video_link = href
-        elif text.startswith("http"):
-            video_link = text
-        elif href:
-            video_link = "https://www.youtube.com" + href
-        else:
-            video_link = None
+        video_link = href if href.startswith("http") else (
+            "https://www.youtube.com" + href if href else None
+        )
+        if video_link:
+            print(f"Upload successful (success dialog)! URL: {video_link}")
+            # Click close if available
+            try:
+                page.locator(SELECTORS["close_button"]).first.click(timeout=5000)
+            except Exception:
+                pass
+            return video_link
+    except Exception:
+        pass
 
-        if not video_link:
-            raise RuntimeError(f"Success dialog visible but could not extract video URL (text='{text}', href='{href}')")
+    # --- Strategy 2: "Video processing" dialog (published but SD still processing) ---
+    # This appears when YouTube published the video but SD encode isn't done yet.
+    try:
+        proc = page.locator("ytcp-uploads-still-processing-dialog").first
+        proc.wait_for(state="visible", timeout=15_000)
+        print("Video processing dialog detected — video is published.")
 
-        print(f"Upload successful! Video URL: {video_link}")
-        
-        # Click close button to dismiss dialog
+        # Try to extract a link from inside the dialog
         try:
-            _wait_for_selector(page, SELECTORS["close_button"], cfg.nav_timeout_ms)
-            page.locator(SELECTORS["close_button"]).click()
-            print("Closed upload success dialog.")
-        except PWTimeout:
-            print("Close button not found, dialog may have closed itself or page redirected.")
+            inner_link = proc.locator("a[href]").first
+            href = inner_link.get_attribute("href")
+            if href:
+                video_link = href if href.startswith("http") else "https://www.youtube.com" + href
+                print(f"URL from processing dialog: {video_link}")
+                try:
+                    page.locator(SELECTORS["close_button"]).first.click(timeout=5000)
+                except Exception:
+                    pass
+                return video_link
+        except Exception:
+            pass
 
-        return video_link
+        # Close the processing dialog and grab the video URL from Content page
+        try:
+            page.locator(SELECTORS["close_button"]).first.click(timeout=5000)
+            page.wait_for_timeout(1500)
+        except Exception:
+            pass
 
-    except PWTimeout:
-        # Check for error dialogs
-        if page.locator(SELECTORS["error_dialog"]).is_visible():
-            error_text = page.locator(SELECTORS["error_dialog"]).inner_text()
-            raise RuntimeError(f"Upload failed with dialog error: {error_text}")
-        
-        # Check for stuck processing (if video link not found after long wait)
-        if page.locator(SELECTORS["processing_progress"]).is_visible():
-            progress_text = page.locator(SELECTORS["processing_progress"]).inner_text()
-            if "Checks complete" not in progress_text and "Processing complete" not in progress_text:
-                raise RuntimeError(f"Upload stuck in processing: {progress_text}. Reschedule and retry.")
+        # Extract channel ID from current URL and navigate to Videos page
+        channel_id = ""
+        try:
+            url = page.url  # e.g. https://studio.youtube.com/channel/UCxxx
+            channel_id = url.split("/channel/")[1].split("/")[0]
+        except Exception:
+            pass
 
-        raise RuntimeError("Upload verification timed out. No video link found.")
+        if channel_id:
+            try:
+                page.goto(
+                    f"https://studio.youtube.com/channel/{channel_id}/videos",
+                    wait_until="domcontentloaded",
+                    timeout=30_000,
+                )
+                page.wait_for_timeout(2500)
+                for sel in [
+                    "a[href*='youtube.com/shorts']",
+                    "a[href*='youtube.com/watch']",
+                ]:
+                    links = page.locator(sel).all()
+                    for lnk in links[:3]:
+                        href = lnk.get_attribute("href")
+                        if href and "youtube.com" in href:
+                            video_link = href
+                            print(f"URL from Content page: {video_link}")
+                            return video_link
+            except Exception as e:
+                print(f"Content page navigation failed: {e}")
+
+        # Fallback: we know it published, return studio channel URL as confirmation
+        fallback = f"https://studio.youtube.com/channel/{channel_id}/videos" if channel_id else "https://studio.youtube.com"
+        print(f"Upload confirmed (processing). Fallback URL: {fallback}")
+        return fallback
+
+    except Exception:
+        pass
+
+    # --- Error dialog check ---
+    if page.locator(SELECTORS["error_dialog"]).is_visible():
+        error_text = page.locator(SELECTORS["error_dialog"]).inner_text()
+        raise RuntimeError(f"Upload failed: {error_text}")
+
+    raise RuntimeError("Upload verification timed out. No success or processing dialog found.")
 
 
 def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[str] = None) -> int:

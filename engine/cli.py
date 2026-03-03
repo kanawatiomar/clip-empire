@@ -69,6 +69,7 @@ def main() -> None:
     parser.add_argument("--db", default="data/clip_empire.db", help="Path to SQLite database")
     parser.add_argument("--trend-radar", action="store_true", help="Enable trend radar supplemental sources")
     parser.add_argument("--no-policy-filter", action="store_true", help="Disable safety/policy pre-filter")
+    parser.add_argument("--enable-sora-lane", action="store_true", help="Enable optional Sora lane scaffold")
 
     args = parser.parse_args()
 
@@ -88,6 +89,7 @@ def main() -> None:
         db_path=args.db,
         trend_radar_enabled=args.trend_radar,
         policy_filter_enabled=not args.no_policy_filter,
+        sora_lane_enabled=args.enable_sora_lane,
     )
 
     if args.all:

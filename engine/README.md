@@ -21,6 +21,7 @@ Purpose-built content engine for the Clip Empire system (not reused from old cli
 python -m engine.cli --channel market_meltdowns
 python -m engine.cli --all --count 1
 python -m engine.cli --all --trend-radar
+python -m engine.cli --all --enable-sora-lane  # optional scaffold only
 python -m engine.cli --status
 ```
 
@@ -32,6 +33,7 @@ python -m engine.cli --status
 - `engine/ingest/dedup.py` — global dedup tracker (`source_clips` table)
 - `engine/ingest/trend_radar.py` — optional trend signal → source expansion
 - `engine/ingest/safety.py` — policy keyword pre-filter
+- `engine/ingest/sora_lane.py` — optional feature-flag scaffold
 - `engine/transform/crop.py` — 9:16 transform
 - `engine/transform/caption.py` — Whisper → ASS subtitles
 - `engine/transform/overlay.py` — text overlays

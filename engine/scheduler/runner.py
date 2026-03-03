@@ -32,6 +32,7 @@ from engine.ingest.base import RawClip
 from engine.ingest.trend_radar import TrendRadar
 from engine.ingest.safety import ClipPolicyFilter
 from engine.ingest.fingerprint import url_fingerprint, visual_fingerprint
+from engine.ingest.sora_lane import SoraLane
 from engine.transform.crop import CropTransform
 from engine.transform.caption import CaptionTransform
 from engine.transform.overlay import OverlayTransform
@@ -61,12 +62,14 @@ class Runner:
         db_path: str = "data/clip_empire.db",
         trend_radar_enabled: bool = False,
         policy_filter_enabled: bool = True,
+        sora_lane_enabled: bool = False,
     ):
         self.dry_run = dry_run
         self.skip_caption = skip_caption
         self.keep_intermediate = keep_intermediate
         self.trend_radar_enabled = trend_radar_enabled
         self.policy_filter_enabled = policy_filter_enabled
+        self.sora_lane_enabled = sora_lane_enabled
 
         # Init all pipeline components
         self.budget = BudgetManager(db_path=db_path)
@@ -77,6 +80,7 @@ class Runner:
         )
         self.trend_radar = TrendRadar()
         self.policy_filter = ClipPolicyFilter()
+        self.sora_lane = SoraLane(enabled=sora_lane_enabled)
         self.crop = CropTransform(output_dir=INTERMEDIATE_DIR)
         self.caption = CaptionTransform(
             model_size=model_size,
@@ -158,6 +162,11 @@ class Runner:
 
         job_ids = []
         clips_produced = 0
+
+        if self.sora_lane_enabled:
+            sora_candidates = self.sora_lane.fetch_candidates(channel_name, limit=effective_count)
+            if sora_candidates:
+                print(f"[runner] Sora lane provided {len(sora_candidates)} candidate clip(s)")
 
         for source_config in sources:
             if clips_produced >= effective_count:

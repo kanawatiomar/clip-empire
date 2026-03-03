@@ -99,11 +99,34 @@ def _login_to_studio_if_needed(page: Page, cfg: YouTubeWorkerConfig) -> None:
     print(f"Successfully reached YouTube Studio: {page.url}")
 
 def _click_upload(page: Page, cfg: YouTubeWorkerConfig) -> None:
+    """Open the upload dialog via Studio Create button.
+
+    Studio UI is flaky; try a few selector strategies.
+    """
     print("Clicking upload button...")
-    _wait_for_selector(page, SELECTORS["upload_button"], cfg.nav_timeout_ms)
-    page.locator(SELECTORS["upload_button"]).click()
-    _wait_for_selector(page, SELECTORS["upload_menu_item"], cfg.nav_timeout_ms)
-    page.locator(SELECTORS["upload_menu_item"]).click()
+
+    # Strategy A: known id
+    try:
+        if page.locator(SELECTORS["upload_button"]).first.is_visible(timeout=5000):
+            page.locator(SELECTORS["upload_button"]).click()
+        else:
+            raise PWTimeout("#create-icon not visible")
+    except Exception:
+        # Strategy B: role/name
+        try:
+            page.get_by_role("button", name="Create").click(timeout=10_000)
+        except Exception:
+            # Strategy C: aria-label contains Create
+            page.locator("button[aria-label*='Create']").first.click(timeout=10_000)
+
+    # Menu item "Upload videos" / Upload
+    try:
+        _wait_for_selector(page, SELECTORS["upload_menu_item"], 15_000)
+        page.locator(SELECTORS["upload_menu_item"]).click()
+    except Exception:
+        # Fallback by visible text
+        page.get_by_role("menuitem", name="Upload videos").click(timeout=15_000)
+
     print("Upload menu clicked.")
 
 def _upload_file(page: Page, cfg: YouTubeWorkerConfig, video_path: str) -> None:
@@ -261,7 +284,7 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
     # Ensure profile dir exists (it should be created by setup_wizard)
     os.makedirs(profile_path, exist_ok=True)
 
-    page = None
+    page: Page | None = None
     try:
         with sync_playwright() as p:
             context = p.chromium.launch_persistent_context(
@@ -274,47 +297,52 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
             )
             page = context.new_page()
 
-            _log_step(job_id, "open studio")
-            _login_to_studio_if_needed(page, cfg)
+            try:
+                _log_step(job_id, "open studio")
+                _login_to_studio_if_needed(page, cfg)
 
-            _log_step(job_id, "click upload")
-            _click_upload(page, cfg)
+                _log_step(job_id, "click upload")
+                _click_upload(page, cfg)
 
-            # Use job data for file, title, description
-            video_file_path = job["render_path"]
-            if not os.path.exists(video_file_path):
-                raise FileNotFoundError(f"Rendered video file not found: {video_file_path}")
+                # Use job data for file, title, description
+                video_file_path = job["render_path"]
+                if not os.path.exists(video_file_path):
+                    raise FileNotFoundError(f"Rendered video file not found: {video_file_path}")
 
-            _log_step(job_id, f"set input file: {video_file_path}")
-            _upload_file(page, cfg, video_file_path)
+                _log_step(job_id, f"set input file: {video_file_path}")
+                _upload_file(page, cfg, video_file_path)
 
-            page.wait_for_timeout(5000)
+                page.wait_for_timeout(5000)
 
-            _log_step(job_id, "fill details")
-            _fill_details(page, cfg, job["caption_text"], job["caption_text"], made_for_kids_status)
+                _log_step(job_id, "fill details")
+                _fill_details(page, cfg, job["caption_text"], job["caption_text"], made_for_kids_status)
 
-            # schedule_at is stored as ISO string; treat as UTC if naive.
-            _log_step(job_id, "visibility/schedule")
-            schedule_at_dt = datetime.fromisoformat(job["schedule_at"])
-            if schedule_at_dt.tzinfo is None:
-                schedule_at_dt = schedule_at_dt.replace(tzinfo=timezone.utc)
+                # schedule_at is stored as ISO string; treat as UTC if naive.
+                _log_step(job_id, "visibility/schedule")
+                schedule_at_dt = datetime.fromisoformat(job["schedule_at"])
+                if schedule_at_dt.tzinfo is None:
+                    schedule_at_dt = schedule_at_dt.replace(tzinfo=timezone.utc)
 
-            publish_type = _set_visibility_and_schedule(page, cfg, schedule_at_dt, cfg.timezone)
+                publish_type = _set_visibility_and_schedule(page, cfg, schedule_at_dt, cfg.timezone)
 
-            _log_step(job_id, f"verify success ({publish_type})")
-            video_url = _verify_upload_success(page, cfg, publish_type)
-            if not video_url:
-                raise RuntimeError("No video URL returned by verification")
+                _log_step(job_id, f"verify success ({publish_type})")
+                video_url = _verify_upload_success(page, cfg, publish_type)
+                if not video_url:
+                    raise RuntimeError("No video URL returned by verification")
 
-            # Mark job succeeded only if we have a URL
-            update_job_status(job_id, "succeeded", post_url=video_url, platform_post_id=video_url.split("/")[-1])
+                # Mark job succeeded only if we have a URL
+                update_job_status(job_id, "succeeded", post_url=video_url, platform_post_id=video_url.split("/")[-1])
 
-            context.close()
-        return 0
+                context.close()
+                return 0
+
+            except Exception:
+                # Save artifacts BEFORE playwright stops
+                if page is not None:
+                    _save_failure_artifacts(page, job_id)
+                raise
 
     except Exception as e:
-        if page is not None:
-            _save_failure_artifacts(page, job_id)
         error_class = "unknown_error"
         error_detail = str(e)
 

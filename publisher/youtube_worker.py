@@ -34,24 +34,34 @@ UPLOAD_URL_SUFFIX = "/upload"
 
 # --- SELECTORS (Robustness is key) ---
 SELECTORS = {
-    "upload_button": "#create-icon", # This is the '+' icon
+    # Studio Create button (top-right)
+    "upload_button": "#create-icon",
+    # Upload videos menu item
     "upload_menu_item": "tp-yt-paper-item[test-id=\"upload-beta\"]",
+    # Hidden file input inside upload dialog
     "file_input": "input[type=\"file\"]",
-    "title_textbox": "#textbox[aria-label=\"Add title\"]",
-    "description_textbox": "#textbox[aria-label=\"Add description\"]",
-    "not_made_for_kids_radio": "#not-made-for-kids-radio-button",
+    # Title: contenteditable div inside the title textarea widget
+    # aria-label is "Title (required)" — match via the inner textbox
+    "title_textbox": "ytcp-social-suggestions-textbox[label='Title (required)'] div[contenteditable='true']",
+    # Description: contenteditable div
+    "description_textbox": "ytcp-social-suggestions-textbox[label='Description'] div[contenteditable='true']",
+    # Audience radios (scroll down to find them)
+    "not_made_for_kids_radio": "tp-yt-paper-radio-button[name='VIDEO_MADE_FOR_KIDS_NOT_MFK']",
+    "made_for_kids_radio": "tp-yt-paper-radio-button[name='VIDEO_MADE_FOR_KIDS_MFK']",
+    # Wizard nav
     "next_button": "#next-button",
-    "visibility_radio_button": "tp-yt-paper-radio-button[name=\"SCHEDULE\"]", # For schedule radio
-    "schedule_date_input": "#date-textbox > input",
-    "schedule_time_input": "#time-textbox > input",
-    "schedule_button": "#schedule-button",
-    "publish_button": "#publish-button", # This is used if publishing immediately
-    "video_link_text": "a.ytcp-video-info-renderer-metadata-details",
+    # Visibility page
+    "public_radio": "tp-yt-paper-radio-button[name='PUBLIC']",
+    "schedule_radio": "tp-yt-paper-radio-button[name='SCHEDULE']",
+    "schedule_date_input": "#datepicker-trigger input",
+    "schedule_time_input": "#time-of-day-trigger input",
+    "schedule_button": "#schedule-button-container ytcp-button#schedule-button",
+    "publish_button": "#done-button",   # "Publish" on Visibility page
+    # Post-publish confirmation
+    "close_button": "ytcp-uploads-still-processing-dialog #close-button, ytcp-video-upload-success-dialog #close-button, #close-button",
+    "video_link": "ytcp-video-upload-success-dialog a",   # link in the success dialog
+    # Error
     "error_dialog": "ytcp-dialog.warning",
-    "save_button": "#save-button", # When publishing immediately
-    "close_button": "#close-button", # For the final 'video uploaded' dialog
-    "processing_progress": ".progress-label.style-scope.ytcp-uploads-dialog",
-    "checks_complete": ".ytcp-uploads-review-stage-status-text",
 }
 
 @dataclass
@@ -181,31 +191,55 @@ def _upload_file(page: Page, cfg: YouTubeWorkerConfig, video_path: str) -> None:
     print("File selected via JS-exposed input (Strategy C).")
 
 def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description: str, made_for_kids: bool) -> None:
-    print("Filling video details...")
-    _wait_for_selector(page, SELECTORS["title_textbox"], cfg.nav_timeout_ms)
-    page.locator(SELECTORS["title_textbox"]).fill(title)
-    page.locator(SELECTORS["description_textbox"]).fill(description)
+    """Fill the Details step of the upload wizard.
 
-    if made_for_kids:
-        # Assuming 'Made for kids' is the default, if not, we'd need to select it
-        # For now, we only handle 'Not made for kids' explicitly if it's not the default
-        pass # Need to implement selecting 'Made for kids' if it's an option to click
-    else:
-        # Ensure 'Not made for kids' is selected
-        _wait_for_selector(page, SELECTORS["not_made_for_kids_radio"], cfg.nav_timeout_ms)
-        is_checked = page.locator(SELECTORS["not_made_for_kids_radio"]).get_attribute("aria-checked")
-        if is_checked == "false":
-            page.locator(SELECTORS["not_made_for_kids_radio"]).click()
-            print("Selected 'Not made for kids'.")
-        else:
-            print("'Not made for kids' already selected.")
-    
-    # Navigate to next step (Video elements)
+    YouTube auto-fills the title with the filename — we clear and replace it.
+    Then scroll to the audience section and set the made-for-kids radio.
+    Finally click Next twice to pass through Video elements → Checks.
+    """
+    print("Filling video details...")
+
+    # ---- Title ----
+    # Wait for the title contenteditable to be ready
+    title_loc = page.locator(SELECTORS["title_textbox"])
+    title_loc.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
+    title_loc.click()
+    # Select-all and replace (works on contenteditable)
+    title_loc.press("Control+a")
+    title_loc.type(title, delay=30)
+    print(f"Title set: {title}")
+
+    # ---- Description ----
+    desc_loc = page.locator(SELECTORS["description_textbox"])
+    if desc_loc.is_visible(timeout=3000):
+        desc_loc.click()
+        desc_loc.type(description, delay=20)
+        print("Description set.")
+
+    # ---- Audience: scroll down to find it ----
+    page.wait_for_timeout(500)
+    page.keyboard.press("Tab")  # nudge focus so scroll triggers
+    try:
+        audience_radio_sel = SELECTORS["made_for_kids_radio"] if made_for_kids else SELECTORS["not_made_for_kids_radio"]
+        audience_loc = page.locator(audience_radio_sel)
+        audience_loc.scroll_into_view_if_needed(timeout=10_000)
+        is_checked = audience_loc.get_attribute("aria-checked")
+        if is_checked != "true":
+            audience_loc.click()
+        status = "made for kids" if made_for_kids else "not made for kids"
+        print(f"Audience set: {status}")
+    except Exception as e:
+        print(f"Could not set audience radio (non-fatal, defaulting to YouTube setting): {e}")
+
+    # ---- Next → Video elements ----
     page.locator(SELECTORS["next_button"]).click()
-    print("Clicked Next (to Video elements).")
-    # Navigate to next step (Checks)
+    print("Clicked Next (Video elements).")
+    page.wait_for_timeout(1000)
+
+    # ---- Next → Checks ----
     page.locator(SELECTORS["next_button"]).click()
-    print("Clicked Next (to Checks).")
+    print("Clicked Next (Checks).")
+    page.wait_for_timeout(1000)
 
 def _set_visibility_and_schedule(
     page: Page, cfg: YouTubeWorkerConfig, schedule_at: datetime, timezone: str
@@ -215,35 +249,44 @@ def _set_visibility_and_schedule(
     page.locator(SELECTORS["next_button"]).click() # To Visibility page
     print("Clicked Next (to Visibility).")
 
-    now = datetime.now(pytz.timezone(timezone))
-    schedule_time_local = schedule_at.astimezone(pytz.timezone(timezone))
-    
-    if schedule_time_local <= now + timedelta(minutes=5): # Publish immediately if schedule_at is in past or very soon
-        print("Scheduling for immediate publish.")
-        # For immediate publish, click 'Public' and then 'Publish'
-        page.locator("tp-yt-paper-radio-button[name=\"PUBLIC\"]").click()
-        _wait_for_selector(page, SELECTORS["publish_button"], cfg.nav_timeout_ms)
+    tz = pytz.timezone(timezone)
+    now = datetime.now(tz)
+    schedule_time_local = schedule_at.astimezone(tz)
+
+    # Publish immediately if scheduled time is in the past or within 5 minutes
+    if schedule_time_local <= now + timedelta(minutes=5):
+        print("Publishing immediately (schedule time is past/soon).")
+        pub_loc = page.locator(SELECTORS["public_radio"])
+        pub_loc.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
+        pub_loc.click()
+        page.locator(SELECTORS["publish_button"]).wait_for(state="visible", timeout=cfg.nav_timeout_ms)
         page.locator(SELECTORS["publish_button"]).click()
-        print("Clicked Publish (immediate).")
+        print("Clicked Publish.")
         return "published"
     else:
-        print(f"Scheduling for {schedule_time_local.strftime("%Y-%m-%d %H:%M")}")
-        page.locator(SELECTORS["visibility_radio_button"]).click()
+        print(f"Scheduling for {schedule_time_local.strftime('%Y-%m-%d %H:%M %Z')}")
+        sched_loc = page.locator(SELECTORS["schedule_radio"])
+        sched_loc.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
+        sched_loc.click()
+        page.wait_for_timeout(500)
 
-        # Open date picker
-        _wait_for_selector(page, SELECTORS["schedule_date_input"], cfg.nav_timeout_ms)
-        page.locator(SELECTORS["schedule_date_input"]).click()
-        
-        # Set date (Playwright can directly fill, simpler than clicking calendar)
-        schedule_date_str = schedule_time_local.strftime("%b %d, %Y") # e.g., Jan 01, 2026
-        page.fill(SELECTORS["schedule_date_input"], schedule_date_str)
+        # Date input
+        date_loc = page.locator(SELECTORS["schedule_date_input"])
+        date_loc.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
+        date_loc.triple_click()
+        date_loc.type(schedule_time_local.strftime("%b %d, %Y"), delay=30)
 
-        # Set time
-        _wait_for_selector(page, SELECTORS["schedule_time_input"], cfg.nav_timeout_ms)
-        page.fill(SELECTORS["schedule_time_input"], schedule_time_local.strftime("%I:%M %p")) # e.g., 03:00 PM
+        # Time input
+        time_loc = page.locator(SELECTORS["schedule_time_input"])
+        time_loc.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
+        time_loc.triple_click()
+        time_loc.type(schedule_time_local.strftime("%I:%M %p"), delay=30)
+        time_loc.press("Enter")
+        page.wait_for_timeout(500)
 
-        _wait_for_selector(page, SELECTORS["schedule_button"], cfg.nav_timeout_ms)
-        page.locator(SELECTORS["schedule_button"]).click()
+        sched_btn = page.locator(SELECTORS["schedule_button"])
+        sched_btn.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
+        sched_btn.click()
         print("Clicked Schedule button.")
         return "scheduled"
 
@@ -251,23 +294,23 @@ def _verify_upload_success(page: Page, cfg: YouTubeWorkerConfig, publish_type: s
     print("Verifying upload success...")
     # Wait for the confirmation dialog or redirect to video details
     try:
-        # This selector is for the dialog that appears after successful upload and schedule/publish
-        _wait_for_selector(page, SELECTORS["video_link_text"], 120_000) # Give more time for processing
-        link_el = page.locator(SELECTORS["video_link_text"]).first
-        video_link_text = link_el.inner_text().strip()
-        href = link_el.get_attribute("href")
-        video_link = None
-        if href:
-            # href may be relative
-            if href.startswith("http"):
-                video_link = href
-            else:
-                video_link = "https://studio.youtube.com" + href
-        elif video_link_text.startswith("http"):
-            video_link = video_link_text
+        # Wait for the success/processing dialog — it contains a link to the video
+        link_el = page.locator(SELECTORS["video_link"]).first
+        link_el.wait_for(state="visible", timeout=120_000)
+
+        href = link_el.get_attribute("href") or ""
+        text = link_el.inner_text().strip()
+        if href.startswith("http"):
+            video_link = href
+        elif text.startswith("http"):
+            video_link = text
+        elif href:
+            video_link = "https://www.youtube.com" + href
+        else:
+            video_link = None
 
         if not video_link:
-            raise RuntimeError(f"Upload dialog found but could not extract video URL (text='{video_link_text}', href={href})")
+            raise RuntimeError(f"Success dialog visible but could not extract video URL (text='{text}', href='{href}')")
 
         print(f"Upload successful! Video URL: {video_link}")
         

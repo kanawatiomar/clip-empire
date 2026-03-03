@@ -11,7 +11,8 @@ Purpose-built content engine for the Clip Empire system (not reused from old cli
    - Whisper captions (GPU if available, CPU fallback)
    - Hook + CTA overlays per niche
    - Final encode (NVENC if available)
-4. **Queue** for publish via `publish_jobs` (consumed by `publisher/youtube_worker.py`)
+4. **Safety filter** removes policy-risk clips before transforms
+5. **Queue** for publish via `publish_jobs` (consumed by `publisher/youtube_worker.py`)
 
 ## Entry point
 
@@ -29,6 +30,7 @@ python -m engine.cli --status
 - `engine/ingest/ytdlp.py` — downloader
 - `engine/ingest/dedup.py` — global dedup tracker (`source_clips` table)
 - `engine/ingest/trend_radar.py` — optional trend signal → source expansion
+- `engine/ingest/safety.py` — policy keyword pre-filter
 - `engine/transform/crop.py` — 9:16 transform
 - `engine/transform/caption.py` — Whisper → ASS subtitles
 - `engine/transform/overlay.py` — text overlays

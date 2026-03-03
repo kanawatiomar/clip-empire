@@ -30,6 +30,7 @@ from engine.ingest.ytdlp import YtDlpIngester
 from engine.ingest.dedup import DedupTracker
 from engine.ingest.base import RawClip
 from engine.ingest.trend_radar import TrendRadar
+from engine.ingest.safety import ClipPolicyFilter
 from engine.transform.crop import CropTransform
 from engine.transform.caption import CaptionTransform
 from engine.transform.overlay import OverlayTransform
@@ -56,11 +57,13 @@ class Runner:
         model_size: str = "auto",
         db_path: str = "data/clip_empire.db",
         trend_radar_enabled: bool = False,
+        policy_filter_enabled: bool = True,
     ):
         self.dry_run = dry_run
         self.skip_caption = skip_caption
         self.keep_intermediate = keep_intermediate
         self.trend_radar_enabled = trend_radar_enabled
+        self.policy_filter_enabled = policy_filter_enabled
 
         # Init all pipeline components
         self.budget = BudgetManager(db_path=db_path)
@@ -70,6 +73,7 @@ class Runner:
             cookies_dir=COOKIES_DIR,
         )
         self.trend_radar = TrendRadar()
+        self.policy_filter = ClipPolicyFilter()
         self.crop = CropTransform(output_dir=INTERMEDIATE_DIR)
         self.caption = CaptionTransform(
             model_size=model_size,
@@ -170,6 +174,12 @@ class Runner:
             if not fresh_clips:
                 print(f"[runner] All clips already used, trying next source")
                 continue
+
+            if self.policy_filter_enabled:
+                fresh_clips = self.policy_filter.filter(fresh_clips)
+                if not fresh_clips:
+                    print("[runner] No policy-safe clips from source, trying next source")
+                    continue
 
             # Process each clip
             for clip in fresh_clips[:needed]:

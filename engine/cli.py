@@ -36,6 +36,7 @@ from accounts.channel_definitions import CHANNELS
 from engine.scheduler.budget import BudgetManager
 from engine.scheduler.runner import Runner
 from engine.ops.status_exporter import export_status
+from engine.ops.watchdog import recover_stale_jobs
 
 
 def cmd_status() -> None:
@@ -68,6 +69,7 @@ def main() -> None:
     parser.add_argument("--model", default="auto", help="Whisper model: tiny|base|small|medium|large|auto")
     parser.add_argument("--status", "-s", action="store_true", help="Show channel budget status")
     parser.add_argument("--export-status", help="Export ops dashboard JSON to path and exit")
+    parser.add_argument("--watchdog", action="store_true", help="Run auto-recovery watchdog pass and exit")
     parser.add_argument("--db", default="data/clip_empire.db", help="Path to SQLite database")
     parser.add_argument("--trend-radar", action="store_true", help="Enable trend radar supplemental sources")
     parser.add_argument("--no-policy-filter", action="store_true", help="Disable safety/policy pre-filter")
@@ -82,6 +84,11 @@ def main() -> None:
     if args.export_status:
         out = export_status(db_path=args.db, out_path=args.export_status)
         print(f"Exported status: {out}")
+        return
+
+    if args.watchdog:
+        recovered = recover_stale_jobs(db_path=args.db)
+        print(f"Watchdog recovered {recovered} stale running job(s)")
         return
 
     if not args.channel and not args.all:

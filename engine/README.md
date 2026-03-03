@@ -24,6 +24,7 @@ python -m engine.cli --all --trend-radar
 python -m engine.cli --all --enable-sora-lane  # optional scaffold only
 python -m engine.cli --status
 python -m engine.cli --export-status output/ops_status.json
+python -m engine.cli --watchdog
 ```
 
 ## Files
@@ -45,6 +46,7 @@ python -m engine.cli --export-status output/ops_status.json
 - `engine/ops/feedback.py` — source/template performance scoring loop
 - `engine/ops/source_health.py` — source reliability and auto-skip monitor
 - `engine/ops/status_exporter.py` — JSON exporter for dashboard/ops polling
+- `engine/ops/watchdog.py` — stale-job auto-recovery scaffold
 
 ## Notes
 

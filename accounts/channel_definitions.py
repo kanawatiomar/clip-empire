@@ -1,0 +1,87 @@
+"""
+Clip Empire - Channel Definitions
+10 pre-defined niche channels
+"""
+
+CHANNELS = {
+    "market_meltdowns": {
+        "display_name": "Market Meltdowns",
+        "niche": "Finance",
+        "description": "Stocks crashing, trader reactions, financial disasters and massive wins",
+        "content_focus": "Stock market chaos, trader breakdowns, financial disasters, massive gains/losses",
+        "source_types": ["financial YouTube", "trading streams", "Wall Street drama clips"],
+        "tags": ["stocks", "investing", "wallstreet", "finance", "trading", "crash"],
+    },
+    "crypto_confessions": {
+        "display_name": "Crypto Confessions",
+        "niche": "Finance",
+        "description": "Crypto wins/losses, trader breakdowns, NFT disasters, pump & dump stories",
+        "content_focus": "Crypto trader reactions, massive losses, NFT cringe, DeFi disasters",
+        "source_types": ["crypto streams", "Twitter/X spaces", "finance YouTube"],
+        "tags": ["crypto", "bitcoin", "ethereum", "nft", "defi", "blockchain"],
+    },
+    "rich_or_ruined": {
+        "display_name": "Rich or Ruined",
+        "niche": "Finance",
+        "description": "Extreme financial transformations - rags to riches and riches to rags",
+        "content_focus": "Financial transformation stories, lottery winners, bankruptcy tales, overnight millionaires",
+        "source_types": ["podcast clips", "documentary moments", "interview highlights"],
+        "tags": ["money", "wealth", "finance", "millionaire", "bankrupt", "rich"],
+    },
+    "startup_graveyard": {
+        "display_name": "Startup Graveyard",
+        "niche": "Business",
+        "description": "Failed startups, Shark Tank rejections, entrepreneur disasters and lessons",
+        "content_focus": "Business failures, Shark Tank rejects, startup post-mortems, founder mistakes",
+        "source_types": ["Shark Tank", "business YouTube", "founder interviews"],
+        "tags": ["startup", "entrepreneur", "business", "sharktank", "failure", "founder"],
+    },
+    "self_made_clips": {
+        "display_name": "Self Made Clips",
+        "niche": "Business",
+        "description": "Raw motivational moments from real entrepreneurs - hard truths, no fluff",
+        "content_focus": "Alex Hormozi, Gary Vee, entrepreneur wisdom, hustle culture highlights",
+        "source_types": ["podcast clips", "interview highlights", "livestreams"],
+        "tags": ["motivation", "entrepreneur", "success", "hustle", "business", "mindset"],
+    },
+    "ai_did_what": {
+        "display_name": "AI Did What",
+        "niche": "Tech/AI",
+        "description": "AI doing insane/unexpected/scary things, tech fails, mind-blowing demos",
+        "content_focus": "AI demonstrations, tech fails, shocking AI moments, future tech reveals",
+        "source_types": ["tech YouTube", "AI demo clips", "Linus/MKBHD moments"],
+        "tags": ["ai", "tech", "artificial intelligence", "chatgpt", "technology", "robot"],
+    },
+    "gym_moments": {
+        "display_name": "Gym Moments",
+        "niche": "Fitness",
+        "description": "Gym fails, insane lifts, transformation reveals, fitness rage/humor",
+        "content_focus": "Gym fails, world record lifts, body transformation, fitness rage",
+        "source_types": ["fitness YouTube", "gym POV content", "bodybuilding streams"],
+        "tags": ["gym", "fitness", "workout", "bodybuilding", "gains", "fail"],
+    },
+    "kitchen_chaos": {
+        "display_name": "Kitchen Chaos",
+        "niche": "Food",
+        "description": "Cooking disasters, Gordon Ramsay reactions, food fails and street food extremes",
+        "content_focus": "Cooking fails, Hell's Kitchen moments, food disasters, Gordon Ramsay reactions",
+        "source_types": ["Kitchen Nightmares", "Hell's Kitchen", "food YouTube"],
+        "tags": ["cooking", "food", "gordonramsay", "kitchen", "fail", "chef"],
+    },
+    "cases_unsolved": {
+        "display_name": "Cases Unsolved",
+        "niche": "True Crime",
+        "description": "Overlooked cases, shocking 60-second case summaries, cold cases",
+        "content_focus": "Cold cases, shocking facts, quick case breakdowns, mystery cases",
+        "source_types": ["true crime YouTube docs", "podcast clips", "case summary channels"],
+        "tags": ["truecrime", "mystery", "coldcase", "unsolved", "crime", "detective"],
+    },
+    "unfiltered_clips": {
+        "display_name": "Unfiltered Clips",
+        "niche": "Experimental",
+        "description": "Viral/weird internet moments - testing what pops, no fixed format",
+        "content_focus": "Viral moments, weird internet clips, unexpected reactions, oddly satisfying",
+        "source_types": ["Reddit videos", "random viral moments", "social media", "anything"],
+        "tags": ["viral", "funny", "weird", "unexpected", "clips", "moments"],
+    },
+}

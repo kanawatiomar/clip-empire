@@ -38,6 +38,7 @@ from engine.transform.overlay import OverlayTransform
 from engine.transform.encode import EncodeTransform
 from engine.scheduler.budget import BudgetManager
 from engine.scheduler.queue_writer import QueueWriter
+from engine.ops.feedback import PerformanceFeedback
 
 
 # Directories (relative to repo root)
@@ -83,6 +84,7 @@ class Runner:
         self.overlay = OverlayTransform(output_dir=INTERMEDIATE_DIR)
         self.encode = EncodeTransform(output_dir=RENDERS_DIR)
         self.queue_writer = QueueWriter(db_path=db_path)
+        self.feedback = PerformanceFeedback(db_path=db_path)
 
     def run_all(self, count_per_channel: int = 1) -> dict:
         """Run the pipeline for every active channel.
@@ -143,8 +145,14 @@ class Runner:
             print(f"[runner] {channel_name}: no sources configured")
             return []
 
-        # Sort by priority
-        sources = sorted(sources, key=lambda s: s.get("priority", 99))
+        # Sort by priority + performance feedback (better sources first)
+        sources = sorted(
+            sources,
+            key=lambda s: (
+                s.get("priority", 99),
+                -self.feedback.get_source_score(s.get("url", "")),
+            ),
+        )
 
         job_ids = []
         clips_produced = 0
@@ -194,8 +202,10 @@ class Runner:
                     if job_id:
                         job_ids.append(job_id)
                         self.dedup.mark_used(clip, channel_name)
+                        self.feedback.record_source_outcome(source_config.get("url", ""), success=True)
                         clips_produced += 1
                 except Exception as e:
+                    self.feedback.record_source_outcome(source_config.get("url", ""), success=False)
                     print(f"[runner] Pipeline error on clip {clip.clip_id[:8]}: {e}")
                     traceback.print_exc()
 

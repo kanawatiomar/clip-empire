@@ -38,6 +38,7 @@ python -m engine.cli --status
 - `engine/transform/encode.py` — final render
 - `engine/scheduler/runner.py` — orchestrator
 - `engine/scheduler/queue_writer.py` — publish queue bridge
+- `engine/ops/feedback.py` — source/template performance scoring loop
 
 ## Notes
 

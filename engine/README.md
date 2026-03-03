@@ -23,6 +23,7 @@ python -m engine.cli --all --count 1
 python -m engine.cli --all --trend-radar
 python -m engine.cli --all --enable-sora-lane  # optional scaffold only
 python -m engine.cli --status
+python -m engine.cli --export-status output/ops_status.json
 ```
 
 ## Files
@@ -43,6 +44,7 @@ python -m engine.cli --status
 - `engine/scheduler/queue_writer.py` — publish queue bridge + schedule load balancing
 - `engine/ops/feedback.py` — source/template performance scoring loop
 - `engine/ops/source_health.py` — source reliability and auto-skip monitor
+- `engine/ops/status_exporter.py` — JSON exporter for dashboard/ops polling
 
 ## Notes
 

@@ -35,6 +35,7 @@ import sys
 from accounts.channel_definitions import CHANNELS
 from engine.scheduler.budget import BudgetManager
 from engine.scheduler.runner import Runner
+from engine.ops.status_exporter import export_status
 
 
 def cmd_status() -> None:
@@ -66,6 +67,7 @@ def main() -> None:
     parser.add_argument("--keep-intermediate", action="store_true", help="Keep cropped/overlaid files")
     parser.add_argument("--model", default="auto", help="Whisper model: tiny|base|small|medium|large|auto")
     parser.add_argument("--status", "-s", action="store_true", help="Show channel budget status")
+    parser.add_argument("--export-status", help="Export ops dashboard JSON to path and exit")
     parser.add_argument("--db", default="data/clip_empire.db", help="Path to SQLite database")
     parser.add_argument("--trend-radar", action="store_true", help="Enable trend radar supplemental sources")
     parser.add_argument("--no-policy-filter", action="store_true", help="Disable safety/policy pre-filter")
@@ -75,6 +77,11 @@ def main() -> None:
 
     if args.status:
         cmd_status()
+        return
+
+    if args.export_status:
+        out = export_status(db_path=args.db, out_path=args.export_status)
+        print(f"Exported status: {out}")
         return
 
     if not args.channel and not args.all:

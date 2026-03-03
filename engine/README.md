@@ -35,6 +35,7 @@ python -m engine.cli --status
 - `engine/transform/crop.py` — 9:16 transform
 - `engine/transform/caption.py` — Whisper → ASS subtitles
 - `engine/transform/overlay.py` — text overlays
+- `engine/transform/ab.py` — automatic A/B title+hook generation
 - `engine/transform/encode.py` — final render
 - `engine/scheduler/runner.py` — orchestrator
 - `engine/scheduler/queue_writer.py` — publish queue bridge

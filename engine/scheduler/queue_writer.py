@@ -18,6 +18,7 @@ from typing import Optional, List
 
 from publisher.queue import add_publish_job
 from engine.config.templates import get_title, get_hashtags
+from engine.transform.ab import choose_variant
 from accounts.channel_definitions import CHANNELS
 
 
@@ -166,7 +167,8 @@ class QueueWriter:
         """
         _ensure_channel_in_db(channel_name, self.db_path)
 
-        caption = title or get_title(channel_name)
+        auto_title, auto_hook, ab_label = choose_variant(channel_name)
+        caption = title or auto_title or get_title(channel_name)
         tags = hashtags or get_hashtags(channel_name)
         sched = schedule_at or _next_schedule_time(channel_name, self.db_path)
 
@@ -187,7 +189,8 @@ class QueueWriter:
             caption_text=caption,
             hashtags=tags,
             render_path=render_path,
+            first_frame_hook=f"{auto_hook} [{ab_label}]",
         )
 
-        print(f"[queue] Enqueued {channel_name} → {job_id} (schedule: {sched.strftime('%Y-%m-%d %H:%M')})")
+        print(f"[queue] Enqueued {channel_name} → {job_id} (schedule: {sched.strftime('%Y-%m-%d %H:%M')}, A/B={ab_label})")
         return job_id

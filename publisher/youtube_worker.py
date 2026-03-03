@@ -40,11 +40,11 @@ SELECTORS = {
     "upload_menu_item": "tp-yt-paper-item[test-id=\"upload-beta\"]",
     # Hidden file input inside upload dialog
     "file_input": "input[type=\"file\"]",
-    # Title: contenteditable div inside the title textarea widget
-    # aria-label is "Title (required)" — match via the inner textbox
-    "title_textbox": "ytcp-social-suggestions-textbox[label='Title (required)'] div[contenteditable='true']",
-    # Description: contenteditable div
-    "description_textbox": "ytcp-social-suggestions-textbox[label='Description'] div[contenteditable='true']",
+    # Title: the contenteditable div inside YouTube Studio's custom textarea element.
+    # It has aria-label="Title (required)" directly on the div.
+    "title_textbox": "div[contenteditable='true'][aria-label='Title (required)']",
+    # Description: similar pattern
+    "description_textbox": "div[contenteditable='true'][aria-label='Description']",
     # Audience radios (scroll down to find them)
     "not_made_for_kids_radio": "tp-yt-paper-radio-button[name='VIDEO_MADE_FOR_KIDS_NOT_MFK']",
     "made_for_kids_radio": "tp-yt-paper-radio-button[name='VIDEO_MADE_FOR_KIDS_MFK']",
@@ -200,21 +200,64 @@ def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description:
     print("Filling video details...")
 
     # ---- Title ----
-    # Wait for the title contenteditable to be ready
-    title_loc = page.locator(SELECTORS["title_textbox"])
-    title_loc.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
+    # Try multiple selectors for the title contenteditable — YouTube Studio updates its DOM regularly.
+    title_loc = None
+    title_selectors = [
+        "div[contenteditable='true'][aria-label='Title (required)']",
+        "div[contenteditable='true'][aria-label='Add a title']",
+        "#title-textarea div[contenteditable='true']",
+        "ytcp-uploads-details div[contenteditable='true']:first-of-type",
+        "ytcp-social-suggestions-textbox div[contenteditable='true']",
+    ]
+    for sel in title_selectors:
+        loc = page.locator(sel).first
+        try:
+            loc.wait_for(state="visible", timeout=5000)
+            title_loc = loc
+            print(f"Title found via: {sel}")
+            break
+        except Exception:
+            continue
+
+    if title_loc is None:
+        # Diagnostic: dump all contenteditable elements on the page
+        try:
+            all_ce = page.evaluate("""() => {
+                return Array.from(document.querySelectorAll('[contenteditable]')).map(el => ({
+                    tag: el.tagName,
+                    id: el.id,
+                    ariaLabel: el.getAttribute('aria-label'),
+                    placeholder: el.getAttribute('placeholder'),
+                    classes: el.className.substring(0, 80)
+                }));
+            }""")
+            print("DEBUG contenteditable elements:", all_ce)
+        except Exception as de:
+            print(f"DEBUG eval failed: {de}")
+        raise RuntimeError("Could not find title input. Tried: " + str(title_selectors))
+
     title_loc.click()
-    # Select-all and replace (works on contenteditable)
     title_loc.press("Control+a")
     title_loc.type(title, delay=30)
     print(f"Title set: {title}")
 
     # ---- Description ----
-    desc_loc = page.locator(SELECTORS["description_textbox"])
-    if desc_loc.is_visible(timeout=3000):
-        desc_loc.click()
-        desc_loc.type(description, delay=20)
-        print("Description set.")
+    desc_selectors = [
+        "div[contenteditable='true'][aria-label='Description']",
+        "div[contenteditable='true'][aria-label='Tell viewers about your video']",
+        "#description-textarea div[contenteditable='true']",
+        "ytcp-uploads-details div[contenteditable='true']:nth-of-type(2)",
+    ]
+    for sel in desc_selectors:
+        loc = page.locator(sel).first
+        try:
+            if loc.is_visible(timeout=3000):
+                loc.click()
+                loc.type(description, delay=20)
+                print(f"Description set via: {sel}")
+                break
+        except Exception:
+            continue
 
     # ---- Audience: scroll down to find it ----
     page.wait_for_timeout(500)

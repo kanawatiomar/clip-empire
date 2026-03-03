@@ -330,23 +330,41 @@ def _verify_upload_success(page: Page, cfg: YouTubeWorkerConfig, publish_type: s
         raise RuntimeError(f"Could not load Content page: {e}")
 
     # Find the most recently uploaded video link
-    for sel in [
-        "a[href*='youtube.com/shorts']",
-        "a[href*='youtube.com/watch']",
-        "ytcp-video-row a[href]",
-    ]:
+    # YouTube Studio renders video rows lazily — try a few times
+    for attempt in range(3):
+        for sel in [
+            "a[href*='youtube.com/shorts']",
+            "a[href*='youtube.com/watch']",
+        ]:
+            try:
+                links = page.locator(sel).all()
+                for lnk in links[:5]:
+                    href = lnk.get_attribute("href") or ""
+                    if href and ("shorts" in href or "watch" in href):
+                        print(f"Upload verified! URL: {href}")
+                        return href
+            except Exception:
+                continue
+
+        # JS eval — catches relative hrefs like /shorts/XXXX
         try:
-            links = page.locator(sel).all()
-            for lnk in links[:5]:
-                href = lnk.get_attribute("href") or ""
-                if "youtube.com" in href and ("shorts" in href or "watch" in href):
-                    print(f"Upload verified! URL: {href}")
-                    return href
+            hrefs = page.evaluate("""() => {
+                return Array.from(document.querySelectorAll('a[href]'))
+                    .map(a => a.href)
+                    .filter(h => h.includes('youtube.com/shorts') || h.includes('youtube.com/watch'));
+            }""")
+            if hrefs:
+                print(f"Upload verified (JS)! URL: {hrefs[0]}")
+                return hrefs[0]
         except Exception:
-            continue
+            pass
+
+        if attempt < 2:
+            print(f"Video links not found yet, waiting... (attempt {attempt + 1})")
+            page.wait_for_timeout(3000)
 
     # Last fallback: return the studio content page URL so we still mark as succeeded
-    print(f"Could not find video URL in content page. Using studio URL as fallback.")
+    print("Could not find video URL in content page. Using studio URL as fallback.")
     return content_url
 
 

@@ -27,6 +27,7 @@ DATABASE_PATH = "data/clip_empire.db"
 # Spread posts across these hours (Denver time → converted to UTC for storage)
 POST_WINDOW_START_H = 8   # 8am local
 POST_WINDOW_END_H = 22    # 10pm local
+MAX_JOBS_PER_SLOT = 4
 
 
 def _ensure_channel_in_db(channel_name: str, db_path: str = DATABASE_PATH) -> None:
@@ -83,6 +84,22 @@ def _create_dummy_variant(
     return variant_id
 
 
+def _slot_load(slot_start_local: datetime, db_path: str = DATABASE_PATH) -> int:
+    conn = sqlite3.connect(db_path)
+    slot_end = slot_start_local + timedelta(minutes=30)
+    cur = conn.execute(
+        """
+        SELECT COUNT(1) FROM publish_jobs
+        WHERE status IN ('queued', 'running', 'succeeded')
+          AND schedule_at >= ? AND schedule_at < ?
+        """,
+        (slot_start_local.isoformat(), slot_end.isoformat()),
+    )
+    count = int(cur.fetchone()[0] or 0)
+    conn.close()
+    return count
+
+
 def _next_schedule_time(channel_name: str, db_path: str = DATABASE_PATH) -> datetime:
     """Calculate the next available upload slot for a channel today.
 
@@ -135,6 +152,14 @@ def _next_schedule_time(channel_name: str, db_path: str = DATABASE_PATH) -> date
         next_time = (now_local + timedelta(days=1)).replace(
             hour=POST_WINDOW_START_H, minute=0, second=0, microsecond=0
         )
+
+    # Load balancer: avoid overpacking a single half-hour slot globally.
+    while _slot_load(next_time, db_path=db_path) >= MAX_JOBS_PER_SLOT:
+        next_time = next_time + timedelta(minutes=30)
+        if next_time.hour > POST_WINDOW_END_H:
+            next_time = (next_time + timedelta(days=1)).replace(
+                hour=POST_WINDOW_START_H, minute=0, second=0, microsecond=0
+            )
 
     return next_time
 

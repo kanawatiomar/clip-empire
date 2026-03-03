@@ -38,7 +38,7 @@ python -m engine.cli --status
 - `engine/transform/ab.py` — automatic A/B title+hook generation
 - `engine/transform/encode.py` — final render
 - `engine/scheduler/runner.py` — orchestrator
-- `engine/scheduler/queue_writer.py` — publish queue bridge
+- `engine/scheduler/queue_writer.py` — publish queue bridge + schedule load balancing
 - `engine/ops/feedback.py` — source/template performance scoring loop
 - `engine/ops/source_health.py` — source reliability and auto-skip monitor
 

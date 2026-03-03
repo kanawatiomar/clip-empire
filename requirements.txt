@@ -1,10 +1,21 @@
+# Publisher / browser automation
 playwright
+pytz
+
+# Account management
 pyotp
 pyzbar
 Pillow
 cryptography
 tabulate
+
+# Google API (existing clip engines)
 google-api-python-client
 google-auth-httplib2
 google-auth-oauthlib
-pytz # Added for timezone handling
+
+# Engine — content pipeline
+yt-dlp                  # universal video downloader (TikTok, YouTube, Reddit, Twitter)
+openai-whisper          # Whisper speech-to-text for captions
+torch                   # PyTorch — required by Whisper (CUDA auto-detected)
+tqdm                    # progress bars used by Whisper

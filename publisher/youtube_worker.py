@@ -130,10 +130,55 @@ def _click_upload(page: Page, cfg: YouTubeWorkerConfig) -> None:
     print("Upload menu clicked.")
 
 def _upload_file(page: Page, cfg: YouTubeWorkerConfig, video_path: str) -> None:
+    """Set the file on the upload dialog.
+
+    Strategy A: Wait for a file chooser to open when we click the drag-drop area.
+    Strategy B: Directly set_input_files on the hidden file input (works when input is in DOM).
+    Strategy C: Click "Select files" button if visible.
+    """
     print(f"Uploading file: {video_path}")
-    _wait_for_selector(page, SELECTORS["file_input"], cfg.nav_timeout_ms)
-    page.locator(SELECTORS["file_input"]).set_input_files(video_path)
-    print("File selected for upload.")
+
+    # Give the upload modal time to animate in
+    page.wait_for_timeout(2500)
+
+    # Strategy A: intercept file chooser triggered by clicking the drop zone
+    try:
+        with page.expect_file_chooser(timeout=10_000) as fc_info:
+            # Click the "Select files" button or drag-drop area
+            try:
+                page.get_by_role("button", name="Select files").click(timeout=5000)
+            except Exception:
+                try:
+                    page.locator("ytcp-uploads-file-picker").click(timeout=5000)
+                except Exception:
+                    # Last resort: click center of dialog
+                    page.locator("ytcp-uploads-dialog").click(timeout=5000)
+        fc_info.value.set_files(video_path)
+        print("File selected via file chooser (Strategy A).")
+        return
+    except Exception as e_a:
+        print(f"Strategy A failed: {e_a}. Trying Strategy B...")
+
+    # Strategy B: directly set the hidden file input
+    try:
+        file_input = page.locator(SELECTORS["file_input"]).first
+        file_input.set_input_files(video_path)
+        print("File selected via hidden input (Strategy B).")
+        return
+    except Exception as e_b:
+        print(f"Strategy B failed: {e_b}. Trying Strategy C...")
+
+    # Strategy C: evaluate JS to trigger file input
+    page.evaluate("""(path) => {
+        const inp = document.querySelector('input[type="file"]');
+        if (!inp) throw new Error('no file input found');
+        const dt = new DataTransfer();
+        // Can only set via File object in renderer context — skipping, use set_input_files
+        inp.removeAttribute('style');
+        inp.style.display = 'block';
+    }""", video_path)
+    page.locator(SELECTORS["file_input"]).first.set_input_files(video_path)
+    print("File selected via JS-exposed input (Strategy C).")
 
 def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description: str, made_for_kids: bool) -> None:
     print("Filling video details...")

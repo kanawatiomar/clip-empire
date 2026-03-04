@@ -150,3 +150,6 @@ def migrate(db_path: str = DB_PATH):
 
 if __name__ == "__main__":
     migrate()
+
+# Alias for backward compat
+ensure_schema = migrate

@@ -1,9 +1,12 @@
 # secrets / local state
+.env
 accounts/.master_key
 accounts/accounts.db
 profiles/
 logs/
 renders/
+sora/footage/
+sora/gen_state.json
 # keep schema/migrations in repo; ignore runtime DB/state
 data/*.db
 data/*.sqlite

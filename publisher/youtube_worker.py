@@ -1,8 +1,53 @@
-import os
+﻿import os
 import time
+import urllib.request
+import json as _json
 from dataclasses import dataclass
 from typing import Optional
 from datetime import datetime, timedelta, timezone as dt_timezone
+
+# â”€â”€ Discord alert channels (Clip Empire server) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# Load .env from repo root if not already set
+_env_path = os.path.join(os.path.dirname(__file__), "..", ".env")
+if os.path.exists(_env_path) and not os.environ.get("DISCORD_BOT_TOKEN"):
+    for _line in open(_env_path):
+        if _line.startswith("DISCORD_BOT_TOKEN="):
+            os.environ["DISCORD_BOT_TOKEN"] = _line.strip().split("=", 1)[1]
+_DISCORD_TOKEN = os.environ.get("DISCORD_BOT_TOKEN", "")
+_CH_SUCCESS  = "1480139743709888665"  # #publish-success
+_CH_FAILURES = "1480139754514157729"  # #publish-failures
+
+def _discord_post(channel_id: str, message: str) -> None:
+    """Fire-and-forget Discord message via bot token."""
+    try:
+        import subprocess, sys
+        token_path = os.path.join(os.path.dirname(__file__), "..", ".env")
+        token = _DISCORD_TOKEN
+        if not token and os.path.exists(token_path):
+            for line in open(token_path):
+                if line.startswith("DISCORD_BOT_TOKEN="):
+                    token = line.strip().split("=", 1)[1]
+        if not token:
+            # Try openclaw env
+            result = subprocess.run(
+                ["openclaw", "config", "get", "channels.discord.token"],
+                capture_output=True, text=True
+            )
+            token = result.stdout.strip()
+        if not token:
+            print(f"[discord] No bot token â€” skipping alert")
+            return
+        payload = _json.dumps({"content": message}).encode()
+        req = urllib.request.Request(
+            f"https://discord.com/api/v10/channels/{channel_id}/messages",
+            data=payload,
+            headers={"Authorization": f"Bot {token}", "Content-Type": "application/json"},
+            method="POST",
+        )
+        urllib.request.urlopen(req, timeout=10)
+    except Exception as e:
+        print(f"[discord] Alert failed: {e}")
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 from playwright.sync_api import sync_playwright, Page, expect, TimeoutError as PWTimeout
 import pytz # Will need 'pip install pytz'
@@ -40,7 +85,7 @@ SELECTORS = {
     "upload_menu_item": "tp-yt-paper-item[test-id=\"upload-beta\"]",
     # Hidden file input inside upload dialog
     "file_input": "input[type=\"file\"]",
-    # Confirmed via debug_selectors.py — exact aria-labels on the contenteditable divs
+    # Confirmed via debug_selectors.py â€” exact aria-labels on the contenteditable divs
     "title_textbox": "div#textbox[aria-label='Add a title that describes your video (type @ to mention a channel)']",
     "description_textbox": "div#textbox[aria-label='Tell viewers about your video (type @ to mention a channel)']",
     # Audience radios (scroll down to find them)
@@ -219,7 +264,7 @@ def _upload_file(page: Page, cfg: YouTubeWorkerConfig, video_path: str) -> None:
         const inp = document.querySelector('input[type="file"]');
         if (!inp) throw new Error('no file input found');
         const dt = new DataTransfer();
-        // Can only set via File object in renderer context — skipping, use set_input_files
+        // Can only set via File object in renderer context â€” skipping, use set_input_files
         inp.removeAttribute('style');
         inp.style.display = 'block';
     }""", video_path)
@@ -229,9 +274,9 @@ def _upload_file(page: Page, cfg: YouTubeWorkerConfig, video_path: str) -> None:
 def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description: str, made_for_kids: bool) -> None:
     """Fill the Details step of the upload wizard.
 
-    YouTube auto-fills the title with the filename — we clear and replace it.
+    YouTube auto-fills the title with the filename â€” we clear and replace it.
     Then scroll to the audience section and set the made-for-kids radio.
-    Finally click Next twice to pass through Video elements → Checks.
+    Finally click Next twice to pass through Video elements â†’ Checks.
     """
     print("Filling video details...")
 
@@ -268,12 +313,12 @@ def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description:
     except Exception as e:
         print(f"Could not set audience radio (non-fatal, defaulting to YouTube setting): {e}")
 
-    # ---- Next → Video elements ----
+    # ---- Next â†’ Video elements ----
     page.locator(SELECTORS["next_button"]).click()
     print("Clicked Next (Video elements).")
     page.wait_for_timeout(1000)
 
-    # ---- Next → Checks ----
+    # ---- Next â†’ Checks ----
     page.locator(SELECTORS["next_button"]).click()
     print("Clicked Next (Checks).")
     page.wait_for_timeout(1000)
@@ -290,42 +335,17 @@ def _set_visibility_and_schedule(
     now = datetime.now(tz)
     schedule_time_local = schedule_at.astimezone(tz)
 
-    # Publish immediately if scheduled time is in the past or within 5 minutes
-    if schedule_time_local <= now + timedelta(minutes=5):
-        print("Publishing immediately (schedule time is past/soon).")
-        pub_loc = page.locator(SELECTORS["public_radio"])
-        pub_loc.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
-        pub_loc.click()
-        page.locator(SELECTORS["publish_button"]).wait_for(state="visible", timeout=cfg.nav_timeout_ms)
-        page.locator(SELECTORS["publish_button"]).click()
-        print("Clicked Publish.")
-        return "published"
-    else:
-        print(f"Scheduling for {schedule_time_local.strftime('%Y-%m-%d %H:%M %Z')}")
-        sched_loc = page.locator(SELECTORS["schedule_radio"])
-        sched_loc.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
-        sched_loc.click()
-        page.wait_for_timeout(500)
-
-        # Date input
-        date_loc = page.locator(SELECTORS["schedule_date_input"])
-        date_loc.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
-        date_loc.triple_click()
-        date_loc.type(schedule_time_local.strftime("%b %d, %Y"), delay=30)
-
-        # Time input
-        time_loc = page.locator(SELECTORS["schedule_time_input"])
-        time_loc.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
-        time_loc.triple_click()
-        time_loc.type(schedule_time_local.strftime("%I:%M %p"), delay=30)
-        time_loc.press("Enter")
-        page.wait_for_timeout(500)
-
-        sched_btn = page.locator(SELECTORS["schedule_button"])
-        sched_btn.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
-        sched_btn.click()
-        print("Clicked Schedule button.")
-        return "scheduled"
+    # Always publish immediately as Public — scheduling UI is unreliable
+    # and Shorts don't benefit from scheduling (algorithm-driven discovery)
+    print("Publishing immediately as Public.")
+    pub_loc = page.locator(SELECTORS["public_radio"])
+    pub_loc.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
+    pub_loc.click()
+    page.wait_for_timeout(300)
+    page.locator(SELECTORS["publish_button"]).wait_for(state="visible", timeout=cfg.nav_timeout_ms)
+    page.locator(SELECTORS["publish_button"]).click()
+    print("Clicked Publish.")
+    return "published"
 
 def _verify_upload_success(page: Page, cfg: YouTubeWorkerConfig, publish_type: str) -> Optional[str]:
     """Confirm the video was published and return its URL.
@@ -343,7 +363,7 @@ def _verify_upload_success(page: Page, cfg: YouTubeWorkerConfig, publish_type: s
     try:
         if page.locator(SELECTORS["error_dialog"]).is_visible(timeout=1000):
             error_text = page.locator(SELECTORS["error_dialog"]).inner_text()
-            raise RuntimeError(f"Upload failed — YouTube error dialog: {error_text}")
+            raise RuntimeError(f"Upload failed â€” YouTube error dialog: {error_text}")
     except Exception as e:
         if "Upload failed" in str(e):
             raise
@@ -368,7 +388,7 @@ def _verify_upload_success(page: Page, cfg: YouTubeWorkerConfig, publish_type: s
         raise RuntimeError(f"Could not load Content page: {e}")
 
     # Find the most recently uploaded video link
-    # YouTube Studio renders video rows lazily — try a few times
+    # YouTube Studio renders video rows lazily â€” try a few times
     for attempt in range(3):
         for sel in [
             "a[href*='youtube.com/shorts']",
@@ -384,7 +404,7 @@ def _verify_upload_success(page: Page, cfg: YouTubeWorkerConfig, publish_type: s
             except Exception:
                 continue
 
-        # JS eval — catches relative hrefs like /shorts/XXXX
+        # JS eval â€” catches relative hrefs like /shorts/XXXX
         try:
             hrefs = page.evaluate("""() => {
                 return Array.from(document.querySelectorAll('a[href]'))
@@ -413,7 +433,7 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
     - opens YouTube Studio
     - verifies session is logged in
 
-    Returns exit code (0=did work, 2=no job)."""
+    Returns exit code (0=did work or nothing to do, 1=real failure)."""
 
     cfg = cfg or YouTubeWorkerConfig()
     
@@ -426,7 +446,8 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
 
     job = get_next_job(platform="youtube", channel_name=channel_name)
     if not job:
-        return 2
+        print('No queued jobs ready -- nothing to do.')
+        return 0
 
     job_id = job["job_id"]
     ch = job["channel_name"]
@@ -467,7 +488,7 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                 _log_step(job_id, f"set input file: {video_file_path}")
                 _upload_file(page, cfg, video_file_path)
 
-                # Capture the video URL early — Studio shows it in the dialog right panel
+                # Capture the video URL early â€” Studio shows it in the dialog right panel
                 early_video_url = _extract_video_url_from_dialog(page)
                 if early_video_url:
                     _log_step(job_id, f"captured video URL early: {early_video_url}")
@@ -492,6 +513,14 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
 
                 # Mark job succeeded only if we have a URL
                 update_job_status(job_id, "succeeded", post_url=video_url, platform_post_id=video_url.split("/")[-1])
+
+                # Discord success alert
+                title = job.get("caption_text", "Unknown title")[:80]
+                _discord_post(_CH_SUCCESS,
+                    f"âœ… **{ch}** uploaded\n"
+                    f"**{title}**\n"
+                    f"{video_url}"
+                )
 
                 context.close()
                 return 0
@@ -520,6 +549,10 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
             error_class = "yt_processing_stuck"
 
         fail_job(job_id, error_class=error_class, error_detail=error_detail)
+        _discord_post(_CH_FAILURES,
+            f"âŒ **{job_id[:8]}** failed â€” `{error_class}`\n"
+            f"{error_detail[:300]}"
+        )
         return 1
 
 
@@ -536,3 +569,4 @@ if __name__ == "__main__":
     code = run_once(YouTubeWorkerConfig(headless=False)) # Run headful for debugging
     print(f"Worker exited with code: {code}")
     raise SystemExit(code)
+

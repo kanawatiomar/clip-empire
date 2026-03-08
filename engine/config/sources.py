@@ -363,8 +363,6 @@ CHANNEL_SOURCES: dict = {
          "type": "search", "priority": 3, "max_age_days": 7,
          "min_dur_s": 20, "max_dur_s": 60, "crop_anchor": "center"},
     ],
-}
-
 
     "fomo_highlights": [
         # Shroud: cam bottom-left -> anchor right to keep gameplay on right side
@@ -392,5 +390,7 @@ CHANNEL_SOURCES: dict = {
          "type": "search", "priority": 3, "max_age_days": 7,
          "min_dur_s": 20, "max_dur_s": 60, "crop_anchor": "center"},
     ],
+}
+
 # Alias so imports can use either name
 SOURCES = CHANNEL_SOURCES

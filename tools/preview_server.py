@@ -17,7 +17,6 @@ import base64
 import subprocess
 import tempfile
 from pathlib import Path
-from typing import Optional
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
@@ -27,13 +26,6 @@ from engine.config.styles import CHANNEL_STYLE_MAP, STYLE_PRESETS, get_overlay_s
 from engine.config.templates import get_hook, get_cta
 from engine.transform.overlay import _strip_emoji
 from accounts.channel_definitions import CHANNELS
-
-# ── Smart crop import (graceful fallback) ─────────────────────────────────────
-try:
-    from engine.transform.smart_crop import SmartCropDetector, SmartCropResult
-    _SMART_CROP_AVAILABLE = True
-except ImportError:
-    _SMART_CROP_AVAILABLE = False
 
 app = Flask(__name__)
 
@@ -121,7 +113,6 @@ HTML = """
         <button class="tab active" onclick="setTab('hook', this)">Hook Frame</button>
         <button class="tab" onclick="setTab('cta', this)">CTA Frame</button>
         <button class="tab" onclick="setTab('caption', this)">Captions</button>
-        <button class="tab" onclick="setTab('crop', this)">Crop Preview</button>
       </div>
       <div class="phone-frame">
         <div class="loading" id="loading">Loading...</div>
@@ -207,163 +198,6 @@ HTML = """
 </html>
 """
 
-# ── Crop Preview renderer ─────────────────────────────────────────────────────
-
-def _find_latest_raw_clip() -> Optional[str]:
-    """Find the most recently downloaded raw clip across all channel folders."""
-    base = Path(__file__).parent.parent / "raw_clips"
-    if not base.exists():
-        return None
-    candidates = list(base.rglob("*.mp4")) + list(base.rglob("*.mkv")) + list(base.rglob("*.webm"))
-    if not candidates:
-        return None
-    # Sort by modification time descending
-    candidates.sort(key=lambda p: p.stat().st_mtime, reverse=True)
-    return str(candidates[0])
-
-
-def _render_crop_preview() -> tuple[bytes, str]:
-    """Render a before/after composite showing smart crop face detection results.
-
-    Returns (PNG bytes, label string).
-    """
-    import numpy as np
-
-    PREVIEW_W = 540  # composite image width
-
-    # ── 1. Find a raw clip ────────────────────────────────────────────────────
-    clip_path = _find_latest_raw_clip()
-    test_frame_generated = False
-
-    if clip_path is None or not _SMART_CROP_AVAILABLE:
-        # Generate a synthetic test frame (solid color + simulated face box)
-        frame_w, frame_h = 1920, 1080
-        arr = np.zeros((frame_h, frame_w, 3), dtype=np.uint8)
-        arr[:] = (40, 60, 80)  # dark blue-grey background
-        # Simulated face region
-        face_x, face_y, face_w, face_h = 700, 200, 200, 260
-        arr[face_y:face_y + face_h, face_x:face_x + face_w] = (180, 140, 110)
-        result = SmartCropResult(
-            anchor="center",
-            crop_x=420,
-            face_boxes=[{"x": face_x, "y": face_y, "w": face_w, "h": face_h,
-                         "frame_w": frame_w, "frame_h": frame_h}],
-            sampled_frames=[arr],
-        ) if _SMART_CROP_AVAILABLE else None
-        test_frame_generated = True
-        source_frame = Image.fromarray(arr[..., ::-1])  # BGR→RGB
-        crop_x = 420
-        anchor = "center"
-        faces_found = 1
-    else:
-        # ── 2. Run SmartCropDetector on the clip ──────────────────────────────
-        try:
-            detector = SmartCropDetector(clip_path)
-            result = detector.detect()
-        except Exception as e:
-            # Fall back to a blank result
-            result = SmartCropResult(anchor="center", crop_x=420)
-
-        crop_x = result.crop_x
-        anchor = result.anchor
-        faces_found = len(result.face_boxes)
-
-        # Use first sampled frame for the preview
-        if result.sampled_frames:
-            raw_frame = result.sampled_frames[0]  # BGR numpy array
-            source_frame = Image.fromarray(raw_frame[..., ::-1])  # BGR→RGB
-        else:
-            # Blank frame
-            source_frame = Image.new("RGB", (1920, 1080), (40, 40, 40))
-
-    # ── 3. Build composite image ──────────────────────────────────────────────
-    # Dimensions
-    orig_w, orig_h = source_frame.size  # e.g. 1920x1080
-
-    # Scale source frame to PREVIEW_W wide
-    scale = PREVIEW_W / orig_w
-    thumb_w = PREVIEW_W
-    thumb_h = int(orig_h * scale)
-
-    thumb = source_frame.resize((thumb_w, thumb_h), Image.LANCZOS)
-    draw_thumb = ImageDraw.Draw(thumb)
-
-    # Draw face detection boxes in green (scaled to thumb coords)
-    for box in (result.face_boxes if result else []):
-        bx = int(box["x"] * scale)
-        by = int(box["y"] * scale)
-        bw = int(box["w"] * scale)
-        bh = int(box["h"] * scale)
-        draw_thumb.rectangle([bx, by, bx + bw, by + bh], outline=(0, 255, 0), width=2)
-
-    # Draw 9:16 crop window rectangle in red (scaled)
-    crop_w_orig = 1080  # the 1080px crop window on original frame
-    rx0 = int(crop_x * scale)
-    rx1 = int((crop_x + crop_w_orig) * scale)
-    draw_thumb.rectangle([rx0, 0, rx1, thumb_h - 1], outline=(255, 0, 0), width=3)
-
-    # Build the cropped result preview
-    # Crop from source frame, then scale down to a 9:16 thumbnail
-    crop_left = crop_x
-    crop_right = crop_x + crop_w_orig
-    crop_left = max(0, min(crop_left, orig_w - crop_w_orig))
-    crop_right = crop_left + crop_w_orig
-
-    cropped_full = source_frame.crop((crop_left, 0, crop_right, orig_h))
-    # Scale cropped (1080x1080 or narrower) to fill 9:16: scale height to 1920 proportion
-    # For preview: show as 9:16 thumbnail, ~270x480 (half of 540x960)
-    crop_thumb_w = PREVIEW_W // 2
-    crop_thumb_h = int(crop_thumb_w * (1920 / 1080))  # 9:16 ratio
-    # Fit-within box
-    crop_preview = cropped_full.resize(
-        (crop_thumb_w, int(cropped_full.size[1] * crop_thumb_w / cropped_full.size[0])),
-        Image.LANCZOS,
-    )
-
-    # ── 4. Compose: top = landscape thumb, bottom = 9:16 crop result ─────────
-    try:
-        label_font = ImageFont.truetype("C:/Windows/Fonts/arial.ttf", 14)
-    except Exception:
-        label_font = ImageFont.load_default()
-
-    label_h = 24
-    gap = 8
-    total_h = thumb_h + label_h + gap + crop_preview.size[1] + label_h
-
-    composite = Image.new("RGB", (PREVIEW_W, total_h), (13, 13, 13))
-    composite.paste(thumb, (0, 0))
-
-    cdraw = ImageDraw.Draw(composite)
-    # Top label
-    cdraw.text(
-        (8, thumb_h + 4),
-        f"Original (1920×1080) | faces={faces_found} | anchor={anchor} | crop_x={crop_x}",
-        font=label_font,
-        fill=(200, 200, 200),
-    )
-
-    # Paste cropped preview centered
-    crop_y_offset = thumb_h + label_h + gap
-    paste_x = (PREVIEW_W - crop_preview.size[0]) // 2
-    composite.paste(crop_preview, (paste_x, crop_y_offset))
-
-    # Bottom label
-    cdraw.text(
-        (8, crop_y_offset + crop_preview.size[1] + 4),
-        f"9:16 crop result (from crop_x={crop_x}){' [TEST FRAME]' if test_frame_generated else ''}",
-        font=label_font,
-        fill=(180, 180, 180),
-    )
-
-    buf = io.BytesIO()
-    composite.save(buf, format="PNG")
-    label_str = (
-        f"Smart Crop Preview | anchor={anchor} | faces={faces_found} | crop_x={crop_x}"
-        + (f" | source: {Path(clip_path).name}" if clip_path else " | [test frame]")
-    )
-    return buf.getvalue(), label_str
-
-
 # ── PIL-based frame renderer ───────────────────────────────────────────────────
 
 def _pil_font(fontname: str, size: int) -> ImageFont.FreeTypeFont:
@@ -388,14 +222,7 @@ def _ass_to_rgba(ass_color: str) -> tuple:
 
 
 def _render_frame(channel_name: str, tab: str) -> tuple[bytes, str]:
-    """Render a preview frame as PNG bytes.
-
-    For tab='crop', delegates to _render_crop_preview().
-    All other tabs render a 540x960 (half of 1080x1920) styled frame.
-    """
-    if tab == "crop":
-        return _render_crop_preview()
-
+    """Render a 540x960 (half of 1080x1920) preview frame as PNG bytes."""
     W, H = 540, 960
     cs = get_caption_style(channel_name)
     os_ = get_overlay_style(channel_name)
@@ -451,76 +278,37 @@ def _render_frame(channel_name: str, tab: str) -> tuple[bytes, str]:
         label = f'CTA: "{cta_text}"'
 
     elif tab == "caption":
-        # ── Word-highlight caption demo ──────────────────────────────────────
-        # Shows 3 rows, each with a different word highlighted — simulates the
-        # TikTok karaoke effect exactly as it appears in the actual ASS render.
-        fontname   = cs.get("fontname", "Impact")
-        font_sz    = max(16, cs.get("fontsize", 72) // 2)
-        font       = _pil_font(fontname, font_sz)
+        # Simulate caption bar
+        fontname = cs.get("fontname", "Impact")
+        font_sz = max(16, cs.get("fontsize", 72) // 2)
+        font = _pil_font(fontname, font_sz)
+        sample = "This clip is INSANE"
+        margin_v = cs.get("margin_v", 400)
+        y = int((margin_v / 1920) * H)
+        back = _ass_to_rgba(cs.get("back_color", "&H80000000"))
+        if back[3] > 20:
+            bbox = draw.textbbox((W//2, y), sample, font=font, anchor="mm")
+            pad = 8
+            draw.rectangle([bbox[0]-pad, bbox[1]-pad, bbox[2]+pad, bbox[3]+pad],
+                           fill=(back[0], back[1], back[2], back[3]))
+        # Outline
         outline_sz = cs.get("outline_size", 4)
-        margin_v   = cs.get("margin_v", 400)
-        prim       = _ass_to_rgba(cs.get("primary_color",          "&H00FFFFFF"))
-        outl       = _ass_to_rgba(cs.get("outline_color",          "&H00000000"))
-        hl         = _ass_to_rgba(cs.get("word_highlight_color",   "&H0000FFFF"))
-        back       = _ass_to_rgba(cs.get("back_color",             "&H80000000"))
+        prim = _ass_to_rgba(cs.get("primary_color", "&H00FFFFFF"))
+        outl = _ass_to_rgba(cs.get("outline_color", "&H00000000"))
+        for dx in range(-outline_sz, outline_sz+1, max(1, outline_sz//2)):
+            for dy in range(-outline_sz, outline_sz+1, max(1, outline_sz//2)):
+                if dx or dy:
+                    draw.text((W//2 + dx, y + dy), sample, font=font,
+                             fill=(outl[0], outl[1], outl[2], outl[3]), anchor="mm")
+        draw.text((W//2, y), sample, font=font,
+                 fill=(prim[0], prim[1], prim[2], 255), anchor="mm")
 
-        # Three 3-word groups to demo
-        word_groups = [
-            ["This", "clip", "is"],
-            ["absolutely",  "INSANE", "bro"],
-            ["no", "way", "that"],
-        ]
-
-        base_y = int((margin_v / 1920) * H)
-
-        for row_idx, words in enumerate(word_groups):
-            active_idx = row_idx % len(words)   # rotate which word is highlighted
-            y = base_y + row_idx * (font_sz + 18)
-
-            # Measure total line width to center it
-            word_sizes = []
-            space_w = int(font_sz * 0.28)
-            for w in words:
-                bb = draw.textbbox((0, 0), w, font=font)
-                word_sizes.append(bb[2] - bb[0])
-            total_w = sum(word_sizes) + space_w * (len(words) - 1)
-            x = (W - total_w) // 2
-
-            for w_idx, (word, ww) in enumerate(zip(words, word_sizes)):
-                color = hl if w_idx == active_idx else prim
-
-                # Optional back box for this word
-                if back[3] > 20:
-                    pad = 4
-                    draw.rectangle(
-                        [x - pad, y - pad, x + ww + pad, y + font_sz + pad],
-                        fill=(back[0], back[1], back[2], back[3])
-                    )
-
-                # Outline
-                for dx in range(-outline_sz, outline_sz + 1, max(1, outline_sz // 2)):
-                    for dy in range(-outline_sz, outline_sz + 1, max(1, outline_sz // 2)):
-                        if dx or dy:
-                            draw.text((x + dx, y + dy), word, font=font,
-                                      fill=(outl[0], outl[1], outl[2], 200))
-
-                # Word text
-                draw.text((x, y), word, font=font,
-                          fill=(color[0], color[1], color[2], 255))
-                x += ww + space_w
-
-        # Legend
-        legend_font = _pil_font("Arial", 13)
-        hl_css = f"RGB({hl[0]},{hl[1]},{hl[2]})"
-        draw.text((W // 2, base_y + len(word_groups) * (font_sz + 18) + 10),
-                  f"highlighted word -> {hl_css}",
-                  font=legend_font, fill=(hl[0], hl[1], hl[2], 200), anchor="mt")
-
-        label = (
-            f"Caption: {fontname} {cs.get('fontsize')}px | "
-            f"outline {outline_sz}px | {cs.get('words_per_line',3)} words/line | "
-            f"highlight color shown"
-        )
+        # Word highlight simulation
+        hl_color = _ass_to_rgba(cs.get("word_highlight_color", "&H0000FFFF"))
+        hl_font = _pil_font(fontname, font_sz)
+        draw.text((W//2, y + font_sz + 10), "← word highlight", font=_pil_font("Arial", 12),
+                 fill=(hl_color[0], hl_color[1], hl_color[2], 200), anchor="mm")
+        label = f'Caption: {fontname} {cs.get("fontsize")}px | outline {outline_sz}px'
 
     # Convert to PNG bytes
     buf = io.BytesIO()

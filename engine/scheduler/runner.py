@@ -251,12 +251,11 @@ class Runner:
             return None
 
         try:
-            # 1. Crop to 9:16 (smart face-detection crop when landscape)
+            # 1. Crop to 9:16
             cropped = self.crop.process(
                 input_path=clip.download_path,
                 clip_id=clip.clip_id,
                 trim_to_s=55.0,
-                smart=True,
             )
 
             # 2. Caption (optional — skip if no Whisper or --skip-caption)

@@ -365,5 +365,32 @@ CHANNEL_SOURCES: dict = {
     ],
 }
 
+
+    "fomo_highlights": [
+        # Shroud: cam bottom-left -> anchor right to keep gameplay on right side
+        {"platform": "twitch", "url": "https://www.twitch.tv/shroud/clips",
+         "type": "channel", "priority": 1, "max_age_days": 3,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 6,
+         "crop_anchor": "right"},
+        # Nickmercs: cam bottom-right -> anchor left to keep gameplay on left side
+        {"platform": "twitch", "url": "https://www.twitch.tv/nickmercs/clips",
+         "type": "channel", "priority": 1, "max_age_days": 3,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 6,
+         "crop_anchor": "left"},
+        # TimTheTatman: cam bottom-left -> anchor right
+        {"platform": "twitch", "url": "https://www.twitch.tv/timthetatman/clips",
+         "type": "channel", "priority": 1, "max_age_days": 3,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 6,
+         "crop_anchor": "right"},
+        # YouTube fallbacks
+        {"platform": "youtube",
+         "url": "https://www.youtube.com/results?search_query=shroud+best+clips+shorts+2025",
+         "type": "search", "priority": 3, "max_age_days": 7,
+         "min_dur_s": 20, "max_dur_s": 60, "crop_anchor": "center"},
+        {"platform": "youtube",
+         "url": "https://www.youtube.com/results?search_query=nickmercs+highlights+shorts+2025",
+         "type": "search", "priority": 3, "max_age_days": 7,
+         "min_dur_s": 20, "max_dur_s": 60, "crop_anchor": "center"},
+    ],
 # Alias so imports can use either name
 SOURCES = CHANNEL_SOURCES

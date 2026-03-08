@@ -252,6 +252,7 @@ STYLE_PRESETS = {
 # ── Channel → style mapping ───────────────────────────────────────────────────
 CHANNEL_STYLE_MAP = {
     "arc_highlightz":   "gaming",
+    "fomo_highlights":  "gaming",
     "market_meltdowns": "finance",
     "crypto_confessions": "finance",
     "rich_or_ruined":   "finance",

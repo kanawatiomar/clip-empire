@@ -94,4 +94,26 @@ CHANNELS = {
         "tags": ["viral", "funny", "weird", "unexpected", "clips", "moments"],
         "made_for_kids": True, # Explicitly True for Experimental
     },
+
+    # ── GAMING ────────────────────────────────────────────────────────────────
+
+    "arc_highlightz": {
+        "display_name": "Arc Highlightz",
+        "niche": "Gaming",
+        "description": "Top Twitch gaming highlights — Tfue, Cloakzy and more",
+        "content_focus": "Insane plays, clutch moments, rage, funny reactions from top streamers",
+        "source_types": ["Twitch clips", "gaming YouTube", "streamer highlights"],
+        "tags": ["gaming", "twitch", "highlights", "tfue", "cloakzy", "clips", "gaming"],
+        "made_for_kids": False,
+    },
+
+    "fomo_highlights": {
+        "display_name": "Fomo Highlights",
+        "niche": "Gaming",
+        "description": "FPS & aim highlights — Shroud, Nickmercs, TimTheTatman",
+        "content_focus": "Insane aim, clutch gunfights, funny moments from top FPS streamers",
+        "source_types": ["Twitch clips", "gaming YouTube", "FPS highlights"],
+        "tags": ["gaming", "fps", "shroud", "nickmercs", "timthetatman", "highlights", "clips"],
+        "made_for_kids": False,
+    },
 }

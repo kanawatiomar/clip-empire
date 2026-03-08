@@ -30,17 +30,10 @@ from engine.config.styles import get_overlay_style
 
 
 def _strip_emoji(text: str) -> str:
-    """Remove emoji characters that Impact/Arial can't render."""
-    return re.sub(
-        r'[\U00010000-\U0010ffff'   # supplementary multilingual plane (most emoji)
-        r'\U0001F000-\U0001FFFF'    # emoji blocks
-        r'\u2600-\u26FF'            # misc symbols
-        r'\u2700-\u27BF'            # dingbats
-        r'\uFE00-\uFE0F'            # variation selectors
-        r'\u200d'                   # zero-width joiner
-        r']+',
-        '', text
-    ).strip()
+    """Strip all non-ASCII characters — Impact/Arial only render ASCII anyway."""
+    # Keep printable ASCII only, collapse multiple spaces
+    ascii_only = ''.join(c if ord(c) < 128 and (c.isprintable() or c == ' ') else '' for c in text)
+    return re.sub(r' {2,}', ' ', ascii_only).strip()
 
 
 def _esc(text: str) -> str:

@@ -43,13 +43,23 @@ class CropTransform:
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
-    def process(self, input_path: str, clip_id: str, trim_to_s: float = 55.0) -> str:
+    def process(
+        self,
+        input_path: str,
+        clip_id: str,
+        trim_to_s: float = 55.0,
+        crop_anchor: str = "center",
+    ) -> str:
         """Crop/reframe video to 9:16 and trim to target length.
 
         Args:
-            input_path: Source video file path.
-            clip_id:    Unique ID for naming the output.
-            trim_to_s:  Max duration in seconds (default 55s, keeps under 60s limit).
+            input_path:   Source video file path.
+            clip_id:      Unique ID for naming the output.
+            trim_to_s:    Max duration in seconds (default 55s, under 60s limit).
+            crop_anchor:  Horizontal anchor for landscape crops:
+                          "left"   — crop window at left  (subject on left side)
+                          "center" — center crop (default)
+                          "right"  — crop window at right (subject on right side)
 
         Returns:
             Path to the cropped output video.
@@ -66,8 +76,8 @@ class CropTransform:
             # Already vertical — center crop to 9:16
             filter_graph = self._vertical_crop_filter(w, h)
         else:
-            # Landscape — blur background + centered original
-            filter_graph = self._blur_background_filter(w, h)
+            # Landscape — blur background + anchored original
+            filter_graph = self._blur_background_filter(w, h, anchor=crop_anchor)
 
         cmd = [
             "ffmpeg", "-y",
@@ -105,24 +115,42 @@ class CropTransform:
             f"setsar=1[out_v]"
         )
 
-    def _blur_background_filter(self, w: int, h: int) -> str:
-        """Landscape video: blurred full-screen background + centered original overlay.
+    def _blur_background_filter(self, w: int, h: int, anchor: str = "center") -> str:
+        """Landscape video: blurred full-screen background + anchored original overlay.
+
+        anchor controls where the foreground is horizontally positioned:
+          "left"   — foreground snapped to left edge  (keeps left-side content)
+          "center" — foreground centered               (default)
+          "right"  — foreground snapped to right edge (keeps right-side content)
 
         Background: scale to 1080x1920, apply heavy gaussian blur.
-        Foreground: scale original to fit within 1080x1080 (centered).
+        Foreground: scale original to fit height, position by anchor.
         """
-        # Foreground: fit within 1080 wide (letterboxed)
-        fg_scale = f"scale={TARGET_W}:-2:flags=lanczos"
-        # Position foreground in center of 1920-height canvas
-        overlay_y = "(main_h-overlay_h)/2"
+        # Foreground: scale to full TARGET_H height, keeping aspect ratio
+        # This makes the foreground taller → we crop width to TARGET_W via bg
+        fg_w = int(w * TARGET_H / h)   # width of fg when scaled to full canvas height
+        fg_scale = f"scale={fg_w}:{TARGET_H}:flags=lanczos"
+
+        # Horizontal offset based on anchor
+        if anchor == "left":
+            overlay_x = "0"
+            log_anchor = "left"
+        elif anchor == "right":
+            overlay_x = f"main_w-overlay_w"   # flush right
+            log_anchor = "right"
+        else:
+            overlay_x = "(main_w-overlay_w)/2"
+            log_anchor = "center"
+
+        print(f"[crop] Anchor={log_anchor} (fg_w={fg_w}px → crop to {TARGET_W}px)")
 
         return (
             # Background: scale + blur fill
             f"[0:v]scale={TARGET_W}:{TARGET_H}:force_original_aspect_ratio=increase,"
             f"crop={TARGET_W}:{TARGET_H},"
             f"gblur=sigma=30[bg];"
-            # Foreground: scale to fit width
+            # Foreground: scale to full height
             f"[0:v]{fg_scale}[fg];"
-            # Overlay fg centered on bg
-            f"[bg][fg]overlay=(main_w-overlay_w)/2:{overlay_y}[out_v]"
+            # Overlay fg on bg at anchor position, crop to canvas
+            f"[bg][fg]overlay={overlay_x}:0[out_v]"
         )

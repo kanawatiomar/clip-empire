@@ -201,6 +201,10 @@ class Runner:
             for clip in raw_clips:
                 clip.url_fingerprint = url_fingerprint(clip.source_url)
                 clip.visual_fingerprint = visual_fingerprint(clip.download_path)
+                # Pass crop_anchor from source config into clip metadata
+                if not hasattr(clip, "metadata") or clip.metadata is None:
+                    clip.metadata = {}
+                clip.metadata["crop_anchor"] = source_config.get("crop_anchor", "center")
 
             # Filter deduplication
             fresh_clips = self.dedup.filter_unused(raw_clips, channel_name=channel_name)
@@ -251,11 +255,13 @@ class Runner:
             return None
 
         try:
-            # 1. Crop to 9:16
+            # 1. Crop to 9:16 — use crop_anchor from source config if available
+            crop_anchor = clip.metadata.get("crop_anchor", "center")
             cropped = self.crop.process(
                 input_path=clip.download_path,
                 clip_id=clip.clip_id,
                 trim_to_s=55.0,
+                crop_anchor=crop_anchor,
             )
 
             # 2. Caption (optional — skip if no Whisper or --skip-caption)

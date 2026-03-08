@@ -113,6 +113,7 @@ HTML = """
         <button class="tab active" onclick="setTab('hook', this)">Hook Frame</button>
         <button class="tab" onclick="setTab('cta', this)">CTA Frame</button>
         <button class="tab" onclick="setTab('caption', this)">Captions</button>
+        <button class="tab" onclick="setTab('crop', this)">Crop Anchor</button>
       </div>
       <div class="phone-frame">
         <div class="loading" id="loading">Loading...</div>
@@ -309,6 +310,103 @@ def _render_frame(channel_name: str, tab: str) -> tuple[bytes, str]:
         draw.text((W//2, y + font_sz + 10), "← word highlight", font=_pil_font("Arial", 12),
                  fill=(hl_color[0], hl_color[1], hl_color[2], 200), anchor="mm")
         label = f'Caption: {fontname} {cs.get("fontsize")}px | outline {outline_sz}px'
+
+    elif tab == "crop":
+        # ── Crop anchor comparison ────────────────────────────────────────────
+        # Draw a simulated 16:9 landscape frame with 3 crop windows:
+        # left / center / right — showing what each anchor keeps vs. cuts
+        img = Image.new("RGBA", (W, H), (18, 18, 18, 255))
+        draw = ImageDraw.Draw(img)
+
+        # Simulated landscape frame (16:9 = 540 wide × 304 tall)
+        FRAME_W, FRAME_H = 510, 287
+        FRAME_X, FRAME_Y = (W - FRAME_W) // 2, 40
+
+        # Gradient background (simulates video)
+        for i in range(FRAME_H):
+            t = i / FRAME_H
+            draw.line([(FRAME_X, FRAME_Y + i), (FRAME_X + FRAME_W, FRAME_Y + i)],
+                      fill=(int(20+50*t), int(18+40*t), int(40+60*t), 255))
+
+        # Simulated webcam bubble (bottom-right corner of landscape)
+        cam_r = 28
+        cam_center = (FRAME_X + FRAME_W - cam_r - 8, FRAME_Y + FRAME_H - cam_r - 8)
+        draw.ellipse([cam_center[0]-cam_r, cam_center[1]-cam_r,
+                      cam_center[0]+cam_r, cam_center[1]+cam_r], fill=(80, 130, 200, 220))
+        draw.text(cam_center, "CAM", font=_pil_font("Arial", 9), fill=(255,255,255,255), anchor="mm")
+
+        # Simulated gameplay (left side content)
+        draw.rectangle([FRAME_X+10, FRAME_Y+10, FRAME_X+200, FRAME_Y+FRAME_H-10],
+                       fill=(30, 60, 30, 180))
+        draw.text((FRAME_X+105, FRAME_Y+FRAME_H//2), "GAMEPLAY",
+                  font=_pil_font("Arial", 10), fill=(100,200,100,255), anchor="mm")
+
+        # Frame border
+        draw.rectangle([FRAME_X, FRAME_Y, FRAME_X+FRAME_W, FRAME_Y+FRAME_H],
+                       outline=(80,80,80,255), width=2)
+
+        # 9:16 crop window width in landscape coordinates
+        # 9:16 aspect at FRAME_H height → crop_w = FRAME_H * 9/16
+        CROP_W = int(FRAME_H * 9 / 16)  # ~162px at this scale
+
+        anchors = [
+            ("left",   FRAME_X,                              (100, 220, 100),  "LEFT\nKeeps left action"),
+            ("center", FRAME_X + (FRAME_W - CROP_W)//2,     (220, 220, 100),  "CENTER\nStandard crop"),
+            ("right",  FRAME_X + FRAME_W - CROP_W,          (220, 100, 100),  "RIGHT\nKeeps cam side"),
+        ]
+
+        # Draw crop windows on the landscape frame
+        for anchor_name, crop_x, color, _ in anchors:
+            draw.rectangle([crop_x, FRAME_Y, crop_x + CROP_W, FRAME_Y + FRAME_H],
+                           outline=color + (255,), width=3)
+
+        # Show source config for this channel
+        from engine.config.sources import SOURCES
+        ch_sources = SOURCES.get(channel_name, [])
+        anchor_map = {s.get("url","")[-30:]: s.get("crop_anchor","center") for s in ch_sources}
+
+        # Three mini previews below showing what each crop keeps
+        MINI_H = int((H - FRAME_Y - FRAME_H - 100) // 3)
+        MINI_W = int(MINI_H * 9 / 16)
+        BASE_Y = FRAME_Y + FRAME_H + 20
+
+        small_font = _pil_font("Arial", 12)
+        label_font = _pil_font("Impact", 14)
+
+        for idx, (anchor_name, crop_x, color, desc) in enumerate(anchors):
+            mx = (W - MINI_W * 3 - 20) // 2 + idx * (MINI_W + 10)
+            my = BASE_Y
+
+            # Crop the simulated frame to this window
+            src_x0 = crop_x - FRAME_X
+            src_x1 = src_x0 + CROP_W
+            region = img.crop([FRAME_X + src_x0, FRAME_Y,
+                               FRAME_X + src_x1, FRAME_Y + FRAME_H])
+            region = region.resize((MINI_W, MINI_H), Image.LANCZOS)
+            img.paste(region, (mx, my))
+
+            # Border
+            mini_draw = ImageDraw.Draw(img)
+            mini_draw.rectangle([mx, my, mx+MINI_W, my+MINI_H], outline=color+(255,), width=2)
+
+            # Label
+            mini_draw.text((mx + MINI_W//2, my + MINI_H + 6), anchor_name.upper(),
+                           font=label_font, fill=color+(255,), anchor="mt")
+
+        # Source config legend
+        y_leg = BASE_Y + MINI_H + 36
+        legend_font = _pil_font("Arial", 11)
+        draw.text((W//2, y_leg), "Source anchor config:", font=legend_font,
+                  fill=(150,150,150,255), anchor="mt")
+        for si, src in enumerate(ch_sources[:4]):
+            url_short = src.get("url","?").split("/")[-1][:28] or src.get("url","")[-28:]
+            anchor_val = src.get("crop_anchor","center")
+            col = {"left":(100,220,100),"right":(220,100,100),"center":(220,220,100)}.get(anchor_val,(200,200,200))
+            draw.text((W//2, y_leg + 16 + si*14),
+                      f"{url_short}  →  {anchor_val}",
+                      font=legend_font, fill=col+(255,), anchor="mt")
+
+        label = f"Crop anchors for {channel_name} — red box = 9:16 window"
 
     # Convert to PNG bytes
     buf = io.BytesIO()

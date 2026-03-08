@@ -14,15 +14,18 @@ from __future__ import annotations
 import os
 import subprocess
 from pathlib import Path
+
+_FFMPEG_BIN_DIR = Path(os.environ.get("LOCALAPPDATA", "")) / (
+    "Microsoft/WinGet/Packages/"
+    "Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/"
+    "ffmpeg-8.0.1-full_build/bin"
+)
+FFMPEG_BIN = str(_FFMPEG_BIN_DIR / "ffmpeg.exe") if (_FFMPEG_BIN_DIR / "ffmpeg.exe").exists() else "ffmpeg"
+from pathlib import Path
 from typing import Optional
 
 from engine.config.templates import get_hook, get_cta
-
-
-# Impact is the standard viral-Shorts font — ensure it's available.
-FONT = "Impact"
-# Fallback font if Impact not on system
-FONT_FALLBACK = "Arial-Bold"
+from engine.config.styles import get_overlay_style
 
 
 def _esc(text: str) -> str:
@@ -76,7 +79,7 @@ class OverlayTransform:
         )
 
         cmd = [
-            "ffmpeg", "-y",
+            FFMPEG_BIN, "-y",
             "-i", input_path,
             "-vf", filters,
             "-c:v", "libx264",
@@ -103,30 +106,41 @@ class OverlayTransform:
         duration_s: float,
         channel_name: str,
     ) -> str:
-        """Build ffmpeg drawtext filter chain."""
+        """Build ffmpeg drawtext filter chain using per-channel style."""
+        s = get_overlay_style(channel_name)
 
-        # Common style params
-        outline = "borderw=5:bordercolor=black@0.9"
-        shadow = "shadowx=3:shadowy=3:shadowcolor=black@0.7"
+        fontfile     = s.get("fontfile", r"C\:/Windows/Fonts/Impact.ttf")
+        hook_fs      = s.get("hook_fontsize", 88)
+        cta_fs       = s.get("cta_fontsize", 56)
+        fontcolor    = s.get("fontcolor", "white")
+        borderw      = s.get("borderw", 5)
+        bordercolor  = s.get("bordercolor", "black@0.9")
+        shadowx      = s.get("shadowx", 3)
+        shadowy      = s.get("shadowy", 3)
+        shadowcolor  = s.get("shadowcolor", "black@0.7")
+        hook_y       = s.get("hook_y", "h/4")
 
-        # Hook text — large, upper third, 0 → hook_end
+        outline = f"borderw={borderw}:bordercolor={bordercolor}"
+        shadow  = f"shadowx={shadowx}:shadowy={shadowy}:shadowcolor={shadowcolor}"
+
+        # Hook text — large, upper area, 0 → hook_end
         hook_filter = (
-            f"drawtext=font='{FONT}':"
+            f"drawtext=fontfile='{fontfile}':"
             f"text='{_esc(hook)}':"
-            f"fontsize=88:"
-            f"fontcolor=white:"
+            f"fontsize={hook_fs}:"
+            f"fontcolor={fontcolor}:"
             f"{outline}:{shadow}:"
-            f"x=(w-text_w)/2:y=h/4:"
+            f"x=(w-text_w)/2:y={hook_y}:"
             f"enable='between(t,0,{hook_end:.1f})':"
             f"alpha='if(lt(t,0.2),t/0.2,if(gt(t,{hook_end:.1f}-0.15),({hook_end:.1f}-t)/0.15,1))'"
         )
 
-        # CTA text — smaller, lower quarter, cta_start → end
+        # CTA text — smaller, lower area, cta_start → end
         cta_filter = (
-            f"drawtext=font='{FONT}':"
+            f"drawtext=fontfile='{fontfile}':"
             f"text='{_esc(cta)}':"
-            f"fontsize=56:"
-            f"fontcolor=white:"
+            f"fontsize={cta_fs}:"
+            f"fontcolor={fontcolor}:"
             f"{outline}:{shadow}:"
             f"x=(w-text_w)/2:y=h*0.82:"
             f"enable='between(t,{cta_start:.1f},{duration_s:.1f})'"
@@ -135,7 +149,7 @@ class OverlayTransform:
         # Channel watermark — small, bottom right, always visible
         watermark_text = channel_name.replace("_", " ").upper()
         watermark_filter = (
-            f"drawtext=font='{FONT}':"
+            f"drawtext=fontfile='{fontfile}':"
             f"text='{_esc(watermark_text)}':"
             f"fontsize=28:"
             f"fontcolor=white@0.5:"

@@ -85,7 +85,7 @@ class CaptionTransform:
                 )
         return self._whisper
 
-    def process(self, video_path: str, clip_id: str) -> str:
+    def process(self, video_path: str, clip_id: str, channel_name: str = "") -> str:
         """Transcribe video and write an ASS subtitle file.
 
         Returns:
@@ -115,7 +115,7 @@ class CaptionTransform:
         )
 
         segments = result.get("segments", [])
-        ass_content = self._build_ass(segments)
+        ass_content = self._build_ass(segments, channel_name=channel_name)
 
         with open(ass_path, "w", encoding="utf-8") as f:
             f.write(ass_content)
@@ -123,9 +123,39 @@ class CaptionTransform:
         print(f"[caption] ASS subtitles written: {ass_path}")
         return ass_path
 
-    def _build_ass(self, segments: List[dict]) -> str:
-        """Build ASS content from Whisper segments."""
-        lines = [ASS_HEADER]
+    def _build_ass(self, segments: List[dict], channel_name: str = "") -> str:
+        """Build ASS content from Whisper segments with per-channel styling."""
+        from engine.config.styles import get_caption_style
+        style = get_caption_style(channel_name) if channel_name else {}
+
+        fontname    = style.get("fontname", "Impact")
+        fontsize    = style.get("fontsize", 72)
+        primary     = style.get("primary_color", "&H00FFFFFF")
+        outline_col = style.get("outline_color", "&H00000000")
+        back_col    = style.get("back_color", "&H80000000")
+        bold        = style.get("bold", 0)
+        outline_sz  = style.get("outline_size", 4)
+        shadow      = style.get("shadow", 3)
+        margin_v    = style.get("margin_v", 400)
+
+        header = (
+            "[Script Info]\n"
+            "ScriptType: v4.00+\n"
+            "Collisions: Normal\n"
+            "PlayResX: 1080\n"
+            "PlayResY: 1920\n"
+            "Timer: 100.0000\n\n"
+            "[V4+ Styles]\n"
+            "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, "
+            "Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, "
+            "Alignment, MarginL, MarginR, MarginV, Encoding\n"
+            f"Style: Default,{fontname},{fontsize},{primary},&H000000FF,{outline_col},{back_col},"
+            f"{bold},0,0,0,100,100,0,0,1,{outline_sz},{shadow},2,20,20,{margin_v},1\n\n"
+            "[Events]\n"
+            "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n"
+        )
+
+        lines = [header]
 
         for seg in segments:
             words = seg.get("words", [])

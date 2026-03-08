@@ -265,14 +265,19 @@ class Runner:
                     ass_path = self.caption.process(
                         video_path=cropped,
                         clip_id=clip.clip_id,
+                        channel_name=channel_name,
                     )
                 except Exception as e:
                     print(f"[pipeline] Caption failed (non-fatal): {e}")
 
             # 3. Overlay (hook text + CTA)
             import subprocess
+            from pathlib import Path as _Path
+            import os as _os
+            _ffbin = _Path(_os.environ.get("LOCALAPPDATA","")) / "Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-8.0.1-full_build/bin"
+            _ffprobe = str(_ffbin / "ffprobe.exe") if (_ffbin / "ffprobe.exe").exists() else "ffprobe"
             result = subprocess.run(
-                ["ffprobe", "-v", "quiet", "-show_entries", "format=duration",
+                [_ffprobe, "-v", "quiet", "-show_entries", "format=duration",
                  "-of", "csv=p=0", cropped],
                 capture_output=True, text=True,
             )

@@ -27,7 +27,7 @@ STYLE_PRESETS = {
             "bold":          0,
             "outline_size":  5,
             "shadow":        3,
-            "margin_v":      360,
+            "margin_v":      1300,           # lower center — gameplay action at top
             "words_per_line": 3,
             "word_highlight_color": "&H001AFFE4",  # neon yellow-green
         },
@@ -56,7 +56,7 @@ STYLE_PRESETS = {
             "bold":          -1,
             "outline_size":  3,
             "shadow":        0,
-            "margin_v":      380,
+            "margin_v":      960,            # center — talking head clips
             "words_per_line": 4,
             "word_highlight_color": "&H0000D4FF",  # gold/amber
         },
@@ -85,7 +85,7 @@ STYLE_PRESETS = {
             "bold":          -1,
             "outline_size":  4,
             "shadow":        2,
-            "margin_v":      370,
+            "margin_v":      960,            # center — talking head
             "words_per_line": 4,
             "word_highlight_color": "&H0000AAFF",  # orange-amber
         },
@@ -114,7 +114,7 @@ STYLE_PRESETS = {
             "bold":          -1,
             "outline_size":  3,
             "shadow":        1,
-            "margin_v":      380,
+            "margin_v":      960,            # center — demo/screen content
             "words_per_line": 4,
             "word_highlight_color": "&H00FFE400",  # cyan
         },
@@ -143,7 +143,7 @@ STYLE_PRESETS = {
             "bold":          0,
             "outline_size":  5,
             "shadow":        3,
-            "margin_v":      350,
+            "margin_v":      1200,           # lower center — gym action at top
             "words_per_line": 3,
             "word_highlight_color": "&H0000FFFF",  # yellow
         },
@@ -172,7 +172,7 @@ STYLE_PRESETS = {
             "bold":          -1,
             "outline_size":  4,
             "shadow":        2,
-            "margin_v":      380,
+            "margin_v":      1100,           # lower center — food/hands visible at center
             "words_per_line": 4,
             "word_highlight_color": "&H000066FF",  # warm orange
         },
@@ -201,7 +201,7 @@ STYLE_PRESETS = {
             "bold":          -1,
             "outline_size":  3,
             "shadow":        1,
-            "margin_v":      390,
+            "margin_v":      1400,           # lower third — classic documentary style
             "words_per_line": 4,
             "word_highlight_color": "&H002222CC",  # red
         },
@@ -230,7 +230,7 @@ STYLE_PRESETS = {
             "bold":          -1,
             "outline_size":  4,
             "shadow":        2,
-            "margin_v":      370,
+            "margin_v":      1050,           # slightly below center
             "words_per_line": 4,
             "word_highlight_color": "&H00FF00FF",  # magenta
         },

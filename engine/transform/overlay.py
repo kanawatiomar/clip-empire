@@ -24,8 +24,23 @@ FFMPEG_BIN = str(_FFMPEG_BIN_DIR / "ffmpeg.exe") if (_FFMPEG_BIN_DIR / "ffmpeg.e
 from pathlib import Path
 from typing import Optional
 
+import re
 from engine.config.templates import get_hook, get_cta
 from engine.config.styles import get_overlay_style
+
+
+def _strip_emoji(text: str) -> str:
+    """Remove emoji characters that Impact/Arial can't render."""
+    return re.sub(
+        r'[\U00010000-\U0010ffff'   # supplementary multilingual plane (most emoji)
+        r'\U0001F000-\U0001FFFF'    # emoji blocks
+        r'\u2600-\u26FF'            # misc symbols
+        r'\u2700-\u27BF'            # dingbats
+        r'\uFE00-\uFE0F'            # variation selectors
+        r'\u200d'                   # zero-width joiner
+        r']+',
+        '', text
+    ).strip()
 
 
 def _esc(text: str) -> str:
@@ -64,8 +79,8 @@ class OverlayTransform:
         if os.path.exists(output_path):
             return output_path
 
-        hook = hook_text or get_hook(channel_name)
-        cta = cta_text or get_cta(channel_name)
+        hook = _strip_emoji(hook_text or get_hook(channel_name))
+        cta = _strip_emoji(cta_text or get_cta(channel_name))
         hook_end = min(2.5, duration_s * 0.2)
         cta_start = max(0, duration_s - 3.0)
 

@@ -19,6 +19,16 @@ import subprocess
 from pathlib import Path
 from typing import List, Tuple, Optional
 
+# Inject ffmpeg into PATH so Whisper can find it for audio loading
+_FFMPEG_BIN = (
+    Path(os.environ.get("LOCALAPPDATA", ""))
+    / "Microsoft/WinGet/Packages"
+    / "Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe"
+    / "ffmpeg-8.0.1-full_build/bin"
+)
+if _FFMPEG_BIN.exists() and str(_FFMPEG_BIN) not in os.environ.get("PATH", ""):
+    os.environ["PATH"] = str(_FFMPEG_BIN) + os.pathsep + os.environ.get("PATH", "")
+
 
 ASS_HEADER = """\
 [Script Info]
@@ -124,19 +134,27 @@ class CaptionTransform:
         return ass_path
 
     def _build_ass(self, segments: List[dict], channel_name: str = "") -> str:
-        """Build ASS content from Whisper segments with per-channel styling."""
+        """Build TikTok-style word-highlight ASS captions.
+
+        Each dialogue event shows a group of words (words_per_line).
+        Within each group, the currently spoken word is highlighted in
+        word_highlight_color while the rest stay in primary_color.
+        One event fires per word — no overlapping, no flicker.
+        """
         from engine.config.styles import get_caption_style
         style = get_caption_style(channel_name) if channel_name else {}
 
         fontname    = style.get("fontname", "Impact")
         fontsize    = style.get("fontsize", 72)
         primary     = style.get("primary_color", "&H00FFFFFF")
+        highlight   = style.get("word_highlight_color", "&H0000FFFF")
         outline_col = style.get("outline_color", "&H00000000")
         back_col    = style.get("back_color", "&H80000000")
         bold        = style.get("bold", 0)
         outline_sz  = style.get("outline_size", 4)
         shadow      = style.get("shadow", 3)
         margin_v    = style.get("margin_v", 400)
+        wpl         = style.get("words_per_line", 3)
 
         header = (
             "[Script Info]\n"
@@ -155,48 +173,80 @@ class CaptionTransform:
             "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n"
         )
 
-        lines = [header]
+        events: List[str] = []
 
+        # Collect all words with timestamps across all segments
+        all_words: List[dict] = []
         for seg in segments:
-            words = seg.get("words", [])
-            text = seg.get("text", "").strip()
+            seg_words = seg.get("words", [])
+            if seg_words:
+                for w in seg_words:
+                    if w.get("word", "").strip():
+                        all_words.append({
+                            "word":  w["word"].strip(),
+                            "start": float(w.get("start", seg["start"])),
+                            "end":   float(w.get("end",   seg["end"])),
+                        })
+            else:
+                # No word timestamps — fall back to segment-level line
+                text = seg.get("text", "").strip()
+                if text:
+                    line = self._escape_ass(text)
+                    events.append(
+                        f"Dialogue: 0,{_seconds_to_ass(seg['start'])},"
+                        f"{_seconds_to_ass(seg['end'])},Default,,0,0,0,,{line}\n"
+                    )
 
-            if not text:
-                continue
+        if not all_words:
+            return header + "".join(events)
 
-            start = seg["start"]
-            end = seg["end"]
+        # Group words into chunks of `wpl` words
+        chunks: List[List[dict]] = []
+        for i in range(0, len(all_words), wpl):
+            chunks.append(all_words[i : i + wpl])
 
-            # Cap line length for readability (wrap at ~40 chars)
-            wrapped_lines = self._wrap_text(text, max_chars=40)
+        # For each chunk, emit one dialogue event per word
+        # Each event shows the full chunk but highlights one word
+        for chunk in chunks:
+            chunk_end = chunk[-1]["end"]
 
-            for line in wrapped_lines:
-                dialogue = (
-                    f"Dialogue: 0,{_seconds_to_ass(start)},{_seconds_to_ass(end)},"
-                    f"Default,,0,0,0,,{{{self._fade_tag()}}}{self._escape_ass(line)}\n"
+            for active_idx, active_word in enumerate(chunk):
+                t_start = active_word["start"]
+                # End = start of next word in chunk, or end of last word
+                if active_idx + 1 < len(chunk):
+                    t_end = chunk[active_idx + 1]["start"]
+                else:
+                    t_end = chunk_end
+
+                # Skip zero-duration events
+                if t_end <= t_start:
+                    t_end = t_start + 0.05
+
+                # Build the text: non-active words in primary, active in highlight
+                parts = []
+                for idx, w in enumerate(chunk):
+                    clean = self._escape_ass(w["word"])
+                    if idx == active_idx:
+                        parts.append(f"{{\\1c{highlight}}}{clean}{{\\1c{primary}}}")
+                    else:
+                        parts.append(clean)
+
+                line_text = " ".join(parts)
+                events.append(
+                    f"Dialogue: 0,{_seconds_to_ass(t_start)},"
+                    f"{_seconds_to_ass(t_end)},Default,,0,0,0,,{line_text}\n"
                 )
-                lines.append(dialogue)
 
-                # Advance start proportionally for multi-line wraps
-                if len(wrapped_lines) > 1:
-                    dur = end - start
-                    start += dur / len(wrapped_lines)
-
-        return "".join(lines)
-
-    @staticmethod
-    def _fade_tag() -> str:
-        """ASS fade-in/out: 150ms in, 100ms out."""
-        return r"\fad(150,100)"
+        return header + "".join(events)
 
     @staticmethod
     def _escape_ass(text: str) -> str:
         """Escape special ASS characters."""
-        return text.replace("{", "｛").replace("}", "｝")
+        return text.replace("{", "｛").replace("}", "｝").replace("\\", "")
 
     @staticmethod
     def _wrap_text(text: str, max_chars: int = 40) -> List[str]:
-        """Wrap text into lines of at most max_chars characters."""
+        """Wrap text into lines of at most max_chars characters (fallback only)."""
         words = text.split()
         lines = []
         current = ""

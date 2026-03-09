@@ -1,0 +1,118 @@
+"""Per-channel series system.
+
+Each creator can have multiple named series based on clip theme.
+Counters are stored in the `series_counters` DB table.
+
+Series title format:  "{Creator} {Series} #{N}"
+Example:              "Shroud Best Plays #12"
+                      "Tfue Rage Moments #3"
+                      "Moistcr1tikal Funny Moments #7"
+"""
+
+from __future__ import annotations
+
+import re
+import sqlite3
+from typing import Optional
+
+DATABASE_PATH = "data/clip_empire.db"
+
+# ── THEME KEYWORDS ──────────────────────────────────────────────────────────
+# Matched against the raw clip title (lowercase). First match wins.
+
+GAMING_THEMES: list[tuple[str, list[str]]] = [
+    ("Rage Moments",  ["rage", "mad", "tilt", "tilted", "angry", "furious", "loses it", "freaks out"]),
+    ("Funny Moments", ["funny", "lol", "lmao", "rofl", "haha", "humor", "hilarious", "cringe", "awkward"]),
+    ("Best Plays",    ["clutch", "insane", "insane play", "no way", "impossible", "cracked", "goated", "best", "highlight", "sick play", "godly"]),
+    ("Fails",         ["fail", "died", "rip ", "oof", "trolled", "griefed", "unlucky", "terrible", "awful"]),
+    ("Moments",       []),   # default / catch-all
+]
+
+FINANCE_THEMES: list[tuple[str, list[str]]] = [
+    ("Market Crashes", ["crash", "dump", "collapse", "bubble", "recession", "crisis", "lost everything"]),
+    ("Big Wins",       ["bull", "moon", "ath", "profit", "gained", "win", "rich", "millionaire"]),
+    ("Hot Takes",      ["wrong", "controversial", "nobody talks", "truth", "unpopular", "exposed"]),
+    ("Moments",        []),
+]
+
+NICHE_THEMES: dict[str, list[tuple[str, list[str]]]] = {
+    "Gaming":      GAMING_THEMES,
+    "Finance":     FINANCE_THEMES,
+    "Business":    GAMING_THEMES,   # reuse gaming structure for now
+    "Tech/AI":     GAMING_THEMES,
+    "Fitness":     GAMING_THEMES,
+    "Food":        GAMING_THEMES,
+    "True Crime":  GAMING_THEMES,
+    "Experimental": GAMING_THEMES,
+}
+
+
+# ── THEME CLASSIFIER ─────────────────────────────────────────────────────────
+
+def classify_theme(clip_title: str, niche: str = "Gaming") -> str:
+    """Return the series theme name for a given clip title."""
+    title_lower = (clip_title or "").lower()
+    themes = NICHE_THEMES.get(niche, GAMING_THEMES)
+    for theme_name, keywords in themes:
+        if not keywords:        # catch-all
+            return theme_name
+        if any(kw in title_lower for kw in keywords):
+            return theme_name
+    return "Moments"            # absolute fallback
+
+
+# ── DB SETUP ─────────────────────────────────────────────────────────────────
+
+def _ensure_table(conn: sqlite3.Connection) -> None:
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS series_counters (
+            channel_name  TEXT NOT NULL,
+            creator       TEXT NOT NULL,
+            series_name   TEXT NOT NULL,
+            count         INTEGER NOT NULL DEFAULT 0,
+            PRIMARY KEY (channel_name, creator, series_name)
+        )
+    """)
+    conn.commit()
+
+
+# ── COUNTER ───────────────────────────────────────────────────────────────────
+
+def next_episode(
+    channel_name: str,
+    creator: str,
+    series_name: str,
+    db_path: str = DATABASE_PATH,
+) -> int:
+    """Increment and return the next episode number for this series."""
+    conn = sqlite3.connect(db_path)
+    _ensure_table(conn)
+    conn.execute("""
+        INSERT INTO series_counters (channel_name, creator, series_name, count)
+        VALUES (?, ?, ?, 1)
+        ON CONFLICT(channel_name, creator, series_name)
+        DO UPDATE SET count = count + 1
+    """, (channel_name, creator, series_name))
+    conn.commit()
+    row = conn.execute(
+        "SELECT count FROM series_counters WHERE channel_name=? AND creator=? AND series_name=?",
+        (channel_name, creator, series_name),
+    ).fetchone()
+    conn.close()
+    return row[0] if row else 1
+
+
+# ── TITLE BUILDER ─────────────────────────────────────────────────────────────
+
+def build_series_title(
+    channel_name: str,
+    creator: str,
+    clip_title: str,
+    niche: str = "Gaming",
+    db_path: str = DATABASE_PATH,
+) -> str:
+    """Return a numbered series title like 'Shroud Best Plays #12'."""
+    theme = classify_theme(clip_title, niche)
+    n = next_episode(channel_name, creator, theme, db_path)
+    display_creator = creator.capitalize()
+    return f"{display_creator} {theme} #{n}"

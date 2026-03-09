@@ -315,6 +315,7 @@ class Runner:
                 channel_name=channel_name,
                 render_path=final,
                 creator=getattr(clip, "creator", None),
+                clip_title=getattr(clip, "title", None),
             )
 
             # 6. Clean up intermediate files if not keeping

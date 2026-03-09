@@ -19,6 +19,7 @@ from typing import Optional, List
 from publisher.queue import add_publish_job
 from engine.config.templates import get_title, get_hashtags
 from engine.transform.ab import choose_variant
+from engine.config.series import build_series_title
 from accounts.channel_definitions import CHANNELS
 
 
@@ -178,6 +179,7 @@ class QueueWriter:
         hashtags: Optional[List[str]] = None,
         schedule_at: Optional[datetime] = None,
         creator: Optional[str] = None,
+        clip_title: Optional[str] = None,
     ) -> str:
         """Add a clip to the publish queue.
 
@@ -187,14 +189,31 @@ class QueueWriter:
             title:        Caption/title for YouTube (auto-generated if None).
             hashtags:     Hashtag list (auto-generated if None).
             schedule_at:  When to post (auto-scheduled if None).
+            creator:      Streamer/broadcaster name (used in series titles).
+            clip_title:   Raw clip title (used for series theme classification).
 
         Returns:
             job_id of the created publish job.
         """
         _ensure_channel_in_db(channel_name, self.db_path)
 
-        auto_title, auto_hook, ab_label = choose_variant(channel_name, creator=creator)
-        caption = title or auto_title
+        niche = CHANNELS.get(channel_name, {}).get("niche", "Gaming")
+
+        # Build series title if we know the creator, otherwise fall back to A/B
+        if creator and not title:
+            caption = build_series_title(
+                channel_name=channel_name,
+                creator=creator,
+                clip_title=clip_title or "",
+                niche=niche,
+                db_path=self.db_path,
+            )
+            # Derive hook from series title prefix
+            auto_hook = caption.split("#")[0].strip()[:80]
+            ab_label = "S"  # S = Series
+        else:
+            auto_title, auto_hook, ab_label = choose_variant(channel_name, creator=creator)
+            caption = title or auto_title
         tags = hashtags or get_hashtags(channel_name)
         sched = schedule_at or _next_schedule_time(channel_name, self.db_path)
 

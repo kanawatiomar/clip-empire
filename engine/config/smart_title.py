@@ -157,10 +157,20 @@ def generate_llm_title(
     random.shuffle(style_examples)
     styles = "\n".join(f"- {s}" for s in style_examples[:4])
 
+    # Get per-creator context hint
+    creator_context = ""
+    try:
+        from engine.config.creator_profiles import get_llm_context
+        ctx = get_llm_context(creator)
+        if ctx:
+            creator_context = f"\nCreator context: {ctx}"
+    except Exception:
+        pass
+
     prompt = f"""You write titles for viral YouTube Shorts on a {niche} channel called "{channel_name}".
 
 Streamer: {creator.capitalize()}
-Clip context: "{clip_title}"{avoid_block}
+Clip context: "{clip_title}"{creator_context}{avoid_block}
 
 Write ONE title. Rules:
 - Max 60 characters

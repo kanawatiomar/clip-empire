@@ -188,6 +188,17 @@ NICHE_TITLE_TEMPLATES: dict = {
 
 def get_hook(channel_name: str, creator: str = None) -> str:
     niche = CHANNELS.get(channel_name, {}).get("niche", "Experimental")
+
+    # Use creator-specific hook overrides if available (50% of the time for variety)
+    if creator:
+        try:
+            from engine.config.creator_profiles import get_hook_overrides
+            overrides = get_hook_overrides(creator)
+            if overrides and random.random() < 0.5:
+                return random.choice(overrides)
+        except Exception:
+            pass
+
     hooks = NICHE_HOOKS.get(niche, NICHE_HOOKS["Experimental"])
     hook = random.choice(hooks)
     # Substitute {creator} placeholder with actual streamer name if known

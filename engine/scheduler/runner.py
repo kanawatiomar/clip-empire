@@ -290,8 +290,13 @@ class Runner:
             print(f"[pipeline] Break detector failed (non-fatal): {e}")
 
         try:
-            # 1. Crop to 9:16 — use crop_anchor from source config if available
-            crop_anchor = clip.metadata.get("crop_anchor", "center")
+            # 1. Crop to 9:16 — creator profile is authoritative, source config is fallback
+            try:
+                from engine.config.creator_profiles import get_crop_anchor
+                _creator = getattr(clip, "creator", "") or ""
+                crop_anchor = get_crop_anchor(_creator) if _creator else clip.metadata.get("crop_anchor", "center")
+            except Exception:
+                crop_anchor = clip.metadata.get("crop_anchor", "center")
             cropped = self.crop.process(
                 input_path=clip.download_path,
                 clip_id=clip.clip_id,

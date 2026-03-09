@@ -975,6 +975,19 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
 
 
 
+    # Kill any lingering Chrome processes holding the profile lock before launching
+    import subprocess as _sp
+    _sp.run(["taskkill", "/F", "/IM", "chrome.exe"], capture_output=True)
+    _sp.run(["taskkill", "/F", "/IM", "chromium.exe"], capture_output=True)
+    import time as _time; _time.sleep(1)
+
+    # Remove SingletonLock if it exists
+    import pathlib as _pathlib
+    for _lock in ["SingletonLock", "SingletonCookie", "SingletonSocket", "lockfile"]:
+        _lp = _pathlib.Path(profile_path) / _lock
+        if _lp.exists():
+            _lp.unlink(missing_ok=True)
+
     page: Page | None = None
 
     try:

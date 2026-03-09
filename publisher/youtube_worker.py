@@ -41,27 +41,35 @@ _CH_QUEUED   = "1480139732284604544"  # #queued-jobs
 
 def _discord_post(channel_id: str, message: str) -> None:
 
-    """Fire-and-forget Discord message via OpenClaw CLI (avoids token redaction issues)."""
+    """Fire-and-forget Discord message via direct API (urllib) — supports multiline messages."""
 
     try:
 
-        import subprocess
+        payload = _json.dumps({"content": message}).encode("utf-8")
 
-        result = subprocess.run(
+        req = urllib.request.Request(
 
-            [r"C:\Users\kanaw\AppData\Roaming\npm\openclaw.cmd", "message", "send", "--channel", "discord", "--target", channel_id, "--message", message],
+            f"https://discord.com/api/v10/channels/{channel_id}/messages",
 
-            capture_output=True, text=True, timeout=15
+            data=payload,
+
+            headers={
+
+                "Authorization": f"Bot {_DISCORD_TOKEN}",
+
+                "Content-Type": "application/json",
+
+                "User-Agent": "ClipEmpire/1.0",
+
+            },
+
+            method="POST",
 
         )
 
-        if result.returncode != 0:
+        with urllib.request.urlopen(req, timeout=15) as resp:
 
-            print(f"[discord] Alert failed (exit {result.returncode}): {result.stderr.strip()}")
-
-        else:
-
-            print(f"[discord] Alert sent to {channel_id}")
+            print(f"[discord] Alert sent to {channel_id} (status {resp.status})")
 
     except Exception as e:
 

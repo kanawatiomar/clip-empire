@@ -61,6 +61,7 @@ class OverlayTransform:
         duration_s: float,
         hook_text: Optional[str] = None,
         cta_text: Optional[str] = None,
+        creator: Optional[str] = None,
     ) -> str:
         """Add overlays to video.
 
@@ -72,7 +73,7 @@ class OverlayTransform:
         if os.path.exists(output_path):
             return output_path
 
-        hook = _strip_emoji(hook_text or get_hook(channel_name))
+        hook = _strip_emoji(hook_text or get_hook(channel_name, creator=creator))
         cta = _strip_emoji(cta_text or get_cta(channel_name))
         hook_end = min(2.5, duration_s * 0.2)
         cta_start = max(0, duration_s - 3.0)
@@ -117,7 +118,7 @@ class OverlayTransform:
         """Build ffmpeg drawtext filter chain using per-channel style."""
         s = get_overlay_style(channel_name)
 
-        fontfile     = s.get("fontfile", r"C\:/Windows/Fonts/Impact.ttf")
+        fontfile     = s.get("fontfile", "C:/Windows/Fonts/Impact.ttf")
         hook_fs      = s.get("hook_fontsize", 88)
         cta_fs       = s.get("cta_fontsize", 56)
         fontcolor    = s.get("fontcolor", "white")

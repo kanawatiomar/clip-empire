@@ -297,6 +297,7 @@ class Runner:
                 clip_id=clip.clip_id,
                 channel_name=channel_name,
                 duration_s=duration_s,
+                creator=getattr(clip, "creator", None),
             )
 
             # 4. Final encode (burns captions + normalizes audio)

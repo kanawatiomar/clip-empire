@@ -79,15 +79,16 @@ NICHE_HOOKS: dict = {
         "HE ACTUALLY DID THAT 🎮",
         "INSANE CLIP 😤",
         "NO WAY THIS HAPPENED",
-        "BUILT DIFFERENT",
+        "{creator} IS BUILT DIFFERENT",
         "CLUTCH OR DELETE",
         "BEST PLAY OF THE YEAR?",
         "THEY COULDN'T BELIEVE IT",
         "THIS IS ILLEGAL 💀",
         "NOBODY PLAYS LIKE THIS",
-        "HOW IS THIS EVEN POSSIBLE?",
+        "{creator} DID WHAT?!",
         "CHAT WAS GOING INSANE",
         "WATCH THIS BEFORE SCROLLING",
+        "{creator} REALLY JUST DID THAT",
     ],
 }
 
@@ -185,10 +186,14 @@ NICHE_TITLE_TEMPLATES: dict = {
 }
 
 
-def get_hook(channel_name: str) -> str:
+def get_hook(channel_name: str, creator: str = None) -> str:
     niche = CHANNELS.get(channel_name, {}).get("niche", "Experimental")
     hooks = NICHE_HOOKS.get(niche, NICHE_HOOKS["Experimental"])
-    return random.choice(hooks)
+    hook = random.choice(hooks)
+    # Substitute {creator} placeholder with actual streamer name if known
+    if creator and "{creator}" in hook:
+        hook = hook.replace("{creator}", creator.upper())
+    return hook
 
 
 def get_cta(channel_name: str) -> str:

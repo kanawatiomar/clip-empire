@@ -1068,6 +1068,19 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
 
     ch = job["channel_name"]
 
+    # Skip jobs for paused channels — cancel them so they don't block the queue
+    try:
+        import sqlite3 as _sq3
+        _conn = _sq3.connect("data/clip_empire.db")
+        _row = _conn.execute("SELECT status FROM channels WHERE channel_name=?", (ch,)).fetchone()
+        _conn.close()
+        if _row and _row[0] == "paused":
+            print(f"[publisher] Channel {ch} is paused — cancelling job {job_id}")
+            update_job_status(job_id, "cancelled")
+            return 0
+    except Exception as _e:
+        print(f"[publisher] Channel status check failed (non-fatal): {_e}")
+
     profile_path = _profile_path_for_channel(cfg, ch)
 
 

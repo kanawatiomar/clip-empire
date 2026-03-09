@@ -102,8 +102,19 @@ class Runner:
             Dict mapping channel_name → list of job_ids created.
         """
         results = {}
-        channels = list(CHANNELS.keys())
-        print(f"\n[runner] Starting empire run: {len(channels)} channels, "
+        # Only run channels that are marked 'active' in the DB
+        import sqlite3 as _sq3
+        try:
+            _conn = _sq3.connect(self.db_path)
+            _active = {r[0] for r in _conn.execute(
+                "SELECT channel_name FROM channels WHERE status='active'"
+            ).fetchall()}
+            _conn.close()
+        except Exception:
+            _active = set(CHANNELS.keys())  # fallback: all channels
+
+        channels = [ch for ch in CHANNELS.keys() if ch in _active]
+        print(f"\n[runner] Starting empire run: {len(channels)} active channels, "
               f"{count_per_channel} clips each")
 
         for channel_name in channels:

@@ -174,11 +174,13 @@ NICHE_TITLE_TEMPLATES: dict = {
         "Watch this before scrolling: Nobody plays like this 🎮",
         "The most insane clip you'll see today",
         "This clip broke Twitch chat",
-        "Streamer goes crazy after this play",
+        "{creator} goes crazy after this play 🎮",
         "Best gaming moment of the week",
         "This play was absolutely filthy 🎮",
-        "Chat couldn't believe what just happened",
+        "Chat couldn't believe what {creator} just did",
         "The clutch that nobody saw coming",
+        "{creator} just broke the game 🎮",
+        "Nobody expected {creator} to do this",
     ],
 }
 
@@ -204,7 +206,11 @@ def get_hashtags(channel_name: str) -> list:
     return combined[:8]
 
 
-def get_title(channel_name: str) -> str:
+def get_title(channel_name: str, creator: str = None) -> str:
     niche = CHANNELS.get(channel_name, {}).get("niche", "Experimental")
     titles = NICHE_TITLE_TEMPLATES.get(niche, NICHE_TITLE_TEMPLATES["Experimental"])
-    return random.choice(titles)
+    title = random.choice(titles)
+    # Substitute {creator} placeholder with actual streamer name if known
+    if creator and "{creator}" in title:
+        title = title.replace("{creator}", creator.capitalize())
+    return title

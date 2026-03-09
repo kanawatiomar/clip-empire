@@ -177,6 +177,7 @@ class QueueWriter:
         title: Optional[str] = None,
         hashtags: Optional[List[str]] = None,
         schedule_at: Optional[datetime] = None,
+        creator: Optional[str] = None,
     ) -> str:
         """Add a clip to the publish queue.
 
@@ -193,7 +194,7 @@ class QueueWriter:
         _ensure_channel_in_db(channel_name, self.db_path)
 
         auto_title, auto_hook, ab_label = choose_variant(channel_name)
-        caption = title or auto_title or get_title(channel_name)
+        caption = title or auto_title or get_title(channel_name, creator=creator)
         tags = hashtags or get_hashtags(channel_name)
         sched = schedule_at or _next_schedule_time(channel_name, self.db_path)
 

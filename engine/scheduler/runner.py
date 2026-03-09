@@ -313,6 +313,7 @@ class Runner:
             job_id = self.queue_writer.enqueue(
                 channel_name=channel_name,
                 render_path=final,
+                creator=getattr(clip, "creator", None),
             )
 
             # 6. Clean up intermediate files if not keeping

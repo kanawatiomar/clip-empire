@@ -1,18 +1,24 @@
-"""Source configuration for all 10 Clip Empire channels.
-
-
+"""Source configuration for all Clip Empire channels.
 
 Each channel entry maps to a list of source objects:
 
-  - platform:  "youtube" | "tiktok" | "reddit" | "twitter"
+  - platform:  "youtube" | "tiktok" | "twitch" | "reddit"
+  - url:        full URL to channel/profile/subreddit/clips page
+  - type:       "channel" | "profile" | "subreddit" | "search" | "longform"
+  - priority:   1 (high) → 3 (low) — sources are tried in priority order
+  - max_age_days: skip clips older than this
 
-  - url:        full URL to channel/profile/subreddit
+── COPYRIGHT POLICY ──────────────────────────────────────────────────────────
+✅ SAFE:   type="longform" — downloads full video, extracts our own highlight
+           (transformative fair use; we pick the moment, add overlays + captions)
+✅ SAFE:   Twitch clips — fan-created clips from a different platform
+❌ RISKY:  Reposting existing YouTube Shorts verbatim (not transformative)
+❌ RISKY:  type="channel" pointing to YouTube /shorts tab = repost risk
 
-  - type:       "channel" | "profile" | "subreddit" | "playlist" | "search"
-
-  - priority:   1 (high) → 3 (low) — used to sort sources when multiple available
-
-  - max_age_days: skip clips older than this (keep content fresh)
+RULE: For YouTube sources, always use type="longform" (extract from full videos).
+      Never use type="channel" for YouTube unless it's a search or playlist of
+      third-party compilations. Gaming uses Twitch clips — no YouTube needed.
+──────────────────────────────────────────────────────────────────────────────
 
   - min_dur_s / max_dur_s: clip duration window (15-180 defaults)
 
@@ -48,36 +54,20 @@ CHANNEL_SOURCES: dict = {
 
 
     "market_meltdowns": [
-
-        # /shorts tab ensures we only get that creator's own Shorts
-        {"platform": "youtube", "url": "https://www.youtube.com/@GrahamStephan/shorts",
-
-         "type": "channel", "priority": 1, "max_age_days": 14,
-         "min_dur_s": 15, "max_dur_s": 60},
-
-        {"platform": "youtube", "url": "https://www.youtube.com/@AndreiJikh/shorts",
-
-         "type": "channel", "priority": 1,
-         "min_dur_s": 15, "max_dur_s": 60},
-
-        {"platform": "youtube", "url": "https://www.youtube.com/@MeetKevin/shorts",
-
-         "type": "channel", "priority": 2,
-         "min_dur_s": 15, "max_dur_s": 60},
-
-        {"platform": "youtube", "url": "https://www.youtube.com/@theplainbagel/shorts",
-
-         "type": "channel", "priority": 2,
-         "min_dur_s": 15, "max_dur_s": 60},
-
-        # Search fallback for fresh crash/meltdown content
-        {"platform": "youtube",
-
-         "url": "https://www.youtube.com/results?search_query=stock+market+crash+reaction+shorts+2025",
-
-         "type": "search", "priority": 3, "max_age_days": 7,
-         "min_dur_s": 15, "max_dur_s": 60},
-
+        # longform: we download their full videos and extract our own highlight
+        # (transformative — we pick the peak energy moment, add overlays + captions)
+        {"platform": "youtube", "url": "https://www.youtube.com/@GrahamStephan/videos",
+         "type": "longform", "priority": 1, "max_age_days": 14,
+         "target_dur_s": 40},
+        {"platform": "youtube", "url": "https://www.youtube.com/@MeetKevin/videos",
+         "type": "longform", "priority": 1, "max_age_days": 7,
+         "target_dur_s": 40},
+        {"platform": "youtube", "url": "https://www.youtube.com/@AndreiJikh/videos",
+         "type": "longform", "priority": 2, "max_age_days": 14,
+         "target_dur_s": 40},
+        {"platform": "youtube", "url": "https://www.youtube.com/@theplainbagel/videos",
+         "type": "longform", "priority": 2, "max_age_days": 14,
+         "target_dur_s": 40},
     ],
 
 

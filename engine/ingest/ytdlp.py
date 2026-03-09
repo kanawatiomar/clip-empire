@@ -20,6 +20,21 @@ from engine.config.sources import SOURCE_DEFAULTS
 from engine.ingest.base import RawClip
 
 
+def _extract_broadcaster(url: str, info: dict) -> str:
+    """For Twitch clips, extract the broadcaster (streamer) name from the URL,
+    not the clip uploader (the viewer who created the clip).
+    URL format: https://www.twitch.tv/{broadcaster}/clip/{clip_id}
+    Falls back to yt-dlp channel/uploader fields for non-Twitch sources.
+    """
+    import re
+    if "twitch.tv" in url:
+        m = re.search(r"twitch\.tv/([^/]+)/clip/", url)
+        if m:
+            return m.group(1)
+    # Non-Twitch: use channel name (more reliable than uploader for YT)
+    return info.get("channel", info.get("uploader", ""))
+
+
 def _find_ytdlp() -> str:
     """Return the yt-dlp executable path, searching common locations."""
     import shutil
@@ -406,7 +421,7 @@ class YtDlpIngester:
                 duration_s=float(info.get("duration", 0) or 0),
                 title=info.get("title", "")[:200],
                 platform=platform,
-                creator=info.get("uploader", info.get("channel", ""))[:100],
+                creator=_extract_broadcaster(info.get("webpage_url", ""), info)[:100],
                 view_count=int(info.get("view_count", 0) or 0),
                 upload_date=info.get("upload_date", ""),
                 width=int(info.get("width", 0) or 0),

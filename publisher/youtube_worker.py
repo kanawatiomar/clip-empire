@@ -1111,11 +1111,18 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
 
                 title = job.get("caption_text", "Unknown title")[:80]
 
+                channel_emoji = {
+                    "arc_highlightz": "🎮",
+                    "fomo_highlights": "🔥",
+                    "viral_recaps": "😂",
+                    "market_meltdowns": "📉",
+                }.get(ch, "📹")
+
                 _discord_post(_CH_SUCCESS,
 
-                    f"[OK] **{ch}** uploaded\n"
+                    f"✅ **{ch}** {channel_emoji}\n"
 
-                    f"**{title}**\n"
+                    f"> {title}\n"
 
                     f"{video_url}"
 
@@ -1123,11 +1130,7 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
 
                 _discord_post(_CH_QUEUED,
 
-                    f"[OK] **Done** - `{ch}`\n"
-
-                    f"**{title}**\n"
-
-                    f"<{video_url}>"
+                    f"✅ **{ch}** published → <{video_url}>"
 
                 )
 

@@ -215,33 +215,42 @@ class QueueWriter:
             except Exception as e:
                 print(f"[queue] LLM title skipped: {e}")
 
-        # 2. Fall back to series title, then A/B template
+        # 2. Always build series entry (for hashtag + counter tracking)
+        series_hashtag = None
+        if creator and not title:
+            from engine.config.series import classify_theme, next_episode
+            theme = classify_theme(clip_title or "", niche)
+            ep_num = next_episode(channel_name, creator, theme, self.db_path)
+            # e.g. "#ShroudBestPlays4" — no space, YouTube hashtag format
+            series_hashtag = f"#{creator.capitalize().replace(' ', '')}{theme.replace(' ', '')}{ep_num}"
+
+        # 3. Title: LLM curiosity-bait, else series title, else A/B template
         if creator and not title:
             if llm_title:
                 caption = llm_title
                 auto_hook = caption.split(":")[0].strip()[:80]
                 ab_label = "L"   # L = LLM
             else:
-                caption = build_series_title(
-                    channel_name=channel_name,
-                    creator=creator,
-                    clip_title=clip_title or "",
-                    niche=niche,
-                    db_path=self.db_path,
-                )
+                # No LLM — use series title as primary
+                series_name = f"{creator.capitalize()} {theme} #{ep_num}"
+                caption = series_name
                 auto_hook = caption.split("#")[0].strip()[:80]
                 ab_label = "S"   # S = Series
         else:
             auto_title, auto_hook, ab_label = choose_variant(channel_name, creator=creator)
             caption = title or auto_title
 
-        # 3. Apply profanity filter
+        # 4. Apply profanity filter
         try:
             from engine.utils.censor import censor_text
             caption = censor_text(caption)
         except Exception:
             pass
-        tags = hashtags or get_hashtags(channel_name)
+
+        # 5. Build hashtag list: base niche tags + series hashtag
+        tags = list(hashtags or get_hashtags(channel_name))
+        if series_hashtag and series_hashtag not in tags:
+            tags.append(series_hashtag)
         sched = schedule_at or _next_schedule_time(channel_name, self.db_path)
 
         variant_id = _create_dummy_variant(

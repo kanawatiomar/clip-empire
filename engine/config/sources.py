@@ -54,20 +54,16 @@ CHANNEL_SOURCES: dict = {
 
 
     "market_meltdowns": [
-        # longform: we download their full videos and extract our own highlight
-        # (transformative — we pick the peak energy moment, add overlays + captions)
-        {"platform": "youtube", "url": "https://www.youtube.com/@GrahamStephan/videos",
-         "type": "longform", "priority": 1, "max_age_days": 14,
-         "target_dur_s": 40},
-        {"platform": "youtube", "url": "https://www.youtube.com/@MeetKevin/videos",
-         "type": "longform", "priority": 1, "max_age_days": 7,
-         "target_dur_s": 40},
-        {"platform": "youtube", "url": "https://www.youtube.com/@AndreiJikh/videos",
-         "type": "longform", "priority": 2, "max_age_days": 14,
-         "target_dur_s": 40},
+        # Smaller / mid-tier finance creators — less likely to have ContentID active.
+        # Avoid mega-creators (Graham Stephan, Meet Kevin) — ContentID will nuke clips.
+        {"platform": "youtube", "url": "https://www.youtube.com/@JarradMorrow/videos",
+         "type": "longform", "priority": 1, "max_age_days": 14, "target_dur_s": 40},
+        {"platform": "youtube", "url": "https://www.youtube.com/@ErinTalksMoney/videos",
+         "type": "longform", "priority": 1, "max_age_days": 14, "target_dur_s": 40},
         {"platform": "youtube", "url": "https://www.youtube.com/@theplainbagel/videos",
-         "type": "longform", "priority": 2, "max_age_days": 14,
-         "target_dur_s": 40},
+         "type": "longform", "priority": 2, "max_age_days": 14, "target_dur_s": 40},
+        {"platform": "youtube", "url": "https://www.youtube.com/@BenFelixCSI/videos",
+         "type": "longform", "priority": 2, "max_age_days": 30, "target_dur_s": 40},
     ],
 
 

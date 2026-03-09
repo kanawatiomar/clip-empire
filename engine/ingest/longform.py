@@ -124,18 +124,23 @@ def extract_segment(
     end_s: float,
     output_path: str,
 ) -> str:
-    """Cut [start_s, end_s] from video_path and write to output_path."""
+    """Cut [start_s, end_s] from video_path and re-encode to output_path.
+
+    Re-encode (not stream copy) to:
+    - Avoid keyframe-boundary corruption
+    - Ensure clean YouTube-compatible output
+    """
     duration = end_s - start_s
     subprocess.run(
         [FFMPEG_BIN,
          "-ss", str(start_s),
          "-i", video_path,
          "-t", str(duration),
-         "-c:v", "copy",   # stream copy — fast, no quality loss
-         "-c:a", "copy",
-         "-avoid_negative_ts", "make_zero",
+         "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+         "-c:a", "aac", "-b:a", "128k",
+         "-movflags", "+faststart",
          "-y", output_path],
-        capture_output=True, timeout=120, check=True,
+        capture_output=True, timeout=300, check=True,
     )
     return output_path
 

@@ -224,6 +224,22 @@ def _profile_path_for_channel(cfg: YouTubeWorkerConfig, channel_name: str) -> st
     return os.path.join(cfg.profiles_dir, channel_name)
 
 
+def _studio_url_for_channel(channel_name: str) -> str:
+    """Returns the direct Studio URL for the channel, or generic Studio URL as fallback."""
+    try:
+        import sqlite3 as _sq3
+        conn = _sq3.connect(os.path.join(os.path.dirname(__file__), "..", "accounts", "accounts.db"))
+        row = conn.execute(
+            "SELECT youtube_channel_id FROM accounts WHERE channel_name=?", (channel_name,)
+        ).fetchone()
+        conn.close()
+        if row and row[0]:
+            return f"https://studio.youtube.com/channel/{row[0]}"
+    except Exception:
+        pass
+    return YOUTUBE_STUDIO_URL
+
+
 
 
 
@@ -235,11 +251,11 @@ def _wait_for_selector(page: Page, selector: str, timeout_ms: int) -> None:
 
 
 
-def _login_to_studio_if_needed(page: Page, cfg: YouTubeWorkerConfig) -> None:
+def _login_to_studio_if_needed(page: Page, cfg: YouTubeWorkerConfig, studio_url: str = YOUTUBE_STUDIO_URL) -> None:
 
     """Navigates to Studio and verifies login. Raises error if redirected or not on Studio page."""
 
-    page.goto(YOUTUBE_STUDIO_URL, wait_until="domcontentloaded", timeout=cfg.nav_timeout_ms)
+    page.goto(studio_url, wait_until="domcontentloaded", timeout=cfg.nav_timeout_ms)
 
 
 
@@ -1017,7 +1033,10 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
 
                 _log_step(job_id, "open studio")
 
-                _login_to_studio_if_needed(page, cfg)
+                _studio_url = _studio_url_for_channel(ch)
+                print(f"Navigating to channel-specific Studio: {_studio_url}")
+                _login_to_studio_if_needed(page, cfg, studio_url=_studio_url)
+                print(f"Successfully reached YouTube Studio: {page.url}")
 
 
 

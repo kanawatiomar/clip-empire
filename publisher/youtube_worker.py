@@ -1265,6 +1265,16 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
 
                 update_job_status(job_id, "succeeded", post_url=video_url, platform_post_id=video_url.split("/")[-1])
 
+                # Auto-cleanup: delete render file after successful upload (keeps disk lean)
+                try:
+                    if os.path.exists(video_file_path):
+                        os.remove(video_file_path)
+                        print(f"[cleanup] Deleted render file: {video_file_path}")
+                    else:
+                        print(f"[cleanup] Render file already gone: {video_file_path}")
+                except Exception as _cleanup_err:
+                    print(f"[cleanup] Could not delete render file (non-fatal): {_cleanup_err}")
+
 
 
                 # Discord success alert

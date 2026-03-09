@@ -110,10 +110,20 @@ CHANNELS = {
     "fomo_highlights": {
         "display_name": "Fomo Highlights",
         "niche": "Gaming",
-        "description": "FPS & aim highlights — Shroud, Nickmercs, TimTheTatman",
-        "content_focus": "Insane aim, clutch gunfights, funny moments from top FPS streamers",
-        "source_types": ["Twitch clips", "gaming YouTube", "FPS highlights"],
-        "tags": ["gaming", "fps", "shroud", "nickmercs", "timthetatman", "highlights", "clips"],
+        "description": "Top Twitch gaming highlights — Shroud, Nickmercs, TimTheTatman",
+        "content_focus": "Insane plays, clutch moments, rage and funny reactions from top FPS/variety streamers",
+        "source_types": ["Twitch clips", "gaming YouTube", "streamer highlights"],
+        "tags": ["gaming", "twitch", "shroud", "nickmercs", "timthetatman", "highlights", "clips"],
+        "made_for_kids": False,
+    },
+
+    "viral_recaps": {
+        "display_name": "Viral Recaps Daily",
+        "niche": "Comedy",
+        "description": "Best moments from Moistcr1tikal, Hasanabi, Ludwig — comedy, takes, chaos",
+        "content_focus": "Funny takes, unfiltered rants, chaotic moments, viral commentary from top variety streamers",
+        "source_types": ["Twitch clips", "YouTube highlights", "variety streamer moments"],
+        "tags": ["funny", "comedy", "penguinz0", "hasanabi", "ludwig", "viral", "clips", "moments"],
         "made_for_kids": False,
     },
 }

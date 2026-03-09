@@ -263,6 +263,7 @@ CHANNEL_STYLE_MAP = {
     "kitchen_chaos":    "food",
     "cases_unsolved":   "truecrime",
     "unfiltered_clips": "experimental",
+    "viral_recaps":     "experimental",   # comedy/variety — bold but loose
 }
 
 

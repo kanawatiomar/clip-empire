@@ -364,6 +364,33 @@ CHANNEL_SOURCES: dict = {
          "min_dur_s": 20, "max_dur_s": 60, "crop_anchor": "center"},
     ],
 
+    "viral_recaps": [
+        # Moistcr1tikal / penguinz0: usually centered cam, reaction-heavy
+        {"platform": "twitch", "url": "https://www.twitch.tv/moistcr1tikal/clips",
+         "type": "channel", "priority": 1, "max_age_days": 3,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 6,
+         "crop_anchor": "center"},
+        # HasanAbi: cam on left side -> anchor right
+        {"platform": "twitch", "url": "https://www.twitch.tv/hasanabi/clips",
+         "type": "channel", "priority": 1, "max_age_days": 3,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 6,
+         "crop_anchor": "right"},
+        # Ludwig: usually centered
+        {"platform": "twitch", "url": "https://www.twitch.tv/ludwig/clips",
+         "type": "channel", "priority": 1, "max_age_days": 3,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 6,
+         "crop_anchor": "center"},
+        # YouTube fallbacks
+        {"platform": "youtube",
+         "url": "https://www.youtube.com/results?search_query=penguinz0+funniest+moments+shorts+2025",
+         "type": "search", "priority": 3, "max_age_days": 7,
+         "min_dur_s": 20, "max_dur_s": 60, "crop_anchor": "center"},
+        {"platform": "youtube",
+         "url": "https://www.youtube.com/results?search_query=hasanabi+funny+clips+shorts+2025",
+         "type": "search", "priority": 3, "max_age_days": 7,
+         "min_dur_s": 20, "max_dur_s": 60, "crop_anchor": "center"},
+    ],
+
     "fomo_highlights": [
         # Shroud: cam bottom-left -> anchor right to keep gameplay on right side
         {"platform": "twitch", "url": "https://www.twitch.tv/shroud/clips",

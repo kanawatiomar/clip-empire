@@ -193,8 +193,8 @@ class QueueWriter:
         """
         _ensure_channel_in_db(channel_name, self.db_path)
 
-        auto_title, auto_hook, ab_label = choose_variant(channel_name)
-        caption = title or auto_title or get_title(channel_name, creator=creator)
+        auto_title, auto_hook, ab_label = choose_variant(channel_name, creator=creator)
+        caption = title or auto_title
         tags = hashtags or get_hashtags(channel_name)
         sched = schedule_at or _next_schedule_time(channel_name, self.db_path)
 

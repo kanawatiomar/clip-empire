@@ -1045,14 +1045,24 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
 
 
                 # Capture the video URL early - Studio shows it in the dialog right panel
+                # (used only as fallback; _verify_upload_success is the primary source)
 
                 early_video_url = _extract_video_url_from_dialog(page)
 
                 if early_video_url:
 
-                    _log_step(job_id, f"captured video URL early: {early_video_url}")
+                    _log_step(job_id, f"captured video URL early (fallback only): {early_video_url}")
 
-
+                # Wait for upload to finish (progress bar disappears / Next button becomes enabled)
+                _log_step(job_id, "waiting for upload to complete...")
+                try:
+                    page.wait_for_function(
+                        "() => !document.querySelector('ytcp-video-upload-progress[uploading]')",
+                        timeout=300_000,  # 5 min max
+                    )
+                    print("Upload progress complete.")
+                except Exception as _wait_err:
+                    print(f"Upload progress wait timed out or failed (continuing): {_wait_err}")
 
                 page.wait_for_timeout(3000)
 
@@ -1082,7 +1092,9 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
 
                 _log_step(job_id, f"verify success ({publish_type})")
 
-                video_url = early_video_url or _verify_upload_success(page, cfg, publish_type)
+                # Primary: verify via Content page (confirms video is actually live)
+                # Fallback: early_video_url captured from upload dialog
+                video_url = _verify_upload_success(page, cfg, publish_type) or early_video_url
 
                 if not video_url:
 

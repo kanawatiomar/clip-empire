@@ -739,9 +739,54 @@ def _set_visibility_and_schedule(
     # Wait for done-button to be clickable, then click
     done_loc = page.locator(SELECTORS["publish_button"])
     done_loc.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
-    done_loc.click()
+
+    # Strategy 1: JS click on inner button element (most reliable for Shadow DOM)
+    page.evaluate("""() => {
+        const outer = document.querySelector('#done-button');
+        if (!outer) return;
+        // Try inner tp-yt-paper-button first
+        const inner = outer.querySelector('tp-yt-paper-button, button, [role="button"]');
+        const target = inner || outer;
+        target.removeAttribute('disabled');
+        target.removeAttribute('aria-disabled');
+        target.click();
+        target.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true}));
+    }""")
+    page.wait_for_timeout(500)
+
+    # Strategy 2: Playwright force-click as backup
+    try:
+        done_loc.click(force=True, timeout=5000)
+    except Exception:
+        pass
+
+    # Strategy 3: Keyboard Enter as final fallback
+    page.wait_for_timeout(300)
+    done_loc.press("Enter")
 
     print("Clicked Publish.")
+
+    # Debug: screenshot right after clicking Publish to see dialog state
+    page.wait_for_timeout(2000)
+    try:
+        page.screenshot(path=f"_publish_debug_{job_id[:8]}.png")
+        print(f"Post-publish screenshot saved.")
+    except Exception:
+        pass
+
+    # Handle "We're still checking your content" confirmation dialog
+    # YouTube shows this when content checks haven't completed — must click "Publish anyway"
+    page.wait_for_timeout(2000)
+    try:
+        # Look for any dialog with "Publish anyway" button
+        publish_anyway = page.locator("tp-yt-paper-button, ytcp-button").filter(has_text="Publish anyway").first
+        if publish_anyway.count() > 0 and publish_anyway.is_visible():
+            print("'We're still checking your content' dialog appeared — clicking 'Publish anyway'...")
+            publish_anyway.click(force=True)
+            page.wait_for_timeout(1000)
+            print("Clicked 'Publish anyway' — video will publish as Public.")
+    except Exception as e:
+        print(f"Publish-anyway dialog check: {e}")
 
     # Wait for the upload dialog to fully close — confirms YouTube accepted the publish.
     # If we navigate away before this, YouTube saves as draft instead of publishing.

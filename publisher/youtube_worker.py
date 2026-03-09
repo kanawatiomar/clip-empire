@@ -157,6 +157,12 @@ SELECTORS = {
 
     "description_textbox": "div#textbox[aria-label='Tell viewers about your video (type @ to mention a channel)']",
 
+    # Tags field (inside "More options" section)
+
+    "tags_input": "input[aria-label='Tags']",
+
+    "more_options_button": "ytcp-button#toggle-button",
+
     # Audience radios (scroll down to find them)
 
     "not_made_for_kids_radio": "tp-yt-paper-radio-button[name='VIDEO_MADE_FOR_KIDS_NOT_MFK']",
@@ -539,7 +545,7 @@ def _upload_file(page: Page, cfg: YouTubeWorkerConfig, video_path: str) -> None:
 
 
 
-def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description: str, made_for_kids: bool) -> None:
+def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description: str, made_for_kids: bool, hashtags: list = None) -> None:
 
     """Fill the Details step of the upload wizard.
 
@@ -554,6 +560,8 @@ def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description:
     """
 
     print("Filling video details...")
+
+    hashtags = hashtags or []
 
 
 
@@ -573,7 +581,7 @@ def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description:
 
 
 
-    # ---- Description ----
+    # ---- Description (caption + hashtags appended) ----
 
     desc_loc = page.locator(SELECTORS["description_textbox"]).first
 
@@ -583,13 +591,57 @@ def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description:
 
         desc_loc.click()
 
-        desc_loc.type(description, delay=20)
+        full_description = description
 
-        print("Description set.")
+        if hashtags:
+
+            tag_line = " ".join(f"#{t.lstrip('#')}" for t in hashtags)
+
+            full_description = f"{description}\n\n{tag_line}"
+
+        desc_loc.type(full_description, delay=20)
+
+        print(f"Description set with {len(hashtags)} hashtags.")
 
     except Exception:
 
         print("Description field not found, skipping.")
+
+
+
+    # ---- Tags (via More options) ----
+
+    if hashtags:
+
+        try:
+
+            more_btn = page.locator(SELECTORS["more_options_button"]).first
+
+            more_btn.wait_for(state="visible", timeout=5000)
+
+            more_btn.click()
+
+            page.wait_for_timeout(1000)
+
+            tags_input = page.locator(SELECTORS["tags_input"]).first
+
+            tags_input.wait_for(state="visible", timeout=5000)
+
+            tags_input.click()
+
+            tags_str = ",".join(t.lstrip('#') for t in hashtags)
+
+            tags_input.type(tags_str, delay=20)
+
+            # Press Enter or comma to confirm tags
+
+            tags_input.press("Return")
+
+            print(f"Tags set: {tags_str}")
+
+        except Exception as e:
+
+            print(f"Could not set tags (non-fatal): {e}")
 
 
 
@@ -1150,7 +1202,21 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
 
                 _log_step(job_id, "fill details")
 
-                _fill_details(page, cfg, job["caption_text"], job["caption_text"], made_for_kids_status)
+                job_hashtags = job.get("hashtags") or []
+
+                if isinstance(job_hashtags, str):
+
+                    import json as _json2
+
+                    try:
+
+                        job_hashtags = _json2.loads(job_hashtags)
+
+                    except Exception:
+
+                        job_hashtags = []
+
+                _fill_details(page, cfg, job["caption_text"], job["caption_text"], made_for_kids_status, hashtags=job_hashtags)
 
 
 

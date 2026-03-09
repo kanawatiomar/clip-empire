@@ -95,14 +95,14 @@ NICHE_HOOKS: dict = {
 # ── CTA TEXT (shown at video end, last 3s) ───────────────────────────────────
 
 NICHE_CTAS: dict = {
-    "Finance":       ["Follow for more 💰", "Like if you're shocked", "Save this one"],
+    "Finance":       ["Follow for more", "Like if you're shocked", "Save this one", "Comment your take"],
     "Business":      ["Follow for real talk", "Like if this hit different", "Save for later"],
-    "Tech/AI":       ["Follow for AI updates 🤖", "Like if this blew your mind", "Share this"],
-    "Fitness":       ["Follow for gym content 💪", "Like if you've seen this", "Drop a comment"],
-    "Food":          ["Follow for more chaos 🍳", "Like if Gordon was right", "Comment your take"],
+    "Tech/AI":       ["Follow for AI updates", "Like if this blew your mind", "Share this"],
+    "Fitness":       ["Follow for gym content", "Like if you've seen this", "Drop a comment"],
+    "Food":          ["Follow for more chaos", "Like if Gordon was right", "Comment your take"],
     "True Crime":    ["Follow for more cases", "Like if this shocked you", "Share this case"],
-    "Experimental":  ["Follow for more 😳", "Like if this was satisfying", "Save this"],
-    "Gaming":        ["Follow for clips 🎮", "Like if this was insane", "Drop a 🔥 if you agree"],
+    "Experimental":  ["Follow for more", "Like if this was satisfying", "Save this", "Comment FIRE if you agree"],
+    "Gaming":        ["Follow for more clips", "Like if this was insane", "Comment FIRE if you agree", "Drop a comment below", "Follow for daily clips"],
 }
 
 # ── HASHTAGS ─────────────────────────────────────────────────────────────────

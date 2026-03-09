@@ -49,33 +49,34 @@ CHANNEL_SOURCES: dict = {
 
     "market_meltdowns": [
 
-        {"platform": "youtube", "url": "https://www.youtube.com/@GrahamStephan",
+        # /shorts tab ensures we only get that creator's own Shorts
+        {"platform": "youtube", "url": "https://www.youtube.com/@GrahamStephan/shorts",
 
-         "type": "channel", "priority": 1, "max_age_days": 14},
+         "type": "channel", "priority": 1, "max_age_days": 14,
+         "min_dur_s": 15, "max_dur_s": 60},
 
-        {"platform": "youtube", "url": "https://www.youtube.com/@AndreiJikh",
+        {"platform": "youtube", "url": "https://www.youtube.com/@AndreiJikh/shorts",
 
-         "type": "channel", "priority": 1},
+         "type": "channel", "priority": 1,
+         "min_dur_s": 15, "max_dur_s": 60},
 
-        {"platform": "youtube", "url": "https://www.youtube.com/@MeetKevin",
+        {"platform": "youtube", "url": "https://www.youtube.com/@MeetKevin/shorts",
 
-         "type": "channel", "priority": 2},
+         "type": "channel", "priority": 2,
+         "min_dur_s": 15, "max_dur_s": 60},
 
-        {"platform": "tiktok", "url": "https://www.tiktok.com/@markdice",
+        {"platform": "youtube", "url": "https://www.youtube.com/@theplainbagel/shorts",
 
-         "type": "profile", "priority": 2},
-
-        {"platform": "youtube", "url": "https://www.youtube.com/@theplainbagel",
-
-         "type": "channel", "priority": 2},
+         "type": "channel", "priority": 2,
+         "min_dur_s": 15, "max_dur_s": 60},
 
         # Search fallback for fresh crash/meltdown content
-
         {"platform": "youtube",
 
-         "url": "https://www.youtube.com/results?search_query=stock+market+crash+2025+shorts",
+         "url": "https://www.youtube.com/results?search_query=stock+market+crash+reaction+shorts+2025",
 
-         "type": "search", "priority": 3, "max_age_days": 7},
+         "type": "search", "priority": 3, "max_age_days": 7,
+         "min_dur_s": 15, "max_dur_s": 60},
 
     ],
 

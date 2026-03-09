@@ -75,6 +75,20 @@ NICHE_HOOKS: dict = {
         "UNEXPECTED ENDING",
         "WATCH THE WHOLE THING",
     ],
+    "Gaming": [
+        "HE ACTUALLY DID THAT 🎮",
+        "INSANE CLIP 😤",
+        "NO WAY THIS HAPPENED",
+        "BUILT DIFFERENT",
+        "CLUTCH OR DELETE",
+        "BEST PLAY OF THE YEAR?",
+        "THEY COULDN'T BELIEVE IT",
+        "THIS IS ILLEGAL 💀",
+        "NOBODY PLAYS LIKE THIS",
+        "HOW IS THIS EVEN POSSIBLE?",
+        "CHAT WAS GOING INSANE",
+        "WATCH THIS BEFORE SCROLLING",
+    ],
 }
 
 # ── CTA TEXT (shown at video end, last 3s) ───────────────────────────────────
@@ -87,6 +101,7 @@ NICHE_CTAS: dict = {
     "Food":          ["Follow for more chaos 🍳", "Like if Gordon was right", "Comment your take"],
     "True Crime":    ["Follow for more cases", "Like if this shocked you", "Share this case"],
     "Experimental":  ["Follow for more 😳", "Like if this was satisfying", "Save this"],
+    "Gaming":        ["Follow for clips 🎮", "Like if this was insane", "Drop a 🔥 if you agree"],
 }
 
 # ── HASHTAGS ─────────────────────────────────────────────────────────────────
@@ -99,6 +114,7 @@ NICHE_HASHTAGS: dict = {
     "Food":          ["food", "cooking", "chef", "kitchen", "foodie", "gordonramsay"],
     "True Crime":    ["truecrime", "crime", "mystery", "coldcase", "unsolved", "detective"],
     "Experimental":  ["viral", "satisfying", "unexpected", "clips", "moments", "trending"],
+    "Gaming":        ["gaming", "twitch", "highlights", "clips", "gamingclips", "twitchclips", "clutch"],
 }
 
 # ── TITLE TEMPLATES ───────────────────────────────────────────────────────────
@@ -153,6 +169,16 @@ NICHE_TITLE_TEMPLATES: dict = {
         "The most unexpected moment of the day",
         "How is this even real?",
         "This will make your brain feel good",
+    ],
+    "Gaming": [
+        "Watch this before scrolling: Nobody plays like this 🎮",
+        "The most insane clip you'll see today",
+        "This clip broke Twitch chat",
+        "Streamer goes crazy after this play",
+        "Best gaming moment of the week",
+        "This play was absolutely filthy 🎮",
+        "Chat couldn't believe what just happened",
+        "The clutch that nobody saw coming",
     ],
 }
 

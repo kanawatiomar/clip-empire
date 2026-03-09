@@ -199,21 +199,48 @@ class QueueWriter:
 
         niche = CHANNELS.get(channel_name, {}).get("niche", "Gaming")
 
-        # Build series title if we know the creator, otherwise fall back to A/B
+        # 1. Try LLM title generation (GPT-4o-mini curiosity-bait)
+        llm_title = None
         if creator and not title:
-            caption = build_series_title(
-                channel_name=channel_name,
-                creator=creator,
-                clip_title=clip_title or "",
-                niche=niche,
-                db_path=self.db_path,
-            )
-            # Derive hook from series title prefix
-            auto_hook = caption.split("#")[0].strip()[:80]
-            ab_label = "S"  # S = Series
+            try:
+                from engine.config.smart_title import generate_llm_title, clean_title
+                raw_llm = generate_llm_title(
+                    creator=creator,
+                    clip_title=clip_title or "",
+                    channel_name=channel_name,
+                    niche=niche,
+                )
+                if raw_llm:
+                    llm_title = clean_title(raw_llm)
+            except Exception as e:
+                print(f"[queue] LLM title skipped: {e}")
+
+        # 2. Fall back to series title, then A/B template
+        if creator and not title:
+            if llm_title:
+                caption = llm_title
+                auto_hook = caption.split(":")[0].strip()[:80]
+                ab_label = "L"   # L = LLM
+            else:
+                caption = build_series_title(
+                    channel_name=channel_name,
+                    creator=creator,
+                    clip_title=clip_title or "",
+                    niche=niche,
+                    db_path=self.db_path,
+                )
+                auto_hook = caption.split("#")[0].strip()[:80]
+                ab_label = "S"   # S = Series
         else:
             auto_title, auto_hook, ab_label = choose_variant(channel_name, creator=creator)
             caption = title or auto_title
+
+        # 3. Apply profanity filter
+        try:
+            from engine.utils.censor import censor_text
+            caption = censor_text(caption)
+        except Exception:
+            pass
         tags = hashtags or get_hashtags(channel_name)
         sched = schedule_at or _next_schedule_time(channel_name, self.db_path)
 

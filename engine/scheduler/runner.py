@@ -254,6 +254,30 @@ class Runner:
             print(f"[pipeline] DRY RUN — skipping actual processing")
             return None
 
+        # ── Quality gate: skip boring clips before rendering ──────────────────
+        try:
+            from engine.config.smart_title import score_clip_title, is_boring_clip
+            hype = score_clip_title(clip.title or "")
+            if is_boring_clip(clip.title or ""):
+                print(f"[pipeline] SKIP (boring title): '{clip.title[:50]}'")
+                return None
+            print(f"[pipeline] Hype score: {hype:.2f} for '{clip.title[:40]}'")
+        except Exception as e:
+            print(f"[pipeline] Hype scoring failed (non-fatal): {e}")
+
+        try:
+            # ── Break screen trim (before crop) ──────────────────────────────
+            from engine.ingest.break_detector import trim_break_screen
+            from pathlib import Path as _BPath
+            import tempfile as _tmp
+            _break_out = str(_BPath(clip.download_path).parent / f"{clip.clip_id}_trimmed.mp4")
+            _trimmed = trim_break_screen(_BPath(clip.download_path), _BPath(_break_out))
+            if str(_trimmed) != clip.download_path:
+                clip.download_path = str(_trimmed)
+                print(f"[pipeline] Break screen trimmed from clip start")
+        except Exception as e:
+            print(f"[pipeline] Break detector failed (non-fatal): {e}")
+
         try:
             # 1. Crop to 9:16 — use crop_anchor from source config if available
             crop_anchor = clip.metadata.get("crop_anchor", "center")

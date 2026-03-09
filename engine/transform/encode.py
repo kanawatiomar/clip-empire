@@ -11,6 +11,12 @@ import subprocess
 from pathlib import Path
 from typing import Optional
 
+_FFMPEG_BIN_DIR = Path(os.environ.get("LOCALAPPDATA", "")) / (
+    "Microsoft/WinGet/Packages/"
+    "Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/"
+    "ffmpeg-8.0.1-full_build/bin"
+)
+FFMPEG_BIN = str(_FFMPEG_BIN_DIR / "ffmpeg.exe") if (_FFMPEG_BIN_DIR / "ffmpeg.exe").exists() else FFMPEG_BIN
 
 TARGET_W = 1080
 TARGET_H = 1920
@@ -22,7 +28,7 @@ def detect_gpu() -> bool:
     """Return True if ffmpeg has NVENC support (NVIDIA GPU + CUDA drivers)."""
     try:
         result = subprocess.run(
-            ["ffmpeg", "-hide_banner", "-encoders"],
+            [FFMPEG_BIN, "-hide_banner", "-encoders"],
             capture_output=True, text=True, timeout=10,
         )
         return "h264_nvenc" in result.stdout
@@ -89,7 +95,9 @@ class EncodeTransform:
                 "-preset", "p4",        # balanced quality/speed
                 "-rc", "vbr",
                 "-cq", "23",
-                "-b:v", "0",
+                "-b:v", "6M",           # 6 Mbit/s minimum — YouTube rejects sub-1Mbit/s
+                "-maxrate", "15M",      # cap at 15 Mbit/s
+                "-bufsize", "20M",
                 "-profile:v", "high",
             ]
         else:
@@ -101,7 +109,7 @@ class EncodeTransform:
             ]
 
         cmd = [
-            "ffmpeg", "-y",
+            FFMPEG_BIN, "-y",
             "-i", video_path,
         ]
 
@@ -112,6 +120,7 @@ class EncodeTransform:
             *vcodec_args,
             "-c:a", "aac",
             "-b:a", "192k",
+            "-ar", "48000",   # resample to 48kHz — YouTube rejects 96kHz audio
             "-af", af_filter,
             "-pix_fmt", "yuv420p",
             "-movflags", "+faststart",
@@ -119,7 +128,7 @@ class EncodeTransform:
             output_path,
         ]
 
-        print(f"[encode] Final encode → {os.path.basename(output_path)} ({'NVENC' if self.use_gpu else 'CPU'})")
+        print(f"[encode] Final encode -> {os.path.basename(output_path)} ({'NVENC' if self.use_gpu else 'CPU'})")
         result = subprocess.run(cmd, capture_output=True)
         if result.returncode != 0:
             raise RuntimeError(f"ffmpeg final encode failed:\n{result.stderr.decode()[:500]}")

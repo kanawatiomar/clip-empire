@@ -137,7 +137,7 @@ def extract_segment(
          "-i", video_path,
          "-t", str(duration),
          "-c:v", "libx264", "-preset", "fast", "-crf", "23",
-         "-c:a", "aac", "-b:a", "128k",
+         "-c:a", "aac", "-b:a", "128k", "-ar", "48000",
          "-movflags", "+faststart",
          "-y", output_path],
         capture_output=True, timeout=300, check=True,

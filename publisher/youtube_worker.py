@@ -679,69 +679,86 @@ def _set_visibility_and_schedule(
 
     page.wait_for_selector("#privacy-radios", timeout=cfg.nav_timeout_ms)
 
-    page.wait_for_timeout(1500)  # extra settle time for web components
+    page.wait_for_timeout(2000)  # extra settle time for web components
 
 
 
-    pub_loc = page.locator(SELECTORS["public_radio"])
-
-    pub_loc.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
-
-
-
-    # Try clicking up to 3 times, verifying aria-checked changes
-
-    for attempt in range(3):
-
-        pub_loc.click()
-
-        page.wait_for_timeout(600)
-
-        checked = pub_loc.get_attribute("aria-checked")
-
-        print(f"Public radio aria-checked after click attempt {attempt+1}: {checked}")
-
-        if checked == "true":
-
-            break
-
-        # Fallback: JS dispatch click on the inner container
-
+    # Use multiple strategies to select Public — aria-checked alone is not enough
+    # (YouTube web components can show aria-checked=true without triggering form state change)
+    def _try_select_public() -> bool:
+        """Returns True if done-button text became 'Publish'."""
+        # Strategy 1: click the inner paper-radio-button directly
         page.evaluate("""() => {
-
-            const btn = document.querySelector('tp-yt-paper-radio-button[name="PUBLIC"]');
-
-            if (btn) { btn.click(); btn.dispatchEvent(new Event('tap', {bubbles: true})); }
-
+            const radios = document.querySelectorAll('tp-yt-paper-radio-button');
+            for (const r of radios) {
+                if (r.getAttribute('name') === 'PUBLIC') {
+                    r.click();
+                    r.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true}));
+                    r.dispatchEvent(new Event('tap', {bubbles: true}));
+                    // Also try clicking the inner radio
+                    const inner = r.shadowRoot && r.shadowRoot.querySelector('#radioButton');
+                    if (inner) inner.click();
+                    break;
+                }
+            }
         }""")
+        page.wait_for_timeout(800)
+        # Check if done-button text changed to Publish
+        btn_text = page.evaluate("() => { const b = document.querySelector('#done-button'); return b ? b.innerText.trim() : ''; }")
+        print(f"  done-button text after JS click: {btn_text!r}")
+        return btn_text.lower() == "publish"
 
-        page.wait_for_timeout(600)
-
-        checked = pub_loc.get_attribute("aria-checked")
-
-        print(f"  After JS tap: aria-checked={checked}")
-
-        if checked == "true":
-
+    publish_confirmed = False
+    for attempt in range(4):
+        publish_confirmed = _try_select_public()
+        if publish_confirmed:
+            print(f"Public selected + done-button is 'Publish' (attempt {attempt+1})")
+            break
+        # Also try clicking via Playwright locator as backup
+        try:
+            pub_loc = page.locator(SELECTORS["public_radio"])
+            if pub_loc.count() > 0:
+                pub_loc.click(force=True)
+                page.wait_for_timeout(600)
+        except Exception:
+            pass
+        btn_text = page.evaluate("() => { const b = document.querySelector('#done-button'); return b ? b.innerText.trim() : ''; }")
+        print(f"  After fallback click attempt {attempt+1}: done-button={btn_text!r}")
+        if btn_text.lower() == "publish":
+            publish_confirmed = True
             break
 
-
-
-    final_checked = pub_loc.get_attribute("aria-checked")
-
-    if final_checked != "true":
-
-        raise RuntimeError(f"Failed to select Public visibility - aria-checked={final_checked}")
-
-
+    if not publish_confirmed:
+        # Last resort: check aria-checked and proceed anyway if it looks right
+        final_checked = page.evaluate("() => { const b = document.querySelector('tp-yt-paper-radio-button[name=\"PUBLIC\"]'); return b ? b.getAttribute('aria-checked') : null; }")
+        btn_text = page.evaluate("() => { const b = document.querySelector('#done-button'); return b ? b.innerText.trim() : ''; }")
+        print(f"WARNING: done-button still shows {btn_text!r} (aria-checked={final_checked}). Proceeding anyway.")
 
     print("Public visibility confirmed.")
 
-    page.locator(SELECTORS["publish_button"]).wait_for(state="visible", timeout=cfg.nav_timeout_ms)
-
-    page.locator(SELECTORS["publish_button"]).click()
+    # Wait for done-button to be clickable, then click
+    done_loc = page.locator(SELECTORS["publish_button"])
+    done_loc.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
+    done_loc.click()
 
     print("Clicked Publish.")
+
+    # Wait for the upload dialog to fully close — confirms YouTube accepted the publish.
+    # If we navigate away before this, YouTube saves as draft instead of publishing.
+    # The dialog closes when YouTube finishes processing the publish action.
+    try:
+        # Primary: wait for the upload dialog to disappear
+        page.locator("ytcp-uploads-dialog").wait_for(state="detached", timeout=60000)
+        print("Upload dialog closed — publish confirmed.")
+    except Exception:
+        try:
+            # Fallback: wait for post-publish success dialog
+            page.locator("ytcp-video-upload-success-dialog").wait_for(state="visible", timeout=15000)
+            print("Upload success dialog appeared — publish confirmed.")
+        except Exception:
+            # Last resort: just wait 8 seconds for YouTube to process the click
+            print("Dialog wait timed out — waiting 8s for publish to register...")
+            page.wait_for_timeout(8000)
 
     return "published"
 

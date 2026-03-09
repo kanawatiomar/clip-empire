@@ -97,6 +97,7 @@ def get_next_job(platform: str, channel_name: Optional[str] = None) -> Optional[
         SELECT pj.*, c.made_for_kids FROM publish_jobs pj
         JOIN channels c ON pj.channel_name = c.channel_name
         WHERE pj.status = 'queued'
+          AND c.status = 'active'
           AND pj.platform = ?
           AND (pj.schedule_at_ts IS NULL OR pj.schedule_at_ts <= ?)
           AND (pj.next_retry_at_ts IS NULL OR pj.next_retry_at_ts <= ?)

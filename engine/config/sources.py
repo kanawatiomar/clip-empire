@@ -333,14 +333,15 @@ CHANNEL_SOURCES: dict = {
         #   left   -> crop window shifts left  (webcam bottom-left, action right)
         #   right  -> crop window shifts right (webcam bottom-right, action left)
         #   center -> standard center crop
+        # min_views: only take clips with this many views (quality filter)
         {"platform": "twitch", "url": "https://www.twitch.tv/tfue/clips",
          "type": "channel", "priority": 1, "max_age_days": 3,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 8,
-         "crop_anchor": "right"},
+         "crop_anchor": "right", "min_views": 2000},
         {"platform": "twitch", "url": "https://www.twitch.tv/cloakzy/clips",
          "type": "channel", "priority": 1, "max_age_days": 3,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 8,
-         "crop_anchor": "left"},
+         "crop_anchor": "left", "min_views": 2000},
         {"platform": "youtube",
          "url": "https://www.youtube.com/results?search_query=tfue+highlights+2025+shorts",
          "type": "search", "priority": 3, "max_age_days": 7,
@@ -356,12 +357,12 @@ CHANNEL_SOURCES: dict = {
         {"platform": "twitch", "url": "https://www.twitch.tv/moistcr1tikal/clips",
          "type": "channel", "priority": 1, "max_age_days": 3,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 6,
-         "crop_anchor": "center"},
+         "crop_anchor": "center", "min_views": 3000},
         # HasanAbi: cam on left side -> anchor right
         {"platform": "twitch", "url": "https://www.twitch.tv/hasanabi/clips",
          "type": "channel", "priority": 1, "max_age_days": 3,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 6,
-         "crop_anchor": "right"},
+         "crop_anchor": "right", "min_views": 3000},
         # Ludwig: usually centered
         {"platform": "twitch", "url": "https://www.twitch.tv/ludwig/clips",
          "type": "channel", "priority": 1, "max_age_days": 3,
@@ -383,17 +384,17 @@ CHANNEL_SOURCES: dict = {
         {"platform": "twitch", "url": "https://www.twitch.tv/shroud/clips",
          "type": "channel", "priority": 1, "max_age_days": 3,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 6,
-         "crop_anchor": "right"},
+         "crop_anchor": "right", "min_views": 2000},
         # Nickmercs: cam bottom-right -> anchor left to keep gameplay on left side
         {"platform": "twitch", "url": "https://www.twitch.tv/nickmercs/clips",
          "type": "channel", "priority": 1, "max_age_days": 3,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 6,
-         "crop_anchor": "left"},
+         "crop_anchor": "left", "min_views": 2000},
         # TimTheTatman: cam bottom-left -> anchor right
         {"platform": "twitch", "url": "https://www.twitch.tv/timthetatman/clips",
          "type": "channel", "priority": 1, "max_age_days": 3,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 6,
-         "crop_anchor": "right"},
+         "crop_anchor": "right", "min_views": 2000},
         # YouTube fallbacks
         {"platform": "youtube",
          "url": "https://www.youtube.com/results?search_query=shroud+best+clips+shorts+2025",

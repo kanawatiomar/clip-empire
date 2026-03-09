@@ -96,6 +96,7 @@ class YtDlpIngester:
                 max_age_days=max_age,
                 out_dir=out_dir,
                 channel_name=channel_name,
+                min_views=source_config.get("min_views", 0),
             )
 
         return clips
@@ -110,6 +111,7 @@ class YtDlpIngester:
         max_age_days: int,
         out_dir: Path,
         channel_name: str,
+        min_views: int = 0,
     ) -> List[RawClip]:
         """Run yt-dlp to download clips from YouTube, TikTok, or Twitter."""
 
@@ -119,10 +121,15 @@ class YtDlpIngester:
         # Date cutoff for max_age_days
         cutoff = (datetime.now() - timedelta(days=max_age_days)).strftime("%Y%m%d")
 
+        # Build match filter — duration range + optional view count floor
+        match_filter = f"duration>={int(min_dur)} & duration<={int(max_dur)}"
+        if min_views > 0:
+            match_filter += f" & view_count>={min_views}"
+
         cmd = [
             YTDLP_BIN,
             "--no-playlist" if "watch?v=" in url or "tiktok.com" in url else "--yes-playlist",
-            "--match-filter", f"duration>={int(min_dur)} & duration<={int(max_dur)}",
+            "--match-filter", match_filter,
             "--dateafter", cutoff,
             "--max-downloads", str(limit),
             "--format", "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best",

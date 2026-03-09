@@ -879,11 +879,10 @@ def _verify_upload_success(page: Page, cfg: YouTubeWorkerConfig, publish_type: s
 
 
 
-    # Last fallback: return the studio content page URL so we still mark as succeeded
+    # Could not find video URL on content page — return None so caller falls back to early_video_url
+    print("Could not find video URL in content page. Falling back to early-captured URL.")
 
-    print("Could not find video URL in content page. Using studio URL as fallback.")
-
-    return content_url
+    return None
 
 
 

@@ -7,7 +7,45 @@ CAPTIONS:  Auto-generated YouTube video title templates.
 """
 
 from accounts.channel_definitions import CHANNELS
+from pathlib import Path
+import json
 import random
+
+# ── HOOK DEDUPLICATION ────────────────────────────────────────────────────────
+
+_USED_HOOKS_PATH = Path("data/used_hooks.json")
+_HOOK_MEMORY = 12  # avoid repeating the last N hooks per channel
+
+
+def _load_used_hooks(channel_name: str) -> list[str]:
+    try:
+        if _USED_HOOKS_PATH.exists():
+            data = json.loads(_USED_HOOKS_PATH.read_text(encoding="utf-8"))
+            return data.get(channel_name, [])
+    except Exception:
+        pass
+    return []
+
+
+def _save_used_hook(channel_name: str, hook: str) -> None:
+    try:
+        data: dict = {}
+        if _USED_HOOKS_PATH.exists():
+            data = json.loads(_USED_HOOKS_PATH.read_text(encoding="utf-8"))
+        history = data.get(channel_name, [])
+        history.append(hook)
+        data[channel_name] = history[-_HOOK_MEMORY:]
+        _USED_HOOKS_PATH.parent.mkdir(parents=True, exist_ok=True)
+        _USED_HOOKS_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    except Exception:
+        pass
+
+
+def _pick_fresh(options: list[str], used: list[str]) -> str:
+    """Pick an option not in the recent used list. Falls back to full pool if all used."""
+    fresh = [o for o in options if o not in used]
+    pool = fresh if fresh else options
+    return random.choice(pool)
 
 # ── HOOK TEXT (shown at video start, 0-3s) ──────────────────────────────────
 
@@ -81,7 +119,6 @@ NICHE_HOOKS: dict = {
     ],
     "Gaming": [
         "HE ACTUALLY DID THAT 🎮",
-        "INSANE CLIP 😤",
         "NO WAY THIS HAPPENED",
         "{creator} IS BUILT DIFFERENT",
         "CLUTCH OR DELETE",
@@ -93,6 +130,24 @@ NICHE_HOOKS: dict = {
         "CHAT WAS GOING INSANE",
         "WATCH THIS BEFORE SCROLLING",
         "{creator} REALLY JUST DID THAT",
+        "THIS CLIP BROKE TWITCH",
+        "CHAT FROZE WATCHING THIS",
+        "NOT A SINGLE PERSON EXPECTED THIS",
+        "{creator} SAID NOTHING AND DID EVERYTHING",
+        "THE AUDACITY 💀",
+        "HOW IS THIS EVEN LEGAL",
+        "{creator} ATE AND LEFT NO CRUMBS",
+        "WHATEVER YOU DO, WATCH THIS",
+        "CLIP IT. SAVE IT. SHARE IT.",
+        "THIS IS WHAT PEAK GAMING LOOKS LIKE",
+        "VIEWERS LOST THEIR MINDS",
+        "{creator} WENT OFF",
+        "RARE {creator} MOMENT",
+        "I HAVE NO WORDS 😤",
+        "TELL ME YOU'RE CRACKED WITHOUT TELLING ME",
+        "THE LOBBY WAS NOT READY",
+        "ZERO HESITATION",
+        "{creator} COOKED",
     ],
 }
 
@@ -191,28 +246,54 @@ NICHE_TITLE_TEMPLATES: dict = {
         "The clutch that nobody saw coming",
         "{creator} just broke the game 🎮",
         "Nobody expected {creator} to do this",
+        "The moment {creator}'s chat went silent 😤",
+        "This is why {creator} has millions of viewers",
+        "{creator} made it look too easy 🎮",
+        "Zero thought. Perfect execution.",
+        "The lobby had no answer for this",
+        "I've watched this 10 times and still don't understand",
+        "{creator} casually does the impossible",
+        "This is the clip everyone's talking about",
+        "Chat was not ready for this",
+        "{creator} woke up and chose violence 💀",
+        "This is what separates {creator} from everyone else",
+        "The play that left chat speechless",
+        "When {creator} locks in 🎮",
+        "Nobody in the lobby stood a chance",
+        "If you blink you'll miss it",
+        "Somehow {creator} made it out",
+        "The reaction says it all",
+        "This one got clipped for a reason",
+        "That's not a skill gap — that's a skill canyon",
+        "{creator} really said 'watch this' 💀",
     ],
 }
 
 
 def get_hook(channel_name: str, creator: str = None) -> str:
     niche = CHANNELS.get(channel_name, {}).get("niche", "Experimental")
+    used = _load_used_hooks(channel_name)
 
-    # Use creator-specific hook overrides if available (50% of the time for variety)
+    # Build candidate pool: merge niche hooks + creator overrides if available
+    niche_hooks = NICHE_HOOKS.get(niche, NICHE_HOOKS["Experimental"])
+    all_candidates = list(niche_hooks)
+
     if creator:
         try:
             from engine.config.creator_profiles import get_hook_overrides
             overrides = get_hook_overrides(creator)
-            if overrides and random.random() < 0.5:
-                return random.choice(overrides)
+            if overrides:
+                all_candidates = all_candidates + overrides
         except Exception:
             pass
 
-    hooks = NICHE_HOOKS.get(niche, NICHE_HOOKS["Experimental"])
-    hook = random.choice(hooks)
+    hook = _pick_fresh(all_candidates, used)
+
     # Substitute {creator} placeholder with actual streamer name if known
     if creator and "{creator}" in hook:
         hook = hook.replace("{creator}", creator.upper())
+
+    _save_used_hook(channel_name, hook)
     return hook
 
 

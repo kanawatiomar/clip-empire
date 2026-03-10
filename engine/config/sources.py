@@ -54,16 +54,24 @@ CHANNEL_SOURCES: dict = {
 
 
     "market_meltdowns": [
-        # Smaller / mid-tier finance creators — less likely to have ContentID active.
-        # Avoid mega-creators (Graham Stephan, Meet Kevin) — ContentID will nuke clips.
-        {"platform": "youtube", "url": "https://www.youtube.com/@JarradMorrow/videos",
-         "type": "longform", "priority": 1, "max_age_days": 14, "target_dur_s": 40},
-        {"platform": "youtube", "url": "https://www.youtube.com/@ErinTalksMoney/videos",
-         "type": "longform", "priority": 1, "max_age_days": 14, "target_dur_s": 40},
+        # Mid-tier finance creators — original commentary, no ContentID.
+        # Avoid mega-creators (Graham Stephan, Meet Kevin) — ContentID risk.
+        # All use type="longform" — we extract peak audio moments ourselves (transformative).
+        {"platform": "youtube", "url": "https://www.youtube.com/@PatrickBoyleOnFinance/videos",
+         "type": "longform", "priority": 1, "max_age_days": 30, "target_dur_s": 45,
+         "creator": "patrickboyle", "crop_anchor": "top"},
+        {"platform": "youtube", "url": "https://www.youtube.com/@WallStreetMillennial/videos",
+         "type": "longform", "priority": 1, "max_age_days": 30, "target_dur_s": 45,
+         "creator": "wallstreetmillennial", "crop_anchor": "top"},
+        {"platform": "youtube", "url": "https://www.youtube.com/@coffeeziIIa/videos",
+         "type": "longform", "priority": 1, "max_age_days": 14, "target_dur_s": 40,
+         "creator": "coffeezilla", "crop_anchor": "top"},
+        {"platform": "youtube", "url": "https://www.youtube.com/@RareLiquid/videos",
+         "type": "longform", "priority": 2, "max_age_days": 14, "target_dur_s": 40,
+         "creator": "rareliquid", "crop_anchor": "top"},
         {"platform": "youtube", "url": "https://www.youtube.com/@theplainbagel/videos",
-         "type": "longform", "priority": 2, "max_age_days": 14, "target_dur_s": 40},
-        {"platform": "youtube", "url": "https://www.youtube.com/@BenFelixCSI/videos",
-         "type": "longform", "priority": 2, "max_age_days": 30, "target_dur_s": 40},
+         "type": "longform", "priority": 2, "max_age_days": 30, "target_dur_s": 40,
+         "creator": "plainbagel", "crop_anchor": "top"},
     ],
 
 

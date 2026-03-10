@@ -173,6 +173,86 @@ CREATOR_PROFILES: dict[str, dict] = {
 }
 
 
+    # ── MARKET MELTDOWNS CREATORS ─────────────────────────────────────────────
+
+    "patrickboyle": {
+        "channel": "market_meltdowns",
+        "crop_anchor": "top",
+        "content_types": ["educational", "reaction", "funny"],
+        "hook_style": "statement",
+        "min_views": 0,
+        "llm_context": "Patrick Boyle is a dry-witted British hedge fund manager who explains finance with deadpan humor. Best moments are when he reacts to absurd market events or exposes financial nonsense. Titles should be understated but intriguing.",
+        "prefer_keywords": ["crash", "collapse", "fraud", "exposed", "insane", "ridiculous", "bubble", "bankrupt"],
+        "avoid_keywords": ["tutorial", "how to", "basics"],
+        "hook_overrides": [
+            "THIS ACTUALLY HAPPENED",
+            "THE NUMBERS DON'T LIE",
+            "HE SAID WHAT HE SAID",
+        ],
+    },
+
+    "wallstreetmillennial": {
+        "channel": "market_meltdowns",
+        "crop_anchor": "top",
+        "content_types": ["educational", "reaction"],
+        "hook_style": "question",
+        "min_views": 0,
+        "llm_context": "Wall Street Millennial makes documentary-style explainers about corporate collapses, scams, and market events. Titles should be curiosity-driven and reference the company or event by name.",
+        "prefer_keywords": ["collapse", "bankrupt", "fraud", "scam", "billion", "lost", "failed", "disaster"],
+        "avoid_keywords": ["investing basics", "how to invest"],
+        "hook_overrides": [
+            "HOW DID THIS HAPPEN",
+            "BILLIONS GONE",
+            "THE REAL STORY",
+        ],
+    },
+
+    "coffeezilla": {
+        "channel": "market_meltdowns",
+        "crop_anchor": "top",
+        "content_types": ["reaction", "educational", "funny"],
+        "hook_style": "statement",
+        "min_views": 0,
+        "llm_context": "Coffeezilla exposes internet scams, crypto frauds, and fake gurus with investigative journalism style. His best moments are dramatic reveals and calling people out. Titles should feel like receipts being dropped.",
+        "prefer_keywords": ["scam", "fraud", "exposed", "fake", "caught", "lie", "rug pull", "millions"],
+        "avoid_keywords": [],
+        "hook_overrides": [
+            "HE GOT CAUGHT",
+            "THE RECEIPTS ARE HERE",
+            "THEY REALLY THOUGHT",
+            "THIS IS A SCAM",
+        ],
+    },
+
+    "rareliquid": {
+        "channel": "market_meltdowns",
+        "crop_anchor": "top",
+        "content_types": ["educational", "reaction"],
+        "hook_style": "question",
+        "min_views": 0,
+        "llm_context": "Rare Liquid covers stock market events, investing, and financial news in a direct, no-BS style. Titles should be punchy and reference specific numbers or events.",
+        "prefer_keywords": ["crash", "pump", "dump", "market", "stocks", "billion", "record"],
+        "avoid_keywords": [],
+        "hook_overrides": [
+            "THE MARKET IS WILD",
+            "THIS CHANGED EVERYTHING",
+        ],
+    },
+
+    "plainbagel": {
+        "channel": "market_meltdowns",
+        "crop_anchor": "top",
+        "content_types": ["educational", "funny"],
+        "hook_style": "question",
+        "min_views": 0,
+        "llm_context": "The Plain Bagel explains financial concepts and news in a calm, accessible way with occasional dry humor. Titles should be approachable but highlight the most surprising or counterintuitive point.",
+        "prefer_keywords": ["actually", "truth", "mistake", "wrong", "surprising", "real"],
+        "avoid_keywords": [],
+        "hook_overrides": [],
+    },
+}
+
+
 def get_profile(creator: str) -> dict:
     """Return creator profile by username (case-insensitive). Returns empty dict if unknown."""
     return CREATOR_PROFILES.get(creator.lower(), {})

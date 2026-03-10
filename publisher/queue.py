@@ -49,7 +49,8 @@ def add_publish_job(
     caption_text: str,
     hashtags: List[str],
     render_path: str,
-    first_frame_hook: Optional[str] = None
+    first_frame_hook: Optional[str] = None,
+    thumbnail_path: Optional[str] = None,
 ) -> str:
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -86,14 +87,14 @@ def add_publish_job(
             INSERT INTO publish_jobs (
                 job_id, variant_id, platform, channel_name, publisher_account, 
                 schedule_at, schedule_at_ts, created_at, updated_at,
-                caption_text, hashtags, render_path, first_frame_hook
+                caption_text, hashtags, render_path, first_frame_hook, thumbnail_path
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             job_id, variant_id, platform, channel_name, publisher_account,
             schedule_at.isoformat(), schedule_at_ts,
             created_at, updated_at,
-            caption_text, hashtags_json, render_path, first_frame_hook
+            caption_text, hashtags_json, render_path, first_frame_hook, thumbnail_path
         ))
         conn.commit()
         print(f"Added publish job {job_id} for {channel_name} on {platform}.")

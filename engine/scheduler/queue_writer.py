@@ -11,9 +11,11 @@ Scheduling logic:
 
 from __future__ import annotations
 
+import os
 import sqlite3
 import uuid
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 from typing import Optional, List
 
 from publisher.queue import add_publish_job
@@ -404,6 +406,26 @@ class QueueWriter:
             tags.append(series_hashtag)
         sched = schedule_at or _next_schedule_time(channel_name, self.db_path)
 
+        # 6. Generate thumbnail
+        thumbnail_path = None
+        try:
+            from engine.transform.thumbnail import generate as gen_thumb
+            thumb_dir = Path("renders/thumbnails") / channel_name
+            thumb_dir.mkdir(parents=True, exist_ok=True)
+            thumb_file = str(thumb_dir / f"{uuid.uuid4().hex[:12]}.jpg")
+            gen_thumb(
+                video_path=render_path,
+                output_path=thumb_file,
+                hook_text=auto_hook,
+                creator=creator,
+                channel_name=channel_name,
+            )
+            if os.path.exists(thumb_file) and os.path.getsize(thumb_file) > 0:
+                thumbnail_path = thumb_file
+                print(f"[queue] Thumbnail: {os.path.basename(thumb_file)}")
+        except Exception as e:
+            print(f"[queue] Thumbnail generation skipped: {e}")
+
         variant_id = _create_dummy_variant(
             channel_name=channel_name,
             render_path=render_path,
@@ -422,6 +444,7 @@ class QueueWriter:
             hashtags=tags,
             render_path=render_path,
             first_frame_hook=f"{auto_hook} [{ab_label}]",
+            thumbnail_path=thumbnail_path,
         )
 
         print(f"[queue] Enqueued {channel_name} → {job_id} (schedule: {sched.strftime('%Y-%m-%d %H:%M')}, A/B={ab_label})")

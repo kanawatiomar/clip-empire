@@ -545,7 +545,33 @@ def _upload_file(page: Page, cfg: YouTubeWorkerConfig, video_path: str) -> None:
 
 
 
-def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description: str, made_for_kids: bool, hashtags: list = None) -> None:
+def _upload_thumbnail(page: Page, thumbnail_path: str) -> None:
+    """Upload a custom thumbnail in the Details step.
+
+    YouTube Studio has a thumbnail upload button in the Details dialog.
+    We click it, intercept the file chooser, and set the thumbnail file.
+    """
+    if not thumbnail_path or not os.path.exists(thumbnail_path):
+        print(f"[thumbnail] Skipping — file not found: {thumbnail_path}")
+        return
+    try:
+        # Scroll to thumbnail section
+        thumb_btn = page.locator("button#still-selection-button, ytcp-thumbnail-uploader button, [test-id='thumbnail-upload-button']").first
+        if thumb_btn.count() == 0:
+            # Try broader selector
+            thumb_btn = page.get_by_text("Upload thumbnail", exact=False).first
+        thumb_btn.scroll_into_view_if_needed(timeout=5000)
+        page.wait_for_timeout(500)
+        with page.expect_file_chooser(timeout=8000) as fc_info:
+            thumb_btn.click(timeout=5000)
+        fc_info.value.set_files(thumbnail_path)
+        page.wait_for_timeout(1500)
+        print(f"[thumbnail] Uploaded: {os.path.basename(thumbnail_path)}")
+    except Exception as e:
+        print(f"[thumbnail] Upload skipped (non-fatal): {e}")
+
+
+def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description: str, made_for_kids: bool, hashtags: list = None, thumbnail_path: str = None) -> None:
 
     """Fill the Details step of the upload wizard.
 
@@ -579,7 +605,9 @@ def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description:
 
     print(f"Title set: {title}")
 
-
+    # ---- Thumbnail ----
+    if thumbnail_path:
+        _upload_thumbnail(page, thumbnail_path)
 
     # ---- Description (caption + hashtags appended) ----
 
@@ -1259,7 +1287,8 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                         _base_desc = f"{_base_desc}\n\nOriginal: {_handle}"
                 except Exception:
                     pass
-                _fill_details(page, cfg, job["caption_text"], _base_desc, made_for_kids_status, hashtags=job_hashtags)
+                _thumb_path = job.get("thumbnail_path") or ""
+                _fill_details(page, cfg, job["caption_text"], _base_desc, made_for_kids_status, hashtags=job_hashtags, thumbnail_path=_thumb_path)
 
 
 

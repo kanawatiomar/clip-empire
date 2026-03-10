@@ -21,6 +21,10 @@ NICHE_HOOKS: dict = {
         "THE MARKET IS BROKEN",
         "NO ONE TALKS ABOUT THIS",
         "THEY TOLD YOU WRONG",
+        "THIS SHOULD BE ILLEGAL",
+        "THE NUMBER DOESN'T LIE",
+        "NOBODY EXPLAINS THIS",
+        "IT ALL COLLAPSED",
     ],
     "Business": [
         "BRUTAL TRUTH 💀",
@@ -123,11 +127,16 @@ NICHE_HASHTAGS: dict = {
 
 NICHE_TITLE_TEMPLATES: dict = {
     "Finance": [
-        "This trader lost everything in SECONDS 📉",
-        "The market did WHAT?! 💀",
-        "Nobody talks about this financial truth",
-        "How they turned $1k into $1M (then lost it)",
-        "Wall Street moment nobody expected",
+        "{creator} just exposed how this really works 📉",
+        "The number {creator} revealed will shock you",
+        "Why {creator} says the market is broken",
+        "Nobody talks about what {creator} just said",
+        "The financial truth Wall Street hides 💀",
+        "{creator} breaks down exactly how they lost it all",
+        "This is why your money is disappearing",
+        "{creator} called this 6 months ago",
+        "The collapse nobody saw coming — {creator} explains",
+        "What {creator} said that changes everything",
     ],
     "Business": [
         "The startup mistake that cost $10M",

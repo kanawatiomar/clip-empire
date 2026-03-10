@@ -1229,7 +1229,37 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
 
                         job_hashtags = []
 
-                _fill_details(page, cfg, job["caption_text"], job["caption_text"], made_for_kids_status, hashtags=job_hashtags)
+                # Build description with optional creator credit
+                _base_desc = job["caption_text"]
+                try:
+                    import sqlite3 as _sq3c
+                    _cr_row = _sq3c.connect(os.path.join(os.path.dirname(__file__), "..", "data", "clip_empire.db")).execute(
+                        "SELECT creator FROM source_clips WHERE clip_id=(SELECT clip_id FROM platform_variants WHERE variant_id=?)",
+                        (job.get("variant_id") or "",)
+                    ).fetchone()
+                    _creator = (_cr_row[0] or "").strip() if _cr_row else ""
+                    # Map creator key → YouTube handle
+                    _HANDLE_MAP = {
+                        "patrickboyle": "@PatrickBoyleOnFinance",
+                        "wallstreetmillennial": "@WallStreetMillennial",
+                        "coffeezilla": "@coffeeziIIa",
+                        "rareliquid": "@RareLiquid",
+                        "plainbagel": "@theplainbagel",
+                        "tfue": "@tfue",
+                        "cloakzy": "@cloakzy",
+                        "shroud": "@shroud",
+                        "nickmercs": "@NICKMERCS",
+                        "timthetatman": "@timthetatman",
+                        "moistcr1tikal": "@moistcr1tikal",
+                        "hasanabi": "@hasanabi",
+                        "ludwig": "@LudwigAhgren",
+                    }
+                    _handle = _HANDLE_MAP.get(_creator.lower(), "")
+                    if _handle:
+                        _base_desc = f"{_base_desc}\n\nOriginal: {_handle}"
+                except Exception:
+                    pass
+                _fill_details(page, cfg, job["caption_text"], _base_desc, made_for_kids_status, hashtags=job_hashtags)
 
 
 

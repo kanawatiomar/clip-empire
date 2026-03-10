@@ -95,6 +95,28 @@ CHANNELS = {
         "made_for_kids": True, # Explicitly True for Experimental
     },
 
+    # ── FEMALE STREAMERS ─────────────────────────────────────────────────────
+
+    "stream_sirens": {
+        "display_name": "Stream Sirens",
+        "niche": "Female Streamers",
+        "description": "Viral moments from Amouranth, Alinity, Indiefoxx and the hot-tub era — reactions, drama, funny clips",
+        "content_focus": "Viral reactions, drama moments, funny takes — NOT explicit content. Ban stories, Twitch chaos, shocking moments",
+        "source_types": ["Twitch clips", "YouTube highlights"],
+        "tags": ["twitch", "amouranth", "streamer", "viral", "drama", "clips", "funny"],
+        "made_for_kids": False,
+    },
+
+    "stream_queens": {
+        "display_name": "Stream Queens",
+        "niche": "Female Streamers",
+        "description": "Best moments from the biggest female streamers — Pokimane, Emiru, Valkyrae, Ironmouse, ExtraEmily",
+        "content_focus": "Funny moments, insane plays, wholesome reactions, viral clips from top female streamers",
+        "source_types": ["Twitch clips", "YouTube highlights"],
+        "tags": ["pokimane", "emiru", "valkyrae", "ironmouse", "twitch", "streamer", "clips", "funny"],
+        "made_for_kids": False,
+    },
+
     # ── GAMING ────────────────────────────────────────────────────────────────
 
     "arc_highlightz": {

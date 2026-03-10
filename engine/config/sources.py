@@ -334,6 +334,67 @@ CHANNEL_SOURCES: dict = {
 
 
 
+    # ── FEMALE STREAMERS ─────────────────────────────────────────────────────
+
+    "stream_sirens": [
+        # Hot-tub / suggestive era streamers — pull Twitch clips (reactions, drama, viral moments)
+        # Strategy: funny/viral moments only, avoid explicit content — stays YouTube-safe
+        {"platform": "twitch", "url": "https://www.twitch.tv/amouranth/clips",
+         "type": "channel", "priority": 1, "max_age_days": 7,
+         "min_dur_s": 15, "max_dur_s": 60, "max_per_run": 6,
+         "crop_anchor": "center", "min_views": 5000},
+        {"platform": "twitch", "url": "https://www.twitch.tv/alinity/clips",
+         "type": "channel", "priority": 1, "max_age_days": 7,
+         "min_dur_s": 15, "max_dur_s": 60, "max_per_run": 5,
+         "crop_anchor": "center", "min_views": 3000},
+        {"platform": "twitch", "url": "https://www.twitch.tv/morgpie/clips",
+         "type": "channel", "priority": 2, "max_age_days": 7,
+         "min_dur_s": 15, "max_dur_s": 60, "max_per_run": 4,
+         "crop_anchor": "center", "min_views": 2000},
+        {"platform": "twitch", "url": "https://www.twitch.tv/indiefoxx/clips",
+         "type": "channel", "priority": 2, "max_age_days": 30,
+         "min_dur_s": 15, "max_dur_s": 60, "max_per_run": 4,
+         "crop_anchor": "center", "min_views": 1000},
+        # YouTube fallback — drama/reaction compilations
+        {"platform": "youtube",
+         "url": "https://www.youtube.com/results?search_query=amouranth+funny+moments+twitch+clips+2025",
+         "type": "search", "priority": 3, "max_age_days": 14,
+         "min_dur_s": 15, "max_dur_s": 60, "crop_anchor": "center"},
+    ],
+
+    "stream_queens": [
+        # Top female streamers — gaming, variety, wholesome/funny/viral moments
+        {"platform": "twitch", "url": "https://www.twitch.tv/pokimane/clips",
+         "type": "channel", "priority": 1, "max_age_days": 7,
+         "min_dur_s": 15, "max_dur_s": 60, "max_per_run": 6,
+         "crop_anchor": "center", "min_views": 5000},
+        {"platform": "twitch", "url": "https://www.twitch.tv/emiru/clips",
+         "type": "channel", "priority": 1, "max_age_days": 7,
+         "min_dur_s": 15, "max_dur_s": 60, "max_per_run": 6,
+         "crop_anchor": "center", "min_views": 3000},
+        {"platform": "twitch", "url": "https://www.twitch.tv/ironmouse/clips",
+         "type": "channel", "priority": 1, "max_age_days": 7,
+         "min_dur_s": 15, "max_dur_s": 60, "max_per_run": 5,
+         "crop_anchor": "center", "min_views": 3000},
+        {"platform": "twitch", "url": "https://www.twitch.tv/extraemily/clips",
+         "type": "channel", "priority": 2, "max_age_days": 7,
+         "min_dur_s": 15, "max_dur_s": 60, "max_per_run": 5,
+         "crop_anchor": "center", "min_views": 2000},
+        {"platform": "twitch", "url": "https://www.twitch.tv/valkyrae/clips",
+         "type": "channel", "priority": 2, "max_age_days": 7,
+         "min_dur_s": 15, "max_dur_s": 60, "max_per_run": 5,
+         "crop_anchor": "center", "min_views": 2000},
+        # YouTube fallback
+        {"platform": "youtube",
+         "url": "https://www.youtube.com/results?search_query=pokimane+funny+moments+twitch+clips+2025",
+         "type": "search", "priority": 3, "max_age_days": 14,
+         "min_dur_s": 15, "max_dur_s": 60, "crop_anchor": "center"},
+        {"platform": "youtube",
+         "url": "https://www.youtube.com/results?search_query=emiru+best+clips+twitch+2025",
+         "type": "search", "priority": 3, "max_age_days": 14,
+         "min_dur_s": 15, "max_dur_s": 60, "crop_anchor": "center"},
+    ],
+
     # -- GAMING ----------------------------------------------------------------
 
     "arc_highlightz": [

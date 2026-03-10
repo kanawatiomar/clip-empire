@@ -179,6 +179,35 @@ class Runner:
             if sora_candidates:
                 print(f"[runner] Sora lane provided {len(sora_candidates)} candidate clip(s)")
 
+        # In-session dedup: tracks URLs + title keywords used THIS run
+        # Prevents same moment clipped by multiple viewers from sneaking through
+        _session_urls: set[str] = set()
+        _session_title_words: list[set[str]] = []
+
+        def _is_session_duplicate(clip) -> bool:
+            """True if this clip is too similar to one already processed this run."""
+            url = getattr(clip, "source_url", "")
+            if url and url in _session_urls:
+                return True
+            # Title word similarity: if 4+ significant words overlap with any prior clip title
+            title = (getattr(clip, "title", "") or "").lower()
+            stop = {"the", "a", "an", "in", "on", "at", "to", "of", "and", "or", "is", "he", "it"}
+            words = {w for w in title.split() if len(w) > 3 and w not in stop}
+            for prior_words in _session_title_words:
+                if len(words & prior_words) >= 3:
+                    return True
+            return False
+
+        def _register_session(clip) -> None:
+            url = getattr(clip, "source_url", "")
+            if url:
+                _session_urls.add(url)
+            title = (getattr(clip, "title", "") or "").lower()
+            stop = {"the", "a", "an", "in", "on", "at", "to", "of", "and", "or", "is", "he", "it"}
+            words = {w for w in title.split() if len(w) > 3 and w not in stop}
+            if words:
+                _session_title_words.append(words)
+
         for source_config in sources:
             if clips_produced >= effective_count:
                 break
@@ -217,9 +246,13 @@ class Runner:
                     clip.metadata = {}
                 clip.metadata["crop_anchor"] = source_config.get("crop_anchor", "center")
 
-            # Filter deduplication
+            # Filter deduplication (DB + in-session)
             fresh_clips = self.dedup.filter_unused(raw_clips, channel_name=channel_name)
             fresh_clips = [c for c in fresh_clips if not self.dedup.is_near_duplicate(c)]
+            pre_session = len(fresh_clips)
+            fresh_clips = [c for c in fresh_clips if not _is_session_duplicate(c)]
+            if len(fresh_clips) < pre_session:
+                print(f"[runner] In-session dedup removed {pre_session - len(fresh_clips)} near-duplicate clip(s)")
             if not fresh_clips:
                 print(f"[runner] All clips already used, trying next source")
                 continue
@@ -237,8 +270,13 @@ class Runner:
                     if job_id:
                         job_ids.append(job_id)
                         self.dedup.mark_used(clip, channel_name)
+                        _register_session(clip)   # in-session dedup
                         self.feedback.record_source_outcome(source_key, success=True)
                         clips_produced += 1
+                    else:
+                        # Even skipped clips (boring/break screen) register session to prevent
+                        # the same source moment from being retried this run
+                        _register_session(clip)
                 except Exception as e:
                     self.feedback.record_source_outcome(source_key, success=False)
                     self.source_health.record_failure(source_key, str(e))

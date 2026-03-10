@@ -170,8 +170,6 @@ CREATOR_PROFILES: dict[str, dict] = {
             "THIS GOT OUT OF HAND",
         ],
     },
-}
-
 
     # ── MARKET MELTDOWNS CREATORS ─────────────────────────────────────────────
 

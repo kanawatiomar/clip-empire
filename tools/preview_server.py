@@ -69,9 +69,9 @@ HTML = """
   .ch-btn.active { border-color: var(--accent); background: #1d1b33; }
   .ch-btn .niche { font-size: 11px; color: var(--muted); margin-top: 2px; }
   .main { display: grid; grid-template-columns: 1fr 1fr; gap: 0; overflow-y: auto; }
-  .preview-panel { padding: 24px; border-right: 1px solid var(--border); }
+  .preview-panel { padding: 12px 24px; border-right: 1px solid var(--border); }
   .preview-panel h2 { font-size: 13px; color: var(--muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
-  .phone-frame { width: 270px; height: 480px; border: 3px solid #333; border-radius: 24px; overflow: hidden;
+  .phone-frame { width: 190px; height: 338px; border: 3px solid #333; border-radius: 18px; overflow: hidden;
                  position: relative; background: #111; margin: 0 auto; }
   .phone-frame img { width: 100%; height: 100%; object-fit: cover; }
   .loading { display: flex; align-items: center; justify-content: center; height: 100%; color: var(--muted); font-size: 13px; }
@@ -114,11 +114,13 @@ HTML = """
         <button class="tab" onclick="setTab('cta', this)">CTA Frame</button>
         <button class="tab" onclick="setTab('caption', this)">Captions</button>
         <button class="tab" onclick="setTab('crop', this)">Crop Anchor</button>
+        <button class="tab" onclick="setTab('creators', this)">Creators</button>
       </div>
-      <div class="phone-frame">
+      <div class="phone-frame" id="phone-frame">
         <div class="loading" id="loading">Loading...</div>
         <img id="preview-img" style="display:none" src="" alt="preview">
       </div>
+      <div id="creator-panel" style="display:none;max-height:420px;overflow-y:auto"></div>
       <div class="preview-label" id="preview-label"></div>
     </div>
     <div class="config-panel">
@@ -148,6 +150,26 @@ HTML = """
   function loadPreview() {
     const img = document.getElementById('preview-img');
     const loading = document.getElementById('loading');
+    const creatorPanel = document.getElementById('creator-panel');
+
+    // Creators tab — renders a card grid instead of a phone frame
+    if (currentTab === 'creators') {
+      img.style.display = 'none';
+      loading.style.display = 'none';
+      document.getElementById('phone-frame').style.display = 'none';
+      if (creatorPanel) creatorPanel.style.display = 'block';
+      document.getElementById('preview-label').textContent = '';
+      fetch(`/creators?channel=${currentChannel}`)
+        .then(r => r.json())
+        .then(data => {
+          if (creatorPanel) creatorPanel.innerHTML = renderCreatorCards(data.creators || []);
+          document.getElementById('config-display').innerHTML = '';
+        })
+        .catch(e => { if (creatorPanel) creatorPanel.textContent = 'Error: ' + e; });
+      return;
+    }
+
+    if (creatorPanel) creatorPanel.style.display = 'none';
     img.style.display = 'none';
     loading.style.display = 'flex';
     loading.textContent = 'Rendering...';
@@ -165,6 +187,26 @@ HTML = """
       .catch(e => { loading.textContent = 'Error: ' + e; });
   }
 
+  let currentCreator = '';
+
+  function renderCreatorCards(creators) {
+    if (!creators.length) return '<p style="color:var(--muted);font-size:13px;padding:8px">No creator profiles for this channel yet.</p>';
+    return `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;padding:8px 0">` +
+      creators.map(c => `
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;cursor:pointer"
+             onclick="previewCreator('${c.name}', this)"
+             title="Click to preview this creator's style">
+          <div style="font-weight:700;font-size:14px;margin-bottom:4px">${c.name} <span style="font-size:10px;color:#6c63ff">▶ preview</span></div>
+          <div style="font-size:11px;color:#6c63ff;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">${(c.content_types||[]).join(' · ')}</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:6px">✂️ Crop: <b style="color:var(--text)">${c.crop_anchor}</b> &nbsp; 🪝 Hook: <b style="color:var(--text)">${c.hook_style}</b></div>
+          ${c.llm_context ? `<div style="font-size:11px;color:#aaa;border-top:1px solid var(--border);padding-top:7px;margin-top:6px;line-height:1.5">${c.llm_context}</div>` : ''}
+          ${c.prefer_keywords && c.prefer_keywords.length ? `<div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px">${c.prefer_keywords.map(k=>`<span style="font-size:10px;padding:2px 7px;border-radius:20px;background:rgba(0,200,100,.12);color:#00c864;border:1px solid rgba(0,200,100,.2)">${k}</span>`).join('')}</div>` : ''}
+          ${c.avoid_keywords && c.avoid_keywords.length ? `<div style="margin-top:4px;display:flex;flex-wrap:wrap;gap:4px">${c.avoid_keywords.map(k=>`<span style="font-size:10px;padding:2px 7px;border-radius:20px;background:rgba(200,50,50,.12);color:#e06060;border:1px solid rgba(200,50,50,.2)">✗ ${k}</span>`).join('')}</div>` : ''}
+          ${c.hook_overrides && c.hook_overrides.length ? `<div style="margin-top:8px;border-top:1px solid var(--border);padding-top:7px"><div style="font-size:10px;color:var(--muted);margin-bottom:4px">HOOK OVERRIDES</div>${c.hook_overrides.map(h=>`<div style="font-size:11px;color:#f0c060;font-family:monospace;margin-bottom:2px">"${h}"</div>`).join('')}</div>` : ''}
+        </div>`
+      ).join('') + '</div>';
+  }
+
   function renderConfig(style) {
     if (!style) return;
     const el = document.getElementById('config-display');
@@ -179,6 +221,29 @@ HTML = """
     };
 
     el.innerHTML = section('Caption Style', style.caption) + section('Overlay Style', style.overlay);
+  }
+
+  function previewCreator(creatorKey, el) {
+    currentCreator = creatorKey;
+    // Switch to hook frame to show the style
+    document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab')[0].classList.add('active');
+    currentTab = 'hook';
+    document.getElementById('creator-panel').style.display = 'none';
+    document.getElementById('phone-frame').style.display = 'block';
+    const img = document.getElementById('preview-img');
+    const loading = document.getElementById('loading');
+    img.style.display = 'none';
+    loading.style.display = 'flex';
+    loading.textContent = `Rendering ${creatorKey} style...`;
+    const url = `/preview?channel=${currentChannel}&tab=hook&creator=${creatorKey}&t=${Date.now()}`;
+    fetch(url).then(r => r.json()).then(data => {
+      img.src = 'data:image/png;base64,' + data.image;
+      img.style.display = 'block';
+      loading.style.display = 'none';
+      document.getElementById('preview-label').textContent = `Style: ${creatorKey}`;
+      renderConfig(data.style);
+    }).catch(e => { loading.textContent = 'Error: ' + e; });
   }
 
   function assColorToCSS(ass) {
@@ -222,13 +287,13 @@ def _ass_to_rgba(ass_color: str) -> tuple:
     return (r, g, b, alpha)
 
 
-def _render_frame(channel_name: str, tab: str) -> tuple[bytes, str]:
+def _render_frame(channel_name: str, tab: str, creator: str = "") -> tuple[bytes, str]:
     """Render a 540x960 (half of 1080x1920) preview frame as PNG bytes."""
     W, H = 540, 960
-    cs = get_caption_style(channel_name)
-    os_ = get_overlay_style(channel_name)
+    cs = get_caption_style(channel_name, creator)
+    os_ = get_overlay_style(channel_name, creator)
 
-    hook_text = _strip_emoji(get_hook(channel_name))
+    hook_text = _strip_emoji(get_hook(channel_name, creator=creator))
     cta_text = _strip_emoji(get_cta(channel_name))
 
     # Background: blurred gradient to simulate video
@@ -279,37 +344,62 @@ def _render_frame(channel_name: str, tab: str) -> tuple[bytes, str]:
         label = f'CTA: "{cta_text}"'
 
     elif tab == "caption":
-        # Simulate caption bar
-        fontname = cs.get("fontname", "Impact")
-        font_sz = max(16, cs.get("fontsize", 72) // 2)
-        font = _pil_font(fontname, font_sz)
-        sample = "This clip is INSANE"
-        margin_v = cs.get("margin_v", 400)
-        y = int((margin_v / 1920) * H)
-        back = _ass_to_rgba(cs.get("back_color", "&H80000000"))
-        if back[3] > 20:
-            bbox = draw.textbbox((W//2, y), sample, font=font, anchor="mm")
-            pad = 8
-            draw.rectangle([bbox[0]-pad, bbox[1]-pad, bbox[2]+pad, bbox[3]+pad],
-                           fill=(back[0], back[1], back[2], back[3]))
-        # Outline
+        # ── Word-highlight caption demo with position ruler ──────────────────
+        fontname   = cs.get("fontname", "Impact")
+        font_sz    = max(14, cs.get("fontsize", 72) // 2)
+        font       = _pil_font(fontname, font_sz)
         outline_sz = cs.get("outline_size", 4)
-        prim = _ass_to_rgba(cs.get("primary_color", "&H00FFFFFF"))
-        outl = _ass_to_rgba(cs.get("outline_color", "&H00000000"))
-        for dx in range(-outline_sz, outline_sz+1, max(1, outline_sz//2)):
-            for dy in range(-outline_sz, outline_sz+1, max(1, outline_sz//2)):
-                if dx or dy:
-                    draw.text((W//2 + dx, y + dy), sample, font=font,
-                             fill=(outl[0], outl[1], outl[2], outl[3]), anchor="mm")
-        draw.text((W//2, y), sample, font=font,
-                 fill=(prim[0], prim[1], prim[2], 255), anchor="mm")
+        margin_v   = cs.get("margin_v", 960)
+        prim       = _ass_to_rgba(cs.get("primary_color",        "&H00FFFFFF"))
+        outl       = _ass_to_rgba(cs.get("outline_color",        "&H00000000"))
+        hl         = _ass_to_rgba(cs.get("word_highlight_color", "&H0000FFFF"))
+        back       = _ass_to_rgba(cs.get("back_color",           "&H80000000"))
 
-        # Word highlight simulation
-        hl_color = _ass_to_rgba(cs.get("word_highlight_color", "&H0000FFFF"))
-        hl_font = _pil_font(fontname, font_sz)
-        draw.text((W//2, y + font_sz + 10), "← word highlight", font=_pil_font("Arial", 12),
-                 fill=(hl_color[0], hl_color[1], hl_color[2], 200), anchor="mm")
-        label = f'Caption: {fontname} {cs.get("fontsize")}px | outline {outline_sz}px'
+        # Position ruler — horizontal zone lines
+        guide_font = _pil_font("Arial", 11)
+        for zy, zlabel in [(int(H*0.1),"TOP"), (H//2,"CENTER"), (int(H*0.65),"LOWER"), (int(H*0.83),"BOTTOM")]:
+            draw.line([(0, zy), (W, zy)], fill=(55, 55, 75, 200), width=1)
+            draw.text((5, zy - 12), zlabel, font=guide_font, fill=(80, 80, 120, 200))
+
+        # Compute caption y position from margin_v
+        base_y = int((margin_v / 1920) * H)
+
+        # Arrow pointing to caption position
+        draw.line([(10, base_y), (30, base_y)], fill=(100, 200, 100, 220), width=2)
+        draw.polygon([(30, base_y-4), (30, base_y+4), (38, base_y)], fill=(100, 200, 100, 220))
+        draw.text((42, base_y - 7), f"margin_v={margin_v}px", font=guide_font,
+                  fill=(100, 200, 100, 200))
+
+        # Three word-groups, each showing a different word highlighted
+        word_groups = [
+            ["This", "clip", "is"],
+            ["absolutely", "INSANE", "bro"],
+            ["no", "way", "that"],
+        ]
+        for row_idx, words in enumerate(word_groups):
+            active_idx = row_idx % len(words)
+            y = base_y + row_idx * (font_sz + 12)
+            space_w = max(6, int(font_sz * 0.28))
+            word_sizes = [draw.textbbox((0,0), w, font=font)[2] for w in words]
+            total_w = sum(word_sizes) + space_w * (len(words) - 1)
+            x = (W - total_w) // 2
+            for w_idx, (word, ww) in enumerate(zip(words, word_sizes)):
+                color = hl if w_idx == active_idx else prim
+                if back[3] > 20:
+                    draw.rectangle([x-3, y-2, x+ww+3, y+font_sz+2],
+                                   fill=(back[0], back[1], back[2], back[3]))
+                for dx in range(-outline_sz, outline_sz+1, max(1, outline_sz//2)):
+                    for dy in range(-outline_sz, outline_sz+1, max(1, outline_sz//2)):
+                        if dx or dy:
+                            draw.text((x+dx, y+dy), word, font=font,
+                                      fill=(outl[0], outl[1], outl[2], 180))
+                draw.text((x, y), word, font=font, fill=(color[0], color[1], color[2], 255))
+                x += ww + space_w
+
+        hl_label = f"RGB({hl[0]},{hl[1]},{hl[2]})"
+        pct = int(margin_v / 1920 * 100)
+        label = (f"Caption: {fontname} {cs.get('fontsize')}px | "
+                 f"position {pct}% down | highlight {hl_label}")
 
     elif tab == "crop":
         # ── Crop anchor comparison ────────────────────────────────────────────
@@ -421,16 +511,41 @@ def index():
     return render_template_string(HTML, channels=CHANNELS)
 
 
+@app.route("/creators")
+def creators():
+    channel = request.args.get("channel", "arc_highlightz")
+    try:
+        from engine.config.creator_profiles import CREATOR_PROFILES
+        result = []
+        for creator_key, profile in CREATOR_PROFILES.items():
+            if profile.get("channel") == channel:
+                result.append({
+                    "name": creator_key.replace("wallstreetmillennial", "WallStMillennial"),
+                    "crop_anchor": profile.get("crop_anchor", "center"),
+                    "content_types": profile.get("content_types", []),
+                    "hook_style": profile.get("hook_style", "hype"),
+                    "min_views": profile.get("min_views", 0),
+                    "llm_context": profile.get("llm_context", ""),
+                    "prefer_keywords": profile.get("prefer_keywords", []),
+                    "avoid_keywords": profile.get("avoid_keywords", []),
+                    "hook_overrides": profile.get("hook_overrides", []),
+                })
+        return jsonify({"channel": channel, "creators": result})
+    except Exception as e:
+        return jsonify({"error": str(e), "creators": []}), 500
+
+
 @app.route("/preview")
 def preview():
     channel = request.args.get("channel", "arc_highlightz")
     tab = request.args.get("tab", "hook")
+    creator = request.args.get("creator", "")
 
     try:
-        png_bytes, label = _render_frame(channel, tab)
+        png_bytes, label = _render_frame(channel, tab, creator=creator)
         img_b64 = base64.b64encode(png_bytes).decode()
         from engine.config.styles import get_style
-        style = get_style(channel)
+        style = get_style(channel, creator)
         return jsonify({"image": img_b64, "label": label, "style": style})
     except Exception as e:
         import traceback

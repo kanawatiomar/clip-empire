@@ -85,6 +85,7 @@ class OverlayTransform:
             cta_start=cta_start,
             duration_s=duration_s,
             channel_name=channel_name,
+            creator=creator or "",
         )
 
         cmd = [
@@ -114,9 +115,10 @@ class OverlayTransform:
         cta_start: float,
         duration_s: float,
         channel_name: str,
+        creator: str = "",
     ) -> str:
-        """Build ffmpeg drawtext filter chain using per-channel style."""
-        s = get_overlay_style(channel_name)
+        """Build ffmpeg drawtext filter chain — creator style first, channel fallback."""
+        s = get_overlay_style(channel_name, creator)
 
         fontfile     = s.get("fontfile", "C:/Windows/Fonts/Impact.ttf")
         hook_fs      = s.get("hook_fontsize", 88)

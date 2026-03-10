@@ -95,7 +95,7 @@ class CaptionTransform:
                 )
         return self._whisper
 
-    def process(self, video_path: str, clip_id: str, channel_name: str = "") -> str:
+    def process(self, video_path: str, clip_id: str, channel_name: str = "", creator: str = "") -> str:
         """Transcribe video and write an ASS subtitle file.
 
         Returns:
@@ -125,7 +125,7 @@ class CaptionTransform:
         )
 
         segments = result.get("segments", [])
-        ass_content = self._build_ass(segments, channel_name=channel_name)
+        ass_content = self._build_ass(segments, channel_name=channel_name, creator=creator)
 
         with open(ass_path, "w", encoding="utf-8") as f:
             f.write(ass_content)
@@ -133,7 +133,7 @@ class CaptionTransform:
         print(f"[caption] ASS subtitles written: {ass_path}")
         return ass_path
 
-    def _build_ass(self, segments: List[dict], channel_name: str = "") -> str:
+    def _build_ass(self, segments: List[dict], channel_name: str = "", creator: str = "") -> str:
         """Build TikTok-style word-highlight ASS captions.
 
         Each dialogue event shows a group of words (words_per_line).
@@ -142,7 +142,7 @@ class CaptionTransform:
         One event fires per word — no overlapping, no flicker.
         """
         from engine.config.styles import get_caption_style
-        style = get_caption_style(channel_name) if channel_name else {}
+        style = get_caption_style(channel_name, creator) if (channel_name or creator) else {}
 
         fontname    = style.get("fontname", "Impact")
         fontsize    = style.get("fontsize", 72)

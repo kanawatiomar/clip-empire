@@ -267,15 +267,23 @@ CHANNEL_STYLE_MAP = {
 }
 
 
-def get_style(channel_name: str) -> dict:
-    """Return the full style dict for a channel."""
+def get_style(channel_name: str, creator: str = "") -> dict:
+    """Return style dict — creator-specific first, then channel fallback."""
+    if creator:
+        try:
+            from engine.config.creator_profiles import get_creator_style
+            creator_style = get_creator_style(creator)
+            if creator_style:
+                return creator_style
+        except Exception:
+            pass
     preset_key = CHANNEL_STYLE_MAP.get(channel_name, "experimental")
     return STYLE_PRESETS.get(preset_key, STYLE_PRESETS["experimental"])
 
 
-def get_caption_style(channel_name: str) -> dict:
-    return get_style(channel_name)["caption"]
+def get_caption_style(channel_name: str, creator: str = "") -> dict:
+    return get_style(channel_name, creator)["caption"]
 
 
-def get_overlay_style(channel_name: str) -> dict:
-    return get_style(channel_name)["overlay"]
+def get_overlay_style(channel_name: str, creator: str = "") -> dict:
+    return get_style(channel_name, creator)["overlay"]

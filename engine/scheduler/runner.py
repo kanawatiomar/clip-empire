@@ -350,6 +350,7 @@ class Runner:
                         video_path=cropped,
                         clip_id=clip.clip_id,
                         channel_name=channel_name,
+                        creator=getattr(clip, "creator", "") or "",
                     )
                 except Exception as e:
                     print(f"[pipeline] Caption failed (non-fatal): {e}")

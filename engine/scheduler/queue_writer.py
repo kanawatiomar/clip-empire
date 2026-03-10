@@ -177,7 +177,7 @@ def _next_schedule_time(channel_name: str, db_path: str = DATABASE_PATH) -> date
     niche = CHANNEL_NICHE_MAP.get(channel_name, "Experimental")
 
     # Get daily target for this channel
-    daily_target = 5
+    daily_target = 3  # conservative default — better distribution per video
     try:
         conn = sqlite3.connect(db_path)
         row = conn.execute(
@@ -324,6 +324,29 @@ class QueueWriter:
             job_id of the created publish job.
         """
         _ensure_channel_in_db(channel_name, self.db_path)
+
+        # Hard daily cap: refuse to queue if today's target is already met
+        try:
+            import pytz
+            tz = pytz.timezone("America/Denver")
+            today_str = datetime.now(tz).date().isoformat()
+            conn = sqlite3.connect(self.db_path)
+            row = conn.execute(
+                "SELECT daily_target FROM channels WHERE channel_name=?", (channel_name,)
+            ).fetchone()
+            cap = int(row[0]) if (row and row[0]) else 3
+            today_count = conn.execute(
+                """SELECT COUNT(1) FROM publish_jobs
+                   WHERE channel_name=? AND status IN ('queued','running','succeeded')
+                   AND date(schedule_at)=?""",
+                (channel_name, today_str),
+            ).fetchone()[0]
+            conn.close()
+            if today_count >= cap:
+                print(f"[queue] SKIP {channel_name}: daily cap {cap} already reached ({today_count} queued today)")
+                return ""
+        except Exception as e:
+            print(f"[queue] daily cap check error: {e}")
 
         niche = CHANNELS.get(channel_name, {}).get("niche", "Gaming")
 

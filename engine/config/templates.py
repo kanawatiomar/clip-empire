@@ -16,6 +16,35 @@ import random
 _USED_HOOKS_PATH = Path("data/used_hooks.json")
 _HOOK_MEMORY = 12  # avoid repeating the last N hooks per channel
 
+# ── TITLE DEDUPLICATION ───────────────────────────────────────────────────────
+
+_USED_TITLES_PATH = Path("data/used_titles_per_channel.json")
+_TITLE_MEMORY = 20  # avoid repeating the last N titles per channel
+
+
+def _load_used_titles_for_channel(channel_name: str) -> list[str]:
+    try:
+        if _USED_TITLES_PATH.exists():
+            data = json.loads(_USED_TITLES_PATH.read_text(encoding="utf-8"))
+            return data.get(channel_name, [])
+    except Exception:
+        pass
+    return []
+
+
+def _save_used_title_for_channel(channel_name: str, title: str) -> None:
+    try:
+        data: dict = {}
+        if _USED_TITLES_PATH.exists():
+            data = json.loads(_USED_TITLES_PATH.read_text(encoding="utf-8"))
+        history = data.get(channel_name, [])
+        history.append(title)
+        data[channel_name] = history[-_TITLE_MEMORY:]
+        _USED_TITLES_PATH.parent.mkdir(parents=True, exist_ok=True)
+        _USED_TITLES_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    except Exception:
+        pass
+
 
 def _load_used_hooks(channel_name: str) -> list[str]:
     try:
@@ -182,16 +211,31 @@ NICHE_HASHTAGS: dict = {
 
 NICHE_TITLE_TEMPLATES: dict = {
     "Finance": [
-        "{creator} just exposed how this really works 📉",
-        "The number {creator} revealed will shock you",
-        "Why {creator} says the market is broken",
-        "Nobody talks about what {creator} just said",
-        "The financial truth Wall Street hides 💀",
-        "{creator} breaks down exactly how they lost it all",
         "This is why your money is disappearing",
-        "{creator} called this 6 months ago",
-        "The collapse nobody saw coming — {creator} explains",
-        "What {creator} said that changes everything",
+        "The financial truth Wall Street hides 💀",
+        "Nobody explains this part of investing",
+        "The collapse nobody saw coming",
+        "What the banks don't want you to know",
+        "This changed how I think about money",
+        "The number that explains everything right now",
+        "Why the market is doing this — explained",
+        "This is what a bubble actually looks like",
+        "Most people get this completely wrong",
+        "The financial move nobody is talking about",
+        "Why your savings are losing value right now",
+        "The trade that made millions — and then didn't",
+        "This is the moment it all fell apart",
+        "What happened when they ran out of money",
+        "The warning sign everyone ignored",
+        "This is how markets actually work 📉",
+        "The quiet crisis nobody is covering",
+        "How one decision wiped out everything",
+        "The thing Wall Street hopes you never learn",
+        "This is why timing the market doesn't work",
+        "The financial truth that changes everything",
+        "What happened after they bet it all",
+        "Nobody saw this market move coming",
+        "This is what a real financial meltdown looks like",
     ],
     "Business": [
         "The startup mistake that cost $10M",
@@ -314,9 +358,16 @@ def get_hashtags(channel_name: str) -> list:
 
 def get_title(channel_name: str, creator: str = None) -> str:
     niche = CHANNELS.get(channel_name, {}).get("niche", "Experimental")
-    titles = NICHE_TITLE_TEMPLATES.get(niche, NICHE_TITLE_TEMPLATES["Experimental"])
-    title = random.choice(titles)
-    # Substitute {creator} placeholder with actual streamer name if known
-    if creator and "{creator}" in title:
-        title = title.replace("{creator}", creator.capitalize())
+    templates = NICHE_TITLE_TEMPLATES.get(niche, NICHE_TITLE_TEMPLATES["Experimental"])
+
+    # Build resolved candidates (with {creator} substituted so dedup compares final text)
+    def resolve(t: str) -> str:
+        if creator and "{creator}" in t:
+            return t.replace("{creator}", creator.capitalize())
+        return t
+
+    resolved_candidates = [resolve(t) for t in templates]
+    used = _load_used_titles_for_channel(channel_name)
+    title = _pick_fresh(resolved_candidates, used)
+    _save_used_title_for_channel(channel_name, title)
     return title

@@ -63,6 +63,25 @@ def add_publish_job(
     try:
         schedule_at_ts = _to_utc_epoch_seconds(schedule_at)
 
+        # ── Render-path dedup guard ───────────────────────────────────────────
+        # If the same render file is already queued/running/succeeded for this
+        # channel, don't add a duplicate job. Return the existing job_id.
+        if render_path:
+            cursor.execute(
+                """SELECT job_id FROM publish_jobs
+                   WHERE channel_name = ? AND render_path = ?
+                     AND status IN ('queued', 'running', 'succeeded')
+                   LIMIT 1""",
+                (channel_name, render_path),
+            )
+            existing = cursor.fetchone()
+            if existing:
+                existing_id = existing[0] if isinstance(existing, tuple) else existing['job_id']
+                print(f"[dedup] Skipping duplicate render for {channel_name}: {render_path} (existing job {existing_id})")
+                conn.close()
+                return existing_id
+        # ─────────────────────────────────────────────────────────────────────
+
         cursor.execute("""
             INSERT INTO publish_jobs (
                 job_id, variant_id, platform, channel_name, publisher_account, 

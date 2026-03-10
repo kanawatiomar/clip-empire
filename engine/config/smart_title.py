@@ -209,6 +209,35 @@ Return ONLY the title, nothing else."""
         title = data["choices"][0]["message"]["content"].strip().strip('"').strip("'")
         if len(title) > 100:
             title = title[:97] + "..."
+
+        # Hard dedup: if LLM repeated a recently-used title, retry once more
+        if title in recent:
+            logger.warning("LLM title '%s' is a duplicate — retrying once", title)
+            payload2 = json.dumps({
+                "model": "gpt-4o-mini",
+                "messages": [
+                    {"role": "user", "content": prompt},
+                    {"role": "assistant", "content": title},
+                    {"role": "user", "content": "That title was already used. Write a completely different one — different angle, different structure."},
+                ],
+                "max_tokens": 60,
+                "temperature": 1.0,
+            }).encode("utf-8")
+            req2 = urllib.request.Request(
+                "https://api.openai.com/v1/chat/completions",
+                data=payload2,
+                headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+                method="POST",
+            )
+            try:
+                with urllib.request.urlopen(req2, timeout=15) as resp2:
+                    data2 = json.loads(resp2.read())
+                title = data2["choices"][0]["message"]["content"].strip().strip('"').strip("'")
+                if len(title) > 100:
+                    title = title[:97] + "..."
+            except Exception as e2:
+                logger.warning("LLM retry failed: %s", e2)
+
         logger.info("LLM title: '%s'", title)
         _save_used_title(title)
         return title

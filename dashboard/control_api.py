@@ -37,6 +37,42 @@ DISCORD_CHANNELS = {
 }
 
 
+def init_db() -> None:
+    """Initialize database tables if they don't exist."""
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        cursor = conn.cursor()
+        # Create dashboard_notifications table if it doesn't exist
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS dashboard_notifications (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                type TEXT NOT NULL,
+                title TEXT NOT NULL,
+                message TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                read_at TIMESTAMP,
+                channel TEXT
+            )
+        ''')
+        conn.commit()
+    finally:
+        conn.close()
+
+
+def mark_notifications_read() -> dict:
+    """Mark all unread notifications as read."""
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        cursor = conn.cursor()
+        cursor.execute(
+            'UPDATE dashboard_notifications SET read_at=CURRENT_TIMESTAMP WHERE read_at IS NULL'
+        )
+        conn.commit()
+        return {'ok': True, 'message': 'All notifications marked as read'}
+    finally:
+        conn.close()
+
+
 def run_generate() -> None:
     subprocess.run(['py', '-3', str(BASE_DIR / 'generate_data.py')], cwd=REPO_ROOT, check=True)
 
@@ -728,6 +764,61 @@ class Handler(SimpleHTTPRequestHandler):
             except Exception as exc:
                 self._send_json({'ok': False, 'error': str(exc)}, 500)
             return
+        if parsed.path == '/api/notifications':
+            try:
+                conn = sqlite3.connect(DB_PATH)
+                conn.row_factory = sqlite3.Row
+                try:
+                    # Get last 20 unread + 5 most recent read
+                    unread = conn.execute(
+                        '''SELECT id, type, title, message, created_at, channel
+                           FROM dashboard_notifications
+                           WHERE read_at IS NULL
+                           ORDER BY created_at DESC
+                           LIMIT 20'''
+                    ).fetchall()
+                    
+                    read = conn.execute(
+                        '''SELECT id, type, title, message, created_at, channel
+                           FROM dashboard_notifications
+                           WHERE read_at IS NOT NULL
+                           ORDER BY created_at DESC
+                           LIMIT 5'''
+                    ).fetchall()
+                    
+                    unread_count = conn.execute(
+                        'SELECT COUNT(*) FROM dashboard_notifications WHERE read_at IS NULL'
+                    ).fetchone()[0]
+                finally:
+                    conn.close()
+                
+                notifications = []
+                for n in unread:
+                    notifications.append({
+                        'id': n['id'],
+                        'type': n['type'],
+                        'title': n['title'],
+                        'message': n['message'],
+                        'created_at': n['created_at'],
+                        'channel': n['channel'],
+                        'read': False,
+                    })
+                
+                for n in read:
+                    notifications.append({
+                        'id': n['id'],
+                        'type': n['type'],
+                        'title': n['title'],
+                        'message': n['message'],
+                        'created_at': n['created_at'],
+                        'channel': n['channel'],
+                        'read': True,
+                    })
+                
+                self._send_json({'ok': True, 'notifications': notifications, 'unread_count': unread_count})
+            except Exception as exc:
+                self._send_json({'ok': False, 'error': str(exc), 'notifications': [], 'unread_count': 0}, 500)
+            return
         if parsed.path == '/api/logs':
             try:
                 # Parse query parameters
@@ -775,7 +866,7 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_POST(self):
         parsed = urlparse(self.path)
-        if parsed.path not in {'/api/action', '/api/update_channel_settings', '/api/retry_job', '/api/cancel_job', '/api/enable_channel', '/api/disable_channel', '/api/cleanup_renders', '/api/add_source', '/api/remove_source', '/api/toggle_source', '/api/send_daily_summary'}:
+        if parsed.path not in {'/api/action', '/api/update_channel_settings', '/api/retry_job', '/api/cancel_job', '/api/enable_channel', '/api/disable_channel', '/api/cleanup_renders', '/api/add_source', '/api/remove_source', '/api/toggle_source', '/api/send_daily_summary', '/api/mark_notifications_read'}:
             self._send_json({'ok': False, 'error': 'Not found'}, 404)
             return
         try:
@@ -824,6 +915,8 @@ class Handler(SimpleHTTPRequestHandler):
                     run_generate()
             elif parsed.path == '/api/send_daily_summary':
                 result = send_daily_summary_to_discord()
+            elif parsed.path == '/api/mark_notifications_read':
+                result = mark_notifications_read()
             else:
                 result = run_action(payload)
                 if payload.get('action') in {'pause_channel', 'resume_channel', 'refresh_data'}:
@@ -834,6 +927,7 @@ class Handler(SimpleHTTPRequestHandler):
 
 
 if __name__ == '__main__':
+    init_db()
     run_generate()
     server = ThreadingHTTPServer((HOST, PORT), Handler)
     print(f'Clip Empire dashboard server running at http://{HOST}:{PORT}')

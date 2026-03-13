@@ -1432,9 +1432,24 @@
         <h1>Clip <span>Empire</span> Control Center</h1>
         <div class="sub">Automated shorts pipeline ops dashboard · dark-mode war room for the farm</div>
       </div>
-      <div class="meta">
-        <div id="lastUpdate">Last update: loading…</div>
-        <div id="modeLabel">Mode: checking…</div>
+      <div style="display: flex; gap: 20px; align-items: center;">
+        <div class="notification-bell" style="position: relative;">
+          <button id="notificationBellBtn" style="position: relative; padding: 8px 12px; background: rgba(201,168,76,.12); border-color: rgba(201,168,76,.3);" onclick="toggleNotificationPanel()">
+            🔔
+            <span id="notificationBadge" style="position: absolute; top: 0; right: 0; background: var(--error); color: white; border-radius: 999px; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; display: none;">0</span>
+          </button>
+          <div id="notificationPanel" style="position: absolute; top: 100%; right: 0; width: 400px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 8px; display: none; max-height: 600px; overflow-y: auto; z-index: 1000;">
+            <div style="padding: 16px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center;">
+              <h3 style="margin: 0; font-size: 16px; font-family: var(--display);">Notifications</h3>
+              <button onclick="markAllNotificationsRead()" style="padding: 6px 12px; font-size: 12px;">✓ Mark all read</button>
+            </div>
+            <div id="notificationsList" style="padding: 8px;"></div>
+          </div>
+        </div>
+        <div class="meta">
+          <div id="lastUpdate">Last update: loading…</div>
+          <div id="modeLabel">Mode: checking…</div>
+        </div>
       </div>
     </div>
   </header>
@@ -4224,15 +4239,125 @@
       byId('scheduledPostsList').innerHTML = scheduledHTML;
     }
 
+    // Notification Center Functions
+    function toggleNotificationPanel() {
+      const panel = byId('notificationPanel');
+      panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+      if (panel.style.display === 'block') {
+        loadNotifications();
+      }
+    }
+
+    async function loadNotifications() {
+      try {
+        const res = await fetch(`${LOCAL_API}/api/notifications`, { cache: 'no-store' });
+        if (!res.ok) throw new Error('Failed to fetch notifications');
+        const data = await res.json();
+        
+        if (!data.ok) throw new Error(data.error || 'Failed to load notifications');
+        
+        const notifications = data.notifications || [];
+        const unreadCount = data.unread_count || 0;
+        
+        // Update badge
+        const badge = byId('notificationBadge');
+        if (unreadCount > 0) {
+          badge.textContent = unreadCount > 99 ? '99+' : unreadCount;
+          badge.style.display = 'flex';
+        } else {
+          badge.style.display = 'none';
+        }
+        
+        // Render notifications list
+        const notifList = byId('notificationsList');
+        if (notifications.length === 0) {
+          notifList.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--muted);">No notifications</div>';
+        } else {
+          notifList.innerHTML = notifications.map(n => {
+            const typeEmoji = {
+              'error': '🔴',
+              'warning': '🟡',
+              'success': '🟢',
+              'info': '🔵',
+            }[n.type] || '⚪';
+            
+            const timeAgo = getTimeAgo(n.created_at);
+            const readClass = n.read ? ' opacity: 0.6;' : '';
+            
+            return `
+              <div style="padding: 12px 8px; border-bottom: 1px solid rgba(255,255,255,.05); cursor: pointer; transition: background 0.2s ease;${readClass}" onmouseover="this.style.background='rgba(255,255,255,.05)'" onmouseout="this.style.background=''">
+                <div style="display: flex; gap: 12px; align-items: flex-start;">
+                  <div style="font-size: 18px; margin-top: 2px;">${typeEmoji}</div>
+                  <div style="flex: 1; min-width: 0;">
+                    <div style="font-weight: 600; color: var(--text); font-size: 13px;">${esc(n.title)}</div>
+                    ${n.message ? `<div style="font-size: 12px; color: var(--dim); margin-top: 4px;">${esc(n.message)}</div>` : ''}
+                    <div style="font-size: 11px; color: var(--muted); margin-top: 6px;">${timeAgo}</div>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+      } catch (err) {
+        console.error('Error loading notifications:', err);
+        byId('notificationsList').innerHTML = '<div style="padding: 20px; text-align: center; color: var(--error);">Failed to load notifications</div>';
+      }
+    }
+
+    async function markAllNotificationsRead() {
+      try {
+        const res = await fetch(`${LOCAL_API}/api/mark_notifications_read`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: '{}',
+        });
+        if (!res.ok) throw new Error('Failed to mark notifications as read');
+        const data = await res.json();
+        if (data.ok) {
+          toast('Notifications marked as read');
+          loadNotifications();
+        }
+      } catch (err) {
+        console.error('Error marking notifications as read:', err);
+        toast('Error marking as read');
+      }
+    }
+
+    function getTimeAgo(isoString) {
+      if (!isoString) return '—';
+      try {
+        const date = new Date(isoString);
+        const now = new Date();
+        const seconds = Math.floor((now - date) / 1000);
+        
+        if (seconds < 60) return 'just now';
+        if (seconds < 3600) return Math.floor(seconds / 60) + 'm ago';
+        if (seconds < 86400) return Math.floor(seconds / 3600) + 'h ago';
+        if (seconds < 604800) return Math.floor(seconds / 86400) + 'd ago';
+        return date.toLocaleDateString();
+      } catch (e) {
+        return isoString;
+      }
+    }
 
     async function boot(){
       await detectMode();
       renderAll();
       renderDailySummary();
+      loadNotifications();  // Load notifications on boot
       window.addEventListener('resize', () => renderAnalytics());
       setInterval(loadData, (dataCache?.meta?.refresh_seconds || 15) * 1000);
       setInterval(() => renderDailySummary(), 5000);  // Update summary every 5 seconds
+      setInterval(loadNotifications, 30000);  // Refresh notifications every 30 seconds
       startLogAutoRefresh();
+      // Close notification panel when clicking outside
+      document.addEventListener('click', (e) => {
+        const bell = byId('notificationBellBtn');
+        const panel = byId('notificationPanel');
+        if (!bell.contains(e.target) && !panel.contains(e.target)) {
+          panel.style.display = 'none';
+        }
+      });
     }
     boot();
   </script>

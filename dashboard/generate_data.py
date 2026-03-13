@@ -2810,6 +2810,140 @@ def get_competitor_benchmarks(conn: sqlite3.Connection) -> dict[str, Any]:
     }
 
 
+def get_notifications(conn: sqlite3.Connection) -> list[dict[str, Any]]:
+    """Generate notifications from system state and read from database.
+    
+    Returns last 20 unread + 5 most recent read notifications.
+    Auto-generates alerts from system state.
+    """
+    notifications = []
+    now = utc_now()
+    
+    # Auto-generate notifications from system state
+    
+    # 1. Channel paused for 24+ hours with no uploads
+    for channel_row in query_all(conn, "SELECT channel_name, status, updated_at FROM channels WHERE status='paused'"):
+        channel_name = channel_row['channel_name']
+        updated_at_str = channel_row['updated_at']
+        if updated_at_str:
+            try:
+                updated_at = datetime.fromisoformat(updated_at_str.replace('Z', '+00:00')).replace(tzinfo=None)
+                hours_paused = (now - updated_at).total_seconds() / 3600
+                if hours_paused >= 24:
+                    notifications.append({
+                        'type': 'warning',
+                        'title': f'Channel "{channel_name}" paused for 24+ hours',
+                        'message': f'{channel_name} has been paused for {int(hours_paused)} hours',
+                        'channel': channel_name,
+                        'created_at': now.isoformat(),
+                        'read': False,
+                    })
+            except Exception:
+                pass
+    
+    # 2. Quota at 80%+
+    try:
+        quota_row = query_one(conn, "SELECT * FROM quota LIMIT 1")
+        if quota_row:
+            used = float(quota_row.get('used_gb') or 0)
+            limit = float(quota_row.get('limit_gb') or 0)
+            if limit > 0:
+                quota_pct = (used / limit) * 100
+                if quota_pct >= 80:
+                    notifications.append({
+                        'type': 'warning',
+                        'title': f'Quota at {quota_pct:.1f}%',
+                        'message': f'Storage quota usage is at {quota_pct:.1f}% ({used:.1f}GB / {limit:.1f}GB)',
+                        'channel': None,
+                        'created_at': now.isoformat(),
+                        'read': False,
+                    })
+    except Exception:
+        pass
+    
+    # 3. 10+ failed jobs in queue
+    try:
+        failed_count = query_one(conn, "SELECT COUNT(*) as cnt FROM publish_jobs WHERE status='failed'")['cnt']
+        if failed_count >= 10:
+            notifications.append({
+                'type': 'error',
+                'title': f'{failed_count} failed jobs in queue',
+                'message': f'There are {failed_count} failed publish jobs waiting for retry',
+                'channel': None,
+                'created_at': now.isoformat(),
+                'read': False,
+            })
+    except Exception:
+        pass
+    
+    # 4. New milestone: channel uploaded 100+ clips total
+    try:
+        milestones = query_all(conn, """
+            SELECT channel_name, COUNT(*) as total_clips
+            FROM clips
+            GROUP BY channel_name
+            HAVING COUNT(*) >= 100
+        """)
+        for milestone in milestones:
+            channel_name = milestone['channel_name']
+            total_clips = milestone['total_clips']
+            # Check if we already have this notification
+            if not any(n['title'] == f'{channel_name} reached {total_clips} clips!' for n in notifications):
+                notifications.append({
+                    'type': 'success',
+                    'title': f'{channel_name} reached {total_clips} clips!',
+                    'message': f'{channel_name} has uploaded {total_clips} total clips',
+                    'channel': channel_name,
+                    'created_at': now.isoformat(),
+                    'read': False,
+                })
+    except Exception:
+        pass
+    
+    # Read manually stored notifications from database
+    try:
+        unread = query_all(conn, """
+            SELECT id, type, title, message, created_at, channel
+            FROM dashboard_notifications
+            WHERE read_at IS NULL
+            ORDER BY created_at DESC
+            LIMIT 20
+        """)
+        
+        read = query_all(conn, """
+            SELECT id, type, title, message, created_at, channel
+            FROM dashboard_notifications
+            WHERE read_at IS NOT NULL
+            ORDER BY created_at DESC
+            LIMIT 5
+        """)
+        
+        for n in unread:
+            notifications.append({
+                'type': n['type'],
+                'title': n['title'],
+                'message': n['message'],
+                'channel': n['channel'],
+                'created_at': n['created_at'],
+                'read': False,
+            })
+        
+        for n in read:
+            notifications.append({
+                'type': n['type'],
+                'title': n['title'],
+                'message': n['message'],
+                'channel': n['channel'],
+                'created_at': n['created_at'],
+                'read': True,
+            })
+    except Exception:
+        # Table doesn't exist yet, that's fine
+        pass
+    
+    return notifications
+
+
 def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     queue_monitor = get_queue_monitor(conn)
     queue_status = get_queue_status(conn)
@@ -2829,6 +2963,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     style_performance = get_style_performance(conn)
     posting_times = get_posting_time_insights(conn)
     benchmarks = get_competitor_benchmarks(conn)
+    notifications = get_notifications(conn)
     lagging = [item for item in channel_performance if item['lagging']]
     payload = {
         'generated_at': utc_now().isoformat() + 'Z',
@@ -2862,6 +2997,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'style_performance': style_performance,
         'posting_times': posting_times,
         'benchmarks': benchmarks,
+        'notifications': notifications,
         'insights': {
             'lagging_channels': lagging[:6],
             'lagging_count': len(lagging),

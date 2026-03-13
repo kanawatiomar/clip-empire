@@ -898,6 +898,209 @@
       font-weight: 700;
       color: var(--gold);
     }
+    /* Hall of Fame Styles */
+    .hall-of-fame-podium {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 1200px) {
+      .hall-of-fame-podium {
+        grid-template-columns: 1fr;
+      }
+    }
+    .podium-featured {
+      background: linear-gradient(135deg, rgba(201,168,76,.15), rgba(201,168,76,.05)), var(--surface);
+      border: 2px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .podium-featured.rank-1 {
+      border-color: #ffd700;
+      background: linear-gradient(135deg, rgba(255,215,0,.15), rgba(255,215,0,.05)), var(--surface);
+    }
+    .podium-featured.rank-2 {
+      border-color: #c0c0c0;
+      background: linear-gradient(135deg, rgba(192,192,192,.15), rgba(192,192,192,.05)), var(--surface);
+    }
+    .podium-featured.rank-3 {
+      border-color: #cd7f32;
+      background: linear-gradient(135deg, rgba(205,127,50,.15), rgba(205,127,50,.05)), var(--surface);
+    }
+    .podium-medal-display {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+    .podium-rank-display {
+      font-family: var(--display);
+      font-size: 14px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .podium-channel-display {
+      font-family: var(--display);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+    .podium-views-display {
+      font-family: var(--mono);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .podium-title-featured {
+      font-size: 14px;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.4;
+      max-height: 60px;
+      overflow: hidden;
+    }
+    .podium-footer-featured {
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,.1);
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .hall-of-fame-top-10 {
+      margin-bottom: 32px;
+    }
+    .hall-of-fame-title {
+      font-size: 13px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+      font-family: var(--mono);
+    }
+    .hall-of-fame-list {
+      display: grid;
+      gap: 12px;
+    }
+    .hall-of-fame-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 12px;
+      background: var(--surface-2);
+      border: 1px solid rgba(255,255,255,.05);
+      border-radius: 12px;
+      transition: all 0.2s ease;
+    }
+    .hall-of-fame-item:hover {
+      background: var(--surface-3);
+      border-color: rgba(201,168,76,.3);
+    }
+    .hall-of-fame-rank {
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gold);
+      min-width: 30px;
+      text-align: center;
+    }
+    .hall-of-fame-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .hall-of-fame-item-title {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 600;
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .hall-of-fame-item-meta {
+      display: flex;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .hall-of-fame-views {
+      font-family: var(--mono);
+      font-weight: 600;
+      color: var(--success);
+      text-align: right;
+      min-width: 80px;
+    }
+    .hall-of-fame-thumbnail {
+      width: 80px;
+      height: 80px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .best-per-channel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .best-per-channel-card {
+      background: linear-gradient(180deg, rgba(255,255,255,.01), transparent), var(--surface-2);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px;
+      padding: 16px;
+      transition: all 0.2s ease;
+    }
+    .best-per-channel-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 8px 24px rgba(0,0,0,.2);
+    }
+    .best-channel-badge {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+      font-family: var(--mono);
+    }
+    .best-channel-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .best-clip-title-card {
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 12px;
+      line-height: 1.4;
+      min-height: 40px;
+    }
+    .best-clip-views-card {
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .best-clip-meta-card {
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+    }
+    .hall-of-fame-empty {
+      padding: 32px;
+      text-align: center;
+      color: var(--dim);
+    }
   </style>
 </head>
 <body>
@@ -1161,6 +1364,14 @@
       <div class="card-body">
         <div class="leaderboard-container" id="leaderboardContainer"></div>
       </div>
+    </section>
+
+    <section class="card" style="margin-top:18px;">
+      <div class="card-head">
+        <h2>🏆 Hall of Fame</h2>
+        <div class="top-note">Top performing clips across all channels • Best clips per channel</div>
+      </div>
+      <div class="card-body" id="hallOfFameContainer"></div>
     </section>
 
     <section class="card" style="margin-top:18px;">
@@ -1902,6 +2113,98 @@
       }).join('');
     }
 
+    function renderHallOfFame(){
+      const hallOfFame = dataCache.hall_of_fame || {};
+      const topThree = hallOfFame.top_3 || [];
+      const top10 = hallOfFame.top_10_clips || [];
+      const bestPerChannel = hallOfFame.best_per_channel || [];
+      
+      if (!top10.length && !bestPerChannel.length) {
+        byId('hallOfFameContainer').innerHTML = '<div class="hall-of-fame-empty">No hall of fame data yet. Keep publishing clips!</div>';
+        return;
+      }
+      
+      // Medals for top 3
+      const medals = ['🥇', '🥈', '🥉'];
+      
+      // Build top 3 featured cards
+      const podiumHTML = topThree.map((clip, idx) => {
+        const medal = medals[idx];
+        const hasThumb = clip.thumbnail_path && clip.thumbnail_path.trim();
+        const thumbHtml = hasThumb
+          ? `<img src="${esc(clip.thumbnail_path)}" alt="${esc(clip.title)}" style="width:100%; height:160px; object-fit:cover; border-radius:10px; margin-bottom:12px;">`
+          : '';
+        
+        return `
+          <div class="podium-featured rank-${clip.rank}">
+            <div class="podium-medal-display">${medal}</div>
+            <div class="podium-rank-display">#${clip.rank}</div>
+            <div class="podium-channel-display">${esc(clip.channel)}</div>
+            <div class="podium-views-display">${esc(clip.views_display)} views</div>
+            ${thumbHtml}
+            <div class="podium-title-featured">${esc(clip.title_display)}</div>
+            <div class="podium-footer-featured">
+              <span>${esc(clip.published_ago)}</span>
+              ${clip.post_url ? `<a href="${esc(clip.post_url)}" target="_blank" rel="noreferrer">Watch →</a>` : '<span>No link</span>'}
+            </div>
+          </div>`;
+      }).join('');
+      
+      // Build top 10 ranked list
+      const top10HTML = `
+        <div class="hall-of-fame-top-10">
+          <div class="hall-of-fame-title">📊 Top 10 All-Time Clips</div>
+          <div class="hall-of-fame-list">
+            ${top10.map((clip, idx) => {
+              const hasThumb = clip.thumbnail_path && clip.thumbnail_path.trim();
+              return `
+                <div class="hall-of-fame-item">
+                  <div class="hall-of-fame-rank">#${clip.rank}</div>
+                  <div class="hall-of-fame-content">
+                    <div class="hall-of-fame-item-title" title="${esc(clip.title)}">${esc(clip.title_display)}</div>
+                    <div class="hall-of-fame-item-meta">
+                      <span class="clip-channel-badge">${esc(clip.channel)}</span>
+                      <span>${esc(clip.published_ago)}</span>
+                      ${clip.post_url ? `<a href="${esc(clip.post_url)}" target="_blank" rel="noreferrer">Watch</a>` : '<span>No link</span>'}
+                    </div>
+                  </div>
+                  <div class="hall-of-fame-views">${esc(clip.views_display)}</div>
+                </div>`;
+            }).join('')}
+          </div>
+        </div>`;
+      
+      // Build best per channel grid
+      const bestPerChannelHTML = `
+        <div style="margin-top: 32px;">
+          <div class="hall-of-fame-title">🏅 Best Clip Per Channel</div>
+          <div class="best-per-channel-grid">
+            ${bestPerChannel.map(clip => {
+              const hasThumb = clip.thumbnail_path && clip.thumbnail_path.trim();
+              return `
+                <div class="best-per-channel-card">
+                  ${hasThumb ? `<img src="${esc(clip.thumbnail_path)}" alt="${esc(clip.title)}" class="hall-of-fame-thumbnail" style="width:100%; height:160px; object-fit:cover; border-radius:10px; margin-bottom:12px;">` : ''}
+                  <div class="best-channel-badge">Channel</div>
+                  <div class="best-channel-name">${esc(clip.channel)}</div>
+                  <div class="best-clip-title-card">${esc(clip.title_display)}</div>
+                  <div class="best-clip-views-card">${esc(clip.views_display)}</div>
+                  <div class="best-clip-meta-card">
+                    <span>${esc(clip.published_ago)}</span>
+                    ${clip.post_url ? `<a href="${esc(clip.post_url)}" target="_blank" rel="noreferrer">Watch</a>` : '<span>—</span>'}
+                  </div>
+                </div>`;
+            }).join('')}
+          </div>
+        </div>`;
+      
+      const html = `
+        <div class="hall-of-fame-podium">${podiumHTML}</div>
+        ${top10HTML}
+        ${bestPerChannelHTML}`;
+      
+      byId('hallOfFameContainer').innerHTML = html;
+    }
+
     function renderRecentUploads(){
       const rows = dataCache.recent_uploads || [];
       byId('uploadsBody').innerHTML = rows.map(item => `
@@ -2439,6 +2742,7 @@
       renderRevenue();
       renderPipeline();
       renderLeaderboard();
+      renderHallOfFame();
       renderAnalytics();
       renderDiskUsage();
       renderSourceHealth();

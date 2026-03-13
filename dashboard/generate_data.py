@@ -954,6 +954,156 @@ def get_current_settings(conn: sqlite3.Connection) -> dict[str, dict[str, Any]]:
     return settings
 
 
+def extract_uuid_from_render_path(render_path: str | None) -> str | None:
+    """Extract UUID from render_path like 'renders\\channel\\UUID_final.mp4'"""
+    if not render_path:
+        return None
+    # Split by backslash or forward slash and get the filename part
+    parts = render_path.replace('\\', '/').split('/')
+    if parts:
+        filename = parts[-1]  # Get last part (filename)
+        # Extract UUID (36 chars before '_final.mp4')
+        if '_final' in filename:
+            uuid_part = filename.split('_final')[0]
+            if len(uuid_part) == 36 and uuid_part.count('-') == 4:
+                return uuid_part
+    return None
+
+
+def get_hall_of_fame(conn: sqlite3.Connection) -> dict[str, Any]:
+    """Get the top 10 all-time best performing clips and best clip per channel.
+    
+    Returns:
+    - top_10_clips: ranked list of top 10 clips with views, channel, title, URL, published_at, thumbnail
+    - best_per_channel: one top clip per channel showing their personal best
+    
+    Links platform_variants to source_clips by extracting UUID from render_path.
+    """
+    import re
+    
+    # Build lookup table: render_path → (clip_id, views, post_url)
+    # Get all succeeded jobs with their source clip data
+    rows = query_all(
+        conn,
+        """
+        SELECT pj.job_id, pj.channel_name, pj.caption_text, pj.updated_at,
+               pv.clip_id, pv.render_path,
+               pr.post_url
+        FROM publish_jobs pj
+        LEFT JOIN platform_variants pv ON pv.variant_id = pj.variant_id
+        LEFT JOIN publish_results pr ON pr.job_id = pj.job_id
+        WHERE pj.status='succeeded'
+        """,
+    )
+    
+    # Get all source clips
+    source_clips_map = {}
+    source_clip_rows = query_all(conn, "SELECT clip_id, view_count FROM source_clips WHERE view_count > 0")
+    for row in source_clip_rows:
+        source_clips_map[row['clip_id']] = int(row['view_count'] or 0)
+    
+    # Build hall of fame entries by matching render_path UUID to source_clips
+    hof_entries = []
+    for row in rows:
+        uuid = extract_uuid_from_render_path(row['render_path'])
+        if uuid and uuid in source_clips_map:
+            views = source_clips_map[uuid]
+            hof_entries.append({
+                'channel': row['channel_name'],
+                'title': row['caption_text'] or 'Untitled clip',
+                'updated_at': row['updated_at'],
+                'post_url': row['post_url'],
+                'source_clip_id': uuid,
+                'views': views,
+            })
+    
+    # Sort by views descending
+    hof_entries.sort(key=lambda x: x['views'], reverse=True)
+    
+    # Build top 10 clips
+    top_10_clips = []
+    for idx, entry in enumerate(hof_entries[:10], start=1):
+        channel = entry['channel']
+        source_clip_id = entry['source_clip_id']
+        views = entry['views']
+        title = entry['title']
+        
+        # Build thumbnail path
+        thumbnail_path = None
+        if channel and source_clip_id:
+            thumb_file = REPO_ROOT / 'renders' / 'thumbnails' / channel / f'{source_clip_id}.jpg'
+            if thumb_file.exists():
+                thumbnail_path = f'/thumbnails/{channel}/{source_clip_id}.jpg'
+        
+        # Truncate title
+        title_display = (title[:80] + '...') if len(title) > 80 else title
+        
+        top_10_clips.append({
+            'rank': idx,
+            'channel': channel,
+            'title': title,
+            'title_display': title_display,
+            'views': views,
+            'views_display': fmt_num_compact(views),
+            'post_url': entry['post_url'],
+            'published_at': entry['updated_at'],
+            'published_at_display': fmt_compact_dt(entry['updated_at']),
+            'published_ago': rel_time(entry['updated_at']),
+            'thumbnail_path': thumbnail_path,
+        })
+    
+    # Build best per channel (highest views per channel)
+    best_per_channel_map = {}
+    for entry in hof_entries:
+        channel = entry['channel']
+        if channel not in best_per_channel_map:
+            source_clip_id = entry['source_clip_id']
+            views = entry['views']
+            title = entry['title']
+            
+            # Build thumbnail path
+            thumbnail_path = None
+            if channel and source_clip_id:
+                thumb_file = REPO_ROOT / 'renders' / 'thumbnails' / channel / f'{source_clip_id}.jpg'
+                if thumb_file.exists():
+                    thumbnail_path = f'/thumbnails/{channel}/{source_clip_id}.jpg'
+            
+            # Truncate title
+            title_display = (title[:80] + '...') if len(title) > 80 else title
+            
+            best_per_channel_map[channel] = {
+                'channel': channel,
+                'title': title,
+                'title_display': title_display,
+                'views': views,
+                'views_display': fmt_num_compact(views),
+                'post_url': entry['post_url'],
+                'published_at': entry['updated_at'],
+                'published_at_display': fmt_compact_dt(entry['updated_at']),
+                'published_ago': rel_time(entry['updated_at']),
+                'thumbnail_path': thumbnail_path,
+            }
+    
+    # Sort best_per_channel by views descending
+    best_per_channel = sorted(best_per_channel_map.values(), key=lambda x: x['views'], reverse=True)
+    
+    return {
+        'top_10_clips': top_10_clips,
+        'best_per_channel': best_per_channel,
+        'top_3': top_10_clips[:3] if top_10_clips else [],
+        'total_clips_tracked': len(best_per_channel),
+    }
+
+
+def fmt_num_compact(value: int) -> str:
+    """Format number with K/M suffix (e.g., 1.2K, 3.4M)"""
+    if value >= 1_000_000:
+        return f"{value / 1_000_000:.1f}M".rstrip('0').rstrip('.')
+    if value >= 1_000:
+        return f"{value / 1_000:.1f}K".rstrip('0').rstrip('.')
+    return str(value)
+
+
 def get_channel_leaderboard(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     """Build ranked channel leaderboard with all-time views, recent uploads, and best clips.
     
@@ -1599,6 +1749,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     revenue = get_revenue_estimate(conn)
     pipeline = get_pipeline_status(conn)
     disk_usage = get_disk_usage()
+    hall_of_fame = get_hall_of_fame(conn)
     lagging = [item for item in channel_performance if item['lagging']]
     payload = {
         'generated_at': utc_now().isoformat() + 'Z',
@@ -1623,6 +1774,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'revenue': revenue,
         'pipeline': pipeline,
         'disk': disk_usage,
+        'hall_of_fame': hall_of_fame,
         'leaderboard': get_channel_leaderboard(conn),
         'insights': {
             'lagging_channels': lagging[:6],

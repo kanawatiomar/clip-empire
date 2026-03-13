@@ -353,6 +353,18 @@ def cancel_job(job_id: str) -> dict:
     return {'ok': True, 'message': f'Job {job_id[:8]} cancelled.', 'job_id': job_id}
 
 
+def get_all_channel_status() -> dict[str, str]:
+    """Returns all channels with their current status."""
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        rows = conn.execute(
+            'SELECT channel_name, status FROM channels ORDER BY channel_name'
+        ).fetchall()
+        return {row[0]: row[1] for row in rows}
+    finally:
+        conn.close()
+
+
 def run_action(payload: dict) -> dict:
     action = payload.get('action')
     channel = payload.get('channel')
@@ -374,10 +386,14 @@ def run_action(payload: dict) -> dict:
         return {'ok': True, 'message': f'Queue processor started (pid {proc.pid}).'}
 
     if action == 'pause_channel':
-        return {'ok': True, 'message': toggle_channel(channel, 'paused')}
+        result = toggle_channel(channel, 'paused')
+        run_generate()
+        return {'ok': True, 'message': result}
 
     if action == 'resume_channel':
-        return {'ok': True, 'message': toggle_channel(channel, 'active')}
+        result = toggle_channel(channel, 'active')
+        run_generate()
+        return {'ok': True, 'message': result}
 
     if action == 'view_logs':
         return {'ok': True, 'logs': tail_logs()}
@@ -406,6 +422,14 @@ class Handler(SimpleHTTPRequestHandler):
                 self._send_json(body)
             except Exception as exc:
                 self._send_json({'ok': False, 'error': str(exc)}, 500)
+            return
+        if parsed.path == '/api/channel_status':
+            try:
+                status_map = get_all_channel_status()
+                channels = [{'channel': ch, 'status': st} for ch, st in status_map.items()]
+                self._send_json({'ok': True, 'channels': channels})
+            except Exception as exc:
+                self._send_json({'ok': False, 'error': str(exc), 'channels': []}, 500)
             return
         if parsed.path == '/api/discord_feed':
             try:
@@ -460,14 +484,33 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_POST(self):
         parsed = urlparse(self.path)
-        if parsed.path not in {'/api/action', '/api/update_channel_settings', '/api/retry_job', '/api/cancel_job'}:
+        if parsed.path not in {'/api/action', '/api/update_channel_settings', '/api/retry_job', '/api/cancel_job', '/api/enable_channel', '/api/disable_channel'}:
             self._send_json({'ok': False, 'error': 'Not found'}, 404)
             return
         try:
             length = int(self.headers.get('Content-Length', '0'))
             payload = json.loads(self.rfile.read(length).decode('utf-8') or '{}')
             
-            if parsed.path == '/api/update_channel_settings':
+            # Parse query parameters for enable/disable endpoints
+            from urllib.parse import parse_qs
+            query = parse_qs(parsed.query)
+            channel_param = query.get('channel', [None])[0]
+            
+            if parsed.path == '/api/enable_channel':
+                channel = channel_param or payload.get('channel')
+                if not channel:
+                    raise ValueError('channel is required')
+                result = toggle_channel(channel, 'active')
+                run_generate()
+                return self._send_json({'ok': True, 'message': result, 'channel': channel, 'status': 'active'})
+            elif parsed.path == '/api/disable_channel':
+                channel = channel_param or payload.get('channel')
+                if not channel:
+                    raise ValueError('channel is required')
+                result = toggle_channel(channel, 'paused')
+                run_generate()
+                return self._send_json({'ok': True, 'message': result, 'channel': channel, 'status': 'paused'})
+            elif parsed.path == '/api/update_channel_settings':
                 result = update_channel_setting(payload)
             elif parsed.path == '/api/retry_job':
                 result = retry_job(payload.get('job_id', ''))

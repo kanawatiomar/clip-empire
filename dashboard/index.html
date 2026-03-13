@@ -212,6 +212,52 @@
       padding:10px 12px; font:500 14px var(--body);
     }
     .dialog-actions { display:flex; justify-content:flex-end; gap:10px; margin-top:16px; flex-wrap:wrap; }
+    /* Toggle Switch Styles */
+    .toggle-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toggle-switch input[type="checkbox"] {
+      display: none;
+    }
+    .toggle-slider {
+      display: inline-flex;
+      width: 44px;
+      height: 24px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 999px;
+      position: relative;
+      transition: background .25s ease, border-color .25s ease;
+    }
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: var(--text);
+      border-radius: 50%;
+      top: 50%;
+      left: 2px;
+      transform: translateY(-50%);
+      transition: left .25s ease;
+    }
+    .toggle-switch input[type="checkbox"]:checked + .toggle-slider {
+      background: rgba(61,214,140,.3);
+      border-color: rgba(61,214,140,.5);
+    }
+    .toggle-switch input[type="checkbox"]:checked + .toggle-slider::before {
+      left: 22px;
+    }
+    .toggle-label {
+      font: 12px var(--mono);
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
     .discord-feed { display:grid; gap:12px; max-height:360px; overflow:auto; }
     .discord-item {
       border:1px solid rgba(255,255,255,.06); background:var(--surface-2); border-radius:16px; padding:14px;
@@ -1398,14 +1444,23 @@
         const sourceTag = `<span class="tag">views: ${esc(ch.views_source)}</span>`;
         const queueTag = `<span class="tag">queue ${ch.queue_depth}</span>`;
         const failTag = `<span class="tag">failed 7d ${ch.failed_7d}</span>`;
+        const isActive = ch.status === 'active';
+        const toggleDisabled = !localMode ? 'disabled' : '';
+        const cardStyle = !isActive ? 'opacity: 0.65;' : '';
         return `
-          <div class="channel-card">
+          <div class="channel-card" style="${cardStyle}">
             <div class="channel-top">
               <div>
                 <div class="channel-name">${esc(ch.channel)}</div>
                 <div class="dim">${esc(ch.category)} · ${statusBadge(ch.status)}</div>
               </div>
-              <div class="num ${ch.lagging ? 'error' : 'success'}">${ch.published_24h}/${ch.target_per_day}</div>
+              <div style="display:flex; gap:12px; align-items:center;">
+                <div class="num ${ch.lagging ? 'error' : 'success'}">${ch.published_24h}/${ch.target_per_day}</div>
+                <label class="toggle-switch" title="${localMode ? 'Click to toggle channel' : 'Local control API required'}">
+                  <input type="checkbox" ${isActive ? 'checked' : ''} onchange="toggleChannel('${esc(ch.channel)}', this)" ${toggleDisabled} />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
             </div>
             <div class="progress"><div style="width:${pct}%"></div></div>
             <div class="row muted"><span>avg views ${fmtNum(ch.avg_views)}</span><span class="mono">RPM $${Number(ch.rpm).toFixed(2)}</span></div>
@@ -2094,6 +2149,31 @@
         await loadData();
       } catch (err) {
         toast(err.message || 'Action failed');
+      }
+    }
+
+    async function toggleChannel(channel, checkbox){
+      if (!localMode) {
+        checkbox.checked = !checkbox.checked; // Revert the toggle
+        toast('Static mode: run py -3 dashboard/control_api.py for live controls.');
+        return;
+      }
+      try {
+        const isChecked = checkbox.checked;
+        const endpoint = isChecked ? 'enable_channel' : 'disable_channel';
+        const res = await fetch(`${LOCAL_API}/api/${endpoint}?channel=${encodeURIComponent(channel)}`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ channel })
+        });
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'Toggle failed');
+        toast(`${channel} is now ${isChecked ? 'active' : 'paused'}`);
+        // Small delay to show optimistic UI before refreshing
+        setTimeout(() => loadData(), 500);
+      } catch (err) {
+        checkbox.checked = !checkbox.checked; // Revert on error
+        toast(err.message || 'Toggle failed');
       }
     }
 

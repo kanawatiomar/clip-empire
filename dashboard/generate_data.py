@@ -337,6 +337,68 @@ def get_queue_monitor(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     return items
 
 
+def get_queue_status(conn: sqlite3.Connection) -> dict[str, Any]:
+    """Get detailed queue status grouped by job status for Queue Manager.
+    
+    Returns per-job details including title, retry count, and error messages,
+    grouped by status with summary counts.
+    """
+    rows = query_all(
+        conn,
+        """
+        SELECT job_id, channel_name, caption_text, status, created_at, 
+               COALESCE(attempts, 0) AS retry_count, last_error
+        FROM publish_jobs
+        WHERE status IN ('pending', 'processing', 'failed', 'retrying')
+        ORDER BY status, datetime(created_at) DESC
+        """,
+    )
+    
+    # Group by status
+    grouped: dict[str, list[dict[str, Any]]] = {
+        'pending': [],
+        'processing': [],
+        'failed': [],
+        'retrying': [],
+    }
+    
+    for row in rows:
+        status = normalize_status(row['status'])
+        if status not in grouped:
+            grouped[status] = []
+        
+        # Truncate title to 60 chars and error to 100 chars
+        title = (row['caption_text'] or '')[:60]
+        error = (row['last_error'] or '')[:100]
+        
+        job_item = {
+            'job_id': row['job_id'],
+            'job_id_short': (row['job_id'] or '')[:8],
+            'channel': row['channel_name'],
+            'title': title or '(untitled)',
+            'status': status,
+            'created_at': row['created_at'],
+            'created_at_display': fmt_compact_dt(row['created_at']),
+            'created_ago': rel_time(row['created_at']),
+            'retry_count': int(row['retry_count'] or 0),
+            'last_error': error,
+            'has_error': bool(error),
+        }
+        grouped[status].append(job_item)
+    
+    # Build summary
+    return {
+        'jobs_by_status': grouped,
+        'summary': {
+            'pending': len(grouped['pending']),
+            'processing': len(grouped['processing']),
+            'failed': len(grouped['failed']),
+            'retrying': len(grouped['retrying']),
+            'total': sum(len(v) for v in grouped.values()),
+        },
+    }
+
+
 def get_channel_performance(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     metric_map = load_channel_view_metrics(conn)
     channel_rows = query_all(conn, "SELECT channel_name, category, status, daily_target FROM channels ORDER BY channel_name")
@@ -807,6 +869,7 @@ def get_current_settings(conn: sqlite3.Connection) -> dict[str, dict[str, Any]]:
 
 def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     queue_monitor = get_queue_monitor(conn)
+    queue_status = get_queue_status(conn)
     channel_performance = get_channel_performance(conn)
     analytics = load_channel_trends(conn)
     source_health = get_source_health(conn)
@@ -818,6 +881,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'database_path': str(DB_PATH),
         'live_status': get_live_status(conn),
         'queue_monitor': queue_monitor,
+        'queue': queue_status,
         'channel_performance': channel_performance,
         'analytics': analytics,
         'source_health': source_health,

@@ -394,6 +394,34 @@
       </div>
     </section>
 
+    <section class="card" style="margin-top:18px;">
+      <div class="card-head">
+        <h2>Queue Manager</h2>
+        <div class="top-note">Pending, processing, failed, and retrying jobs with retry/cancel actions</div>
+      </div>
+      <div class="card-body">
+        <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:12px; margin-bottom:18px;">
+          <div style="background:rgba(91,141,239,.12); border:1px solid rgba(91,141,239,.3); border-radius:12px; padding:12px; text-align:center;">
+            <div style="color:var(--muted); font-size:12px; margin-bottom:4px;">Pending</div>
+            <div style="font-size:24px; font-weight:700; color:var(--blue);" id="queueStatusPending">—</div>
+          </div>
+          <div style="background:rgba(232,176,78,.12); border:1px solid rgba(232,176,78,.3); border-radius:12px; padding:12px; text-align:center;">
+            <div style="color:var(--muted); font-size:12px; margin-bottom:4px;">Processing</div>
+            <div style="font-size:24px; font-weight:700; color:var(--warning);" id="queueStatusProcessing">—</div>
+          </div>
+          <div style="background:rgba(232,84,84,.12); border:1px solid rgba(232,84,84,.3); border-radius:12px; padding:12px; text-align:center;">
+            <div style="color:var(--muted); font-size:12px; margin-bottom:4px;">Failed</div>
+            <div style="font-size:24px; font-weight:700; color:var(--error);" id="queueStatusFailed">—</div>
+          </div>
+          <div style="background:rgba(232,176,78,.12); border:1px solid rgba(232,176,78,.35); border-radius:12px; padding:12px; text-align:center;">
+            <div style="color:var(--muted); font-size:12px; margin-bottom:4px;">Retrying</div>
+            <div style="font-size:24px; font-weight:700; color:var(--warning);" id="queueStatusRetrying">—</div>
+          </div>
+        </div>
+        <div id="queueManagerContent" style="max-height:600px; overflow:auto;"></div>
+      </div>
+    </section>
+
     <section class="grid wide">
       <article class="card">
         <div class="card-head">
@@ -635,6 +663,107 @@
           <td><div>${esc(row.created_ago)}</div><div class="dim mono">${esc(row.created_at_display || '')}</div></td>
         </tr>`).join('') || '<tr><td colspan="5" class="muted">No jobs found.</td></tr>';
       byId('queueBody').innerHTML = html;
+    }
+
+    function renderQueueManager(){
+      const qdata = dataCache.queue || { jobs_by_status: {}, summary: {} };
+      const summary = qdata.summary || {};
+      byId('queueStatusPending').textContent = summary.pending || 0;
+      byId('queueStatusProcessing').textContent = summary.processing || 0;
+      byId('queueStatusFailed').textContent = summary.failed || 0;
+      byId('queueStatusRetrying').textContent = summary.retrying || 0;
+
+      const jobs = qdata.jobs_by_status || {};
+      const statuses = ['pending', 'processing', 'failed', 'retrying'];
+      const colors = { pending: '#5b8def', processing: '#e8b04e', failed: '#e85454', retrying: '#e8b04e' };
+      
+      let html = '';
+      for (const status of statuses) {
+        const jobList = jobs[status] || [];
+        if (jobList.length === 0) continue;
+        
+        html += `<div style="margin-bottom:20px;">
+          <div style="font-weight:600; margin-bottom:10px; color:${colors[status]}; text-transform:uppercase; font-size:12px;">${status} (${jobList.length})</div>
+          <div style="display:grid; gap:10px;">`;
+        
+        for (const job of jobList) {
+          const errorText = job.last_error ? esc(job.last_error) : '—';
+          html += `<div style="border:1px solid rgba(255,255,255,.08); border-left:3px solid ${colors[status]}; border-radius:10px; padding:12px; background:var(--surface-2);">
+            <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start; margin-bottom:8px;">
+              <div>
+                <div style="font-weight:600; font-family:var(--mono); font-size:13px;">${esc(job.job_id_short)}</div>
+                <div style="color:var(--muted); font-size:12px;">
+                  <span style="display:inline-block; background:rgba(201,168,76,.12); border:1px solid rgba(201,168,76,.24); border-radius:999px; padding:3px 7px; margin-right:8px;">
+                    ${esc(job.channel)}
+                  </span>
+                  ${esc(job.created_ago)}
+                </div>
+                <div style="color:var(--text); margin-top:6px; line-height:1.5;">${esc(job.title)}</div>
+              </div>
+              <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end;">
+                <button class="success" style="padding:6px 10px; font-size:12px;" onclick="retryJob('${esc(job.job_id)}', this)">⟳ Retry</button>
+                <button class="warn" style="padding:6px 10px; font-size:12px;" onclick="cancelJob('${esc(job.job_id)}', this)">✕ Cancel</button>
+              </div>
+            </div>
+            ${job.retry_count > 0 ? `<div style="color:var(--warning); font-size:11px; margin-bottom:6px;">Retried ${job.retry_count} time(s)</div>` : ''}
+            ${job.has_error ? `<div style="background:rgba(232,84,84,.08); border:1px solid rgba(232,84,84,.2); border-radius:8px; padding:8px; color:var(--muted); font-family:var(--mono); font-size:11px; word-break:break-word;">Error: ${errorText}</div>` : ''}
+          </div>`;
+        }
+        html += `</div></div>`;
+      }
+      
+      if (!html) {
+        html = '<div style="padding:20px; text-align:center; color:var(--muted);">No pending, processing, failed, or retrying jobs.</div>';
+      }
+      byId('queueManagerContent').innerHTML = html;
+    }
+
+    async function retryJob(jobId, button){
+      if (!localMode) {
+        toast('Static mode: run py -3 dashboard/control_api.py for live controls.');
+        return;
+      }
+      try {
+        const originalText = button.textContent;
+        button.disabled = true;
+        button.textContent = 'Retrying…';
+        const res = await fetch(`${LOCAL_API}/api/retry_job`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ job_id: jobId })
+        });
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'Retry failed');
+        toast(data.message || 'Job reset to pending');
+        await loadData();
+      } catch (err) {
+        toast(err.message || 'Retry failed');
+        if (button) { button.disabled = false; button.textContent = originalText; }
+      }
+    }
+
+    async function cancelJob(jobId, button){
+      if (!localMode) {
+        toast('Static mode: run py -3 dashboard/control_api.py for live controls.');
+        return;
+      }
+      try {
+        const originalText = button.textContent;
+        button.disabled = true;
+        button.textContent = 'Cancelling…';
+        const res = await fetch(`${LOCAL_API}/api/cancel_job`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ job_id: jobId })
+        });
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'Cancel failed');
+        toast(data.message || 'Job cancelled');
+        await loadData();
+      } catch (err) {
+        toast(err.message || 'Cancel failed');
+        if (button) { button.disabled = false; button.textContent = originalText; }
+      }
     }
 
     function renderChannels(){
@@ -940,6 +1069,7 @@
       renderHeader();
       renderKPIs();
       renderQueue();
+      renderQueueManager();
       renderChannels();
       renderAnalytics();
       renderSourceHealth();

@@ -247,6 +247,50 @@ def update_channel_setting(payload: dict) -> dict:
     return {'ok': True, 'message': f'{channel} {setting_name} updated.', 'channel': channel, 'setting_name': setting_name, 'value': value}
 
 
+def retry_job(job_id: str) -> dict:
+    """Reset a failed/retrying job back to pending and clear the error."""
+    if not job_id or not job_id.strip():
+        raise ValueError('job_id is required')
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        cur = conn.execute(
+            """
+            UPDATE publish_jobs
+            SET status = 'pending', last_error = NULL, updated_at = CURRENT_TIMESTAMP
+            WHERE job_id = ?
+            """,
+            (job_id.strip(),),
+        )
+        conn.commit()
+        if cur.rowcount <= 0:
+            raise ValueError(f'Job not found: {job_id}')
+    finally:
+        conn.close()
+    return {'ok': True, 'message': f'Job {job_id[:8]} reset to pending.', 'job_id': job_id}
+
+
+def cancel_job(job_id: str) -> dict:
+    """Cancel a job by setting its status to cancelled."""
+    if not job_id or not job_id.strip():
+        raise ValueError('job_id is required')
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        cur = conn.execute(
+            """
+            UPDATE publish_jobs
+            SET status = 'cancelled', updated_at = CURRENT_TIMESTAMP
+            WHERE job_id = ?
+            """,
+            (job_id.strip(),),
+        )
+        conn.commit()
+        if cur.rowcount <= 0:
+            raise ValueError(f'Job not found: {job_id}')
+    finally:
+        conn.close()
+    return {'ok': True, 'message': f'Job {job_id[:8]} cancelled.', 'job_id': job_id}
+
+
 def run_action(payload: dict) -> dict:
     action = payload.get('action')
     channel = payload.get('channel')
@@ -337,14 +381,19 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_POST(self):
         parsed = urlparse(self.path)
-        if parsed.path not in {'/api/action', '/api/update_channel_settings'}:
+        if parsed.path not in {'/api/action', '/api/update_channel_settings', '/api/retry_job', '/api/cancel_job'}:
             self._send_json({'ok': False, 'error': 'Not found'}, 404)
             return
         try:
             length = int(self.headers.get('Content-Length', '0'))
             payload = json.loads(self.rfile.read(length).decode('utf-8') or '{}')
+            
             if parsed.path == '/api/update_channel_settings':
                 result = update_channel_setting(payload)
+            elif parsed.path == '/api/retry_job':
+                result = retry_job(payload.get('job_id', ''))
+            elif parsed.path == '/api/cancel_job':
+                result = cancel_job(payload.get('job_id', ''))
             else:
                 result = run_action(payload)
                 if payload.get('action') in {'pause_channel', 'resume_channel', 'refresh_data'}:

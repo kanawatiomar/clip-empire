@@ -1,22 +1,94 @@
 {
-  "generated_at": "2026-03-13T06:38:31.861555Z",
+  "generated_at": "2026-03-13T12:14:06.622228Z",
   "repo_root": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire",
   "database_path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\data\\clip_empire.db",
+  "health_score": {
+    "score": 62.7,
+    "grade": "C",
+    "status": "Needs Attention",
+    "color": "yellow",
+    "breakdown": {
+      "pipeline_health": 0.0,
+      "error_rate": 20.0,
+      "quota_safety": 15,
+      "queue_depth": 10,
+      "source_freshness": 15,
+      "channel_uptime": 2.7
+    },
+    "metrics": {
+      "uploads_today": 0,
+      "target_today": 12,
+      "pipeline_health_ratio": 0.0,
+      "errors_today": 0,
+      "total_jobs_today": 3,
+      "error_rate": 0.0,
+      "queue_depth": 17,
+      "active_channels": 3,
+      "total_channels": 11,
+      "fresh_sources": 0,
+      "total_sources": 0
+    }
+  },
   "live_status": {
     "active_channels": 3,
     "total_channels": 11,
     "jobs_today": {
-      "total": 0,
-      "queued": 0,
+      "total": 2,
+      "queued": 1,
       "running": 0,
       "succeeded": 0,
       "failed": 0,
-      "cancelled": 0
+      "cancelled": 1
     },
-    "render_queue_depth": 23,
-    "last_updated": "2026-03-13T06:38:31.861555Z"
+    "render_queue_depth": 17,
+    "last_updated": "2026-03-13T12:14:06.622228Z"
   },
   "queue_monitor": [
+    {
+      "job_id": "50adacf7-8bdd-4c3b-a8c6-d33113b254f7",
+      "job_id_short": "50adacf7",
+      "channel": "ai_did_what",
+      "status": "cancelled",
+      "attempt": 4,
+      "created_at": "2026-03-11T06:23:40.897490",
+      "created_at_display": "2026-03-11 06:23",
+      "created_ago": "2d",
+      "updated_at": "2026-03-13 10:39:54",
+      "scheduled_for": "2026-03-11 08:00",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "0f6e4cc9-6ae2-48d3-921f-7402f77f968b",
+      "job_id_short": "0f6e4cc9",
+      "channel": "rich_or_ruined",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-13T06:10:29.197156",
+      "created_at_display": "2026-03-13 06:10",
+      "created_ago": "6h",
+      "updated_at": "2026-03-13T06:10:29.197156",
+      "scheduled_for": "2026-03-13 07:00",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "b50b5ebd-5d76-4cdf-89ae-bfe0296db0a4",
+      "job_id_short": "b50b5ebd",
+      "channel": "rich_or_ruined",
+      "status": "cancelled",
+      "attempt": 0,
+      "created_at": "2026-03-13T04:12:47.831480",
+      "created_at_display": "2026-03-13 04:12",
+      "created_ago": "8h",
+      "updated_at": "2026-03-13T04:12:47.831480",
+      "scheduled_for": "2026-03-13 07:00",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
     {
       "job_id": "f9cbdb17-f5ac-4c4d-8881-8fdcdaff54ad",
       "job_id_short": "f9cbdb17",
@@ -25,7 +97,7 @@
       "attempt": 0,
       "created_at": "2026-03-12T22:25:43.553248",
       "created_at_display": "2026-03-12 22:25",
-      "created_ago": "8h",
+      "created_ago": "13h",
       "updated_at": "2026-03-12T22:25:43.553248",
       "scheduled_for": "2026-03-12 23:00",
       "error": null,
@@ -40,7 +112,7 @@
       "attempt": 0,
       "created_at": "2026-03-12T20:18:03.661574",
       "created_at_display": "2026-03-12 20:18",
-      "created_ago": "10h",
+      "created_ago": "15h",
       "updated_at": "2026-03-12T20:18:03.661574",
       "scheduled_for": "2026-03-12 01:27",
       "error": null,
@@ -55,7 +127,7 @@
       "attempt": 0,
       "created_at": "2026-03-12T18:06:12.288297",
       "created_at_display": "2026-03-12 18:06",
-      "created_ago": "12h",
+      "created_ago": "18h",
       "updated_at": "2026-03-12T18:06:12.288297",
       "scheduled_for": "2026-03-12 20:00",
       "error": null,
@@ -70,7 +142,7 @@
       "attempt": 0,
       "created_at": "2026-03-12T14:08:58.228687",
       "created_at_display": "2026-03-12 14:08",
-      "created_ago": "16h",
+      "created_ago": "22h",
       "updated_at": "2026-03-12T14:08:58.228687",
       "scheduled_for": "2026-03-12 20:00",
       "error": null,
@@ -85,7 +157,7 @@
       "attempt": 0,
       "created_at": "2026-03-12T10:08:45.003339",
       "created_at_display": "2026-03-12 10:08",
-      "created_ago": "20h",
+      "created_ago": "1d",
       "updated_at": "2026-03-12T10:08:45.003339",
       "scheduled_for": "2026-03-12 20:00",
       "error": null,
@@ -100,7 +172,7 @@
       "attempt": 0,
       "created_at": "2026-03-12T08:08:33.464318",
       "created_at_display": "2026-03-12 08:08",
-      "created_ago": "22h",
+      "created_ago": "1d",
       "updated_at": "2026-03-12T08:08:33.464318",
       "scheduled_for": "2026-03-12 17:00",
       "error": null,
@@ -156,7 +228,7 @@
       "job_id": "b9555784-031f-4325-a9dd-d83fb66437f1",
       "job_id_short": "b9555784",
       "channel": "self_made_clips",
-      "status": "queued",
+      "status": "cancelled",
       "attempt": 0,
       "created_at": "2026-03-11T22:15:02.487589",
       "created_at_display": "2026-03-11 22:15",
@@ -171,7 +243,7 @@
       "job_id": "e4839ab1-e828-4955-b6a3-fb4db3eed28a",
       "job_id_short": "e4839ab1",
       "channel": "self_made_clips",
-      "status": "queued",
+      "status": "cancelled",
       "attempt": 0,
       "created_at": "2026-03-11T18:15:48.690322",
       "created_at_display": "2026-03-11 18:15",
@@ -186,7 +258,7 @@
       "job_id": "0153ba5b-abe2-4cf6-8aba-683ef96ab7df",
       "job_id_short": "0153ba5b",
       "channel": "self_made_clips",
-      "status": "queued",
+      "status": "cancelled",
       "attempt": 0,
       "created_at": "2026-03-11T16:16:29.434650",
       "created_at_display": "2026-03-11 16:16",
@@ -209,21 +281,6 @@
       "updated_at": "2026-03-11T13:00:43.214601",
       "scheduled_for": "2026-03-11 11:00",
       "error": "Not logged in (redirected to https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fstudio.youtube.com%252F%26feature%3Dredirect_login&dsh=S1511656262%3A1773252034089038&hl=en&ifkv=ASfE1-ryhUP0B77YK0BV5XhSzwFEDm41WQWH8ShJQMWxEDeDE6mPB2bD-JuudBEEvkz7I4AWKEng&passive=true&service=youtube&uilel=3&flowName=GlifWebSignIn&flowEntry=ServiceLogin). Manual login required for channel.",
-      "has_error": true,
-      "post_url": null
-    },
-    {
-      "job_id": "50adacf7-8bdd-4c3b-a8c6-d33113b254f7",
-      "job_id_short": "50adacf7",
-      "channel": "ai_did_what",
-      "status": "failed",
-      "attempt": 4,
-      "created_at": "2026-03-11T06:23:40.897490",
-      "created_at_display": "2026-03-11 06:23",
-      "created_ago": "2d",
-      "updated_at": "2026-03-11T10:30:06.566027",
-      "scheduled_for": "2026-03-11 08:00",
-      "error": "Not logged in (redirected to https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fstudio.youtube.com%252F%26feature%3Dredirect_login&dsh=S1511656262%3A1773243002654621&hl=en&ifkv=ASfE1-rwoEDtPpxyVF0J2QA-VXc7EEmB9xUvPYXbx8qWs6j2A_BH7i-TTfX02pR6Rcau_e4OGm7XbA&passive=true&service=youtube&uilel=3&flowName=GlifWebSignIn&flowEntry=ServiceLogin). Manual login required for channel.",
       "has_error": true,
       "post_url": null
     },
@@ -351,7 +408,7 @@
       "job_id": "132a3fbb-95bb-4c5d-9417-4d7a2a471053",
       "job_id_short": "132a3fbb",
       "channel": "self_made_clips",
-      "status": "queued",
+      "status": "cancelled",
       "attempt": 0,
       "created_at": "2026-03-10T18:14:35.103638",
       "created_at_display": "2026-03-10 18:14",
@@ -366,7 +423,7 @@
       "job_id": "455238b4-3e98-4da7-9cbb-236c8555583c",
       "job_id_short": "455238b4",
       "channel": "self_made_clips",
-      "status": "queued",
+      "status": "cancelled",
       "attempt": 0,
       "created_at": "2026-03-10T14:12:48.654588",
       "created_at_display": "2026-03-10 14:12",
@@ -396,11 +453,11 @@
       "job_id": "a20b1f82-5318-4ec0-be15-9245243288ad",
       "job_id_short": "a20b1f82",
       "channel": "self_made_clips",
-      "status": "queued",
+      "status": "cancelled",
       "attempt": 0,
       "created_at": "2026-03-10T12:13:40.450842",
       "created_at_display": "2026-03-10 12:13",
-      "created_ago": "2d",
+      "created_ago": "3d",
       "updated_at": "2026-03-10T12:13:40.450842",
       "scheduled_for": "2026-03-10 12:30",
       "error": null,
@@ -415,7 +472,7 @@
       "attempt": 0,
       "created_at": "2026-03-10T12:07:24.531640",
       "created_at_display": "2026-03-10 12:07",
-      "created_ago": "2d",
+      "created_ago": "3d",
       "updated_at": "2026-03-10T12:07:24.531640",
       "scheduled_for": "2026-03-10 20:00",
       "error": "account_terminated",
@@ -426,11 +483,11 @@
       "job_id": "5ea4d4b5-b645-4915-8422-5fe33ef4638f",
       "job_id_short": "5ea4d4b5",
       "channel": "rich_or_ruined",
-      "status": "queued",
+      "status": "cancelled",
       "attempt": 0,
       "created_at": "2026-03-10T10:07:59.420548",
       "created_at_display": "2026-03-10 10:07",
-      "created_ago": "2d",
+      "created_ago": "3d",
       "updated_at": "2026-03-10T10:07:59.420548",
       "scheduled_for": "2026-03-10 12:00",
       "error": null,
@@ -445,7 +502,7 @@
       "attempt": 0,
       "created_at": "2026-03-10T10:06:04.899258",
       "created_at_display": "2026-03-10 10:06",
-      "created_ago": "2d",
+      "created_ago": "3d",
       "updated_at": "2026-03-10T10:06:04.899258",
       "scheduled_for": "2026-03-10 20:00",
       "error": "account_terminated",
@@ -475,7 +532,7 @@
       "attempt": 0,
       "created_at": "2026-03-10T08:07:40.635050",
       "created_at_display": "2026-03-10 08:07",
-      "created_ago": "2d",
+      "created_ago": "3d",
       "updated_at": "2026-03-10T08:07:40.635050",
       "scheduled_for": "2026-03-10 20:00",
       "error": "account_terminated",
@@ -550,7 +607,7 @@
       "attempt": 0,
       "created_at": "2026-03-09T11:13:40.737084",
       "created_at_display": "2026-03-09 11:13",
-      "created_ago": "3d",
+      "created_ago": "4d",
       "updated_at": "2026-03-09T19:32:36.359491",
       "scheduled_for": "2026-03-09 19:30",
       "error": null,
@@ -565,7 +622,7 @@
       "attempt": 0,
       "created_at": "2026-03-09T11:13:05.264267",
       "created_at_display": "2026-03-09 11:13",
-      "created_ago": "3d",
+      "created_ago": "4d",
       "updated_at": "2026-03-09T17:02:59.769374",
       "scheduled_for": "2026-03-09 17:00",
       "error": null,
@@ -580,7 +637,7 @@
       "attempt": 0,
       "created_at": "2026-03-09T11:12:35.861953",
       "created_at_display": "2026-03-09 11:12",
-      "created_ago": "3d",
+      "created_ago": "4d",
       "updated_at": "2026-03-09T16:02:30.195448",
       "scheduled_for": "2026-03-09 14:30",
       "error": null,
@@ -610,7 +667,7 @@
       "attempt": 1,
       "created_at": "2026-03-09T12:12:23.367208",
       "created_at_display": "2026-03-09 12:12",
-      "created_ago": "3d",
+      "created_ago": "4d",
       "updated_at": "2026-03-09T14:34:16.149612",
       "scheduled_for": "2026-03-09 12:30",
       "error": "Not logged in (redirected to https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fstudio.youtube.com%252F%26feature%3Dredirect_login&dsh=S119765853%3A1773088453953102&hl=en&ifkv=ASfE1-qIVnkanQfmRLIiOyrt1BqE7JhB3o8tzTa7U3GQWMGbjvGLxl_XHoWNDVpevlrgq6O2t-gW&passive=true&service=youtube&uilel=3&flowName=GlifWebSignIn&flowEntry=ServiceLogin). Manual login required for channel.",
@@ -655,7 +712,7 @@
       "attempt": 0,
       "created_at": "2026-03-09T12:07:39.564406",
       "created_at_display": "2026-03-09 12:07",
-      "created_ago": "3d",
+      "created_ago": "4d",
       "updated_at": "2026-03-09T12:07:39.564406",
       "scheduled_for": "2026-03-10 08:00",
       "error": null,
@@ -700,7 +757,7 @@
       "attempt": 0,
       "created_at": "2026-03-09T10:07:43.638793",
       "created_at_display": "2026-03-09 10:07",
-      "created_ago": "3d",
+      "created_ago": "4d",
       "updated_at": "2026-03-09T10:07:43.638793",
       "scheduled_for": "2026-03-10 08:00",
       "error": null,
@@ -730,7 +787,7 @@
       "attempt": 0,
       "created_at": "2026-03-09T08:07:56.554473",
       "created_at_display": "2026-03-09 08:07",
-      "created_ago": "3d",
+      "created_ago": "4d",
       "updated_at": "2026-03-09T08:07:56.554473",
       "scheduled_for": "2026-03-10 08:00",
       "error": null,
@@ -1263,6 +1320,48 @@
       "post_url": "https://youtube.com/shorts/plamirK3ewM"
     }
   ],
+  "queue": {
+    "jobs_by_status": {
+      "pending": [],
+      "processing": [],
+      "failed": [
+        {
+          "job_id": "22d50e1d-47e6-4200-b48b-8efd25b30865",
+          "job_id_short": "22d50e1d",
+          "channel": "gym_moments",
+          "title": "Chris Bumstead reveals his secret weapon for gains! \ud83d\udcaa",
+          "status": "failed",
+          "created_at": "2026-03-11T06:27:00.155746",
+          "created_at_display": "2026-03-11 06:27",
+          "created_ago": "2d",
+          "retry_count": 4,
+          "last_error": "Not logged in (redirected to https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2",
+          "has_error": true
+        },
+        {
+          "job_id": "c3acf855-84ea-4341-b52a-318aef047a5f",
+          "job_id_short": "c3acf855",
+          "channel": "gym_moments",
+          "title": "Chris Bumstead's unexpected moment with Hany Rambod \ud83d\ude02",
+          "status": "failed",
+          "created_at": "2026-03-11T06:26:37.025052",
+          "created_at_display": "2026-03-11 06:26",
+          "created_ago": "2d",
+          "retry_count": 4,
+          "last_error": "Not logged in (redirected to https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2",
+          "has_error": true
+        }
+      ],
+      "retrying": []
+    },
+    "summary": {
+      "pending": 0,
+      "processing": 0,
+      "failed": 2,
+      "retrying": 0,
+      "total": 2
+    }
+  },
   "channel_performance": [
     {
       "channel": "fomo_highlights",
@@ -1403,7 +1502,7 @@
       "category": "Business",
       "target_per_day": 5,
       "published_24h": 0,
-      "queue_depth": 6,
+      "queue_depth": 0,
       "running_jobs": 0,
       "failed_7d": 0,
       "avg_views": 6454,
@@ -1425,8 +1524,8 @@
       "queue_depth": 1,
       "running_jobs": 0,
       "failed_7d": 0,
-      "avg_views": 488,
-      "rpm": 0.41,
+      "avg_views": 686,
+      "rpm": 0.58,
       "deficit": 5,
       "completion_rate": 0.0,
       "lagging": false,
@@ -1443,7 +1542,7 @@
       "published_24h": 0,
       "queue_depth": 0,
       "running_jobs": 0,
-      "failed_7d": 1,
+      "failed_7d": 0,
       "avg_views": 0,
       "rpm": 0.0,
       "deficit": 5,
@@ -3377,29 +3476,29 @@
           },
           {
             "date": "2026-03-13",
-            "views": null,
-            "rpm": null
+            "views": 884.0,
+            "rpm": 0.7514
           }
         ],
         "window_7d": {
           "window_days": 7,
-          "avg": 488.0,
-          "previous_avg": 6.0,
-          "delta": 482.0,
-          "delta_pct": 8033.3,
+          "avg": 620.0,
+          "previous_avg": 488.0,
+          "delta": 132.0,
+          "delta_pct": 27.0,
           "direction": "up",
-          "points": 2
+          "points": 3
         },
         "window_30d": {
           "window_days": 30,
-          "avg": 488.0,
-          "previous_avg": 6.0,
-          "delta": 482.0,
-          "delta_pct": 8033.3,
+          "avg": 620.0,
+          "previous_avg": 488.0,
+          "delta": 132.0,
+          "delta_pct": 27.0,
           "direction": "up",
-          "points": 2
+          "points": 3
         },
-        "latest": 970.0
+        "latest": 884.0
       },
       "rpm": {
         "series_30d": [
@@ -3550,29 +3649,29 @@
           },
           {
             "date": "2026-03-13",
-            "views": null,
-            "rpm": null
+            "views": 884.0,
+            "rpm": 0.7514
           }
         ],
         "window_7d": {
           "window_days": 7,
-          "avg": 0.41,
-          "previous_avg": 0.01,
-          "delta": 0.4,
-          "delta_pct": 4000.0,
+          "avg": 0.53,
+          "previous_avg": 0.41,
+          "delta": 0.12,
+          "delta_pct": 29.3,
           "direction": "up",
-          "points": 2
+          "points": 3
         },
         "window_30d": {
           "window_days": 30,
-          "avg": 0.41,
-          "previous_avg": 0.01,
-          "delta": 0.4,
-          "delta_pct": 4000.0,
+          "avg": 0.53,
+          "previous_avg": 0.41,
+          "delta": 0.12,
+          "delta_pct": 29.3,
           "direction": "up",
-          "points": 2
+          "points": 3
         },
-        "latest": 0.8245
+        "latest": 0.7514
       }
     },
     {
@@ -4689,7 +4788,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-09 10:08:47",
       "last_fetch_display": "2026-03-09 10:08",
-      "last_fetch_ago": "3d",
+      "last_fetch_ago": "4d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -5037,13 +5136,13 @@
       "source_id": "https://www.tiktok.com/@alexhormozi",
       "source_key": "https://www.tiktok.com/@alexhormozi",
       "platform": "tiktok",
-      "last_fetch": "2026-03-13 06:11:58",
-      "last_fetch_display": "2026-03-13 06:11",
-      "last_fetch_ago": "26m",
+      "last_fetch": "2026-03-13 12:11:45",
+      "last_fetch_display": "2026-03-13 12:11",
+      "last_fetch_ago": "2m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.02,
-      "success_count": 49,
+      "error_rate": 0.019,
+      "success_count": 51,
       "failure_count": 1,
       "last_error": "no clips returned"
     },
@@ -5053,7 +5152,7 @@
       "platform": "tiktok",
       "last_fetch": "2026-03-13 02:17:39",
       "last_fetch_display": "2026-03-13 02:17",
-      "last_fetch_ago": "4h",
+      "last_fetch_ago": "9h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.4,
@@ -5067,7 +5166,7 @@
       "platform": "tiktok",
       "last_fetch": "2026-03-13 06:11:31",
       "last_fetch_display": "2026-03-13 06:11",
-      "last_fetch_ago": "27m",
+      "last_fetch_ago": "6h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.019,
@@ -5151,7 +5250,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-10 08:09:45",
       "last_fetch_display": "2026-03-10 08:09",
-      "last_fetch_ago": "2d",
+      "last_fetch_ago": "3d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.067,
@@ -5179,7 +5278,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-10 08:06:37",
       "last_fetch_display": "2026-03-10 08:06",
-      "last_fetch_ago": "2d",
+      "last_fetch_ago": "3d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.059,
@@ -5191,13 +5290,13 @@
       "source_id": "https://www.youtube.com/@RareLiquid/videos",
       "source_key": "https://www.youtube.com/@RareLiquid/videos",
       "platform": "youtube",
-      "last_fetch": "2026-03-13 06:10:29",
-      "last_fetch_display": "2026-03-13 06:10",
-      "last_fetch_ago": "28m",
+      "last_fetch": "2026-03-13 12:08:25",
+      "last_fetch_display": "2026-03-13 12:08",
+      "last_fetch_ago": "5m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.192,
-      "success_count": 21,
+      "error_rate": 0.179,
+      "success_count": 23,
       "failure_count": 5,
       "last_error": "ffmpeg overlay failed: ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev8, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --"
     },
@@ -5205,13 +5304,13 @@
       "source_id": "https://www.youtube.com/@WallStreetMillennial/videos",
       "source_key": "https://www.youtube.com/@WallStreetMillennial/videos",
       "platform": "youtube",
-      "last_fetch": "2026-03-13 06:06:29",
-      "last_fetch_display": "2026-03-13 06:06",
-      "last_fetch_ago": "32m",
+      "last_fetch": "2026-03-13 12:05:48",
+      "last_fetch_display": "2026-03-13 12:05",
+      "last_fetch_ago": "8m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.171,
-      "success_count": 34,
+      "error_rate": 0.159,
+      "success_count": 37,
       "failure_count": 7,
       "last_error": "ffmpeg overlay failed: ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev8, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --"
     },
@@ -5221,7 +5320,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-13 02:17:18",
       "last_fetch_display": "2026-03-13 02:17",
-      "last_fetch_ago": "4h",
+      "last_fetch_ago": "9h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.25,
@@ -5233,13 +5332,13 @@
       "source_id": "https://www.youtube.com/@theplainbagel/videos",
       "source_key": "https://www.youtube.com/@theplainbagel/videos",
       "platform": "youtube",
-      "last_fetch": "2026-03-13 06:08:46",
-      "last_fetch_display": "2026-03-13 06:08",
-      "last_fetch_ago": "29m",
+      "last_fetch": "2026-03-13 12:07:14",
+      "last_fetch_display": "2026-03-13 12:07",
+      "last_fetch_ago": "6m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.067,
-      "success_count": 28,
+      "error_rate": 0.062,
+      "success_count": 30,
       "failure_count": 2,
       "last_error": "ffmpeg overlay failed: ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev8, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --"
     },
@@ -5249,7 +5348,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-13 02:15:01",
       "last_fetch_display": "2026-03-13 02:15",
-      "last_fetch_ago": "4h",
+      "last_fetch_ago": "9h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.444,
@@ -5263,7 +5362,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-13 02:14:31",
       "last_fetch_display": "2026-03-13 02:14",
-      "last_fetch_ago": "4h",
+      "last_fetch_ago": "9h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.333,
@@ -5275,13 +5374,13 @@
       "source_id": "https://www.youtube.com/results?search_query=millionaire+went+broke+story+shorts",
       "source_key": "https://www.youtube.com/results?search_query=millionaire+went+broke+story+shorts",
       "platform": "youtube",
-      "last_fetch": "2026-03-13 06:11:28",
-      "last_fetch_display": "2026-03-13 06:11",
-      "last_fetch_ago": "27m",
+      "last_fetch": "2026-03-13 12:09:56",
+      "last_fetch_display": "2026-03-13 12:09",
+      "last_fetch_ago": "4m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.019,
-      "success_count": 53,
+      "error_rate": 0.018,
+      "success_count": 55,
       "failure_count": 1,
       "last_error": "ffmpeg overlay failed: ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev8, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --"
     },
@@ -5289,13 +5388,13 @@
       "source_id": "https://www.youtube.com/results?search_query=startup+failure+story+shorts",
       "source_key": "https://www.youtube.com/results?search_query=startup+failure+story+shorts",
       "platform": "youtube",
-      "last_fetch": "2026-03-13 06:11:56",
-      "last_fetch_display": "2026-03-13 06:11",
-      "last_fetch_ago": "26m",
+      "last_fetch": "2026-03-13 12:11:41",
+      "last_fetch_display": "2026-03-13 12:11",
+      "last_fetch_ago": "2m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.04,
-      "success_count": 48,
+      "error_rate": 0.038,
+      "success_count": 50,
       "failure_count": 2,
       "last_error": "no clips returned"
     },
@@ -5303,13 +5402,13 @@
       "source_id": "https://www.tiktok.com/@garyvee",
       "source_key": "https://www.tiktok.com/@garyvee",
       "platform": "tiktok",
-      "last_fetch": "2026-03-13 06:14:58",
-      "last_fetch_display": "2026-03-13 06:14",
-      "last_fetch_ago": "23m",
+      "last_fetch": "2026-03-13 10:17:30",
+      "last_fetch_display": "2026-03-13 10:17",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "healthy",
       "error_rate": 0.0,
-      "success_count": 48,
+      "success_count": 49,
       "failure_count": 0,
       "last_error": ""
     },
@@ -5346,7 +5445,7 @@
     "top_errors": [
       {
         "error_type": "Not logged in (redirected to https://accounts.goog",
-        "count": 13,
+        "count": 12,
         "trend": {
           "today": 0,
           "yesterday": 0,
@@ -5410,7 +5509,7 @@
         "severity": "info"
       }
     ],
-    "total_errors": 23,
+    "total_errors": 22,
     "distinct_errors": 5,
     "log_viewer_label": "View Full Logs",
     "log_viewer_target": "logs_dialog"
@@ -5699,13 +5798,73 @@
   ],
   "recent_uploads": [
     {
+      "job_id": "50adacf7-8bdd-4c3b-a8c6-d33113b254f7",
+      "job_id_short": "50adacf7",
+      "channel": "ai_did_what",
+      "status": "cancelled",
+      "updated_at": "2026-03-13 10:39:54",
+      "updated_at_display": "2026-03-13 10:39",
+      "updated_ago": "1h",
+      "title": "Why is Ai shorts trending with a dancing plant? \ud83c\udf31",
+      "url": null,
+      "error": null
+    },
+    {
+      "job_id": "50adacf7-8bdd-4c3b-a8c6-d33113b254f7",
+      "job_id_short": "50adacf7",
+      "channel": "ai_did_what",
+      "status": "cancelled",
+      "updated_at": "2026-03-13 10:39:54",
+      "updated_at_display": "2026-03-13 10:39",
+      "updated_ago": "1h",
+      "title": "Why is Ai shorts trending with a dancing plant? \ud83c\udf31",
+      "url": null,
+      "error": null
+    },
+    {
+      "job_id": "50adacf7-8bdd-4c3b-a8c6-d33113b254f7",
+      "job_id_short": "50adacf7",
+      "channel": "ai_did_what",
+      "status": "cancelled",
+      "updated_at": "2026-03-13 10:39:54",
+      "updated_at_display": "2026-03-13 10:39",
+      "updated_ago": "1h",
+      "title": "Why is Ai shorts trending with a dancing plant? \ud83c\udf31",
+      "url": null,
+      "error": null
+    },
+    {
+      "job_id": "0f6e4cc9-6ae2-48d3-921f-7402f77f968b",
+      "job_id_short": "0f6e4cc9",
+      "channel": "rich_or_ruined",
+      "status": "queued",
+      "updated_at": "2026-03-13T06:10:29.197156",
+      "updated_at_display": "2026-03-13 06:10",
+      "updated_ago": "6h",
+      "title": "A cat\u00e2\u20ac\u2122s story Big Wins #1",
+      "url": null,
+      "error": null
+    },
+    {
+      "job_id": "b50b5ebd-5d76-4cdf-89ae-bfe0296db0a4",
+      "job_id_short": "b50b5ebd",
+      "channel": "rich_or_ruined",
+      "status": "cancelled",
+      "updated_at": "2026-03-13T04:12:47.831480",
+      "updated_at_display": "2026-03-13 04:12",
+      "updated_ago": "8h",
+      "title": "Money cycles Moments #1",
+      "url": null,
+      "error": null
+    },
+    {
       "job_id": "f9cbdb17-f5ac-4c4d-8881-8fdcdaff54ad",
       "job_id_short": "f9cbdb17",
       "channel": "startup_graveyard",
       "status": "queued",
       "updated_at": "2026-03-12T22:25:43.553248",
       "updated_at_display": "2026-03-12 22:25",
-      "updated_ago": "8h",
+      "updated_ago": "13h",
       "title": "Shark spark uncovers the truth behind the pitch war\" \ud83e\udd88",
       "url": null,
       "error": null
@@ -5717,7 +5876,7 @@
       "status": "queued",
       "updated_at": "2026-03-12T20:18:03.661574",
       "updated_at_display": "2026-03-12 20:18",
-      "updated_ago": "10h",
+      "updated_ago": "15h",
       "title": "Chris Bumstead uncovers bodybuilding's biggest secret \ud83e\udd14",
       "url": null,
       "error": null
@@ -5729,7 +5888,7 @@
       "status": "queued",
       "updated_at": "2026-03-12T18:06:12.288297",
       "updated_at_display": "2026-03-12 18:06",
-      "updated_ago": "12h",
+      "updated_ago": "18h",
       "title": "What happened after they bet it all",
       "url": null,
       "error": null
@@ -5741,7 +5900,7 @@
       "status": "queued",
       "updated_at": "2026-03-12T14:08:58.228687",
       "updated_at_display": "2026-03-12 14:08",
-      "updated_ago": "16h",
+      "updated_ago": "22h",
       "title": "Why your savings are losing value right now",
       "url": null,
       "error": null
@@ -5753,72 +5912,529 @@
       "status": "queued",
       "updated_at": "2026-03-12T10:08:45.003339",
       "updated_at_display": "2026-03-12 10:08",
-      "updated_ago": "20h",
+      "updated_ago": "1d",
       "title": "Nobody saw this market move coming",
-      "url": null,
-      "error": null
-    },
-    {
-      "job_id": "8cc6200e-0473-4781-b822-66623ea51915",
-      "job_id_short": "8cc6200e",
-      "channel": "market_meltdowns",
-      "status": "queued",
-      "updated_at": "2026-03-12T08:08:33.464318",
-      "updated_at_display": "2026-03-12 08:08",
-      "updated_ago": "22h",
-      "title": "This is how markets actually work \ud83d\udcc9",
-      "url": null,
-      "error": null
-    },
-    {
-      "job_id": "5771d834-a91b-46aa-b9b7-3a40149f2a3b",
-      "job_id_short": "5771d834",
-      "channel": "market_meltdowns",
-      "status": "queued",
-      "updated_at": "2026-03-12T02:31:24.872011",
-      "updated_at_display": "2026-03-12 02:31",
-      "updated_ago": "1d",
-      "title": "The financial move nobody is talking about",
-      "url": null,
-      "error": null
-    },
-    {
-      "job_id": "26a70d1a-194a-422e-9f1a-8155541a96bd",
-      "job_id_short": "26a70d1a",
-      "channel": "market_meltdowns",
-      "status": "queued",
-      "updated_at": "2026-03-12T00:09:31.962931",
-      "updated_at_display": "2026-03-12 00:09",
-      "updated_ago": "1d",
-      "title": "The trade that made millions \u2014 and then didn't",
-      "url": null,
-      "error": null
-    },
-    {
-      "job_id": "fa440d06-a708-4a16-a485-4228b6b1b010",
-      "job_id_short": "fa440d06",
-      "channel": "gym_moments",
-      "status": "queued",
-      "updated_at": "2026-03-11T22:18:31.031825",
-      "updated_at_display": "2026-03-11 22:18",
-      "updated_ago": "1d",
-      "title": "Chris Bumstead shares the truth about fad diets \ud83d\ude2e",
-      "url": null,
-      "error": null
-    },
-    {
-      "job_id": "b9555784-031f-4325-a9dd-d83fb66437f1",
-      "job_id_short": "b9555784",
-      "channel": "self_made_clips",
-      "status": "queued",
-      "updated_at": "2026-03-11T22:15:02.487589",
-      "updated_at_display": "2026-03-11 22:15",
-      "updated_ago": "1d",
-      "title": "Garyvee calls out those relying on their parents' money\" \ud83d\udcb8",
       "url": null,
       "error": null
     }
   ],
+  "recent_clips": [
+    {
+      "job_id": "e47a97f4-e3df-43d4-a653-b4bb583a0817",
+      "job_id_short": "e47a97f4",
+      "channel": "market_meltdowns",
+      "title": "Watch this before scrolling: The market did WHAT?! \ud83d\udc80",
+      "title_truncated": "Watch this before scrolling: The market did WHAT?! \ud83d\udc80",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/lkhiXVxzCC8",
+      "published_at": "2026-03-10T08:32:30.674100",
+      "published_at_display": "2026-03-10 08:32",
+      "published_ago": "3d"
+    },
+    {
+      "job_id": "a6925f5d-a04b-4be3-a4dd-97a864e831ae",
+      "job_id_short": "a6925f5d",
+      "channel": "market_meltdowns",
+      "title": "Watch this before scrolling: Wall Street moment nobody expected",
+      "title_truncated": "Watch this before scrolling: Wall Street moment nobody expec...",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/_WVesLGuYdI",
+      "published_at": "2026-03-10T08:02:31.811264",
+      "published_at_display": "2026-03-10 08:02",
+      "published_ago": "3d"
+    },
+    {
+      "job_id": "88940c50-3f9f-44f8-912c-4cc016c5e815",
+      "job_id_short": "88940c50",
+      "channel": "market_meltdowns",
+      "title": "Watch this before scrolling: Wall Street moment nobody expected",
+      "title_truncated": "Watch this before scrolling: Wall Street moment nobody expec...",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/orrqiQhOv08",
+      "published_at": "2026-03-10T03:32:35.548702",
+      "published_at_display": "2026-03-10 03:32",
+      "published_ago": "3d"
+    },
+    {
+      "job_id": "011a0dd7-9257-4120-ab1b-95d4fa52bf52",
+      "job_id_short": "011a0dd7",
+      "channel": "market_meltdowns",
+      "title": "Watch this before scrolling: The market did WHAT?! \ud83d\udc80",
+      "title_truncated": "Watch this before scrolling: The market did WHAT?! \ud83d\udc80",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/va8kIcmRwOs",
+      "published_at": "2026-03-10T03:02:37.536847",
+      "published_at_display": "2026-03-10 03:02",
+      "published_ago": "3d"
+    },
+    {
+      "job_id": "0ceb2421-88ad-4e6f-bb40-c007fa76e227",
+      "job_id_short": "0ceb2421",
+      "channel": "arc_highlightz",
+      "title": "Tfue's unexpected twist left everyone stunned\" \ud83c\udfae",
+      "title_truncated": "Tfue's unexpected twist left everyone stunned\" \ud83c\udfae",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/5iZ3iVk2Z0s",
+      "published_at": "2026-03-09T19:32:36.359491",
+      "published_at_display": "2026-03-09 19:32",
+      "published_ago": "3d"
+    },
+    {
+      "job_id": "cf96dcc1-eaed-4846-9345-482fa7c1880d",
+      "job_id_short": "cf96dcc1",
+      "channel": "arc_highlightz",
+      "title": "When Tfue faced the ultimate 'big dead' moment\" \ud83d\udc80",
+      "title_truncated": "When Tfue faced the ultimate 'big dead' moment\" \ud83d\udc80",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/nN25YVwU9SY",
+      "published_at": "2026-03-09T17:02:59.769374",
+      "published_at_display": "2026-03-09 17:02",
+      "published_ago": "3d"
+    },
+    {
+      "job_id": "0d30423e-cfb8-403e-82d7-80ec4316a71f",
+      "job_id_short": "0d30423e",
+      "channel": "arc_highlightz",
+      "title": "Tfue's big dead moment will leave you guessing \ud83d\udc80",
+      "title_truncated": "Tfue's big dead moment will leave you guessing \ud83d\udc80",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/i9tEPRcVSNM",
+      "published_at": "2026-03-09T16:02:30.195448",
+      "published_at_display": "2026-03-09 16:02",
+      "published_ago": "3d"
+    },
+    {
+      "job_id": "170cd6d2-6f0b-43ca-b9dd-4729e68982bb",
+      "job_id_short": "170cd6d2",
+      "channel": "fomo_highlights",
+      "title": "Watch this before scrolling: Nobody plays like this \ud83c\udfae",
+      "title_truncated": "Watch this before scrolling: Nobody plays like this \ud83c\udfae",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/rUgpDHmIXvY",
+      "published_at": "2026-03-09T15:36:50.116744",
+      "published_at_display": "2026-03-09 15:36",
+      "published_ago": "3d"
+    },
+    {
+      "job_id": "019041b2-5721-4591-9e99-cf78eb3a359e",
+      "job_id_short": "019041b2",
+      "channel": "arc_highlightz",
+      "title": "Watch this before scrolling: The clutch that nobody saw coming",
+      "title_truncated": "Watch this before scrolling: The clutch that nobody saw comi...",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/5N7h-z1gxu0",
+      "published_at": "2026-03-09T12:33:51.433435",
+      "published_at_display": "2026-03-09 12:33",
+      "published_ago": "3d"
+    },
+    {
+      "job_id": "0358aa4e-d99b-4244-b433-c863be395506",
+      "job_id_short": "0358aa4e",
+      "channel": "fomo_highlights",
+      "title": "Nobody expected Shroud to do this",
+      "title_truncated": "Nobody expected Shroud to do this",
+      "thumbnail_path": null,
+      "post_url": null,
+      "published_at": "2026-03-09T02:02:29.397235",
+      "published_at_display": "2026-03-09 02:02",
+      "published_ago": "4d"
+    }
+  ],
+  "upload_timeline": {
+    "buckets": [
+      {
+        "name": "Today",
+        "count": 0,
+        "items": []
+      },
+      {
+        "name": "Yesterday",
+        "count": 0,
+        "items": []
+      },
+      {
+        "name": "This Week",
+        "count": 15,
+        "items": [
+          {
+            "job_id": "e47a97f4-e3df-43d4-a653-b4bb583a0817",
+            "job_id_short": "e47a97f4",
+            "channel": "market_meltdowns",
+            "title": "Watch this before scrolling: The market did WHAT?! \ud83d\udc80",
+            "published_at": "2026-03-10T08:32:30.674100",
+            "published_at_display": "2026-03-10 08:32",
+            "published_ago": "3d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/lkhiXVxzCC8"
+          },
+          {
+            "job_id": "a6925f5d-a04b-4be3-a4dd-97a864e831ae",
+            "job_id_short": "a6925f5d",
+            "channel": "market_meltdowns",
+            "title": "Watch this before scrolling: Wall Street moment nobody ex...",
+            "published_at": "2026-03-10T08:02:31.811264",
+            "published_at_display": "2026-03-10 08:02",
+            "published_ago": "3d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/_WVesLGuYdI"
+          },
+          {
+            "job_id": "88940c50-3f9f-44f8-912c-4cc016c5e815",
+            "job_id_short": "88940c50",
+            "channel": "market_meltdowns",
+            "title": "Watch this before scrolling: Wall Street moment nobody ex...",
+            "published_at": "2026-03-10T03:32:35.548702",
+            "published_at_display": "2026-03-10 03:32",
+            "published_ago": "3d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/orrqiQhOv08"
+          },
+          {
+            "job_id": "011a0dd7-9257-4120-ab1b-95d4fa52bf52",
+            "job_id_short": "011a0dd7",
+            "channel": "market_meltdowns",
+            "title": "Watch this before scrolling: The market did WHAT?! \ud83d\udc80",
+            "published_at": "2026-03-10T03:02:37.536847",
+            "published_at_display": "2026-03-10 03:02",
+            "published_ago": "3d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/va8kIcmRwOs"
+          },
+          {
+            "job_id": "0ceb2421-88ad-4e6f-bb40-c007fa76e227",
+            "job_id_short": "0ceb2421",
+            "channel": "arc_highlightz",
+            "title": "Tfue's unexpected twist left everyone stunned\" \ud83c\udfae",
+            "published_at": "2026-03-09T19:32:36.359491",
+            "published_at_display": "2026-03-09 19:32",
+            "published_ago": "3d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/5iZ3iVk2Z0s"
+          },
+          {
+            "job_id": "cf96dcc1-eaed-4846-9345-482fa7c1880d",
+            "job_id_short": "cf96dcc1",
+            "channel": "arc_highlightz",
+            "title": "When Tfue faced the ultimate 'big dead' moment\" \ud83d\udc80",
+            "published_at": "2026-03-09T17:02:59.769374",
+            "published_at_display": "2026-03-09 17:02",
+            "published_ago": "3d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/nN25YVwU9SY"
+          },
+          {
+            "job_id": "0d30423e-cfb8-403e-82d7-80ec4316a71f",
+            "job_id_short": "0d30423e",
+            "channel": "arc_highlightz",
+            "title": "Tfue's big dead moment will leave you guessing \ud83d\udc80",
+            "published_at": "2026-03-09T16:02:30.195448",
+            "published_at_display": "2026-03-09 16:02",
+            "published_ago": "3d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/i9tEPRcVSNM"
+          },
+          {
+            "job_id": "170cd6d2-6f0b-43ca-b9dd-4729e68982bb",
+            "job_id_short": "170cd6d2",
+            "channel": "fomo_highlights",
+            "title": "Watch this before scrolling: Nobody plays like this \ud83c\udfae",
+            "published_at": "2026-03-09T15:36:50.116744",
+            "published_at_display": "2026-03-09 15:36",
+            "published_ago": "3d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/rUgpDHmIXvY"
+          },
+          {
+            "job_id": "019041b2-5721-4591-9e99-cf78eb3a359e",
+            "job_id_short": "019041b2",
+            "channel": "arc_highlightz",
+            "title": "Watch this before scrolling: The clutch that nobody saw c...",
+            "published_at": "2026-03-09T12:33:51.433435",
+            "published_at_display": "2026-03-09 12:33",
+            "published_ago": "3d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/5N7h-z1gxu0"
+          },
+          {
+            "job_id": "0358aa4e-d99b-4244-b433-c863be395506",
+            "job_id_short": "0358aa4e",
+            "channel": "fomo_highlights",
+            "title": "Nobody expected Shroud to do this",
+            "published_at": "2026-03-09T02:02:29.397235",
+            "published_at_display": "2026-03-09 02:02",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": null
+          },
+          {
+            "job_id": "0358aa4e-d99b-4244-b433-c863be395506",
+            "job_id_short": "0358aa4e",
+            "channel": "fomo_highlights",
+            "title": "Nobody expected Shroud to do this",
+            "published_at": "2026-03-09T02:02:29.397235",
+            "published_at_display": "2026-03-09 02:02",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/t7_vmIPVyq0"
+          },
+          {
+            "job_id": "1cd20737-9641-4f0c-8f3f-bbe3aa1e35d2",
+            "job_id_short": "1cd20737",
+            "channel": "viral_recaps",
+            "title": "Watch this before scrolling: How is this even real?",
+            "published_at": "2026-03-09T01:32:33.422670",
+            "published_at_display": "2026-03-09 01:32",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/gncPTxstR34"
+          },
+          {
+            "job_id": "fb0a0ee2-19fa-4d4b-b8a2-cda5791ca82f",
+            "job_id_short": "fb0a0ee2",
+            "channel": "fomo_highlights",
+            "title": "Watch this before scrolling: Nobody expected Keyingtv to ...",
+            "published_at": "2026-03-09T01:02:34.842289",
+            "published_at_display": "2026-03-09 01:02",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/NsTrhyYREtw"
+          },
+          {
+            "job_id": "8ba0cdbe-d3b2-4358-9ac7-a62f0f3a7fd0",
+            "job_id_short": "8ba0cdbe",
+            "channel": "viral_recaps",
+            "title": "This was NOT supposed to happen \ud83d\ude33",
+            "published_at": "2026-03-09T00:32:25.661698",
+            "published_at_display": "2026-03-09 00:32",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/lWLGOFVqsd0"
+          },
+          {
+            "job_id": "f603ac5e-92fc-4414-bec6-b22bdf7feb40",
+            "job_id_short": "f603ac5e",
+            "channel": "arc_highlightz",
+            "title": "Watch this before scrolling: Chat couldn't believe what {...",
+            "published_at": "2026-03-09T00:21:31.861816",
+            "published_at_display": "2026-03-09 00:21",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/3muQhbF8RIw"
+          }
+        ]
+      },
+      {
+        "name": "Last Week",
+        "count": 18,
+        "items": [
+          {
+            "job_id": "991086c2-a969-4dfe-8855-b9034d05477f",
+            "job_id_short": "991086c2",
+            "channel": "viral_recaps",
+            "title": "Watch this before scrolling: This will make your brain fe...",
+            "published_at": "2026-03-08T23:21:32.668551",
+            "published_at_display": "2026-03-08 23:21",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/PnYe4JAvpXo"
+          },
+          {
+            "job_id": "19f168e7-75e4-49bd-a371-ebfb055caf8a",
+            "job_id_short": "19f168e7",
+            "channel": "fomo_highlights",
+            "title": "Tfue just broke the game \ud83c\udfae",
+            "published_at": "2026-03-08T23:18:37.825820",
+            "published_at_display": "2026-03-08 23:18",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/IcaWcciAOzM"
+          },
+          {
+            "job_id": "4297f7df-abb4-44dd-a2c7-8394ef1d2ed6",
+            "job_id_short": "4297f7df",
+            "channel": "arc_highlightz",
+            "title": "Watch this before scrolling: Nobody plays like this",
+            "published_at": "2026-03-08T23:11:05.670130",
+            "published_at_display": "2026-03-08 23:11",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/Jz6HHg_vVD8"
+          },
+          {
+            "job_id": "4297f7df-abb4-44dd-a2c7-8394ef1d2ed6",
+            "job_id_short": "4297f7df",
+            "channel": "arc_highlightz",
+            "title": "Watch this before scrolling: Nobody plays like this",
+            "published_at": "2026-03-08T23:11:05.670130",
+            "published_at_display": "2026-03-08 23:11",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/LMPEwsLXHVw"
+          },
+          {
+            "job_id": "4297f7df-abb4-44dd-a2c7-8394ef1d2ed6",
+            "job_id_short": "4297f7df",
+            "channel": "arc_highlightz",
+            "title": "Watch this before scrolling: Nobody plays like this",
+            "published_at": "2026-03-08T23:11:05.670130",
+            "published_at_display": "2026-03-08 23:11",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/U-bJAmsRBOQ"
+          },
+          {
+            "job_id": "4297f7df-abb4-44dd-a2c7-8394ef1d2ed6",
+            "job_id_short": "4297f7df",
+            "channel": "arc_highlightz",
+            "title": "Watch this before scrolling: Nobody plays like this",
+            "published_at": "2026-03-08T23:11:05.670130",
+            "published_at_display": "2026-03-08 23:11",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/W6X5VpSQccw"
+          },
+          {
+            "job_id": "4297f7df-abb4-44dd-a2c7-8394ef1d2ed6",
+            "job_id_short": "4297f7df",
+            "channel": "arc_highlightz",
+            "title": "Watch this before scrolling: Nobody plays like this",
+            "published_at": "2026-03-08T23:11:05.670130",
+            "published_at_display": "2026-03-08 23:11",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/WPJe8hhJYZA"
+          },
+          {
+            "job_id": "b7749019-2eef-415f-a301-8d9363e5c267",
+            "job_id_short": "b7749019",
+            "channel": "arc_highlightz",
+            "title": "Watch this before scrolling: Nobody plays like this",
+            "published_at": "2026-03-08T22:34:36.446714",
+            "published_at_display": "2026-03-08 22:34",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/TEq89-Zd608"
+          },
+          {
+            "job_id": "37068cbb-222c-45b6-a33a-13549f1367bb",
+            "job_id_short": "37068cbb",
+            "channel": "fomo_highlights",
+            "title": "Watch this before scrolling: Tfue just broke the game \ud83c\udfae",
+            "published_at": "2026-03-08T22:00:55.857093",
+            "published_at_display": "2026-03-08 22:00",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/d1odaah2CV8"
+          },
+          {
+            "job_id": "ec7a6378-840e-4105-8c1a-e1df8971eb10",
+            "job_id_short": "ec7a6378",
+            "channel": "viral_recaps",
+            "title": "This was NOT supposed to happen \ud83d\ude33",
+            "published_at": "2026-03-08T21:00:40.067342",
+            "published_at_display": "2026-03-08 21:00",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/h2hJKv-iIAM"
+          },
+          {
+            "job_id": "8a5ef077-a153-4551-af0d-38c8966d3cd0",
+            "job_id_short": "8a5ef077",
+            "channel": "market_meltdowns",
+            "title": "Wall Street moment nobody expected",
+            "published_at": "2026-03-08T18:58:24.456804",
+            "published_at_display": "2026-03-08 18:58",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/vgMn88LdzmY"
+          },
+          {
+            "job_id": "6db7ec37-fe9b-4f90-b7cf-16228bf02997",
+            "job_id_short": "6db7ec37",
+            "channel": "market_meltdowns",
+            "title": "Nobody talks about this financial truth",
+            "published_at": "2026-03-08T18:21:13.917244",
+            "published_at_display": "2026-03-08 18:21",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": null
+          },
+          {
+            "job_id": "6db7ec37-fe9b-4f90-b7cf-16228bf02997",
+            "job_id_short": "6db7ec37",
+            "channel": "market_meltdowns",
+            "title": "Nobody talks about this financial truth",
+            "published_at": "2026-03-08T18:21:13.917244",
+            "published_at_display": "2026-03-08 18:21",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": null
+          },
+          {
+            "job_id": "6db7ec37-fe9b-4f90-b7cf-16228bf02997",
+            "job_id_short": "6db7ec37",
+            "channel": "market_meltdowns",
+            "title": "Nobody talks about this financial truth",
+            "published_at": "2026-03-08T18:21:13.917244",
+            "published_at_display": "2026-03-08 18:21",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/SpM-FYAvaro"
+          },
+          {
+            "job_id": "6cee1dcd-bfea-4fbd-b0d3-e292ca694ac1",
+            "job_id_short": "6cee1dcd",
+            "channel": "viral_recaps",
+            "title": "Watch this before scrolling: The most unexpected moment o...",
+            "published_at": "2026-03-08T18:12:01.128538",
+            "published_at_display": "2026-03-08 18:12",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/B_KCveVY-eg"
+          },
+          {
+            "job_id": "b94017ea-3582-421d-bb20-e645d819198f",
+            "job_id_short": "b94017ea",
+            "channel": "fomo_highlights",
+            "title": "Watch this before scrolling: Nobody plays like this",
+            "published_at": "2026-03-08T17:01:06.386252",
+            "published_at_display": "2026-03-08 17:01",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/R0qO8kF3wM8"
+          },
+          {
+            "job_id": "5df91f96-57e2-4919-870d-25c28083d908",
+            "job_id_short": "5df91f96",
+            "channel": "fomo_highlights",
+            "title": "Cloakzy made this look easy",
+            "published_at": "2026-03-08T16:42:43.382813",
+            "published_at_display": "2026-03-08 16:42",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": null
+          },
+          {
+            "job_id": "5df91f96-57e2-4919-870d-25c28083d908",
+            "job_id_short": "5df91f96",
+            "channel": "fomo_highlights",
+            "title": "Cloakzy made this look easy",
+            "published_at": "2026-03-08T16:42:43.382813",
+            "published_at_display": "2026-03-08 16:42",
+            "published_ago": "4d",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/aquaRYzjze8"
+          }
+        ]
+      },
+      {
+        "name": "Older",
+        "count": 0,
+        "items": []
+      }
+    ],
+    "total_count": 33
+  },
   "discord_feed": [
     {
       "id": "1481889609037385788",
@@ -5827,7 +6443,7 @@
       "author": "Aidan Bot",
       "timestamp": "2026-03-13T05:40:14.972000+00:00",
       "timestamp_display": "2026-03-13 05:40",
-      "timestamp_ago": "58m",
+      "timestamp_ago": "6h",
       "message": "[Dashboard Test] Feature #5 Discord Feed integration smoke test at 2026-03-13 05:44 UTC",
       "message_snippet": "[Dashboard Test] Feature #5 Discord Feed integration smoke test at 2026-03-13 05:44 UTC",
       "url": "https://discord.com/channels/1468193294432604326/1475223354066600036/1481889609037385788"
@@ -5889,12 +6505,6 @@
       "message": "Not logged in (redirected to https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fstudio.youtube.com%252F%26fea"
     },
     {
-      "channel": "ai_did_what",
-      "job_id_short": "50adacf7",
-      "updated_at": "2026-03-11 10:30",
-      "message": "Not logged in (redirected to https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fstudio.youtube.com%252F%26fea"
-    },
-    {
       "channel": "gym_moments",
       "job_id_short": "c3acf855",
       "updated_at": "2026-03-11 10:00",
@@ -5928,6 +6538,12 @@
       "channel": "market_meltdowns",
       "job_id_short": "2a4802e5",
       "updated_at": "2026-03-10 13:00",
+      "message": "account_terminated"
+    },
+    {
+      "channel": "market_meltdowns",
+      "job_id_short": "b611ec85",
+      "updated_at": "2026-03-10 12:07",
       "message": "account_terminated"
     }
   ],
@@ -6078,6 +6694,4462 @@
       "source_count": 5
     }
   },
+  "schedule": {
+    "2026-03-10": [
+      {
+        "job_id": "678a5b3f-89d2-4a6a-b8a3-690ba6e343d5",
+        "job_id_short": "678a5b3f",
+        "channel": "market_meltdowns",
+        "title": "This changed how I think about money",
+        "scheduled_at": "2026-03-10T17:00:00-06:00",
+        "scheduled_at_iso": "2026-03-10T17:00:00",
+        "status": "queued"
+      },
+      {
+        "job_id": "78f659dc-5c0d-4e6c-912d-7d2970b81904",
+        "job_id_short": "78f659dc",
+        "channel": "market_meltdowns",
+        "title": "The quiet crisis nobody is covering",
+        "scheduled_at": "2026-03-10T19:25:00-06:00",
+        "scheduled_at_iso": "2026-03-10T19:25:00",
+        "status": "queued"
+      },
+      {
+        "job_id": "579597de-81ea-4033-9311-888f1a8374c7",
+        "job_id_short": "579597de",
+        "channel": "market_meltdowns",
+        "title": "Most people get this completely wrong",
+        "scheduled_at": "2026-03-10T20:00:00-06:00",
+        "scheduled_at_iso": "2026-03-10T20:00:00",
+        "status": "queued"
+      },
+      {
+        "job_id": "79330624-5b4e-4faf-964b-45416d6b204f",
+        "job_id_short": "79330624",
+        "channel": "market_meltdowns",
+        "title": "What the banks don't want you to know",
+        "scheduled_at": "2026-03-10T20:00:00-06:00",
+        "scheduled_at_iso": "2026-03-10T20:00:00",
+        "status": "queued"
+      },
+      {
+        "job_id": "29ceb605-4a56-4b40-b12e-78d73c616546",
+        "job_id_short": "29ceb605",
+        "channel": "market_meltdowns",
+        "title": "The thing Wall Street hopes you never learn",
+        "scheduled_at": "2026-03-10T20:30:00-06:00",
+        "scheduled_at_iso": "2026-03-10T20:30:00",
+        "status": "queued"
+      },
+      {
+        "job_id": "011a0dd7-9257-4120-ab1b-95d4fa52bf52",
+        "job_id_short": "011a0dd7",
+        "channel": "market_meltdowns",
+        "title": "Watch this before scrolling: The market did WHAT?!",
+        "scheduled_at": "2026-03-10T03:02:37.536847",
+        "scheduled_at_iso": "2026-03-10T03:02:37.536847",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "88940c50-3f9f-44f8-912c-4cc016c5e815",
+        "job_id_short": "88940c50",
+        "channel": "market_meltdowns",
+        "title": "Watch this before scrolling: Wall Street moment no",
+        "scheduled_at": "2026-03-10T03:32:35.548702",
+        "scheduled_at_iso": "2026-03-10T03:32:35.548702",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "a6925f5d-a04b-4be3-a4dd-97a864e831ae",
+        "job_id_short": "a6925f5d",
+        "channel": "market_meltdowns",
+        "title": "Watch this before scrolling: Wall Street moment no",
+        "scheduled_at": "2026-03-10T08:02:31.811264",
+        "scheduled_at_iso": "2026-03-10T08:02:31.811264",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "e47a97f4-e3df-43d4-a653-b4bb583a0817",
+        "job_id_short": "e47a97f4",
+        "channel": "market_meltdowns",
+        "title": "Watch this before scrolling: The market did WHAT?!",
+        "scheduled_at": "2026-03-10T08:32:30.674100",
+        "scheduled_at_iso": "2026-03-10T08:32:30.674100",
+        "status": "succeeded"
+      }
+    ],
+    "2026-03-11": [
+      {
+        "job_id": "5865cb1d-af47-4855-9475-ed710365e548",
+        "job_id_short": "5865cb1d",
+        "channel": "market_meltdowns",
+        "title": "This is what a real financial meltdown looks like",
+        "scheduled_at": "2026-03-11T07:00:00-06:00",
+        "scheduled_at_iso": "2026-03-11T07:00:00",
+        "status": "queued"
+      },
+      {
+        "job_id": "bd1675b9-b4c9-42da-81e5-24efd62280dd",
+        "job_id_short": "bd1675b9",
+        "channel": "market_meltdowns",
+        "title": "This is why your money is disappearing",
+        "scheduled_at": "2026-03-11T12:00:00-06:00",
+        "scheduled_at_iso": "2026-03-11T12:00:00",
+        "status": "queued"
+      },
+      {
+        "job_id": "fa440d06-a708-4a16-a485-4228b6b1b010",
+        "job_id_short": "fa440d06",
+        "channel": "gym_moments",
+        "title": "Chris Bumstead shares the truth about fad diets \ud83d\ude2e",
+        "scheduled_at": "2026-03-11T22:30:00-06:00",
+        "scheduled_at_iso": "2026-03-11T22:30:00",
+        "status": "queued"
+      }
+    ],
+    "2026-03-12": [
+      {
+        "job_id": "f245a092-b530-4ed5-870b-93a5de960a18",
+        "job_id_short": "f245a092",
+        "channel": "gym_moments",
+        "title": "Chris Bumstead uncovers bodybuilding's biggest sec",
+        "scheduled_at": "2026-03-12T01:27:00-06:00",
+        "scheduled_at_iso": "2026-03-12T01:27:00",
+        "status": "queued"
+      },
+      {
+        "job_id": "26a70d1a-194a-422e-9f1a-8155541a96bd",
+        "job_id_short": "26a70d1a",
+        "channel": "market_meltdowns",
+        "title": "The trade that made millions \u2014 and then didn't",
+        "scheduled_at": "2026-03-12T07:00:00-06:00",
+        "scheduled_at_iso": "2026-03-12T07:00:00",
+        "status": "queued"
+      },
+      {
+        "job_id": "5771d834-a91b-46aa-b9b7-3a40149f2a3b",
+        "job_id_short": "5771d834",
+        "channel": "market_meltdowns",
+        "title": "The financial move nobody is talking about",
+        "scheduled_at": "2026-03-12T12:00:00-06:00",
+        "scheduled_at_iso": "2026-03-12T12:00:00",
+        "status": "queued"
+      },
+      {
+        "job_id": "8cc6200e-0473-4781-b822-66623ea51915",
+        "job_id_short": "8cc6200e",
+        "channel": "market_meltdowns",
+        "title": "This is how markets actually work \ud83d\udcc9",
+        "scheduled_at": "2026-03-12T17:00:00-06:00",
+        "scheduled_at_iso": "2026-03-12T17:00:00",
+        "status": "queued"
+      },
+      {
+        "job_id": "f8bf2d77-21dd-4042-a1fb-8db1be879d67",
+        "job_id_short": "f8bf2d77",
+        "channel": "market_meltdowns",
+        "title": "Nobody saw this market move coming",
+        "scheduled_at": "2026-03-12T20:00:00-06:00",
+        "scheduled_at_iso": "2026-03-12T20:00:00",
+        "status": "queued"
+      },
+      {
+        "job_id": "ba1fcfd1-b569-4405-90f2-5bfeca9ac788",
+        "job_id_short": "ba1fcfd1",
+        "channel": "market_meltdowns",
+        "title": "Why your savings are losing value right now",
+        "scheduled_at": "2026-03-12T20:00:00-06:00",
+        "scheduled_at_iso": "2026-03-12T20:00:00",
+        "status": "queued"
+      },
+      {
+        "job_id": "e7a62d40-a5c0-4516-8bdb-ac4b1771ebae",
+        "job_id_short": "e7a62d40",
+        "channel": "market_meltdowns",
+        "title": "What happened after they bet it all",
+        "scheduled_at": "2026-03-12T20:00:00-06:00",
+        "scheduled_at_iso": "2026-03-12T20:00:00",
+        "status": "queued"
+      },
+      {
+        "job_id": "f9cbdb17-f5ac-4c4d-8881-8fdcdaff54ad",
+        "job_id_short": "f9cbdb17",
+        "channel": "startup_graveyard",
+        "title": "Shark spark uncovers the truth behind the pitch wa",
+        "scheduled_at": "2026-03-12T23:00:00-06:00",
+        "scheduled_at_iso": "2026-03-12T23:00:00",
+        "status": "queued"
+      }
+    ],
+    "2026-03-13": [
+      {
+        "job_id": "0f6e4cc9-6ae2-48d3-921f-7402f77f968b",
+        "job_id_short": "0f6e4cc9",
+        "channel": "rich_or_ruined",
+        "title": "A cat\u00e2\u20ac\u2122s story Big Wins #1",
+        "scheduled_at": "2026-03-13T07:00:00-06:00",
+        "scheduled_at_iso": "2026-03-13T07:00:00",
+        "status": "queued"
+      }
+    ],
+    "2026-03-08": [
+      {
+        "job_id": "5df91f96-57e2-4919-870d-25c28083d908",
+        "job_id_short": "5df91f96",
+        "channel": "fomo_highlights",
+        "title": "Cloakzy made this look easy",
+        "scheduled_at": "2026-03-08T16:42:43.382813",
+        "scheduled_at_iso": "2026-03-08T16:42:43.382813",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "b94017ea-3582-421d-bb20-e645d819198f",
+        "job_id_short": "b94017ea",
+        "channel": "fomo_highlights",
+        "title": "Watch this before scrolling: Nobody plays like thi",
+        "scheduled_at": "2026-03-08T17:01:06.386252",
+        "scheduled_at_iso": "2026-03-08T17:01:06.386252",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "6cee1dcd-bfea-4fbd-b0d3-e292ca694ac1",
+        "job_id_short": "6cee1dcd",
+        "channel": "viral_recaps",
+        "title": "Watch this before scrolling: The most unexpected m",
+        "scheduled_at": "2026-03-08T18:12:01.128538",
+        "scheduled_at_iso": "2026-03-08T18:12:01.128538",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "6db7ec37-fe9b-4f90-b7cf-16228bf02997",
+        "job_id_short": "6db7ec37",
+        "channel": "market_meltdowns",
+        "title": "Nobody talks about this financial truth",
+        "scheduled_at": "2026-03-08T18:21:13.917244",
+        "scheduled_at_iso": "2026-03-08T18:21:13.917244",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "8a5ef077-a153-4551-af0d-38c8966d3cd0",
+        "job_id_short": "8a5ef077",
+        "channel": "market_meltdowns",
+        "title": "Wall Street moment nobody expected",
+        "scheduled_at": "2026-03-08T18:58:24.456804",
+        "scheduled_at_iso": "2026-03-08T18:58:24.456804",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "ec7a6378-840e-4105-8c1a-e1df8971eb10",
+        "job_id_short": "ec7a6378",
+        "channel": "viral_recaps",
+        "title": "This was NOT supposed to happen \ud83d\ude33",
+        "scheduled_at": "2026-03-08T21:00:40.067342",
+        "scheduled_at_iso": "2026-03-08T21:00:40.067342",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "37068cbb-222c-45b6-a33a-13549f1367bb",
+        "job_id_short": "37068cbb",
+        "channel": "fomo_highlights",
+        "title": "Watch this before scrolling: Tfue just broke the g",
+        "scheduled_at": "2026-03-08T22:00:55.857093",
+        "scheduled_at_iso": "2026-03-08T22:00:55.857093",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "b7749019-2eef-415f-a301-8d9363e5c267",
+        "job_id_short": "b7749019",
+        "channel": "arc_highlightz",
+        "title": "Watch this before scrolling: Nobody plays like thi",
+        "scheduled_at": "2026-03-08T22:34:36.446714",
+        "scheduled_at_iso": "2026-03-08T22:34:36.446714",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "4297f7df-abb4-44dd-a2c7-8394ef1d2ed6",
+        "job_id_short": "4297f7df",
+        "channel": "arc_highlightz",
+        "title": "Watch this before scrolling: Nobody plays like thi",
+        "scheduled_at": "2026-03-08T23:11:05.670130",
+        "scheduled_at_iso": "2026-03-08T23:11:05.670130",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "19f168e7-75e4-49bd-a371-ebfb055caf8a",
+        "job_id_short": "19f168e7",
+        "channel": "fomo_highlights",
+        "title": "Tfue just broke the game \ud83c\udfae",
+        "scheduled_at": "2026-03-08T23:18:37.825820",
+        "scheduled_at_iso": "2026-03-08T23:18:37.825820",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "991086c2-a969-4dfe-8855-b9034d05477f",
+        "job_id_short": "991086c2",
+        "channel": "viral_recaps",
+        "title": "Watch this before scrolling: This will make your b",
+        "scheduled_at": "2026-03-08T23:21:32.668551",
+        "scheduled_at_iso": "2026-03-08T23:21:32.668551",
+        "status": "succeeded"
+      }
+    ],
+    "2026-03-09": [
+      {
+        "job_id": "f603ac5e-92fc-4414-bec6-b22bdf7feb40",
+        "job_id_short": "f603ac5e",
+        "channel": "arc_highlightz",
+        "title": "Watch this before scrolling: Chat couldn't believe",
+        "scheduled_at": "2026-03-09T00:21:31.861816",
+        "scheduled_at_iso": "2026-03-09T00:21:31.861816",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "8ba0cdbe-d3b2-4358-9ac7-a62f0f3a7fd0",
+        "job_id_short": "8ba0cdbe",
+        "channel": "viral_recaps",
+        "title": "This was NOT supposed to happen \ud83d\ude33",
+        "scheduled_at": "2026-03-09T00:32:25.661698",
+        "scheduled_at_iso": "2026-03-09T00:32:25.661698",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "fb0a0ee2-19fa-4d4b-b8a2-cda5791ca82f",
+        "job_id_short": "fb0a0ee2",
+        "channel": "fomo_highlights",
+        "title": "Watch this before scrolling: Nobody expected Keyin",
+        "scheduled_at": "2026-03-09T01:02:34.842289",
+        "scheduled_at_iso": "2026-03-09T01:02:34.842289",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "1cd20737-9641-4f0c-8f3f-bbe3aa1e35d2",
+        "job_id_short": "1cd20737",
+        "channel": "viral_recaps",
+        "title": "Watch this before scrolling: How is this even real",
+        "scheduled_at": "2026-03-09T01:32:33.422670",
+        "scheduled_at_iso": "2026-03-09T01:32:33.422670",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "0358aa4e-d99b-4244-b433-c863be395506",
+        "job_id_short": "0358aa4e",
+        "channel": "fomo_highlights",
+        "title": "Nobody expected Shroud to do this",
+        "scheduled_at": "2026-03-09T02:02:29.397235",
+        "scheduled_at_iso": "2026-03-09T02:02:29.397235",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "019041b2-5721-4591-9e99-cf78eb3a359e",
+        "job_id_short": "019041b2",
+        "channel": "arc_highlightz",
+        "title": "Watch this before scrolling: The clutch that nobod",
+        "scheduled_at": "2026-03-09T12:33:51.433435",
+        "scheduled_at_iso": "2026-03-09T12:33:51.433435",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "170cd6d2-6f0b-43ca-b9dd-4729e68982bb",
+        "job_id_short": "170cd6d2",
+        "channel": "fomo_highlights",
+        "title": "Watch this before scrolling: Nobody plays like thi",
+        "scheduled_at": "2026-03-09T15:36:50.116744",
+        "scheduled_at_iso": "2026-03-09T15:36:50.116744",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "0d30423e-cfb8-403e-82d7-80ec4316a71f",
+        "job_id_short": "0d30423e",
+        "channel": "arc_highlightz",
+        "title": "Tfue's big dead moment will leave you guessing \ud83d\udc80",
+        "scheduled_at": "2026-03-09T16:02:30.195448",
+        "scheduled_at_iso": "2026-03-09T16:02:30.195448",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "cf96dcc1-eaed-4846-9345-482fa7c1880d",
+        "job_id_short": "cf96dcc1",
+        "channel": "arc_highlightz",
+        "title": "When Tfue faced the ultimate 'big dead' moment\" \ud83d\udc80",
+        "scheduled_at": "2026-03-09T17:02:59.769374",
+        "scheduled_at_iso": "2026-03-09T17:02:59.769374",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "0ceb2421-88ad-4e6f-bb40-c007fa76e227",
+        "job_id_short": "0ceb2421",
+        "channel": "arc_highlightz",
+        "title": "Tfue's unexpected twist left everyone stunned\" \ud83c\udfae",
+        "scheduled_at": "2026-03-09T19:32:36.359491",
+        "scheduled_at_iso": "2026-03-09T19:32:36.359491",
+        "status": "succeeded"
+      }
+    ],
+    "2026-03-14": [],
+    "2026-03-15": [],
+    "2026-03-16": [],
+    "2026-03-17": [],
+    "2026-03-18": [],
+    "2026-03-19": [],
+    "2026-03-20": []
+  },
+  "quota": {
+    "quota_by_channel": [
+      {
+        "channel": "ai_did_what",
+        "uploads_today": 0,
+        "units_used": 0,
+        "units_remaining": 10000,
+        "units_total": 10000,
+        "pct_used": 0.0,
+        "status": "green",
+        "display_text": "0/10000 units (0.0%)"
+      },
+      {
+        "channel": "arc_highlightz",
+        "uploads_today": 0,
+        "units_used": 0,
+        "units_remaining": 10000,
+        "units_total": 10000,
+        "pct_used": 0.0,
+        "status": "green",
+        "display_text": "0/10000 units (0.0%)"
+      },
+      {
+        "channel": "fomo_highlights",
+        "uploads_today": 0,
+        "units_used": 0,
+        "units_remaining": 10000,
+        "units_total": 10000,
+        "pct_used": 0.0,
+        "status": "green",
+        "display_text": "0/10000 units (0.0%)"
+      },
+      {
+        "channel": "gym_moments",
+        "uploads_today": 0,
+        "units_used": 0,
+        "units_remaining": 10000,
+        "units_total": 10000,
+        "pct_used": 0.0,
+        "status": "green",
+        "display_text": "0/10000 units (0.0%)"
+      },
+      {
+        "channel": "market_meltdowns",
+        "uploads_today": 0,
+        "units_used": 0,
+        "units_remaining": 10000,
+        "units_total": 10000,
+        "pct_used": 0.0,
+        "status": "green",
+        "display_text": "0/10000 units (0.0%)"
+      },
+      {
+        "channel": "rich_or_ruined",
+        "uploads_today": 0,
+        "units_used": 0,
+        "units_remaining": 10000,
+        "units_total": 10000,
+        "pct_used": 0.0,
+        "status": "green",
+        "display_text": "0/10000 units (0.0%)"
+      },
+      {
+        "channel": "self_made_clips",
+        "uploads_today": 0,
+        "units_used": 0,
+        "units_remaining": 10000,
+        "units_total": 10000,
+        "pct_used": 0.0,
+        "status": "green",
+        "display_text": "0/10000 units (0.0%)"
+      },
+      {
+        "channel": "startup_graveyard",
+        "uploads_today": 0,
+        "units_used": 0,
+        "units_remaining": 10000,
+        "units_total": 10000,
+        "pct_used": 0.0,
+        "status": "green",
+        "display_text": "0/10000 units (0.0%)"
+      },
+      {
+        "channel": "stream_queens",
+        "uploads_today": 0,
+        "units_used": 0,
+        "units_remaining": 10000,
+        "units_total": 10000,
+        "pct_used": 0.0,
+        "status": "green",
+        "display_text": "0/10000 units (0.0%)"
+      },
+      {
+        "channel": "stream_sirens",
+        "uploads_today": 0,
+        "units_used": 0,
+        "units_remaining": 10000,
+        "units_total": 10000,
+        "pct_used": 0.0,
+        "status": "green",
+        "display_text": "0/10000 units (0.0%)"
+      },
+      {
+        "channel": "viral_recaps",
+        "uploads_today": 0,
+        "units_used": 0,
+        "units_remaining": 10000,
+        "units_total": 10000,
+        "pct_used": 0.0,
+        "status": "green",
+        "display_text": "0/10000 units (0.0%)"
+      }
+    ],
+    "any_channel_high": false,
+    "all_channels_safe": true,
+    "reset_time_hours": 19,
+    "reset_time_minutes": 45,
+    "reset_time_display": "19h 45m"
+  },
+  "revenue": {
+    "total_views_30d": 0,
+    "total_revenue_30d": 0.0,
+    "average_rpm": 0.0,
+    "monthly_avg_views": 0.0,
+    "projected_annual_revenue": 0.0,
+    "growth_rate": 0.0,
+    "next_milestone": 500,
+    "progress_to_milestone_pct": 0.0,
+    "months_to_next_milestone": null,
+    "channel_breakdown": [],
+    "summary": "Keep up the great work!"
+  },
+  "pipeline": {
+    "overall": {
+      "discovered": 0,
+      "downloaded": 0,
+      "processed": 0,
+      "queued": 17,
+      "uploaded": 25
+    },
+    "by_channel": [
+      {
+        "channel": "arc_highlightz",
+        "discovered": 0,
+        "downloaded": 0,
+        "processed": 0,
+        "queued": 0,
+        "uploaded": 7
+      },
+      {
+        "channel": "fomo_highlights",
+        "discovered": 0,
+        "downloaded": 0,
+        "processed": 0,
+        "queued": 0,
+        "uploaded": 7
+      },
+      {
+        "channel": "gym_moments",
+        "discovered": 0,
+        "downloaded": 0,
+        "processed": 0,
+        "queued": 2,
+        "uploaded": 0
+      },
+      {
+        "channel": "market_meltdowns",
+        "discovered": 0,
+        "downloaded": 0,
+        "processed": 0,
+        "queued": 13,
+        "uploaded": 6
+      },
+      {
+        "channel": "rich_or_ruined",
+        "discovered": 0,
+        "downloaded": 0,
+        "processed": 0,
+        "queued": 1,
+        "uploaded": 0
+      },
+      {
+        "channel": "startup_graveyard",
+        "discovered": 0,
+        "downloaded": 0,
+        "processed": 0,
+        "queued": 1,
+        "uploaded": 0
+      },
+      {
+        "channel": "viral_recaps",
+        "discovered": 0,
+        "downloaded": 0,
+        "processed": 0,
+        "queued": 0,
+        "uploaded": 5
+      }
+    ],
+    "throughput": {
+      "uploads_per_hour": 0.0,
+      "uploads_last_24h": 0
+    },
+    "stage_timings": {
+      "discovered_to_downloaded_hours": 0.0,
+      "queued_to_uploaded_hours": 3.47
+    },
+    "bottleneck": {
+      "stage": "queued",
+      "backlog": 17
+    }
+  },
+  "disk": {
+    "directories": [
+      {
+        "name": "raw_clips",
+        "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\raw_clips",
+        "size_bytes": 11708629546,
+        "size_human": "10.9GB",
+        "file_count": 1695
+      },
+      {
+        "name": "intermediate",
+        "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\intermediate",
+        "size_bytes": 550088126,
+        "size_human": "524.6MB",
+        "file_count": 54
+      },
+      {
+        "name": "renders",
+        "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\renders",
+        "size_bytes": 1009444011,
+        "size_human": "962.7MB",
+        "file_count": 97
+      },
+      {
+        "name": "renders/thumbnails",
+        "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\renders\\thumbnails",
+        "size_bytes": 1082874,
+        "size_human": "1.0MB",
+        "file_count": 24
+      }
+    ],
+    "total_disk_bytes": 14454994920,
+    "total_disk_human": "13.5GB",
+    "percent_of_500gb": 2.7,
+    "warning_threshold_pct": 70,
+    "error_threshold_pct": 85,
+    "largest_files": [
+      {
+        "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\raw_clips\\rich_or_ruined\\IV1ZYfIpjjU_He_Fixed_a_Billionaire_s_Car._His_Life_Was_Never_t.mp4",
+        "name": "IV1ZYfIpjjU_He_Fixed_a_Billionaire_s_Car._His_Life_Was_Never_t.mp4",
+        "size_bytes": 388655815,
+        "size_human": "370.7MB",
+        "directory": "raw_clips"
+      },
+      {
+        "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\raw_clips\\rich_or_ruined\\D4cSena8m3Y_The_Millionaire_Found_an_Old_Letter_From_His_Child.mp4",
+        "name": "D4cSena8m3Y_The_Millionaire_Found_an_Old_Letter_From_His_Child.mp4",
+        "size_bytes": 106975924,
+        "size_human": "102.0MB",
+        "directory": "raw_clips"
+      },
+      {
+        "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\raw_clips\\rich_or_ruined\\XDdK2VOes-I_They_Kicked_Out_A_Poor_Old_Man..._Then_A_Billionai.mp4",
+        "name": "XDdK2VOes-I_They_Kicked_Out_A_Poor_Old_Man..._Then_A_Billionai.mp4",
+        "size_bytes": 80093677,
+        "size_human": "76.4MB",
+        "directory": "raw_clips"
+      },
+      {
+        "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\raw_clips\\ai_did_what\\McE6el9mn_I_Samsung_s_Secret_Screen_Feature.mp4",
+        "name": "McE6el9mn_I_Samsung_s_Secret_Screen_Feature.mp4",
+        "size_bytes": 64510767,
+        "size_human": "61.5MB",
+        "directory": "raw_clips"
+      },
+      {
+        "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\raw_clips\\rich_or_ruined\\sCNwS3no6A0_After_25_Years_A_Ghibli-Style_Tale_of_a_Promise_a_.mp4",
+        "name": "sCNwS3no6A0_After_25_Years_A_Ghibli-Style_Tale_of_a_Promise_a_.mp4",
+        "size_bytes": 62932706,
+        "size_human": "60.0MB",
+        "directory": "raw_clips"
+      }
+    ],
+    "disk_status": "healthy"
+  },
+  "hall_of_fame": {
+    "top_10_clips": [
+      {
+        "rank": 1,
+        "channel": "market_meltdowns",
+        "title": "Nobody talks about this financial truth",
+        "title_display": "Nobody talks about this financial truth",
+        "views": 3153,
+        "views_display": "3.2K",
+        "post_url": null,
+        "published_at": "2026-03-08T18:21:13.917244",
+        "published_at_display": "2026-03-08 18:21",
+        "published_ago": "4d",
+        "thumbnail_path": null
+      },
+      {
+        "rank": 2,
+        "channel": "market_meltdowns",
+        "title": "Nobody talks about this financial truth",
+        "title_display": "Nobody talks about this financial truth",
+        "views": 3153,
+        "views_display": "3.2K",
+        "post_url": null,
+        "published_at": "2026-03-08T18:21:13.917244",
+        "published_at_display": "2026-03-08 18:21",
+        "published_ago": "4d",
+        "thumbnail_path": null
+      },
+      {
+        "rank": 3,
+        "channel": "market_meltdowns",
+        "title": "Nobody talks about this financial truth",
+        "title_display": "Nobody talks about this financial truth",
+        "views": 3153,
+        "views_display": "3.2K",
+        "post_url": "https://youtube.com/shorts/SpM-FYAvaro",
+        "published_at": "2026-03-08T18:21:13.917244",
+        "published_at_display": "2026-03-08 18:21",
+        "published_ago": "4d",
+        "thumbnail_path": null
+      },
+      {
+        "rank": 4,
+        "channel": "fomo_highlights",
+        "title": "Watch this before scrolling: Nobody expected Keyingtv to do this",
+        "title_display": "Watch this before scrolling: Nobody expected Keyingtv to do this",
+        "views": 1016,
+        "views_display": "1.0K",
+        "post_url": "https://youtube.com/shorts/NsTrhyYREtw",
+        "published_at": "2026-03-09T01:02:34.842289",
+        "published_at_display": "2026-03-09 01:02",
+        "published_ago": "4d",
+        "thumbnail_path": null
+      },
+      {
+        "rank": 5,
+        "channel": "arc_highlightz",
+        "title": "Watch this before scrolling: The clutch that nobody saw coming",
+        "title_display": "Watch this before scrolling: The clutch that nobody saw coming",
+        "views": 244,
+        "views_display": "244",
+        "post_url": "https://youtube.com/shorts/5N7h-z1gxu0",
+        "published_at": "2026-03-09T12:33:51.433435",
+        "published_at_display": "2026-03-09 12:33",
+        "published_ago": "3d",
+        "thumbnail_path": null
+      },
+      {
+        "rank": 6,
+        "channel": "fomo_highlights",
+        "title": "Nobody expected Shroud to do this",
+        "title_display": "Nobody expected Shroud to do this",
+        "views": 126,
+        "views_display": "126",
+        "post_url": null,
+        "published_at": "2026-03-09T02:02:29.397235",
+        "published_at_display": "2026-03-09 02:02",
+        "published_ago": "4d",
+        "thumbnail_path": null
+      },
+      {
+        "rank": 7,
+        "channel": "fomo_highlights",
+        "title": "Nobody expected Shroud to do this",
+        "title_display": "Nobody expected Shroud to do this",
+        "views": 126,
+        "views_display": "126",
+        "post_url": "https://youtube.com/shorts/t7_vmIPVyq0",
+        "published_at": "2026-03-09T02:02:29.397235",
+        "published_at_display": "2026-03-09 02:02",
+        "published_ago": "4d",
+        "thumbnail_path": null
+      },
+      {
+        "rank": 8,
+        "channel": "fomo_highlights",
+        "title": "Watch this before scrolling: Nobody plays like this \ud83c\udfae",
+        "title_display": "Watch this before scrolling: Nobody plays like this \ud83c\udfae",
+        "views": 106,
+        "views_display": "106",
+        "post_url": "https://youtube.com/shorts/rUgpDHmIXvY",
+        "published_at": "2026-03-09T15:36:50.116744",
+        "published_at_display": "2026-03-09 15:36",
+        "published_ago": "3d",
+        "thumbnail_path": null
+      },
+      {
+        "rank": 9,
+        "channel": "fomo_highlights",
+        "title": "Watch this before scrolling: Tfue just broke the game \ud83c\udfae",
+        "title_display": "Watch this before scrolling: Tfue just broke the game \ud83c\udfae",
+        "views": 77,
+        "views_display": "77",
+        "post_url": "https://youtube.com/shorts/d1odaah2CV8",
+        "published_at": "2026-03-08T22:00:55.857093",
+        "published_at_display": "2026-03-08 22:00",
+        "published_ago": "4d",
+        "thumbnail_path": null
+      },
+      {
+        "rank": 10,
+        "channel": "fomo_highlights",
+        "title": "Tfue just broke the game \ud83c\udfae",
+        "title_display": "Tfue just broke the game \ud83c\udfae",
+        "views": 75,
+        "views_display": "75",
+        "post_url": "https://youtube.com/shorts/IcaWcciAOzM",
+        "published_at": "2026-03-08T23:18:37.825820",
+        "published_at_display": "2026-03-08 23:18",
+        "published_ago": "4d",
+        "thumbnail_path": null
+      }
+    ],
+    "best_per_channel": [
+      {
+        "channel": "market_meltdowns",
+        "title": "Nobody talks about this financial truth",
+        "title_display": "Nobody talks about this financial truth",
+        "views": 3153,
+        "views_display": "3.2K",
+        "post_url": null,
+        "published_at": "2026-03-08T18:21:13.917244",
+        "published_at_display": "2026-03-08 18:21",
+        "published_ago": "4d",
+        "thumbnail_path": null
+      },
+      {
+        "channel": "fomo_highlights",
+        "title": "Watch this before scrolling: Nobody expected Keyingtv to do this",
+        "title_display": "Watch this before scrolling: Nobody expected Keyingtv to do this",
+        "views": 1016,
+        "views_display": "1.0K",
+        "post_url": "https://youtube.com/shorts/NsTrhyYREtw",
+        "published_at": "2026-03-09T01:02:34.842289",
+        "published_at_display": "2026-03-09 01:02",
+        "published_ago": "4d",
+        "thumbnail_path": null
+      },
+      {
+        "channel": "arc_highlightz",
+        "title": "Watch this before scrolling: The clutch that nobody saw coming",
+        "title_display": "Watch this before scrolling: The clutch that nobody saw coming",
+        "views": 244,
+        "views_display": "244",
+        "post_url": "https://youtube.com/shorts/5N7h-z1gxu0",
+        "published_at": "2026-03-09T12:33:51.433435",
+        "published_at_display": "2026-03-09 12:33",
+        "published_ago": "3d",
+        "thumbnail_path": null
+      },
+      {
+        "channel": "viral_recaps",
+        "title": "Watch this before scrolling: The most unexpected moment of the day",
+        "title_display": "Watch this before scrolling: The most unexpected moment of the day",
+        "views": 31,
+        "views_display": "31",
+        "post_url": "https://youtube.com/shorts/B_KCveVY-eg",
+        "published_at": "2026-03-08T18:12:01.128538",
+        "published_at_display": "2026-03-08 18:12",
+        "published_ago": "4d",
+        "thumbnail_path": null
+      }
+    ],
+    "top_3": [
+      {
+        "rank": 1,
+        "channel": "market_meltdowns",
+        "title": "Nobody talks about this financial truth",
+        "title_display": "Nobody talks about this financial truth",
+        "views": 3153,
+        "views_display": "3.2K",
+        "post_url": null,
+        "published_at": "2026-03-08T18:21:13.917244",
+        "published_at_display": "2026-03-08 18:21",
+        "published_ago": "4d",
+        "thumbnail_path": null
+      },
+      {
+        "rank": 2,
+        "channel": "market_meltdowns",
+        "title": "Nobody talks about this financial truth",
+        "title_display": "Nobody talks about this financial truth",
+        "views": 3153,
+        "views_display": "3.2K",
+        "post_url": null,
+        "published_at": "2026-03-08T18:21:13.917244",
+        "published_at_display": "2026-03-08 18:21",
+        "published_ago": "4d",
+        "thumbnail_path": null
+      },
+      {
+        "rank": 3,
+        "channel": "market_meltdowns",
+        "title": "Nobody talks about this financial truth",
+        "title_display": "Nobody talks about this financial truth",
+        "views": 3153,
+        "views_display": "3.2K",
+        "post_url": "https://youtube.com/shorts/SpM-FYAvaro",
+        "published_at": "2026-03-08T18:21:13.917244",
+        "published_at_display": "2026-03-08 18:21",
+        "published_ago": "4d",
+        "thumbnail_path": null
+      }
+    ],
+    "total_clips_tracked": 4
+  },
+  "leaderboard": [
+    {
+      "channel_name": "fomo_highlights",
+      "total_views": 0,
+      "uploads_30d": 7,
+      "avg_views": 0,
+      "best_clip_title": "No clips yet",
+      "best_clip_views": 0,
+      "best_clip_url": "",
+      "rank": 1,
+      "trend": "stable"
+    },
+    {
+      "channel_name": "arc_highlightz",
+      "total_views": 0,
+      "uploads_30d": 7,
+      "avg_views": 0,
+      "best_clip_title": "No clips yet",
+      "best_clip_views": 0,
+      "best_clip_url": "",
+      "rank": 2,
+      "trend": "stable"
+    },
+    {
+      "channel_name": "market_meltdowns",
+      "total_views": 0,
+      "uploads_30d": 6,
+      "avg_views": 0,
+      "best_clip_title": "No clips yet",
+      "best_clip_views": 0,
+      "best_clip_url": "",
+      "rank": 3,
+      "trend": "stable"
+    },
+    {
+      "channel_name": "viral_recaps",
+      "total_views": 0,
+      "uploads_30d": 5,
+      "avg_views": 0,
+      "best_clip_title": "No clips yet",
+      "best_clip_views": 0,
+      "best_clip_url": "",
+      "rank": 4,
+      "trend": "stable"
+    }
+  ],
+  "sources_list": [
+    {
+      "channel": "market_meltdowns",
+      "sources": [
+        {
+          "id": "market_meltdowns:patrickboyle:youtube:0",
+          "channel": "market_meltdowns",
+          "platform": "youtube",
+          "creator_name": "patrickboyle",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/@PatrickBoyleOnFinance/videos",
+          "type": "longform"
+        },
+        {
+          "id": "market_meltdowns:wallstreetmillennial:youtube:1",
+          "channel": "market_meltdowns",
+          "platform": "youtube",
+          "creator_name": "wallstreetmillennial",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/@WallStreetMillennial/videos",
+          "type": "longform"
+        },
+        {
+          "id": "market_meltdowns:coffeezilla:youtube:2",
+          "channel": "market_meltdowns",
+          "platform": "youtube",
+          "creator_name": "coffeezilla",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/@coffeeziIIa/videos",
+          "type": "longform"
+        },
+        {
+          "id": "market_meltdowns:rareliquid:youtube:3",
+          "channel": "market_meltdowns",
+          "platform": "youtube",
+          "creator_name": "rareliquid",
+          "min_views": 0,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/@RareLiquid/videos",
+          "type": "longform"
+        },
+        {
+          "id": "market_meltdowns:plainbagel:youtube:4",
+          "channel": "market_meltdowns",
+          "platform": "youtube",
+          "creator_name": "plainbagel",
+          "min_views": 0,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/@theplainbagel/videos",
+          "type": "longform"
+        }
+      ]
+    },
+    {
+      "channel": "crypto_confessions",
+      "sources": [
+        {
+          "id": "crypto_confessions:youtube:youtube:0",
+          "channel": "crypto_confessions",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/@CoinBureau",
+          "type": "channel"
+        },
+        {
+          "id": "crypto_confessions:youtube:youtube:1",
+          "channel": "crypto_confessions",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/@BenArmstrong",
+          "type": "channel"
+        },
+        {
+          "id": "crypto_confessions:tiktok:tiktok:2",
+          "channel": "crypto_confessions",
+          "platform": "tiktok",
+          "creator_name": "tiktok",
+          "min_views": 0,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.tiktok.com/@cryptogirly_",
+          "type": "profile"
+        },
+        {
+          "id": "crypto_confessions:youtube:youtube:3",
+          "channel": "crypto_confessions",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 3,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/results?search_query=crypto+loss+confession+shorts",
+          "type": "search"
+        },
+        {
+          "id": "crypto_confessions:reddit:reddit:4",
+          "channel": "crypto_confessions",
+          "platform": "reddit",
+          "creator_name": "reddit",
+          "min_views": 0,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.reddit.com/r/CryptoCurrency/top/?t=week",
+          "type": "subreddit"
+        }
+      ]
+    },
+    {
+      "channel": "rich_or_ruined",
+      "sources": [
+        {
+          "id": "rich_or_ruined:youtube:youtube:0",
+          "channel": "rich_or_ruined",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/@alexhormozi",
+          "type": "channel"
+        },
+        {
+          "id": "rich_or_ruined:youtube:youtube:1",
+          "channel": "rich_or_ruined",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/@GaryVee",
+          "type": "channel"
+        },
+        {
+          "id": "rich_or_ruined:youtube:youtube:2",
+          "channel": "rich_or_ruined",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/results?search_query=millionaire+went+broke+story+shorts",
+          "type": "search"
+        },
+        {
+          "id": "rich_or_ruined:tiktok:tiktok:3",
+          "channel": "rich_or_ruined",
+          "platform": "tiktok",
+          "creator_name": "tiktok",
+          "min_views": 0,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.tiktok.com/@hramsey",
+          "type": "profile"
+        }
+      ]
+    },
+    {
+      "channel": "startup_graveyard",
+      "sources": [
+        {
+          "id": "startup_graveyard:youtube:youtube:0",
+          "channel": "startup_graveyard",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/playlist?list=PLF596A4DFAF3E0FAB",
+          "type": "playlist"
+        },
+        {
+          "id": "startup_graveyard:youtube:youtube:1",
+          "channel": "startup_graveyard",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/@coffeezilla",
+          "type": "channel"
+        },
+        {
+          "id": "startup_graveyard:youtube:youtube:2",
+          "channel": "startup_graveyard",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/results?search_query=startup+failure+story+shorts",
+          "type": "search"
+        },
+        {
+          "id": "startup_graveyard:reddit:reddit:3",
+          "channel": "startup_graveyard",
+          "platform": "reddit",
+          "creator_name": "reddit",
+          "min_views": 0,
+          "priority": 3,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.reddit.com/r/Entrepreneur/top/?t=week",
+          "type": "subreddit"
+        }
+      ]
+    },
+    {
+      "channel": "self_made_clips",
+      "sources": [
+        {
+          "id": "self_made_clips:youtube:youtube:0",
+          "channel": "self_made_clips",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/@alexhormozi",
+          "type": "channel"
+        },
+        {
+          "id": "self_made_clips:tiktok:tiktok:1",
+          "channel": "self_made_clips",
+          "platform": "tiktok",
+          "creator_name": "tiktok",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.tiktok.com/@alexhormozi",
+          "type": "profile"
+        },
+        {
+          "id": "self_made_clips:youtube:youtube:2",
+          "channel": "self_made_clips",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/@GaryVee",
+          "type": "channel"
+        },
+        {
+          "id": "self_made_clips:tiktok:tiktok:3",
+          "channel": "self_made_clips",
+          "platform": "tiktok",
+          "creator_name": "tiktok",
+          "min_views": 0,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.tiktok.com/@garyvee",
+          "type": "profile"
+        },
+        {
+          "id": "self_made_clips:youtube:youtube:4",
+          "channel": "self_made_clips",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/results?search_query=entrepreneur+motivation+hard+truth+shorts",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "channel": "ai_did_what",
+      "sources": [
+        {
+          "id": "ai_did_what:youtube:youtube:0",
+          "channel": "ai_did_what",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/@linustechtips",
+          "type": "channel"
+        },
+        {
+          "id": "ai_did_what:youtube:youtube:1",
+          "channel": "ai_did_what",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/@mkbhd",
+          "type": "channel"
+        },
+        {
+          "id": "ai_did_what:youtube:youtube:2",
+          "channel": "ai_did_what",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/@TwoMinutePapers",
+          "type": "channel"
+        },
+        {
+          "id": "ai_did_what:tiktok:tiktok:3",
+          "channel": "ai_did_what",
+          "platform": "tiktok",
+          "creator_name": "tiktok",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.tiktok.com/@ai.explained",
+          "type": "profile"
+        },
+        {
+          "id": "ai_did_what:youtube:youtube:4",
+          "channel": "ai_did_what",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/results?search_query=ai+shocking+demo+2025+shorts",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "channel": "gym_moments",
+      "sources": [
+        {
+          "id": "gym_moments:youtube:youtube:0",
+          "channel": "gym_moments",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/@jeffnippard",
+          "type": "channel"
+        },
+        {
+          "id": "gym_moments:tiktok:tiktok:1",
+          "channel": "gym_moments",
+          "platform": "tiktok",
+          "creator_name": "tiktok",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.tiktok.com/@cbum",
+          "type": "profile"
+        },
+        {
+          "id": "gym_moments:tiktok:tiktok:2",
+          "channel": "gym_moments",
+          "platform": "tiktok",
+          "creator_name": "tiktok",
+          "min_views": 0,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.tiktok.com/@gymfails",
+          "type": "profile"
+        },
+        {
+          "id": "gym_moments:youtube:youtube:3",
+          "channel": "gym_moments",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/results?search_query=gym+fail+compilation+shorts",
+          "type": "search"
+        },
+        {
+          "id": "gym_moments:reddit:reddit:4",
+          "channel": "gym_moments",
+          "platform": "reddit",
+          "creator_name": "reddit",
+          "min_views": 0,
+          "priority": 3,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.reddit.com/r/gym/top/?t=week",
+          "type": "subreddit"
+        }
+      ]
+    },
+    {
+      "channel": "kitchen_chaos",
+      "sources": [
+        {
+          "id": "kitchen_chaos:youtube:youtube:0",
+          "channel": "kitchen_chaos",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/@gordonramsay",
+          "type": "channel"
+        },
+        {
+          "id": "kitchen_chaos:tiktok:tiktok:1",
+          "channel": "kitchen_chaos",
+          "platform": "tiktok",
+          "creator_name": "tiktok",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.tiktok.com/@gordonramsayofficial",
+          "type": "profile"
+        },
+        {
+          "id": "kitchen_chaos:youtube:youtube:2",
+          "channel": "kitchen_chaos",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/results?search_query=cooking+disaster+fail+shorts",
+          "type": "search"
+        },
+        {
+          "id": "kitchen_chaos:reddit:reddit:3",
+          "channel": "kitchen_chaos",
+          "platform": "reddit",
+          "creator_name": "reddit",
+          "min_views": 0,
+          "priority": 3,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.reddit.com/r/KitchenConfidential/top/?t=week",
+          "type": "subreddit"
+        }
+      ]
+    },
+    {
+      "channel": "cases_unsolved",
+      "sources": [
+        {
+          "id": "cases_unsolved:youtube:youtube:0",
+          "channel": "cases_unsolved",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/@CriminallyListed",
+          "type": "channel"
+        },
+        {
+          "id": "cases_unsolved:youtube:youtube:1",
+          "channel": "cases_unsolved",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/@ColdCaseCrimes",
+          "type": "channel"
+        },
+        {
+          "id": "cases_unsolved:tiktok:tiktok:2",
+          "channel": "cases_unsolved",
+          "platform": "tiktok",
+          "creator_name": "tiktok",
+          "min_views": 0,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.tiktok.com/@truecrimetok",
+          "type": "profile"
+        },
+        {
+          "id": "cases_unsolved:youtube:youtube:3",
+          "channel": "cases_unsolved",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/results?search_query=unsolved+cold+case+60+seconds+shorts",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "channel": "unfiltered_clips",
+      "sources": [
+        {
+          "id": "unfiltered_clips:reddit:reddit:0",
+          "channel": "unfiltered_clips",
+          "platform": "reddit",
+          "creator_name": "reddit",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.reddit.com/r/oddlysatisfying/top/?t=day",
+          "type": "subreddit"
+        },
+        {
+          "id": "unfiltered_clips:reddit:reddit:1",
+          "channel": "unfiltered_clips",
+          "platform": "reddit",
+          "creator_name": "reddit",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.reddit.com/r/nextfuckinglevel/top/?t=day",
+          "type": "subreddit"
+        },
+        {
+          "id": "unfiltered_clips:reddit:reddit:2",
+          "channel": "unfiltered_clips",
+          "platform": "reddit",
+          "creator_name": "reddit",
+          "min_views": 0,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.reddit.com/r/interestingasfuck/top/?t=day",
+          "type": "subreddit"
+        },
+        {
+          "id": "unfiltered_clips:youtube:youtube:3",
+          "channel": "unfiltered_clips",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 3,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/results?search_query=satisfying+unexpected+viral+shorts",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "channel": "stream_sirens",
+      "sources": [
+        {
+          "id": "stream_sirens:twitch:twitch:0",
+          "channel": "stream_sirens",
+          "platform": "twitch",
+          "creator_name": "twitch",
+          "min_views": 5000,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.twitch.tv/amouranth/clips",
+          "type": "channel"
+        },
+        {
+          "id": "stream_sirens:twitch:twitch:1",
+          "channel": "stream_sirens",
+          "platform": "twitch",
+          "creator_name": "twitch",
+          "min_views": 3000,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.twitch.tv/alinity/clips",
+          "type": "channel"
+        },
+        {
+          "id": "stream_sirens:twitch:twitch:2",
+          "channel": "stream_sirens",
+          "platform": "twitch",
+          "creator_name": "twitch",
+          "min_views": 2000,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.twitch.tv/morgpie/clips",
+          "type": "channel"
+        },
+        {
+          "id": "stream_sirens:twitch:twitch:3",
+          "channel": "stream_sirens",
+          "platform": "twitch",
+          "creator_name": "twitch",
+          "min_views": 1000,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.twitch.tv/indiefoxx/clips",
+          "type": "channel"
+        },
+        {
+          "id": "stream_sirens:youtube:youtube:4",
+          "channel": "stream_sirens",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 3,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/results?search_query=amouranth+funny+moments+twitch+clips+2025",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "channel": "stream_queens",
+      "sources": [
+        {
+          "id": "stream_queens:twitch:twitch:0",
+          "channel": "stream_queens",
+          "platform": "twitch",
+          "creator_name": "twitch",
+          "min_views": 5000,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.twitch.tv/pokimane/clips",
+          "type": "channel"
+        },
+        {
+          "id": "stream_queens:twitch:twitch:1",
+          "channel": "stream_queens",
+          "platform": "twitch",
+          "creator_name": "twitch",
+          "min_views": 3000,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.twitch.tv/emiru/clips",
+          "type": "channel"
+        },
+        {
+          "id": "stream_queens:twitch:twitch:2",
+          "channel": "stream_queens",
+          "platform": "twitch",
+          "creator_name": "twitch",
+          "min_views": 3000,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.twitch.tv/ironmouse/clips",
+          "type": "channel"
+        },
+        {
+          "id": "stream_queens:twitch:twitch:3",
+          "channel": "stream_queens",
+          "platform": "twitch",
+          "creator_name": "twitch",
+          "min_views": 2000,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.twitch.tv/extraemily/clips",
+          "type": "channel"
+        },
+        {
+          "id": "stream_queens:twitch:twitch:4",
+          "channel": "stream_queens",
+          "platform": "twitch",
+          "creator_name": "twitch",
+          "min_views": 2000,
+          "priority": 2,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.twitch.tv/valkyrae/clips",
+          "type": "channel"
+        },
+        {
+          "id": "stream_queens:youtube:youtube:5",
+          "channel": "stream_queens",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 3,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/results?search_query=pokimane+funny+moments+twitch+clips+2025",
+          "type": "search"
+        },
+        {
+          "id": "stream_queens:youtube:youtube:6",
+          "channel": "stream_queens",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 3,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/results?search_query=emiru+best+clips+twitch+2025",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "channel": "arc_highlightz",
+      "sources": [
+        {
+          "id": "arc_highlightz:twitch:twitch:0",
+          "channel": "arc_highlightz",
+          "platform": "twitch",
+          "creator_name": "twitch",
+          "min_views": 2000,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.twitch.tv/tfue/clips",
+          "type": "channel"
+        },
+        {
+          "id": "arc_highlightz:twitch:twitch:1",
+          "channel": "arc_highlightz",
+          "platform": "twitch",
+          "creator_name": "twitch",
+          "min_views": 2000,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.twitch.tv/cloakzy/clips",
+          "type": "channel"
+        },
+        {
+          "id": "arc_highlightz:youtube:youtube:2",
+          "channel": "arc_highlightz",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 3,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/results?search_query=tfue+highlights+2025+shorts",
+          "type": "search"
+        },
+        {
+          "id": "arc_highlightz:youtube:youtube:3",
+          "channel": "arc_highlightz",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 3,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/results?search_query=cloakzy+best+moments+2025+shorts",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "channel": "viral_recaps",
+      "sources": [
+        {
+          "id": "viral_recaps:twitch:twitch:0",
+          "channel": "viral_recaps",
+          "platform": "twitch",
+          "creator_name": "twitch",
+          "min_views": 3000,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.twitch.tv/moistcr1tikal/clips",
+          "type": "channel"
+        },
+        {
+          "id": "viral_recaps:twitch:twitch:1",
+          "channel": "viral_recaps",
+          "platform": "twitch",
+          "creator_name": "twitch",
+          "min_views": 3000,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.twitch.tv/hasanabi/clips",
+          "type": "channel"
+        },
+        {
+          "id": "viral_recaps:twitch:twitch:2",
+          "channel": "viral_recaps",
+          "platform": "twitch",
+          "creator_name": "twitch",
+          "min_views": 0,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.twitch.tv/ludwig/clips",
+          "type": "channel"
+        },
+        {
+          "id": "viral_recaps:youtube:youtube:3",
+          "channel": "viral_recaps",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 3,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/results?search_query=penguinz0+funniest+moments+shorts+2025",
+          "type": "search"
+        },
+        {
+          "id": "viral_recaps:youtube:youtube:4",
+          "channel": "viral_recaps",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 3,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/results?search_query=hasanabi+funny+clips+shorts+2025",
+          "type": "search"
+        }
+      ]
+    },
+    {
+      "channel": "fomo_highlights",
+      "sources": [
+        {
+          "id": "fomo_highlights:twitch:twitch:0",
+          "channel": "fomo_highlights",
+          "platform": "twitch",
+          "creator_name": "twitch",
+          "min_views": 2000,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.twitch.tv/shroud/clips",
+          "type": "channel"
+        },
+        {
+          "id": "fomo_highlights:twitch:twitch:1",
+          "channel": "fomo_highlights",
+          "platform": "twitch",
+          "creator_name": "twitch",
+          "min_views": 2000,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.twitch.tv/nickmercs/clips",
+          "type": "channel"
+        },
+        {
+          "id": "fomo_highlights:twitch:twitch:2",
+          "channel": "fomo_highlights",
+          "platform": "twitch",
+          "creator_name": "twitch",
+          "min_views": 2000,
+          "priority": 1,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.twitch.tv/timthetatman/clips",
+          "type": "channel"
+        },
+        {
+          "id": "fomo_highlights:youtube:youtube:3",
+          "channel": "fomo_highlights",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 3,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/results?search_query=shroud+best+clips+shorts+2025",
+          "type": "search"
+        },
+        {
+          "id": "fomo_highlights:youtube:youtube:4",
+          "channel": "fomo_highlights",
+          "platform": "youtube",
+          "creator_name": "youtube",
+          "min_views": 0,
+          "priority": 3,
+          "clips_fetched": 0,
+          "last_fetched_at": null,
+          "last_fetched_rel": "\u2014",
+          "enabled": true,
+          "url": "https://www.youtube.com/results?search_query=nickmercs+highlights+shorts+2025",
+          "type": "search"
+        }
+      ]
+    }
+  ],
+  "daily_summary": {
+    "date": "2026-03-13",
+    "uploads_today": 0,
+    "uploads_yesterday": 0,
+    "views_gained_today": 0,
+    "views_yesterday": 0,
+    "errors_today": 0,
+    "quota_pct": 0.0,
+    "quota_units_used": 0,
+    "delta_uploads": 0,
+    "delta_views": 0,
+    "top_clip_today": null,
+    "top_3_channels": [],
+    "summary_text": "\ud83d\udcca Daily Summary for 2026-03-13\n\n\ud83d\udcc8 Stats:\n  Uploads: 0 (+0 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 0.0% used (0/10000 units)",
+    "summary_discord": "## \ud83d\udcca Daily Summary \u2014 2026-03-13\n\n**\ud83d\udcc8 Today's Stats:**\n\u2022 **Uploads:** 0 (+0 vs yesterday)\n\u2022 **Views:** 0 (+0 vs yesterday)\n\u2022 **Errors:** 0\n\u2022 **API Quota:** 0.0% used (`0/10000` units)"
+  },
+  "title_performance": {
+    "pattern_analysis": {
+      "has_numbers": {
+        "avg_views": 0,
+        "count": 0,
+        "total_views": 0
+      },
+      "has_question": {
+        "avg_views": 0.0,
+        "count": 3,
+        "total_views": 0
+      },
+      "has_caps": {
+        "avg_views": 0,
+        "count": 0,
+        "total_views": 0
+      },
+      "has_emoji": {
+        "avg_views": 0.0,
+        "count": 10,
+        "total_views": 0
+      }
+    },
+    "power_words": [
+      {
+        "word": "watch",
+        "avg_views": 0.0,
+        "occurrences": 15
+      },
+      {
+        "word": "this",
+        "avg_views": 0.0,
+        "occurrences": 27
+      },
+      {
+        "word": "before",
+        "avg_views": 0.0,
+        "occurrences": 15
+      },
+      {
+        "word": "scrolling",
+        "avg_views": 0.0,
+        "occurrences": 15
+      },
+      {
+        "word": "nobody",
+        "avg_views": 0.0,
+        "occurrences": 11
+      },
+      {
+        "word": "plays",
+        "avg_views": 0.0,
+        "occurrences": 4
+      },
+      {
+        "word": "like",
+        "avg_views": 0.0,
+        "occurrences": 4
+      },
+      {
+        "word": "the",
+        "avg_views": 0.0,
+        "occurrences": 8
+      },
+      {
+        "word": "unexpected",
+        "avg_views": 0.0,
+        "occurrences": 2
+      },
+      {
+        "word": "moment",
+        "avg_views": 0.0,
+        "occurrences": 6
+      }
+    ],
+    "avoid_words": [
+      {
+        "word": "watch",
+        "avg_views": 0.0,
+        "occurrences": 15
+      },
+      {
+        "word": "this",
+        "avg_views": 0.0,
+        "occurrences": 27
+      },
+      {
+        "word": "before",
+        "avg_views": 0.0,
+        "occurrences": 15
+      },
+      {
+        "word": "scrolling",
+        "avg_views": 0.0,
+        "occurrences": 15
+      },
+      {
+        "word": "nobody",
+        "avg_views": 0.0,
+        "occurrences": 11
+      },
+      {
+        "word": "plays",
+        "avg_views": 0.0,
+        "occurrences": 4
+      },
+      {
+        "word": "like",
+        "avg_views": 0.0,
+        "occurrences": 4
+      },
+      {
+        "word": "the",
+        "avg_views": 0.0,
+        "occurrences": 8
+      },
+      {
+        "word": "unexpected",
+        "avg_views": 0.0,
+        "occurrences": 2
+      },
+      {
+        "word": "moment",
+        "avg_views": 0.0,
+        "occurrences": 6
+      }
+    ],
+    "best_example_per_channel": [
+      {
+        "channel": "fomo_highlights",
+        "title": "Watch this before scrolling: Nobody plays like this",
+        "views": 0
+      },
+      {
+        "channel": "viral_recaps",
+        "title": "Watch this before scrolling: The most unexpected moment of the day",
+        "views": 0
+      },
+      {
+        "channel": "market_meltdowns",
+        "title": "Nobody talks about this financial truth",
+        "views": 0
+      },
+      {
+        "channel": "arc_highlightz",
+        "title": "Watch this before scrolling: Nobody plays like this",
+        "views": 0
+      }
+    ],
+    "per_channel_insights": [
+      {
+        "channel": "arc_highlightz",
+        "best_title": "Watch this before scrolling: Nobody plays like this",
+        "best_views": 0,
+        "total_titles_analyzed": 7,
+        "pattern_breakdown": {
+          "numbers_pct": 0.0,
+          "questions_pct": 0.0,
+          "caps_pct": 0.0,
+          "emoji_pct": 42.9
+        }
+      },
+      {
+        "channel": "fomo_highlights",
+        "best_title": "Watch this before scrolling: Nobody plays like this",
+        "best_views": 0,
+        "total_titles_analyzed": 7,
+        "pattern_breakdown": {
+          "numbers_pct": 0.0,
+          "questions_pct": 0.0,
+          "caps_pct": 0.0,
+          "emoji_pct": 42.9
+        }
+      },
+      {
+        "channel": "market_meltdowns",
+        "best_title": "Nobody talks about this financial truth",
+        "best_views": 0,
+        "total_titles_analyzed": 6,
+        "pattern_breakdown": {
+          "numbers_pct": 0.0,
+          "questions_pct": 33.3,
+          "caps_pct": 0.0,
+          "emoji_pct": 33.3
+        }
+      },
+      {
+        "channel": "viral_recaps",
+        "best_title": "Watch this before scrolling: The most unexpected moment of the day",
+        "best_views": 0,
+        "total_titles_analyzed": 5,
+        "pattern_breakdown": {
+          "numbers_pct": 0.0,
+          "questions_pct": 20.0,
+          "caps_pct": 0.0,
+          "emoji_pct": 40.0
+        }
+      }
+    ]
+  },
+  "style_performance": {
+    "by_style": [
+      {
+        "style_name": "Gaming/Clips",
+        "avg_views": 0,
+        "total_clips": 19,
+        "best_clip": null,
+        "total_views": 0,
+        "is_best": true
+      },
+      {
+        "style_name": "Finance",
+        "avg_views": 0,
+        "total_clips": 6,
+        "best_clip": null,
+        "total_views": 0,
+        "is_best": false
+      }
+    ],
+    "best_style_overall": "Gaming/Clips",
+    "summary_stats": {
+      "total_styles": 2,
+      "total_clips_all": 25,
+      "total_views_all": 0,
+      "avg_views_overall": 0
+    }
+  },
+  "posting_times": {
+    "hourly": [
+      {
+        "hour": 0,
+        "hour_label": "00:00",
+        "posts": 0,
+        "avg_views": 0
+      },
+      {
+        "hour": 1,
+        "hour_label": "01:00",
+        "posts": 0,
+        "avg_views": 0
+      },
+      {
+        "hour": 2,
+        "hour_label": "02:00",
+        "posts": 0,
+        "avg_views": 0
+      },
+      {
+        "hour": 3,
+        "hour_label": "03:00",
+        "posts": 0,
+        "avg_views": 0
+      },
+      {
+        "hour": 4,
+        "hour_label": "04:00",
+        "posts": 0,
+        "avg_views": 0
+      },
+      {
+        "hour": 5,
+        "hour_label": "05:00",
+        "posts": 0,
+        "avg_views": 0
+      },
+      {
+        "hour": 6,
+        "hour_label": "06:00",
+        "posts": 0,
+        "avg_views": 0
+      },
+      {
+        "hour": 7,
+        "hour_label": "07:00",
+        "posts": 0,
+        "avg_views": 0
+      },
+      {
+        "hour": 8,
+        "hour_label": "08:00",
+        "posts": 5,
+        "avg_views": 744.0
+      },
+      {
+        "hour": 9,
+        "hour_label": "09:00",
+        "posts": 4,
+        "avg_views": 720.0
+      },
+      {
+        "hour": 10,
+        "hour_label": "10:00",
+        "posts": 0,
+        "avg_views": 0
+      },
+      {
+        "hour": 11,
+        "hour_label": "11:00",
+        "posts": 0,
+        "avg_views": 0
+      },
+      {
+        "hour": 12,
+        "hour_label": "12:00",
+        "posts": 3,
+        "avg_views": 1200.0
+      },
+      {
+        "hour": 13,
+        "hour_label": "13:00",
+        "posts": 0,
+        "avg_views": 0
+      },
+      {
+        "hour": 14,
+        "hour_label": "14:00",
+        "posts": 2,
+        "avg_views": 1200.0
+      },
+      {
+        "hour": 15,
+        "hour_label": "15:00",
+        "posts": 0,
+        "avg_views": 0
+      },
+      {
+        "hour": 16,
+        "hour_label": "16:00",
+        "posts": 0,
+        "avg_views": 0
+      },
+      {
+        "hour": 17,
+        "hour_label": "17:00",
+        "posts": 2,
+        "avg_views": 950.0
+      },
+      {
+        "hour": 18,
+        "hour_label": "18:00",
+        "posts": 3,
+        "avg_views": 1300.0
+      },
+      {
+        "hour": 19,
+        "hour_label": "19:00",
+        "posts": 2,
+        "avg_views": 1425.0
+      },
+      {
+        "hour": 20,
+        "hour_label": "20:00",
+        "posts": 0,
+        "avg_views": 0
+      },
+      {
+        "hour": 21,
+        "hour_label": "21:00",
+        "posts": 3,
+        "avg_views": 1300.0
+      },
+      {
+        "hour": 22,
+        "hour_label": "22:00",
+        "posts": 1,
+        "avg_views": 1050.0
+      },
+      {
+        "hour": 23,
+        "hour_label": "23:00",
+        "posts": 0,
+        "avg_views": 0
+      }
+    ],
+    "daily": [
+      {
+        "day": 0,
+        "day_name": "Monday",
+        "posts": 16,
+        "avg_views": 1102.0
+      },
+      {
+        "day": 1,
+        "day_name": "Tuesday",
+        "posts": 2,
+        "avg_views": 780.0
+      },
+      {
+        "day": 2,
+        "day_name": "Wednesday",
+        "posts": 0,
+        "avg_views": 0
+      },
+      {
+        "day": 3,
+        "day_name": "Thursday",
+        "posts": 0,
+        "avg_views": 0
+      },
+      {
+        "day": 4,
+        "day_name": "Friday",
+        "posts": 0,
+        "avg_views": 0
+      },
+      {
+        "day": 5,
+        "day_name": "Saturday",
+        "posts": 0,
+        "avg_views": 0
+      },
+      {
+        "day": 6,
+        "day_name": "Sunday",
+        "posts": 7,
+        "avg_views": 1000.0
+      }
+    ],
+    "best_hours": [
+      {
+        "hour": 19,
+        "hour_label": "19:00",
+        "posts": 2,
+        "avg_views": 1425.0
+      },
+      {
+        "hour": 18,
+        "hour_label": "18:00",
+        "posts": 3,
+        "avg_views": 1300.0
+      },
+      {
+        "hour": 21,
+        "hour_label": "21:00",
+        "posts": 3,
+        "avg_views": 1300.0
+      }
+    ],
+    "best_days": [
+      {
+        "day": 0,
+        "day_name": "Monday",
+        "posts": 16,
+        "avg_views": 1102.0
+      },
+      {
+        "day": 6,
+        "day_name": "Sunday",
+        "posts": 7,
+        "avg_views": 1000.0
+      },
+      {
+        "day": 1,
+        "day_name": "Tuesday",
+        "posts": 2,
+        "avg_views": 780.0
+      }
+    ],
+    "heatmap_grid": [
+      [
+        {
+          "hour": 0,
+          "day": 0,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 0,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 0,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 0,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 0,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 0,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 0,
+          "day": 6,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "hour": 1,
+          "day": 0,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 1,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 1,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 1,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 1,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 1,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 1,
+          "day": 6,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "hour": 2,
+          "day": 0,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 2,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 2,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 2,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 2,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 2,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 2,
+          "day": 6,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "hour": 3,
+          "day": 0,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 3,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 3,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 3,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 3,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 3,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 3,
+          "day": 6,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "hour": 4,
+          "day": 0,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 4,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 4,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 4,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 4,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 4,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 4,
+          "day": 6,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "hour": 5,
+          "day": 0,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 5,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 5,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 5,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 5,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 5,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 5,
+          "day": 6,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "hour": 6,
+          "day": 0,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 6,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 6,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 6,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 6,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 6,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 6,
+          "day": 6,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "hour": 7,
+          "day": 0,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 7,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 7,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 7,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 7,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 7,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 7,
+          "day": 6,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "hour": 8,
+          "day": 0,
+          "views": 720.0,
+          "posts": 3,
+          "intensity": 50.5
+        },
+        {
+          "hour": 8,
+          "day": 1,
+          "views": 780.0,
+          "posts": 2,
+          "intensity": 54.7
+        },
+        {
+          "hour": 8,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 8,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 8,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 8,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 8,
+          "day": 6,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "hour": 9,
+          "day": 0,
+          "views": 720.0,
+          "posts": 4,
+          "intensity": 50.5
+        },
+        {
+          "hour": 9,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 9,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 9,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 9,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 9,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 9,
+          "day": 6,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "hour": 10,
+          "day": 0,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 10,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 10,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 10,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 10,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 10,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 10,
+          "day": 6,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "hour": 11,
+          "day": 0,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 11,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 11,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 11,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 11,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 11,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 11,
+          "day": 6,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "hour": 12,
+          "day": 0,
+          "views": 1200.0,
+          "posts": 3,
+          "intensity": 84.2
+        },
+        {
+          "hour": 12,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 12,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 12,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 12,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 12,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 12,
+          "day": 6,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "hour": 13,
+          "day": 0,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 13,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 13,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 13,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 13,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 13,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 13,
+          "day": 6,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "hour": 14,
+          "day": 0,
+          "views": 1200.0,
+          "posts": 2,
+          "intensity": 84.2
+        },
+        {
+          "hour": 14,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 14,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 14,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 14,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 14,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 14,
+          "day": 6,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "hour": 15,
+          "day": 0,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 15,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 15,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 15,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 15,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 15,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 15,
+          "day": 6,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "hour": 16,
+          "day": 0,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 16,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 16,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 16,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 16,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 16,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 16,
+          "day": 6,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "hour": 17,
+          "day": 0,
+          "views": 1200.0,
+          "posts": 1,
+          "intensity": 84.2
+        },
+        {
+          "hour": 17,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 17,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 17,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 17,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 17,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 17,
+          "day": 6,
+          "views": 700.0,
+          "posts": 1,
+          "intensity": 49.1
+        }
+      ],
+      [
+        {
+          "hour": 18,
+          "day": 0,
+          "views": 1800.0,
+          "posts": 1,
+          "intensity": 126.3
+        },
+        {
+          "hour": 18,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 18,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 18,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 18,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 18,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 18,
+          "day": 6,
+          "views": 1050.0,
+          "posts": 2,
+          "intensity": 73.7
+        }
+      ],
+      [
+        {
+          "hour": 19,
+          "day": 0,
+          "views": 1800.0,
+          "posts": 1,
+          "intensity": 126.3
+        },
+        {
+          "hour": 19,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 19,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 19,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 19,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 19,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 19,
+          "day": 6,
+          "views": 1050.0,
+          "posts": 1,
+          "intensity": 73.7
+        }
+      ],
+      [
+        {
+          "hour": 20,
+          "day": 0,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 20,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 20,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 20,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 20,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 20,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 20,
+          "day": 6,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        }
+      ],
+      [
+        {
+          "hour": 21,
+          "day": 0,
+          "views": 1800.0,
+          "posts": 1,
+          "intensity": 126.3
+        },
+        {
+          "hour": 21,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 21,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 21,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 21,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 21,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 21,
+          "day": 6,
+          "views": 1050.0,
+          "posts": 2,
+          "intensity": 73.7
+        }
+      ],
+      [
+        {
+          "hour": 22,
+          "day": 0,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 22,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 22,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 22,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 22,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 22,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 22,
+          "day": 6,
+          "views": 1050.0,
+          "posts": 1,
+          "intensity": 73.7
+        }
+      ],
+      [
+        {
+          "hour": 23,
+          "day": 0,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 23,
+          "day": 1,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 23,
+          "day": 2,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 23,
+          "day": 3,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 23,
+          "day": 4,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 23,
+          "day": 5,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        },
+        {
+          "hour": 23,
+          "day": 6,
+          "views": 0,
+          "posts": 0,
+          "intensity": 0.0
+        }
+      ]
+    ],
+    "scheduled_posts": [],
+    "next_best_slot": {
+      "date": "2026-03-16",
+      "hour": 19,
+      "hour_label": "19:00",
+      "day_name": "Monday",
+      "est_views": 1425.0
+    },
+    "job_count": 25
+  },
+  "benchmarks": {
+    "current_tier": "Starter",
+    "current_tier_index": 0,
+    "current_metrics": {
+      "subs_estimated": 0,
+      "views_30d": 0,
+      "revenue_30d": 0.0
+    },
+    "next_tier": "Growing",
+    "next_tier_targets": {
+      "subs": 5000,
+      "views_mo": 500000,
+      "revenue_mo": 425.0
+    },
+    "progress_breakdown": {
+      "subs_pct": 0.0,
+      "views_pct": 0.0,
+      "revenue_pct": 0.0
+    },
+    "tiers": [
+      {
+        "tier": "Starter",
+        "tier_index": 0,
+        "subs_target": 500,
+        "views_target": 50000,
+        "revenue_target": 42.0,
+        "is_current": true,
+        "is_achieved": false,
+        "is_next": false,
+        "progress_pct": 0.0,
+        "months_to_tier": null
+      },
+      {
+        "tier": "Growing",
+        "tier_index": 1,
+        "subs_target": 5000,
+        "views_target": 500000,
+        "revenue_target": 425.0,
+        "is_current": false,
+        "is_achieved": false,
+        "is_next": true,
+        "progress_pct": 0.0,
+        "months_to_tier": null
+      },
+      {
+        "tier": "Monetized",
+        "tier_index": 2,
+        "subs_target": 10000,
+        "views_target": 1000000,
+        "revenue_target": 850.0,
+        "is_current": false,
+        "is_achieved": false,
+        "is_next": false,
+        "progress_pct": 0.0,
+        "months_to_tier": null
+      },
+      {
+        "tier": "Pro",
+        "tier_index": 3,
+        "subs_target": 50000,
+        "views_target": 5000000,
+        "revenue_target": 4250.0,
+        "is_current": false,
+        "is_achieved": false,
+        "is_next": false,
+        "progress_pct": 0.0,
+        "months_to_tier": null
+      },
+      {
+        "tier": "Empire",
+        "tier_index": 4,
+        "subs_target": 500000,
+        "views_target": 50000000,
+        "revenue_target": 42500.0,
+        "is_current": false,
+        "is_achieved": false,
+        "is_next": false,
+        "progress_pct": 0.0,
+        "months_to_tier": null
+      }
+    ],
+    "milestones_unlocked": [
+      0
+    ]
+  },
+  "notifications": [
+    {
+      "type": "warning",
+      "title": "Channel \"market_meltdowns\" paused for 24+ hours",
+      "message": "market_meltdowns has been paused for 107 hours",
+      "channel": "market_meltdowns",
+      "created_at": "2026-03-13T12:14:06.444117",
+      "read": false
+    },
+    {
+      "type": "warning",
+      "title": "Channel \"self_made_clips\" paused for 24+ hours",
+      "message": "self_made_clips has been paused for 103 hours",
+      "channel": "self_made_clips",
+      "created_at": "2026-03-13T12:14:06.444117",
+      "read": false
+    },
+    {
+      "type": "warning",
+      "title": "Channel \"rich_or_ruined\" paused for 24+ hours",
+      "message": "rich_or_ruined has been paused for 102 hours",
+      "channel": "rich_or_ruined",
+      "created_at": "2026-03-13T12:14:06.444117",
+      "read": false
+    },
+    {
+      "type": "warning",
+      "title": "Channel \"startup_graveyard\" paused for 24+ hours",
+      "message": "startup_graveyard has been paused for 102 hours",
+      "channel": "startup_graveyard",
+      "created_at": "2026-03-13T12:14:06.444117",
+      "read": false
+    },
+    {
+      "type": "warning",
+      "title": "Channel \"stream_sirens\" paused for 24+ hours",
+      "message": "stream_sirens has been paused for 81 hours",
+      "channel": "stream_sirens",
+      "created_at": "2026-03-13T12:14:06.444117",
+      "read": false
+    },
+    {
+      "type": "warning",
+      "title": "Channel \"stream_queens\" paused for 24+ hours",
+      "message": "stream_queens has been paused for 81 hours",
+      "channel": "stream_queens",
+      "created_at": "2026-03-13T12:14:06.444117",
+      "read": false
+    },
+    {
+      "type": "warning",
+      "title": "Channel \"ai_did_what\" paused for 24+ hours",
+      "message": "ai_did_what has been paused for 47 hours",
+      "channel": "ai_did_what",
+      "created_at": "2026-03-13T12:14:06.444117",
+      "read": false
+    },
+    {
+      "type": "warning",
+      "title": "Channel \"gym_moments\" paused for 24+ hours",
+      "message": "gym_moments has been paused for 47 hours",
+      "channel": "gym_moments",
+      "created_at": "2026-03-13T12:14:06.444117",
+      "read": false
+    }
+  ],
+  "checklists": [
+    {
+      "channel": "arc_highlightz",
+      "readiness_score": 5,
+      "total_checks": 6,
+      "badge": "needs_attention",
+      "badge_text": "Needs Attention",
+      "badge_color": "orange",
+      "checks": [
+        {
+          "label": "Has YouTube account linked",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has at least 1 source configured",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has uploaded at least 1 clip",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Status is active",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has clips in queue",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Quota not exhausted (< 90% used)",
+          "passed": true,
+          "icon": "\u2705"
+        }
+      ]
+    },
+    {
+      "channel": "fomo_highlights",
+      "readiness_score": 5,
+      "total_checks": 6,
+      "badge": "needs_attention",
+      "badge_text": "Needs Attention",
+      "badge_color": "orange",
+      "checks": [
+        {
+          "label": "Has YouTube account linked",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has at least 1 source configured",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has uploaded at least 1 clip",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Status is active",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has clips in queue",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Quota not exhausted (< 90% used)",
+          "passed": true,
+          "icon": "\u2705"
+        }
+      ]
+    },
+    {
+      "channel": "market_meltdowns",
+      "readiness_score": 5,
+      "total_checks": 6,
+      "badge": "needs_attention",
+      "badge_text": "Needs Attention",
+      "badge_color": "orange",
+      "checks": [
+        {
+          "label": "Has YouTube account linked",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has at least 1 source configured",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has uploaded at least 1 clip",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Status is active",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Has clips in queue",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Quota not exhausted (< 90% used)",
+          "passed": true,
+          "icon": "\u2705"
+        }
+      ]
+    },
+    {
+      "channel": "viral_recaps",
+      "readiness_score": 5,
+      "total_checks": 6,
+      "badge": "needs_attention",
+      "badge_text": "Needs Attention",
+      "badge_color": "orange",
+      "checks": [
+        {
+          "label": "Has YouTube account linked",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has at least 1 source configured",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has uploaded at least 1 clip",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Status is active",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has clips in queue",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Quota not exhausted (< 90% used)",
+          "passed": true,
+          "icon": "\u2705"
+        }
+      ]
+    },
+    {
+      "channel": "gym_moments",
+      "readiness_score": 4,
+      "total_checks": 6,
+      "badge": "needs_attention",
+      "badge_text": "Needs Attention",
+      "badge_color": "orange",
+      "checks": [
+        {
+          "label": "Has YouTube account linked",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has at least 1 source configured",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has uploaded at least 1 clip",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Status is active",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Has clips in queue",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Quota not exhausted (< 90% used)",
+          "passed": true,
+          "icon": "\u2705"
+        }
+      ]
+    },
+    {
+      "channel": "rich_or_ruined",
+      "readiness_score": 4,
+      "total_checks": 6,
+      "badge": "needs_attention",
+      "badge_text": "Needs Attention",
+      "badge_color": "orange",
+      "checks": [
+        {
+          "label": "Has YouTube account linked",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has at least 1 source configured",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has uploaded at least 1 clip",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Status is active",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Has clips in queue",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Quota not exhausted (< 90% used)",
+          "passed": true,
+          "icon": "\u2705"
+        }
+      ]
+    },
+    {
+      "channel": "startup_graveyard",
+      "readiness_score": 4,
+      "total_checks": 6,
+      "badge": "needs_attention",
+      "badge_text": "Needs Attention",
+      "badge_color": "orange",
+      "checks": [
+        {
+          "label": "Has YouTube account linked",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has at least 1 source configured",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has uploaded at least 1 clip",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Status is active",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Has clips in queue",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Quota not exhausted (< 90% used)",
+          "passed": true,
+          "icon": "\u2705"
+        }
+      ]
+    },
+    {
+      "channel": "ai_did_what",
+      "readiness_score": 3,
+      "total_checks": 6,
+      "badge": "needs_attention",
+      "badge_text": "Needs Attention",
+      "badge_color": "orange",
+      "checks": [
+        {
+          "label": "Has YouTube account linked",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has at least 1 source configured",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has uploaded at least 1 clip",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Status is active",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Has clips in queue",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Quota not exhausted (< 90% used)",
+          "passed": true,
+          "icon": "\u2705"
+        }
+      ]
+    },
+    {
+      "channel": "self_made_clips",
+      "readiness_score": 3,
+      "total_checks": 6,
+      "badge": "needs_attention",
+      "badge_text": "Needs Attention",
+      "badge_color": "orange",
+      "checks": [
+        {
+          "label": "Has YouTube account linked",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has at least 1 source configured",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has uploaded at least 1 clip",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Status is active",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Has clips in queue",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Quota not exhausted (< 90% used)",
+          "passed": true,
+          "icon": "\u2705"
+        }
+      ]
+    },
+    {
+      "channel": "stream_queens",
+      "readiness_score": 3,
+      "total_checks": 6,
+      "badge": "needs_attention",
+      "badge_text": "Needs Attention",
+      "badge_color": "orange",
+      "checks": [
+        {
+          "label": "Has YouTube account linked",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has at least 1 source configured",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has uploaded at least 1 clip",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Status is active",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Has clips in queue",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Quota not exhausted (< 90% used)",
+          "passed": true,
+          "icon": "\u2705"
+        }
+      ]
+    },
+    {
+      "channel": "stream_sirens",
+      "readiness_score": 3,
+      "total_checks": 6,
+      "badge": "needs_attention",
+      "badge_text": "Needs Attention",
+      "badge_color": "orange",
+      "checks": [
+        {
+          "label": "Has YouTube account linked",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has at least 1 source configured",
+          "passed": true,
+          "icon": "\u2705"
+        },
+        {
+          "label": "Has uploaded at least 1 clip",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Status is active",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Has clips in queue",
+          "passed": false,
+          "icon": "\u274c"
+        },
+        {
+          "label": "Quota not exhausted (< 90% used)",
+          "passed": true,
+          "icon": "\u2705"
+        }
+      ]
+    }
+  ],
+  "git_status": {
+    "current_branch": "master",
+    "total_commits": 116,
+    "recent_commits": [
+      {
+        "hash": "34c79a4",
+        "message": "feat: add git status & commit history panel",
+        "index": 0
+      },
+      {
+        "hash": "db0dd2a",
+        "message": "feat: add dark/light/high-contrast theme toggle",
+        "index": 1
+      },
+      {
+        "hash": "787c0d1",
+        "message": "feat: add multi-channel bulk action controls",
+        "index": 2
+      },
+      {
+        "hash": "ededc56",
+        "message": "feat: add automated health score with grade",
+        "index": 3
+      },
+      {
+        "hash": "b45c09b",
+        "message": "feat: add channel launch readiness checklist",
+        "index": 4
+      },
+      {
+        "hash": "4082672",
+        "message": "feat: add notification center with auto-alerts",
+        "index": 5
+      },
+      {
+        "hash": "4d6478f",
+        "message": "feat: add clip style performance analyzer",
+        "index": 6
+      },
+      {
+        "hash": "4d17dd6",
+        "message": "feat: add growth tiers benchmarking panel",
+        "index": 7
+      },
+      {
+        "hash": "abb7fb6",
+        "message": "feat: add posting time optimizer heatmap",
+        "index": 8
+      },
+      {
+        "hash": "63f4829",
+        "message": "feat: add A/B title performance tracker",
+        "index": 9
+      }
+    ],
+    "uncommitted_files": [
+      "M dashboard/README.md",
+      "M dashboard/data.json",
+      "M dashboard/health_history.json",
+      "M dashboard/index.html",
+      "M engine/cli.py",
+      "M engine/transform/crop.py",
+      "M publisher/youtube_worker.py",
+      "?? .github/",
+      "?? _after_public_select.png",
+      "?? _after_save.png",
+      "?? _check_trend_math.py",
+      "?? _inspect_metrics.py",
+      "?? _inspect_schema.py",
+      "?? _inspect_schema_temp.py",
+      "?? _inspect_source.py",
+      "?? _inspect_source_health_temp.py",
+      "?? _probe_more.py",
+      "?? _profile_db.py",
+      "?? accounts.db",
+      "?? check_assets.py",
+      "?? check_fomo.py",
+      "?? check_job.py",
+      "?? check_metrics.py",
+      "?? check_mm.py",
+      "?? check_publish_results.py",
+      "?? check_queue.py",
+      "?? check_recent.py",
+      "?? check_renders.py",
+      "?? check_renders2.py",
+      "?? check_schema.py",
+      "?? check_succeeded_jobs.py",
+      "?? check_tables.py",
+      "?? check_thumb_mapping.py",
+      "?? check_variants.py",
+      "?? clip_empire.db",
+      "?? dashboard/check_schedule.py",
+      "?? data/used_hooks.json",
+      "?? data/used_titles.json",
+      "?? data/used_titles_per_channel.json",
+      "?? disable_channel.py",
+      "?? feature_2_prompt.md",
+      "?? fix_terminated.py",
+      "?? inspect_db.py",
+      "?? inspect_db2.py",
+      "?? inspect_db3.py",
+      "?? inspect_schema.py",
+      "?? inspect_schema_temp.py",
+      "?? intermediate/",
+      "?? preview_site/",
+      "?? publish_queue.db",
+      "?? publisher/queue.db",
+      "?? queue_status.py",
+      "?? raw_clips/",
+      "?? requeue.py",
+      "?? test_api.py",
+      "?? test_dedup.py",
+      "?? test_logs.py",
+      "?? test_overlay.py",
+      "?? test_toggle.py",
+      "?? test_toggle_simple.py",
+      "?? tools/build_static_preview.py"
+    ],
+    "uncommitted_count": 61,
+    "diff_stats": {
+      "insertions": 5775,
+      "deletions": 243
+    },
+    "has_changes": true
+  },
   "insights": {
     "lagging_channels": [
       {
@@ -6139,13 +11211,13 @@
       }
     ],
     "lagging_count": 3,
-    "queue_backlog": 23,
+    "queue_backlog": 17,
     "analytics_channels": 9
   },
   "meta": {
     "refresh_seconds": 30,
     "channel_count": 11,
-    "job_count": 83,
+    "job_count": 85,
     "has_metrics_daily": false,
     "has_clip_assets": false,
     "note": "Trend analytics prefer metrics_daily and fall back to source clip proxy series when upload analytics are sparse."

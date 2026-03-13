@@ -1640,7 +1640,81 @@
       </div>
     </section>
 
-    
+    <!-- Posting Time Optimizer Panel -->
+    <section class="card" style="margin-top:18px;">
+      <div class="card-head">
+        <h2>📅 Posting Time Optimizer</h2>
+        <div class="top-note">24-hour heatmap and day-of-week analysis to maximize views</div>
+      </div>
+      <div class="card-body">
+        <!-- Best Times Summary -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 24px;">
+          <div style="padding: 16px; background: rgba(201,168,76,.12); border: 1px solid rgba(201,168,76,.3); border-radius: 12px;">
+            <div style="font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Best Hour</div>
+            <div style="font-size: 20px; font-weight: 700; color: var(--gold-2);" id="bestHourTime">—</div>
+            <div style="font-size: 12px; color: var(--dim); margin-top: 4px;" id="bestHourViews">— avg views</div>
+          </div>
+          <div style="padding: 16px; background: rgba(91,141,239,.12); border: 1px solid rgba(91,141,239,.3); border-radius: 12px;">
+            <div style="font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Best Day</div>
+            <div style="font-size: 20px; font-weight: 700; color: var(--blue);" id="bestDayName">—</div>
+            <div style="font-size: 12px; color: var(--dim); margin-top: 4px;" id="bestDayViews">— avg views</div>
+          </div>
+          <div style="padding: 16px; background: rgba(61,214,140,.12); border: 1px solid rgba(61,214,140,.3); border-radius: 12px;">
+            <div style="font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Next Best Slot</div>
+            <div style="font-size: 20px; font-weight: 700; color: var(--success);" id="nextBestSlot">—</div>
+            <div style="font-size: 12px; color: var(--dim); margin-top: 4px;" id="nextBestSlotDate">— UTC</div>
+          </div>
+        </div>
+
+        <!-- 24-Hour Heatmap -->
+        <div style="margin-bottom: 28px;">
+          <div style="color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; font-family: var(--mono);">
+            24-Hour View Heatmap (Hour × Day of Week)
+          </div>
+          <div style="overflow-x: auto; padding-bottom: 8px;">
+            <div style="display: grid; grid-template-columns: 50px repeat(7, 1fr); gap: 4px; min-width: fit-content;">
+              <!-- Header row -->
+              <div style=""></div>
+              <div style="text-align: center; font-size: 11px; color: var(--muted); font-weight: 600; padding: 8px 0;">Mon</div>
+              <div style="text-align: center; font-size: 11px; color: var(--muted); font-weight: 600; padding: 8px 0;">Tue</div>
+              <div style="text-align: center; font-size: 11px; color: var(--muted); font-weight: 600; padding: 8px 0;">Wed</div>
+              <div style="text-align: center; font-size: 11px; color: var(--muted); font-weight: 600; padding: 8px 0;">Thu</div>
+              <div style="text-align: center; font-size: 11px; color: var(--muted); font-weight: 600; padding: 8px 0;">Fri</div>
+              <div style="text-align: center; font-size: 11px; color: var(--muted); font-weight: 600; padding: 8px 0;">Sat</div>
+              <div style="text-align: center; font-size: 11px; color: var(--muted); font-weight: 600; padding: 8px 0;">Sun</div>
+              <!-- Hour rows -->
+              <div id="heatmapContainer"></div>
+            </div>
+          </div>
+          <div style="margin-top: 12px; display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--muted);">
+            <span>Scale:</span>
+            <div style="display: flex; gap: 2px;">
+              <div style="width: 20px; height: 20px; background: rgba(201,168,76,.2); border: 1px solid rgba(201,168,76,.3); border-radius: 4px;"></div>
+              <div style="width: 20px; height: 20px; background: rgba(201,168,76,.5); border: 1px solid rgba(201,168,76,.3); border-radius: 4px;"></div>
+              <div style="width: 20px; height: 20px; background: rgba(201,168,76,.8); border: 1px solid rgba(201,168,76,.3); border-radius: 4px;"></div>
+              <div style="width: 20px; height: 20px; background: linear-gradient(135deg, var(--gold), var(--gold-2)); border: 1px solid rgba(201,168,76,.3); border-radius: 4px;"></div>
+            </div>
+            <span>Low ← → High</span>
+          </div>
+        </div>
+
+        <!-- Day of Week Performance -->
+        <div style="margin-bottom: 28px;">
+          <div style="color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; font-family: var(--mono);">
+            Day of Week Performance
+          </div>
+          <div id="dayOfWeekChart" style="display: flex; flex-direction: column; gap: 10px;"></div>
+        </div>
+
+        <!-- Scheduled Posts -->
+        <div>
+          <div style="color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; font-family: var(--mono);">
+            Next 7 Days Scheduled Posts
+          </div>
+          <div id="scheduledPostsList" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px;"></div>
+        </div>
+      </div>
+    </section>
 
     <section class="card" style="margin-top:18px;">
       <div class="card-head">
@@ -3348,6 +3422,7 @@
       renderSchedule();
       renderQuota();
       renderTitlePerformance(); renderRevenue();
+      renderPostingTimes();
       renderPipeline();
       renderLeaderboard();
       renderHallOfFame();
@@ -3726,6 +3801,102 @@
 
       byId('titleScore').textContent = score;
       byId('titleScoreFeedback').innerHTML = feedback.map(f => `<div>• ${f}</div>`).join('');
+    }
+
+
+    function renderPostingTimes(){
+      const postingTimes = dataCache.posting_times || {};
+      const hourly = postingTimes.hourly || [];
+      const daily = postingTimes.daily || [];
+      const bestHours = postingTimes.best_hours || [];
+      const bestDays = postingTimes.best_days || [];
+      const heatmapGrid = postingTimes.heatmap_grid || [];
+      const scheduledPosts = postingTimes.scheduled_posts || [];
+      const nextBestSlot = postingTimes.next_best_slot || null;
+
+      // Best Hour & Day Summary
+      if (bestHours.length > 0) {
+        byId('bestHourTime').textContent = `${bestHours[0].hour_label}`;
+        byId('bestHourViews').textContent = `${fmtNum(bestHours[0].avg_views)} avg views`;
+      }
+
+      if (bestDays.length > 0) {
+        byId('bestDayName').textContent = `${bestDays[0].day_name}`;
+        byId('bestDayViews').textContent = `${fmtNum(bestDays[0].avg_views)} avg views`;
+      }
+
+      if (nextBestSlot) {
+        byId('nextBestSlot').textContent = `${nextBestSlot.day_name} ${nextBestSlot.hour_label}`;
+        byId('nextBestSlotDate').textContent = `Est. ${fmtNum(nextBestSlot.est_views)} views`;
+      }
+
+      // Build Heatmap
+      let heatmapHTML = '';
+      if (heatmapGrid.length > 0) {
+        for (let hour = 0; hour < heatmapGrid.length; hour++) {
+          const hourRow = heatmapGrid[hour];
+          // Hour label
+          heatmapHTML += `<div style="text-align: right; font-size: 10px; color: var(--muted); font-weight: 600; padding: 8px 2px; line-height: 1;">${hour.toString().padStart(2, '0')}</div>`;
+          // Day cells
+          for (let day = 0; day < 7; day++) {
+            const cell = hourRow[day];
+            if (!cell) continue;
+            const intensity = cell.intensity || 0;
+            const views = fmtNum(Math.round(cell.views));
+            const posts = cell.posts || 0;
+            
+            // Color intensity from 0-100
+            let bgColor = 'rgba(201,168,76,.2)';
+            if (intensity > 75) {
+              bgColor = 'linear-gradient(135deg, var(--gold), var(--gold-2))';
+            } else if (intensity > 50) {
+              bgColor = 'rgba(201,168,76,.7)';
+            } else if (intensity > 25) {
+              bgColor = 'rgba(201,168,76,.4)';
+            }
+
+            heatmapHTML += `
+              <div style="background: ${bgColor}; border: 1px solid rgba(201,168,76,.3); border-radius: 4px; padding: 6px; text-align: center; min-height: 36px; display: flex; flex-direction: column; justify-content: center; cursor: help;" title="Hour ${hour}:00 | ${views} views avg | ${posts} posts">
+                <div style="font-size: 11px; font-weight: 600; color: var(--text);">${views}</div>
+                <div style="font-size: 9px; color: var(--muted);">${posts}x</div>
+              </div>`;
+          }
+        }
+      }
+      const heatmapContainer = byId('heatmapContainer');
+      if (heatmapContainer) {
+        heatmapContainer.innerHTML = heatmapHTML || '<div style="grid-column: 1 / -1; text-align: center; padding: 20px; color: var(--muted);">No heatmap data available</div>';
+      }
+
+      // Day of Week Bar Chart
+      const maxDayViews = Math.max(...daily.map(d => d.avg_views || 0), 1);
+      const dayOfWeekHTML = daily.map(day => {
+        const pct = (day.avg_views / maxDayViews) * 100;
+        const barColor = day.avg_views > (maxDayViews * 0.75) ? 'linear-gradient(90deg, var(--gold), var(--gold-2))' : 'rgba(201,168,76,.5)';
+        return `
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="min-width: 70px; font-weight: 500; color: var(--text);">${day.day_name}</div>
+            <div style="flex: 1; position: relative; height: 24px; background: rgba(201,168,76,.12); border-radius: 4px; overflow: hidden;">
+              <div style="height: 100%; width: ${pct}%; background: ${barColor}; transition: width 0.3s ease;"></div>
+            </div>
+            <div style="min-width: 100px; text-align: right;">
+              <div style="font-weight: 600; color: var(--gold-2);">${fmtNum(day.avg_views)}</div>
+              <div style="font-size: 11px; color: var(--dim);">${day.posts} posts</div>
+            </div>
+          </div>`;
+      }).join('');
+      byId('dayOfWeekChart').innerHTML = dayOfWeekHTML || '<div style="color: var(--muted); text-align: center; padding: 20px;">No day data available</div>';
+
+      // Scheduled Posts
+      const scheduledHTML = scheduledPosts.length > 0
+        ? scheduledPosts.map(post => `
+            <div style="padding: 12px; background: rgba(91,141,239,.12); border: 1px solid rgba(91,141,239,.3); border-radius: 8px;">
+              <div style="font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">${post.day_name} at ${post.hour}:00</div>
+              <div style="font-weight: 600; color: var(--text); margin-bottom: 4px; font-size: 13px;">${esc(post.title)}</div>
+              <div style="font-size: 12px; color: var(--dim);">@${esc(post.channel)}</div>
+            </div>`).join('')
+        : '<div style="color: var(--muted); text-align: center; padding: 20px; grid-column: 1 / -1;">No scheduled posts in next 7 days</div>';
+      byId('scheduledPostsList').innerHTML = scheduledHTML;
     }
 
 

@@ -1656,6 +1656,216 @@ def get_sources_list(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     return sources_list
 
 
+def get_daily_summary(conn: sqlite3.Connection) -> dict[str, Any]:
+    """Generate daily summary report with today's stats and comparisons to yesterday.
+    
+    Returns:
+    - date: today's date (YYYY-MM-DD)
+    - uploads_today: uploads succeeded today
+    - views_gained_today: total views from clips uploaded today (source_clips view_count)
+    - errors_today: publish_jobs with errors created/updated today
+    - top_clip_today: title, views, channel of best performing clip from today
+    - quota_usage: percentage of YouTube API quota used today
+    - delta_uploads: uploads today vs yesterday (positive = growth)
+    - delta_views: views today vs yesterday
+    - top_3_channels: list of top 3 channels by upload count today
+    - summary_text: plain text summary
+    - summary_discord: Discord markdown formatted summary (for sending to bot-logs)
+    """
+    from datetime import datetime, timedelta
+    
+    today = utc_now().date().isoformat()
+    yesterday = (utc_now().date() - timedelta(days=1)).isoformat()
+    
+    # Get today's uploads (succeeded jobs created/updated today)
+    uploads_today = int(
+        query_one(
+            conn,
+            """
+            SELECT COUNT(*) AS c FROM publish_jobs
+            WHERE status = 'succeeded'
+              AND DATE(COALESCE(updated_at, created_at)) = ?
+            """,
+            (today,)
+        )['c'] or 0
+    )
+    
+    # Get yesterday's uploads for comparison
+    uploads_yesterday = int(
+        query_one(
+            conn,
+            """
+            SELECT COUNT(*) AS c FROM publish_jobs
+            WHERE status = 'succeeded'
+              AND DATE(COALESCE(updated_at, created_at)) = ?
+            """,
+            (yesterday,)
+        )['c'] or 0
+    )
+    
+    delta_uploads = uploads_today - uploads_yesterday
+    
+    # Get today's errors
+    errors_today = int(
+        query_one(
+            conn,
+            """
+            SELECT COUNT(*) AS c FROM publish_jobs
+            WHERE last_error IS NOT NULL
+              AND TRIM(last_error) != ''
+              AND DATE(COALESCE(updated_at, created_at)) = ?
+            """,
+            (today,)
+        )['c'] or 0
+    )
+    
+    # Get today's views gained (sum of view_count from source_clips used in today's uploads)
+    views_today_result = query_one(
+        conn,
+        """
+        SELECT COALESCE(SUM(NULLIF(sc.view_count, 0)), 0) AS total_views
+        FROM publish_jobs pj
+        LEFT JOIN platform_variants pv ON pv.variant_id = pj.variant_id
+        LEFT JOIN source_clips sc ON sc.clip_id = pv.clip_id
+        WHERE pj.status = 'succeeded'
+          AND DATE(COALESCE(pj.updated_at, pj.created_at)) = ?
+        """,
+        (today,)
+    )
+    views_gained_today = int(views_today_result['total_views'] or 0) if views_today_result else 0
+    
+    # Get yesterday's views for comparison
+    views_yesterday_result = query_one(
+        conn,
+        """
+        SELECT COALESCE(SUM(NULLIF(sc.view_count, 0)), 0) AS total_views
+        FROM publish_jobs pj
+        LEFT JOIN platform_variants pv ON pv.variant_id = pj.variant_id
+        LEFT JOIN source_clips sc ON sc.clip_id = pv.clip_id
+        WHERE pj.status = 'succeeded'
+          AND DATE(COALESCE(pj.updated_at, pj.created_at)) = ?
+        """,
+        (yesterday,)
+    )
+    views_yesterday = int(views_yesterday_result['total_views'] or 0) if views_yesterday_result else 0
+    delta_views = views_gained_today - views_yesterday
+    
+    # Get top performing clip from today
+    top_clip_row = query_one(
+        conn,
+        """
+        SELECT pj.channel_name, pj.caption_text, COALESCE(sc.view_count, 0) AS views
+        FROM publish_jobs pj
+        LEFT JOIN platform_variants pv ON pv.variant_id = pj.variant_id
+        LEFT JOIN source_clips sc ON sc.clip_id = pv.clip_id
+        WHERE pj.status = 'succeeded'
+          AND DATE(COALESCE(pj.updated_at, pj.created_at)) = ?
+        ORDER BY COALESCE(sc.view_count, 0) DESC
+        LIMIT 1
+        """,
+        (today,)
+    )
+    
+    top_clip_today = None
+    if top_clip_row:
+        top_clip_today = {
+            'title': (top_clip_row['caption_text'] or 'Untitled')[:100],
+            'views': int(top_clip_row['views'] or 0),
+            'channel': top_clip_row['channel_name'],
+        }
+    
+    # Get quota usage for today (YouTube API: 1600 units per upload, 10000 units daily limit)
+    quota_units_used = uploads_today * 1600
+    quota_pct = round((quota_units_used / 10000.0) * 100, 1)
+    
+    # Get top 3 channels by upload count today
+    top_channels_rows = query_all(
+        conn,
+        """
+        SELECT channel_name, COUNT(*) AS uploads
+        FROM publish_jobs
+        WHERE status = 'succeeded'
+          AND DATE(COALESCE(updated_at, created_at)) = ?
+        GROUP BY channel_name
+        ORDER BY uploads DESC
+        LIMIT 3
+        """,
+        (today,)
+    )
+    
+    top_3_channels = [
+        {'channel': row['channel_name'], 'uploads': int(row['uploads'] or 0)}
+        for row in top_channels_rows
+    ]
+    
+    # Generate summary text
+    summary_lines = [
+        f"📊 Daily Summary for {today}",
+        f"",
+        f"📈 Stats:",
+        f"  Uploads: {uploads_today} ({'+' if delta_uploads >= 0 else ''}{delta_uploads} vs yesterday)",
+        f"  Views: {fmt_num_compact(views_gained_today)} ({'+' if delta_views >= 0 else ''}{fmt_num_compact(delta_views)} vs yesterday)",
+        f"  Errors: {errors_today}",
+        f"  API Quota: {quota_pct}% used ({quota_units_used}/10000 units)",
+    ]
+    
+    if top_clip_today:
+        summary_lines.append(f"")
+        summary_lines.append(f"🌟 Top Clip:")
+        summary_lines.append(f"  {top_clip_today['title']}")
+        summary_lines.append(f"  {fmt_num_compact(top_clip_today['views'])} views • {top_clip_today['channel']}")
+    
+    if top_3_channels:
+        summary_lines.append(f"")
+        summary_lines.append(f"🏆 Top Channels:")
+        for idx, ch in enumerate(top_3_channels, 1):
+            summary_lines.append(f"  {idx}. {ch['channel']}: {ch['uploads']} uploads")
+    
+    summary_text = '\n'.join(summary_lines)
+    
+    # Generate Discord markdown version
+    discord_lines = [
+        f"## 📊 Daily Summary — {today}",
+        f"",
+        f"**📈 Today's Stats:**",
+        f"• **Uploads:** {uploads_today} ({'+' if delta_uploads >= 0 else ''}{delta_uploads} vs yesterday)",
+        f"• **Views:** {fmt_num_compact(views_gained_today)} ({'+' if delta_views >= 0 else ''}{fmt_num_compact(delta_views)} vs yesterday)",
+        f"• **Errors:** {errors_today}",
+        f"• **API Quota:** {quota_pct}% used (`{quota_units_used}/10000` units)",
+    ]
+    
+    if top_clip_today:
+        discord_lines.append(f"")
+        discord_lines.append(f"**🌟 Top Performer Today:**")
+        discord_lines.append(f"_{top_clip_today['title']}_")
+        discord_lines.append(f"**{fmt_num_compact(top_clip_today['views'])} views** • **{top_clip_today['channel']}**")
+    
+    if top_3_channels:
+        discord_lines.append(f"")
+        discord_lines.append(f"**🏆 Top Channels:**")
+        for idx, ch in enumerate(top_3_channels, 1):
+            discord_lines.append(f"{idx}. **{ch['channel']}** — {ch['uploads']} uploads")
+    
+    summary_discord = '\n'.join(discord_lines)
+    
+    return {
+        'date': today,
+        'uploads_today': uploads_today,
+        'uploads_yesterday': uploads_yesterday,
+        'views_gained_today': views_gained_today,
+        'views_yesterday': views_yesterday,
+        'errors_today': errors_today,
+        'quota_pct': quota_pct,
+        'quota_units_used': quota_units_used,
+        'delta_uploads': delta_uploads,
+        'delta_views': delta_views,
+        'top_clip_today': top_clip_today,
+        'top_3_channels': top_3_channels,
+        'summary_text': summary_text,
+        'summary_discord': summary_discord,
+    }
+
+
 def get_pipeline_status(conn: sqlite3.Connection) -> dict[str, Any]:
     """Track the full clip lifecycle through the pipeline.
     
@@ -1819,6 +2029,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     disk_usage = get_disk_usage()
     hall_of_fame = get_hall_of_fame(conn)
     sources_list = get_sources_list(conn)
+    daily_summary = get_daily_summary(conn)
     lagging = [item for item in channel_performance if item['lagging']]
     payload = {
         'generated_at': utc_now().isoformat() + 'Z',
@@ -1846,6 +2057,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'hall_of_fame': hall_of_fame,
         'leaderboard': get_channel_leaderboard(conn),
         'sources_list': sources_list,
+        'daily_summary': daily_summary,
         'insights': {
             'lagging_channels': lagging[:6],
             'lagging_count': len(lagging),

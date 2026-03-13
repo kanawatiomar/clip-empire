@@ -541,6 +541,93 @@ def toggle_source(payload: dict) -> dict:
         return {'ok': False, 'error': f'Failed to toggle source: {str(e)}'}
 
 
+def send_daily_summary_to_discord() -> dict:
+    """Send the daily summary to Discord #bot-logs channel.
+    
+    Returns:
+    - ok: True if successful
+    - message_id: Discord message ID if successful
+    - error: Error message if failed
+    """
+    import json
+    
+    try:
+        # Load the latest data.json
+        data_json_path = BASE_DIR / 'data.json'
+        if not data_json_path.exists():
+            raise ValueError('data.json not found. Run generate_data.py first.')
+        
+        data = json.loads(data_json_path.read_text(encoding='utf-8'))
+        daily_summary = data.get('daily_summary', {})
+        
+        if not daily_summary:
+            raise ValueError('No daily_summary data available')
+        
+        # Get Discord message from daily_summary
+        summary_discord = daily_summary.get('summary_discord', '')
+        if not summary_discord:
+            raise ValueError('No Discord summary text available')
+        
+        # Send to Discord #bot-logs channel
+        channel_id = '1475223354066600036'
+        token = get_discord_bot_token()
+        
+        # Prepare message payload
+        message_payload = {
+            'content': summary_discord,
+        }
+        
+        # Send POST request to Discord API
+        req = urlrequest.Request(
+            f'{DISCORD_API_BASE}/channels/{channel_id}/messages',
+            data=json.dumps(message_payload).encode('utf-8'),
+            headers={
+                'Authorization': f'Bot {token}',
+                'Content-Type': 'application/json',
+                'User-Agent': 'ClipEmpireDashboard/1.0',
+            },
+            method='POST',
+        )
+        
+        try:
+            with urlrequest.urlopen(req, timeout=15) as resp:
+                response_data = json.loads(resp.read().decode('utf-8'))
+                message_id = response_data.get('id')
+                
+                # Store last sent time in a metadata file for dashboard display
+                metadata = {
+                    'last_sent_at': utc_now().isoformat() + 'Z',
+                    'last_message_id': message_id,
+                    'date': daily_summary.get('date'),
+                }
+                
+                metadata_file = BASE_DIR / '.daily_summary_metadata.json'
+                metadata_file.write_text(json.dumps(metadata, indent=2), encoding='utf-8')
+                
+                return {
+                    'ok': True,
+                    'message_id': message_id,
+                    'message': f'Daily summary sent to Discord ({message_id})',
+                    'summary': daily_summary,
+                }
+        except urlerror.HTTPError as exc:
+            detail = exc.read().decode('utf-8', errors='replace')
+            raise ValueError(f'Discord API error {exc.code}: {detail[:240]}') from exc
+        except urlerror.URLError as exc:
+            raise ValueError(f'Discord API request failed: {exc.reason}') from exc
+    except Exception as e:
+        return {
+            'ok': False,
+            'error': str(e),
+        }
+
+
+def utc_now():
+    """Return current UTC datetime."""
+    from datetime import datetime
+    return datetime.utcnow()
+
+
 def run_action(payload: dict) -> dict:
     action = payload.get('action')
     channel = payload.get('channel')
@@ -613,6 +700,34 @@ class Handler(SimpleHTTPRequestHandler):
             except Exception as exc:
                 self._send_json({'ok': False, 'error': str(exc), 'messages': []}, 500)
             return
+        if parsed.path == '/api/daily_summary':
+            try:
+                # Load the daily summary from data.json
+                data_json_path = BASE_DIR / 'data.json'
+                if data_json_path.exists():
+                    data = json.loads(data_json_path.read_text(encoding='utf-8'))
+                    daily_summary = data.get('daily_summary', {})
+                else:
+                    daily_summary = {}
+                
+                # Load metadata for last sent time
+                metadata_file = BASE_DIR / '.daily_summary_metadata.json'
+                metadata = {}
+                if metadata_file.exists():
+                    try:
+                        metadata = json.loads(metadata_file.read_text(encoding='utf-8'))
+                    except Exception:
+                        metadata = {}
+                
+                self._send_json({
+                    'ok': True,
+                    'daily_summary': daily_summary,
+                    'last_sent_at': metadata.get('last_sent_at'),
+                    'last_message_id': metadata.get('last_message_id'),
+                })
+            except Exception as exc:
+                self._send_json({'ok': False, 'error': str(exc)}, 500)
+            return
         if parsed.path == '/api/logs':
             try:
                 # Parse query parameters
@@ -660,7 +775,7 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_POST(self):
         parsed = urlparse(self.path)
-        if parsed.path not in {'/api/action', '/api/update_channel_settings', '/api/retry_job', '/api/cancel_job', '/api/enable_channel', '/api/disable_channel', '/api/cleanup_renders', '/api/add_source', '/api/remove_source', '/api/toggle_source'}:
+        if parsed.path not in {'/api/action', '/api/update_channel_settings', '/api/retry_job', '/api/cancel_job', '/api/enable_channel', '/api/disable_channel', '/api/cleanup_renders', '/api/add_source', '/api/remove_source', '/api/toggle_source', '/api/send_daily_summary'}:
             self._send_json({'ok': False, 'error': 'Not found'}, 404)
             return
         try:
@@ -707,6 +822,8 @@ class Handler(SimpleHTTPRequestHandler):
                 result = toggle_source(payload)
                 if result.get('ok'):
                     run_generate()
+            elif parsed.path == '/api/send_daily_summary':
+                result = send_daily_summary_to_discord()
             else:
                 result = run_action(payload)
                 if payload.get('action') in {'pause_channel', 'resume_channel', 'refresh_data'}:

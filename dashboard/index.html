@@ -1258,6 +1258,65 @@
       <div class="kpi"><div class="label">Render Queue Depth</div><div class="value" id="kpiDepth">—</div><div class="hint" id="kpiLagging">— lagging channels</div></div>
     </section>
 
+    <!-- Daily Summary Panel -->
+    <section class="card" style="margin-top:18px;">
+      <div class="card-head">
+        <h2>📊 Daily Summary</h2>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <button onclick="sendDailySummaryToDiscord()" class="success" style="padding: 8px 12px; font-size: 12px;">📤 Send to Discord</button>
+          <span id="lastSentTime" style="font-size: 12px; color: var(--dim);"></span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px;">
+          <div style="padding: 16px; background: rgba(255,255,255,.03); border-radius: 12px; border: 1px solid var(--line);">
+            <div style="font-size: 12px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Date</div>
+            <div style="font-size: 16px; font-weight: 600; font-family: var(--mono);" id="summaryDate">—</div>
+          </div>
+          <div style="padding: 16px; background: rgba(255,255,255,.03); border-radius: 12px; border: 1px solid var(--line);">
+            <div style="font-size: 12px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Uploads Today</div>
+            <div style="font-size: 16px; font-weight: 600; color: var(--gold);" id="summaryUploads">—</div>
+            <div style="font-size: 11px; color: var(--muted); margin-top: 4px;" id="summaryUploadsDelta">—</div>
+          </div>
+          <div style="padding: 16px; background: rgba(255,255,255,.03); border-radius: 12px; border: 1px solid var(--line);">
+            <div style="font-size: 12px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Views Gained</div>
+            <div style="font-size: 16px; font-weight: 600; color: var(--gold);" id="summaryViews">—</div>
+            <div style="font-size: 11px; color: var(--muted); margin-top: 4px;" id="summaryViewsDelta">—</div>
+          </div>
+          <div style="padding: 16px; background: rgba(255,255,255,.03); border-radius: 12px; border: 1px solid var(--line);">
+            <div style="font-size: 12px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">Errors Today</div>
+            <div style="font-size: 16px; font-weight: 600;" id="summaryErrors">—</div>
+          </div>
+          <div style="padding: 16px; background: rgba(255,255,255,.03); border-radius: 12px; border: 1px solid var(--line);">
+            <div style="font-size: 12px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">API Quota</div>
+            <div style="font-size: 16px; font-weight: 600;" id="summaryQuota">—</div>
+          </div>
+        </div>
+
+        <!-- Top Performer Today -->
+        <div id="topClipContainer" style="display: none; margin-bottom: 20px; padding: 16px; background: rgba(201,168,76,.08); border-radius: 12px; border: 1px solid rgba(201,168,76,.25);">
+          <div style="font-size: 12px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">🌟 Top Performer Today</div>
+          <div style="font-size: 14px; font-weight: 600; margin-bottom: 8px;" id="topClipTitle">—</div>
+          <div style="display: flex; gap: 16px; font-size: 12px; color: var(--muted);">
+            <div><span style="color: var(--text);" id="topClipViews">—</span> views</div>
+            <div>Channel: <span style="color: var(--text);" id="topClipChannel">—</span></div>
+          </div>
+        </div>
+
+        <!-- Top 3 Channels -->
+        <div id="topChannelsContainer" style="display: none;">
+          <div style="font-size: 12px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">🏆 Top Channels Today</div>
+          <div style="display: grid; gap: 8px;" id="topChannelsList"></div>
+        </div>
+
+        <!-- Discord Preview -->
+        <div style="margin-top: 20px; padding: 16px; background: rgba(91,141,239,.08); border-radius: 12px; border: 1px solid rgba(91,141,239,.25);">
+          <div style="font-size: 12px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Discord Preview</div>
+          <div style="font-family: var(--mono); font-size: 12px; color: var(--muted); white-space: pre-wrap; word-break: break-word; line-height: 1.5;" id="discordPreview">Loading preview...</div>
+        </div>
+      </div>
+    </section>
+
     <section class="grid main">
       <article class="card">
         <div class="card-head">
@@ -3162,11 +3221,102 @@
       }
     }
 
+    // Daily Summary functions
+    async function loadDailySummaryMetadata() {
+      try {
+        const res = await fetch(`${LOCAL_API}/api/daily_summary`);
+        const data = await res.json();
+        if (data.ok) {
+          return { summary: data.daily_summary, lastSent: data.last_sent_at, messageId: data.last_message_id };
+        }
+      } catch (err) {
+        console.log('Failed to load daily summary metadata:', err.message);
+      }
+      return { summary: {}, lastSent: null, messageId: null };
+    }
+
+    function renderDailySummary() {
+      const summary = dataCache?.daily_summary || {};
+      if (!summary || !summary.date) {
+        byId('summaryDate').textContent = '—';
+        return;
+      }
+
+      // Render summary stats
+      byId('summaryDate').textContent = summary.date;
+      byId('summaryUploads').textContent = summary.uploads_today || '0';
+      
+      const uploadsDelta = summary.delta_uploads || 0;
+      byId('summaryUploadsDelta').textContent = uploadsDelta >= 0 
+        ? `+${uploadsDelta} vs yesterday` 
+        : `${uploadsDelta} vs yesterday`;
+      
+      byId('summaryViews').textContent = fmtNum(summary.views_gained_today || 0);
+      const viewsDelta = summary.delta_views || 0;
+      byId('summaryViewsDelta').textContent = viewsDelta >= 0
+        ? `+${fmtNum(viewsDelta)} vs yesterday`
+        : `${fmtNum(viewsDelta)} vs yesterday`;
+      
+      byId('summaryErrors').textContent = summary.errors_today || '0';
+      byId('summaryQuota').textContent = (summary.quota_pct || 0) + '%';
+      
+      // Render top clip if available
+      const topClip = summary.top_clip_today;
+      if (topClip) {
+        byId('topClipContainer').style.display = 'block';
+        byId('topClipTitle').textContent = topClip.title;
+        byId('topClipViews').textContent = fmtNum(topClip.views);
+        byId('topClipChannel').textContent = topClip.channel;
+      } else {
+        byId('topClipContainer').style.display = 'none';
+      }
+      
+      // Render top 3 channels
+      const topChannels = summary.top_3_channels || [];
+      if (topChannels.length > 0) {
+        byId('topChannelsContainer').style.display = 'block';
+        const list = byId('topChannelsList');
+        list.innerHTML = topChannels.map((ch, idx) => `
+          <div style="padding: 12px; background: rgba(255,255,255,.03); border-radius: 10px; border: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-weight: 600;">${idx + 1}. ${esc(ch.channel)}</div>
+            <div style="font-family: var(--mono); color: var(--gold);">${ch.uploads} uploads</div>
+          </div>
+        `).join('');
+      } else {
+        byId('topChannelsContainer').style.display = 'none';
+      }
+      
+      // Render Discord preview
+      byId('discordPreview').textContent = summary.summary_discord || 'No preview available';
+    }
+
+    async function sendDailySummaryToDiscord() {
+      try {
+        const res = await fetch(`${LOCAL_API}/api/send_daily_summary`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({})
+        });
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'Failed to send');
+        
+        toast(`📤 Daily summary sent to Discord (${data.message_id})`);
+        
+        // Update last sent time
+        const now = new Date().toLocaleTimeString();
+        byId('lastSentTime').textContent = `Last sent: ${now}`;
+      } catch (err) {
+        toast(`❌ Error sending to Discord: ${err.message}`);
+      }
+    }
+
     async function boot(){
       await detectMode();
       renderAll();
+      renderDailySummary();
       window.addEventListener('resize', () => renderAnalytics());
       setInterval(loadData, (dataCache?.meta?.refresh_seconds || 15) * 1000);
+      setInterval(() => renderDailySummary(), 5000);  // Update summary every 5 seconds
       startLogAutoRefresh();
     }
     boot();

@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import sqlite3
+import subprocess
 import sys
 from collections import Counter, defaultdict
 from datetime import datetime, timedelta
@@ -3281,6 +3282,129 @@ def get_channel_checklists(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     return checklists
 
 
+def get_git_status() -> dict[str, Any]:
+    """Get git status info: recent commits, branch, uncommitted changes, etc."""
+    try:
+        # Get current branch
+        try:
+            branch_result = subprocess.run(
+                ['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
+                cwd=str(REPO_ROOT),
+                capture_output=True,
+                text=True,
+                timeout=5
+            )
+            current_branch = branch_result.stdout.strip() if branch_result.returncode == 0 else 'unknown'
+        except Exception:
+            current_branch = 'unknown'
+        
+        # Get total commit count
+        try:
+            count_result = subprocess.run(
+                ['git', 'rev-list', '--count', 'HEAD'],
+                cwd=str(REPO_ROOT),
+                capture_output=True,
+                text=True,
+                timeout=5
+            )
+            total_commits = int(count_result.stdout.strip()) if count_result.returncode == 0 else 0
+        except Exception:
+            total_commits = 0
+        
+        # Get last 10 commits with oneline format
+        commits = []
+        try:
+            log_result = subprocess.run(
+                ['git', 'log', '--oneline', '-10'],
+                cwd=str(REPO_ROOT),
+                capture_output=True,
+                text=True,
+                timeout=5
+            )
+            if log_result.returncode == 0:
+                for line in log_result.stdout.strip().split('\n'):
+                    if line.strip():
+                        parts = line.split(' ', 1)
+                        if len(parts) == 2:
+                            hash_short = parts[0]
+                            message = parts[1]
+                            commits.append({
+                                'hash': hash_short,
+                                'message': message,
+                                'index': len(commits),  # 0 is latest
+                            })
+        except Exception:
+            pass
+        
+        # Get uncommitted changes
+        uncommitted_files = []
+        try:
+            status_result = subprocess.run(
+                ['git', 'status', '--short'],
+                cwd=str(REPO_ROOT),
+                capture_output=True,
+                text=True,
+                timeout=5
+            )
+            if status_result.returncode == 0:
+                for line in status_result.stdout.strip().split('\n'):
+                    if line.strip():
+                        uncommitted_files.append(line.strip())
+        except Exception:
+            pass
+        
+        uncommitted_count = len(uncommitted_files)
+        
+        # Get diff stats
+        diff_stats = {'insertions': 0, 'deletions': 0}
+        try:
+            diff_result = subprocess.run(
+                ['git', 'diff', '--stat', 'HEAD'],
+                cwd=str(REPO_ROOT),
+                capture_output=True,
+                text=True,
+                timeout=5
+            )
+            if diff_result.returncode == 0:
+                # Parse diff --stat output for totals
+                lines = diff_result.stdout.strip().split('\n')
+                if lines:
+                    # Last line typically contains summary: "5 files changed, 150 insertions(+), 42 deletions(-)"
+                    summary_line = lines[-1] if len(lines) > 0 else ''
+                    # Extract insertions and deletions
+                    import re
+                    insertions = re.search(r'(\d+) insertions?\(\+\)', summary_line)
+                    deletions = re.search(r'(\d+) deletions?\(-\)', summary_line)
+                    if insertions:
+                        diff_stats['insertions'] = int(insertions.group(1))
+                    if deletions:
+                        diff_stats['deletions'] = int(deletions.group(1))
+        except Exception:
+            pass
+        
+        return {
+            'current_branch': current_branch,
+            'total_commits': total_commits,
+            'recent_commits': commits,
+            'uncommitted_files': uncommitted_files,
+            'uncommitted_count': uncommitted_count,
+            'diff_stats': diff_stats,
+            'has_changes': uncommitted_count > 0,
+        }
+    except Exception as e:
+        # Return a safe default if anything goes wrong
+        return {
+            'current_branch': 'unknown',
+            'total_commits': 0,
+            'recent_commits': [],
+            'uncommitted_files': [],
+            'uncommitted_count': 0,
+            'diff_stats': {'insertions': 0, 'deletions': 0},
+            'has_changes': False,
+            'error': str(e),
+        }
+
+
 def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     queue_monitor = get_queue_monitor(conn)
     queue_status = get_queue_status(conn)
@@ -3303,6 +3427,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     notifications = get_notifications(conn)
     checklists = get_channel_checklists(conn)
     health_score = get_health_score(conn)
+    git_status = get_git_status()
     lagging = [item for item in channel_performance if item['lagging']]
     payload = {
         'generated_at': utc_now().isoformat() + 'Z',
@@ -3339,6 +3464,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'benchmarks': benchmarks,
         'notifications': notifications,
         'checklists': checklists,
+        'git_status': git_status,
         'insights': {
             'lagging_channels': lagging[:6],
             'lagging_count': len(lagging),

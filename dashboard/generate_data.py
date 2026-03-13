@@ -954,6 +954,117 @@ def get_current_settings(conn: sqlite3.Connection) -> dict[str, dict[str, Any]]:
     return settings
 
 
+def get_channel_leaderboard(conn: sqlite3.Connection) -> list[dict[str, Any]]:
+    """Build ranked channel leaderboard with all-time views, recent uploads, and best clips.
+    
+    Primary data source: source_clips (via publish_jobs join).
+    Fallback: metrics_daily if available.
+    """
+    
+    # Try metrics_daily first (if populated), otherwise use source_clips
+    metrics_count = query_one(conn, "SELECT COUNT(*) AS c FROM metrics_daily")['c']
+    
+    if metrics_count > 0:
+        # Use metrics_daily for total views (all-time from DB)
+        total_views_rows = query_all(
+            conn,
+            """
+            SELECT channel_name,
+                   COALESCE(SUM(NULLIF(views_total, 0)), 0) AS total_views
+            FROM metrics_daily
+            GROUP BY channel_name
+            """,
+        )
+        total_views_map = {row['channel_name']: int(row['total_views'] or 0) for row in total_views_rows}
+    else:
+        # Fallback: sum views from source_clips used by each channel (proxy for all-time)
+        total_views_rows = query_all(
+            conn,
+            """
+            SELECT pj.channel_name,
+                   COALESCE(SUM(NULLIF(sc.view_count, 0)), 0) AS total_views
+            FROM publish_jobs pj
+            LEFT JOIN platform_variants pv ON pv.variant_id = pj.variant_id
+            LEFT JOIN source_clips sc ON sc.clip_id = pv.clip_id
+            WHERE pj.status='succeeded'
+            GROUP BY pj.channel_name
+            """,
+        )
+        total_views_map = {row['channel_name']: int(row['total_views'] or 0) for row in total_views_rows}
+    
+    # Get uploads in last 30 days per channel
+    uploads_30d_rows = query_all(
+        conn,
+        """
+        SELECT channel_name, COUNT(*) AS uploads_30d
+        FROM publish_jobs
+        WHERE status='succeeded'
+          AND datetime(COALESCE(updated_at, created_at)) >= datetime('now', '-30 day')
+        GROUP BY channel_name
+        """,
+    )
+    uploads_30d_map = {row['channel_name']: int(row['uploads_30d'] or 0) for row in uploads_30d_rows}
+    
+    # Get best clip per channel (highest view count from source_clips)
+    best_clips_rows = query_all(
+        conn,
+        """
+        SELECT pj.channel_name,
+               sc.clip_id,
+               sc.title,
+               COALESCE(sc.view_count, 0) AS view_count,
+               pr.post_url,
+               ROW_NUMBER() OVER (PARTITION BY pj.channel_name ORDER BY COALESCE(sc.view_count, 0) DESC) AS rn
+        FROM publish_jobs pj
+        LEFT JOIN platform_variants pv ON pv.variant_id = pj.variant_id
+        LEFT JOIN source_clips sc ON sc.clip_id = pv.clip_id
+        LEFT JOIN publish_results pr ON pr.job_id = pj.job_id
+        WHERE pj.status='succeeded'
+        """,
+    )
+    
+    # Track best clip per channel (highest views)
+    best_clips_map = {}
+    for row in best_clips_rows:
+        channel = row['channel_name']
+        if channel not in best_clips_map and row['title']:
+            best_clips_map[channel] = {
+                'title': row['title'],
+                'views': int(row['view_count'] or 0),
+                'url': row['post_url'] or '',
+            }
+    
+    # Build leaderboard entries for channels with any publishing activity
+    leaderboard = []
+    all_channels = set(uploads_30d_map.keys()) | set(total_views_map.keys()) | set(best_clips_map.keys())
+    
+    for channel in all_channels:
+        total_views = total_views_map.get(channel, 0)
+        uploads_30d = uploads_30d_map.get(channel, 0)
+        avg_views = int(total_views / uploads_30d) if uploads_30d > 0 else 0
+        best_clip = best_clips_map.get(channel, {'title': 'No clips yet', 'views': 0, 'url': ''})
+        
+        leaderboard.append({
+            'channel_name': channel,
+            'total_views': total_views,
+            'uploads_30d': uploads_30d,
+            'avg_views': avg_views,
+            'best_clip_title': best_clip['title'],
+            'best_clip_views': best_clip['views'],
+            'best_clip_url': best_clip['url'],
+        })
+    
+    # Sort by total views descending (then by uploads count as tiebreaker)
+    leaderboard.sort(key=lambda x: (x['total_views'], x['uploads_30d']), reverse=True)
+    
+    # Add rank and trend (placeholder for now, last week would need historical data)
+    for idx, entry in enumerate(leaderboard, 1):
+        entry['rank'] = idx
+        entry['trend'] = 'stable'  # Would compare to previous week snapshot
+    
+    return leaderboard
+
+
 def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     queue_monitor = get_queue_monitor(conn)
     queue_status = get_queue_status(conn)
@@ -982,6 +1093,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'controls': get_controls_metadata(conn),
         'current_settings': get_current_settings(conn),
         'schedule': schedule,
+        'leaderboard': get_channel_leaderboard(conn),
         'insights': {
             'lagging_channels': lagging[:6],
             'lagging_count': len(lagging),

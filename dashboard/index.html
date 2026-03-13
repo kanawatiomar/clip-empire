@@ -1627,6 +1627,17 @@
           <h2>Channel Performance</h2>
           <div class="top-note" id="laggingSummary">loading…</div>
         </div>
+        <!-- Bulk Action Toolbar -->
+        <div id="bulkActionToolbar" style="display: none; padding: 16px; border-bottom: 1px solid var(--line); background: rgba(201, 168, 76, 0.05); flex-wrap: wrap; gap: 12px; align-items: center;">
+          <span id="selectionCount" style="font-weight: 600; color: var(--gold-2);">0 channels selected</span>
+          <div style="flex: 1;"></div>
+          <button onclick="bulkSelectAll()" style="padding: 8px 12px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; color: var(--text); cursor: pointer; font-size: 12px;">Select All</button>
+          <button onclick="bulkDeselectAll()" style="padding: 8px 12px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 6px; color: var(--text); cursor: pointer; font-size: 12px;">Deselect All</button>
+          <button id="bulkPauseBtn" onclick="bulkPause()" style="padding: 8px 12px; background: var(--warning-bg); border: 1px solid var(--warning); border-radius: 6px; color: var(--warning); cursor: pointer; font-size: 12px;">Pause Selected</button>
+          <button id="bulkActivateBtn" onclick="bulkActivate()" style="padding: 8px 12px; background: var(--success-bg); border: 1px solid var(--success); border-radius: 6px; color: var(--success); cursor: pointer; font-size: 12px;">Activate Selected</button>
+          <button id="bulkRunBtn" onclick="bulkRunNow()" style="padding: 8px 12px; background: var(--blue-bg); border: 1px solid var(--blue); border-radius: 6px; color: var(--blue); cursor: pointer; font-size: 12px;">Run Now</button>
+          <button id="bulkClearBtn" onclick="bulkClearQueue()" style="padding: 8px 12px; background: var(--error-bg); border: 1px solid var(--error); border-radius: 6px; color: var(--error); cursor: pointer; font-size: 12px;">Clear Queue</button>
+        </div>
         <div class="card-body board" id="channelBoard"></div>
       </article>
 
@@ -2689,11 +2700,17 @@
         const toggleDisabled = !localMode ? 'disabled' : '';
         const cardStyle = !isActive ? 'opacity: 0.65;' : '';
         return `
-          <div class="channel-card" style="${cardStyle}">
+          <div class="channel-card" style="${cardStyle}" data-channel="${esc(ch.channel)}">
             <div class="channel-top">
-              <div>
-                <div class="channel-name">${esc(ch.channel)}</div>
-                <div class="dim">${esc(ch.category)} · ${statusBadge(ch.status)}</div>
+              <div style="display:flex; gap:12px; align-items:center;">
+                <label class="bulk-select-checkbox" style="cursor:pointer;">
+                  <input type="checkbox" class="bulk-select" data-channel="${esc(ch.channel)}" onchange="updateBulkSelection()" />
+                  <span style="width:18px; height:18px; border:1px solid var(--line); border-radius:4px; display:inline-block; background:var(--surface-2);"></span>
+                </label>
+                <div>
+                  <div class="channel-name">${esc(ch.channel)}</div>
+                  <div class="dim">${esc(ch.category)} · ${statusBadge(ch.status)}</div>
+                </div>
               </div>
               <div style="display:flex; gap:12px; align-items:center;">
                 <div class="num ${ch.lagging ? 'error' : 'success'}">${ch.published_24h}/${ch.target_per_day}</div>
@@ -3981,6 +3998,78 @@
         checkbox.checked = !checkbox.checked; // Revert on error
         toast(err.message || 'Toggle failed');
       }
+    }
+
+    // Bulk selection functions
+    function updateBulkSelection() {
+      const checkboxes = document.querySelectorAll('.bulk-select:checked');
+      const count = checkboxes.length;
+      const toolbar = byId('bulkActionToolbar');
+      const countBadge = byId('selectionCount');
+      
+      if (count > 0) {
+        toolbar.style.display = 'flex';
+        countBadge.textContent = `${count} channel${count === 1 ? '' : 's'} selected`;
+      } else {
+        toolbar.style.display = 'none';
+      }
+    }
+
+    function bulkSelectAll() {
+      const checkboxes = document.querySelectorAll('.bulk-select');
+      checkboxes.forEach(cb => cb.checked = true);
+      updateBulkSelection();
+    }
+
+    function bulkDeselectAll() {
+      const checkboxes = document.querySelectorAll('.bulk-select');
+      checkboxes.forEach(cb => cb.checked = false);
+      updateBulkSelection();
+    }
+
+    async function bulkAction(action, endpoint) {
+      if (!localMode) {
+        toast('Static mode: run py -3 dashboard/control_api.py for live controls.');
+        return;
+      }
+      
+      const checkboxes = document.querySelectorAll('.bulk-select:checked');
+      const channels = Array.from(checkboxes).map(cb => cb.dataset.channel);
+      
+      if (channels.length === 0) {
+        toast('No channels selected');
+        return;
+      }
+      
+      try {
+        const res = await fetch(`${LOCAL_API}${endpoint}`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ channels })
+        });
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'Action failed');
+        toast(`${action} applied to ${channels.length} channel${channels.length === 1 ? '' : 's'}`);
+        setTimeout(() => loadData(), 500);
+      } catch (err) {
+        toast(err.message || 'Action failed');
+      }
+    }
+
+    function bulkPause() {
+      bulkAction('Pause', '/api/bulk_pause');
+    }
+
+    function bulkActivate() {
+      bulkAction('Activate', '/api/bulk_activate');
+    }
+
+    function bulkRunNow() {
+      bulkAction('Run Now', '/api/bulk_run_now');
+    }
+
+    function bulkClearQueue() {
+      bulkAction('Clear Queue', '/api/bulk_clear_queue');
     }
 
     function openLogs(){

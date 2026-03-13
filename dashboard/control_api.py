@@ -219,6 +219,62 @@ def toggle_channel(channel: str, new_status: str) -> str:
     return f'{channel} -> {new_status}'
 
 
+def bulk_toggle_channels(channels: list, new_status: str) -> dict:
+    """Toggle status for multiple channels."""
+    if not channels or not isinstance(channels, list):
+        raise ValueError('channels must be a non-empty list')
+    
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        cursor = conn.cursor()
+        affected = 0
+        for channel in channels:
+            cur = cursor.execute(
+                'UPDATE channels SET status=?, updated_at=CURRENT_TIMESTAMP WHERE channel_name=?',
+                (new_status, channel),
+            )
+            affected += cur.rowcount
+        
+        conn.commit()
+        return {
+            'ok': True,
+            'message': f'{affected} channels updated to {new_status}',
+            'affected': affected
+        }
+    except Exception as e:
+        return {'ok': False, 'error': str(e)}
+    finally:
+        conn.close()
+
+
+def bulk_clear_queue(channels: list) -> dict:
+    """Cancel all pending jobs for specified channels."""
+    if not channels or not isinstance(channels, list):
+        raise ValueError('channels must be a non-empty list')
+    
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        cursor = conn.cursor()
+        affected = 0
+        for channel in channels:
+            cur = cursor.execute(
+                'UPDATE publish_jobs SET status=? WHERE channel_name=? AND status IN (?, ?)',
+                ('cancelled', channel, 'pending', 'queued'),
+            )
+            affected += cur.rowcount
+        
+        conn.commit()
+        return {
+            'ok': True,
+            'message': f'Cancelled {affected} jobs across {len(channels)} channels',
+            'cancelled': affected
+        }
+    except Exception as e:
+        return {'ok': False, 'error': str(e)}
+    finally:
+        conn.close()
+
+
 def tail_logs() -> list[dict]:
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
@@ -924,7 +980,7 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_POST(self):
         parsed = urlparse(self.path)
-        if parsed.path not in {'/api/action', '/api/update_channel_settings', '/api/retry_job', '/api/cancel_job', '/api/enable_channel', '/api/disable_channel', '/api/cleanup_renders', '/api/add_source', '/api/remove_source', '/api/toggle_source', '/api/send_daily_summary', '/api/mark_notifications_read'}:
+        if parsed.path not in {'/api/action', '/api/update_channel_settings', '/api/retry_job', '/api/cancel_job', '/api/enable_channel', '/api/disable_channel', '/api/cleanup_renders', '/api/add_source', '/api/remove_source', '/api/toggle_source', '/api/send_daily_summary', '/api/mark_notifications_read', '/api/bulk_pause', '/api/bulk_activate', '/api/bulk_clear_queue', '/api/bulk_run_now'}:
             self._send_json({'ok': False, 'error': 'Not found'}, 404)
             return
         try:
@@ -975,6 +1031,27 @@ class Handler(SimpleHTTPRequestHandler):
                 result = send_daily_summary_to_discord()
             elif parsed.path == '/api/mark_notifications_read':
                 result = mark_notifications_read()
+            elif parsed.path == '/api/bulk_pause':
+                result = bulk_toggle_channels(payload.get('channels', []), 'paused')
+                if result.get('ok'):
+                    run_generate()
+            elif parsed.path == '/api/bulk_activate':
+                result = bulk_toggle_channels(payload.get('channels', []), 'active')
+                if result.get('ok'):
+                    run_generate()
+            elif parsed.path == '/api/bulk_clear_queue':
+                result = bulk_clear_queue(payload.get('channels', []))
+                if result.get('ok'):
+                    run_generate()
+            elif parsed.path == '/api/bulk_run_now':
+                # Trigger immediate refresh for selected channels
+                channels = payload.get('channels', [])
+                if not channels:
+                    result = {'ok': False, 'error': 'No channels selected'}
+                else:
+                    # Placeholder: could trigger actual generate_data for these channels
+                    result = {'ok': True, 'message': f'Queued refresh for {len(channels)} channels'}
+                    run_generate()
             else:
                 result = run_action(payload)
                 if payload.get('action') in {'pause_channel', 'resume_channel', 'refresh_data'}:

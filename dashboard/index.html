@@ -473,6 +473,59 @@
     .count-up {
       animation: countUp 0.6s ease-out;
     }
+    .quota-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .quota-item {
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .quota-channel {
+      font-weight: 600;
+      color: var(--gold-2);
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+    .quota-bar-container {
+      margin-bottom: 12px;
+    }
+    .quota-bar {
+      width: 100%;
+      height: 8px;
+      background: rgba(0, 0, 0, .4);
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .08);
+    }
+    .quota-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+    .quota-bar-fill.green {
+      background: linear-gradient(90deg, #3dd68c, #2db876);
+    }
+    .quota-bar-fill.yellow {
+      background: linear-gradient(90deg, #e8b04e, #d49a2d);
+    }
+    .quota-bar-fill.red {
+      background: linear-gradient(90deg, #e85454, #d63333);
+    }
+    .quota-stats {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-family: var(--mono);
+    }
+    .quota-stats-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
   </style>
 </head>
 <body>
@@ -568,6 +621,25 @@
       </div>
       <div class="card-body">
         <div class="schedule-calendar" id="scheduleCalendar"></div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:18px;">
+      <div class="card-head">
+        <h2>API Quota Tracker</h2>
+        <div class="top-note">YouTube API quota usage • Resets daily at midnight Pacific</div>
+      </div>
+      <div class="card-body">
+        <div id="quotaWarning" style="display:none; margin-bottom:16px; padding:14px 16px; background:rgba(232,84,84,.12); border:1px solid rgba(232,84,84,.35); border-radius:12px; color:#e85454;">
+          ⚠️ Warning: One or more channels are using >80% of daily quota
+        </div>
+        <div id="quotaSafe" style="display:none; margin-bottom:16px; padding:14px 16px; background:rgba(61,214,140,.12); border:1px solid rgba(61,214,140,.35); border-radius:12px; color:#3dd68c; font-weight:600;">
+          ✓ Quota Safe: All channels well under limit
+        </div>
+        <div id="quotaCountdown" style="margin-bottom:16px; font-family: 'JetBrains Mono'; font-size:13px; color:var(--muted);">
+          Reset in: <strong id="quotaResetTime">—</strong>
+        </div>
+        <div class="quota-grid" id="quotaGrid"></div>
       </div>
     </section>
 
@@ -1376,6 +1448,83 @@
       updateCounter();
     }
 
+    function renderQuota(){
+      const quota = dataCache.quota || {};
+      const quotaByChannel = quota.quota_by_channel || [];
+      const anyChannelHigh = quota.any_channel_high || false;
+      const allChannelsSafe = quota.all_channels_safe || false;
+      const resetTimeDisplay = quota.reset_time_display || 'N/A';
+      const resetHours = quota.reset_time_hours || 0;
+      const resetMinutes = quota.reset_time_minutes || 0;
+
+      // Show/hide warning and safe badges
+      const warningEl = byId('quotaWarning');
+      const safeEl = byId('quotaSafe');
+      if (anyChannelHigh) {
+        warningEl.style.display = 'block';
+        safeEl.style.display = 'none';
+      } else if (allChannelsSafe) {
+        warningEl.style.display = 'none';
+        safeEl.style.display = 'block';
+      } else {
+        warningEl.style.display = 'none';
+        safeEl.style.display = 'none';
+      }
+
+      // Update countdown timer (will update every second if page is open)
+      function updateCountdown() {
+        const now = new Date();
+        // Pacific time (PST/PDT)
+        const pacificOffset = -8 * 60; // Simplified: PST
+        const localOffset = now.getTimezoneOffset();
+        const adjustedNow = new Date(now.getTime() + (localOffset + pacificOffset) * 60 * 1000);
+        
+        const nextMidnight = new Date(adjustedNow);
+        nextMidnight.setHours(24, 0, 0, 0);
+        
+        const timeUntilReset = nextMidnight - adjustedNow;
+        const hoursLeft = Math.floor(timeUntilReset / (1000 * 60 * 60));
+        const minutesLeft = Math.floor((timeUntilReset % (1000 * 60 * 60)) / (1000 * 60));
+        
+        byId('quotaResetTime').textContent = `${hoursLeft}h ${minutesLeft}m`;
+      }
+      updateCountdown();
+      window.__quotaCountdownInterval = setInterval(updateCountdown, 1000);
+
+      // Build quota cards
+      const quotaHTML = quotaByChannel.map(item => {
+        const pct = item.pct_used || 0;
+        const statusColor = item.status || 'green';
+        const progressWidth = Math.min(pct, 100);
+        
+        return `
+          <div class="quota-item">
+            <div class="quota-channel">${esc(item.channel)}</div>
+            <div class="quota-bar-container">
+              <div class="quota-bar">
+                <div class="quota-bar-fill ${statusColor}" style="width: ${progressWidth}%;"></div>
+              </div>
+            </div>
+            <div class="quota-stats">
+              <div class="quota-stats-row">
+                <span>Units Used:</span>
+                <span>${fmtNum(item.units_used)} / ${fmtNum(item.units_total)}</span>
+              </div>
+              <div class="quota-stats-row">
+                <span>Today's Uploads:</span>
+                <span>${item.uploads_today}</span>
+              </div>
+              <div class="quota-stats-row">
+                <span>Usage:</span>
+                <span style="color: ${statusColor === 'green' ? 'var(--success)' : statusColor === 'yellow' ? 'var(--warning)' : 'var(--error)'};">${pct}%</span>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+
+      byId('quotaGrid').innerHTML = quotaHTML || '<div style="padding:20px; color:var(--muted); text-align:center;">No quota data available.</div>';
+    }
+
     function renderLeaderboard(){
       const leaderboard = dataCache.leaderboard || [];
       if (!leaderboard || leaderboard.length === 0) {
@@ -1477,6 +1626,7 @@
       renderQueueManager();
       renderChannels();
       renderSchedule();
+      renderQuota();
       renderLeaderboard();
       renderAnalytics();
       renderSourceHealth();

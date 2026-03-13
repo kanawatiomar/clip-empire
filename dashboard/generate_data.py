@@ -1065,6 +1065,112 @@ def get_channel_leaderboard(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     return leaderboard
 
 
+def get_quota_usage(conn: sqlite3.Connection) -> dict[str, Any]:
+    """Calculate YouTube API quota usage per channel.
+    
+    YouTube API quota:
+    - Resets daily at midnight Pacific time
+    - Each upload costs 1600 units
+    - Each metadata update costs ~50 units
+    - Daily limit is 10,000 units per project/account
+    
+    Returns dict with:
+    - quota_by_channel: list of per-channel quota data
+    - any_channel_high: bool, True if any channel >80% quota used
+    - all_channels_safe: bool, True if all channels <60% quota used
+    - reset_time_hours: hours until next midnight Pacific
+    - reset_time_minutes: minutes until next midnight Pacific
+    """
+    from datetime import datetime, timezone, timedelta
+    
+    # Get current time
+    now_utc = datetime.utcnow().replace(tzinfo=timezone.utc)
+    
+    # Convert UTC to Pacific time (PST/PDT)
+    # Pacific is UTC-7 (PDT) or UTC-8 (PST)
+    # For simplicity, we'll calculate midnight Pacific as:
+    # Current UTC time adjusted to PST (UTC-8)
+    pacific_tz_offset = timedelta(hours=-8)  # PST, adjust for PDT if needed
+    now_pacific = now_utc + pacific_tz_offset
+    
+    # Calculate next midnight Pacific (00:00:00 next day)
+    next_midnight_pacific = (now_pacific.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1))
+    
+    # Time until reset
+    time_until_reset = next_midnight_pacific - now_pacific
+    reset_hours = int(time_until_reset.total_seconds() // 3600)
+    reset_minutes = int((time_until_reset.total_seconds() % 3600) // 60)
+    
+    # Calculate today's midnight Pacific in UTC for database query
+    today_midnight_pacific_utc = next_midnight_pacific - timedelta(days=1)
+    # Convert back to ISO string for SQL
+    today_midnight_str = today_midnight_pacific_utc.replace(tzinfo=None).isoformat()
+    
+    # Query succeeded uploads today (from midnight Pacific)
+    rows = query_all(
+        conn,
+        """
+        SELECT channel_name, COUNT(*) AS uploads_today
+        FROM publish_jobs
+        WHERE status = 'succeeded'
+          AND datetime(COALESCE(updated_at, created_at)) >= ?
+        GROUP BY channel_name
+        """,
+        (today_midnight_str,),
+    )
+    
+    uploads_by_channel = {row['channel_name']: int(row['uploads_today'] or 0) for row in rows}
+    
+    # Get all channels from the database
+    all_channels_rows = query_all(conn, "SELECT DISTINCT channel_name FROM channels ORDER BY channel_name")
+    all_channels = [row['channel_name'] for row in all_channels_rows]
+    
+    # Build quota data per channel
+    quota_by_channel = []
+    any_channel_high = False
+    
+    for channel in all_channels:
+        uploads_today = uploads_by_channel.get(channel, 0)
+        units_used = uploads_today * 1600  # Each upload costs 1600 units
+        units_remaining = 10000 - units_used
+        pct_used = round((units_used / 10000.0) * 100, 1)
+        
+        # Determine color coding
+        if pct_used > 85:
+            status_color = 'red'
+        elif pct_used > 60:
+            status_color = 'yellow'
+        else:
+            status_color = 'green'
+        
+        # Track if any channel is >80%
+        if pct_used > 80:
+            any_channel_high = True
+        
+        quota_by_channel.append({
+            'channel': channel,
+            'uploads_today': uploads_today,
+            'units_used': units_used,
+            'units_remaining': max(0, units_remaining),
+            'units_total': 10000,
+            'pct_used': pct_used,
+            'status': status_color,
+            'display_text': f'{units_used}/10000 units ({pct_used}%)',
+        })
+    
+    # Determine overall safety status
+    all_channels_safe = all(item['pct_used'] < 60 for item in quota_by_channel)
+    
+    return {
+        'quota_by_channel': quota_by_channel,
+        'any_channel_high': any_channel_high,
+        'all_channels_safe': all_channels_safe,
+        'reset_time_hours': reset_hours,
+        'reset_time_minutes': reset_minutes,
+        'reset_time_display': f'{reset_hours}h {reset_minutes}m',
+    }
+
+
 def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     queue_monitor = get_queue_monitor(conn)
     queue_status = get_queue_status(conn)
@@ -1073,6 +1179,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     source_health = get_source_health(conn)
     error_analysis = get_error_analysis(conn)
     schedule = get_upload_schedule(conn)
+    quota = get_quota_usage(conn)
     lagging = [item for item in channel_performance if item['lagging']]
     payload = {
         'generated_at': utc_now().isoformat() + 'Z',
@@ -1093,6 +1200,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'controls': get_controls_metadata(conn),
         'current_settings': get_current_settings(conn),
         'schedule': schedule,
+        'quota': quota,
         'leaderboard': get_channel_leaderboard(conn),
         'insights': {
             'lagging_channels': lagging[:6],

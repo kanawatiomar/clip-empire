@@ -14,6 +14,8 @@ from collections import Counter, defaultdict
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
+from urllib import error as urlerror
+from urllib import request as urlrequest
 
 BASE_DIR = Path(__file__).resolve().parent
 REPO_ROOT = BASE_DIR.parent
@@ -26,9 +28,11 @@ DB_PATH = REPO_ROOT / 'data' / 'clip_empire.db'
 OUTPUT_FILE = BASE_DIR / 'data.json'
 
 RPM_PER_1K_VIEWS = 0.85
-REFRESH_SECONDS = 15
+REFRESH_SECONDS = 30
 TREND_DAYS = 30
 TREND_LOOKBACK_DAYS = 60
+CONTROL_API_BASE = 'http://127.0.0.1:8787'
+DISCORD_FEED_LIMIT = 5
 
 
 def utc_now() -> datetime:
@@ -701,6 +705,41 @@ def get_controls_metadata(conn: sqlite3.Connection) -> dict[str, Any]:
     }
 
 
+def get_discord_feed() -> list[dict[str, Any]]:
+    messages: list[dict[str, Any]] = []
+    try:
+        with urlrequest.urlopen(f'{CONTROL_API_BASE}/api/discord_feed', timeout=15) as resp:
+            payload = json.loads(resp.read().decode('utf-8'))
+        if not payload.get('ok'):
+            raise ValueError(payload.get('error') or 'Discord feed endpoint failed')
+        messages = payload.get('messages') or []
+    except Exception:
+        try:
+            from control_api import fetch_recent_discord_messages
+            messages = fetch_recent_discord_messages(limit=10)
+        except Exception:
+            return []
+
+    normalized: list[dict[str, Any]] = []
+    for msg in messages:
+        timestamp = msg.get('timestamp')
+        normalized.append({
+            'id': msg.get('id'),
+            'channel_id': msg.get('channel_id'),
+            'channel_name': msg.get('channel_name') or 'discord',
+            'author': msg.get('author') or 'Unknown',
+            'timestamp': timestamp,
+            'timestamp_display': fmt_compact_dt(timestamp),
+            'timestamp_ago': rel_time(timestamp),
+            'message': (msg.get('message') or '').strip(),
+            'message_snippet': ((msg.get('message') or '').strip()[:140]),
+            'url': msg.get('url'),
+        })
+
+    normalized.sort(key=lambda item: parse_dt(item['timestamp']) or datetime.min, reverse=True)
+    return normalized[:DISCORD_FEED_LIMIT]
+
+
 def get_current_settings(conn: sqlite3.Connection) -> dict[str, dict[str, Any]]:
     channel_rows = query_all(conn, "SELECT channel_name, daily_target FROM channels ORDER BY channel_name")
     settings: dict[str, dict[str, Any]] = {}
@@ -738,6 +777,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'error_analysis': error_analysis,
         'top_clips': get_top_clips(conn),
         'recent_uploads': get_recent_uploads(conn),
+        'discord_feed': get_discord_feed(),
         'logs_preview': get_logs_preview(conn),
         'controls': get_controls_metadata(conn),
         'current_settings': get_current_settings(conn),

@@ -212,6 +212,19 @@
       padding:10px 12px; font:500 14px var(--body);
     }
     .dialog-actions { display:flex; justify-content:flex-end; gap:10px; margin-top:16px; flex-wrap:wrap; }
+    .discord-feed { display:grid; gap:12px; max-height:360px; overflow:auto; }
+    .discord-item {
+      border:1px solid rgba(255,255,255,.06); background:var(--surface-2); border-radius:16px; padding:14px;
+      border-left:4px solid transparent;
+    }
+    .discord-item.logs { border-left-color: var(--warning); }
+    .discord-item.failures { border-left-color: var(--error); }
+    .discord-top { display:flex; justify-content:space-between; gap:12px; align-items:flex-start; margin-bottom:8px; }
+    .discord-meta { display:grid; gap:4px; }
+    .discord-author { font-weight:700; }
+    .discord-channel { color:var(--dim); font:12px var(--mono); text-transform:uppercase; }
+    .discord-time { color:var(--muted); font:12px var(--mono); text-align:right; }
+    .discord-message { color:#dce2ea; line-height:1.5; word-break:break-word; }
     @media (max-width: 1280px) {
       .stats { grid-template-columns: repeat(3, minmax(0,1fr)); }
       .main, .wide { grid-template-columns: 1fr; }
@@ -388,6 +401,16 @@
         </div>
       </article>
     </section>
+
+    <section class="card" style="margin-top:18px;">
+      <div class="card-head">
+        <h2>Discord Feed</h2>
+        <div class="top-note">latest 5 alerts from #bot-logs and #publish-failures</div>
+      </div>
+      <div class="card-body">
+        <div class="discord-feed" id="discordFeed"></div>
+      </div>
+    </section>
   </div>
 
   <dialog id="logsDialog">
@@ -442,6 +465,11 @@
       const sign = num > 0 ? '+' : num < 0 ? '-' : '';
       const value = Math.abs(num).toFixed(prefix ? 2 : 0);
       return `${sign}${prefix}${value}`;
+    }
+    function truncateText(value, max = 140){
+      const text = (value ?? '').toString().trim();
+      if (!text) return '—';
+      return text.length > max ? `${text.slice(0, max - 1)}…` : text;
     }
     function drawSparkline(canvas, values, color){
       if (!canvas) return;
@@ -777,6 +805,31 @@
         </tr>`).join('') || '<tr><td colspan="5" class="muted">No upload records available.</td></tr>';
     }
 
+    function renderDiscordFeed(){
+      const rows = dataCache.discord_feed || [];
+      byId('discordFeed').innerHTML = rows.map(item => {
+        const channelClass = item.channel_name === 'publish-failures' ? 'failures' : 'logs';
+        const channelLabel = item.channel_name === 'publish-failures' ? '#publish-failures' : '#bot-logs';
+        return `
+          <div class="discord-item ${channelClass}">
+            <div class="discord-top">
+              <div class="discord-meta">
+                <div class="discord-author">${esc(item.author || 'Unknown')}</div>
+                <div class="discord-channel">${esc(channelLabel)}</div>
+              </div>
+              <div class="discord-time">
+                <div>${esc(item.timestamp_display || '—')}</div>
+                <div>${esc(item.timestamp_ago || '—')}</div>
+              </div>
+            </div>
+            <div class="discord-message">${esc(truncateText(item.message_snippet || item.message || '—', 140))}</div>
+            <div style="margin-top:10px;">
+              ${item.url ? `<a href="${esc(item.url)}" target="_blank" rel="noreferrer">View in Discord</a>` : '<span class="muted">No link</span>'}
+            </div>
+          </div>`;
+      }).join('') || '<div class="analytics-empty">No Discord alerts found yet.</div>';
+    }
+
     function renderLogsPreview(){
       const logs = dataCache.logs_preview || [];
       byId('logsPre').textContent = logs.length
@@ -828,6 +881,7 @@
       renderErrorAnalysis();
       renderTopClips();
       renderRecentUploads();
+      renderDiscordFeed();
       renderLogsPreview();
       renderSettings();
     }

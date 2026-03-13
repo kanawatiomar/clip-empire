@@ -181,6 +181,124 @@
     .trend-pill { display:inline-flex; align-items:center; gap:6px; flex-wrap:wrap; }
     .trend-pill span { padding:3px 7px; border-radius:999px; background:rgba(255,255,255,.04); color:var(--muted); font:11px var(--mono); }
     .suggestion-text { max-width: 420px; }
+    .source-manager { display: grid; gap: 14px; }
+    .source-group {
+      border: 1px solid rgba(255,255,255,.05);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--surface-2);
+    }
+    .source-group-header {
+      padding: 14px 16px;
+      background: linear-gradient(90deg, rgba(201,168,76,.08), transparent);
+      border-bottom: 1px solid rgba(255,255,255,.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .source-group-header:hover {
+      background: linear-gradient(90deg, rgba(201,168,76,.12), transparent);
+    }
+    .source-group-title {
+      font: 600 15px var(--body);
+      color: var(--text);
+      flex: 1;
+    }
+    .source-group-count {
+      font: 12px var(--mono);
+      color: var(--dim);
+      margin-right: 16px;
+    }
+    .source-group-toggle {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      transition: transform .2s ease;
+    }
+    .source-group.collapsed .source-group-toggle {
+      transform: rotate(-90deg);
+    }
+    .source-group-body {
+      display: none;
+      border-top: 1px solid rgba(255,255,255,.05);
+    }
+    .source-group.expanded .source-group-body {
+      display: grid;
+      gap: 1px;
+      background: rgba(0,0,0,.2);
+    }
+    .source-row {
+      padding: 14px 16px;
+      background: var(--surface-2);
+      display: grid;
+      grid-template-columns: auto 1fr auto auto auto auto auto;
+      gap: 12px;
+      align-items: center;
+      font-size: 14px;
+    }
+    .source-row:hover {
+      background: linear-gradient(90deg, rgba(201,168,76,.06), transparent);
+    }
+    .source-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .source-info {
+      display: grid;
+      gap: 4px;
+    }
+    .source-creator {
+      font: 600 14px var(--body);
+      color: var(--text);
+    }
+    .source-meta {
+      font: 12px var(--mono);
+      color: var(--dim);
+    }
+    .source-stat {
+      text-align: right;
+      font: 600 13px var(--mono);
+      color: var(--muted);
+    }
+    .source-toggle {
+      display: flex;
+      align-items: center;
+      height: 20px;
+    }
+    .source-toggle input {
+      cursor: pointer;
+    }
+    .source-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .source-actions button {
+      padding: 6px 10px;
+      font-size: 12px;
+      height: auto;
+    }
+    .source-add-btn {
+      padding: 12px 16px;
+      border-top: 1px solid rgba(255,255,255,.05);
+      background: rgba(201,168,76,.08);
+      border: none;
+      cursor: pointer;
+      font: 600 13px var(--body);
+      color: var(--gold-2);
+      transition: background .18s ease;
+    }
+    .source-add-btn:hover {
+      background: rgba(201,168,76,.12);
+    }
     .toast {
       position:fixed; right:22px; bottom:22px; min-width:220px; max-width:420px; padding:12px 14px; border-radius:14px;
       border:1px solid var(--line); background:var(--surface-2); box-shadow:var(--shadow); display:none; z-index:50;
@@ -1372,6 +1490,16 @@
         <div class="top-note">Top performing clips across all channels • Best clips per channel</div>
       </div>
       <div class="card-body" id="hallOfFameContainer"></div>
+    </section>
+
+    <section class="card" style="margin-top:18px;">
+      <div class="card-head">
+        <h2>Source Manager</h2>
+        <div class="top-note">Manage streaming sources per channel • Add/remove/toggle sources</div>
+      </div>
+      <div class="card-body">
+        <div class="source-manager" id="sourceManagerContainer"></div>
+      </div>
     </section>
 
     <section class="card" style="margin-top:18px;">
@@ -2731,6 +2859,158 @@
       });
     }
 
+    function renderSourceManager(){
+      const sources = dataCache.sources_list || [];
+      const container = byId('sourceManagerContainer');
+      
+      if (!sources || sources.length === 0) {
+        container.innerHTML = '<div class="analytics-empty">No sources configured yet.</div>';
+        return;
+      }
+      
+      const html = sources.map(group => {
+        const channel = group.channel || 'Unknown';
+        const channelSources = group.sources || [];
+        
+        if (channelSources.length === 0) return '';
+        
+        const sourceRows = channelSources.map((source, idx) => {
+          const platformIcon = source.platform === 'twitch' ? '🎮' : source.platform === 'youtube' ? '📺' : '📱';
+          const creatorName = source.creator_name || '—';
+          const minViews = source.min_views || 0;
+          const priority = source.priority || '—';
+          const clipsFetched = source.clips_fetched || 0;
+          const lastFetched = source.last_fetched_rel || '—';
+          const sourceId = source.id || `${channel}:${idx}`;
+          const isEnabled = source.enabled !== false;
+          
+          return `
+            <div class="source-row">
+              <div class="source-icon">${platformIcon}</div>
+              <div class="source-info">
+                <div class="source-creator">${esc(creatorName)}</div>
+                <div class="source-meta">${esc(source.type || 'unknown')} • <a href="${esc(source.url || '#')}" target="_blank" rel="noreferrer">view</a></div>
+              </div>
+              <div class="source-stat" title="Minimum views">min: ${fmtNum(minViews)}</div>
+              <div class="source-stat" title="Priority (1=high, 3=low)">p: ${priority}</div>
+              <div class="source-stat" title="Clips fetched from this source">${clipsFetched} clips</div>
+              <div class="source-stat" title="Last fetch time">${lastFetched}</div>
+              <div class="source-toggle">
+                <input type="checkbox" ${isEnabled ? 'checked' : ''} onchange="toggleSource('${esc(channel)}', '${esc(sourceId)}', this.checked)" />
+              </div>
+              <div class="source-actions">
+                <button class="warn" onclick="removeSource('${esc(channel)}', '${esc(sourceId)}')">Remove</button>
+              </div>
+            </div>`;
+        }).join('');
+        
+        return `
+          <div class="source-group expanded">
+            <div class="source-group-header" onclick="toggleSourceGroup(this)">
+              <div class="source-group-title">${esc(channel)}</div>
+              <div class="source-group-count">${channelSources.length} source${channelSources.length !== 1 ? 's' : ''}</div>
+              <div class="source-group-toggle">▼</div>
+            </div>
+            <div class="source-group-body">
+              ${sourceRows}
+              <button class="source-add-btn" onclick="openAddSourceModal('${esc(channel)}')">+ Add Source</button>
+            </div>
+          </div>`;
+      }).join('');
+      
+      container.innerHTML = html;
+    }
+
+    function toggleSourceGroup(header){
+      const group = header.closest('.source-group');
+      group.classList.toggle('expanded');
+      group.classList.toggle('collapsed');
+    }
+
+    async function removeSource(channel, sourceId){
+      if (!localMode) {
+        toast('Static mode: run py -3 dashboard/control_api.py for live controls.');
+        return;
+      }
+      if (!confirm(`Remove source ${sourceId}?`)) return;
+      
+      try {
+        const res = await fetch(`${LOCAL_API}/api/remove_source`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ channel, source_id: sourceId })
+        });
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'Failed to remove source');
+        toast(`Removed source ${sourceId}`);
+        await loadData();
+      } catch (err) {
+        toast(err.message || 'Remove failed');
+      }
+    }
+
+    async function toggleSource(channel, sourceId, enabled){
+      if (!localMode) {
+        toast('Static mode: run py -3 dashboard/control_api.py for live controls.');
+        return;
+      }
+      
+      try {
+        const res = await fetch(`${LOCAL_API}/api/toggle_source`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ channel, source_id: sourceId, enabled })
+        });
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'Failed to toggle source');
+        toast(`Source ${enabled ? 'enabled' : 'disabled'}`);
+        await loadData();
+      } catch (err) {
+        toast(err.message || 'Toggle failed');
+      }
+    }
+
+    function openAddSourceModal(channel){
+      if (!localMode) {
+        toast('Static mode: run py -3 dashboard/control_api.py for live controls.');
+        return;
+      }
+      
+      // Simple prompt-based modal for now
+      const platform = prompt('Platform (twitch/youtube/tiktok/reddit):', 'twitch');
+      if (!platform) return;
+      
+      const creatorName = prompt('Creator name:', '');
+      if (!creatorName) return;
+      
+      const minViews = prompt('Min views:', '0');
+      const priority = prompt('Priority (1=high, 2=medium, 3=low):', '2');
+      
+      addSource(channel, platform, creatorName, minViews, priority);
+    }
+
+    async function addSource(channel, platform, creatorName, minViews, priority){
+      try {
+        const res = await fetch(`${LOCAL_API}/api/add_source`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            channel,
+            platform,
+            creator_name: creatorName,
+            min_views: parseInt(minViews || 0),
+            priority: parseInt(priority || 2)
+          })
+        });
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'Failed to add source');
+        toast(`Added source: ${creatorName}`);
+        await loadData();
+      } catch (err) {
+        toast(err.message || 'Add failed');
+      }
+    }
+
     function renderAll(){
       renderHeader();
       renderKPIs();
@@ -2743,6 +3023,7 @@
       renderPipeline();
       renderLeaderboard();
       renderHallOfFame();
+      renderSourceManager();
       renderAnalytics();
       renderDiskUsage();
       renderSourceHealth();

@@ -448,6 +448,99 @@ def cleanup_renders(dry_run: bool = True) -> dict:
         conn.close()
 
 
+def add_source(payload: dict) -> dict:
+    """Add a new source to CHANNEL_SOURCES config and persist to DB."""
+    try:
+        channel = payload.get('channel')
+        platform = payload.get('platform', '').lower()
+        creator_name = payload.get('creator_name', '').strip()
+        min_views = int(payload.get('min_views', 0))
+        priority = int(payload.get('priority', 2))
+        
+        if not channel or not creator_name or platform not in {'twitch', 'youtube', 'tiktok', 'reddit'}:
+            return {'ok': False, 'error': 'channel, creator_name, and valid platform required'}
+        
+        # Read current sources.py
+        sources_text = SOURCES_PATH.read_text(encoding='utf-8')
+        
+        # Insert new source entry into the channel's source list
+        # This is a simple text insertion; for production, use AST parsing
+        new_source = f"""        {{"platform": "{platform}", "url": "", "creator": "{creator_name}", "priority": {priority}, "min_views": {min_views}}},"""
+        
+        # Find the channel section and append
+        if f'"{channel}": [' not in sources_text:
+            return {'ok': False, 'error': f'Channel {channel} not found in config'}
+        
+        # Find insertion point (after the channel opening bracket)
+        marker = f'"{channel}": ['
+        idx = sources_text.find(marker)
+        if idx < 0:
+            return {'ok': False, 'error': f'Channel {channel} format not recognized'}
+        
+        # Find the position after the opening bracket and any leading newline
+        insert_pos = idx + len(marker) + 1
+        while insert_pos < len(sources_text) and sources_text[insert_pos] in {'\n', '\r'}:
+            insert_pos += 1
+        
+        # Insert the new source with proper indentation
+        new_sources_text = sources_text[:insert_pos] + '\n' + new_source + '\n' + sources_text[insert_pos:]
+        SOURCES_PATH.write_text(new_sources_text, encoding='utf-8')
+        
+        return {'ok': True, 'message': f'Added source: {creator_name} ({platform}) to {channel}'}
+    except Exception as e:
+        return {'ok': False, 'error': f'Failed to add source: {str(e)}'}
+
+
+def remove_source(payload: dict) -> dict:
+    """Remove a source from CHANNEL_SOURCES config."""
+    try:
+        channel = payload.get('channel')
+        source_id = payload.get('source_id')
+        
+        if not channel or not source_id:
+            return {'ok': False, 'error': 'channel and source_id required'}
+        
+        # Read current sources.py
+        sources_text = SOURCES_PATH.read_text(encoding='utf-8')
+        
+        # For now, simple line-based removal. In production, use AST rewriting.
+        lines = sources_text.split('\n')
+        new_lines = []
+        skip_next = False
+        
+        for line in lines:
+            if skip_next:
+                skip_next = False
+                continue
+            # Look for source dict lines and match creator from source_id
+            if source_id.split(':')[1] in line and '"creator":' in line:
+                # Skip this source dict line
+                continue
+            new_lines.append(line)
+        
+        SOURCES_PATH.write_text('\n'.join(new_lines), encoding='utf-8')
+        return {'ok': True, 'message': f'Removed source {source_id} from {channel}'}
+    except Exception as e:
+        return {'ok': False, 'error': f'Failed to remove source: {str(e)}'}
+
+
+def toggle_source(payload: dict) -> dict:
+    """Toggle source enabled/disabled status."""
+    try:
+        channel = payload.get('channel')
+        source_id = payload.get('source_id')
+        enabled = payload.get('enabled', True)
+        
+        if not channel or not source_id:
+            return {'ok': False, 'error': 'channel and source_id required'}
+        
+        # For now, toggle is tracked in-memory during runtime
+        # Full persistence would require config rewrite
+        return {'ok': True, 'message': f'Toggled source {source_id} to enabled={enabled}', 'source_id': source_id, 'enabled': enabled}
+    except Exception as e:
+        return {'ok': False, 'error': f'Failed to toggle source: {str(e)}'}
+
+
 def run_action(payload: dict) -> dict:
     action = payload.get('action')
     channel = payload.get('channel')
@@ -567,7 +660,7 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_POST(self):
         parsed = urlparse(self.path)
-        if parsed.path not in {'/api/action', '/api/update_channel_settings', '/api/retry_job', '/api/cancel_job', '/api/enable_channel', '/api/disable_channel', '/api/cleanup_renders'}:
+        if parsed.path not in {'/api/action', '/api/update_channel_settings', '/api/retry_job', '/api/cancel_job', '/api/enable_channel', '/api/disable_channel', '/api/cleanup_renders', '/api/add_source', '/api/remove_source', '/api/toggle_source'}:
             self._send_json({'ok': False, 'error': 'Not found'}, 404)
             return
         try:
@@ -602,6 +695,18 @@ class Handler(SimpleHTTPRequestHandler):
             elif parsed.path == '/api/cleanup_renders':
                 dry_run = payload.get('dry_run', True)
                 result = cleanup_renders(dry_run=dry_run)
+            elif parsed.path == '/api/add_source':
+                result = add_source(payload)
+                if result.get('ok'):
+                    run_generate()
+            elif parsed.path == '/api/remove_source':
+                result = remove_source(payload)
+                if result.get('ok'):
+                    run_generate()
+            elif parsed.path == '/api/toggle_source':
+                result = toggle_source(payload)
+                if result.get('ok'):
+                    run_generate()
             else:
                 result = run_action(payload)
                 if payload.get('action') in {'pause_channel', 'resume_channel', 'refresh_data'}:

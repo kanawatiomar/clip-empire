@@ -1588,6 +1588,74 @@ def get_disk_usage() -> dict[str, Any]:
     }
 
 
+def get_sources_list(conn: sqlite3.Connection) -> list[dict[str, Any]]:
+    """Build a complete sources list grouped by channel with DB metrics.
+    
+    Returns a list of channel groups, each containing:
+    - channel: channel name
+    - sources: list of source objects with config + DB metrics
+    """
+    sources_list = []
+    
+    # Iterate through CHANNEL_SOURCES from config
+    for channel_name, channel_sources in CHANNEL_SOURCES.items():
+        channel_group = {
+            'channel': channel_name,
+            'sources': [],
+        }
+        
+        for idx, source_config in enumerate(channel_sources):
+            # Get default values
+            min_views = source_config.get('min_views', SOURCE_DEFAULTS.get('min_views', 0))
+            priority = source_config.get('priority', 1)
+            creator_name = source_config.get('creator', source_config.get('platform', 'unknown'))
+            platform = source_config.get('platform', 'unknown')
+            
+            # Create source ID for DB lookups
+            # Use creator + platform + index to uniquely identify
+            source_id_key = f"{channel_name}:{creator_name}:{platform}:{idx}"
+            
+            # Query for clips_fetched and last_fetched_at
+            try:
+                metric_row = query_one(
+                    conn,
+                    """
+                    SELECT COUNT(*) as clips_fetched,
+                           MAX(used_at) as last_fetched_at
+                    FROM source_clips
+                    WHERE channel_name = ? AND creator = ?
+                    """,
+                    (channel_name, creator_name)
+                )
+                clips_fetched = metric_row['clips_fetched'] or 0 if metric_row else 0
+                last_fetched_at = metric_row['last_fetched_at'] if metric_row else None
+            except Exception:
+                clips_fetched = 0
+                last_fetched_at = None
+            
+            # Build source object
+            source_obj = {
+                'id': source_id_key,
+                'channel': channel_name,
+                'platform': platform,
+                'creator_name': creator_name,
+                'min_views': min_views,
+                'priority': priority,
+                'clips_fetched': clips_fetched,
+                'last_fetched_at': last_fetched_at,
+                'last_fetched_rel': rel_time(last_fetched_at) if last_fetched_at else '—',
+                'enabled': source_config.get('enabled', True),
+                'url': source_config.get('url', ''),
+                'type': source_config.get('type', 'unknown'),
+            }
+            
+            channel_group['sources'].append(source_obj)
+        
+        sources_list.append(channel_group)
+    
+    return sources_list
+
+
 def get_pipeline_status(conn: sqlite3.Connection) -> dict[str, Any]:
     """Track the full clip lifecycle through the pipeline.
     
@@ -1750,6 +1818,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     pipeline = get_pipeline_status(conn)
     disk_usage = get_disk_usage()
     hall_of_fame = get_hall_of_fame(conn)
+    sources_list = get_sources_list(conn)
     lagging = [item for item in channel_performance if item['lagging']]
     payload = {
         'generated_at': utc_now().isoformat() + 'Z',
@@ -1776,6 +1845,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'disk': disk_usage,
         'hall_of_fame': hall_of_fame,
         'leaderboard': get_channel_leaderboard(conn),
+        'sources_list': sources_list,
         'insights': {
             'lagging_channels': lagging[:6],
             'lagging_count': len(lagging),

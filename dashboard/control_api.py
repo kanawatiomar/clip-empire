@@ -73,8 +73,66 @@ def mark_notifications_read() -> dict:
         conn.close()
 
 
+def save_health_score_history() -> None:
+    """Read health_score from data.json and append to health_history.json.
+    
+    Keeps the last 30 entries in health_history.json.
+    """
+    try:
+        data_file = BASE_DIR / 'data.json'
+        history_file = BASE_DIR / 'health_history.json'
+        
+        if not data_file.exists():
+            return
+        
+        # Read data.json
+        with open(data_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        
+        # Extract health score
+        health_score = data.get('health_score', {})
+        if not health_score:
+            return
+        
+        # Load existing history or create new
+        history = []
+        if history_file.exists():
+            try:
+                with open(history_file, 'r', encoding='utf-8') as f:
+                    history = json.load(f)
+            except (json.JSONDecodeError, IOError):
+                history = []
+        
+        # Ensure history is a list
+        if not isinstance(history, list):
+            history = []
+        
+        # Add new entry with timestamp
+        entry = {
+            'timestamp': data.get('generated_at', ''),
+            'score': health_score.get('score', 0),
+            'grade': health_score.get('grade', 'F'),
+            'status': health_score.get('status', 'Unknown'),
+            'breakdown': health_score.get('breakdown', {}),
+        }
+        
+        history.append(entry)
+        
+        # Keep only last 30 entries
+        if len(history) > 30:
+            history = history[-30:]
+        
+        # Write back to history file
+        with open(history_file, 'w', encoding='utf-8') as f:
+            json.dump(history, f, indent=2)
+    except Exception as exc:
+        # Silently fail if history saving fails - don't break data generation
+        pass
+
+
 def run_generate() -> None:
     subprocess.run(['py', '-3', str(BASE_DIR / 'generate_data.py')], cwd=REPO_ROOT, check=True)
+    save_health_score_history()
 
 
 def _load_dotenv(path: Path) -> dict[str, str]:

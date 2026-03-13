@@ -1468,6 +1468,69 @@
       <span class="pill" id="metricsPill">Metrics: checking</span>
     </div>
 
+    <!-- Health Score Display -->
+    <section class="card" style="margin-top:18px; background: linear-gradient(135deg, rgba(61,214,140,.1), rgba(201,168,76,.08));">
+      <div class="card-body" style="display: grid; grid-template-columns: auto 1fr auto; gap: 24px; align-items: center; position: relative;">
+        <!-- Large Health Score Display -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+          <div style="position: relative; width: 120px; height: 120px; display: flex; align-items: center; justify-content: center;">
+            <svg style="position: absolute; width: 100%; height: 100%;" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="55" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="8"/>
+              <circle id="healthCircle" cx="60" cy="60" r="55" fill="none" stroke="var(--success)" stroke-width="8" stroke-dasharray="345" stroke-dashoffset="0" stroke-linecap="round" style="transform: rotate(-90deg); transform-origin: 60px 60px; transition: stroke .3s ease, stroke-dashoffset .3s ease;"/>
+            </svg>
+            <div style="text-align: center; position: relative; z-index: 1;">
+              <div style="font: 700 48px var(--mono); color: var(--text);" id="healthScoreNum">—</div>
+              <div style="font: 600 18px var(--mono); color: var(--gold-2); margin-top: -4px;" id="healthGrade">—</div>
+            </div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font: 700 14px var(--body); color: var(--text);" id="healthStatus">Loading…</div>
+            <div style="font: 12px var(--mono); color: var(--muted); margin-top: 4px;">System Health</div>
+          </div>
+        </div>
+
+        <!-- Health Metrics Breakdown -->
+        <div style="display: grid; gap: 12px;">
+          <div style="font: 600 14px var(--body); color: var(--text); margin-bottom: 4px;">Health Score Breakdown</div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;">
+            <div style="padding: 12px; background: rgba(255,255,255,.04); border-radius: 12px; border: 1px solid rgba(255,255,255,.06);">
+              <div style="font: 12px var(--mono); color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Pipeline Health</div>
+              <div style="font: 600 16px var(--mono); color: var(--gold);" id="healthPipeline">— / 25</div>
+            </div>
+            <div style="padding: 12px; background: rgba(255,255,255,.04); border-radius: 12px; border: 1px solid rgba(255,255,255,.06);">
+              <div style="font: 12px var(--mono); color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Error Rate</div>
+              <div style="font: 600 16px var(--mono); color: var(--gold);" id="healthError">— / 20</div>
+            </div>
+            <div style="padding: 12px; background: rgba(255,255,255,.04); border-radius: 12px; border: 1px solid rgba(255,255,255,.06);">
+              <div style="font: 12px var(--mono); color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Quota Safety</div>
+              <div style="font: 600 16px var(--mono); color: var(--gold);" id="healthQuota">— / 15</div>
+            </div>
+            <div style="padding: 12px; background: rgba(255,255,255,.04); border-radius: 12px; border: 1px solid rgba(255,255,255,.06);">
+              <div style="font: 12px var(--mono); color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Queue Depth</div>
+              <div style="font: 600 16px var(--mono); color: var(--gold);" id="healthQueue">— / 15</div>
+            </div>
+            <div style="padding: 12px; background: rgba(255,255,255,.04); border-radius: 12px; border: 1px solid rgba(255,255,255,.06);">
+              <div style="font: 12px var(--mono); color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Source Freshness</div>
+              <div style="font: 600 16px var(--mono); color: var(--gold);" id="healthFreshness">— / 15</div>
+            </div>
+            <div style="padding: 12px; background: rgba(255,255,255,.04); border-radius: 12px; border: 1px solid rgba(255,255,255,.06);">
+              <div style="font: 12px var(--mono); color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Channel Uptime</div>
+              <div style="font: 600 16px var(--mono); color: var(--gold);" id="healthUptime">— / 10</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Health History Sparkline -->
+        <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-end;">
+          <div>
+            <div style="font: 600 14px var(--body); color: var(--text); margin-bottom: 8px; text-align: right;">Score History</div>
+            <canvas id="healthSparkline" width="200" height="60" style="border: 1px solid rgba(255,255,255,.05); border-radius: 12px; background: rgba(255,255,255,.02); padding: 4px;"></canvas>
+          </div>
+          <div style="font: 11px var(--mono); color: var(--dim); text-align: right;">Last 7 runs</div>
+        </div>
+      </div>
+    </section>
+
     <section class="grid stats">
       <div class="kpi"><div class="label">Active Channels</div><div class="value gold" id="kpiActive">—</div><div class="hint" id="kpiTotalChannels">— total channels</div></div>
       <div class="kpi"><div class="label">Jobs Queued Today</div><div class="value" id="kpiQueued">—</div><div class="hint">ready to publish / retry</div></div>
@@ -2363,6 +2426,17 @@
         const res = await fetch(`${STATIC_JSON}?t=${Date.now()}`, { cache: 'no-store' });
         dataCache = await res.json();
       }
+      
+      // Load health history
+      try {
+        const historyRes = await fetch('./health_history.json?t=' + Date.now(), { cache: 'no-store' });
+        if (historyRes.ok) {
+          window.healthHistory = await historyRes.json();
+        }
+      } catch (e) {
+        // Ignore if health history not available
+      }
+      
       renderAll();
     }
 
@@ -2372,6 +2446,99 @@
       byId('refreshRate').textContent = `${d.meta.refresh_seconds}s`;
       byId('dbHealthPill').textContent = `DB: ${d.meta.channel_count} channels · ${d.meta.job_count} jobs`;
       byId('metricsPill').textContent = d.meta.has_metrics_daily ? 'Metrics: live metrics_daily' : 'Metrics: source proxy fallback';
+    }
+
+    function renderHealthScore(){
+      const hs = dataCache.health_score || {};
+      const score = hs.score || 0;
+      const grade = hs.grade || 'F';
+      const status = hs.status || 'Unknown';
+      const color = hs.color || 'gray';
+      const breakdown = hs.breakdown || {};
+      
+      // Update score display
+      byId('healthScoreNum').textContent = score.toFixed(1);
+      byId('healthGrade').textContent = grade;
+      byId('healthStatus').textContent = status;
+      
+      // Set color theme
+      const colorMap = {
+        'green': '#3dd68c',
+        'yellow': '#e8b04e',
+        'red': '#e85454'
+      };
+      const themedColor = colorMap[color] || '#96a0ae';
+      
+      // Update circle progress
+      const circle = byId('healthCircle');
+      if (circle) {
+        const circumference = 2 * Math.PI * 55;
+        const offset = circumference * (1 - (score / 100));
+        circle.style.strokeDashoffset = offset;
+        circle.style.stroke = themedColor;
+      }
+      
+      // Update breakdown values
+      byId('healthPipeline').textContent = `${breakdown.pipeline_health?.toFixed(1) || 0} / 25`;
+      byId('healthError').textContent = `${breakdown.error_rate?.toFixed(1) || 0} / 20`;
+      byId('healthQuota').textContent = `${breakdown.quota_safety?.toFixed(1) || 0} / 15`;
+      byId('healthQueue').textContent = `${breakdown.queue_depth?.toFixed(1) || 0} / 15`;
+      byId('healthFreshness').textContent = `${breakdown.source_freshness?.toFixed(1) || 0} / 15`;
+      byId('healthUptime').textContent = `${breakdown.channel_uptime?.toFixed(1) || 0} / 10`;
+      
+      // Render sparkline
+      renderHealthSparkline();
+    }
+
+    function renderHealthSparkline(){
+      const canvas = byId('healthSparkline');
+      if (!canvas) return;
+      
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+      
+      // Load health history from localStorage or fetch
+      const history = window.healthHistory || [];
+      
+      ctx.clearRect(0, 0, w, h);
+      
+      if (history.length === 0) {
+        ctx.fillStyle = 'rgba(255,255,255,.1)';
+        ctx.font = '12px var(--mono)';
+        ctx.textAlign = 'center';
+        ctx.fillText('No history', w/2, h/2);
+        return;
+      }
+      
+      // Draw sparkline
+      const padding = 8;
+      const graphW = w - (padding * 2);
+      const graphH = h - (padding * 2);
+      const maxScore = 100;
+      const points = history.slice(-7).map((entry, i) => {
+        const x = padding + (i / Math.max(1, history.length - 1)) * graphW;
+        const y = h - padding - ((entry.score || 0) / maxScore) * graphH;
+        return { x, y, score: entry.score };
+      });
+      
+      // Draw line
+      ctx.strokeStyle = '#3dd68c';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      points.forEach((p, i) => {
+        if (i === 0) ctx.moveTo(p.x, p.y);
+        else ctx.lineTo(p.x, p.y);
+      });
+      ctx.stroke();
+      
+      // Draw points
+      points.forEach(p => {
+        ctx.fillStyle = '#3dd68c';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+        ctx.fill();
+      });
     }
 
     function renderKPIs(){
@@ -3739,6 +3906,7 @@
 
     function renderAll(){
       renderHeader();
+      renderHealthScore();
       renderKPIs();
       renderQueue();
       renderQueueManager();

@@ -493,6 +493,103 @@ def get_logs_preview(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     ]
 
 
+def get_source_health(conn: sqlite3.Connection) -> list[dict[str, Any]]:
+    source_rows = query_all(
+        conn,
+        """
+        SELECT source_id, type, url, ingested_at
+        FROM sources
+        """,
+    )
+    health_rows = query_all(
+        conn,
+        """
+        SELECT source_key, success_count, failure_count, last_error, updated_at
+        FROM source_health
+        """,
+    )
+    recent_clip_rows = query_all(
+        conn,
+        """
+        SELECT source_url, COUNT(*) AS clips_24h
+        FROM source_clips
+        WHERE datetime(used_at) >= datetime('now', '-24 hour')
+        GROUP BY source_url
+        """,
+    )
+
+    source_map: dict[str, dict[str, Any]] = {}
+    for row in source_rows:
+        key = row['url'] or row['source_id']
+        if not key:
+            continue
+        source_map[key] = {
+            'source_id': row['source_id'] or key,
+            'platform': row['type'] or 'unknown',
+            'last_fetch': row['ingested_at'],
+            'success_count': 0,
+            'failure_count': 0,
+            'last_error': None,
+        }
+
+    for row in health_rows:
+        key = row['source_key']
+        item = source_map.get(key, {
+            'source_id': key,
+            'platform': 'unknown',
+            'last_fetch': row['updated_at'],
+            'success_count': 0,
+            'failure_count': 0,
+            'last_error': row['last_error'],
+        })
+        if item.get('platform') == 'unknown':
+            lowered = (key or '').lower()
+            if 'tiktok.com' in lowered:
+                item['platform'] = 'tiktok'
+            elif 'youtube.com' in lowered or 'youtu.be' in lowered:
+                item['platform'] = 'youtube'
+        item['last_fetch'] = row['updated_at'] or item.get('last_fetch')
+        item['success_count'] = int(row['success_count'] or 0)
+        item['failure_count'] = int(row['failure_count'] or 0)
+        item['last_error'] = row['last_error']
+        source_map[key] = item
+
+    recent_clips = {row['source_url']: int(row['clips_24h'] or 0) for row in recent_clip_rows}
+    items: list[dict[str, Any]] = []
+    for key, item in source_map.items():
+        success_count = int(item.get('success_count') or 0)
+        failure_count = int(item.get('failure_count') or 0)
+        total_attempts = success_count + failure_count
+        error_rate = round((failure_count / total_attempts), 3) if total_attempts else 0.0
+        last_fetch = item.get('last_fetch')
+        last_dt = parse_dt(last_fetch)
+        stale = not last_dt or (utc_now() - last_dt) > timedelta(hours=48)
+        if total_attempts and error_rate >= 0.5:
+            status = 'error'
+        elif stale or failure_count > 0:
+            status = 'warning'
+        else:
+            status = 'healthy'
+        items.append({
+            'source_id': item.get('source_id') or key,
+            'source_key': key,
+            'platform': item.get('platform') or 'unknown',
+            'last_fetch': last_fetch,
+            'last_fetch_display': fmt_compact_dt(last_fetch),
+            'last_fetch_ago': rel_time(last_fetch),
+            'clips_24h': recent_clips.get(key, 0),
+            'status': status,
+            'error_rate': error_rate,
+            'success_count': success_count,
+            'failure_count': failure_count,
+            'last_error': item.get('last_error'),
+        })
+
+    severity = {'error': 0, 'warning': 1, 'healthy': 2}
+    items.sort(key=lambda row: (severity.get(row['status'], 9), row['platform'], row['source_id']))
+    return items
+
+
 def get_controls_metadata(conn: sqlite3.Connection) -> dict[str, Any]:
     channels = query_all(conn, "SELECT channel_name, status FROM channels ORDER BY channel_name")
     return {
@@ -512,6 +609,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     queue_monitor = get_queue_monitor(conn)
     channel_performance = get_channel_performance(conn)
     analytics = load_channel_trends(conn)
+    source_health = get_source_health(conn)
     lagging = [item for item in channel_performance if item['lagging']]
     payload = {
         'generated_at': utc_now().isoformat() + 'Z',
@@ -521,6 +619,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'queue_monitor': queue_monitor,
         'channel_performance': channel_performance,
         'analytics': analytics,
+        'source_health': source_health,
         'top_clips': get_top_clips(conn),
         'recent_uploads': get_recent_uploads(conn),
         'logs_preview': get_logs_preview(conn),

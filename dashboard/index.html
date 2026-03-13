@@ -128,9 +128,9 @@
     }
     .status.queued { color:var(--warning); background:var(--warning-bg); border-color:rgba(232,176,78,.24); }
     .status.running { color:var(--blue); background:var(--blue-bg); border-color:rgba(91,141,239,.24); }
-    .status.succeeded, .status.active { color:var(--success); background:var(--success-bg); border-color:rgba(61,214,140,.24); }
-    .status.failed { color:var(--error); background:var(--error-bg); border-color:rgba(232,84,84,.24); }
-    .status.paused, .status.cancelled { color:var(--warning); background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.08); }
+    .status.succeeded, .status.active, .status.healthy { color:var(--success); background:var(--success-bg); border-color:rgba(61,214,140,.24); }
+    .status.failed, .status.error { color:var(--error); background:var(--error-bg); border-color:rgba(232,84,84,.24); }
+    .status.paused, .status.cancelled, .status.warning { color:var(--warning); background:var(--warning-bg); border-color:rgba(232,176,78,.24); }
     .status.unknown { color:var(--muted); background:rgba(255,255,255,.05); }
     .muted { color: var(--muted); }
     .dim { color: var(--dim); }
@@ -296,6 +296,21 @@
       </div>
       <div class="card-body">
         <div class="analytics-board" id="analyticsBoard"></div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:18px;">
+      <div class="card-head">
+        <h2>Source Health</h2>
+        <div class="top-note" id="sourceHealthSummary">fetch recency, 24h ingestion, and failure pressure</div>
+      </div>
+      <div class="card-body table-wrap">
+        <table>
+          <thead>
+            <tr><th>Source</th><th>Platform</th><th>Last Fetch</th><th>Clips / 24h</th><th>Status</th></tr>
+          </thead>
+          <tbody id="sourceHealthBody"></tbody>
+        </table>
       </div>
     </section>
 
@@ -620,6 +635,34 @@
       });
     }
 
+    function renderSourceHealth(){
+      const rows = dataCache.source_health || [];
+      const counts = rows.reduce((acc, row) => {
+        acc[row.status] = (acc[row.status] || 0) + 1;
+        return acc;
+      }, {});
+      byId('sourceHealthSummary').textContent = rows.length
+        ? `${rows.length} tracked sources · ${counts.healthy || 0} healthy · ${counts.warning || 0} warning · ${counts.error || 0} error`
+        : 'No source health data available yet';
+      byId('sourceHealthBody').innerHTML = rows.map(row => `
+        <tr>
+          <td>
+            <div class="leader-title">${esc(row.source_id)}</div>
+            <div class="dim mono">${esc(row.source_key || '')}</div>
+          </td>
+          <td>${esc(row.platform || 'unknown')}</td>
+          <td>
+            <div>${esc(row.last_fetch_ago || '—')}</div>
+            <div class="dim mono">${esc(row.last_fetch_display || '—')}</div>
+          </td>
+          <td class="num">${fmtNum(row.clips_24h)}</td>
+          <td>
+            ${statusBadge(row.status)}
+            <div class="dim mono" style="margin-top:6px;">err ${(Number(row.error_rate || 0) * 100).toFixed(0)}%</div>
+          </td>
+        </tr>`).join('') || '<tr><td colspan="5" class="muted">No source health rows found.</td></tr>';
+    }
+
     function renderTopClips(){
       const rows = dataCache.top_clips || [];
       byId('clipsBody').innerHTML = rows.map(clip => `
@@ -661,6 +704,7 @@
       renderQueue();
       renderChannels();
       renderAnalytics();
+      renderSourceHealth();
       renderTopClips();
       renderRecentUploads();
       renderLogsPreview();

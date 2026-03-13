@@ -936,6 +936,87 @@ def get_discord_feed() -> list[dict[str, Any]]:
     return normalized[:DISCORD_FEED_LIMIT]
 
 
+def get_upload_timeline(conn: sqlite3.Connection) -> dict[str, Any]:
+    """Get upload history grouped into time buckets (Today, Yesterday, This Week, Last Week, Older)."""
+    rows = query_all(
+        conn,
+        """
+        SELECT pj.job_id, pj.channel_name, pj.caption_text, pj.updated_at, pr.post_url,
+               pv.clip_id, sc.view_count
+        FROM publish_jobs pj
+        LEFT JOIN publish_results pr ON pr.job_id = pj.job_id
+        LEFT JOIN platform_variants pv ON pv.variant_id = pj.variant_id
+        LEFT JOIN source_clips sc ON sc.clip_id = pv.clip_id
+        WHERE pj.status='succeeded'
+        ORDER BY datetime(COALESCE(pj.updated_at, pj.created_at)) DESC
+        LIMIT 50
+        """,
+    )
+    
+    now = utc_now()
+    today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+    yesterday_start = today_start - timedelta(days=1)
+    week_start = today_start - timedelta(days=today_start.weekday())  # Monday
+    last_week_start = week_start - timedelta(days=7)
+    
+    buckets: dict[str, list[dict[str, Any]]] = {
+        'Today': [],
+        'Yesterday': [],
+        'This Week': [],
+        'Last Week': [],
+        'Older': [],
+    }
+    
+    for row in rows:
+        pub_dt = parse_dt(row['updated_at'])
+        if not pub_dt:
+            continue
+        
+        title = row['caption_text'] or 'Untitled'
+        if len(title) > 60:
+            title = title[:57] + '...'
+        
+        views = int(row['view_count'] or 0)
+        
+        entry = {
+            'job_id': row['job_id'],
+            'job_id_short': (row['job_id'] or '')[:8],
+            'channel': row['channel_name'],
+            'title': title,
+            'published_at': row['updated_at'],
+            'published_at_display': fmt_compact_dt(row['updated_at']),
+            'published_ago': rel_time(row['updated_at']),
+            'views': views,
+            'post_url': row['post_url'],
+        }
+        
+        # Classify into time bucket
+        if pub_dt >= today_start:
+            buckets['Today'].append(entry)
+        elif pub_dt >= yesterday_start:
+            buckets['Yesterday'].append(entry)
+        elif pub_dt >= week_start:
+            buckets['This Week'].append(entry)
+        elif pub_dt >= last_week_start:
+            buckets['Last Week'].append(entry)
+        else:
+            buckets['Older'].append(entry)
+    
+    # Return as ordered list of buckets with non-empty ones first
+    result = {
+        'buckets': [
+            {'name': 'Today', 'count': len(buckets['Today']), 'items': buckets['Today']},
+            {'name': 'Yesterday', 'count': len(buckets['Yesterday']), 'items': buckets['Yesterday']},
+            {'name': 'This Week', 'count': len(buckets['This Week']), 'items': buckets['This Week']},
+            {'name': 'Last Week', 'count': len(buckets['Last Week']), 'items': buckets['Last Week']},
+            {'name': 'Older', 'count': len(buckets['Older']), 'items': buckets['Older']},
+        ],
+        'total_count': len(rows),
+    }
+    
+    return result
+
+
 def get_current_settings(conn: sqlite3.Connection) -> dict[str, dict[str, Any]]:
     channel_rows = query_all(conn, "SELECT channel_name, daily_target FROM channels ORDER BY channel_name")
     settings: dict[str, dict[str, Any]] = {}
@@ -2045,6 +2126,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'top_clips': get_top_clips(conn),
         'recent_uploads': get_recent_uploads(conn),
         'recent_clips': get_recent_clips(conn),
+        'upload_timeline': get_upload_timeline(conn),
         'discord_feed': get_discord_feed(),
         'logs_preview': get_logs_preview(conn),
         'controls': get_controls_metadata(conn),

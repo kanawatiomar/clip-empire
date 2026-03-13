@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import json
 import sqlite3
-from collections import Counter
+from collections import Counter, defaultdict
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
@@ -21,6 +21,8 @@ OUTPUT_FILE = BASE_DIR / 'data.json'
 
 RPM_PER_1K_VIEWS = 0.85
 REFRESH_SECONDS = 15
+TREND_DAYS = 30
+TREND_LOOKBACK_DAYS = 60
 
 
 def utc_now() -> datetime:
@@ -128,6 +130,128 @@ def load_channel_view_metrics(conn: sqlite3.Connection) -> dict[str, dict[str, f
                 'max_source_views': float(row['max_source_views'] or 0),
             }
     return metrics
+
+
+def trend_direction(current_avg: float, previous_avg: float, tolerance: float = 0.01) -> str:
+    if current_avg > previous_avg + tolerance:
+        return 'up'
+    if current_avg < previous_avg - tolerance:
+        return 'down'
+    return 'flat'
+
+
+def calc_window_stats(values: list[float], window: int) -> dict[str, Any]:
+    recent = values[-window:] if values else []
+    previous = values[-(window * 2):-window] if len(values) > window else []
+    current_avg = round(sum(recent) / len(recent), 2) if recent else 0.0
+    previous_avg = round(sum(previous) / len(previous), 2) if previous else 0.0
+    if not previous and len(recent) >= 2:
+        previous_avg = round(sum(recent[:-1]) / max(len(recent) - 1, 1), 2)
+    delta = round(current_avg - previous_avg, 2)
+    delta_pct = round((delta / previous_avg) * 100, 1) if previous_avg else None
+    return {
+        'window_days': window,
+        'avg': current_avg,
+        'previous_avg': previous_avg,
+        'delta': delta,
+        'delta_pct': delta_pct,
+        'direction': trend_direction(current_avg, previous_avg),
+        'points': len(recent),
+    }
+
+
+def load_channel_trends(conn: sqlite3.Connection) -> list[dict[str, Any]]:
+    rows = query_all(
+        conn,
+        """
+        SELECT channel_name,
+               date,
+               COALESCE(NULLIF(views_median, 0), CASE WHEN posts > 0 THEN CAST(views_total AS REAL) / posts ELSE 0 END, 0) AS daily_views,
+               'metrics_daily' AS source
+        FROM metrics_daily
+        WHERE platform = 'youtube'
+          AND date >= date('now', '-60 day')
+        ORDER BY channel_name, date
+        """,
+    )
+
+    channel_points: dict[str, dict[str, dict[str, Any]]] = defaultdict(dict)
+    for row in rows:
+        channel = row['channel_name']
+        day = row['date']
+        views = float(row['daily_views'] or 0)
+        channel_points[channel][day] = {
+            'date': day,
+            'views': round(views, 2),
+            'rpm': round((views / 1000.0) * RPM_PER_1K_VIEWS, 4),
+            'source': row['source'],
+        }
+
+    fallback_rows = query_all(
+        conn,
+        """
+        SELECT channel_name,
+               date(used_at) AS date,
+               COALESCE(AVG(NULLIF(view_count, 0)), 0) AS daily_views,
+               'source_clips_proxy' AS source
+        FROM source_clips
+        WHERE used_at IS NOT NULL
+          AND date(used_at) >= date('now', '-60 day')
+        GROUP BY channel_name, date(used_at)
+        ORDER BY channel_name, date(used_at)
+        """,
+    )
+    for row in fallback_rows:
+        channel = row['channel_name']
+        day = row['date']
+        if not channel or not day or day in channel_points[channel]:
+            continue
+        views = float(row['daily_views'] or 0)
+        channel_points[channel][day] = {
+            'date': day,
+            'views': round(views, 2),
+            'rpm': round((views / 1000.0) * RPM_PER_1K_VIEWS, 4),
+            'source': row['source'],
+        }
+
+    trend_rows: list[dict[str, Any]] = []
+    end_day = utc_now().date()
+    day_range = [(end_day - timedelta(days=offset)).isoformat() for offset in range(TREND_DAYS - 1, -1, -1)]
+
+    for channel, series_map in sorted(channel_points.items()):
+        ordered_days = sorted(series_map)
+        if not ordered_days:
+            continue
+        views_series = [float(series_map[day]['views']) for day in ordered_days]
+        rpm_series = [float(series_map[day]['rpm']) for day in ordered_days]
+        recent_series = []
+        for day in day_range:
+            point = series_map.get(day)
+            recent_series.append({
+                'date': day,
+                'views': round(float(point['views']), 2) if point else None,
+                'rpm': round(float(point['rpm']), 4) if point else None,
+            })
+
+        primary_source = 'metrics_daily' if any(point['source'] == 'metrics_daily' for point in series_map.values()) else 'source_clips_proxy'
+        trend_rows.append({
+            'channel': channel,
+            'source': primary_source,
+            'views': {
+                'series_30d': recent_series,
+                'window_7d': calc_window_stats(views_series, 7),
+                'window_30d': calc_window_stats(views_series, 30),
+                'latest': round(views_series[-1], 2) if views_series else 0.0,
+            },
+            'rpm': {
+                'series_30d': recent_series,
+                'window_7d': calc_window_stats(rpm_series, 7),
+                'window_30d': calc_window_stats(rpm_series, 30),
+                'latest': round(rpm_series[-1], 4) if rpm_series else 0.0,
+            },
+        })
+
+    return trend_rows
 
 
 def get_live_status(conn: sqlite3.Connection) -> dict[str, Any]:
@@ -387,6 +511,7 @@ def get_controls_metadata(conn: sqlite3.Connection) -> dict[str, Any]:
 def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     queue_monitor = get_queue_monitor(conn)
     channel_performance = get_channel_performance(conn)
+    analytics = load_channel_trends(conn)
     lagging = [item for item in channel_performance if item['lagging']]
     payload = {
         'generated_at': utc_now().isoformat() + 'Z',
@@ -395,6 +520,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'live_status': get_live_status(conn),
         'queue_monitor': queue_monitor,
         'channel_performance': channel_performance,
+        'analytics': analytics,
         'top_clips': get_top_clips(conn),
         'recent_uploads': get_recent_uploads(conn),
         'logs_preview': get_logs_preview(conn),
@@ -403,6 +529,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
             'lagging_channels': lagging[:6],
             'lagging_count': len(lagging),
             'queue_backlog': sum(1 for row in queue_monitor if row['status'] in {'queued', 'running'}),
+            'analytics_channels': len(analytics),
         },
         'meta': {
             'refresh_seconds': REFRESH_SECONDS,
@@ -410,7 +537,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
             'job_count': int(query_one(conn, "SELECT COUNT(*) AS c FROM publish_jobs")['c']),
             'has_metrics_daily': int(query_one(conn, "SELECT COUNT(*) AS c FROM metrics_daily")['c']) > 0,
             'has_clip_assets': int(query_one(conn, "SELECT COUNT(*) AS c FROM clip_assets")['c']) > 0,
-            'note': 'This DB currently has sparse metrics_daily/clip_assets data, so some leaderboard stats use source clip proxy values.',
+            'note': 'Trend analytics prefer metrics_daily and fall back to source clip proxy series when upload analytics are sparse.',
         },
     }
     return payload
@@ -428,6 +555,7 @@ def main() -> int:
     print(f"Active channels: {payload['live_status']['active_channels']} / {payload['live_status']['total_channels']}")
     print(f"Queue backlog: {payload['insights']['queue_backlog']}")
     print(f"Lagging channels: {payload['insights']['lagging_count']}")
+    print(f"Analytics channels: {payload['insights']['analytics_channels']}")
     return 0
 
 

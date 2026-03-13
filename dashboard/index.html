@@ -150,6 +150,27 @@
     .actions-inline { display:flex; gap:8px; flex-wrap:wrap; }
     .top-note { font-size:12px; color:var(--dim); }
     .leader-title { max-width: 380px; font-weight:600; }
+    .analytics-board { display:grid; gap:14px; }
+    .analytics-card { border:1px solid rgba(255,255,255,.05); background:var(--surface-2); border-radius:16px; padding:16px; display:grid; gap:14px; }
+    .analytics-head { display:flex; justify-content:space-between; gap:12px; align-items:flex-start; flex-wrap:wrap; }
+    .analytics-title { font-weight:700; font-size:16px; }
+    .analytics-source { color:var(--dim); font:12px var(--mono); text-transform:uppercase; }
+    .analytics-grid { display:grid; grid-template-columns: 1.25fr .95fr; gap:16px; }
+    .chart-stack { display:grid; gap:12px; }
+    .chart-block { background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.05); border-radius:14px; padding:10px 12px 12px; }
+    .chart-meta { display:flex; justify-content:space-between; gap:12px; align-items:center; margin-bottom:8px; }
+    .chart-label { font:12px var(--mono); color:var(--muted); text-transform:uppercase; letter-spacing:.08em; }
+    .chart-value { font:700 13px var(--mono); color:var(--text); }
+    .trend-canvas { width:100%; height:88px; display:block; }
+    .trend-grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:10px; }
+    .trend-stat { background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.05); border-radius:14px; padding:12px; }
+    .trend-stat .m-label { color:var(--dim); font:12px var(--mono); text-transform:uppercase; }
+    .trend-stat .m-value { font:700 22px var(--mono); margin-top:8px; }
+    .trend-direction { display:inline-flex; align-items:center; gap:6px; font:600 12px var(--mono); margin-top:8px; }
+    .trend-direction.up { color:var(--success); }
+    .trend-direction.down { color:var(--error); }
+    .trend-direction.flat { color:var(--warning); }
+    .analytics-empty { padding:16px; border:1px dashed rgba(255,255,255,.08); border-radius:16px; color:var(--muted); background:rgba(255,255,255,.02); }
     .toast {
       position:fixed; right:22px; bottom:22px; min-width:220px; max-width:420px; padding:12px 14px; border-radius:14px;
       border:1px solid var(--line); background:var(--surface-2); box-shadow:var(--shadow); display:none; z-index:50;
@@ -179,6 +200,7 @@
       .channel-action { flex-direction: column; align-items: stretch; }
       .actions-inline button { width:100%; }
       .leader-title { max-width: unset; }
+      .analytics-grid, .trend-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -267,6 +289,16 @@
       </article>
     </section>
 
+    <section class="card" style="margin-top:18px;">
+      <div class="card-head">
+        <h2>Analytics</h2>
+        <div class="top-note" id="analyticsSummary">30-day views / RPM trend lines with 7d vs 30d momentum</div>
+      </div>
+      <div class="card-body">
+        <div class="analytics-board" id="analyticsBoard"></div>
+      </div>
+    </section>
+
     <section class="grid wide">
       <article class="card">
         <div class="card-head">
@@ -330,6 +362,77 @@
     function esc(str){ return (str ?? '').toString().replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
     function toast(msg){ const t = byId('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(window.__toastTimer); window.__toastTimer = setTimeout(()=>t.classList.remove('show'), 2800); }
     function statusBadge(status){ return `<span class="status ${status}">${status}</span>`; }
+    function trendArrow(direction){ return direction === 'up' ? '↑' : direction === 'down' ? '↓' : '→'; }
+    function trendClass(direction){ return direction || 'flat'; }
+    function fmtDelta(delta, prefix=''){
+      const num = Number(delta || 0);
+      const sign = num > 0 ? '+' : num < 0 ? '-' : '';
+      const value = Math.abs(num).toFixed(prefix ? 2 : 0);
+      return `${sign}${prefix}${value}`;
+    }
+    function drawSparkline(canvas, values, color){
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      const width = canvas.clientWidth || 320;
+      const height = canvas.clientHeight || 88;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, width, height);
+
+      const normalized = (values || []).map(v => v == null ? null : Number(v));
+      const present = normalized.filter(v => Number.isFinite(v));
+      ctx.strokeStyle = 'rgba(255,255,255,.08)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, height - 1);
+      ctx.lineTo(width, height - 1);
+      ctx.stroke();
+      if (!present.length) {
+        ctx.fillStyle = 'rgba(255,255,255,.35)';
+        ctx.font = '12px JetBrains Mono';
+        ctx.fillText('No trend data', 8, 18);
+        return;
+      }
+
+      const min = Math.min(...present);
+      const max = Math.max(...present);
+      const span = max - min || Math.max(max, 1);
+      const stepX = normalized.length > 1 ? width / (normalized.length - 1) : width;
+
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 2;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      let started = false;
+      normalized.forEach((value, idx) => {
+        if (!Number.isFinite(value)) {
+          started = false;
+          return;
+        }
+        const x = idx * stepX;
+        const y = height - 8 - (((value - min) / span) * (height - 18));
+        if (!started) {
+          ctx.moveTo(x, y);
+          started = true;
+        } else {
+          ctx.lineTo(x, y);
+        }
+      });
+      ctx.stroke();
+
+      ctx.fillStyle = color;
+      normalized.forEach((value, idx) => {
+        if (!Number.isFinite(value)) return;
+        const x = idx * stepX;
+        const y = height - 8 - (((value - min) / span) * (height - 18));
+        ctx.beginPath();
+        ctx.arc(x, y, 2.3, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
 
     async function detectMode(){
       try {
@@ -438,6 +541,85 @@
         </div>`).join('');
     }
 
+    function renderAnalytics(){
+      const rows = dataCache.analytics || [];
+      byId('analyticsSummary').textContent = rows.length
+        ? `${rows.length} channels with 30-day trend coverage · refreshes with dashboard data`
+        : 'No analytics rows yet';
+      if (!rows.length) {
+        byId('analyticsBoard').innerHTML = '<div class="analytics-empty">No trend history available yet. Once metrics_daily fills in, charts will render automatically. Source clip proxy data is also supported when metrics are sparse.</div>';
+        return;
+      }
+      byId('analyticsBoard').innerHTML = rows.map((row, idx) => {
+        const views7 = row.views.window_7d;
+        const views30 = row.views.window_30d;
+        const rpm7 = row.rpm.window_7d;
+        const rpm30 = row.rpm.window_30d;
+        return `
+          <div class="analytics-card">
+            <div class="analytics-head">
+              <div>
+                <div class="analytics-title">${esc(row.channel)}</div>
+                <div class="analytics-source">${esc(row.source)} · 30d sparkline</div>
+              </div>
+              <div class="tags">
+                <span class="tag">7d avg ${fmtNum(views7.avg)} views</span>
+                <span class="tag">30d avg ${fmtNum(views30.avg)} views</span>
+                <span class="tag">7d RPM $${Number(rpm7.avg || 0).toFixed(2)}</span>
+                <span class="tag">30d RPM $${Number(rpm30.avg || 0).toFixed(2)}</span>
+              </div>
+            </div>
+            <div class="analytics-grid">
+              <div class="chart-stack">
+                <div class="chart-block">
+                  <div class="chart-meta">
+                    <span class="chart-label">Views trend</span>
+                    <span class="chart-value">latest ${fmtNum(row.views.latest)}</span>
+                  </div>
+                  <canvas class="trend-canvas" id="viewsChart-${idx}"></canvas>
+                </div>
+                <div class="chart-block">
+                  <div class="chart-meta">
+                    <span class="chart-label">RPM trend</span>
+                    <span class="chart-value">latest $${Number(row.rpm.latest || 0).toFixed(2)}</span>
+                  </div>
+                  <canvas class="trend-canvas" id="rpmChart-${idx}"></canvas>
+                </div>
+              </div>
+              <div class="trend-grid">
+                <div class="trend-stat">
+                  <div class="m-label">Views · 7 Day</div>
+                  <div class="m-value">${fmtNum(views7.avg)}</div>
+                  <div class="trend-direction ${trendClass(views7.direction)}">${trendArrow(views7.direction)} ${views7.direction} · ${fmtDelta(views7.delta)} vs prev</div>
+                </div>
+                <div class="trend-stat">
+                  <div class="m-label">Views · 30 Day</div>
+                  <div class="m-value">${fmtNum(views30.avg)}</div>
+                  <div class="trend-direction ${trendClass(views30.direction)}">${trendArrow(views30.direction)} ${views30.direction} · ${fmtDelta(views30.delta)} vs prev</div>
+                </div>
+                <div class="trend-stat">
+                  <div class="m-label">RPM · 7 Day</div>
+                  <div class="m-value">$${Number(rpm7.avg || 0).toFixed(2)}</div>
+                  <div class="trend-direction ${trendClass(rpm7.direction)}">${trendArrow(rpm7.direction)} ${rpm7.direction} · ${fmtDelta(rpm7.delta, '$')} vs prev</div>
+                </div>
+                <div class="trend-stat">
+                  <div class="m-label">RPM · 30 Day</div>
+                  <div class="m-value">$${Number(rpm30.avg || 0).toFixed(2)}</div>
+                  <div class="trend-direction ${trendClass(rpm30.direction)}">${trendArrow(rpm30.direction)} ${rpm30.direction} · ${fmtDelta(rpm30.delta, '$')} vs prev</div>
+                </div>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+
+      requestAnimationFrame(() => {
+        rows.forEach((row, idx) => {
+          drawSparkline(byId(`viewsChart-${idx}`), row.views.series_30d.map(point => point.views), '#e8c96d');
+          drawSparkline(byId(`rpmChart-${idx}`), row.rpm.series_30d.map(point => point.rpm), '#5b8def');
+        });
+      });
+    }
+
     function renderTopClips(){
       const rows = dataCache.top_clips || [];
       byId('clipsBody').innerHTML = rows.map(clip => `
@@ -478,6 +660,7 @@
       renderKPIs();
       renderQueue();
       renderChannels();
+      renderAnalytics();
       renderTopClips();
       renderRecentUploads();
       renderLogsPreview();
@@ -515,6 +698,7 @@
     async function boot(){
       await detectMode();
       renderAll();
+      window.addEventListener('resize', () => renderAnalytics());
       setInterval(loadData, (dataCache?.meta?.refresh_seconds || 15) * 1000);
     }
     boot();

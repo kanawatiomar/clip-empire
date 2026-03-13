@@ -1569,6 +1569,14 @@
 
       <article class="card">
         <div class="card-head">
+          <h2>Channel Launch Checklist</h2>
+          <div class="top-note">Track channel readiness for launch</div>
+        </div>
+        <div class="card-body board" id="checklistBoard"></div>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
           <h2>Control Panel</h2>
           <div class="top-note">local API unlocks live controls</div>
         </div>
@@ -2546,7 +2554,60 @@
             <button class="success" ${!localMode || ch.status === 'active' ? 'disabled' : ''} onclick="runAction('resume_channel','${esc(ch.channel)}')">Resume</button>
           </div>
         </div>`).join('');
+
+      // Render Checklist
+      renderChecklist();
     }
+
+    function renderChecklist(){
+      const checklists = dataCache.checklists || [];
+      if (!checklists.length) {
+        byId('checklistBoard').innerHTML = '<div style="color: var(--muted); text-align: center; padding: 20px;">No channels to evaluate.</div>';
+        return;
+      }
+
+      byId('checklistBoard').innerHTML = checklists.map((ch, idx) => {
+        const badgeColor = {
+          'launch_ready': 'success',
+          'needs_attention': 'warning',
+          'not_started': 'info'
+        }[ch.badge] || 'info';
+        
+        const badgeHtml = `<span class="status ${badgeColor}" style="font-size:11px; padding:4px 8px;">${esc(ch.badge_text)}</span>`;
+        
+        const checksHtml = ch.checks.map(check => `
+          <div style="display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid rgba(255,255,255,.04);">
+            <span style="font-size:14px; min-width:20px;">${check.icon}</span>
+            <span style="font-size:13px; color:var(--text);">${esc(check.label)}</span>
+          </div>
+        `).join('');
+        
+        return `
+          <div class="channel-card" style="cursor: pointer;">
+            <div class="channel-top" onclick="toggleChecklistExpand(${idx})">
+              <div style="flex:1;">
+                <div class="channel-name">${esc(ch.channel)}</div>
+                <div class="dim">Readiness: ${ch.readiness_score}/${ch.total_checks}</div>
+              </div>
+              <div style="display:flex; gap:12px; align-items:center;">
+                <div class="num" style="font-size:16px; color:var(--gold-2);">${ch.readiness_score}/<span style="color:var(--muted);">6</span></div>
+                ${badgeHtml}
+              </div>
+            </div>
+            <div class="progress" style="margin:12px 0;"><div style="width:${(ch.readiness_score / 6) * 100}%"></div></div>
+            <div id="checklist-expand-${idx}" style="display:none; padding-top:12px;">
+              ${checksHtml}
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    window.toggleChecklistExpand = function(idx) {
+      const elem = byId(`checklist-expand-${idx}`);
+      if (elem) {
+        elem.style.display = elem.style.display === 'none' ? 'block' : 'none';
+      }
+    };
 
     function renderAnalytics(){
       const rows = dataCache.analytics || [];

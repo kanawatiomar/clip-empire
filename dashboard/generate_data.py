@@ -2944,6 +2944,142 @@ def get_notifications(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     return notifications
 
 
+def get_channel_checklists(conn: sqlite3.Connection) -> list[dict[str, Any]]:
+    """Generate launch readiness checklists for each channel.
+    
+    Each channel checklist includes 6 readiness checks:
+    1. Has YouTube account linked (account_email exists in channels table)
+    2. Has at least 1 source configured (sources configured in CHANNEL_SOURCES)
+    3. Has uploaded at least 1 clip (publish_jobs with status='succeeded')
+    4. Status is active (not paused)
+    5. Has clips in queue (pending publish_jobs)
+    6. Quota not exhausted (< 90% used)
+    
+    Calculates readiness score (0-6 checks passed) and returns sorted by score (highest first).
+    """
+    # Get all channels
+    all_channels_rows = query_all(conn, "SELECT channel_name, status, account_email FROM channels ORDER BY channel_name")
+    
+    # Get quota usage data to check if < 90%
+    quota_rows = query_all(
+        conn,
+        """
+        SELECT channel_name, COUNT(*) AS uploads_today
+        FROM publish_jobs
+        WHERE status = 'succeeded'
+          AND datetime(COALESCE(updated_at, created_at)) >= datetime('now', 'start of day')
+        GROUP BY channel_name
+        """,
+    )
+    uploads_by_channel = {row['channel_name']: int(row['uploads_today'] or 0) for row in quota_rows}
+    
+    checklists = []
+    
+    for channel_row in all_channels_rows:
+        channel = channel_row['channel_name']
+        
+        # Check 1: Has YouTube account linked
+        has_youtube_account = channel_row['account_email'] is not None and len(str(channel_row['account_email'] or '').strip()) > 0
+        
+        # Check 2: Has at least 1 source configured
+        has_source_configured = channel in CHANNEL_SOURCES and len(CHANNEL_SOURCES.get(channel, [])) > 0
+        
+        # Check 3: Has uploaded at least 1 clip
+        total_succeeded = int(query_one(
+            conn,
+            "SELECT COUNT(*) AS c FROM publish_jobs WHERE channel_name = ? AND status = 'succeeded'",
+            (channel,)
+        )['c'] or 0)
+        has_uploaded_clip = total_succeeded > 0
+        
+        # Check 4: Status is active
+        is_active = channel_row['status'] == 'active'
+        
+        # Check 5: Has clips in queue
+        pending_jobs = int(query_one(
+            conn,
+            "SELECT COUNT(*) AS c FROM publish_jobs WHERE channel_name = ? AND status = 'queued'",
+            (channel,)
+        )['c'] or 0)
+        has_clips_queued = pending_jobs > 0
+        
+        # Check 6: Quota not exhausted (< 90% used)
+        uploads_today = uploads_by_channel.get(channel, 0)
+        units_used = uploads_today * 1600  # Each upload costs 1600 units
+        quota_pct = round((units_used / 10000.0) * 100, 1)
+        quota_not_exhausted = quota_pct < 90
+        
+        # Calculate readiness score
+        checks = [
+            has_youtube_account,
+            has_source_configured,
+            has_uploaded_clip,
+            is_active,
+            has_clips_queued,
+            quota_not_exhausted,
+        ]
+        readiness_score = sum(checks)
+        
+        # Determine badge based on score
+        if readiness_score == 6:
+            badge = 'launch_ready'
+            badge_text = 'Launch Ready'
+            badge_color = 'green'
+        elif readiness_score < 2:
+            badge = 'not_started'
+            badge_text = 'Not Started'
+            badge_color = 'gray'
+        else:
+            badge = 'needs_attention'
+            badge_text = 'Needs Attention'
+            badge_color = 'orange'
+        
+        checklists.append({
+            'channel': channel,
+            'readiness_score': readiness_score,
+            'total_checks': 6,
+            'badge': badge,
+            'badge_text': badge_text,
+            'badge_color': badge_color,
+            'checks': [
+                {
+                    'label': 'Has YouTube account linked',
+                    'passed': has_youtube_account,
+                    'icon': '✅' if has_youtube_account else '❌',
+                },
+                {
+                    'label': 'Has at least 1 source configured',
+                    'passed': has_source_configured,
+                    'icon': '✅' if has_source_configured else '❌',
+                },
+                {
+                    'label': 'Has uploaded at least 1 clip',
+                    'passed': has_uploaded_clip,
+                    'icon': '✅' if has_uploaded_clip else '❌',
+                },
+                {
+                    'label': 'Status is active',
+                    'passed': is_active,
+                    'icon': '✅' if is_active else '❌',
+                },
+                {
+                    'label': 'Has clips in queue',
+                    'passed': has_clips_queued,
+                    'icon': '✅' if has_clips_queued else '❌',
+                },
+                {
+                    'label': 'Quota not exhausted (< 90% used)',
+                    'passed': quota_not_exhausted,
+                    'icon': '✅' if quota_not_exhausted else '❌',
+                },
+            ],
+        })
+    
+    # Sort by readiness score (highest first), then by channel name
+    checklists.sort(key=lambda x: (-x['readiness_score'], x['channel']))
+    return checklists
+
+
 def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     queue_monitor = get_queue_monitor(conn)
     queue_status = get_queue_status(conn)
@@ -2964,6 +3100,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     posting_times = get_posting_time_insights(conn)
     benchmarks = get_competitor_benchmarks(conn)
     notifications = get_notifications(conn)
+    checklists = get_channel_checklists(conn)
     lagging = [item for item in channel_performance if item['lagging']]
     payload = {
         'generated_at': utc_now().isoformat() + 'Z',
@@ -2998,6 +3135,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'posting_times': posting_times,
         'benchmarks': benchmarks,
         'notifications': notifications,
+        'checklists': checklists,
         'insights': {
             'lagging_channels': lagging[:6],
             'lagging_count': len(lagging),

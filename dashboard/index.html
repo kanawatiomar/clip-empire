@@ -9,15 +9,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0a0d12;
-      --surface: #11161f;
+      /* Dark theme (default) */
+      --bg: #0a0e17;
+      --surface: #12172b;
       --surface-2: #161d28;
       --surface-3: #1a2230;
       --line: rgba(201,168,76,.16);
       --line-2: rgba(201,168,76,.3);
       --gold: #c9a84c;
       --gold-2: #e8c96d;
-      --text: #eef1f5;
+      --text: #e8eaf0;
       --muted: #96a0ae;
       --dim: #687282;
       --success: #3dd68c;
@@ -34,7 +35,61 @@
       --body: 'DM Sans', sans-serif;
       --display: 'Syne', sans-serif;
     }
+
+    /* Light theme */
+    [data-theme="light"] {
+      --bg: #f0f2f8;
+      --surface: #ffffff;
+      --surface-2: #f7f9fc;
+      --surface-3: #eef2f7;
+      --line: rgba(184,147,10,.16);
+      --line-2: rgba(184,147,10,.3);
+      --gold: #b8930a;
+      --gold-2: #d4a814;
+      --text: #1a1f35;
+      --muted: #6b7280;
+      --dim: #9ca3af;
+      --success: #059669;
+      --success-bg: rgba(5,150,105,.08);
+      --error: #dc2626;
+      --error-bg: rgba(220,38,38,.08);
+      --warning: #d97706;
+      --warning-bg: rgba(217,119,6,.08);
+      --blue: #2563eb;
+      --blue-bg: rgba(37,99,235,.08);
+      --shadow: 0 10px 25px rgba(0,0,0,.1);
+    }
+
+    /* High Contrast theme */
+    [data-theme="high-contrast"] {
+      --bg: #000000;
+      --surface: #111111;
+      --surface-2: #1a1a1a;
+      --surface-3: #222222;
+      --line: rgba(0,255,136,.3);
+      --line-2: rgba(0,255,136,.5);
+      --gold: #00ff88;
+      --gold-2: #00ff88;
+      --text: #ffffff;
+      --muted: #cccccc;
+      --dim: #999999;
+      --success: #00ff00;
+      --success-bg: rgba(0,255,0,.1);
+      --error: #ff0000;
+      --error-bg: rgba(255,0,0,.1);
+      --warning: #ffff00;
+      --warning-bg: rgba(255,255,0,.1);
+      --blue: #00ccff;
+      --blue-bg: rgba(0,204,255,.1);
+      --shadow: 0 0 20px rgba(0,255,136,.2);
+    }
     * { box-sizing: border-box; }
+    
+    /* Smooth theme transitions */
+    body, body * {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+    }
+    
     body {
       margin: 0;
       font-family: var(--body);
@@ -1433,6 +1488,16 @@
         <div class="sub">Automated shorts pipeline ops dashboard · dark-mode war room for the farm</div>
       </div>
       <div style="display: flex; gap: 20px; align-items: center;">
+        <!-- Theme Selector -->
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <label for="themeSelector" style="font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; font-family: var(--mono); font-weight: 600; cursor: pointer;">Theme:</label>
+          <select id="themeSelector" onchange="switchTheme(this.value)" style="padding: 6px 10px; background: var(--surface-2); color: var(--text); border: 1px solid var(--line); border-radius: 8px; font-family: var(--body); font-size: 13px; cursor: pointer;">
+            <option value="dark">🌙 Dark</option>
+            <option value="light">☀️ Light</option>
+            <option value="high-contrast">✨ High Contrast</option>
+          </select>
+        </div>
+        
         <div class="notification-bell" style="position: relative;">
           <button id="notificationBellBtn" style="position: relative; padding: 8px 12px; background: rgba(201,168,76,.12); border-color: rgba(201,168,76,.3);" onclick="toggleNotificationPanel()">
             🔔
@@ -2338,6 +2403,28 @@
     function trendArrow(direction){ return direction === 'up' ? '↑' : direction === 'down' ? '↓' : '→'; }
     function trendClass(direction){ return direction || 'flat'; }
     function currentSettings(){ return dataCache?.current_settings || {}; }
+    
+    // Theme Management Functions
+    function initTheme() {
+      const savedTheme = localStorage.getItem('dashboard-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      const selector = byId('themeSelector');
+      if (selector) {
+        selector.value = savedTheme;
+      }
+    }
+    
+    function switchTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('dashboard-theme', theme);
+      
+      // Update selector if it exists
+      const selector = byId('themeSelector');
+      if (selector) {
+        selector.value = theme;
+      }
+    }
+    
     function fmtDelta(delta, prefix=''){
       const num = Number(delta || 0);
       const sign = num > 0 ? '+' : num < 0 ? '-' : '';
@@ -4659,6 +4746,7 @@
     }
 
     async function boot(){
+      initTheme();  // Initialize theme from localStorage
       await detectMode();
       renderAll();
       renderDailySummary();

@@ -151,6 +151,68 @@ def tail_logs() -> list[dict]:
     ]
 
 
+def get_logs(lines: int = 100, channel: str = 'all', level: str = 'all') -> list[dict]:
+    """Fetch logs from publish_jobs database.
+    
+    Args:
+        lines: Max number of log lines to return
+        channel: Filter by channel name ('all' for all channels)
+        level: Filter by log level - ERROR, WARN, INFO, DEBUG (inferred from message content)
+    
+    Returns:
+        List of log entries: [{timestamp, level, channel, message}]
+    """
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    try:
+        # Get all error logs from publish_jobs
+        query = """
+            SELECT channel_name, job_id, updated_at, status, last_error, created_at
+            FROM publish_jobs
+            WHERE last_error IS NOT NULL AND TRIM(last_error) != ''
+            ORDER BY datetime(COALESCE(updated_at, created_at)) DESC
+            LIMIT ?
+        """
+        rows = conn.execute(query, (lines * 2,)).fetchall()
+    finally:
+        conn.close()
+    
+    logs = []
+    for r in rows:
+        msg = (r['last_error'] or '').strip()
+        if not msg:
+            continue
+        
+        # Infer log level from message content and status
+        inferred_level = 'ERROR'
+        if 'warning' in msg.lower():
+            inferred_level = 'WARN'
+        elif 'info' in msg.lower() or r['status'] == 'succeeded':
+            inferred_level = 'INFO'
+        elif 'debug' in msg.lower():
+            inferred_level = 'DEBUG'
+        elif r['status'] == 'failed':
+            inferred_level = 'ERROR'
+        
+        # Filter by level
+        if level != 'all' and inferred_level != level:
+            continue
+        
+        # Filter by channel
+        if channel != 'all' and r['channel_name'] != channel:
+            continue
+        
+        logs.append({
+            'timestamp': r['updated_at'] or r['created_at'],
+            'level': inferred_level,
+            'channel': r['channel_name'],
+            'message': msg[:500],
+        })
+    
+    # Return only the requested number of lines
+    return logs[:lines]
+
+
 def _normalize_setting_value(setting_name: str, value):
     if setting_name in {'min_views', 'max_per_run', 'daily_target'}:
         try:
@@ -350,6 +412,23 @@ class Handler(SimpleHTTPRequestHandler):
                 self._send_json({'ok': True, 'messages': fetch_recent_discord_messages(limit=10)})
             except Exception as exc:
                 self._send_json({'ok': False, 'error': str(exc), 'messages': []}, 500)
+            return
+        if parsed.path == '/api/logs':
+            try:
+                # Parse query parameters
+                from urllib.parse import parse_qs
+                query = parse_qs(parsed.query)
+                lines = int(query.get('lines', ['100'])[0])
+                channel = query.get('channel', ['all'])[0]
+                level = query.get('level', ['all'])[0]
+                
+                # Validate and clamp parameters
+                lines = max(1, min(lines, 500))
+                
+                logs = get_logs(lines=lines, channel=channel, level=level)
+                self._send_json({'ok': True, 'logs': logs})
+            except Exception as exc:
+                self._send_json({'ok': False, 'error': str(exc), 'logs': []}, 500)
             return
         # Serve thumbnails from renders/thumbnails/ directory
         if parsed.path.startswith('/thumbnails/'):

@@ -647,6 +647,110 @@
       line-height: 1.5;
       font-style: italic;
     }
+    /* Live Log Viewer Styles */
+    .log-viewer-controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto auto;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      align-items: center;
+    }
+    .log-control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .log-control-group label {
+      font-size: 11px;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: var(--mono);
+      font-weight: 600;
+    }
+    .log-control-group select {
+      background: var(--surface-2);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 8px;
+      padding: 6px 8px;
+      font-size: 13px;
+      cursor: pointer;
+      font-family: var(--body);
+    }
+    .log-control-group input[type="checkbox"] {
+      cursor: pointer;
+      width: 16px;
+      height: 16px;
+    }
+    .log-viewer-window {
+      background: #0a0d12;
+      border: 1px solid rgba(0,255,100,.15);
+      border-radius: 8px;
+      height: 400px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.5;
+      padding: 12px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(61,214,140,.3) transparent;
+    }
+    .log-viewer-window::-webkit-scrollbar {
+      width: 8px;
+    }
+    .log-viewer-window::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .log-viewer-window::-webkit-scrollbar-thumb {
+      background: rgba(61,214,140,.3);
+      border-radius: 4px;
+    }
+    .log-viewer-window::-webkit-scrollbar-thumb:hover {
+      background: rgba(61,214,140,.5);
+    }
+    .log-entry {
+      margin-bottom: 2px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      word-break: break-word;
+      white-space: pre-wrap;
+    }
+    .log-entry.ERROR {
+      color: #e85454;
+      background: rgba(232,84,84,.08);
+    }
+    .log-entry.WARN {
+      color: #e8b04e;
+      background: rgba(232,176,78,.08);
+    }
+    .log-entry.INFO {
+      color: #3dd68c;
+      background: rgba(61,214,140,.06);
+    }
+    .log-entry.DEBUG {
+      color: #96a0ae;
+      background: rgba(150,160,174,.04);
+    }
+    .log-timestamp {
+      color: rgba(255,255,255,.4);
+      margin-right: 8px;
+    }
+    .log-channel {
+      color: rgba(201,168,76,.8);
+      margin-right: 8px;
+    }
+    .log-level {
+      font-weight: 600;
+      margin-right: 8px;
+      min-width: 50px;
+    }
+    .log-controls-buttons {
+      display: flex;
+      gap: 8px;
+    }
   </style>
 </head>
 <body>
@@ -860,6 +964,55 @@
           </thead>
           <tbody id="errorAnalysisBody"></tbody>
         </table>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:18px;">
+      <div class="card-head">
+        <h2>Live Log Viewer</h2>
+        <div class="top-note">Real-time system logs with filtering and auto-refresh</div>
+      </div>
+      <div class="card-body">
+        <div class="log-viewer-controls">
+          <div class="log-control-group">
+            <label for="logFilterChannel">Channel</label>
+            <select id="logFilterChannel" onchange="refreshLogs()">
+              <option value="all">All</option>
+              <option value="fomo_highlights">fomo_highlights</option>
+              <option value="startup_graveyard">startup_graveyard</option>
+              <option value="market_meltdowns">market_meltdowns</option>
+              <option value="gym_moments">gym_moments</option>
+              <option value="rich_or_ruined">rich_or_ruined</option>
+              <option value="arc_highlightz">arc_highlightz</option>
+              <option value="trending_shorts">trending_shorts</option>
+              <option value="crypto_crashes">crypto_crashes</option>
+              <option value="trading_fails">trading_fails</option>
+              <option value="viral_wisdom">viral_wisdom</option>
+              <option value="momentum_meter">momentum_meter</option>
+            </select>
+          </div>
+          <div class="log-control-group">
+            <label for="logFilterLevel">Level</label>
+            <select id="logFilterLevel" onchange="refreshLogs()">
+              <option value="all">All</option>
+              <option value="ERROR">ERROR</option>
+              <option value="WARN">WARN</option>
+              <option value="INFO">INFO</option>
+              <option value="DEBUG">DEBUG</option>
+            </select>
+          </div>
+          <div class="log-control-group">
+            <label for="logAutoScroll">Auto-scroll</label>
+            <input type="checkbox" id="logAutoScroll" checked />
+          </div>
+          <div class="log-controls-buttons">
+            <button onclick="refreshLogs()" title="Fetch latest logs">🔄 Refresh</button>
+          </div>
+          <div class="log-controls-buttons">
+            <span style="color:var(--muted); font-size:12px;" id="logRefreshStatus">Auto: 10s</span>
+          </div>
+        </div>
+        <div class="log-viewer-window" id="logViewerWindow"></div>
       </div>
     </section>
 
@@ -1500,6 +1653,66 @@
         : 'No recent DB-backed errors found.';
     }
 
+    async function fetchLogs(){
+      if (!localMode) return [];
+      try {
+        const channel = byId('logFilterChannel').value;
+        const level = byId('logFilterLevel').value;
+        const lines = 200;
+        const res = await fetch(`${LOCAL_API}/api/logs?lines=${lines}&channel=${channel}&level=${level}`);
+        const data = await res.json();
+        return data.logs || [];
+      } catch (err) {
+        console.error('Error fetching logs:', err);
+        return [];
+      }
+    }
+
+    function renderLiveLogViewer(logs){
+      const container = byId('logViewerWindow');
+      if (!logs || logs.length === 0) {
+        container.innerHTML = '<div style="color:var(--muted); padding:20px; text-align:center;">No logs found. System is running smoothly!</div>';
+        return;
+      }
+
+      const html = logs.map(log => {
+        const levelClass = log.level || 'INFO';
+        const timestamp = log.timestamp ? log.timestamp.substring(0, 19) : '—';
+        const channel = log.channel || '?';
+        const message = log.message || '';
+        
+        return `<div class="log-entry ${levelClass}"><span class="log-timestamp">[${esc(timestamp)}]</span><span class="log-channel">${esc(channel)}</span><span class="log-level">${levelClass}</span>${esc(message)}</div>`;
+      }).join('');
+      
+      const shouldAutoScroll = byId('logAutoScroll').checked;
+      container.innerHTML = html;
+      
+      // Auto-scroll to bottom if enabled
+      if (shouldAutoScroll) {
+        container.scrollTop = container.scrollHeight;
+      }
+    }
+
+    async function refreshLogs(){
+      if (!localMode) {
+        toast('Static mode: run py -3 dashboard/control_api.py for live log viewing.');
+        return;
+      }
+      const logs = await fetchLogs();
+      renderLiveLogViewer(logs);
+    }
+
+    function startLogAutoRefresh(){
+      // Initial render
+      refreshLogs();
+      
+      // Set up auto-refresh every 10 seconds
+      const refreshInterval = setInterval(refreshLogs, 10000);
+      
+      // Store interval ID so we can clear it if needed
+      window.logRefreshInterval = refreshInterval;
+    }
+
     function renderSettings(){
       const rows = Object.entries(currentSettings()).sort((a, b) => a[0].localeCompare(b[0]));
       byId('settingsGrid').innerHTML = rows.map(([channel, settings]) => `
@@ -1855,6 +2068,7 @@
       renderRecentClips();
       renderDiscordFeed();
       renderLogsPreview();
+      refreshLogs();
       renderSettings();
     }
 
@@ -1936,6 +2150,7 @@
       renderAll();
       window.addEventListener('resize', () => renderAnalytics());
       setInterval(loadData, (dataCache?.meta?.refresh_seconds || 15) * 1000);
+      startLogAutoRefresh();
     }
     boot();
   </script>

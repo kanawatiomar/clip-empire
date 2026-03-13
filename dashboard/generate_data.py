@@ -799,6 +799,93 @@ def get_source_health(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     return items
 
 
+def get_upload_schedule(conn: sqlite3.Connection) -> dict[str, list[dict[str, Any]]]:
+    """Get scheduled and recent uploads grouped by day for a 7-day calendar view.
+    
+    Returns jobs scheduled for the next 7 days plus 3 days back, including:
+    - Pending jobs with schedule_at set
+    - Recently succeeded jobs from the last 7 days
+    
+    Grouped by day (YYYY-MM-DD), with each day containing a list of jobs.
+    """
+    now = utc_now()
+    today = now.date()
+    
+    # Build date range: 3 days back + today + 7 days ahead
+    start_date = today - timedelta(days=3)
+    end_date = today + timedelta(days=7)
+    
+    date_range = [(start_date + timedelta(days=i)).isoformat() for i in range((end_date - start_date).days + 1)]
+    
+    # Query pending jobs with schedule_at set
+    pending_rows = query_all(
+        conn,
+        """
+        SELECT job_id, channel_name, caption_text, schedule_at, status
+        FROM publish_jobs
+        WHERE status = 'queued'
+          AND schedule_at IS NOT NULL
+          AND DATE(schedule_at) >= DATE(?)
+          AND DATE(schedule_at) <= DATE(?)
+        ORDER BY schedule_at
+        """,
+        (start_date.isoformat(), end_date.isoformat()),
+    )
+    
+    # Query recently succeeded jobs from last 7 days
+    succeeded_rows = query_all(
+        conn,
+        """
+        SELECT job_id, channel_name, caption_text, updated_at AS schedule_at, status
+        FROM publish_jobs
+        WHERE status = 'succeeded'
+          AND DATE(updated_at) >= DATE(?)
+          AND DATE(updated_at) <= DATE(?)
+        ORDER BY updated_at
+        """,
+        ((today - timedelta(days=7)).isoformat(), today.isoformat()),
+    )
+    
+    # Build schedule grouped by day
+    schedule_by_day: dict[str, list[dict[str, Any]]] = {}
+    
+    def add_job_to_schedule(row: sqlite3.Row, job_status: str) -> None:
+        dt_str = row['schedule_at']
+        dt = parse_dt(dt_str)
+        if not dt:
+            return
+        
+        day_key = dt.date().isoformat()
+        if day_key not in schedule_by_day:
+            schedule_by_day[day_key] = []
+        
+        # Truncate title to 50 chars
+        title = (row['caption_text'] or '')[:50]
+        
+        schedule_by_day[day_key].append({
+            'job_id': row['job_id'],
+            'job_id_short': (row['job_id'] or '')[:8],
+            'channel': row['channel_name'],
+            'title': title or '(untitled)',
+            'scheduled_at': dt_str,
+            'scheduled_at_iso': dt.isoformat(),
+            'status': normalize_status(job_status),
+        })
+    
+    for row in pending_rows:
+        add_job_to_schedule(row, 'queued')
+    
+    for row in succeeded_rows:
+        add_job_to_schedule(row, 'succeeded')
+    
+    # Ensure all days in range exist (even if empty)
+    for day in date_range:
+        if day not in schedule_by_day:
+            schedule_by_day[day] = []
+    
+    return schedule_by_day
+
+
 def get_controls_metadata(conn: sqlite3.Connection) -> dict[str, Any]:
     channels = query_all(conn, "SELECT channel_name, status FROM channels ORDER BY channel_name")
     return {
@@ -874,6 +961,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     analytics = load_channel_trends(conn)
     source_health = get_source_health(conn)
     error_analysis = get_error_analysis(conn)
+    schedule = get_upload_schedule(conn)
     lagging = [item for item in channel_performance if item['lagging']]
     payload = {
         'generated_at': utc_now().isoformat() + 'Z',
@@ -893,6 +981,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'logs_preview': get_logs_preview(conn),
         'controls': get_controls_metadata(conn),
         'current_settings': get_current_settings(conn),
+        'schedule': schedule,
         'insights': {
             'lagging_channels': lagging[:6],
             'lagging_count': len(lagging),

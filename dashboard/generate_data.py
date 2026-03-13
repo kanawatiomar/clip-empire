@@ -2511,6 +2511,175 @@ def get_posting_time_insights(conn: sqlite3.Connection) -> dict[str, Any]:
     }
 
 
+def get_competitor_benchmarks(conn: sqlite3.Connection) -> dict[str, Any]:
+    """Calculate channel performance against industry benchmarks for Shorts creators.
+    
+    Defines tier thresholds based on typical successful Shorts channel metrics:
+    - Starter: 500 subs, 50K views/mo, $42/mo
+    - Growing: 5K subs, 500K views/mo, $425/mo
+    - Monetized: 10K subs, 1M views/mo, $850/mo
+    - Pro: 50K subs, 5M views/mo, $4250/mo
+    - Empire: 500K subs, 50M views/mo, $42500/mo
+    
+    Returns current metrics, tier position, and progress to next tier.
+    """
+    # Define benchmark tiers
+    tiers = [
+        {'name': 'Starter', 'subs': 500, 'views_mo': 50000, 'revenue_mo': 42.0},
+        {'name': 'Growing', 'subs': 5000, 'views_mo': 500000, 'revenue_mo': 425.0},
+        {'name': 'Monetized', 'subs': 10000, 'views_mo': 1000000, 'revenue_mo': 850.0},
+        {'name': 'Pro', 'subs': 50000, 'views_mo': 5000000, 'revenue_mo': 4250.0},
+        {'name': 'Empire', 'subs': 500000, 'views_mo': 50000000, 'revenue_mo': 42500.0},
+    ]
+    
+    # Get current metrics from last 30 days
+    current_metrics = query_one(
+        conn,
+        """
+        SELECT COALESCE(SUM(NULLIF(views_total, 0)), 0) AS total_views_30d,
+               COUNT(DISTINCT channel_name) AS active_channels
+        FROM metrics_daily
+        WHERE platform = 'youtube'
+          AND date >= date('now', '-30 day')
+        """,
+    )
+    
+    total_views_30d = float(current_metrics['total_views_30d'] or 0)
+    
+    # For now, estimate subs based on views (typical engagement rates)
+    # Assuming 0.2% of viewers subscribe (conservative for clips)
+    estimated_subs = int(total_views_30d * 0.002)
+    
+    # Calculate revenue from revenue estimation
+    revenue_rows = query_all(
+        conn,
+        """
+        SELECT channel_name,
+               COALESCE(SUM(NULLIF(views_total, 0)), 0) AS views_30d
+        FROM metrics_daily
+        WHERE platform = 'youtube'
+          AND date >= date('now', '-30 day')
+        GROUP BY channel_name
+        """,
+    )
+    
+    # Niche RPM rates (matching get_revenue_estimate)
+    niche_rpm = {
+        'market_meltdowns': 4.50,
+        'crypto_confessions': 4.50,
+        'rich_or_ruined': 4.50,
+        'startup_graveyard': 3.50,
+        'self_made_clips': 3.50,
+        'ai_did_what': 3.00,
+        'gym_moments': 2.50,
+        'kitchen_chaos': 1.50,
+        'cases_unsolved': 2.00,
+        'arc_highlightz': 0.80,
+        'fomo_highlights': 0.80,
+        'viral_recaps': 0.80,
+        'unfiltered_clips': 0.80,
+        'stream_sirens': 1.20,
+        'stream_queens': 1.20,
+    }
+    
+    total_revenue_30d = 0.0
+    for row in revenue_rows:
+        channel = row['channel_name']
+        views = float(row['views_30d'] or 0)
+        rpm = niche_rpm.get(channel, 1.50)  # Default RPM if channel not found
+        total_revenue_30d += (views / 1000.0) * rpm
+    
+    total_revenue_30d = round(total_revenue_30d, 2)
+    
+    # Find current tier
+    current_tier_idx = 0
+    for i, tier in enumerate(tiers):
+        if (total_views_30d >= tier['views_mo'] and 
+            total_revenue_30d >= tier['revenue_mo']):
+            current_tier_idx = i
+    
+    current_tier = tiers[current_tier_idx]
+    
+    # Calculate progress metrics
+    progress_data = []
+    for i, tier in enumerate(tiers):
+        is_current = i == current_tier_idx
+        is_next = i == current_tier_idx + 1
+        is_achieved = i < current_tier_idx
+        
+        # Calculate percentage progress to this tier
+        if is_achieved:
+            progress_pct = 100.0
+        elif is_next:
+            current_progress = current_tier['views_mo']
+            next_tier_views = tier['views_mo']
+            prev_tier_views = tiers[current_tier_idx]['views_mo']
+            
+            if next_tier_views > prev_tier_views:
+                progress_pct = round(
+                    ((current_progress - prev_tier_views) / (next_tier_views - prev_tier_views)) * 100,
+                    1
+                )
+            else:
+                progress_pct = 0.0
+        else:
+            progress_pct = 0.0
+        
+        # Calculate months to reach tier (if not achieved)
+        months_to_tier = None
+        if not is_achieved and is_next:
+            views_remaining = tier['views_mo'] - total_views_30d
+            if total_views_30d > 0:
+                days_elapsed_est = 30  # One month of data
+                monthly_growth_rate = total_views_30d / days_elapsed_est * 30
+                if monthly_growth_rate > 0:
+                    months_to_tier = round(views_remaining / monthly_growth_rate, 1)
+        
+        progress_data.append({
+            'tier': tier['name'],
+            'tier_index': i,
+            'subs_target': tier['subs'],
+            'views_target': tier['views_mo'],
+            'revenue_target': tier['revenue_mo'],
+            'is_current': is_current,
+            'is_achieved': is_achieved,
+            'is_next': is_next,
+            'progress_pct': progress_pct,
+            'months_to_tier': months_to_tier,
+        })
+    
+    # Calculate per-metric breakdowns
+    next_tier_idx = min(current_tier_idx + 1, len(tiers) - 1)
+    next_tier = tiers[next_tier_idx]
+    
+    subs_progress_pct = round((estimated_subs / next_tier['subs']) * 100, 1) if next_tier['subs'] > 0 else 0.0
+    views_progress_pct = round((total_views_30d / next_tier['views_mo']) * 100, 1) if next_tier['views_mo'] > 0 else 0.0
+    revenue_progress_pct = round((total_revenue_30d / next_tier['revenue_mo']) * 100, 1) if next_tier['revenue_mo'] > 0 else 0.0
+    
+    return {
+        'current_tier': current_tier['name'],
+        'current_tier_index': current_tier_idx,
+        'current_metrics': {
+            'subs_estimated': estimated_subs,
+            'views_30d': int(total_views_30d),
+            'revenue_30d': total_revenue_30d,
+        },
+        'next_tier': next_tier['name'] if next_tier_idx < len(tiers) else None,
+        'next_tier_targets': {
+            'subs': next_tier['subs'] if next_tier_idx < len(tiers) else None,
+            'views_mo': next_tier['views_mo'] if next_tier_idx < len(tiers) else None,
+            'revenue_mo': next_tier['revenue_mo'] if next_tier_idx < len(tiers) else None,
+        },
+        'progress_breakdown': {
+            'subs_pct': subs_progress_pct,
+            'views_pct': views_progress_pct,
+            'revenue_pct': revenue_progress_pct,
+        },
+        'tiers': progress_data,
+        'milestones_unlocked': list(range(current_tier_idx + 1)),
+    }
+
+
 def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     queue_monitor = get_queue_monitor(conn)
     queue_status = get_queue_status(conn)
@@ -2528,6 +2697,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     daily_summary = get_daily_summary(conn)
     title_performance = get_title_performance(conn)
     posting_times = get_posting_time_insights(conn)
+    benchmarks = get_competitor_benchmarks(conn)
     lagging = [item for item in channel_performance if item['lagging']]
     payload = {
         'generated_at': utc_now().isoformat() + 'Z',
@@ -2559,6 +2729,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'daily_summary': daily_summary,
         'title_performance': title_performance,
         'posting_times': posting_times,
+        'benchmarks': benchmarks,
         'insights': {
             'lagging_channels': lagging[:6],
             'lagging_count': len(lagging),

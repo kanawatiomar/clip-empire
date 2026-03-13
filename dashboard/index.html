@@ -930,6 +930,91 @@
       line-height: 1.5;
       font-style: italic;
     }
+    
+    /* Growth Tiers Styles */
+    .tier-ladder {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .tier-box {
+      padding: 16px;
+      border: 2px solid rgba(201,168,76,.2);
+      border-radius: 12px;
+      background: rgba(201,168,76,.05);
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .tier-box.current {
+      border-color: var(--gold-2);
+      background: linear-gradient(135deg, rgba(201,168,76,.3), rgba(201,168,76,.15));
+      box-shadow: 0 0 20px rgba(201,168,76,.3), inset 0 0 30px rgba(201,168,76,.1);
+    }
+    .tier-box.achieved {
+      border-color: var(--success);
+      background: rgba(61,214,140,.1);
+    }
+    .tier-box.future {
+      opacity: 0.6;
+    }
+    .tier-unlock {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 18px;
+    }
+    .tier-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gold-2);
+      margin-bottom: 4px;
+    }
+    .tier-progress {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    .progress-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .metric-card {
+      padding: 14px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 10px;
+    }
+    .metric-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      letter-spacing: 0.05em;
+    }
+    .metric-bar {
+      height: 8px;
+      background: rgba(255,255,255,.08);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+    .metric-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-2));
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+    .metric-value {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    
     /* Live Log Viewer Styles */
     .log-viewer-controls {
       display: grid;
@@ -1511,6 +1596,48 @@
           Reset in: <strong id="quotaResetTime">—</strong>
         </div>
         <div class="quota-grid" id="quotaGrid"></div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:18px;">
+      <div class="card-head">
+        <h2>Growth Tiers</h2>
+        <div class="top-note">Progress ladder to YouTube Shorts empire status</div>
+      </div>
+      <div class="card-body">
+        <div class="tier-ladder" id="tierLadder"></div>
+        
+        <div style="color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; font-family: var(--mono);">
+          Progress to Next Tier
+        </div>
+        <div class="progress-metrics">
+          <div class="metric-card">
+            <div class="metric-label">📊 Subscribers</div>
+            <div class="metric-bar">
+              <div class="metric-fill" id="subsProgressFill" style="width: 0%;"></div>
+            </div>
+            <div class="metric-value" id="subsProgressValue">0%</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">👁️ Monthly Views</div>
+            <div class="metric-bar">
+              <div class="metric-fill" id="viewsProgressFill" style="width: 0%;"></div>
+            </div>
+            <div class="metric-value" id="viewsProgressValue">0%</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">💰 Monthly Revenue</div>
+            <div class="metric-bar">
+              <div class="metric-fill" id="revenueProgressFill" style="width: 0%;"></div>
+            </div>
+            <div class="metric-value" id="revenueProgressValue">0%</div>
+          </div>
+        </div>
+        
+        <div style="margin-top: 20px; padding: 14px; background: rgba(201,168,76,.08); border: 1px solid rgba(201,168,76,.2); border-radius: 10px;">
+          <div style="font-size: 12px; color: var(--muted); margin-bottom: 6px;">📈 Projection:</div>
+          <div style="font-size: 13px; color: var(--gold-2); font-weight: 500;" id="tierProjection">Loading…</div>
+        </div>
       </div>
     </section>
 
@@ -3031,6 +3158,79 @@
       byId('quotaGrid').innerHTML = quotaHTML || '<div style="padding:20px; color:var(--muted); text-align:center;">No quota data available.</div>';
     }
 
+    function renderGrowthTiers(){
+      const benchmarks = dataCache.benchmarks || {};
+      const currentTier = benchmarks.current_tier || 'Starter';
+      const currentMetrics = benchmarks.current_metrics || {};
+      const tiers = benchmarks.tiers || [];
+      const progressBreakdown = benchmarks.progress_breakdown || {};
+      
+      // Render tier ladder
+      const tierLadderHTML = tiers.map((tier, idx) => {
+        const isCurrent = tier.is_current;
+        const isAchieved = tier.is_achieved;
+        const isNext = tier.is_next;
+        
+        const tierClass = isCurrent ? 'tier-box current' : (isAchieved ? 'tier-box achieved' : 'tier-box future');
+        const unlockedEmoji = isAchieved ? '🔓' : (isCurrent ? '🎯' : '🔒');
+        const tierName = tier.tier;
+        
+        // Show target metrics
+        const subsTarget = tier.subs_target.toLocaleString();
+        const viewsTarget = (tier.views_target / 1000).toFixed(0) + 'K';
+        const revenueTarget = '$' + tier.revenue_target.toFixed(0);
+        
+        let progressText = '';
+        if (isAchieved) {
+          progressText = '✓ Unlocked';
+        } else if (isNext) {
+          const progPct = tier.progress_pct || 0;
+          progressText = `${progPct.toFixed(0)}% to unlock`;
+        }
+        
+        return `
+          <div class="${tierClass}">
+            <div class="tier-unlock">${unlockedEmoji}</div>
+            <div class="tier-name">${tierName}</div>
+            <div style="font-size: 11px; color: var(--dim); line-height: 1.4;">
+              <div>${subsTarget} subs</div>
+              <div>${viewsTarget} views/mo</div>
+              <div>${revenueTarget}/mo</div>
+            </div>
+            ${progressText ? `<div class="tier-progress">${progressText}</div>` : ''}
+          </div>`;
+      }).join('');
+      
+      byId('tierLadder').innerHTML = tierLadderHTML || '<div style="padding:20px; color:var(--muted); text-align:center; grid-column:1/-1;">No tier data available</div>';
+      
+      // Render progress metrics
+      const subsProgressPct = parseFloat(progressBreakdown.subs_pct || 0);
+      const viewsProgressPct = parseFloat(progressBreakdown.views_pct || 0);
+      const revenueProgressPct = parseFloat(progressBreakdown.revenue_pct || 0);
+      
+      byId('subsProgressFill').style.width = `${Math.min(subsProgressPct, 100)}%`;
+      byId('subsProgressValue').textContent = `${subsProgressPct.toFixed(1)}%`;
+      
+      byId('viewsProgressFill').style.width = `${Math.min(viewsProgressPct, 100)}%`;
+      byId('viewsProgressValue').textContent = `${viewsProgressPct.toFixed(1)}%`;
+      
+      byId('revenueProgressFill').style.width = `${Math.min(revenueProgressPct, 100)}%`;
+      byId('revenueProgressValue').textContent = `${revenueProgressPct.toFixed(1)}%`;
+      
+      // Render projection
+      const nextTier = benchmarks.next_tier || null;
+      if (nextTier) {
+        const nextTierData = tiers.find(t => t.tier === nextTier);
+        if (nextTierData && nextTierData.months_to_tier) {
+          byId('tierProjection').textContent = `At current pace, reach ${nextTier} tier in ~${Math.max(1, nextTierData.months_to_tier)} month${nextTierData.months_to_tier === 1 ? '' : 's'}`;
+        } else {
+          byId('tierProjection').textContent = `Keep pushing to reach ${nextTier} tier! 🚀`;
+        }
+      } else {
+        byId('tierProjection').textContent = `🏆 You\'ve reached the Empire tier! You\'re a legend!`;
+      }
+    }
+
     function renderRevenue(){
       const revenue = dataCache.revenue || {};
       
@@ -3421,7 +3621,7 @@
       renderChannels();
       renderSchedule();
       renderQuota();
-      renderTitlePerformance(); renderRevenue();
+      renderTitlePerformance(); renderGrowthTiers(); renderRevenue();
       renderPostingTimes();
       renderPipeline();
       renderLeaderboard();

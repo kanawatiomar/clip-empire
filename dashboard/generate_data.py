@@ -1306,6 +1306,138 @@ def get_revenue_estimate(conn: sqlite3.Connection) -> dict[str, Any]:
     }
 
 
+def get_disk_usage() -> dict[str, Any]:
+    """Calculate disk usage across key directories and repo root.
+    
+    Scans:
+    - raw_clips/ — downloaded source clips
+    - intermediate/ — in-progress renders
+    - renders/ — finished renders waiting to upload
+    - renders/thumbnails/ — generated thumbnails
+    
+    Returns:
+    - directories: list of directory info with path, size_bytes, size_human, file_count
+    - total_disk_bytes: total disk usage for repo root
+    - total_disk_human: human-readable total
+    - percent_of_500gb: percentage of assumed 500GB total drive
+    - warning_threshold_pct: 70 (warn at this percent)
+    - error_threshold_pct: 85 (critical at this percent)
+    """
+    import shutil
+    import os
+    
+    TOTAL_DRIVE_BYTES = 500 * (1024 ** 3)  # 500GB
+    
+    def get_size_human(bytes_size: int) -> str:
+        """Convert bytes to human-readable format."""
+        for unit in ['B', 'KB', 'MB', 'GB']:
+            if bytes_size < 1024:
+                return f"{bytes_size:.1f}{unit}"
+            bytes_size /= 1024
+        return f"{bytes_size:.1f}TB"
+    
+    def count_files_in_dir(path: Path) -> int:
+        """Count files (not directories) recursively."""
+        try:
+            count = 0
+            for root, dirs, files in os.walk(str(path)):
+                count += len(files)
+            return count
+        except Exception:
+            return 0
+    
+    def get_dir_size(path: Path) -> int:
+        """Get total size of directory recursively."""
+        try:
+            total = 0
+            for root, dirs, files in os.walk(str(path)):
+                for file in files:
+                    try:
+                        file_path = Path(root) / file
+                        total += file_path.stat().st_size
+                    except Exception:
+                        pass
+            return total
+        except Exception:
+            return 0
+    
+    directories_to_scan = [
+        ('raw_clips', REPO_ROOT / 'raw_clips'),
+        ('intermediate', REPO_ROOT / 'intermediate'),
+        ('renders', REPO_ROOT / 'renders'),
+        ('renders/thumbnails', REPO_ROOT / 'renders' / 'thumbnails'),
+    ]
+    
+    dir_info = []
+    total_size = 0
+    
+    for dir_name, dir_path in directories_to_scan:
+        if dir_path.exists():
+            size_bytes = get_dir_size(dir_path)
+            file_count = count_files_in_dir(dir_path)
+            total_size += size_bytes
+            
+            dir_info.append({
+                'name': dir_name,
+                'path': str(dir_path),
+                'size_bytes': size_bytes,
+                'size_human': get_size_human(size_bytes),
+                'file_count': file_count,
+            })
+        else:
+            dir_info.append({
+                'name': dir_name,
+                'path': str(dir_path),
+                'size_bytes': 0,
+                'size_human': '0B',
+                'file_count': 0,
+            })
+    
+    # Get repo root total size
+    repo_root_size = get_dir_size(REPO_ROOT)
+    
+    # Calculate percentage of 500GB
+    percent_used = round((repo_root_size / TOTAL_DRIVE_BYTES) * 100, 1)
+    
+    # Get top 5 largest files across all tracked dirs
+    largest_files = []
+    try:
+        all_files = []
+        for dir_name, dir_path in directories_to_scan:
+            if dir_path.exists():
+                for root, dirs, files in os.walk(str(dir_path)):
+                    for file in files:
+                        try:
+                            file_path = Path(root) / file
+                            size = file_path.stat().st_size
+                            all_files.append({
+                                'path': str(file_path),
+                                'name': file_path.name,
+                                'size_bytes': size,
+                                'size_human': get_size_human(size),
+                                'directory': dir_name,
+                            })
+                        except Exception:
+                            pass
+        
+        # Sort by size and get top 5
+        all_files.sort(key=lambda x: x['size_bytes'], reverse=True)
+        largest_files = all_files[:5]
+    except Exception:
+        pass
+    
+    return {
+        'directories': dir_info,
+        'total_disk_bytes': repo_root_size,
+        'total_disk_human': get_size_human(repo_root_size),
+        'percent_of_500gb': percent_used,
+        'warning_threshold_pct': 70,
+        'error_threshold_pct': 85,
+        'largest_files': largest_files,
+        'disk_status': 'critical' if percent_used >= 85 else 'warning' if percent_used >= 70 else 'healthy',
+    }
+
+
 def get_pipeline_status(conn: sqlite3.Connection) -> dict[str, Any]:
     """Track the full clip lifecycle through the pipeline.
     
@@ -1466,6 +1598,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     quota = get_quota_usage(conn)
     revenue = get_revenue_estimate(conn)
     pipeline = get_pipeline_status(conn)
+    disk_usage = get_disk_usage()
     lagging = [item for item in channel_performance if item['lagging']]
     payload = {
         'generated_at': utc_now().isoformat() + 'Z',
@@ -1489,6 +1622,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'quota': quota,
         'revenue': revenue,
         'pipeline': pipeline,
+        'disk': disk_usage,
         'leaderboard': get_channel_leaderboard(conn),
         'insights': {
             'lagging_channels': lagging[:6],

@@ -365,6 +365,89 @@ def get_all_channel_status() -> dict[str, str]:
         conn.close()
 
 
+def cleanup_renders(dry_run: bool = True) -> dict:
+    """Delete render files for jobs with status='succeeded'.
+    
+    Args:
+        dry_run: If True, only list files that would be deleted (no actual deletion).
+                If False, actually delete the files.
+    
+    Returns:
+        dict with:
+        - ok: True if successful
+        - files_to_delete: number of files that would be deleted (dry_run) or were deleted
+        - bytes_to_free_human: human-readable size of space that would be freed
+        - files_deleted: number of files actually deleted (if not dry_run)
+        - bytes_freed_human: human-readable size of space actually freed (if not dry_run)
+        - message: summary message
+    """
+    def get_size_human(bytes_size: int) -> str:
+        """Convert bytes to human-readable format."""
+        for unit in ['B', 'KB', 'MB', 'GB']:
+            if bytes_size < 1024:
+                return f"{bytes_size:.1f}{unit}"
+            bytes_size /= 1024
+        return f"{bytes_size:.1f}TB"
+    
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        # Get all succeeded jobs
+        rows = conn.execute(
+            "SELECT job_id FROM publish_jobs WHERE status='succeeded' ORDER BY job_id"
+        ).fetchall()
+        
+        renders_dir = REPO_ROOT / 'renders'
+        files_to_delete = 0
+        bytes_to_free = 0
+        
+        # Find render files for succeeded jobs
+        files_for_deletion = []
+        
+        for row in rows:
+            job_id = row[0]
+            # Look for job-related render files in renders/ directory
+            # Pattern: renders/{job_id}* or renders/{channel}/{job_id}*
+            if renders_dir.exists():
+                for item in renders_dir.rglob(f'*{job_id}*'):
+                    if item.is_file():
+                        try:
+                            size = item.stat().st_size
+                            files_for_deletion.append((item, size))
+                            files_to_delete += 1
+                            bytes_to_free += size
+                        except OSError:
+                            pass
+        
+        # If not dry_run, actually delete the files
+        files_deleted = 0
+        bytes_freed = 0
+        if not dry_run:
+            for file_path, size in files_for_deletion:
+                try:
+                    file_path.unlink()
+                    files_deleted += 1
+                    bytes_freed += size
+                except OSError:
+                    pass  # Skip files that can't be deleted
+        
+        return {
+            'ok': True,
+            'files_to_delete': files_to_delete,
+            'bytes_to_free_human': get_size_human(bytes_to_free),
+            'files_deleted': files_deleted if not dry_run else files_to_delete,
+            'bytes_freed_human': get_size_human(bytes_freed if not dry_run else bytes_to_free),
+            'message': f'{"Would delete" if dry_run else "Deleted"} {files_deleted if not dry_run else files_to_delete} render files from succeeded jobs',
+            'dry_run': dry_run,
+        }
+    except Exception as e:
+        return {
+            'ok': False,
+            'error': str(e),
+        }
+    finally:
+        conn.close()
+
+
 def run_action(payload: dict) -> dict:
     action = payload.get('action')
     channel = payload.get('channel')
@@ -484,7 +567,7 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_POST(self):
         parsed = urlparse(self.path)
-        if parsed.path not in {'/api/action', '/api/update_channel_settings', '/api/retry_job', '/api/cancel_job', '/api/enable_channel', '/api/disable_channel'}:
+        if parsed.path not in {'/api/action', '/api/update_channel_settings', '/api/retry_job', '/api/cancel_job', '/api/enable_channel', '/api/disable_channel', '/api/cleanup_renders'}:
             self._send_json({'ok': False, 'error': 'Not found'}, 404)
             return
         try:
@@ -516,6 +599,9 @@ class Handler(SimpleHTTPRequestHandler):
                 result = retry_job(payload.get('job_id', ''))
             elif parsed.path == '/api/cancel_job':
                 result = cancel_job(payload.get('job_id', ''))
+            elif parsed.path == '/api/cleanup_renders':
+                dry_run = payload.get('dry_run', True)
+                result = cleanup_renders(dry_run=dry_run)
             else:
                 result = run_action(payload)
                 if payload.get('action') in {'pause_channel', 'resume_channel', 'refresh_data'}:

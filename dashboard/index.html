@@ -1063,6 +1063,72 @@
 
     <section class="card" style="margin-top:18px;">
       <div class="card-head">
+        <h2>Disk Usage Monitor</h2>
+        <div class="top-note">Storage across raw clips, renders, and processing directories</div>
+      </div>
+      <div class="card-body">
+        <!-- Overall Disk Usage Progress Bar -->
+        <div style="margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; gap: 12px; margin-bottom: 12px; align-items: center;">
+            <div style="font: 600 14px var(--mono); color: var(--text);">Overall Usage</div>
+            <div id="diskPercentText" style="font: 700 18px var(--mono); color: var(--gold-2);">—</div>
+          </div>
+          <div id="diskProgressBar" style="height: 12px; border-radius: 999px; background: rgba(255,255,255,.06); overflow: hidden;">
+            <div style="height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-2)); width: 0%;"></div>
+          </div>
+          <div style="margin-top: 8px; font-size: 12px; color: var(--dim);">
+            <span id="diskBytesUsed">—</span> of 500GB used
+          </div>
+        </div>
+
+        <!-- Directory Breakdown Table -->
+        <div style="margin-bottom: 24px;">
+          <div style="color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; font-family: var(--mono);">
+            Per-Directory Breakdown
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Directory</th>
+                  <th>File Count</th>
+                  <th>Size</th>
+                </tr>
+              </thead>
+              <tbody id="diskDirectoriesBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Largest Files -->
+        <div style="margin-bottom: 20px;">
+          <div style="color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; font-family: var(--mono);">
+            Top 5 Largest Files
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>File</th>
+                  <th>Directory</th>
+                  <th>Size</th>
+                </tr>
+              </thead>
+              <tbody id="diskLargestFilesBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Cleanup Button -->
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <button class="warn" onclick="cleanupRenders(false)" title="First preview what will be deleted">🗑️ Preview Cleanup (renders/)</button>
+          <button class="warn" onclick="cleanupRenders(true)" title="Actually delete the files">🗑️ Execute Cleanup</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:18px;">
+      <div class="card-head">
         <h2>Pipeline Flow</h2>
         <div class="top-note">Full clip lifecycle: Discovered → Downloaded → Processed → Queued → Uploaded</div>
       </div>
@@ -1744,6 +1810,51 @@
         </tr>`).join('') || '<tr><td colspan="5" class="muted">No error patterns found.</td></tr>';
     }
 
+    function renderDiskUsage(){
+      const disk = dataCache.disk || {};
+      const pctUsed = disk.percent_of_500gb || 0;
+      const status = disk.disk_status || 'healthy';
+      
+      // Update progress bar
+      const progressDiv = byId('diskProgressBar').querySelector('div');
+      if (progressDiv) {
+        progressDiv.style.width = `${Math.min(pctUsed, 100)}%`;
+        // Change color based on status
+        if (status === 'critical') {
+          progressDiv.style.background = 'linear-gradient(90deg, #e85454, #e85454)';
+        } else if (status === 'warning') {
+          progressDiv.style.background = 'linear-gradient(90deg, #e8b04e, #e8b04e)';
+        } else {
+          progressDiv.style.background = 'linear-gradient(90deg, var(--gold), var(--gold-2))';
+        }
+      }
+      
+      // Update percentage text
+      const statusColor = status === 'critical' ? 'color: #e85454;' : status === 'warning' ? 'color: #e8b04e;' : 'color: var(--gold-2);';
+      byId('diskPercentText').innerHTML = `<span style="${statusColor}">${pctUsed.toFixed(1)}%</span>`;
+      
+      // Update bytes used
+      byId('diskBytesUsed').textContent = disk.total_disk_human || '—';
+      
+      // Render directory breakdown
+      const dirs = disk.directories || [];
+      byId('diskDirectoriesBody').innerHTML = dirs.map(dir => `
+        <tr>
+          <td><strong>${esc(dir.name)}</strong><div class="dim mono">${esc(dir.path)}</div></td>
+          <td class="num">${fmtNum(dir.file_count)}</td>
+          <td class="num">${esc(dir.size_human)}</td>
+        </tr>`).join('') || '<tr><td colspan="3" class="muted">No directory data available.</td></tr>';
+      
+      // Render largest files
+      const largest = disk.largest_files || [];
+      byId('diskLargestFilesBody').innerHTML = largest.map(file => `
+        <tr>
+          <td><strong>${esc(file.name)}</strong><div class="dim mono" style="word-break: break-all;">${esc(file.path)}</div></td>
+          <td>${esc(file.directory)}</td>
+          <td class="num">${esc(file.size_human)}</td>
+        </tr>`).join('') || '<tr><td colspan="3" class="muted">No large files found.</td></tr>';
+    }
+
     function renderTopClips(){
       const rows = dataCache.top_clips || [];
       byId('clipsBody').innerHTML = rows.map(clip => `
@@ -2329,6 +2440,7 @@
       renderPipeline();
       renderLeaderboard();
       renderAnalytics();
+      renderDiskUsage();
       renderSourceHealth();
       renderErrorAnalysis();
       renderTopClips();
@@ -2435,6 +2547,33 @@
         toast(err.message || 'Settings update failed');
       } finally {
         if (button) { button.disabled = false; button.textContent = originalLabel; }
+      }
+    }
+
+    async function cleanupRenders(execute = false){
+      if (!localMode) {
+        toast('Static mode: run py -3 dashboard/control_api.py for live cleanup controls.');
+        return;
+      }
+      try {
+        const res = await fetch(`${LOCAL_API}/api/cleanup_renders`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ dry_run: !execute })
+        });
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'Cleanup failed');
+        
+        const message = execute 
+          ? `Deleted ${data.files_deleted} files, freed ${data.bytes_freed_human}`
+          : `Preview: would delete ${data.files_to_delete} files, free ${data.bytes_to_free_human}`;
+        toast(message);
+        
+        if (execute) {
+          await loadData();
+        }
+      } catch (err) {
+        toast(err.message || 'Cleanup failed');
       }
     }
 

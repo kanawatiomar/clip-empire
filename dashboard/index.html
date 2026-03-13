@@ -1562,6 +1562,88 @@
 
     <section class="card" style="margin-top:18px;">
       <div class="card-head">
+        <h2>Title A/B Insights</h2>
+        <div class="top-note">Analyze title patterns and discover power words that drive views</div>
+      </div>
+      <div class="card-body">
+        <!-- Pattern Analysis -->
+        <div style="margin-bottom: 28px;">
+          <div style="color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; font-family: var(--mono);">
+            Title Pattern Performance
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px;">
+            <div style="padding: 14px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); border-radius: 10px;">
+              <div style="font-size: 12px; color: var(--muted); margin-bottom: 4px;">With Numbers</div>
+              <div style="font-size: 18px; font-weight: 600; color: var(--gold-2);" id="titlePatternNumbers">—</div>
+              <div style="font-size: 11px; color: var(--dim); margin-top: 4px;" id="titlePatternNumbersCount">— titles</div>
+            </div>
+            <div style="padding: 14px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); border-radius: 10px;">
+              <div style="font-size: 12px; color: var(--muted); margin-bottom: 4px;">With Questions (?)</div>
+              <div style="font-size: 18px; font-weight: 600; color: var(--blue);" id="titlePatternQuestion">—</div>
+              <div style="font-size: 11px; color: var(--dim); margin-top: 4px;" id="titlePatternQuestionCount">— titles</div>
+            </div>
+            <div style="padding: 14px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); border-radius: 10px;">
+              <div style="font-size: 12px; color: var(--muted); margin-bottom: 4px;">ALL CAPS Words</div>
+              <div style="font-size: 18px; font-weight: 600; color: var(--warning);" id="titlePatternCaps">—</div>
+              <div style="font-size: 11px; color: var(--dim); margin-top: 4px;" id="titlePatternCapsCount">— titles</div>
+            </div>
+            <div style="padding: 14px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); border-radius: 10px;">
+              <div style="font-size: 12px; color: var(--muted); margin-bottom: 4px;">With Emojis</div>
+              <div style="font-size: 18px; font-weight: 600; color: var(--success);" id="titlePatternEmoji">—</div>
+              <div style="font-size: 11px; color: var(--dim); margin-top: 4px;" id="titlePatternEmojiCount">— titles</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Power Words Bar Chart (CSS-only) -->
+        <div style="margin-bottom: 28px;">
+          <div style="color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; font-family: var(--mono);">
+            🚀 Power Words (Boost Views)
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px;" id="powerWordsChart"></div>
+        </div>
+
+        <!-- Avoid Words -->
+        <div style="margin-bottom: 28px;">
+          <div style="color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; font-family: var(--mono);">
+            ❌ Words to Avoid (Lower Performance)
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 10px;" id="avoidWordsChart"></div>
+        </div>
+
+        <!-- Title Scorer -->
+        <div style="margin-bottom: 28px;">
+          <div style="color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; font-family: var(--mono);">
+            📊 Title Score Tool
+          </div>
+          <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+            <input type="text" id="titleScorerInput" placeholder="Type a title to score..." 
+                   style="flex: 1; padding: 10px 12px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; color: var(--text); font-family: var(--body);" />
+            <button onclick="scoreTitleInput()" style="padding: 10px 16px;">Score</button>
+          </div>
+          <div style="padding: 14px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); border-radius: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <div style="font-size: 12px; color: var(--muted);">Score:</div>
+              <div style="font-size: 24px; font-weight: 700; color: var(--gold-2);" id="titleScore">—</div>
+            </div>
+            <div style="font-size: 12px; color: var(--muted); line-height: 1.6;" id="titleScoreFeedback">Score a title to see recommendations</div>
+          </div>
+        </div>
+
+        <!-- Best Examples per Channel -->
+        <div>
+          <div style="color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; font-family: var(--mono);">
+            ⭐ Best Title Example per Channel
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;" id="bestExamplesGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    
+
+    <section class="card" style="margin-top:18px;">
+      <div class="card-head">
         <h2>Disk Usage Monitor</h2>
         <div class="top-note">Storage across raw clips, renders, and processing directories</div>
       </div>
@@ -3265,7 +3347,7 @@
       renderChannels();
       renderSchedule();
       renderQuota();
-      renderRevenue();
+      renderTitlePerformance(); renderRevenue();
       renderPipeline();
       renderLeaderboard();
       renderHallOfFame();
@@ -3497,6 +3579,155 @@
         toast(`❌ Error sending to Discord: ${err.message}`);
       }
     }
+
+    function renderTitlePerformance(){
+      const titlePerf = dataCache.title_performance || {};
+      const patterns = titlePerf.pattern_analysis || {};
+      const powerWords = titlePerf.power_words || [];
+      const avoidWords = titlePerf.avoid_words || [];
+      const bestExamples = titlePerf.best_example_per_channel || [];
+
+      // Pattern Stats
+      const patternHasNumbers = patterns.has_numbers || {};
+      const patternQuestion = patterns.has_question || {};
+      const patternCaps = patterns.has_caps || {};
+      const patternEmoji = patterns.has_emoji || {};
+
+      byId('titlePatternNumbers').textContent = `${Math.round(patternHasNumbers.avg_views || 0)}`;
+      byId('titlePatternNumbersCount').textContent = `${patternHasNumbers.count || 0} titles`;
+      byId('titlePatternQuestion').textContent = `${Math.round(patternQuestion.avg_views || 0)}`;
+      byId('titlePatternQuestionCount').textContent = `${patternQuestion.count || 0} titles`;
+      byId('titlePatternCaps').textContent = `${Math.round(patternCaps.avg_views || 0)}`;
+      byId('titlePatternCapsCount').textContent = `${patternCaps.count || 0} titles`;
+      byId('titlePatternEmoji').textContent = `${Math.round(patternEmoji.avg_views || 0)}`;
+      byId('titlePatternEmojiCount').textContent = `${patternEmoji.count || 0} titles`;
+
+      // Power Words Chart (CSS-only bar chart)
+      const maxPowerAvg = Math.max(...powerWords.map(w => w.avg_views || 0), 1);
+      const powerWordsHTML = powerWords.map(word => {
+        const pct = ((word.avg_views || 0) / maxPowerAvg) * 100;
+        return `
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="min-width: 80px; font-weight: 500; color: var(--text);">"${esc(word.word)}"</div>
+            <div style="flex: 1; position: relative; height: 24px; background: rgba(201,168,76,.12); border-radius: 4px; overflow: hidden;">
+              <div style="height: 100%; width: ${pct}%; background: linear-gradient(90deg, var(--gold), var(--gold-2)); transition: width 0.3s ease;"></div>
+            </div>
+            <div style="min-width: 80px; text-align: right;">
+              <div style="font-weight: 600; color: var(--gold-2);">${Math.round(word.avg_views)}</div>
+              <div style="font-size: 11px; color: var(--dim);">${word.occurrences}x</div>
+            </div>
+          </div>`;
+      }).join('');
+      byId('powerWordsChart').innerHTML = powerWordsHTML || '<div style="color: var(--muted); text-align: center; padding: 20px;">No power words data yet</div>';
+
+      // Avoid Words Chart
+      const maxAvoidAvg = Math.max(...avoidWords.map(w => w.avg_views || 0), 1);
+      const avoidWordsHTML = avoidWords.map(word => {
+        const pct = ((word.avg_views || 0) / maxAvoidAvg) * 100;
+        return `
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="min-width: 80px; font-weight: 500; color: var(--text);">"${esc(word.word)}"</div>
+            <div style="flex: 1; position: relative; height: 24px; background: rgba(232,84,84,.12); border-radius: 4px; overflow: hidden;">
+              <div style="height: 100%; width: ${pct}%; background: linear-gradient(90deg, #d46a6a, #e85454); transition: width 0.3s ease;"></div>
+            </div>
+            <div style="min-width: 80px; text-align: right;">
+              <div style="font-weight: 600; color: #e85454;">${Math.round(word.avg_views)}</div>
+              <div style="font-size: 11px; color: var(--dim);">${word.occurrences}x</div>
+            </div>
+          </div>`;
+      }).join('');
+      byId('avoidWordsChart').innerHTML = avoidWordsHTML || '<div style="color: var(--muted); text-align: center; padding: 20px;">No avoid words data yet</div>';
+
+      // Best Examples per Channel
+      const bestExamplesHTML = bestExamples.slice(0, 6).map(item => {
+        return `
+          <div style="padding: 12px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); border-radius: 8px;">
+            <div style="font-weight: 600; color: var(--text); margin-bottom: 4px;">${esc(item.channel)}</div>
+            <div style="font-size: 12px; color: var(--muted); margin-bottom: 6px; line-height: 1.4;">"${esc(item.title)}"</div>
+            <div style="font-size: 13px; font-weight: 500; color: var(--gold-2);">${fmtNum(item.views)} views</div>
+          </div>`;
+      }).join('');
+      byId('bestExamplesGrid').innerHTML = bestExamplesHTML || '<div style="color: var(--muted);">No examples available</div>';
+    }
+
+    function scoreTitleInput(){
+      const titleInput = byId('titleScorerInput').value.trim();
+      if (!titleInput) {
+        byId('titleScore').textContent = '—';
+        byId('titleScoreFeedback').textContent = 'Enter a title to score';
+        return;
+      }
+
+      const titlePerf = dataCache.title_performance || {};
+      const powerWords = titlePerf.power_words || [];
+      const avoidWords = titlePerf.avoid_words || [];
+      const patterns = titlePerf.pattern_analysis || {};
+
+      let score = 50; // Base score
+      const feedback = [];
+
+      // Check for power words
+      const lowerTitle = titleInput.toLowerCase();
+      let powerWordCount = 0;
+      for (const word of powerWords) {
+        if (lowerTitle.includes(word.word.toLowerCase())) {
+          score += 5;
+          powerWordCount++;
+        }
+      }
+      if (powerWordCount > 0) {
+        feedback.push(`+ Found ${powerWordCount} power word(s)`);
+      }
+
+      // Check for avoid words
+      let avoidWordCount = 0;
+      for (const word of avoidWords) {
+        if (lowerTitle.includes(word.word.toLowerCase())) {
+          score -= 5;
+          avoidWordCount++;
+        }
+      }
+      if (avoidWordCount > 0) {
+        feedback.push(`- Found ${avoidWordCount} word(s) to avoid`);
+      }
+
+      // Check patterns
+      if (/\d+/.test(titleInput)) {
+        const numAvg = patterns.has_numbers?.avg_views || 0;
+        if (numAvg > 1000) score += 3;
+        feedback.push('+ Has numbers (generally good)');
+      }
+
+      if (/\?/.test(titleInput)) {
+        const qAvg = patterns.has_question?.avg_views || 0;
+        if (qAvg > 1000) score += 3;
+        feedback.push('+ Has question (engages viewers)');
+      }
+
+      if (/[^a-zA-Z0-9\s?!.,:;-]/.test(titleInput)) {
+        const emojiAvg = patterns.has_emoji?.avg_views || 0;
+        if (emojiAvg > 1000) score += 3;
+        feedback.push('+ Has emoji (visual appeal)');
+      }
+
+      // Check title length
+      if (titleInput.length > 60) {
+        score -= 2;
+        feedback.push('- Title is long (may get truncated)');
+      } else if (titleInput.length < 15) {
+        score -= 1;
+        feedback.push('- Title is short (could be more descriptive)');
+      } else {
+        feedback.push('+ Title length is good');
+      }
+
+      // Cap score between 0 and 100
+      score = Math.max(0, Math.min(100, score));
+
+      byId('titleScore').textContent = score;
+      byId('titleScoreFeedback').innerHTML = feedback.map(f => `<div>• ${f}</div>`).join('');
+    }
+
 
     async function boot(){
       await detectMode();

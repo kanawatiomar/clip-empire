@@ -1737,6 +1737,217 @@ def get_sources_list(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     return sources_list
 
 
+def get_title_performance(conn: sqlite3.Connection) -> dict[str, Any]:
+    """Analyze A/B title performance patterns.
+    
+    Analyzes:
+    - Titles with numbers (e.g., "5 Ways to...")
+    - Questions (titles with ?)
+    - ALL CAPS words
+    - Emojis in titles
+    
+    Returns:
+    - pattern_stats: avg views by pattern type
+    - power_words: top 10 keywords by avg views
+    - avoid_words: bottom 10 keywords by avg views
+    - best_example_per_channel: best title per channel
+    - per_channel_insights: analytics by channel
+    """
+    import re
+    
+    # Query all succeeded publish jobs with titles and view counts
+    rows = query_all(
+        conn,
+        """
+        SELECT pj.job_id, pj.channel_name, pj.caption_text, 
+               COALESCE(sc.view_count, 0) AS views
+        FROM publish_jobs pj
+        LEFT JOIN platform_variants pv ON pv.variant_id = pj.variant_id
+        LEFT JOIN source_clips sc ON sc.clip_id = pv.clip_id
+        WHERE pj.status='succeeded' AND pj.caption_text IS NOT NULL
+        """,
+    )
+    
+    # Helper functions for pattern detection
+    def has_numbers(title: str) -> bool:
+        return bool(re.search(r'\d+', title))
+    
+    def has_question(title: str) -> bool:
+        return '?' in title
+    
+    def has_caps_words(title: str) -> bool:
+        # Check if 40%+ of words are ALL CAPS
+        words = title.split()
+        if not words:
+            return False
+        caps_words = [w for w in words if w.isupper() and len(w) > 1]
+        return len(caps_words) >= len(words) * 0.4
+    
+    def has_emoji(title: str) -> bool:
+        # Emoji ranges
+        emoji_pattern = re.compile(
+            "["
+            "\U0001F600-\U0001F64F"  # emoticons
+            "\U0001F300-\U0001F5FF"  # symbols & pictographs
+            "\U0001F680-\U0001F6FF"  # transport & map symbols
+            "\U0001F1E0-\U0001F1FF"  # flags (iOS)
+            "]+",
+            flags=re.UNICODE
+        )
+        return bool(emoji_pattern.search(title))
+    
+    def extract_words(title: str) -> list[str]:
+        # Extract individual words (lowercase, no punctuation)
+        words = re.findall(r'\b[a-z0-9]+\b', title.lower())
+        return words
+    
+    # Analyze patterns
+    pattern_views = {
+        'has_numbers': [],
+        'has_question': [],
+        'has_caps': [],
+        'has_emoji': [],
+    }
+    
+    word_views = {}  # word -> [view_counts]
+    channel_best = {}  # channel -> (title, views)
+    channel_patterns = {}  # channel -> {pattern: count}
+    
+    for row in rows:
+        title = row['caption_text'] or ''
+        views = int(row['views'] or 0)
+        channel = row['channel_name']
+        
+        # Track best title per channel
+        if channel not in channel_best or views > channel_best[channel][1]:
+            channel_best[channel] = (title, views)
+        
+        # Initialize channel pattern tracking
+        if channel not in channel_patterns:
+            channel_patterns[channel] = {
+                'has_numbers': 0,
+                'has_question': 0,
+                'has_caps': 0,
+                'has_emoji': 0,
+                'total': 0,
+            }
+        
+        channel_patterns[channel]['total'] += 1
+        
+        # Check patterns
+        if has_numbers(title):
+            pattern_views['has_numbers'].append(views)
+            channel_patterns[channel]['has_numbers'] += 1
+        
+        if has_question(title):
+            pattern_views['has_question'].append(views)
+            channel_patterns[channel]['has_question'] += 1
+        
+        if has_caps_words(title):
+            pattern_views['has_caps'].append(views)
+            channel_patterns[channel]['has_caps'] += 1
+        
+        if has_emoji(title):
+            pattern_views['has_emoji'].append(views)
+            channel_patterns[channel]['has_emoji'] += 1
+        
+        # Track words
+        for word in extract_words(title):
+            if word not in word_views:
+                word_views[word] = []
+            word_views[word].append(views)
+    
+    # Calculate pattern stats
+    pattern_stats = {}
+    for pattern, views_list in pattern_views.items():
+        if views_list:
+            avg = round(sum(views_list) / len(views_list), 0)
+            pattern_stats[pattern] = {
+                'avg_views': avg,
+                'count': len(views_list),
+                'total_views': sum(views_list),
+            }
+        else:
+            pattern_stats[pattern] = {
+                'avg_views': 0,
+                'count': 0,
+                'total_views': 0,
+            }
+    
+    # Calculate word stats
+    word_stats = {}
+    for word, views_list in word_views.items():
+        if len(views_list) >= 2:  # Only include words that appear 2+ times
+            avg = round(sum(views_list) / len(views_list), 0)
+            word_stats[word] = {
+                'avg_views': avg,
+                'count': len(views_list),
+                'total_views': sum(views_list),
+            }
+    
+    # Get top 10 power words (highest avg views)
+    power_words = sorted(
+        [(word, stats) for word, stats in word_stats.items()],
+        key=lambda x: x[1]['avg_views'],
+        reverse=True
+    )[:10]
+    
+    # Get bottom 10 words to avoid (lowest avg views)
+    avoid_words = sorted(
+        [(word, stats) for word, stats in word_stats.items()],
+        key=lambda x: x[1]['avg_views']
+    )[:10]
+    
+    # Build per-channel insights
+    per_channel = []
+    for channel, best_data in sorted(channel_best.items()):
+        title, views = best_data
+        patterns = channel_patterns.get(channel, {})
+        total = patterns.get('total', 1)
+        
+        per_channel.append({
+            'channel': channel,
+            'best_title': title[:80],
+            'best_views': views,
+            'total_titles_analyzed': total,
+            'pattern_breakdown': {
+                'numbers_pct': round((patterns.get('has_numbers', 0) / total) * 100, 1),
+                'questions_pct': round((patterns.get('has_question', 0) / total) * 100, 1),
+                'caps_pct': round((patterns.get('has_caps', 0) / total) * 100, 1),
+                'emoji_pct': round((patterns.get('has_emoji', 0) / total) * 100, 1),
+            },
+        })
+    
+    return {
+        'pattern_analysis': pattern_stats,
+        'power_words': [
+            {
+                'word': word,
+                'avg_views': stats['avg_views'],
+                'occurrences': stats['count'],
+            }
+            for word, stats in power_words
+        ],
+        'avoid_words': [
+            {
+                'word': word,
+                'avg_views': stats['avg_views'],
+                'occurrences': stats['count'],
+            }
+            for word, stats in avoid_words
+        ],
+        'best_example_per_channel': [
+            {
+                'channel': channel,
+                'title': title[:80],
+                'views': views,
+            }
+            for channel, (title, views) in sorted(channel_best.items(), key=lambda x: x[1][1], reverse=True)
+        ],
+        'per_channel_insights': per_channel,
+    }
+
+
 def get_daily_summary(conn: sqlite3.Connection) -> dict[str, Any]:
     """Generate daily summary report with today's stats and comparisons to yesterday.
     
@@ -2111,6 +2322,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     hall_of_fame = get_hall_of_fame(conn)
     sources_list = get_sources_list(conn)
     daily_summary = get_daily_summary(conn)
+    title_performance = get_title_performance(conn)
     lagging = [item for item in channel_performance if item['lagging']]
     payload = {
         'generated_at': utc_now().isoformat() + 'Z',
@@ -2140,6 +2352,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'leaderboard': get_channel_leaderboard(conn),
         'sources_list': sources_list,
         'daily_summary': daily_summary,
+        'title_performance': title_performance,
         'insights': {
             'lagging_channels': lagging[:6],
             'lagging_count': len(lagging),

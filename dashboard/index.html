@@ -1767,6 +1767,54 @@
       </div>
     </section>
 
+    <!-- Style Performance Panel -->
+    <section class="card" style="margin-top:18px;">
+      <div class="card-head">
+        <h2>🎨 Clip Style Performance Analyzer</h2>
+        <div class="top-note">Performance metrics grouped by clip style/niche to identify your strongest content categories</div>
+      </div>
+      <div class="card-body">
+        <!-- Best Style Overall Badge -->
+        <div style="margin-bottom: 28px; padding: 16px; background: linear-gradient(135deg, rgba(201,168,76,.18), rgba(201,168,76,.08)); border: 2px solid rgba(201,168,76,.4); border-radius: 14px; text-align: center;">
+          <div style="font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;">🏆 Best Style Overall</div>
+          <div style="font-size: 28px; font-weight: 700; color: var(--gold-2);" id="bestStyleName">—</div>
+          <div style="font-size: 13px; color: var(--dim); margin-top: 8px;" id="bestStyleStats">— avg views</div>
+        </div>
+
+        <!-- Summary Stats -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 28px;">
+          <div style="padding: 14px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); border-radius: 10px;">
+            <div style="font-size: 12px; color: var(--muted); margin-bottom: 4px;">Total Styles</div>
+            <div style="font-size: 18px; font-weight: 600; color: var(--text);" id="totalStyles">—</div>
+          </div>
+          <div style="padding: 14px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); border-radius: 10px;">
+            <div style="font-size: 12px; color: var(--muted); margin-bottom: 4px;">Total Clips</div>
+            <div style="font-size: 18px; font-weight: 600; color: var(--text);" id="totalClipsAll">—</div>
+          </div>
+          <div style="padding: 14px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); border-radius: 10px;">
+            <div style="font-size: 12px; color: var(--muted); margin-bottom: 4px;">Avg Views Overall</div>
+            <div style="font-size: 18px; font-weight: 600; color: var(--gold-2);" id="avgViewsOverall">—</div>
+          </div>
+        </div>
+
+        <!-- Style Cards Ranking -->
+        <div style="color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; font-family: var(--mono);">
+          Style Performance Ranking
+        </div>
+        <div id="styleCardsContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+          <!-- Style cards will be rendered here -->
+        </div>
+
+        <!-- Comparison Bar Chart (CSS-only) -->
+        <div style="margin-top: 28px;">
+          <div style="color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; font-family: var(--mono);">
+            📊 Average Views Comparison
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 14px;" id="styleComparisonBars"></div>
+        </div>
+      </div>
+    </section>
+
     <!-- Posting Time Optimizer Panel -->
     <section class="card" style="margin-top:18px;">
       <div class="card-head">
@@ -3621,7 +3669,7 @@
       renderChannels();
       renderSchedule();
       renderQuota();
-      renderTitlePerformance(); renderGrowthTiers(); renderRevenue();
+      renderTitlePerformance(); renderStylePerformance(); renderGrowthTiers(); renderRevenue();
       renderPostingTimes();
       renderPipeline();
       renderLeaderboard();
@@ -3923,6 +3971,83 @@
           </div>`;
       }).join('');
       byId('bestExamplesGrid').innerHTML = bestExamplesHTML || '<div style="color: var(--muted);">No examples available</div>';
+    }
+
+    function renderStylePerformance(){
+      const stylePerf = dataCache.style_performance || {};
+      const byStyle = stylePerf.by_style || [];
+      const bestStyleOverall = stylePerf.best_style_overall || '';
+      const summaryStats = stylePerf.summary_stats || {};
+
+      // Update summary stats
+      byId('bestStyleName').textContent = bestStyleOverall || '—';
+      const bestStyleData = byStyle.length > 0 ? byStyle[0] : null;
+      if (bestStyleData) {
+        byId('bestStyleStats').textContent = `${fmtNum(bestStyleData.avg_views)} avg views • ${bestStyleData.total_clips} clips`;
+      } else {
+        byId('bestStyleStats').textContent = '—';
+      }
+
+      byId('totalStyles').textContent = summaryStats.total_styles || '0';
+      byId('totalClipsAll').textContent = fmtNum(summaryStats.total_clips_all || 0);
+      byId('avgViewsOverall').textContent = fmtNum(summaryStats.avg_views_overall || 0);
+
+      // Render style cards (ranked by avg views)
+      const maxAvgViews = Math.max(...byStyle.map(s => s.avg_views || 0), 1);
+      const styleCardsHTML = byStyle.map((style, idx) => {
+        const isBest = idx === 0;
+        const badgeHTML = isBest ? '<div style="position: absolute; top: -10px; right: 16px; padding: 4px 12px; background: linear-gradient(135deg, var(--gold), var(--gold-2)); color: var(--bg); font-size: 11px; font-weight: 700; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.05em;">BEST</div>' : '';
+        const bestClipHTML = style.best_clip ? `
+          <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.06);">
+            <div style="font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Best Clip</div>
+            <div style="font-size: 13px; font-weight: 500; color: var(--text); line-height: 1.4; margin-bottom: 4px;">${esc(style.best_clip.title)}</div>
+            <div style="font-size: 12px; color: var(--dim);">${style.best_clip.channel} • ${fmtNum(style.best_clip.views)} views</div>
+          </div>` : '';
+        
+        return `
+          <div style="position: relative; padding: 16px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06); border-radius: 12px;">
+            ${badgeHTML}
+            <div style="font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 12px;">${esc(style.style_name)}</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+              <div>
+                <div style="font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Avg Views</div>
+                <div style="font-size: 20px; font-weight: 700; color: var(--gold-2);">${fmtNum(style.avg_views)}</div>
+              </div>
+              <div>
+                <div style="font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Total Clips</div>
+                <div style="font-size: 20px; font-weight: 700; color: var(--blue);">${style.total_clips}</div>
+              </div>
+            </div>
+            <div style="padding: 8px; background: rgba(201,168,76,.12); border-radius: 8px; margin-bottom: 12px; text-align: center;">
+              <div style="font-size: 11px; color: var(--dim);">Total Views</div>
+              <div style="font-size: 16px; font-weight: 600; color: var(--gold-2);">${fmtNum(style.total_views)}</div>
+            </div>
+            ${bestClipHTML}
+          </div>`;
+      }).join('');
+      byId('styleCardsContainer').innerHTML = styleCardsHTML || '<div style="color: var(--muted); text-align: center; padding: 40px; grid-column: 1 / -1;">No style performance data available yet</div>';
+
+      // Render comparison bar chart (CSS-only)
+      const comparisonBarsHTML = byStyle.map((style, idx) => {
+        const pct = (style.avg_views / maxAvgViews) * 100;
+        const color = idx === 0 ? 'var(--gold)' : idx === 1 ? 'var(--blue)' : 'rgba(201,168,76,.5)';
+        const gradientColor = idx === 0 ? 'linear-gradient(90deg, var(--gold), var(--gold-2))' : idx === 1 ? 'linear-gradient(90deg, var(--blue), #7aa3f5)' : 'linear-gradient(90deg, rgba(201,168,76,.5), rgba(201,168,76,.3))';
+        
+        return `
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="min-width: 140px; font-weight: 600; color: var(--text);">${esc(style.style_name)}</div>
+            <div style="flex: 1; position: relative; height: 28px; background: rgba(255,255,255,.06); border-radius: 6px; overflow: hidden;">
+              <div style="height: 100%; width: ${pct}%; background: ${gradientColor}; transition: width 0.3s ease; display: flex; align-items: center; padding-right: 12px;">
+                <div style="margin-left: auto; font-size: 12px; font-weight: 600; color: var(--text);">${fmtNum(style.avg_views)}</div>
+              </div>
+            </div>
+            <div style="min-width: 100px; text-align: right;">
+              <div style="font-weight: 600; color: var(--text);">${style.total_clips} clips</div>
+              <div style="font-size: 11px; color: var(--dim);">${fmtNum(style.total_views)} total</div>
+            </div>
+          </div>`;
+      }).join('');
+      byId('styleComparisonBars').innerHTML = comparisonBarsHTML || '<div style="color: var(--muted); text-align: center; padding: 20px;">No comparison data available</div>';
     }
 
     function scoreTitleInput(){

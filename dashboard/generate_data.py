@@ -1948,6 +1948,136 @@ def get_title_performance(conn: sqlite3.Connection) -> dict[str, Any]:
     }
 
 
+def get_style_performance(conn: sqlite3.Connection) -> dict[str, Any]:
+    """Analyze performance metrics grouped by clip style/niche.
+    
+    Since there's no explicit style_preset column in the database, we group by
+    channel niche type. Each channel belongs to a specific niche, and we aggregate
+    performance data (views, clip count, best clip) by niche.
+    
+    Returns:
+    - by_style: list of style objects sorted by avg_views (highest first)
+      - style_name: niche name (Finance, Business, Tech/AI, etc.)
+      - avg_views: average views per clip in this style
+      - total_clips: number of clips published in this style
+      - best_clip: {title, views, channel, upload_date}
+      - total_views: sum of all views in this style
+      - is_best: boolean (True for highest avg_views)
+    - best_style_overall: niche with highest avg_views
+    - summary_stats: {total_styles, total_clips_all, avg_views_overall}
+    """
+    
+    # Define niche mappings (consistent with get_revenue_estimate)
+    channel_niche_map = {
+        'market_meltdowns': 'Finance',
+        'crypto_confessions': 'Finance',
+        'rich_or_ruined': 'Finance',
+        'startup_graveyard': 'Business',
+        'self_made_clips': 'Business',
+        'ai_did_what': 'Tech/AI',
+        'gym_moments': 'Fitness',
+        'kitchen_chaos': 'Food',
+        'cases_unsolved': 'True Crime',
+        'arc_highlightz': 'Gaming/Clips',
+        'fomo_highlights': 'Gaming/Clips',
+        'viral_recaps': 'Gaming/Clips',
+        'unfiltered_clips': 'Gaming/Clips',
+        'stream_sirens': 'Female Streamers',
+        'stream_queens': 'Female Streamers',
+    }
+    
+    # Query all succeeded publish_jobs with clip views
+    rows = query_all(
+        conn,
+        """
+        SELECT pj.job_id, pj.channel_name, pj.caption_text, pj.updated_at,
+               COALESCE(sc.view_count, 0) AS views
+        FROM publish_jobs pj
+        LEFT JOIN platform_variants pv ON pv.variant_id = pj.variant_id
+        LEFT JOIN source_clips sc ON sc.clip_id = pv.clip_id
+        WHERE pj.status='succeeded'
+        ORDER BY pj.channel_name, COALESCE(sc.view_count, 0) DESC
+        """,
+    )
+    
+    # Group by niche
+    niche_data = defaultdict(lambda: {
+        'clips': [],
+        'views_list': [],
+        'best_clip': None,
+        'best_views': 0,
+        'total_clips': 0,
+        'total_views': 0,
+    })
+    
+    for row in rows:
+        channel = row['channel_name']
+        niche = channel_niche_map.get(channel, 'Other')
+        views = int(row['views'] or 0)
+        title = row['caption_text'] or 'Untitled'
+        
+        # Add to niche data
+        niche_data[niche]['clips'].append({
+            'title': title[:80],
+            'views': views,
+            'channel': channel,
+            'upload_date': fmt_compact_dt(row['updated_at']),
+        })
+        niche_data[niche]['views_list'].append(views)
+        niche_data[niche]['total_clips'] += 1
+        niche_data[niche]['total_views'] += views
+        
+        # Track best clip
+        if views > niche_data[niche]['best_views']:
+            niche_data[niche]['best_views'] = views
+            niche_data[niche]['best_clip'] = {
+                'title': title[:80],
+                'views': views,
+                'channel': channel,
+                'upload_date': fmt_compact_dt(row['updated_at']),
+            }
+    
+    # Calculate stats and build result list
+    style_list = []
+    for niche, data in niche_data.items():
+        if data['total_clips'] == 0:
+            continue
+        
+        avg_views = round(sum(data['views_list']) / len(data['views_list']), 0)
+        style_list.append({
+            'style_name': niche,
+            'avg_views': int(avg_views),
+            'total_clips': data['total_clips'],
+            'best_clip': data['best_clip'],
+            'total_views': data['total_views'],
+        })
+    
+    # Sort by avg_views descending
+    style_list.sort(key=lambda x: x['avg_views'], reverse=True)
+    
+    # Mark best style
+    if style_list:
+        style_list[0]['is_best'] = True
+        for item in style_list[1:]:
+            item['is_best'] = False
+    
+    # Calculate overall stats
+    total_clips_all = sum(item['total_clips'] for item in style_list)
+    total_views_all = sum(item['total_views'] for item in style_list)
+    avg_views_overall = round(total_views_all / total_clips_all, 0) if total_clips_all > 0 else 0
+    
+    return {
+        'by_style': style_list,
+        'best_style_overall': style_list[0]['style_name'] if style_list else None,
+        'summary_stats': {
+            'total_styles': len(style_list),
+            'total_clips_all': total_clips_all,
+            'total_views_all': total_views_all,
+            'avg_views_overall': int(avg_views_overall),
+        },
+    }
+
+
 def get_daily_summary(conn: sqlite3.Connection) -> dict[str, Any]:
     """Generate daily summary report with today's stats and comparisons to yesterday.
     
@@ -2696,6 +2826,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     sources_list = get_sources_list(conn)
     daily_summary = get_daily_summary(conn)
     title_performance = get_title_performance(conn)
+    style_performance = get_style_performance(conn)
     posting_times = get_posting_time_insights(conn)
     benchmarks = get_competitor_benchmarks(conn)
     lagging = [item for item in channel_performance if item['lagging']]
@@ -2728,6 +2859,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'sources_list': sources_list,
         'daily_summary': daily_summary,
         'title_performance': title_performance,
+        'style_performance': style_performance,
         'posting_times': posting_times,
         'benchmarks': benchmarks,
         'insights': {

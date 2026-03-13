@@ -307,6 +307,32 @@ class Handler(SimpleHTTPRequestHandler):
             except Exception as exc:
                 self._send_json({'ok': False, 'error': str(exc), 'messages': []}, 500)
             return
+        # Serve thumbnails from renders/thumbnails/ directory
+        if parsed.path.startswith('/thumbnails/'):
+            try:
+                # Extract channel and filename from path: /thumbnails/{channel}/{clip_id}.jpg
+                parts = parsed.path.split('/')
+                if len(parts) >= 4:  # ['', 'thumbnails', 'channel', 'clip_id.jpg']
+                    channel = parts[2]
+                    filename = parts[3]
+                    # Prevent directory traversal attacks
+                    if '..' not in channel and '..' not in filename and channel and filename:
+                        thumb_path = REPO_ROOT / 'renders' / 'thumbnails' / channel / filename
+                        if thumb_path.exists() and thumb_path.is_file():
+                            with open(thumb_path, 'rb') as f:
+                                content = f.read()
+                            self.send_response(200)
+                            self.send_header('Content-Type', 'image/jpeg')
+                            self.send_header('Content-Length', str(len(content)))
+                            self.send_header('Cache-Control', 'public, max-age=86400')
+                            self.end_headers()
+                            self.wfile.write(content)
+                            return
+            except Exception:
+                pass
+            self.send_response(404)
+            self.end_headers()
+            return
         return super().do_GET()
 
     def do_POST(self):

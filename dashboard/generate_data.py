@@ -481,6 +481,53 @@ def get_recent_uploads(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     return items
 
 
+def get_recent_clips(conn: sqlite3.Connection) -> list[dict[str, Any]]:
+    """Get the last 10 succeeded publish jobs with thumbnail paths for the preview grid."""
+    rows = query_all(
+        conn,
+        """
+        SELECT pj.job_id, pj.channel_name, pj.caption_text, pj.updated_at,
+               pr.post_url, pv.clip_id
+        FROM publish_jobs pj
+        LEFT JOIN publish_results pr ON pr.job_id = pj.job_id
+        LEFT JOIN platform_variants pv ON pv.variant_id = pj.variant_id
+        WHERE pj.status='succeeded'
+        ORDER BY datetime(COALESCE(pj.updated_at, pj.created_at)) DESC
+        LIMIT 10
+        """,
+    )
+    items = []
+    for row in rows:
+        channel = row['channel_name']
+        clip_id = row['clip_id']
+        
+        # Build thumbnail path: renders/thumbnails/{channel}/{clip_id}.jpg
+        thumbnail_path = None
+        if channel and clip_id:
+            thumb_file = REPO_ROOT / 'renders' / 'thumbnails' / channel / f'{clip_id}.jpg'
+            if thumb_file.exists():
+                # Return relative path for serving via control_api
+                thumbnail_path = f'/thumbnails/{channel}/{clip_id}.jpg'
+        
+        # Truncate title to 60 chars
+        title = row['caption_text'] or 'Untitled clip'
+        title_truncated = (title[:60] + '...') if len(title) > 60 else title
+        
+        items.append({
+            'job_id': row['job_id'],
+            'job_id_short': (row['job_id'] or '')[:8],
+            'channel': channel,
+            'title': title,
+            'title_truncated': title_truncated,
+            'thumbnail_path': thumbnail_path,
+            'post_url': row['post_url'],
+            'published_at': row['updated_at'],
+            'published_at_display': fmt_compact_dt(row['updated_at']),
+            'published_ago': rel_time(row['updated_at']),
+        })
+    return items
+
+
 def get_logs_preview(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     rows = query_all(
         conn,
@@ -777,6 +824,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'error_analysis': error_analysis,
         'top_clips': get_top_clips(conn),
         'recent_uploads': get_recent_uploads(conn),
+        'recent_clips': get_recent_clips(conn),
         'discord_feed': get_discord_feed(),
         'logs_preview': get_logs_preview(conn),
         'controls': get_controls_metadata(conn),

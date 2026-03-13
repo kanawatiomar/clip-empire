@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clip Empire Control Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0d12;
+      --surface: #11161f;
+      --surface-2: #161d28;
+      --surface-3: #1a2230;
+      --line: rgba(201,168,76,.16);
+      --line-2: rgba(201,168,76,.3);
+      --gold: #c9a84c;
+      --gold-2: #e8c96d;
+      --text: #eef1f5;
+      --muted: #96a0ae;
+      --dim: #687282;
+      --success: #3dd68c;
+      --success-bg: rgba(61,214,140,.12);
+      --error: #e85454;
+      --error-bg: rgba(232,84,84,.12);
+      --warning: #e8b04e;
+      --warning-bg: rgba(232,176,78,.12);
+      --blue: #5b8def;
+      --blue-bg: rgba(91,141,239,.12);
+      --shadow: 0 18px 70px rgba(0,0,0,.38);
+      --radius: 18px;
+      --mono: 'JetBrains Mono', monospace;
+      --body: 'DM Sans', sans-serif;
+      --display: 'Syne', sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--body);
+      background: radial-gradient(circle at top right, rgba(201,168,76,.08), transparent 30%), var(--bg);
+      color: var(--text);
+    }
+    a { color: var(--gold-2); text-decoration: none; }
+    .wrap { max-width: 1680px; margin: 0 auto; padding: 28px; }
+    header {
+      padding: 28px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.015), transparent);
+      position: sticky; top: 0; backdrop-filter: blur(10px); z-index: 10;
+    }
+    .brand { display:flex; justify-content:space-between; gap:20px; align-items:end; flex-wrap:wrap; }
+    h1 {
+      margin:0;
+      font-family: var(--display);
+      font-size: clamp(1.7rem, 3vw, 2.8rem);
+      line-height: 1;
+      letter-spacing: -.03em;
+    }
+    h1 span { color: var(--gold-2); }
+    .sub { color: var(--muted); margin-top: 6px; }
+    .meta { font-family: var(--mono); font-size: 12px; color: var(--dim); }
+    .banner {
+      margin: 18px 0 22px;
+      display:flex; gap:12px; flex-wrap:wrap; align-items:center;
+      padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface);
+    }
+    .pill {
+      display:inline-flex; align-items:center; gap:8px;
+      border:1px solid var(--line); border-radius:999px; padding:6px 10px;
+      font-size:12px; color:var(--muted); background: rgba(255,255,255,.02);
+    }
+    .btns { display:flex; flex-wrap:wrap; gap:10px; }
+    button {
+      background: var(--surface-2); color: var(--text); border: 1px solid var(--line);
+      border-radius: 12px; padding: 10px 14px; font: 600 14px var(--body); cursor: pointer;
+      transition: .18s ease; box-shadow:none;
+    }
+    button:hover { border-color: var(--line-2); transform: translateY(-1px); }
+    button.primary { background: linear-gradient(135deg, rgba(201,168,76,.18), rgba(201,168,76,.08)); color: var(--gold-2); }
+    button.success { color: var(--success); border-color: rgba(61,214,140,.35); }
+    button.warn { color: var(--warning); border-color: rgba(232,176,78,.35); }
+    .grid { display:grid; gap:18px; }
+    .stats { grid-template-columns: repeat(6, minmax(0,1fr)); }
+    .main { grid-template-columns: 1.2fr 1.1fr .9fr; margin-top:18px; }
+    .wide { grid-template-columns: 1.15fr .85fr; margin-top:18px; }
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,.015), transparent 18%), var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      min-width: 0;
+    }
+    .card-head {
+      display:flex; justify-content:space-between; gap:12px; align-items:center;
+      padding: 18px 20px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+    }
+    .card h2 { margin:0; font-size: 18px; font-family: var(--display); }
+    .card-body { padding: 18px 20px 20px; }
+    .kpi {
+      padding: 18px; background: var(--surface); border:1px solid var(--line); border-radius: 16px;
+      min-height: 122px;
+    }
+    .kpi .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .12em; font-family: var(--mono); }
+    .kpi .value { font: 700 clamp(1.35rem, 2.8vw, 2rem) var(--mono); margin-top: 10px; }
+    .kpi .hint { color: var(--dim); font-size: 13px; margin-top: 10px; }
+    .value.success { color: var(--success); }
+    .value.error { color: var(--error); }
+    .value.gold { color: var(--gold-2); }
+    .stack { display:grid; gap:12px; }
+    .mini-grid { display:grid; gap:10px; grid-template-columns: repeat(2,minmax(0,1fr)); }
+    .mini {
+      background: var(--surface-2); border:1px solid rgba(255,255,255,.04); border-radius: 14px; padding: 12px 14px;
+    }
+    .mini .m-label { color: var(--dim); font: 12px var(--mono); text-transform: uppercase; }
+    .mini .m-value { font: 700 22px var(--mono); margin-top: 8px; }
+    table { width:100%; border-collapse: collapse; }
+    th, td { padding: 12px 10px; text-align:left; border-bottom: 1px solid rgba(255,255,255,.05); }
+    th { color: var(--dim); font: 12px var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+    td { font-size: 14px; color: #dce2ea; vertical-align: top; }
+    .num { font-family: var(--mono); }
+    .table-wrap { overflow:auto; }
+    .status {
+      display:inline-flex; align-items:center; border-radius:999px; padding:5px 9px; font:600 12px var(--mono); text-transform:uppercase; letter-spacing:.04em;
+      border:1px solid transparent;
+    }
+    .status.queued { color:var(--warning); background:var(--warning-bg); border-color:rgba(232,176,78,.24); }
+    .status.running { color:var(--blue); background:var(--blue-bg); border-color:rgba(91,141,239,.24); }
+    .status.succeeded, .status.active { color:var(--success); background:var(--success-bg); border-color:rgba(61,214,140,.24); }
+    .status.failed { color:var(--error); background:var(--error-bg); border-color:rgba(232,84,84,.24); }
+    .status.paused, .status.cancelled { color:var(--warning); background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.08); }
+    .status.unknown { color:var(--muted); background:rgba(255,255,255,.05); }
+    .muted { color: var(--muted); }
+    .dim { color: var(--dim); }
+    .mono { font-family: var(--mono); }
+    .board { display:grid; gap:12px; }
+    .channel-card {
+      border:1px solid rgba(255,255,255,.05); background:var(--surface-2); border-radius:16px; padding:14px;
+    }
+    .channel-top, .row { display:flex; justify-content:space-between; gap:12px; align-items:center; }
+    .channel-name { font-weight:700; font-size:15px; }
+    .progress { height: 8px; border-radius: 999px; background: rgba(255,255,255,.06); overflow:hidden; margin:12px 0; }
+    .progress > div { height:100%; background: linear-gradient(90deg, var(--gold), var(--gold-2)); }
+    .tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+    .tag { font: 11px var(--mono); color: var(--muted); border:1px solid rgba(255,255,255,.06); background: rgba(255,255,255,.03); border-radius:999px; padding:4px 8px; }
+    .controls-list { display:grid; gap:10px; }
+    .channel-action { display:flex; justify-content:space-between; gap:12px; align-items:center; padding:12px 14px; border-radius:14px; background:var(--surface-2); border:1px solid rgba(255,255,255,.05); }
+    .actions-inline { display:flex; gap:8px; flex-wrap:wrap; }
+    .top-note { font-size:12px; color:var(--dim); }
+    .leader-title { max-width: 380px; font-weight:600; }
+    .toast {
+      position:fixed; right:22px; bottom:22px; min-width:220px; max-width:420px; padding:12px 14px; border-radius:14px;
+      border:1px solid var(--line); background:var(--surface-2); box-shadow:var(--shadow); display:none; z-index:50;
+    }
+    .toast.show { display:block; }
+    dialog {
+      width:min(900px, 92vw); border:1px solid var(--line); background:var(--surface); color:var(--text);
+      border-radius:18px; padding:0; box-shadow:var(--shadow);
+    }
+    dialog::backdrop { background: rgba(0,0,0,.55); backdrop-filter: blur(4px); }
+    .dialog-head, .dialog-body { padding:18px 20px; }
+    .dialog-head { border-bottom: 1px solid rgba(255,255,255,.05); display:flex; justify-content:space-between; align-items:center; }
+    pre {
+      background: #0d1218; border:1px solid rgba(255,255,255,.05); border-radius:14px; padding:14px; white-space:pre-wrap; word-break:break-word;
+      color:#dce2ea; font:12px/1.5 var(--mono);
+      max-height: 55vh; overflow:auto;
+    }
+    @media (max-width: 1280px) {
+      .stats { grid-template-columns: repeat(3, minmax(0,1fr)); }
+      .main, .wide { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      .wrap { padding: 16px; }
+      header { padding: 18px 16px; }
+      .stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .mini-grid { grid-template-columns: 1fr; }
+      .channel-action { flex-direction: column; align-items: stretch; }
+      .actions-inline button { width:100%; }
+      .leader-title { max-width: unset; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div>
+        <h1>Clip <span>Empire</span> Control Center</h1>
+        <div class="sub">Automated shorts pipeline ops dashboard · dark-mode war room for the farm</div>
+      </div>
+      <div class="meta">
+        <div id="lastUpdate">Last update: loading…</div>
+        <div id="modeLabel">Mode: checking…</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="banner">
+      <div class="btns">
+        <button class="primary" onclick="runAction('engine_scan')">▶ Start Engine Scan</button>
+        <button class="success" onclick="runAction('process_queue')">⚙ Process Queue</button>
+        <button onclick="runAction('refresh_data')">🔄 Refresh Data</button>
+        <button onclick="openLogs()">📋 View Logs</button>
+      </div>
+      <span class="pill">Refresh <span id="refreshRate">15s</span></span>
+      <span class="pill" id="dbHealthPill">DB status: loading</span>
+      <span class="pill" id="metricsPill">Metrics: checking</span>
+    </div>
+
+    <section class="grid stats">
+      <div class="kpi"><div class="label">Active Channels</div><div class="value gold" id="kpiActive">—</div><div class="hint" id="kpiTotalChannels">— total channels</div></div>
+      <div class="kpi"><div class="label">Jobs Queued Today</div><div class="value" id="kpiQueued">—</div><div class="hint">ready to publish / retry</div></div>
+      <div class="kpi"><div class="label">Jobs Running Today</div><div class="value" id="kpiRunning">—</div><div class="hint">publisher currently working</div></div>
+      <div class="kpi"><div class="label">Succeeded Today</div><div class="value success" id="kpiSucceeded">—</div><div class="hint">completed uploads</div></div>
+      <div class="kpi"><div class="label">Failed Today</div><div class="value error" id="kpiFailed">—</div><div class="hint">needs attention</div></div>
+      <div class="kpi"><div class="label">Render Queue Depth</div><div class="value" id="kpiDepth">—</div><div class="hint" id="kpiLagging">— lagging channels</div></div>
+    </section>
+
+    <section class="grid main">
+      <article class="card">
+        <div class="card-head">
+          <h2>Queue Monitor</h2>
+          <div>
+            <label class="mono dim" for="queueSort">sort</label>
+            <select id="queueSort" onchange="renderQueue()">
+              <option value="recent">recent</option>
+              <option value="status">status</option>
+              <option value="channel">channel</option>
+            </select>
+          </div>
+        </div>
+        <div class="card-body table-wrap">
+          <table>
+            <thead>
+              <tr><th>Job</th><th>Channel</th><th>Status</th><th>Attempt</th><th>Created</th></tr>
+            </thead>
+            <tbody id="queueBody"></tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h2>Channel Performance</h2>
+          <div class="top-note" id="laggingSummary">loading…</div>
+        </div>
+        <div class="card-body board" id="channelBoard"></div>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h2>Control Panel</h2>
+          <div class="top-note">local API unlocks live controls</div>
+        </div>
+        <div class="card-body stack">
+          <div class="mini-grid">
+            <div class="mini"><div class="m-label">Queue Backlog</div><div class="m-value" id="miniBacklog">—</div></div>
+            <div class="mini"><div class="m-label">Job Records</div><div class="m-value" id="miniJobs">—</div></div>
+            <div class="mini"><div class="m-label">Metrics Feed</div><div class="m-value" id="miniMetrics">—</div></div>
+            <div class="mini"><div class="m-label">Top Clip Mode</div><div class="m-value" id="miniTopMode">—</div></div>
+          </div>
+          <div class="top-note" id="apiHint">Loading control hints…</div>
+          <div class="controls-list" id="channelControls"></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid wide">
+      <article class="card">
+        <div class="card-head">
+          <h2>Top Clips · Last 7 Days</h2>
+          <div class="top-note" id="topClipNote">proxy metrics fallback when upload analytics are missing</div>
+        </div>
+        <div class="card-body table-wrap">
+          <table>
+            <thead>
+              <tr><th>Clip</th><th>Channel</th><th>Views</th><th>Likes</th><th>CTR</th><th>Uploaded</th></tr>
+            </thead>
+            <tbody id="clipsBody"></tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <h2>Recent Uploads</h2>
+          <div class="top-note">latest queue outcomes</div>
+        </div>
+        <div class="card-body table-wrap">
+          <table>
+            <thead>
+              <tr><th>Job</th><th>Channel</th><th>Status</th><th>When</th><th>Link</th></tr>
+            </thead>
+            <tbody id="uploadsBody"></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+  </div>
+
+  <dialog id="logsDialog">
+    <div class="dialog-head">
+      <strong>Recent Error Logs</strong>
+      <button onclick="document.getElementById('logsDialog').close()">Close</button>
+    </div>
+    <div class="dialog-body">
+      <pre id="logsPre">Loading logs…</pre>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const LOCAL_API = 'http://127.0.0.1:8787';
+    const STATIC_JSON = './data.json';
+    let dataCache = null;
+    let localMode = false;
+
+    function byId(id){ return document.getElementById(id); }
+    function fmtNum(v){
+      if (v === null || v === undefined || v === '') return '—';
+      const n = Number(v);
+      if (Number.isNaN(n)) return v;
+      if (Math.abs(n) >= 1_000_000) return (n/1_000_000).toFixed(1) + 'M';
+      if (Math.abs(n) >= 1_000) return (n/1_000).toFixed(1) + 'K';
+      return n.toLocaleString();
+    }
+    function esc(str){ return (str ?? '').toString().replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+    function toast(msg){ const t = byId('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(window.__toastTimer); window.__toastTimer = setTimeout(()=>t.classList.remove('show'), 2800); }
+    function statusBadge(status){ return `<span class="status ${status}">${status}</span>`; }
+
+    async function detectMode(){
+      try {
+        const res = await fetch(`${LOCAL_API}/api/data`, { cache: 'no-store' });
+        if (!res.ok) throw new Error('bad local api');
+        dataCache = await res.json();
+        localMode = true;
+        byId('modeLabel').textContent = 'Mode: local control API · live controls enabled';
+        return;
+      } catch (_) {
+        localMode = false;
+        byId('modeLabel').textContent = 'Mode: static dashboard · GitHub Pages friendly';
+      }
+      const res = await fetch(`${STATIC_JSON}?t=${Date.now()}`, { cache: 'no-store' });
+      dataCache = await res.json();
+    }
+
+    async function loadData(){
+      if (localMode) {
+        const res = await fetch(`${LOCAL_API}/api/data`, { cache: 'no-store' });
+        dataCache = await res.json();
+      } else {
+        const res = await fetch(`${STATIC_JSON}?t=${Date.now()}`, { cache: 'no-store' });
+        dataCache = await res.json();
+      }
+      renderAll();
+    }
+
+    function renderHeader(){
+      const d = dataCache;
+      byId('lastUpdate').textContent = `Last update: ${new Date(d.generated_at).toLocaleString()}`;
+      byId('refreshRate').textContent = `${d.meta.refresh_seconds}s`;
+      byId('dbHealthPill').textContent = `DB: ${d.meta.channel_count} channels · ${d.meta.job_count} jobs`;
+      byId('metricsPill').textContent = d.meta.has_metrics_daily ? 'Metrics: live metrics_daily' : 'Metrics: source proxy fallback';
+    }
+
+    function renderKPIs(){
+      const s = dataCache.live_status;
+      byId('kpiActive').textContent = s.active_channels;
+      byId('kpiTotalChannels').textContent = `${s.total_channels} total channels`;
+      byId('kpiQueued').textContent = s.jobs_today.queued;
+      byId('kpiRunning').textContent = s.jobs_today.running;
+      byId('kpiSucceeded').textContent = s.jobs_today.succeeded;
+      byId('kpiFailed').textContent = s.jobs_today.failed;
+      byId('kpiDepth').textContent = s.render_queue_depth;
+      byId('kpiLagging').textContent = `${dataCache.insights.lagging_count} lagging channels`;
+      byId('miniBacklog').textContent = dataCache.insights.queue_backlog;
+      byId('miniJobs').textContent = fmtNum(dataCache.meta.job_count);
+      byId('miniMetrics').textContent = dataCache.meta.has_metrics_daily ? 'LIVE' : 'SPARSE';
+      byId('miniTopMode').textContent = dataCache.top_clips.some(x => x.metric_mode === 'source_clip_proxy') ? 'PROXY' : 'LIVE';
+    }
+
+    function renderQueue(){
+      const sort = byId('queueSort').value;
+      const rows = [...(dataCache.queue_monitor || [])];
+      const order = { running:0, queued:1, failed:2, succeeded:3, cancelled:4 };
+      if (sort === 'status') rows.sort((a,b)=>(order[a.status] ?? 9) - (order[b.status] ?? 9) || a.channel.localeCompare(b.channel));
+      else if (sort === 'channel') rows.sort((a,b)=>a.channel.localeCompare(b.channel) || a.created_at.localeCompare(b.created_at));
+      const html = rows.slice(0, 40).map(row => `
+        <tr>
+          <td><div class="mono">${esc(row.job_id_short)}</div><div class="dim">${esc(row.scheduled_for || '')}</div></td>
+          <td><strong>${esc(row.channel)}</strong>${row.has_error ? `<div class="dim">error attached</div>` : ''}</td>
+          <td>${statusBadge(row.status)}</td>
+          <td class="num">${row.attempt}</td>
+          <td><div>${esc(row.created_ago)}</div><div class="dim mono">${esc(row.created_at_display || '')}</div></td>
+        </tr>`).join('') || '<tr><td colspan="5" class="muted">No jobs found.</td></tr>';
+      byId('queueBody').innerHTML = html;
+    }
+
+    function renderChannels(){
+      const rows = dataCache.channel_performance || [];
+      const lagging = rows.filter(x => x.lagging).length;
+      byId('laggingSummary').textContent = lagging ? `${lagging} channels under target` : 'All active channels on pace';
+      byId('channelBoard').innerHTML = rows.map(ch => {
+        const pct = Math.max(0, Math.min(ch.completion_rate || 0, 100));
+        const title = ch.latest_title ? `<div class="dim" style="margin-top:8px">Last: ${esc(ch.latest_title)}</div>` : '';
+        const sourceTag = `<span class="tag">views: ${esc(ch.views_source)}</span>`;
+        const queueTag = `<span class="tag">queue ${ch.queue_depth}</span>`;
+        const failTag = `<span class="tag">failed 7d ${ch.failed_7d}</span>`;
+        return `
+          <div class="channel-card">
+            <div class="channel-top">
+              <div>
+                <div class="channel-name">${esc(ch.channel)}</div>
+                <div class="dim">${esc(ch.category)} · ${statusBadge(ch.status)}</div>
+              </div>
+              <div class="num ${ch.lagging ? 'error' : 'success'}">${ch.published_24h}/${ch.target_per_day}</div>
+            </div>
+            <div class="progress"><div style="width:${pct}%"></div></div>
+            <div class="row muted"><span>avg views ${fmtNum(ch.avg_views)}</span><span class="mono">RPM $${Number(ch.rpm).toFixed(2)}</span></div>
+            <div class="row muted" style="margin-top:6px"><span>${ch.lagging ? `lagging by ${ch.deficit}` : 'on pace'}</span><span>${ch.running_jobs ? `${ch.running_jobs} running` : 'idle'}</span></div>
+            ${title}
+            <div class="tags">${sourceTag}${queueTag}${failTag}</div>
+          </div>`;
+      }).join('');
+
+      const controls = dataCache.controls.channels || [];
+      byId('apiHint').textContent = localMode ? 'Local control API detected. Pause/resume buttons are live.' : (dataCache.controls.local_api_hint || 'Static mode');
+      byId('channelControls').innerHTML = controls.map(ch => `
+        <div class="channel-action">
+          <div><strong>${esc(ch.channel)}</strong><div class="dim">status: ${esc(ch.status)}</div></div>
+          <div class="actions-inline">
+            <button class="warn" ${!localMode || ch.status === 'paused' ? 'disabled' : ''} onclick="runAction('pause_channel','${esc(ch.channel)}')">Pause</button>
+            <button class="success" ${!localMode || ch.status === 'active' ? 'disabled' : ''} onclick="runAction('resume_channel','${esc(ch.channel)}')">Resume</button>
+          </div>
+        </div>`).join('');
+    }
+
+    function renderTopClips(){
+      const rows = dataCache.top_clips || [];
+      byId('clipsBody').innerHTML = rows.map(clip => `
+        <tr>
+          <td>
+            <div class="leader-title">${esc(clip.title)}</div>
+            <div class="dim mono">${esc(clip.clip_id_short)}</div>
+          </td>
+          <td>${esc(clip.channel)}</td>
+          <td class="num">${fmtNum(clip.views)}</td>
+          <td class="num">${clip.likes == null ? '—' : fmtNum(clip.likes)}</td>
+          <td class="num">${clip.ctr_percent == null ? '—' : `${clip.ctr_percent.toFixed(2)}%`}</td>
+          <td>${esc(clip.upload_date || '—')}</td>
+        </tr>`).join('') || '<tr><td colspan="6" class="muted">No clip data available.</td></tr>';
+    }
+
+    function renderRecentUploads(){
+      const rows = dataCache.recent_uploads || [];
+      byId('uploadsBody').innerHTML = rows.map(item => `
+        <tr>
+          <td><div class="mono">${esc(item.job_id_short)}</div><div class="dim">${esc(item.title || '')}</div></td>
+          <td>${esc(item.channel)}</td>
+          <td>${statusBadge(item.status)}</td>
+          <td><div>${esc(item.updated_ago)}</div><div class="dim mono">${esc(item.updated_at_display || '')}</div></td>
+          <td>${item.url ? `<a href="${esc(item.url)}" target="_blank" rel="noreferrer">Open</a>` : '<span class="muted">—</span>'}</td>
+        </tr>`).join('') || '<tr><td colspan="5" class="muted">No upload records available.</td></tr>';
+    }
+
+    function renderLogsPreview(){
+      const logs = dataCache.logs_preview || [];
+      byId('logsPre').textContent = logs.length
+        ? logs.map(l => `[${l.updated_at}] ${l.channel} / ${l.job_id_short}\n${l.message}`).join('\n\n---\n\n')
+        : 'No recent DB-backed errors found.';
+    }
+
+    function renderAll(){
+      renderHeader();
+      renderKPIs();
+      renderQueue();
+      renderChannels();
+      renderTopClips();
+      renderRecentUploads();
+      renderLogsPreview();
+    }
+
+    async function runAction(action, channel = null){
+      if (!localMode) {
+        toast('Static mode: run py -3 dashboard/control_api.py for live controls.');
+        return;
+      }
+      try {
+        const res = await fetch(`${LOCAL_API}/api/action`, {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ action, channel })
+        });
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'Action failed');
+        if (action === 'view_logs' && data.logs) {
+          byId('logsPre').textContent = data.logs.map(l => `[${l.updated_at}] ${l.channel} / ${l.job_id_short}\n${l.message}`).join('\n\n---\n\n') || 'No logs.';
+          byId('logsDialog').showModal();
+        } else {
+          toast(data.message || 'Done');
+        }
+        await loadData();
+      } catch (err) {
+        toast(err.message || 'Action failed');
+      }
+    }
+
+    function openLogs(){
+      byId('logsDialog').showModal();
+    }
+
+    async function boot(){
+      await detectMode();
+      renderAll();
+      setInterval(loadData, (dataCache?.meta?.refresh_seconds || 15) * 1000);
+    }
+    boot();
+  </script>
+</body>
+</html>

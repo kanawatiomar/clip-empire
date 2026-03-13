@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import sqlite3
+import sys
 from collections import Counter, defaultdict
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -16,6 +17,11 @@ from typing import Any
 
 BASE_DIR = Path(__file__).resolve().parent
 REPO_ROOT = BASE_DIR.parent
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from engine.config.sources import CHANNEL_SOURCES, SOURCE_DEFAULTS
+
 DB_PATH = REPO_ROOT / 'data' / 'clip_empire.db'
 OUTPUT_FILE = BASE_DIR / 'data.json'
 
@@ -493,6 +499,96 @@ def get_logs_preview(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     ]
 
 
+def classify_error(error_message: str | None) -> str:
+    cleaned = ' '.join((error_message or '').strip().split())
+    return cleaned[:50] if cleaned else 'Unknown error'
+
+
+def get_error_suggestion(error_type: str, count: int) -> str:
+    normalized = (error_type or '').lower()
+    if 'encoding error' in normalized and count >= 3:
+        return 'Check ffmpeg codec settings'
+    if 'timeout' in normalized:
+        return 'Increase timeout threshold or check network'
+    if 'quota exceeded' in normalized:
+        return 'Check YouTube API quota usage'
+    return 'Review logs for context'
+
+
+def get_error_analysis(conn: sqlite3.Connection) -> dict[str, Any]:
+    rows = query_all(
+        conn,
+        """
+        SELECT last_error,
+               created_at,
+               updated_at,
+               DATE(COALESCE(updated_at, created_at)) AS error_date,
+               DATETIME(COALESCE(updated_at, created_at)) AS occurred_at
+        FROM publish_jobs
+        WHERE last_error IS NOT NULL
+          AND TRIM(last_error) != ''
+        ORDER BY DATETIME(COALESCE(updated_at, created_at)) DESC
+        """,
+    )
+
+    grouped: dict[str, dict[str, Any]] = {}
+    today = datetime.now().date()
+    yesterday = today - timedelta(days=1)
+    week_ago = today - timedelta(days=7)
+
+    for row in rows:
+        error_type = classify_error(row['last_error'])
+        bucket = grouped.setdefault(
+            error_type,
+            {
+                'error_type': error_type,
+                'count': 0,
+                'last_seen': None,
+                'trend': {'today': 0, 'yesterday': 0, 'week_ago': 0},
+            },
+        )
+        bucket['count'] += 1
+
+        occurred_at = row['occurred_at']
+        if occurred_at and (not bucket['last_seen'] or occurred_at > bucket['last_seen']):
+            bucket['last_seen'] = occurred_at
+
+        error_day = parse_dt(row['error_date'])
+        if error_day:
+            day = error_day.date()
+            if day == today:
+                bucket['trend']['today'] += 1
+            if day == yesterday:
+                bucket['trend']['yesterday'] += 1
+            if day == week_ago:
+                bucket['trend']['week_ago'] += 1
+
+    ranked = sorted(grouped.values(), key=lambda item: (-item['count'], item['error_type']))[:5]
+    top_count = ranked[0]['count'] if ranked else 0
+
+    items: list[dict[str, Any]] = []
+    for item in ranked:
+        count = int(item['count'])
+        severity = 'critical' if top_count and count == top_count else 'warning' if count > 1 else 'info'
+        items.append({
+            'error_type': item['error_type'],
+            'count': count,
+            'trend': item['trend'],
+            'last_seen': item['last_seen'],
+            'last_seen_display': fmt_compact_dt(item['last_seen']),
+            'suggestion': get_error_suggestion(item['error_type'], count),
+            'severity': severity,
+        })
+
+    return {
+        'top_errors': items,
+        'total_errors': sum(int(item['count']) for item in grouped.values()),
+        'distinct_errors': len(grouped),
+        'log_viewer_label': 'View Full Logs',
+        'log_viewer_target': 'logs_dialog',
+    }
+
+
 def get_source_health(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     source_rows = query_all(
         conn,
@@ -605,11 +701,30 @@ def get_controls_metadata(conn: sqlite3.Connection) -> dict[str, Any]:
     }
 
 
+def get_current_settings(conn: sqlite3.Connection) -> dict[str, dict[str, Any]]:
+    channel_rows = query_all(conn, "SELECT channel_name, daily_target FROM channels ORDER BY channel_name")
+    settings: dict[str, dict[str, Any]] = {}
+    for row in channel_rows:
+        channel = row['channel_name']
+        sources = CHANNEL_SOURCES.get(channel, [])
+        source_values = [source for source in sources if isinstance(source, dict)]
+        first_source = source_values[0] if source_values else {}
+        settings[channel] = {
+            'min_views': int(first_source.get('min_views', 0) or 0),
+            'max_per_run': int(first_source.get('max_per_run', SOURCE_DEFAULTS.get('max_per_run', 5)) or SOURCE_DEFAULTS.get('max_per_run', 5)),
+            'crop_anchor': first_source.get('crop_anchor', 'center') or 'center',
+            'daily_target': int(row['daily_target'] or 0),
+            'source_count': len(source_values),
+        }
+    return settings
+
+
 def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     queue_monitor = get_queue_monitor(conn)
     channel_performance = get_channel_performance(conn)
     analytics = load_channel_trends(conn)
     source_health = get_source_health(conn)
+    error_analysis = get_error_analysis(conn)
     lagging = [item for item in channel_performance if item['lagging']]
     payload = {
         'generated_at': utc_now().isoformat() + 'Z',
@@ -620,10 +735,12 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'channel_performance': channel_performance,
         'analytics': analytics,
         'source_health': source_health,
+        'error_analysis': error_analysis,
         'top_clips': get_top_clips(conn),
         'recent_uploads': get_recent_uploads(conn),
         'logs_preview': get_logs_preview(conn),
         'controls': get_controls_metadata(conn),
+        'current_settings': get_current_settings(conn),
         'insights': {
             'lagging_channels': lagging[:6],
             'lagging_count': len(lagging),
@@ -655,6 +772,7 @@ def main() -> int:
     print(f"Queue backlog: {payload['insights']['queue_backlog']}")
     print(f"Lagging channels: {payload['insights']['lagging_count']}")
     print(f"Analytics channels: {payload['insights']['analytics_channels']}")
+    print(f"Error types tracked: {payload['error_analysis']['distinct_errors']}")
     return 0
 
 

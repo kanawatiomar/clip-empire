@@ -129,9 +129,9 @@
     .status.queued { color:var(--warning); background:var(--warning-bg); border-color:rgba(232,176,78,.24); }
     .status.running { color:var(--blue); background:var(--blue-bg); border-color:rgba(91,141,239,.24); }
     .status.succeeded, .status.active, .status.healthy { color:var(--success); background:var(--success-bg); border-color:rgba(61,214,140,.24); }
-    .status.failed, .status.error { color:var(--error); background:var(--error-bg); border-color:rgba(232,84,84,.24); }
+    .status.failed, .status.error, .status.critical { color:var(--error); background:var(--error-bg); border-color:rgba(232,84,84,.24); }
     .status.paused, .status.cancelled, .status.warning { color:var(--warning); background:var(--warning-bg); border-color:rgba(232,176,78,.24); }
-    .status.unknown { color:var(--muted); background:rgba(255,255,255,.05); }
+    .status.info, .status.unknown { color:var(--muted); background:rgba(255,255,255,.05); }
     .muted { color: var(--muted); }
     .dim { color: var(--dim); }
     .mono { font-family: var(--mono); }
@@ -171,6 +171,16 @@
     .trend-direction.down { color:var(--error); }
     .trend-direction.flat { color:var(--warning); }
     .analytics-empty { padding:16px; border:1px dashed rgba(255,255,255,.08); border-radius:16px; color:var(--muted); background:rgba(255,255,255,.02); }
+    .severity-chip {
+      display:inline-flex; align-items:center; gap:6px; border-radius:999px; padding:4px 8px;
+      font:600 11px var(--mono); text-transform:uppercase; letter-spacing:.05em; border:1px solid transparent;
+    }
+    .severity-chip.critical { color:var(--error); background:var(--error-bg); border-color:rgba(232,84,84,.24); }
+    .severity-chip.warning { color:var(--warning); background:var(--warning-bg); border-color:rgba(232,176,78,.24); }
+    .severity-chip.info { color:var(--muted); background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.08); }
+    .trend-pill { display:inline-flex; align-items:center; gap:6px; flex-wrap:wrap; }
+    .trend-pill span { padding:3px 7px; border-radius:999px; background:rgba(255,255,255,.04); color:var(--muted); font:11px var(--mono); }
+    .suggestion-text { max-width: 420px; }
     .toast {
       position:fixed; right:22px; bottom:22px; min-width:220px; max-width:420px; padding:12px 14px; border-radius:14px;
       border:1px solid var(--line); background:var(--surface-2); box-shadow:var(--shadow); display:none; z-index:50;
@@ -188,6 +198,20 @@
       color:#dce2ea; font:12px/1.5 var(--mono);
       max-height: 55vh; overflow:auto;
     }
+    .settings-grid { display:grid; gap:14px; }
+    .settings-card {
+      border:1px solid rgba(255,255,255,.05); background:var(--surface-2); border-radius:16px; padding:16px;
+      display:grid; gap:14px;
+    }
+    .settings-top { display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap; }
+    .settings-fields { display:grid; gap:12px; grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .field { display:grid; gap:6px; }
+    .field label { color:var(--muted); font:12px var(--mono); text-transform:uppercase; letter-spacing:.06em; }
+    .field input, .field select {
+      width:100%; background:#0d1218; color:var(--text); border:1px solid rgba(255,255,255,.08); border-radius:12px;
+      padding:10px 12px; font:500 14px var(--body);
+    }
+    .dialog-actions { display:flex; justify-content:flex-end; gap:10px; margin-top:16px; flex-wrap:wrap; }
     @media (max-width: 1280px) {
       .stats { grid-template-columns: repeat(3, minmax(0,1fr)); }
       .main, .wide { grid-template-columns: 1fr; }
@@ -224,6 +248,7 @@
         <button class="primary" onclick="runAction('engine_scan')">▶ Start Engine Scan</button>
         <button class="success" onclick="runAction('process_queue')">⚙ Process Queue</button>
         <button onclick="runAction('refresh_data')">🔄 Refresh Data</button>
+        <button onclick="openSettings()">⚙️ Settings</button>
         <button onclick="openLogs()">📋 View Logs</button>
       </div>
       <span class="pill">Refresh <span id="refreshRate">15s</span></span>
@@ -314,6 +339,24 @@
       </div>
     </section>
 
+    <section class="card" style="margin-top:18px;">
+      <div class="card-head">
+        <h2>Error Analyzer</h2>
+        <div class="btns">
+          <div class="top-note" id="errorSummary">Top publish failure patterns and what to check first</div>
+          <button onclick="openLogs()">📋 View Full Logs</button>
+        </div>
+      </div>
+      <div class="card-body table-wrap">
+        <table>
+          <thead>
+            <tr><th>Error Type</th><th>Count</th><th>Trend</th><th>Last Seen</th><th>Suggestion</th></tr>
+          </thead>
+          <tbody id="errorAnalysisBody"></tbody>
+        </table>
+      </div>
+    </section>
+
     <section class="grid wide">
       <article class="card">
         <div class="card-head">
@@ -357,6 +400,20 @@
     </div>
   </dialog>
 
+  <dialog id="settingsDialog">
+    <div class="dialog-head">
+      <strong>Channel Settings</strong>
+      <button onclick="byId('settingsDialog').close()">Close</button>
+    </div>
+    <div class="dialog-body">
+      <div class="top-note" style="margin-bottom:14px;">Edit ingest and publishing settings per channel. Source-backed settings are written to sources.py; daily target is written to the dashboard DB.</div>
+      <div class="settings-grid" id="settingsGrid"></div>
+      <div class="dialog-actions">
+        <button onclick="byId('settingsDialog').close()">Done</button>
+      </div>
+    </div>
+  </dialog>
+
   <div class="toast" id="toast"></div>
 
   <script>
@@ -379,6 +436,7 @@
     function statusBadge(status){ return `<span class="status ${status}">${status}</span>`; }
     function trendArrow(direction){ return direction === 'up' ? '↑' : direction === 'down' ? '↓' : '→'; }
     function trendClass(direction){ return direction || 'flat'; }
+    function currentSettings(){ return dataCache?.current_settings || {}; }
     function fmtDelta(delta, prefix=''){
       const num = Number(delta || 0);
       const sign = num > 0 ? '+' : num < 0 ? '-' : '';
@@ -663,6 +721,34 @@
         </tr>`).join('') || '<tr><td colspan="5" class="muted">No source health rows found.</td></tr>';
     }
 
+    function renderErrorAnalysis(){
+      const summary = dataCache.error_analysis || {};
+      const rows = summary.top_errors || [];
+      byId('errorSummary').textContent = rows.length
+        ? `${summary.distinct_errors || rows.length} error classes tracked · ${summary.total_errors || 0} total failures with logs`
+        : 'No publish errors with logs found';
+      byId('errorAnalysisBody').innerHTML = rows.map(row => `
+        <tr>
+          <td>
+            <div class="leader-title">${esc(row.error_type)}</div>
+            <div class="severity-chip ${esc(row.severity || 'info')}">${esc(row.severity || 'info')}</div>
+          </td>
+          <td class="num">${fmtNum(row.count)}</td>
+          <td>
+            <div class="trend-pill">
+              <span>today ${fmtNum(row.trend?.today || 0)}</span>
+              <span>yday ${fmtNum(row.trend?.yesterday || 0)}</span>
+              <span>wk-ago ${fmtNum(row.trend?.week_ago || 0)}</span>
+            </div>
+          </td>
+          <td>
+            <div>${esc(row.last_seen_display || '—')}</div>
+            <div class="dim mono">${row.last_seen ? esc(new Date(row.last_seen).toLocaleString()) : '—'}</div>
+          </td>
+          <td class="suggestion-text">${esc(row.suggestion || 'Review logs for context')}</td>
+        </tr>`).join('') || '<tr><td colspan="5" class="muted">No error patterns found.</td></tr>';
+    }
+
     function renderTopClips(){
       const rows = dataCache.top_clips || [];
       byId('clipsBody').innerHTML = rows.map(clip => `
@@ -698,6 +784,40 @@
         : 'No recent DB-backed errors found.';
     }
 
+    function renderSettings(){
+      const rows = Object.entries(currentSettings()).sort((a, b) => a[0].localeCompare(b[0]));
+      byId('settingsGrid').innerHTML = rows.map(([channel, settings]) => `
+        <div class="settings-card">
+          <div class="settings-top">
+            <div>
+              <strong>${esc(channel)}</strong>
+              <div class="dim mono">${settings.source_count || 0} source entries mirrored</div>
+            </div>
+            <button class="primary" ${!localMode ? 'disabled' : ''} onclick="saveChannelSettings('${esc(channel)}', this)">Save</button>
+          </div>
+          <div class="settings-fields">
+            <div class="field">
+              <label for="setting-${esc(channel)}-min_views">Min views</label>
+              <input id="setting-${esc(channel)}-min_views" type="number" min="0" value="${Number(settings.min_views || 0)}" ${!localMode ? 'disabled' : ''} />
+            </div>
+            <div class="field">
+              <label for="setting-${esc(channel)}-max_per_run">Max per run</label>
+              <input id="setting-${esc(channel)}-max_per_run" type="number" min="0" value="${Number(settings.max_per_run || 0)}" ${!localMode ? 'disabled' : ''} />
+            </div>
+            <div class="field">
+              <label for="setting-${esc(channel)}-crop_anchor">Crop anchor</label>
+              <select id="setting-${esc(channel)}-crop_anchor" ${!localMode ? 'disabled' : ''}>
+                ${['left','center','right'].map(opt => `<option value="${opt}" ${settings.crop_anchor === opt ? 'selected' : ''}>${opt}</option>`).join('')}
+              </select>
+            </div>
+            <div class="field">
+              <label for="setting-${esc(channel)}-daily_target">Daily target</label>
+              <input id="setting-${esc(channel)}-daily_target" type="number" min="0" value="${Number(settings.daily_target || 0)}" ${!localMode ? 'disabled' : ''} />
+            </div>
+          </div>
+        </div>`).join('') || '<div class="analytics-empty">No channel settings available.</div>';
+    }
+
     function renderAll(){
       renderHeader();
       renderKPIs();
@@ -705,9 +825,11 @@
       renderChannels();
       renderAnalytics();
       renderSourceHealth();
+      renderErrorAnalysis();
       renderTopClips();
       renderRecentUploads();
       renderLogsPreview();
+      renderSettings();
     }
 
     async function runAction(action, channel = null){
@@ -737,6 +859,50 @@
 
     function openLogs(){
       byId('logsDialog').showModal();
+    }
+
+    function openSettings(){
+      if (!localMode) {
+        toast('Static mode: run py -3 dashboard/control_api.py for live settings edits.');
+      }
+      byId('settingsDialog').showModal();
+    }
+
+    async function updateChannelSetting(channel, settingName, value){
+      const res = await fetch(`${LOCAL_API}/api/update_channel_settings`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ channel, setting_name: settingName, value })
+      });
+      const data = await res.json();
+      if (!data.ok) throw new Error(data.error || 'Update failed');
+      return data;
+    }
+
+    async function saveChannelSettings(channel, button){
+      if (!localMode) {
+        toast('Static mode: settings are read-only here.');
+        return;
+      }
+      const originalLabel = button?.textContent || 'Save';
+      const values = {
+        min_views: Number(byId(`setting-${channel}-min_views`).value || 0),
+        max_per_run: Number(byId(`setting-${channel}-max_per_run`).value || 0),
+        crop_anchor: byId(`setting-${channel}-crop_anchor`).value,
+        daily_target: Number(byId(`setting-${channel}-daily_target`).value || 0),
+      };
+      try {
+        if (button) { button.disabled = true; button.textContent = 'Saving…'; }
+        for (const [settingName, value] of Object.entries(values)) {
+          await updateChannelSetting(channel, settingName, value);
+        }
+        toast(`${channel} settings saved.`);
+        await loadData();
+      } catch (err) {
+        toast(err.message || 'Settings update failed');
+      } finally {
+        if (button) { button.disabled = false; button.textContent = originalLabel; }
+      }
     }
 
     async function boot(){

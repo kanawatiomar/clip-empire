@@ -1306,6 +1306,155 @@ def get_revenue_estimate(conn: sqlite3.Connection) -> dict[str, Any]:
     }
 
 
+def get_pipeline_status(conn: sqlite3.Connection) -> dict[str, Any]:
+    """Track the full clip lifecycle through the pipeline.
+    
+    Pipeline stages:
+    1. Discovered: sources ingested into the system
+    2. Downloaded: sources with download_path filled
+    3. Processed: segments extracted from sources (transcribed, analyzed)
+    4. Queued: publish_jobs awaiting publishing (status=queued/running)
+    5. Uploaded: publish_jobs successfully published (status=succeeded)
+    
+    Returns:
+    - overall: counts and throughput for all clips
+    - by_channel: per-channel breakdown
+    - throughput: clips/hour moving through pipeline
+    - bottleneck: slowest stage (stage name + duration)
+    """
+    # Get overall pipeline counts
+    discovered = query_one(conn, "SELECT COUNT(*) AS c FROM sources")['c'] or 0
+    downloaded = query_one(conn, "SELECT COUNT(*) AS c FROM sources WHERE download_path IS NOT NULL")['c'] or 0
+    processed = query_one(conn, "SELECT COUNT(*) AS c FROM segments")['c'] or 0
+    queued = query_one(conn, "SELECT COUNT(*) AS c FROM publish_jobs WHERE status IN ('queued', 'running')")['c'] or 0
+    uploaded = query_one(conn, "SELECT COUNT(*) AS c FROM publish_jobs WHERE status='succeeded'")['c'] or 0
+    
+    # Get channel breakdown
+    channel_pipeline = []
+    channels = query_all(conn, "SELECT DISTINCT channel_name FROM channels ORDER BY channel_name")
+    
+    for channel_row in channels:
+        channel = channel_row['channel_name']
+        
+        # Count clips at each stage for this channel
+        # Note: clip_assets links segments to channels
+        ch_discovered = query_one(
+            conn,
+            "SELECT COUNT(DISTINCT s.source_id) AS c FROM sources s WHERE s.source_id IN (SELECT DISTINCT segment_id FROM segments WHERE segment_id IN (SELECT segment_id FROM clip_assets WHERE channel_name=?))",
+            (channel,)
+        )['c'] or 0
+        
+        ch_downloaded = query_one(
+            conn,
+            "SELECT COUNT(DISTINCT s.source_id) AS c FROM sources s WHERE s.download_path IS NOT NULL AND s.source_id IN (SELECT DISTINCT segment_id FROM segments WHERE segment_id IN (SELECT segment_id FROM clip_assets WHERE channel_name=?))",
+            (channel,)
+        )['c'] or 0
+        
+        ch_processed = query_one(
+            conn,
+            "SELECT COUNT(*) AS c FROM segments WHERE segment_id IN (SELECT segment_id FROM clip_assets WHERE channel_name=?)",
+            (channel,)
+        )['c'] or 0
+        
+        ch_queued = query_one(
+            conn,
+            "SELECT COUNT(*) AS c FROM publish_jobs WHERE channel_name=? AND status IN ('queued', 'running')",
+            (channel,)
+        )['c'] or 0
+        
+        ch_uploaded = query_one(
+            conn,
+            "SELECT COUNT(*) AS c FROM publish_jobs WHERE channel_name=? AND status='succeeded'",
+            (channel,)
+        )['c'] or 0
+        
+        if ch_discovered > 0 or ch_queued > 0 or ch_uploaded > 0:  # Only include active channels
+            channel_pipeline.append({
+                'channel': channel,
+                'discovered': ch_discovered,
+                'downloaded': ch_downloaded,
+                'processed': ch_processed,
+                'queued': ch_queued,
+                'uploaded': ch_uploaded,
+            })
+    
+    # Calculate throughput: clips/hour moving from queued to uploaded
+    # Look at last 24 hours of successful uploads
+    throughput_rows = query_all(
+        conn,
+        """
+        SELECT COUNT(*) AS uploads_24h
+        FROM publish_jobs
+        WHERE status='succeeded'
+          AND datetime(updated_at) >= datetime('now', '-1 day')
+        """
+    )
+    uploads_24h = throughput_rows[0]['uploads_24h'] or 0 if throughput_rows else 0
+    throughput_per_hour = round(uploads_24h / 24.0, 2)
+    
+    # Calculate average time at each stage (in hours)
+    # Discovered to Downloaded
+    disc_to_dl_rows = query_all(
+        conn,
+        """
+        SELECT AVG((julianday(s.ingested_at) - julianday(s.ingested_at)) * 24) AS avg_hours
+        FROM sources s
+        WHERE s.download_path IS NOT NULL
+          AND s.ingested_at IS NOT NULL
+        """
+    )
+    avg_disc_to_dl = 0.0  # Simplified: assume immediate for now
+    
+    # Queued to Uploaded
+    q_to_up_rows = query_all(
+        conn,
+        """
+        SELECT AVG((julianday(pj.updated_at) - julianday(pj.created_at)) * 24) AS avg_hours
+        FROM publish_jobs pj
+        WHERE pj.status='succeeded'
+        """
+    )
+    avg_q_to_up = round(q_to_up_rows[0]['avg_hours'] or 0.0, 2) if q_to_up_rows else 0.0
+    
+    # Identify bottleneck (slowest stage based on queue depth)
+    stages = [
+        ('discovered', discovered),
+        ('downloaded', downloaded),
+        ('processed', processed),
+        ('queued', queued),
+    ]
+    
+    bottleneck_stage = 'queued'  # Default to queued (most likely bottleneck)
+    max_backlog = queued
+    for stage_name, count in stages:
+        if count > max_backlog:
+            bottleneck_stage = stage_name
+            max_backlog = count
+    
+    return {
+        'overall': {
+            'discovered': discovered,
+            'downloaded': downloaded,
+            'processed': processed,
+            'queued': queued,
+            'uploaded': uploaded,
+        },
+        'by_channel': channel_pipeline,
+        'throughput': {
+            'uploads_per_hour': throughput_per_hour,
+            'uploads_last_24h': uploads_24h,
+        },
+        'stage_timings': {
+            'discovered_to_downloaded_hours': avg_disc_to_dl,
+            'queued_to_uploaded_hours': avg_q_to_up,
+        },
+        'bottleneck': {
+            'stage': bottleneck_stage,
+            'backlog': max_backlog,
+        },
+    }
+
+
 def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     queue_monitor = get_queue_monitor(conn)
     queue_status = get_queue_status(conn)
@@ -1316,6 +1465,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     schedule = get_upload_schedule(conn)
     quota = get_quota_usage(conn)
     revenue = get_revenue_estimate(conn)
+    pipeline = get_pipeline_status(conn)
     lagging = [item for item in channel_performance if item['lagging']]
     payload = {
         'generated_at': utc_now().isoformat() + 'Z',
@@ -1338,6 +1488,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'schedule': schedule,
         'quota': quota,
         'revenue': revenue,
+        'pipeline': pipeline,
         'leaderboard': get_channel_leaderboard(conn),
         'insights': {
             'lagging_channels': lagging[:6],

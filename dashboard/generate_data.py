@@ -1171,6 +1171,141 @@ def get_quota_usage(conn: sqlite3.Connection) -> dict[str, Any]:
     }
 
 
+def get_revenue_estimate(conn: sqlite3.Connection) -> dict[str, Any]:
+    """Calculate estimated monthly revenue based on channel views and niche RPM rates.
+    
+    RPM rates by niche (revenue per 1000 views):
+    - Finance: $4.50 (market_meltdowns, crypto_confessions, rich_or_ruined)
+    - Business: $3.50 (startup_graveyard, self_made_clips)
+    - Tech/AI: $3.00 (ai_did_what)
+    - Fitness: $2.50 (gym_moments)
+    - Food: $1.50 (kitchen_chaos)
+    - True Crime: $2.00 (cases_unsolved)
+    - Gaming/Clips: $0.80 (arc_highlightz, fomo_highlights, viral_recaps, unfiltered_clips)
+    - Female Streamers: $1.20 (stream_sirens, stream_queens)
+    """
+    # Define niche mappings and RPM rates
+    niche_rpm = {
+        'market_meltdowns': {'niche': 'Finance', 'rpm': 4.50},
+        'crypto_confessions': {'niche': 'Finance', 'rpm': 4.50},
+        'rich_or_ruined': {'niche': 'Finance', 'rpm': 4.50},
+        'startup_graveyard': {'niche': 'Business', 'rpm': 3.50},
+        'self_made_clips': {'niche': 'Business', 'rpm': 3.50},
+        'ai_did_what': {'niche': 'Tech/AI', 'rpm': 3.00},
+        'gym_moments': {'niche': 'Fitness', 'rpm': 2.50},
+        'kitchen_chaos': {'niche': 'Food', 'rpm': 1.50},
+        'cases_unsolved': {'niche': 'True Crime', 'rpm': 2.00},
+        'arc_highlightz': {'niche': 'Gaming/Clips', 'rpm': 0.80},
+        'fomo_highlights': {'niche': 'Gaming/Clips', 'rpm': 0.80},
+        'viral_recaps': {'niche': 'Gaming/Clips', 'rpm': 0.80},
+        'unfiltered_clips': {'niche': 'Gaming/Clips', 'rpm': 0.80},
+        'stream_sirens': {'niche': 'Female Streamers', 'rpm': 1.20},
+        'stream_queens': {'niche': 'Female Streamers', 'rpm': 1.20},
+    }
+    
+    # Query metrics_daily for last 30 days
+    rows = query_all(
+        conn,
+        """
+        SELECT channel_name,
+               COALESCE(SUM(NULLIF(views_total, 0)), 0) AS views_30d,
+               COALESCE(COUNT(*), 0) AS days_tracked
+        FROM metrics_daily
+        WHERE platform = 'youtube'
+          AND date >= date('now', '-30 day')
+        GROUP BY channel_name
+        ORDER BY views_30d DESC
+        """,
+    )
+    
+    # Calculate per-channel revenue
+    channel_revenue = []
+    total_views_30d = 0
+    total_revenue_30d = 0.0
+    
+    for row in rows:
+        channel = row['channel_name']
+        views = float(row['views_30d'] or 0)
+        
+        if channel not in niche_rpm:
+            # Unknown channel, use default RPM of 1.50
+            niche_data = {'niche': 'Other', 'rpm': 1.50}
+        else:
+            niche_data = niche_rpm[channel]
+        
+        rpm = niche_data['rpm']
+        estimated_monthly = round((views / 1000.0) * rpm, 2)
+        
+        total_views_30d += views
+        total_revenue_30d += estimated_monthly
+        
+        channel_revenue.append({
+            'channel': channel,
+            'niche': niche_data['niche'],
+            'views_30d': int(views),
+            'rpm': rpm,
+            'estimated_monthly': estimated_monthly,
+        })
+    
+    # Calculate growth rate and projections
+    # Query daily totals to estimate growth trend
+    daily_totals = query_all(
+        conn,
+        """
+        SELECT date,
+               COALESCE(SUM(NULLIF(views_total, 0)), 0) AS daily_total_views
+        FROM metrics_daily
+        WHERE platform = 'youtube'
+          AND date >= date('now', '-30 day')
+        GROUP BY date
+        ORDER BY date
+        """,
+    )
+    
+    # Calculate average daily views for growth projection
+    growth_rate = 1.0  # No growth by default
+    if len(daily_totals) >= 7:
+        first_week = sum(float(row['daily_total_views'] or 0) for row in daily_totals[:7])
+        last_week = sum(float(row['daily_total_views'] or 0) for row in daily_totals[-7:])
+        if first_week > 0:
+            growth_rate = last_week / first_week if last_week > 0 else 1.0
+    
+    # Calculate projected revenue at current growth rate
+    monthly_avg_views = total_views_30d / 30.0
+    projected_annual_revenue = total_revenue_30d * 12
+    
+    # Revenue milestones and progress
+    milestones = [500, 1000, 2000, 5000, 10000]
+    next_milestone = None
+    months_to_milestone = None
+    
+    for milestone in milestones:
+        if total_revenue_30d < milestone:
+            next_milestone = milestone
+            monthly_growth = total_revenue_30d * (growth_rate - 1.0)
+            if monthly_growth > 0:
+                months_to_milestone = round((milestone - total_revenue_30d) / monthly_growth)
+            else:
+                months_to_milestone = None
+            break
+    
+    progress_pct = round((total_revenue_30d / next_milestone) * 100, 1) if next_milestone else 100.0
+    
+    return {
+        'total_views_30d': int(total_views_30d),
+        'total_revenue_30d': round(total_revenue_30d, 2),
+        'average_rpm': round(total_revenue_30d / (total_views_30d / 1000.0), 2) if total_views_30d > 0 else 0.0,
+        'monthly_avg_views': round(monthly_avg_views, 0),
+        'projected_annual_revenue': round(projected_annual_revenue, 2),
+        'growth_rate': round((growth_rate - 1.0) * 100, 1),
+        'next_milestone': next_milestone,
+        'progress_to_milestone_pct': progress_pct,
+        'months_to_next_milestone': months_to_milestone,
+        'channel_breakdown': channel_revenue,
+        'summary': f"At current pace, you'll reach ${next_milestone}/mo in approximately {months_to_milestone} months" if months_to_milestone and next_milestone else "Keep up the great work!",
+    }
+
+
 def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     queue_monitor = get_queue_monitor(conn)
     queue_status = get_queue_status(conn)
@@ -1180,6 +1315,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     error_analysis = get_error_analysis(conn)
     schedule = get_upload_schedule(conn)
     quota = get_quota_usage(conn)
+    revenue = get_revenue_estimate(conn)
     lagging = [item for item in channel_performance if item['lagging']]
     payload = {
         'generated_at': utc_now().isoformat() + 'Z',
@@ -1201,6 +1337,7 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
         'current_settings': get_current_settings(conn),
         'schedule': schedule,
         'quota': quota,
+        'revenue': revenue,
         'leaderboard': get_channel_leaderboard(conn),
         'insights': {
             'lagging_channels': lagging[:6],

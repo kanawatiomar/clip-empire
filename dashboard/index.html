@@ -526,6 +526,127 @@
       justify-content: space-between;
       gap: 8px;
     }
+    /* Revenue Estimator Styles */
+    .revenue-hero {
+      background: linear-gradient(135deg, rgba(201,168,76,.2), rgba(201,168,76,.08));
+      border: 1px solid rgba(201,168,76,.3);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .revenue-hero-label {
+      color: var(--muted);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-family: var(--mono);
+      margin-bottom: 12px;
+    }
+    .revenue-hero-value {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: var(--gold-2);
+      font-family: var(--mono);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .revenue-hero-subtext {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .revenue-progress-wrapper {
+      margin: 20px 0;
+    }
+    .revenue-progress-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .revenue-progress-bar {
+      height: 12px;
+      background: rgba(255,255,255,.08);
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(201,168,76,.2);
+    }
+    .revenue-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-2));
+      border-radius: 999px;
+      transition: width 0.5s ease;
+    }
+    .revenue-breakdown {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .revenue-breakdown-header {
+      display: grid;
+      grid-template-columns: 2fr 1.2fr 1.2fr 1.2fr;
+      gap: 12px;
+      padding: 12px 14px;
+      background: rgba(255,255,255,.03);
+      border-radius: 10px;
+      font-size: 12px;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: var(--mono);
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,.05);
+    }
+    .revenue-breakdown-row {
+      display: grid;
+      grid-template-columns: 2fr 1.2fr 1.2fr 1.2fr;
+      gap: 12px;
+      padding: 12px 14px;
+      background: rgba(255,255,255,.02);
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.04);
+      transition: all 0.2s ease;
+    }
+    .revenue-breakdown-row:hover {
+      background: rgba(201,168,76,.08);
+      border-color: rgba(201,168,76,.2);
+    }
+    .revenue-breakdown-row > div {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+    }
+    .revenue-breakdown-channel {
+      color: var(--gold-2);
+      font-weight: 600;
+    }
+    .revenue-breakdown-views {
+      font-family: var(--mono);
+      color: var(--text);
+    }
+    .revenue-breakdown-rpm {
+      font-family: var(--mono);
+      color: var(--muted);
+    }
+    .revenue-breakdown-monthly {
+      font-family: var(--mono);
+      color: var(--success);
+      font-weight: 600;
+    }
+    .revenue-disclaimer {
+      margin-top: 16px;
+      padding: 12px 14px;
+      background: rgba(232,176,78,.08);
+      border: 1px solid rgba(232,176,78,.2);
+      border-radius: 10px;
+      font-size: 12px;
+      color: var(--warning);
+      line-height: 1.5;
+      font-style: italic;
+    }
   </style>
 </head>
 <body>
@@ -640,6 +761,52 @@
           Reset in: <strong id="quotaResetTime">—</strong>
         </div>
         <div class="quota-grid" id="quotaGrid"></div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:18px;">
+      <div class="card-head">
+        <h2>Revenue Estimator</h2>
+        <div class="top-note">Estimated AdSense revenue based on 30-day metrics • By niche</div>
+      </div>
+      <div class="card-body">
+        <div class="revenue-hero">
+          <div class="revenue-hero-label">Total Estimated Monthly Revenue</div>
+          <div class="revenue-hero-value" id="revenueTotal">$0.00</div>
+          <div class="revenue-hero-subtext" id="revenueSummary">—</div>
+        </div>
+        
+        <div class="revenue-progress-wrapper">
+          <div class="revenue-progress-label">
+            <span>Progress to Next Milestone</span>
+            <span id="revenueMilestoneText">$0 / $500</span>
+          </div>
+          <div class="revenue-progress-bar">
+            <div class="revenue-progress-fill" id="revenueProgressBar" style="width: 0%;"></div>
+          </div>
+          <div style="color: var(--muted); font-size: 12px; margin-top: 8px; font-family: var(--mono);" id="revenueProjection">
+            Loading…
+          </div>
+        </div>
+        
+        <div style="margin-top: 24px;">
+          <div style="color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; font-family: var(--mono);">
+            Per-Channel 30-Day Breakdown
+          </div>
+          <div class="revenue-breakdown">
+            <div class="revenue-breakdown-header">
+              <div>Channel</div>
+              <div style="text-align:right;">Views</div>
+              <div style="text-align:right;">RPM</div>
+              <div style="text-align:right;">Est. Monthly</div>
+            </div>
+            <div id="revenueChannelBreakdown"></div>
+          </div>
+        </div>
+        
+        <div class="revenue-disclaimer">
+          ⚠️ Estimates based on niche RPM averages. Actual AdSense varies by geography, seasonality, and ad demand. Use as a projection tool only.
+        </div>
       </div>
     </section>
 
@@ -1525,6 +1692,57 @@
       byId('quotaGrid').innerHTML = quotaHTML || '<div style="padding:20px; color:var(--muted); text-align:center;">No quota data available.</div>';
     }
 
+    function renderRevenue(){
+      const revenue = dataCache.revenue || {};
+      
+      // Render hero section
+      const totalRevenue = parseFloat(revenue.total_revenue_30d || 0);
+      const totalViews = parseInt(revenue.total_views_30d || 0);
+      const avgRpm = parseFloat(revenue.average_rpm || 0);
+      const nextMilestone = revenue.next_milestone || 500;
+      const progressPct = parseFloat(revenue.progress_to_milestone_pct || 0);
+      const monthsToMilestone = revenue.months_to_next_milestone;
+      const summary = revenue.summary || 'Keep up the great work!';
+      const growthRate = parseFloat(revenue.growth_rate || 0);
+      
+      byId('revenueTotal').textContent = `$${totalRevenue.toFixed(2)}`;
+      
+      let subtext = `${totalViews.toLocaleString()} views • Avg RPM: $${avgRpm.toFixed(2)}`;
+      if (growthRate !== 0) {
+        subtext += ` • Growth: ${growthRate > 0 ? '+' : ''}${growthRate.toFixed(1)}%`;
+      }
+      byId('revenueSummary').textContent = subtext;
+      
+      // Render progress bar
+      const safeProgress = Math.min(Math.max(progressPct, 0), 100);
+      byId('revenueProgressBar').style.width = `${safeProgress}%`;
+      byId('revenueMilestoneText').textContent = `$${totalRevenue.toFixed(2)} / $${nextMilestone}`;
+      
+      let projectionText = summary;
+      if (monthsToMilestone !== null && monthsToMilestone !== undefined) {
+        projectionText = `At current pace, you'll reach $${nextMilestone}/mo in approximately ${Math.max(1, monthsToMilestone)} month${monthsToMilestone === 1 ? '' : 's'}`;
+      }
+      byId('revenueProjection').textContent = projectionText;
+      
+      // Render channel breakdown
+      const breakdown = revenue.channel_breakdown || [];
+      const breakdownHTML = breakdown.length > 0 ? breakdown.map(item => {
+        const views = parseInt(item.views_30d || 0);
+        const rpm = parseFloat(item.rpm || 0);
+        const estMonthly = parseFloat(item.estimated_monthly || 0);
+        return `
+          <div class="revenue-breakdown-row">
+            <div class="revenue-breakdown-channel">${esc(item.channel)} <span style="color:var(--muted); font-size:12px;">(${item.niche})</span></div>
+            <div class="revenue-breakdown-views" style="text-align:right;">${views.toLocaleString()}</div>
+            <div class="revenue-breakdown-rpm" style="text-align:right;">$${rpm.toFixed(2)}</div>
+            <div class="revenue-breakdown-monthly" style="text-align:right;">$${estMonthly.toFixed(2)}</div>
+          </div>
+        `;
+      }).join('') : '<div style="padding:20px; color:var(--muted); text-align:center;">No revenue data available yet.</div>';
+      
+      byId('revenueChannelBreakdown').innerHTML = breakdownHTML;
+    }
+
     function renderLeaderboard(){
       const leaderboard = dataCache.leaderboard || [];
       if (!leaderboard || leaderboard.length === 0) {
@@ -1627,6 +1845,7 @@
       renderChannels();
       renderSchedule();
       renderQuota();
+      renderRevenue();
       renderLeaderboard();
       renderAnalytics();
       renderSourceHealth();

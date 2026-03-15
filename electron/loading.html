@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clip Empire Dashboard - Loading</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0e17;
+            color: #c9a84c;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .loading-container {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 30px;
+            border: 4px solid #2a2f3f;
+            border-top-color: #c9a84c;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .status {
+            font-size: 14px;
+            color: #888;
+            margin-top: 20px;
+            animation: fadeInOut 2s infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            font-size: 18px;
+            color: #666;
+            margin-top: 40px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-container">
+        <div class="spinner"></div>
+        <h1>🎬 Clip Empire</h1>
+        <p style="color: #999; margin-bottom: 20px;">Control Center</p>
+        <p style="color: #c9a84c; font-size: 16px;">Starting Clip Empire...</p>
+        <div class="status">Initializing server...</div>
+        <div class="logo">Powered by Python & Electron</div>
+    </div>
+</body>
+</html>

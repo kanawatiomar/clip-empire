@@ -1,4 +1,4 @@
-"""Writes processed clips into the publish_jobs queue.
+﻿"""Writes processed clips into the publish_jobs queue.
 
 Creates the necessary platform_variants record (so foreign key is satisfied)
 then calls add_publish_job() from publisher/queue.py.

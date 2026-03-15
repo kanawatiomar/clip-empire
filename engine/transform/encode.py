@@ -25,13 +25,21 @@ TARGET_PEAK = -1.5
 
 
 def detect_gpu() -> bool:
-    """Return True if ffmpeg has NVENC support (NVIDIA GPU + CUDA drivers)."""
+    """Return True if ffmpeg NVENC works (tests actual encode, not just presence)."""
     try:
         result = subprocess.run(
             [FFMPEG_BIN, "-hide_banner", "-encoders"],
             capture_output=True, text=True, timeout=10,
         )
-        return "h264_nvenc" in result.stdout
+        if "h264_nvenc" not in result.stdout:
+            return False
+        # Actually test NVENC works (driver version check)
+        test = subprocess.run(
+            [FFMPEG_BIN, "-hide_banner", "-f", "lavfi", "-i", "nullsrc=s=1080x1920:d=0.1",
+             "-c:v", "h264_nvenc", "-f", "null", "-"],
+            capture_output=True, timeout=10,
+        )
+        return test.returncode == 0
     except Exception:
         return False
 

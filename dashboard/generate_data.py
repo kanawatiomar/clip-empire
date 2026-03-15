@@ -550,7 +550,7 @@ def get_recent_clips(conn: sqlite3.Connection) -> list[dict[str, Any]]:
         conn,
         """
         SELECT pj.job_id, pj.channel_name, pj.caption_text, pj.updated_at,
-               pr.post_url, pv.clip_id
+               pr.post_url, pr.views, pv.clip_id
         FROM publish_jobs pj
         LEFT JOIN publish_results pr ON pr.job_id = pj.job_id
         LEFT JOIN platform_variants pv ON pv.variant_id = pj.variant_id
@@ -563,6 +563,7 @@ def get_recent_clips(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     for row in rows:
         channel = row['channel_name']
         clip_id = row['clip_id']
+        views = int(row['views'] or 0) if row['views'] else 0
         
         # Build thumbnail path: renders/thumbnails/{channel}/{clip_id}.jpg
         thumbnail_path = None
@@ -584,6 +585,8 @@ def get_recent_clips(conn: sqlite3.Connection) -> list[dict[str, Any]]:
             'title_truncated': title_truncated,
             'thumbnail_path': thumbnail_path,
             'post_url': row['post_url'],
+            'views': views,
+            'views_display': fmt_num_compact(views) if views > 0 else '—',
             'published_at': row['updated_at'],
             'published_at_display': fmt_compact_dt(row['updated_at']),
             'published_ago': rel_time(row['updated_at']),
@@ -1060,6 +1063,7 @@ def get_hall_of_fame(conn: sqlite3.Connection) -> dict[str, Any]:
     - best_per_channel: one top clip per channel showing their personal best
     
     Links platform_variants to source_clips by extracting UUID from render_path.
+    Uses YouTube published views (publish_results.views) if available, falls back to source_clips.view_count.
     """
     import re
     
@@ -1070,34 +1074,41 @@ def get_hall_of_fame(conn: sqlite3.Connection) -> dict[str, Any]:
         """
         SELECT pj.job_id, pj.channel_name, pj.caption_text, pj.updated_at,
                pv.clip_id, pv.render_path,
-               pr.post_url
+               pr.post_url, pr.views AS youtube_views,
+               sc.view_count AS source_views
         FROM publish_jobs pj
         LEFT JOIN platform_variants pv ON pv.variant_id = pj.variant_id
         LEFT JOIN publish_results pr ON pr.job_id = pj.job_id
+        LEFT JOIN source_clips sc ON sc.clip_id = pv.clip_id
         WHERE pj.status='succeeded'
         """,
     )
     
-    # Get all source clips
-    source_clips_map = {}
-    source_clip_rows = query_all(conn, "SELECT clip_id, view_count FROM source_clips WHERE view_count > 0")
-    for row in source_clip_rows:
-        source_clips_map[row['clip_id']] = int(row['view_count'] or 0)
-    
-    # Build hall of fame entries by matching render_path UUID to source_clips
+    # Build hall of fame entries
     hof_entries = []
     for row in rows:
         uuid = extract_uuid_from_render_path(row['render_path'])
-        if uuid and uuid in source_clips_map:
-            views = source_clips_map[uuid]
-            hof_entries.append({
-                'channel': row['channel_name'],
-                'title': row['caption_text'] or 'Untitled clip',
-                'updated_at': row['updated_at'],
-                'post_url': row['post_url'],
-                'source_clip_id': uuid,
-                'views': views,
-            })
+        if not uuid:
+            continue
+        
+        # Prefer YouTube views if available, otherwise use source clip views
+        youtube_views = int(row['youtube_views'] or 0) if row['youtube_views'] else 0
+        source_views = int(row['source_views'] or 0) if row['source_views'] else 0
+        views = youtube_views if youtube_views > 0 else source_views
+        
+        # Skip if no views data available
+        if views == 0:
+            continue
+        
+        hof_entries.append({
+            'channel': row['channel_name'],
+            'title': row['caption_text'] or 'Untitled clip',
+            'updated_at': row['updated_at'],
+            'post_url': row['post_url'],
+            'source_clip_id': uuid,
+            'views': views,
+            'views_source': 'youtube' if youtube_views > 0 else 'source',
+        })
     
     # Sort by views descending
     hof_entries.sort(key=lambda x: x['views'], reverse=True)
@@ -1189,11 +1200,12 @@ def fmt_num_compact(value: int) -> str:
 def get_channel_leaderboard(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     """Build ranked channel leaderboard with all-time views, recent uploads, and best clips.
     
-    Primary data source: source_clips (via publish_jobs join).
+    Primary data source: YouTube published views (publish_results.views), 
+    fallback to source_clips views.
     Fallback: metrics_daily if available.
     """
     
-    # Try metrics_daily first (if populated), otherwise use source_clips
+    # Try metrics_daily first (if populated), otherwise use combined source_clips + youtube views
     metrics_count = query_one(conn, "SELECT COUNT(*) AS c FROM metrics_daily")['c']
     
     if metrics_count > 0:
@@ -1209,15 +1221,16 @@ def get_channel_leaderboard(conn: sqlite3.Connection) -> list[dict[str, Any]]:
         )
         total_views_map = {row['channel_name']: int(row['total_views'] or 0) for row in total_views_rows}
     else:
-        # Fallback: sum views from source_clips used by each channel (proxy for all-time)
+        # Fallback: sum views from both YouTube publishes and source_clips
         total_views_rows = query_all(
             conn,
             """
             SELECT pj.channel_name,
-                   COALESCE(SUM(NULLIF(sc.view_count, 0)), 0) AS total_views
+                   COALESCE(SUM(NULLIF(sc.view_count, 0)), 0) + COALESCE(SUM(NULLIF(pr.views, 0)), 0) AS total_views
             FROM publish_jobs pj
             LEFT JOIN platform_variants pv ON pv.variant_id = pj.variant_id
             LEFT JOIN source_clips sc ON sc.clip_id = pv.clip_id
+            LEFT JOIN publish_results pr ON pr.job_id = pj.job_id
             WHERE pj.status='succeeded'
             GROUP BY pj.channel_name
             """,
@@ -1237,16 +1250,17 @@ def get_channel_leaderboard(conn: sqlite3.Connection) -> list[dict[str, Any]]:
     )
     uploads_30d_map = {row['channel_name']: int(row['uploads_30d'] or 0) for row in uploads_30d_rows}
     
-    # Get best clip per channel (highest view count from source_clips)
+    # Get best clip per channel (highest view count, preferring YouTube published views)
     best_clips_rows = query_all(
         conn,
         """
         SELECT pj.channel_name,
                sc.clip_id,
                sc.title,
-               COALESCE(sc.view_count, 0) AS view_count,
+               COALESCE(sc.view_count, 0) AS source_view_count,
+               COALESCE(pr.views, 0) AS youtube_view_count,
                pr.post_url,
-               ROW_NUMBER() OVER (PARTITION BY pj.channel_name ORDER BY COALESCE(sc.view_count, 0) DESC) AS rn
+               ROW_NUMBER() OVER (PARTITION BY pj.channel_name ORDER BY COALESCE(pr.views, sc.view_count, 0) DESC) AS rn
         FROM publish_jobs pj
         LEFT JOIN platform_variants pv ON pv.variant_id = pj.variant_id
         LEFT JOIN source_clips sc ON sc.clip_id = pv.clip_id
@@ -1255,14 +1269,16 @@ def get_channel_leaderboard(conn: sqlite3.Connection) -> list[dict[str, Any]]:
         """,
     )
     
-    # Track best clip per channel (highest views)
+    # Track best clip per channel (highest views, prefer YouTube)
     best_clips_map = {}
     for row in best_clips_rows:
         channel = row['channel_name']
         if channel not in best_clips_map and row['title']:
+            # Prefer YouTube published views if available
+            views = int(row['youtube_view_count'] or 0) if row['youtube_view_count'] else int(row['source_view_count'] or 0)
             best_clips_map[channel] = {
                 'title': row['title'],
-                'views': int(row['view_count'] or 0),
+                'views': views,
                 'url': row['post_url'] or '',
             }
     

@@ -36,11 +36,6 @@ jobs:
         with:
           python-version: '3.x'
       
-      - name: Generate fresh dashboard data
-        run: |
-          cd dashboard
-          python generate_data.py
-      
       - name: Setup Pages
         uses: actions/configure-pages@v4
       

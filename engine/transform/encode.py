@@ -55,7 +55,7 @@ class EncodeTransform:
         if self.use_gpu:
             print("[encode] NVENC GPU encoding enabled")
         else:
-            print("[encode] CPU encoding (libx264) — no NVENC detected")
+            print("[encode] CPU encoding (libx264) - no NVENC detected")
 
     def process(
         self,

@@ -389,7 +389,7 @@ class YtDlpIngester:
                 },
             )
             clips.append(clip)
-            print(f"[longform] Segment ready: {title[:40]} → {clip_id}")
+            print(f"[longform] Segment ready: {title[:40]} -> {clip_id}")
 
         return clips
 

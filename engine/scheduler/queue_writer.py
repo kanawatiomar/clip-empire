@@ -447,5 +447,5 @@ class QueueWriter:
             thumbnail_path=thumbnail_path,
         )
 
-        print(f"[queue] Enqueued {channel_name} → {job_id} (schedule: {sched.strftime('%Y-%m-%d %H:%M')}, A/B={ab_label})")
+        print(f"[queue] Enqueued {channel_name} -> {job_id} (schedule: {sched.strftime('%Y-%m-%d %H:%M')}, A/B={ab_label})")
         return job_id

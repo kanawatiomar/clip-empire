@@ -300,7 +300,7 @@ class Runner:
         print(f"           Duration: {clip.duration_s:.1f}s | {clip.width}x{clip.height}")
 
         if self.dry_run:
-            print(f"[pipeline] DRY RUN — skipping actual processing")
+            print(f"[pipeline] DRY RUN - skipping actual processing")
             return None
 
         # ── Quality gate: skip boring clips before rendering ──────────────────

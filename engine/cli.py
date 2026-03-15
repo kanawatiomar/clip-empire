@@ -32,6 +32,12 @@ from __future__ import annotations
 import argparse
 import sys
 
+# Force UTF-8 stdout/stderr on Windows to prevent charmap encoding errors
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 from accounts.channel_definitions import CHANNELS
 from engine.scheduler.budget import BudgetManager
 from engine.scheduler.runner import Runner
@@ -43,12 +49,12 @@ def cmd_status() -> None:
     """Print budget status for all channels."""
     budget = BudgetManager()
     print(f"\n{'Channel':<22} {'Niche':<12} {'Target':<8} {'Used':<6} {'Slots'}")
-    print("─" * 60)
+    print("-" * 60)
     for name, cfg in sorted(CHANNELS.items()):
         target = budget.get_daily_target(name)
         used = budget.get_queued_today(name)
         slots = budget.slots_remaining(name)
-        status = "✓" if slots > 0 else "FULL"
+        status = "OK" if slots > 0 else "FULL"
         niche = cfg.get("niche", "?")
         print(f"{name:<22} {niche:<12} {target:<8} {used:<6} {slots}  {status}")
     print()
@@ -109,10 +115,10 @@ def main() -> None:
     if args.all:
         results = runner.run_all(count_per_channel=args.count)
         total = sum(len(v) for v in results.values())
-        print(f"\n✅ Done: {total} jobs queued")
+        print(f"\n[done] {total} jobs queued")
     else:
         jobs = runner.run_channel(args.channel, count=args.count)
-        print(f"\n✅ Done: {len(jobs)} job(s) queued for {args.channel}")
+        print(f"\n[done] {len(jobs)} job(s) queued for {args.channel}")
 
 
 if __name__ == "__main__":

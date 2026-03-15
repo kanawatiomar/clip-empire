@@ -97,7 +97,7 @@ class CropTransform:
             output_path,
         ]
 
-        print(f"[crop] Processing {os.path.basename(input_path)} → {os.path.basename(output_path)}")
+        print(f"[crop] Processing {os.path.basename(input_path)} -> {os.path.basename(output_path)}")
         result = subprocess.run(cmd, capture_output=True)
         if result.returncode != 0:
             raise RuntimeError(f"ffmpeg crop failed: {result.stderr.decode()[:400]}")
@@ -142,7 +142,7 @@ class CropTransform:
             overlay_x = "(main_w-overlay_w)/2"
             log_anchor = "center"
 
-        print(f"[crop] Anchor={log_anchor} (fg_w={fg_w}px → crop to {TARGET_W}px)")
+        print(f"[crop] Anchor={log_anchor} (fg_w={fg_w}px -> crop to {TARGET_W}px)")
 
         return (
             # Background: scale + blur fill

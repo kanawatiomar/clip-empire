@@ -161,10 +161,10 @@ def extract_best_segment(
     try:
         duration = get_video_duration(video_path)
         if duration < MIN_LONGFORM_DUR_S:
-            print(f"[longform] Skipping — too short ({duration:.0f}s)")
+            print(f"[longform] Skipping - too short ({duration:.0f}s)")
             return None
         if duration > MAX_LONGFORM_DUR_S:
-            print(f"[longform] Skipping — too long ({duration:.0f}s)")
+            print(f"[longform] Skipping - too long ({duration:.0f}s)")
             return None
 
         skip_end = duration - OUTRO_SKIP_S
@@ -178,7 +178,7 @@ def extract_best_segment(
             skip_start=INTRO_SKIP_S,
             skip_end_abs=skip_end,
         )
-        print(f"[longform] Best segment: {start_s:.1f}s → {end_s:.1f}s "
+        print(f"[longform] Best segment: {start_s:.1f}s -> {end_s:.1f}s "
               f"(peak energy window)")
 
         extract_segment(video_path, start_s, end_s, output_path)

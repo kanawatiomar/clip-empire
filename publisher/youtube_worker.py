@@ -213,9 +213,8 @@ class YouTubeWorkerConfig:
 
     nav_timeout_ms: int = 60_000
 
-    # Headless should be False for reliability (and to allow manual intervention)
-
-    headless: bool = False
+    # Headless mode: no visible browser window (better for background operation)
+    headless: bool = True
 
     # Timezone for scheduling
 
@@ -745,13 +744,19 @@ def _set_visibility_and_schedule(
 
     schedule_time_local = schedule_at.astimezone(tz)
 
+    time_delta = schedule_time_local - now
 
+    use_scheduling = time_delta.total_seconds() > 15 * 60  # More than 15 minutes in future
 
-    # Always publish immediately as Public - scheduling UI is unreliable
+    
 
-    # and Shorts don't benefit from scheduling (algorithm-driven discovery)
+    if use_scheduling:
 
-    print("Publishing immediately as Public.")
+        print(f"Scheduling video for {schedule_time_local.isoformat()} (in {time_delta.total_seconds()/60:.1f} minutes)")
+
+    else:
+
+        print(f"Publishing immediately as Public (schedule_at is {time_delta.total_seconds()/60:.1f} minutes from now)")
 
 
 
@@ -763,129 +768,294 @@ def _set_visibility_and_schedule(
 
 
 
-    # Use multiple strategies to select Public — aria-checked alone is not enough
-    # (YouTube web components can show aria-checked=true without triggering form state change)
-    def _try_select_public() -> bool:
-        """Returns True if done-button text became 'Publish'."""
-        # Strategy 1: click the inner paper-radio-button directly
+    if use_scheduling:
+
+        # ════════════════════════════════════════════════════════════════════════════════
+
+        # SCHEDULING PATH: Click Schedule radio, set date/time, click Schedule button
+
+        # ════════════════════════════════════════════════════════════════════════════════
+
+        print("Selecting SCHEDULE option...")
+
+        # Click the Schedule radio button using JS dispatch (same pattern as Public)
         page.evaluate("""() => {
             const radios = document.querySelectorAll('tp-yt-paper-radio-button');
             for (const r of radios) {
-                if (r.getAttribute('name') === 'PUBLIC') {
+                if (r.getAttribute('name') === 'SCHEDULE') {
                     r.click();
                     r.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true}));
                     r.dispatchEvent(new Event('tap', {bubbles: true}));
-                    // Also try clicking the inner radio
                     const inner = r.shadowRoot && r.shadowRoot.querySelector('#radioButton');
                     if (inner) inner.click();
                     break;
                 }
             }
         }""")
-        page.wait_for_timeout(800)
-        # Check if done-button text changed to Publish
-        btn_text = page.evaluate("() => { const b = document.querySelector('#done-button'); return b ? b.innerText.trim() : ''; }")
-        print(f"  done-button text after JS click: {btn_text!r}")
-        return btn_text.lower() == "publish"
 
-    publish_confirmed = False
-    for attempt in range(4):
-        publish_confirmed = _try_select_public()
-        if publish_confirmed:
-            print(f"Public selected + done-button is 'Publish' (attempt {attempt+1})")
-            break
-        # Also try clicking via Playwright locator as backup
+        page.wait_for_timeout(1000)
+
+        # Wait for date/time inputs to appear
+
         try:
-            pub_loc = page.locator(SELECTORS["public_radio"])
-            if pub_loc.count() > 0:
-                pub_loc.click(force=True)
-                page.wait_for_timeout(600)
+
+            date_input = page.locator(SELECTORS["schedule_date_input"])
+
+            date_input.wait_for(state="visible", timeout=10000)
+
+            print("Date input appeared.")
+
+        except Exception as e:
+
+            print(f"WARNING: Date input did not appear: {e}")
+
+
+
+        # Set the date input (MM/DD/YYYY format)
+
+        date_str = schedule_time_local.strftime("%m/%d/%Y")
+
+        print(f"Setting date to: {date_str}")
+
+        try:
+
+            date_input = page.locator(SELECTORS["schedule_date_input"])
+
+            date_input.fill(date_str)
+
+            date_input.dispatch_event("change")
+
+            page.wait_for_timeout(1000)
+
+        except Exception as e:
+
+            print(f"WARNING: Could not set date: {e}")
+
+
+
+        # Set the time input (HH:MM AM/PM format)
+
+        time_str = schedule_time_local.strftime("%I:%M %p").lstrip("0")  # Remove leading 0 from hour
+
+        print(f"Setting time to: {time_str}")
+
+        try:
+
+            time_input = page.locator(SELECTORS["schedule_time_input"])
+
+            time_input.fill(time_str)
+
+            time_input.dispatch_event("change")
+
+            page.wait_for_timeout(1000)
+
+        except Exception as e:
+
+            print(f"WARNING: Could not set time: {e}")
+
+
+
+        # Click the Schedule button
+
+        print("Clicking Schedule button...")
+
+        try:
+
+            schedule_button = page.locator(SELECTORS["schedule_button"])
+
+            schedule_button.wait_for(state="visible", timeout=10000)
+
+            # Try JS click first
+
+            page.evaluate("""() => {
+                const btn = document.querySelector('#schedule-button-container ytcp-button#schedule-button');
+                if (btn) {
+                    btn.click();
+                    btn.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true}));
+                }
+            }""")
+
+            page.wait_for_timeout(500)
+
+            # Fallback: Playwright click
+
+            try:
+
+                schedule_button.click(force=True, timeout=5000)
+
+            except Exception:
+
+                pass
+
+            page.wait_for_timeout(1000)
+
+            print("Clicked Schedule button.")
+
+        except Exception as e:
+
+            print(f"WARNING: Could not click Schedule button: {e}")
+
+
+
+        # Wait for confirmation (upload dialog close or success dialog)
+
+        try:
+
+            page.locator("ytcp-uploads-dialog").wait_for(state="detached", timeout=60000)
+
+            print("Upload dialog closed — scheduling confirmed.")
+
+        except Exception:
+
+            try:
+
+                page.locator("ytcp-video-upload-success-dialog").wait_for(state="visible", timeout=15000)
+
+                print("Upload success dialog appeared — scheduling confirmed.")
+
+            except Exception:
+
+                print("Dialog wait timed out — waiting 5s for scheduling to register...")
+
+                page.wait_for_timeout(5000)
+
+
+
+        return f"scheduled:{schedule_at.isoformat()}"
+
+
+
+    else:
+
+        # ════════════════════════════════════════════════════════════════════════════════
+
+        # PUBLISH IMMEDIATELY PATH: Click Public radio and Publish button
+
+        # ════════════════════════════════════════════════════════════════════════════════
+
+        # Use multiple strategies to select Public — aria-checked alone is not enough
+        # (YouTube web components can show aria-checked=true without triggering form state change)
+        def _try_select_public() -> bool:
+            """Returns True if done-button text became 'Publish'."""
+            # Strategy 1: click the inner paper-radio-button directly
+            page.evaluate("""() => {
+                const radios = document.querySelectorAll('tp-yt-paper-radio-button');
+                for (const r of radios) {
+                    if (r.getAttribute('name') === 'PUBLIC') {
+                        r.click();
+                        r.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true}));
+                        r.dispatchEvent(new Event('tap', {bubbles: true}));
+                        // Also try clicking the inner radio
+                        const inner = r.shadowRoot && r.shadowRoot.querySelector('#radioButton');
+                        if (inner) inner.click();
+                        break;
+                    }
+                }
+            }""")
+            page.wait_for_timeout(800)
+            # Check if done-button text changed to Publish
+            btn_text = page.evaluate("() => { const b = document.querySelector('#done-button'); return b ? b.innerText.trim() : ''; }")
+            print(f"  done-button text after JS click: {btn_text!r}")
+            return btn_text.lower() == "publish"
+
+        publish_confirmed = False
+        for attempt in range(4):
+            publish_confirmed = _try_select_public()
+            if publish_confirmed:
+                print(f"Public selected + done-button is 'Publish' (attempt {attempt+1})")
+                break
+            # Also try clicking via Playwright locator as backup
+            try:
+                pub_loc = page.locator(SELECTORS["public_radio"])
+                if pub_loc.count() > 0:
+                    pub_loc.click(force=True)
+                    page.wait_for_timeout(600)
+            except Exception:
+                pass
+            btn_text = page.evaluate("() => { const b = document.querySelector('#done-button'); return b ? b.innerText.trim() : ''; }")
+            print(f"  After fallback click attempt {attempt+1}: done-button={btn_text!r}")
+            if btn_text.lower() == "publish":
+                publish_confirmed = True
+                break
+
+        if not publish_confirmed:
+            # Last resort: check aria-checked and proceed anyway if it looks right
+            final_checked = page.evaluate("() => { const b = document.querySelector('tp-yt-paper-radio-button[name=\"PUBLIC\"]'); return b ? b.getAttribute('aria-checked') : null; }")
+            btn_text = page.evaluate("() => { const b = document.querySelector('#done-button'); return b ? b.innerText.trim() : ''; }")
+            print(f"WARNING: done-button still shows {btn_text!r} (aria-checked={final_checked}). Proceeding anyway.")
+
+        print("Public visibility confirmed.")
+
+        # Wait for done-button to be clickable, then click
+        done_loc = page.locator(SELECTORS["publish_button"])
+        done_loc.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
+
+        # Strategy 1: JS click on inner button element (most reliable for Shadow DOM)
+        page.evaluate("""() => {
+            const outer = document.querySelector('#done-button');
+            if (!outer) return;
+            // Try inner tp-yt-paper-button first
+            const inner = outer.querySelector('tp-yt-paper-button, button, [role="button"]');
+            const target = inner || outer;
+            target.removeAttribute('disabled');
+            target.removeAttribute('aria-disabled');
+            target.click();
+            target.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true}));
+        }""")
+        page.wait_for_timeout(500)
+
+        # Strategy 2: Playwright force-click as backup
+        try:
+            done_loc.click(force=True, timeout=5000)
         except Exception:
             pass
-        btn_text = page.evaluate("() => { const b = document.querySelector('#done-button'); return b ? b.innerText.trim() : ''; }")
-        print(f"  After fallback click attempt {attempt+1}: done-button={btn_text!r}")
-        if btn_text.lower() == "publish":
-            publish_confirmed = True
-            break
 
-    if not publish_confirmed:
-        # Last resort: check aria-checked and proceed anyway if it looks right
-        final_checked = page.evaluate("() => { const b = document.querySelector('tp-yt-paper-radio-button[name=\"PUBLIC\"]'); return b ? b.getAttribute('aria-checked') : null; }")
-        btn_text = page.evaluate("() => { const b = document.querySelector('#done-button'); return b ? b.innerText.trim() : ''; }")
-        print(f"WARNING: done-button still shows {btn_text!r} (aria-checked={final_checked}). Proceeding anyway.")
+        # Strategy 3: Keyboard Enter as final fallback
+        page.wait_for_timeout(300)
+        done_loc.press("Enter")
 
-    print("Public visibility confirmed.")
+        print("Clicked Publish.")
 
-    # Wait for done-button to be clickable, then click
-    done_loc = page.locator(SELECTORS["publish_button"])
-    done_loc.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
-
-    # Strategy 1: JS click on inner button element (most reliable for Shadow DOM)
-    page.evaluate("""() => {
-        const outer = document.querySelector('#done-button');
-        if (!outer) return;
-        // Try inner tp-yt-paper-button first
-        const inner = outer.querySelector('tp-yt-paper-button, button, [role="button"]');
-        const target = inner || outer;
-        target.removeAttribute('disabled');
-        target.removeAttribute('aria-disabled');
-        target.click();
-        target.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true}));
-    }""")
-    page.wait_for_timeout(500)
-
-    # Strategy 2: Playwright force-click as backup
-    try:
-        done_loc.click(force=True, timeout=5000)
-    except Exception:
-        pass
-
-    # Strategy 3: Keyboard Enter as final fallback
-    page.wait_for_timeout(300)
-    done_loc.press("Enter")
-
-    print("Clicked Publish.")
-
-    # Debug: screenshot right after clicking Publish to see dialog state
-    page.wait_for_timeout(2000)
-    try:
-        page.screenshot(path=f"_publish_debug_{job_id[:8]}.png")
-        print(f"Post-publish screenshot saved.")
-    except Exception:
-        pass
-
-    # Handle "We're still checking your content" confirmation dialog
-    # YouTube shows this when content checks haven't completed — must click "Publish anyway"
-    page.wait_for_timeout(2000)
-    try:
-        # Look for any dialog with "Publish anyway" button
-        publish_anyway = page.locator("tp-yt-paper-button, ytcp-button").filter(has_text="Publish anyway").first
-        if publish_anyway.count() > 0 and publish_anyway.is_visible():
-            print("'We're still checking your content' dialog appeared — clicking 'Publish anyway'...")
-            publish_anyway.click(force=True)
-            page.wait_for_timeout(1000)
-            print("Clicked 'Publish anyway' — video will publish as Public.")
-    except Exception as e:
-        print(f"Publish-anyway dialog check: {e}")
-
-    # Wait for the upload dialog to fully close — confirms YouTube accepted the publish.
-    # If we navigate away before this, YouTube saves as draft instead of publishing.
-    # The dialog closes when YouTube finishes processing the publish action.
-    try:
-        # Primary: wait for the upload dialog to disappear
-        page.locator("ytcp-uploads-dialog").wait_for(state="detached", timeout=60000)
-        print("Upload dialog closed — publish confirmed.")
-    except Exception:
+        # Debug: screenshot right after clicking Publish to see dialog state
+        page.wait_for_timeout(2000)
         try:
-            # Fallback: wait for post-publish success dialog
-            page.locator("ytcp-video-upload-success-dialog").wait_for(state="visible", timeout=15000)
-            print("Upload success dialog appeared — publish confirmed.")
+            page.screenshot(path=f"_publish_debug_{job_id[:8]}.png")
+            print(f"Post-publish screenshot saved.")
         except Exception:
-            # Last resort: just wait 8 seconds for YouTube to process the click
-            print("Dialog wait timed out — waiting 8s for publish to register...")
-            page.wait_for_timeout(8000)
+            pass
 
-    return "published"
+        # Handle "We're still checking your content" confirmation dialog
+        # YouTube shows this when content checks haven't completed — must click "Publish anyway"
+        page.wait_for_timeout(2000)
+        try:
+            # Look for any dialog with "Publish anyway" button
+            publish_anyway = page.locator("tp-yt-paper-button, ytcp-button").filter(has_text="Publish anyway").first
+            if publish_anyway.count() > 0 and publish_anyway.is_visible():
+                print("'We're still checking your content' dialog appeared — clicking 'Publish anyway'...")
+                publish_anyway.click(force=True)
+                page.wait_for_timeout(1000)
+                print("Clicked 'Publish anyway' — video will publish as Public.")
+        except Exception as e:
+            print(f"Publish-anyway dialog check: {e}")
+
+        # Wait for the upload dialog to fully close — confirms YouTube accepted the publish.
+        # If we navigate away before this, YouTube saves as draft instead of publishing.
+        # The dialog closes when YouTube finishes processing the publish action.
+        try:
+            # Primary: wait for the upload dialog to disappear
+            page.locator("ytcp-uploads-dialog").wait_for(state="detached", timeout=60000)
+            print("Upload dialog closed — publish confirmed.")
+        except Exception:
+            try:
+                # Fallback: wait for post-publish success dialog
+                page.locator("ytcp-video-upload-success-dialog").wait_for(state="visible", timeout=15000)
+                print("Upload success dialog appeared — publish confirmed.")
+            except Exception:
+                # Last resort: just wait 8 seconds for YouTube to process the click
+                print("Dialog wait timed out — waiting 8s for publish to register...")
+                page.wait_for_timeout(8000)
+
+        return "published"
 
 
 
@@ -1347,21 +1517,35 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                     "market_meltdowns": "📉",
                 }.get(ch, "📹")
 
-                _discord_post(_CH_SUCCESS,
+                # Determine publish status and format messages accordingly
+                if publish_type.startswith("scheduled:"):
+                    # Extract scheduled datetime from return value
+                    scheduled_iso = publish_type.split(":", 1)[1]
+                    scheduled_dt = datetime.fromisoformat(scheduled_iso)
+                    scheduled_local = scheduled_dt.astimezone(pytz.timezone(cfg.timezone))
+                    time_str = scheduled_local.strftime("%b %d, %I:%M %p")
+                    
+                    _discord_post(_CH_SUCCESS,
+                        f"🗓️ **{ch}** {channel_emoji}\n"
+                        f"> {title}\n"
+                        f"Scheduled for {time_str}\n"
+                        f"{video_url}"
+                    )
+                    
+                    _discord_post(_CH_QUEUED,
+                        f"🗓️ **{ch}** scheduled → {time_str}\n<{video_url}>"
+                    )
+                else:
+                    # Published immediately
+                    _discord_post(_CH_SUCCESS,
+                        f"✅ **{ch}** {channel_emoji}\n"
+                        f"> {title}\n"
+                        f"{video_url}"
+                    )
 
-                    f"✅ **{ch}** {channel_emoji}\n"
-
-                    f"> {title}\n"
-
-                    f"{video_url}"
-
-                )
-
-                _discord_post(_CH_QUEUED,
-
-                    f"✅ **{ch}** published → <{video_url}>"
-
-                )
+                    _discord_post(_CH_QUEUED,
+                        f"✅ **{ch}** published → <{video_url}>"
+                    )
 
 
 
@@ -1461,7 +1645,7 @@ if __name__ == "__main__":
 
 
 
-    code = run_once(YouTubeWorkerConfig(headless=False)) # Run headful for debugging
+    code = run_once(YouTubeWorkerConfig(headless=True))
 
     print(f"Worker exited with code: {code}")
 

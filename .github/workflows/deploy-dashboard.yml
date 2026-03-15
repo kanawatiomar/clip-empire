@@ -54,6 +54,7 @@ jobs:
         uses: actions/deploy-pages@v3
 
       - name: Commit data changes (if any)
+        if: always()
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"

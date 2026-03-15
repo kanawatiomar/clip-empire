@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.4" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <RegistrationInfo>
+    <Date>2026-03-14T20:19:00</Date>
+    <Author>ClipEmpire Setup</Author>
+    <Description>Auto-refresh dashboard data every 5 minutes by running generate_data.py</Description>
+    <URI>\ClipEmpire-DataRefresh</URI>
+  </RegistrationInfo>
+  <Triggers>
+    <TimerTrigger>
+      <Repetition>
+        <Interval>PT5M</Interval>
+        <StopAtDurationEnd>false</StopAtDurationEnd>
+      </Repetition>
+      <StartBoundary>2026-03-14T20:19:00</StartBoundary>
+      <Enabled>true</Enabled>
+    </TimerTrigger>
+  </Triggers>
+  <Principals>
+    <Principal id="Author">
+      <UserId>S-1-5-18</UserId>
+      <RunLevel>HighestAvailable</RunLevel>
+    </Principal>
+  </Principals>
+  <Settings>
+    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>
+    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
+    <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>
+    <AllowHardTerminate>true</AllowHardTerminate>
+    <StartWhenAvailable>true</StartWhenAvailable>
+    <RunOnlyIfNetworkAvailable>false</RunOnlyIfNetworkAvailable>
+    <IdleSettings>
+      <StopOnIdleEnd>false</StopOnIdleEnd>
+      <RestartOnIdle>false</RestartOnIdle>
+    </IdleSettings>
+    <AllowStartOnDemand>true</AllowStartOnDemand>
+    <Enabled>true</Enabled>
+    <Hidden>false</Hidden>
+    <RunOnlyIfIdle>false</RunOnlyIfIdle>
+    <DisallowStartOnRemoteAppSession>false</DisallowStartOnRemoteAppSession>
+    <UseUnifiedSchedulingEngine>true</UseUnifiedSchedulingEngine>
+    <WakeToRun>false</WakeToRun>
+    <ExecutionTimeLimit>PT1H</ExecutionTimeLimit>
+    <DeleteExpiredTaskAfter>PT0S</DeleteExpiredTaskAfter>
+    <RestartOnFailure>
+      <Interval>PT1M</Interval>
+      <Count>3</Count>
+    </RestartOnFailure>
+  </Settings>
+  <Actions Context="Author">
+    <Exec>
+      <Command>C:\Users\kanaw\AppData\Local\Programs\Python\Python311\python.exe</Command>
+      <Arguments>C:\Users\kanaw\.openclaw\workspace\ventures\clip_empire\dashboard\generate_data.py</Arguments>
+      <WorkingDirectory>C:\Users\kanaw\.openclaw\workspace\ventures\clip_empire</WorkingDirectory>
+    </Exec>
+  </Actions>
+</Task>

@@ -4,58 +4,21 @@ on:
   push:
     branches:
       - master
-    paths:
-      - 'dashboard/**'
-      - '.github/workflows/deploy-dashboard.yml'
-  
-  # Allow manual trigger
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
+  contents: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-      
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-      
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      
-      - name: Upload dashboard to Pages
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: 'dashboard/'
-      
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v3
 
-      - name: Commit data changes (if any)
-        if: always()
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          
-          if ! git diff --quiet dashboard/data.json; then
-            git add dashboard/data.json
-            git commit -m "chore: refresh dashboard data [auto-deploy]"
-            git push
-          fi
+      - name: Deploy dashboard to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dashboard
+          publish_branch: gh-pages

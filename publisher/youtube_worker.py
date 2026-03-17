@@ -1524,16 +1524,35 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                     scheduled_dt = datetime.fromisoformat(scheduled_iso)
                     scheduled_local = scheduled_dt.astimezone(pytz.timezone(cfg.timezone))
                     time_str = scheduled_local.strftime("%b %d, %I:%M %p")
-                    
+
+                    # Build YouTube Studio edit link from video URL
+                    try:
+                        video_id = video_url.rstrip("/").split("/")[-1]
+                        studio_url = f"https://studio.youtube.com/video/{video_id}/edit"
+                    except Exception:
+                        studio_url = "https://studio.youtube.com"
+
+                    # Post to #arc-clip-alerts for review (channel-specific)
+                    _REVIEW_CHANNEL_MAP = {
+                        "arc_highlightz":  "1475944657040179314",  # #arc-clip-alerts
+                        "fomo_highlights": "1475997768882458836",  # #fomo-clip-alerts
+                        "viral_recaps":    "1476840009133985834",  # #viral-clip-alerts
+                    }
+                    review_ch = _REVIEW_CHANNEL_MAP.get(ch)
+                    if review_ch:
+                        _discord_post(review_ch,
+                            f"👀 **REVIEW NEEDED** — `{ch}` {channel_emoji}\n"
+                            f"**{title}**\n"
+                            f"Goes live: **{time_str}** MDT\n"
+                            f"Preview: <{video_url}>\n"
+                            f"Edit/delete: <{studio_url}>\n"
+                            f"_(Delete before {time_str} to cancel)_"
+                        )
+
                     _discord_post(_CH_SUCCESS,
                         f"🗓️ **{ch}** {channel_emoji}\n"
                         f"> {title}\n"
-                        f"Scheduled for {time_str}\n"
-                        f"{video_url}"
-                    )
-                    
-                    _discord_post(_CH_QUEUED,
-                        f"🗓️ **{ch}** scheduled → {time_str}\n<{video_url}>"
+                        f"Scheduled for {time_str} | <{video_url}>"
                     )
                 else:
                     # Published immediately

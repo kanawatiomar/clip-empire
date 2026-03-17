@@ -32,6 +32,10 @@ POST_WINDOW_START_H = 7   # earliest possible post (7am local)
 POST_WINDOW_END_H = 23    # latest possible post (11pm local)
 MAX_JOBS_PER_SLOT = 3     # max uploads across all channels per 30-min slot
 
+# Review buffer: videos are uploaded to YouTube but kept scheduled (not public)
+# for this many hours, giving Omar time to review before they go live.
+REVIEW_BUFFER_HOURS = 4
+
 # ── Peak posting windows by niche ─────────────────────────────────────────────
 # Format: list of (hour_start, hour_end) tuples in local time (America/Denver)
 # Based on YouTube Shorts peak engagement research:
@@ -404,7 +408,10 @@ class QueueWriter:
         tags = list(hashtags or get_hashtags(channel_name))
         if series_hashtag and series_hashtag not in tags:
             tags.append(series_hashtag)
-        sched = schedule_at or _next_schedule_time(channel_name, self.db_path)
+        # Add review buffer: upload now but schedule YouTube publish 4h from now
+        # This keeps the video unlisted/scheduled so Omar can review before it goes live.
+        raw_sched = schedule_at or _next_schedule_time(channel_name, self.db_path)
+        sched = raw_sched + timedelta(hours=REVIEW_BUFFER_HOURS)
 
         # 6. Generate thumbnail
         thumbnail_path = None

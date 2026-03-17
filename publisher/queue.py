@@ -106,13 +106,19 @@ def add_publish_job(
     finally:
         conn.close()
 
+REVIEW_BUFFER_SECONDS = 4 * 3600  # pick up jobs 4h before their scheduled publish time
+
+
 def get_next_job(platform: str, channel_name: Optional[str] = None) -> Optional[Dict[str, Any]]:
     conn = get_db_connection()
     cursor = conn.cursor()
     now_ts = int(time.time())
 
-    # Select a job that is queued, scheduled for now or past, and ready for retry.
-    # Use numeric epoch seconds to avoid timezone/string-compare bugs.
+    # Pick up jobs whose scheduled publish time is within REVIEW_BUFFER_SECONDS from now.
+    # This means we upload to YouTube 4h early, set it as Scheduled, and send Omar a
+    # review alert. He has 4h to delete it before it goes live.
+    pickup_cutoff_ts = now_ts + REVIEW_BUFFER_SECONDS
+
     query = """
         SELECT pj.*, c.made_for_kids FROM publish_jobs pj
         JOIN channels c ON pj.channel_name = c.channel_name
@@ -122,7 +128,7 @@ def get_next_job(platform: str, channel_name: Optional[str] = None) -> Optional[
           AND (pj.schedule_at_ts IS NULL OR pj.schedule_at_ts <= ?)
           AND (pj.next_retry_at_ts IS NULL OR pj.next_retry_at_ts <= ?)
     """
-    params = (platform, now_ts, now_ts)
+    params = (platform, pickup_cutoff_ts, now_ts)
 
     if channel_name:
         query += " AND pj.channel_name = ?"
@@ -151,6 +157,40 @@ def get_next_job(platform: str, channel_name: Optional[str] = None) -> Optional[
         raise
     finally:
         conn.close()
+
+def save_early_url(job_id: str, url: str) -> None:
+    """Persist the early-captured upload URL immediately after the video file is
+    handed to YouTube Studio. This prevents duplicate uploads: if the browser
+    crashes before update_job_status('succeeded') runs, a retry can detect the
+    URL is already saved and skip the re-upload."""
+    conn = get_db_connection()
+    try:
+        conn.execute(
+            "UPDATE publish_jobs SET last_error = ? WHERE job_id = ?",
+            (f"EARLY_URL:{url}", job_id),
+        )
+        conn.commit()
+    except Exception:
+        pass
+    finally:
+        conn.close()
+
+
+def get_early_url(job_id: str) -> Optional[str]:
+    """Return the early-captured URL if it was saved, else None."""
+    conn = get_db_connection()
+    try:
+        row = conn.execute(
+            "SELECT last_error FROM publish_jobs WHERE job_id = ?", (job_id,)
+        ).fetchone()
+        if row and row[0] and row[0].startswith("EARLY_URL:"):
+            return row[0][len("EARLY_URL:"):]
+    except Exception:
+        pass
+    finally:
+        conn.close()
+    return None
+
 
 def update_job_status(job_id: str, status: str, post_url: Optional[str] = None,
                       platform_post_id: Optional[str] = None) -> None:

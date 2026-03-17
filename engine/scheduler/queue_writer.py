@@ -408,10 +408,10 @@ class QueueWriter:
         tags = list(hashtags or get_hashtags(channel_name))
         if series_hashtag and series_hashtag not in tags:
             tags.append(series_hashtag)
-        # Add review buffer: upload now but schedule YouTube publish 4h from now
-        # This keeps the video unlisted/scheduled so Omar can review before it goes live.
-        raw_sched = schedule_at or _next_schedule_time(channel_name, self.db_path)
-        sched = raw_sched + timedelta(hours=REVIEW_BUFFER_HOURS)
+        # schedule_at = the OPTIMAL peak publishing time (unchanged).
+        # The publisher picks jobs up REVIEW_BUFFER_HOURS early (see publisher/queue.py),
+        # uploads them to YouTube as Scheduled, and sends Omar a review alert.
+        sched = schedule_at or _next_schedule_time(channel_name, self.db_path)
 
         # 6. Generate thumbnail
         thumbnail_path = None

@@ -116,41 +116,47 @@ class CropTransform:
         )
 
     def _blur_background_filter(self, w: int, h: int, anchor: str = "center") -> str:
-        """Landscape video: blurred full-screen background + anchored original overlay.
+        """Landscape video: blurred full-screen background + foreground scaled to fit width.
 
-        anchor controls where the foreground is horizontally positioned:
-          "left"   — foreground snapped to left edge  (keeps left-side content)
-          "center" — foreground centered               (default)
-          "right"  — foreground snapped to right edge (keeps right-side content)
+        anchor controls where the foreground is HORIZONTALLY positioned when the
+        foreground is narrower than the canvas (portrait source). For landscape
+        sources the foreground always fills the full width.
 
-        Background: scale to 1080x1920, apply heavy gaussian blur.
-        Foreground: scale original to fit height, position by anchor.
+          "left"   — foreground snapped to left edge
+          "center" — foreground centered (default)
+          "right"  — foreground snapped to right edge
+
+        Background: scale to fill 1080x1920, apply heavy gaussian blur.
+        Foreground: scale to fit WIDTH (1080px), keep aspect ratio → letterboxed.
         """
-        # Foreground: scale to full TARGET_H height, keeping aspect ratio
-        # This makes the foreground taller → we crop width to TARGET_W via bg
-        fg_w = int(w * TARGET_H / h)   # width of fg when scaled to full canvas height
-        fg_scale = f"scale={fg_w}:{TARGET_H}:flags=lanczos"
+        # Foreground: scale to TARGET_W wide, auto height (keeps aspect ratio)
+        # For 1920x1080 source → fg becomes 1080x607, centered on 1080x1920 canvas
+        fg_h = int(h * TARGET_W / w)   # height of fg when scaled to canvas width
+        fg_scale = f"scale={TARGET_W}:{fg_h}:flags=lanczos"
 
-        # Horizontal offset based on anchor
+        # Vertical centering — place fg in the middle of the 1920px canvas
+        overlay_y = f"(main_h-overlay_h)/2"
+
+        # Horizontal offset based on anchor (mainly relevant for portrait sources)
         if anchor == "left":
             overlay_x = "0"
             log_anchor = "left"
         elif anchor == "right":
-            overlay_x = f"main_w-overlay_w"   # flush right
+            overlay_x = "main_w-overlay_w"
             log_anchor = "right"
         else:
             overlay_x = "(main_w-overlay_w)/2"
             log_anchor = "center"
 
-        print(f"[crop] Anchor={log_anchor} (fg_w={fg_w}px -> crop to {TARGET_W}px)")
+        print(f"[crop] Anchor={log_anchor} landscape→vertical (fg={TARGET_W}x{fg_h}px on {TARGET_W}x{TARGET_H})")
 
         return (
-            # Background: scale + blur fill
+            # Background: scale to fill canvas, blur heavily
             f"[0:v]scale={TARGET_W}:{TARGET_H}:force_original_aspect_ratio=increase,"
             f"crop={TARGET_W}:{TARGET_H},"
             f"gblur=sigma=30[bg];"
-            # Foreground: scale to full height
+            # Foreground: scale to fit width, maintain aspect ratio
             f"[0:v]{fg_scale}[fg];"
-            # Overlay fg on bg at anchor position, crop to canvas
-            f"[bg][fg]overlay={overlay_x}:0[out_v]"
+            # Overlay fg centered on bg
+            f"[bg][fg]overlay={overlay_x}:{overlay_y}[out_v]"
         )

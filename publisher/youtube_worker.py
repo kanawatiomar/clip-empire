@@ -1532,13 +1532,30 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                     except Exception:
                         studio_url = "https://studio.youtube.com"
 
-                    # Post to #arc-clip-alerts for review (channel-specific)
+                    # Post review alert to channel-specific Discord channel
                     _REVIEW_CHANNEL_MAP = {
-                        "arc_highlightz":  "1475944657040179314",  # #arc-clip-alerts
-                        "fomo_highlights": "1475997768882458836",  # #fomo-clip-alerts
-                        "viral_recaps":    "1476840009133985834",  # #viral-clip-alerts
+                        # Gaming
+                        "arc_highlightz":     "1475944657040179314",  # #arc-clip-alerts
+                        "fomo_highlights":    "1475997768882458836",  # #fomo-clip-alerts
+                        "viral_recaps":       "1476840009133985834",  # #viral-clip-alerts
+                        # Finance
+                        "market_meltdowns":   "1480139743709888665",  # #publish-success
+                        "crypto_confessions": "1480139743709888665",
+                        "rich_or_ruined":     "1480139743709888665",
+                        # Business
+                        "startup_graveyard":  "1480139743709888665",
+                        "self_made_clips":    "1480139743709888665",
+                        # Tech/Other
+                        "ai_did_what":        "1480139743709888665",
+                        "gym_moments":        "1480139743709888665",
+                        "kitchen_chaos":      "1480139743709888665",
+                        "cases_unsolved":     "1480139743709888665",
+                        "unfiltered_clips":   "1480139743709888665",
+                        "stream_sirens":      "1480139743709888665",
+                        "stream_queens":      "1480139743709888665",
                     }
-                    review_ch = _REVIEW_CHANNEL_MAP.get(ch)
+                    # Fallback to #publish-success for any unmapped channel
+                    review_ch = _REVIEW_CHANNEL_MAP.get(ch, "1480139743709888665")
                     if review_ch:
                         _discord_post(review_ch,
                             f"👀 **REVIEW NEEDED** — `{ch}` {channel_emoji}\n"

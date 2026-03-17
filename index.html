@@ -1951,9 +1951,9 @@
   <div class="wrap">
     <div class="banner">
       <div class="btns">
-        <button class="primary" onclick="runAction('engine_scan')">▶ Start Engine Scan</button>
-        <button class="success" onclick="runAction('process_queue')">⚙ Process Queue</button>
-        <button onclick="runAction('refresh_data')">🔄 Refresh Data</button>
+        <button class="primary" id="engineScanBtn" onclick="runAction('engine_scan')">▶ Start Engine Scan</button>
+        <button class="success" id="processQueueBtn" onclick="runAction('process_queue')" title="Requires Chrome logged into YouTube Studio to be running">⚙ Process Queue</button>
+        <button id="refreshDataBtn" onclick="runAction('refresh_data')">🔄 Refresh Data</button>
         <button onclick="openSettings()">⚙️ Settings</button>
         <button onclick="openLogs()">📋 View Logs</button>
       </div>
@@ -3350,6 +3350,7 @@
         <div class="channel-action">
           <div><strong>${esc(ch.channel)}</strong><div class="dim">status: ${esc(ch.status)}</div></div>
           <div class="actions-inline">
+            <button class="primary" ${!localMode ? 'disabled' : ''} onclick="runAction('engine_scan','${esc(ch.channel)}')">Run Now</button>
             <button class="warn" ${!localMode || ch.status === 'paused' ? 'disabled' : ''} onclick="runAction('pause_channel','${esc(ch.channel)}')">Pause</button>
             <button class="success" ${!localMode || ch.status === 'active' ? 'disabled' : ''} onclick="runAction('resume_channel','${esc(ch.channel)}')">Resume</button>
           </div>
@@ -4631,20 +4632,52 @@
         return;
       }
       try {
-        const res = await fetch(`${LOCAL_API}/api/action`, {
-          method:'POST',
-          headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({ action, channel })
-        });
-        const data = await res.json();
-        if (!data.ok) throw new Error(data.error || 'Action failed');
-        if (action === 'view_logs' && data.logs) {
-          byId('logsPre').textContent = data.logs.map(l => `[${l.updated_at}] ${l.channel} / ${l.job_id_short}\n${l.message}`).join('\n\n---\n\n') || 'No logs.';
-          byId('logsDialog').showModal();
-        } else {
-          toast(data.message || 'Done');
+        // Get button reference and show loading state
+        let button = null;
+        if (action === 'engine_scan') {
+          button = byId('engineScanBtn');
+        } else if (action === 'process_queue') {
+          button = byId('processQueueBtn');
+        } else if (action === 'refresh_data') {
+          button = byId('refreshDataBtn');
         }
-        await loadData();
+        
+        if (button) {
+          button.disabled = true;
+          const originalText = button.textContent;
+          button.textContent = '⏳ Running...';
+          
+          try {
+            const res = await fetch(`${LOCAL_API}/api/action`, {
+              method:'POST',
+              headers:{'Content-Type':'application/json'},
+              body: JSON.stringify({ action, channel })
+            });
+            const data = await res.json();
+            if (!data.ok) throw new Error(data.error || 'Action failed');
+            if (action === 'view_logs' && data.logs) {
+              byId('logsPre').textContent = data.logs.map(l => `[${l.updated_at}] ${l.channel} / ${l.job_id_short}\n${l.message}`).join('\n\n---\n\n') || 'No logs.';
+              byId('logsDialog').showModal();
+            } else {
+              toast(data.message || 'Done');
+            }
+            await loadData();
+          } finally {
+            button.disabled = false;
+            button.textContent = originalText;
+          }
+        } else {
+          // Fallback for other actions
+          const res = await fetch(`${LOCAL_API}/api/action`, {
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({ action, channel })
+          });
+          const data = await res.json();
+          if (!data.ok) throw new Error(data.error || 'Action failed');
+          toast(data.message || 'Done');
+          await loadData();
+        }
       } catch (err) {
         toast(err.message || 'Action failed');
       }
@@ -5339,9 +5372,17 @@
       // Add print timestamp to body
       const body = document.body;
       body.setAttribute('data-print-date', timestamp);
-      // Print with optimized styling
-      window.print();
-      toast('Print dialog opened. Use "Save as PDF" to export.');
+      
+      // Check if running in Electron
+      const isElectron = typeof window !== 'undefined' && typeof window.process === 'object' && window.process.type === 'renderer';
+      
+      if (isElectron) {
+        toast('Use File → Print from the menu bar to save as PDF');
+      } else {
+        // Print with optimized styling
+        window.print();
+        toast('Print dialog opened. Use "Save as PDF" to export.');
+      }
     }
 
     function exportJSON() {

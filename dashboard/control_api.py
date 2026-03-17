@@ -787,8 +787,15 @@ def run_action(payload: dict) -> dict:
         return {'ok': True, 'message': 'Dashboard data refreshed.'}
 
     if action == 'engine_scan':
-        proc = subprocess.Popen(['py', '-3', '-m', 'engine.cli', '--all'], cwd=REPO_ROOT)
-        return {'ok': True, 'message': f'Engine scan started (pid {proc.pid}).'}
+        if channel:
+            # Per-channel engine scan
+            cmd = ['py', '-3', '-m', 'engine.cli', '--channel', channel, '--count', '3']
+            proc = subprocess.Popen(cmd, cwd=REPO_ROOT)
+            return {'ok': True, 'message': f'Engine scan started for {channel} (pid {proc.pid}).'}
+        else:
+            # All channels scan
+            proc = subprocess.Popen(['py', '-3', '-m', 'engine.cli', '--all'], cwd=REPO_ROOT)
+            return {'ok': True, 'message': f'Engine scan started for all channels (pid {proc.pid}).'}
 
     if action == 'process_queue':
         cmd = [

@@ -47,10 +47,28 @@ NICHE_THEMES: dict[str, list[tuple[str, list[str]]]] = {
 }
 
 
+# ── PER-CHANNEL LOCKED THEMES ────────────────────────────────────────────────
+# If a channel is listed here, ALL clips for that channel use the fixed theme
+# regardless of clip title. Prevents random sub-series spawning (e.g., "Funny
+# Moments #1" appearing on a channel that should only have "Moments").
+
+CHANNEL_LOCKED_THEME: dict[str, str] = {
+    "arc_highlightz":  "Moments",
+    "fomo_highlights": "Moments",
+    "viral_recaps":    "Moments",
+}
+
+
 # ── THEME CLASSIFIER ─────────────────────────────────────────────────────────
 
-def classify_theme(clip_title: str, niche: str = "Gaming") -> str:
-    """Return the series theme name for a given clip title."""
+def classify_theme(clip_title: str, niche: str = "Gaming", channel_name: str = "") -> str:
+    """Return the series theme name for a given clip title.
+    
+    If channel_name is in CHANNEL_LOCKED_THEME, always returns the locked value
+    so the channel stays on a single consistent series (e.g. 'Moments' only).
+    """
+    if channel_name and channel_name in CHANNEL_LOCKED_THEME:
+        return CHANNEL_LOCKED_THEME[channel_name]
     title_lower = (clip_title or "").lower()
     themes = NICHE_THEMES.get(niche, GAMING_THEMES)
     for theme_name, keywords in themes:
@@ -112,7 +130,7 @@ def build_series_title(
     db_path: str = DATABASE_PATH,
 ) -> str:
     """Return a numbered series title like 'Shroud Best Plays #12'."""
-    theme = classify_theme(clip_title, niche)
+    theme = classify_theme(clip_title, niche, channel_name=channel_name)
     n = next_episode(channel_name, creator, theme, db_path)
     display_creator = creator.capitalize()
     return f"{display_creator} {theme} #{n}"

@@ -376,7 +376,7 @@ class QueueWriter:
         series_hashtag = None
         if creator and not title:
             from engine.config.series import classify_theme, next_episode
-            theme = classify_theme(clip_title or "", niche)
+            theme = classify_theme(clip_title or "", niche, channel_name=channel_name)
             ep_num = next_episode(channel_name, creator, theme, self.db_path)
             # e.g. "#ShroudBestPlays4" — no space, YouTube hashtag format
             series_hashtag = f"#{creator.capitalize().replace(' ', '')}{theme.replace(' ', '')}{ep_num}"

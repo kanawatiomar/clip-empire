@@ -85,7 +85,7 @@ import pytz # Will need 'pip install pytz'
 
 
 
-from publisher.queue import get_next_job, update_job_status, fail_job
+from publisher.queue import get_next_job, update_job_status, fail_job, save_early_url, get_early_url
 
 from accounts.channel_definitions import CHANNELS # To get made_for_kids status
 
@@ -260,15 +260,52 @@ def _login_to_studio_if_needed(page: Page, cfg: YouTubeWorkerConfig, studio_url:
 
     """Navigates to Studio and verifies login. Raises error if redirected or not on Studio page."""
 
-    page.goto(studio_url, wait_until="domcontentloaded", timeout=cfg.nav_timeout_ms)
+    # Navigate to base Studio first (avoids channel-specific URL triggering re-auth)
+    # then navigate to the target channel URL once session is confirmed.
+    base_url = YOUTUBE_STUDIO_URL
+    page.goto(base_url, wait_until="domcontentloaded", timeout=cfg.nav_timeout_ms)
+    page.wait_for_timeout(2000)
 
-
+    # If base URL already redirected to sign-in, handle it before going to channel URL
+    if "studio.youtube.com" in page.url and studio_url != base_url:
+        page.goto(studio_url, wait_until="domcontentloaded", timeout=cfg.nav_timeout_ms)
 
     url = page.url
 
+    # Handle Google "Verify it's you" / "Sign in again" interstitial
+    # This shows when Google needs re-confirmation but credentials are already saved
     if "accounts.google.com" in url:
-
-        raise RuntimeError(f"Not logged in (redirected to {url}). Manual login required for channel.")
+        # Try clicking through the interstitial (Next button, then password autofill)
+        for _attempt in range(3):
+            try:
+                # "Verify it's you" page → click Next (id=identifierNext or button)
+                page.evaluate("""() => {
+                    const el = document.getElementById('identifierNext')
+                        || document.querySelector('#next')
+                        || document.querySelector('[data-primary-action-label]')
+                        || Array.from(document.querySelectorAll('button')).find(b => b.innerText.trim() === 'Next');
+                    if (el) el.click();
+                }""")
+                page.wait_for_timeout(3000)
+            except Exception:
+                pass
+            try:
+                # Password page → click saved password or submit
+                pwd = page.locator("input[type=password]").first
+                if pwd.count() > 0:
+                    pwd.wait_for(state="visible", timeout=5000)
+                    pwd.click()
+                    page.wait_for_timeout(800)
+                    page.keyboard.press("Return")
+                    page.wait_for_timeout(4000)
+            except Exception:
+                pass
+            page.wait_for_timeout(2000)
+            if "accounts.google.com" not in page.url:
+                break  # made it past login
+        url = page.url
+        if "accounts.google.com" in url:
+            raise RuntimeError(f"Not logged in (redirected to {url}). Manual login required for channel.")
 
 
 
@@ -1340,6 +1377,8 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
 
                 headless=cfg.headless,
 
+                channel="chrome",  # use system Chrome (not Playwright Chromium — blocked by Defender)
+
                 args=[
 
                     "--disable-blink-features=AutomationControlled",
@@ -1375,6 +1414,16 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
 
                 video_file_path = job["render_path"]
 
+                # Duplicate-upload guard: if a previous attempt already uploaded
+                # this video (early_url was saved) but crashed before marking
+                # succeeded, skip the re-upload and just mark it done.
+                _saved_early_url = get_early_url(job_id)
+                if _saved_early_url and job.get("attempts", 0) > 1:
+                    print(f"[dedup] Retry detected with saved URL {_saved_early_url} — skipping re-upload.")
+                    update_job_status(job_id, "succeeded", post_url=_saved_early_url, platform_post_id=_saved_early_url.split("/")[-1])
+                    _discord_post(_CH_SUCCESS, f"✅ **{ch}** | `{job.get('caption_text','')}` (retry dedup — already uploaded)\n{_saved_early_url}")
+                    return 0
+
                 if not os.path.exists(video_file_path):
 
                     raise FileNotFoundError(f"Rendered video file not found: {video_file_path}")
@@ -1395,6 +1444,8 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                 if early_video_url:
 
                     _log_step(job_id, f"captured video URL early (fallback only): {early_video_url}")
+                    # Persist immediately — crash-safe dedup on retry
+                    save_early_url(job_id, early_video_url)
 
                 # Wait for upload to finish (progress bar disappears / Next button becomes enabled)
                 _log_step(job_id, "waiting for upload to complete...")

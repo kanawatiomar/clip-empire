@@ -403,13 +403,17 @@ CHANNEL_SOURCES: dict = {
         #   right  -> crop window shifts right (webcam bottom-right, action left)
         #   center -> standard center crop
         # min_views: only take clips with this many views (quality filter)
-        {"platform": "twitch", "url": "https://www.twitch.tv/tfue/clips",
-         "type": "channel", "priority": 1, "max_age_days": 3,
-         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 8,
+        # max_age_days: 30 — wide window so engine doesn't starve when streamers
+        #   take breaks or top clips from recent days are already used.
+        # range=30d → Twitch serves clips sorted by recent popularity (not all-time top)
+        # max_per_run=15 → fetch more per run to build a larger unused pool
+        {"platform": "twitch", "url": "https://www.twitch.tv/tfue/clips?filter=clips&range=30d",
+         "type": "channel", "priority": 1, "max_age_days": 30,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 15,
          "crop_anchor": "right", "min_views": 2000},
-        {"platform": "twitch", "url": "https://www.twitch.tv/cloakzy/clips",
-         "type": "channel", "priority": 1, "max_age_days": 3,
-         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 8,
+        {"platform": "twitch", "url": "https://www.twitch.tv/cloakzy/clips?filter=clips&range=30d",
+         "type": "channel", "priority": 1, "max_age_days": 30,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 15,
          "crop_anchor": "left", "min_views": 2000},
         {"platform": "youtube",
          "url": "https://www.youtube.com/results?search_query=tfue+highlights+2025+shorts",
@@ -423,15 +427,17 @@ CHANNEL_SOURCES: dict = {
 
     "viral_recaps": [
         # Moistcr1tikal / penguinz0: usually centered cam, reaction-heavy
+        # min_views lowered to 200 — Moist Twitch clips rarely exceed 300 fresh (his viral content is YouTube)
         {"platform": "twitch", "url": "https://www.twitch.tv/moistcr1tikal/clips",
          "type": "channel", "priority": 1, "max_age_days": 3,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 6,
-         "crop_anchor": "center", "min_views": 3000},
+         "crop_anchor": "center", "min_views": 200},
         # HasanAbi: cam on left side -> anchor right
+        # min_views lowered to 500 — Hasan clips hit 500-1200 fresh, rarely 3k+
         {"platform": "twitch", "url": "https://www.twitch.tv/hasanabi/clips",
          "type": "channel", "priority": 1, "max_age_days": 3,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 6,
-         "crop_anchor": "right", "min_views": 3000},
+         "crop_anchor": "right", "min_views": 500},
         # Ludwig: usually centered
         {"platform": "twitch", "url": "https://www.twitch.tv/ludwig/clips",
          "type": "channel", "priority": 1, "max_age_days": 3,
@@ -450,20 +456,21 @@ CHANNEL_SOURCES: dict = {
 
     "fomo_highlights": [
         # Shroud: cam bottom-left -> anchor right to keep gameplay on right side
+        # min_views raised to 5000 — higher view clips = more likely to be exciting plays, not boring scope/idle moments
         {"platform": "twitch", "url": "https://www.twitch.tv/shroud/clips",
-         "type": "channel", "priority": 1, "max_age_days": 3,
-         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 6,
-         "crop_anchor": "right", "min_views": 2000},
+         "type": "channel", "priority": 1, "max_age_days": 7,
+         "min_dur_s": 20, "max_dur_s": 45, "max_per_run": 6,
+         "crop_anchor": "right", "min_views": 5000},
         # Nickmercs: cam bottom-right -> anchor left to keep gameplay on left side
         {"platform": "twitch", "url": "https://www.twitch.tv/nickmercs/clips",
-         "type": "channel", "priority": 1, "max_age_days": 3,
-         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 6,
-         "crop_anchor": "left", "min_views": 2000},
+         "type": "channel", "priority": 1, "max_age_days": 7,
+         "min_dur_s": 20, "max_dur_s": 45, "max_per_run": 6,
+         "crop_anchor": "left", "min_views": 5000},
         # TimTheTatman: cam bottom-left -> anchor right
         {"platform": "twitch", "url": "https://www.twitch.tv/timthetatman/clips",
-         "type": "channel", "priority": 1, "max_age_days": 3,
-         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 6,
-         "crop_anchor": "right", "min_views": 2000},
+         "type": "channel", "priority": 1, "max_age_days": 7,
+         "min_dur_s": 20, "max_dur_s": 45, "max_per_run": 6,
+         "crop_anchor": "right", "min_views": 5000},
         # YouTube fallbacks
         {"platform": "youtube",
          "url": "https://www.youtube.com/results?search_query=shroud+best+clips+shorts+2025",

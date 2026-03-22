@@ -3522,7 +3522,28 @@ def build_payload(conn: sqlite3.Connection) -> dict[str, Any]:
     return payload
 
 
+def sync_youtube_analytics_background() -> None:
+    """Run YouTube Analytics sync in background (non-blocking, best-effort)."""
+    import subprocess, sys
+    sync_script = REPO_ROOT / 'analytics' / 'sync_all.py'
+    if not sync_script.exists():
+        return
+    try:
+        subprocess.Popen(
+            [sys.executable, str(sync_script)],
+            cwd=str(REPO_ROOT),
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0),
+        )
+    except Exception:
+        pass  # Never block dashboard refresh for analytics failures
+
+
 def main() -> int:
+    # Sync YouTube Analytics in background every refresh so views stay current
+    sync_youtube_analytics_background()
+
     conn = connect()
     try:
         payload = build_payload(conn)

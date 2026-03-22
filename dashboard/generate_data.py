@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Generate dashboard/data.json for the Clip Empire control center.
 
 Reads clip_empire.db in read-only mode and emits a static JSON payload suitable
@@ -39,6 +39,11 @@ DISCORD_FEED_LIMIT = 5
 def utc_now() -> datetime:
     return datetime.utcnow()
 
+def local_now() -> datetime:
+    """Return current local time (America/Denver, UTC-6/UTC-7)."""
+    import time
+    return datetime.now()
+
 
 def parse_dt(value: str | None) -> datetime | None:
     if not value:
@@ -59,7 +64,7 @@ def fmt_compact_dt(value: str | None) -> str | None:
 def rel_time(value: str | None) -> str:
     dt = parse_dt(value)
     if not dt:
-        return '—'
+        return 'â€”'
     diff = utc_now() - dt
     seconds = max(int(diff.total_seconds()), 0)
     if seconds < 60:
@@ -268,11 +273,14 @@ def load_channel_trends(conn: sqlite3.Connection) -> list[dict[str, Any]]:
 def get_live_status(conn: sqlite3.Connection) -> dict[str, Any]:
     active_channels = int(query_one(conn, "SELECT COUNT(*) AS c FROM channels WHERE status='active'")['c'])
 
-    today = utc_now().strftime('%Y-%m-%d')
+    # Use local date + tomorrow UTC to avoid timezone boundary issues
+    from datetime import timedelta
+    today = datetime.now().strftime('%Y-%m-%d')
+    tomorrow_utc = (utc_now() + timedelta(days=1)).strftime('%Y-%m-%d')
     job_rows = query_all(
         conn,
-        "SELECT status, COUNT(*) AS c FROM publish_jobs WHERE date(created_at)=? GROUP BY status",
-        (today,),
+        "SELECT status, COUNT(*) AS c FROM publish_jobs WHERE date(COALESCE(updated_at, created_at)) IN (?, ?) GROUP BY status",
+        (today, tomorrow_utc),
     )
     status_counts = Counter()
     for row in job_rows:
@@ -586,7 +594,7 @@ def get_recent_clips(conn: sqlite3.Connection) -> list[dict[str, Any]]:
             'thumbnail_path': thumbnail_path,
             'post_url': row['post_url'],
             'views': views,
-            'views_display': fmt_num_compact(views) if views > 0 else '—',
+            'views_display': fmt_num_compact(views) if views > 0 else 'â€”',
             'published_at': row['updated_at'],
             'published_at_display': fmt_compact_dt(row['updated_at']),
             'published_ago': rel_time(row['updated_at']),
@@ -1067,7 +1075,7 @@ def get_hall_of_fame(conn: sqlite3.Connection) -> dict[str, Any]:
     """
     import re
     
-    # Build lookup table: render_path → (clip_id, views, post_url)
+    # Build lookup table: render_path â†’ (clip_id, views, post_url)
     # Get all succeeded jobs with their source clip data
     rows = query_all(
         conn,
@@ -1558,10 +1566,10 @@ def get_disk_usage() -> dict[str, Any]:
     """Calculate disk usage across key directories and repo root.
     
     Scans:
-    - raw_clips/ — downloaded source clips
-    - intermediate/ — in-progress renders
-    - renders/ — finished renders waiting to upload
-    - renders/thumbnails/ — generated thumbnails
+    - raw_clips/ â€” downloaded source clips
+    - intermediate/ â€” in-progress renders
+    - renders/ â€” finished renders waiting to upload
+    - renders/thumbnails/ â€” generated thumbnails
     
     Returns:
     - directories: list of directory info with path, size_bytes, size_human, file_count
@@ -1741,7 +1749,7 @@ def get_sources_list(conn: sqlite3.Connection) -> list[dict[str, Any]]:
                 'priority': priority,
                 'clips_fetched': clips_fetched,
                 'last_fetched_at': last_fetched_at,
-                'last_fetched_rel': rel_time(last_fetched_at) if last_fetched_at else '—',
+                'last_fetched_rel': rel_time(last_fetched_at) if last_fetched_at else 'â€”',
                 'enabled': source_config.get('enabled', True),
                 'url': source_config.get('url', ''),
                 'type': source_config.get('type', 'unknown'),
@@ -2112,23 +2120,28 @@ def get_daily_summary(conn: sqlite3.Connection) -> dict[str, Any]:
     - summary_discord: Discord markdown formatted summary (for sending to bot-logs)
     """
     from datetime import datetime, timedelta
+    import time as _time
+
+    # Use local date (not UTC) so midnight doesn't shift day boundaries
+    local_now_dt = datetime.now()
+    today = local_now_dt.date().isoformat()
+    yesterday = (local_now_dt.date() - timedelta(days=1)).isoformat()
+    # Also include next UTC date to catch timestamps stored with +00:00 offset
+    tomorrow_utc = (utc_now().date() + timedelta(days=1)).isoformat()
     
-    today = utc_now().date().isoformat()
-    yesterday = (utc_now().date() - timedelta(days=1)).isoformat()
-    
-    # Get today's uploads (succeeded jobs created/updated today)
+    # Get today's uploads (succeeded jobs created/updated today OR crossing UTC midnight)
     uploads_today = int(
         query_one(
             conn,
             """
             SELECT COUNT(*) AS c FROM publish_jobs
             WHERE status = 'succeeded'
-              AND DATE(COALESCE(updated_at, created_at)) = ?
+              AND DATE(COALESCE(updated_at, created_at)) IN (?, ?)
             """,
-            (today,)
+            (today, tomorrow_utc)
         )['c'] or 0
     )
-    
+
     # Get yesterday's uploads for comparison
     uploads_yesterday = int(
         query_one(
@@ -2136,14 +2149,14 @@ def get_daily_summary(conn: sqlite3.Connection) -> dict[str, Any]:
             """
             SELECT COUNT(*) AS c FROM publish_jobs
             WHERE status = 'succeeded'
-              AND DATE(COALESCE(updated_at, created_at)) = ?
+              AND DATE(COALESCE(updated_at, created_at)) IN (?, ?)
             """,
-            (yesterday,)
+            (yesterday, today)
         )['c'] or 0
     )
-    
+
     delta_uploads = uploads_today - uploads_yesterday
-    
+
     # Get today's errors
     errors_today = int(
         query_one(
@@ -2152,9 +2165,9 @@ def get_daily_summary(conn: sqlite3.Connection) -> dict[str, Any]:
             SELECT COUNT(*) AS c FROM publish_jobs
             WHERE last_error IS NOT NULL
               AND TRIM(last_error) != ''
-              AND DATE(COALESCE(updated_at, created_at)) = ?
+              AND DATE(COALESCE(updated_at, created_at)) IN (?, ?)
             """,
-            (today,)
+            (today, tomorrow_utc)
         )['c'] or 0
     )
     
@@ -2239,9 +2252,9 @@ def get_daily_summary(conn: sqlite3.Connection) -> dict[str, Any]:
     
     # Generate summary text
     summary_lines = [
-        f"📊 Daily Summary for {today}",
+        f"ðŸ“Š Daily Summary for {today}",
         f"",
-        f"📈 Stats:",
+        f"ðŸ“ˆ Stats:",
         f"  Uploads: {uploads_today} ({'+' if delta_uploads >= 0 else ''}{delta_uploads} vs yesterday)",
         f"  Views: {fmt_num_compact(views_gained_today)} ({'+' if delta_views >= 0 else ''}{fmt_num_compact(delta_views)} vs yesterday)",
         f"  Errors: {errors_today}",
@@ -2250,13 +2263,13 @@ def get_daily_summary(conn: sqlite3.Connection) -> dict[str, Any]:
     
     if top_clip_today:
         summary_lines.append(f"")
-        summary_lines.append(f"🌟 Top Clip:")
+        summary_lines.append(f"ðŸŒŸ Top Clip:")
         summary_lines.append(f"  {top_clip_today['title']}")
-        summary_lines.append(f"  {fmt_num_compact(top_clip_today['views'])} views • {top_clip_today['channel']}")
+        summary_lines.append(f"  {fmt_num_compact(top_clip_today['views'])} views â€¢ {top_clip_today['channel']}")
     
     if top_3_channels:
         summary_lines.append(f"")
-        summary_lines.append(f"🏆 Top Channels:")
+        summary_lines.append(f"ðŸ† Top Channels:")
         for idx, ch in enumerate(top_3_channels, 1):
             summary_lines.append(f"  {idx}. {ch['channel']}: {ch['uploads']} uploads")
     
@@ -2264,26 +2277,26 @@ def get_daily_summary(conn: sqlite3.Connection) -> dict[str, Any]:
     
     # Generate Discord markdown version
     discord_lines = [
-        f"## 📊 Daily Summary — {today}",
+        f"## ðŸ“Š Daily Summary â€” {today}",
         f"",
-        f"**📈 Today's Stats:**",
-        f"• **Uploads:** {uploads_today} ({'+' if delta_uploads >= 0 else ''}{delta_uploads} vs yesterday)",
-        f"• **Views:** {fmt_num_compact(views_gained_today)} ({'+' if delta_views >= 0 else ''}{fmt_num_compact(delta_views)} vs yesterday)",
-        f"• **Errors:** {errors_today}",
-        f"• **API Quota:** {quota_pct}% used (`{quota_units_used}/10000` units)",
+        f"**ðŸ“ˆ Today's Stats:**",
+        f"â€¢ **Uploads:** {uploads_today} ({'+' if delta_uploads >= 0 else ''}{delta_uploads} vs yesterday)",
+        f"â€¢ **Views:** {fmt_num_compact(views_gained_today)} ({'+' if delta_views >= 0 else ''}{fmt_num_compact(delta_views)} vs yesterday)",
+        f"â€¢ **Errors:** {errors_today}",
+        f"â€¢ **API Quota:** {quota_pct}% used (`{quota_units_used}/10000` units)",
     ]
     
     if top_clip_today:
         discord_lines.append(f"")
-        discord_lines.append(f"**🌟 Top Performer Today:**")
+        discord_lines.append(f"**ðŸŒŸ Top Performer Today:**")
         discord_lines.append(f"_{top_clip_today['title']}_")
-        discord_lines.append(f"**{fmt_num_compact(top_clip_today['views'])} views** • **{top_clip_today['channel']}**")
+        discord_lines.append(f"**{fmt_num_compact(top_clip_today['views'])} views** â€¢ **{top_clip_today['channel']}**")
     
     if top_3_channels:
         discord_lines.append(f"")
-        discord_lines.append(f"**🏆 Top Channels:**")
+        discord_lines.append(f"**ðŸ† Top Channels:**")
         for idx, ch in enumerate(top_3_channels, 1):
-            discord_lines.append(f"{idx}. **{ch['channel']}** — {ch['uploads']} uploads")
+            discord_lines.append(f"{idx}. **{ch['channel']}** â€” {ch['uploads']} uploads")
     
     summary_discord = '\n'.join(discord_lines)
     
@@ -2465,7 +2478,7 @@ def get_posting_time_insights(conn: sqlite3.Connection) -> dict[str, Any]:
     - daily: List of 7 days with avg views and post counts
     - best_hours: Top 3 hours for posting
     - best_days: Top 3 days for posting
-    - heatmap_data: 24x7 grid for visualization (hours × days)
+    - heatmap_data: 24x7 grid for visualization (hours Ã— days)
     - scheduled_posts: Current scheduled posts with their timing
     """
     # Fetch all succeeded publish_jobs with schedule times
@@ -3263,32 +3276,32 @@ def get_channel_checklists(conn: sqlite3.Connection) -> list[dict[str, Any]]:
                 {
                     'label': 'Has YouTube account linked',
                     'passed': has_youtube_account,
-                    'icon': '✅' if has_youtube_account else '❌',
+                    'icon': 'âœ…' if has_youtube_account else 'âŒ',
                 },
                 {
                     'label': 'Has at least 1 source configured',
                     'passed': has_source_configured,
-                    'icon': '✅' if has_source_configured else '❌',
+                    'icon': 'âœ…' if has_source_configured else 'âŒ',
                 },
                 {
                     'label': 'Has uploaded at least 1 clip',
                     'passed': has_uploaded_clip,
-                    'icon': '✅' if has_uploaded_clip else '❌',
+                    'icon': 'âœ…' if has_uploaded_clip else 'âŒ',
                 },
                 {
                     'label': 'Status is active',
                     'passed': is_active,
-                    'icon': '✅' if is_active else '❌',
+                    'icon': 'âœ…' if is_active else 'âŒ',
                 },
                 {
                     'label': 'Has clips in queue',
                     'passed': has_clips_queued,
-                    'icon': '✅' if has_clips_queued else '❌',
+                    'icon': 'âœ…' if has_clips_queued else 'âŒ',
                 },
                 {
                     'label': 'Quota not exhausted (< 90% used)',
                     'passed': quota_not_exhausted,
-                    'icon': '✅' if quota_not_exhausted else '❌',
+                    'icon': 'âœ…' if quota_not_exhausted else 'âŒ',
                 },
             ],
         })
@@ -3305,7 +3318,9 @@ def get_git_status() -> dict[str, Any]:
         try:
             branch_result = subprocess.run(
                 ['git', 'rev-parse', '--abbrev-ref', 'HEAD'],
-                cwd=str(REPO_ROOT),
+                cwd=str(REPO_ROOT,
+                creationflags=subprocess.CREATE_NO_WINDOW
+            ),
                 capture_output=True,
                 text=True,
                 timeout=5
@@ -3318,7 +3333,9 @@ def get_git_status() -> dict[str, Any]:
         try:
             count_result = subprocess.run(
                 ['git', 'rev-list', '--count', 'HEAD'],
-                cwd=str(REPO_ROOT),
+                cwd=str(REPO_ROOT,
+                creationflags=subprocess.CREATE_NO_WINDOW
+            ),
                 capture_output=True,
                 text=True,
                 timeout=5
@@ -3332,7 +3349,9 @@ def get_git_status() -> dict[str, Any]:
         try:
             log_result = subprocess.run(
                 ['git', 'log', '--oneline', '-10'],
-                cwd=str(REPO_ROOT),
+                cwd=str(REPO_ROOT,
+                creationflags=subprocess.CREATE_NO_WINDOW
+            ),
                 capture_output=True,
                 text=True,
                 timeout=5
@@ -3357,7 +3376,9 @@ def get_git_status() -> dict[str, Any]:
         try:
             status_result = subprocess.run(
                 ['git', 'status', '--short'],
-                cwd=str(REPO_ROOT),
+                cwd=str(REPO_ROOT,
+                creationflags=subprocess.CREATE_NO_WINDOW
+            ),
                 capture_output=True,
                 text=True,
                 timeout=5
@@ -3376,7 +3397,9 @@ def get_git_status() -> dict[str, Any]:
         try:
             diff_result = subprocess.run(
                 ['git', 'diff', '--stat', 'HEAD'],
-                cwd=str(REPO_ROOT),
+                cwd=str(REPO_ROOT,
+                creationflags=subprocess.CREATE_NO_WINDOW
+            ),
                 capture_output=True,
                 text=True,
                 timeout=5
@@ -3518,3 +3541,4 @@ def main() -> int:
 
 if __name__ == '__main__':
     raise SystemExit(main())
+

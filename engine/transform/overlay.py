@@ -31,9 +31,39 @@ from engine.config.styles import get_overlay_style
 
 def _strip_emoji(text: str) -> str:
     """Strip all non-ASCII characters — Impact/Arial only render ASCII anyway."""
-    # Keep printable ASCII only, collapse multiple spaces
     ascii_only = ''.join(c if ord(c) < 128 and (c.isprintable() or c == ' ') else '' for c in text)
     return re.sub(r' {2,}', ' ', ascii_only).strip()
+
+
+def _wrap_hook(text: str, max_chars: int = 20) -> tuple[str, int]:
+    """Word-wrap hook text to fit 1080px canvas.
+    
+    Returns (wrapped_text, adjusted_fontsize).
+    Lines > max_chars trigger wrapping; also reduces fontsize for very long lines.
+    """
+    words = text.split()
+    lines: list[str] = []
+    current = ""
+    for word in words:
+        test = (current + " " + word).strip() if current else word
+        if len(test) > max_chars and current:
+            lines.append(current)
+            current = word
+        else:
+            current = test
+    if current:
+        lines.append(current)
+
+    wrapped = r"\n".join(lines)
+
+    # Scale font down for long single lines
+    longest = max(len(l) for l in lines)
+    if longest > 20:
+        fontsize = max(60, 88 - (longest - 20) * 2)
+    else:
+        fontsize = 88
+
+    return wrapped, fontsize
 
 
 def _esc(text: str) -> str:
@@ -121,8 +151,10 @@ class OverlayTransform:
         s = get_overlay_style(channel_name, creator)
 
         fontfile     = s.get("fontfile", "C:/Windows/Fonts/Impact.ttf")
-        hook_fs      = s.get("hook_fontsize", 88)
         cta_fs       = s.get("cta_fontsize", 56)
+        # Auto-wrap hook and scale font down for long text
+        hook, _hook_fontsize = _wrap_hook(hook)
+        hook_fs      = s.get("hook_fontsize", _hook_fontsize)
         fontcolor    = s.get("fontcolor", "white")
         borderw      = s.get("borderw", 5)
         bordercolor  = s.get("bordercolor", "black@0.9")

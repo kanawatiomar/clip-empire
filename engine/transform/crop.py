@@ -151,10 +151,10 @@ class CropTransform:
         print(f"[crop] Anchor={log_anchor} landscape→vertical (fg={TARGET_W}x{fg_h}px on {TARGET_W}x{TARGET_H})")
 
         return (
-            # Background: scale to fill canvas, blur heavily
+            # Background: scale to fill canvas, blur heavily (sigma=60 = indistinct smear)
             f"[0:v]scale={TARGET_W}:{TARGET_H}:force_original_aspect_ratio=increase,"
             f"crop={TARGET_W}:{TARGET_H},"
-            f"gblur=sigma=30[bg];"
+            f"gblur=sigma=60[bg];"
             # Foreground: scale to fit width, maintain aspect ratio
             f"[0:v]{fg_scale}[fg];"
             # Overlay fg centered on bg

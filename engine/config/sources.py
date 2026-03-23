@@ -407,14 +407,24 @@ CHANNEL_SOURCES: dict = {
         #   take breaks or top clips from recent days are already used.
         # range=30d → Twitch serves clips sorted by recent popularity (not all-time top)
         # max_per_run=15 → fetch more per run to build a larger unused pool
+        # min_views=500 — 2000 threshold exhausted entire 30d pool; 500 still filters junk
+        # Added Myth, Bugha, Benjyfishy as additional Fortnite creators for supply depth
         {"platform": "twitch", "url": "https://www.twitch.tv/tfue/clips?filter=clips&range=30d",
          "type": "channel", "priority": 1, "max_age_days": 30,
-         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 15,
-         "crop_anchor": "right", "min_views": 2000},
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 40,
+         "crop_anchor": "right", "min_views": 500},
         {"platform": "twitch", "url": "https://www.twitch.tv/cloakzy/clips?filter=clips&range=30d",
          "type": "channel", "priority": 1, "max_age_days": 30,
-         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 15,
-         "crop_anchor": "left", "min_views": 2000},
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 40,
+         "crop_anchor": "left", "min_views": 500},
+        {"platform": "twitch", "url": "https://www.twitch.tv/myth/clips?filter=clips&range=30d",
+         "type": "channel", "priority": 2, "max_age_days": 30,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 20,
+         "crop_anchor": "right", "min_views": 500},
+        {"platform": "twitch", "url": "https://www.twitch.tv/bugha/clips?filter=clips&range=30d",
+         "type": "channel", "priority": 2, "max_age_days": 30,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 20,
+         "crop_anchor": "right", "min_views": 500},
         {"platform": "youtube",
          "url": "https://www.youtube.com/results?search_query=tfue+highlights+2025+shorts",
          "type": "search", "priority": 3, "max_age_days": 7,

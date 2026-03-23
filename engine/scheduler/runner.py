@@ -110,8 +110,9 @@ class Runner:
                 "SELECT channel_name FROM channels WHERE status='active'"
             ).fetchall()}
             _conn.close()
-        except Exception:
-            _active = set(CHANNELS.keys())  # fallback: all channels
+        except Exception as _e:
+            print(f"[runner] WARNING: could not query active channels ({_e}) — aborting run_all to avoid processing paused channels")
+            return results  # safe fallback: do nothing rather than run everything
 
         channels = [ch for ch in CHANNELS.keys() if ch in _active]
         print(f"\n[runner] Starting empire run: {len(channels)} active channels, "
@@ -218,12 +219,13 @@ class Runner:
                 continue
 
             needed = effective_count - clips_produced
-            per_source = SOURCE_DEFAULTS["max_per_run"]
+            # Use source-specific max_per_run if set, else global default
+            per_source = source_config.get("max_per_run", SOURCE_DEFAULTS["max_per_run"])
 
             try:
                 raw_clips = self.ingester.fetch(
                     source_config=source_config,
-                    limit=per_source + 2,  # fetch extra to account for dedup losses
+                    limit=per_source + 5,  # fetch extra to account for dedup losses
                     channel_name=channel_name,
                 )
             except Exception as e:

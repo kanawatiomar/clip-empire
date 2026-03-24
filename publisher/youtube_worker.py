@@ -1684,9 +1684,9 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                     # Post review alert to channel-specific Discord channel
                     _REVIEW_CHANNEL_MAP = {
                         # Gaming
-                        "arc_highlightz":     "1475944657040179314",  # #arc-clip-alerts
-                        "fomo_highlights":    "1475997768882458836",  # #fomo-clip-alerts
-                        "viral_recaps":       "1476840009133985834",  # #viral-clip-alerts
+                        "arc_highlightz":     "1480871971645554749",  # #arc-highlightz
+                        "fomo_highlights":    "1480139743709888665",  # #publish-success
+                        "viral_recaps":       "1480139743709888665",  # #publish-success
                         # Finance
                         "market_meltdowns":   "1480139743709888665",  # #publish-success
                         "crypto_confessions": "1480139743709888665",

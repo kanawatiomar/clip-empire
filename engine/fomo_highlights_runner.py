@@ -1,8 +1,8 @@
-﻿"""Main runner for viral_recaps Reddit screenshot pipeline.
+﻿"""Main runner for fomo_highlights Reddit screenshot pipeline.
 
-Run from repo root: python -m engine.viral_recaps_runner --count 2 --dry-run
+Run from repo root: python -m engine.fomo_highlights_runner --count 2 --dry-run
 
-Orchestrates scraping, compositing, and queuing for viral_recaps channel.
+Orchestrates scraping, compositing, and queuing for fomo_highlights channel.
 """
 
 from __future__ import annotations
@@ -25,7 +25,7 @@ from engine.transform import bg_generator, meme_compositor
 
 
 class ViralRecapsRunner:
-    """Orchestrates the viral_recaps pipeline."""
+    """Orchestrates the fomo_highlights pipeline."""
     
     def __init__(
         self,
@@ -35,7 +35,7 @@ class ViralRecapsRunner:
     ):
         self.db_path = db_path
         self.renders_dir = Path(renders_dir)
-        self.channel_renders_dir = self.renders_dir / "viral_recaps"
+        self.channel_renders_dir = self.renders_dir / "fomo_highlights"
         self.used_json_path = used_json_path
         
         # Create directories
@@ -66,7 +66,7 @@ class ViralRecapsRunner:
             clip_id: Unique clip ID
             video_path: Path to the rendered MP4
             title: Display title
-            channel_name: Target channel (e.g., "viral_recaps")
+            channel_name: Target channel (e.g., "fomo_highlights")
         
         Returns:
             True if inserted successfully
@@ -161,7 +161,7 @@ class ViralRecapsRunner:
             clip_id=clip_id,
             video_path=output_path,
             title=display_title,
-            channel_name="viral_recaps",
+            channel_name="fomo_highlights",
         )
         
         # Mark as used
@@ -245,5 +245,4 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 

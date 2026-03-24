@@ -1,319 +1,215 @@
-"""Meme compositor for viral_recaps — combines background, image, and text into a Short."""
-
+"""Meme compositor for viral_recaps.
+Strategy: PIL renders text onto a 1080x1920 canvas (background + image + text),
+then ffmpeg loops that canvas over the bg video for the final MP4.
+This avoids all ffmpeg drawtext/font-path escaping headaches on Windows.
+"""
 from __future__ import annotations
 
-import subprocess
 import os
+import subprocess
 import tempfile
+import textwrap
 from pathlib import Path
 from typing import Optional
+
 import requests
-from PIL import Image
-import re
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
+
+FFMPEG_BIN_DIR = Path(os.environ.get("LOCALAPPDATA", "")) / (
+    "Microsoft/WinGet/Packages/"
+    "Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/"
+    "ffmpeg-8.0.1-full_build/bin"
+)
+FFMPEG = str(FFMPEG_BIN_DIR / "ffmpeg.exe") if (FFMPEG_BIN_DIR / "ffmpeg.exe").exists() else "ffmpeg"
+
+W, H = 1080, 1920
+
+# Font paths
+_FONTS = [
+    r"C:\Windows\Fonts\arialbd.ttf",
+    r"C:\Windows\Fonts\arial.ttf",
+    r"C:\Windows\Fonts\DejaVuSans-Bold.ttf",
+]
+FONT_BOLD_PATH = next((f for f in _FONTS if Path(f).exists()), None)
+FONT_REG_PATH  = next((f for f in [r"C:\Windows\Fonts\arial.ttf", r"C:\Windows\Fonts\DejaVuSans.ttf"] if Path(f).exists()), FONT_BOLD_PATH)
 
 
-def get_ffmpeg() -> str:
-    """Get FFmpeg executable path."""
-    _ffmpeg_bin_dir = Path(os.environ.get("LOCALAPPDATA", "")) / (
-        "Microsoft/WinGet/Packages/"
-        "Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/"
-        "ffmpeg-8.0.1-full_build/bin"
-    )
-    if (_ffmpeg_bin_dir / "ffmpeg.exe").exists():
-        return str(_ffmpeg_bin_dir / "ffmpeg.exe")
-    
-    return "ffmpeg"
+def _load_font(path: Optional[str], size: int) -> ImageFont.FreeTypeFont:
+    if path and Path(path).exists():
+        return ImageFont.truetype(path, size)
+    return ImageFont.load_default()
 
 
-def download_image(image_url: str, max_retries: int = 3) -> Optional[str]:
-    """Download Reddit image to temp file.
-    
-    Args:
-        image_url: URL to download
-        max_retries: Number of retry attempts
-    
-    Returns:
-        Path to downloaded image, or None if failed
-    """
-    for attempt in range(max_retries):
-        try:
-            headers = {"User-Agent": "ViralRecaps/1.0"}
-            response = requests.get(image_url, headers=headers, timeout=10)
-            response.raise_for_status()
-            
-            # Determine extension from URL
-            ext = ".jpg"
-            if ".png" in image_url:
-                ext = ".png"
-            elif ".gif" in image_url:
-                ext = ".gif"
-            elif ".webp" in image_url:
-                ext = ".webp"
-            
-            # Save to temp file
-            temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=ext)
-            temp_file.write(response.content)
-            temp_file.close()
-            
-            print(f"[compositor] Downloaded image: {temp_file.name}")
-            return temp_file.name
-        
-        except Exception as e:
-            print(f"[compositor] Error downloading image (attempt {attempt+1}): {e}")
-            if attempt < max_retries - 1:
-                continue
-    
-    return None
-
-
-def resize_and_optimize_image(image_path: str, max_width: int = 900, output_path: Optional[str] = None) -> str:
-    """Resize image to fit the video, maintain aspect ratio.
-    
-    Args:
-        image_path: Path to original image
-        max_width: Maximum width in pixels
-        output_path: Where to save resized image
-    
-    Returns:
-        Path to resized image
-    """
+def download_image(url: str) -> Optional[str]:
     try:
-        img = Image.open(image_path)
-        
-        # Resize to fit width
-        if img.width > max_width:
-            ratio = max_width / img.width
-            new_height = int(img.height * ratio)
-            img = img.resize((max_width, new_height), Image.Resampling.LANCZOS)
-        
-        # Save to output
-        if output_path is None:
-            output_path = image_path.replace(".jpg", "_resized.jpg")
-        
-        img.save(output_path, quality=90)
-        print(f"[compositor] Resized image: {output_path} ({img.width}x{img.height})")
-        return output_path
-    
+        r = requests.get(url, headers={"User-Agent": "ViralRecaps/1.0"}, timeout=15)
+        r.raise_for_status()
+        ext = ".png" if url.lower().endswith(".png") else ".jpg"
+        tmp = tempfile.NamedTemporaryFile(delete=False, suffix=ext)
+        tmp.write(r.content)
+        tmp.close()
+        return tmp.name
     except Exception as e:
-        print(f"[compositor] Error resizing image: {e}")
-        return image_path
+        print(f"[compositor] Download failed: {e}")
+        return None
 
 
-def escape_ffmpeg_text(text: str) -> str:
-    """Escape special characters for FFmpeg drawtext filter."""
-    # Replace problematic characters
-    text = text.replace("'", "'\\''")  # Single quotes
-    text = text.replace('"', '\\"')    # Double quotes
-    text = text.replace("\\", "\\\\")  # Backslashes
-    text = text.replace(":", "\\:")    # Colons
-    # Keep newlines as \n for line breaks
-    return text
+def draw_text_wrapped(draw: ImageDraw.Draw, text: str, font: ImageFont.FreeTypeFont,
+                      x: int, y: int, max_width: int, fill: str = "white",
+                      stroke: int = 3, stroke_fill: str = "black", align: str = "center") -> int:
+    """Draw word-wrapped text, return final y position."""
+    lines = textwrap.wrap(text, width=28)
+    line_h = font.size + 8
+    for line in lines:
+        bbox = draw.textbbox((0, 0), line, font=font)
+        lw = bbox[2] - bbox[0]
+        if align == "center":
+            lx = x + (max_width - lw) // 2
+        else:
+            lx = x
+        draw.text((lx, y), line, font=font, fill=fill,
+                  stroke_width=stroke, stroke_fill=stroke_fill)
+        y += line_h
+    return y
 
 
-def build_drawtext_filter(
-    text: str,
-    y_position: int,
-    font_size: int = 52,
-    is_hook: bool = True,
-) -> str:
-    """Build FFmpeg drawtext filter string.
-    
-    Args:
-        text: Text to draw (may contain \n for line breaks)
-        y_position: Y position on video
-        font_size: Font size in points
-        is_hook: True for hook (bold), False for punchline (normal)
-    
-    Returns:
-        FFmpeg filter string
+def compose_frame(bg_frame_path: str, image_path: str,
+                  hook_text: str, punchline_text: str) -> Optional[str]:
     """
-    # Choose font
-    font_file = r"C:\Windows\Fonts\arialbd.ttf" if is_hook else r"C:\Windows\Fonts\arial.ttf"
-    if not Path(font_file).exists():
-        # Fallback fonts
-        font_file = r"C:\Windows\Fonts\arial.ttf"
-    
-    # Escape text for FFmpeg drawtext filter
-    # For drawtext, we need to escape: quotes, colons, and newlines
-    safe_text = text.replace("\\", "\\\\")  # Backslash first
-    safe_text = safe_text.replace(":", "\\:")  # Colons
-    safe_text = safe_text.replace("'", "\\'")  # Single quotes
-    safe_text = safe_text.replace("\n", "\\n")  # Newlines as literal \n
-    
-    # Build filter using proper syntax
-    filter_str = (
-        f"drawtext=fontfile='{font_file}':"
-        f"text='{safe_text}':"
-        f"fontsize={font_size}:"
-        f"fontcolor=white:"
-        f"box=1:"
-        f"boxcolor=black@0.3:"
-        f"boxborderw=3:"
-        f"x=(w-text_w)/2:"
-        f"y={y_position}"
-    )
-    
-    return filter_str
-
-
-def composite_video(
-    bg_video_path: str,
-    image_path: str,
-    hook_text: str,
-    punchline_text: str,
-    output_path: str,
-    duration_s: int = 20,
-) -> bool:
-    """Composite all elements into final video.
-    
-    Args:
-        bg_video_path: Path to looping background video
-        image_path: Path to Reddit screenshot image
-        hook_text: Hook text for top
-        punchline_text: Punchline text for bottom
-        output_path: Where to save final MP4
-        duration_s: Duration of final video
-    
-    Returns:
-        True if successful, False otherwise
+    Build a single 1080x1920 PNG frame using PIL:
+    - Background (blurred screenshot of bg video frame)
+    - Dark overlay for readability
+    - Reddit image centered
+    - Hook text at top
+    - Punchline text at bottom
+    Returns path to composed PNG.
     """
-    ffmpeg = get_ffmpeg()
-    Path(output_path).parent.mkdir(parents=True, exist_ok=True)
-    
     try:
-        # Get image dimensions to calculate overlay position
-        img = Image.open(image_path)
-        img_width = img.width
-        img_height = img.height
-        
-        # Center image horizontally, position vertically
-        overlay_x = (1080 - img_width) // 2  # Center X
-        overlay_y = 400  # Center-ish vertically
-        
-        print(f"[compositor] Image dims: {img_width}x{img_height}")
-        print(f"[compositor] Overlay position: x={overlay_x}, y={overlay_y}")
-        
-        # Build simple filter chain: scale bg, overlay image
-        filter_str = (
-            f"[0:v]scale=1080:1920:force_original_aspect_ratio=decrease,"
-            f"pad=1080:1920:(ow-iw)/2:(oh-ih)/2[bg];"
-            f"[1:v]scale={img_width}:{img_height}[img];"
-            f"[bg][img]overlay=x={overlay_x}:y={overlay_y}:eof_action=endall[final]"
-        )
-        
+        # Load bg frame and resize to canvas
+        bg = Image.open(bg_frame_path).convert("RGB").resize((W, H), Image.Resampling.LANCZOS)
+        # Darken bg slightly
+        overlay = Image.new("RGBA", (W, H), (0, 0, 0, 120))
+        bg = bg.convert("RGBA")
+        bg.alpha_composite(overlay)
+        canvas = bg.convert("RGB")
+
+        draw = ImageDraw.Draw(canvas)
+
+        # Load fonts
+        hook_font   = _load_font(FONT_BOLD_PATH, 56)
+        punch_font  = _load_font(FONT_REG_PATH,  44)
+
+        # --- Hook text (top) ---
+        hook_y = 55
+        hook_y = draw_text_wrapped(draw, hook_text, hook_font, 0, hook_y, W)
+
+        # --- Reddit image (center) ---
+        reddit_img = Image.open(image_path).convert("RGBA")
+        # Resize to max 940px wide, max 900px tall
+        max_iw, max_ih = 940, 900
+        ratio = min(max_iw / reddit_img.width, max_ih / reddit_img.height)
+        iw = int(reddit_img.width * ratio)
+        ih = int(reddit_img.height * ratio)
+        reddit_img = reddit_img.resize((iw, ih), Image.Resampling.LANCZOS)
+
+        # Center horizontally, position vertically between hook and punchline
+        ix = (W - iw) // 2
+        iy_available_start = hook_y + 30
+        iy_available_end   = H - 220  # leave room for punchline
+        iy = iy_available_start + (iy_available_end - iy_available_start - ih) // 2
+        iy = max(iy_available_start, iy)
+
+        canvas.paste(reddit_img, (ix, iy), reddit_img)
+
+        # --- Punchline text (bottom) ---
+        if punchline_text and punchline_text.strip():
+            punch_y = H - 190
+            draw_text_wrapped(draw, punchline_text, punch_font, 0, punch_y, W)
+
+        # Save composed frame
+        out = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
+        canvas.save(out.name, "PNG")
+        out.close()
+        return out.name
+
+    except Exception as e:
+        import traceback
+        print(f"[compositor] Frame compose error: {e}")
+        traceback.print_exc()
+        return None
+
+
+def create_short(bg_video_path: str, image_url: str,
+                 hook_text: str, punchline_text: str,
+                 output_path: str, duration_s: int = 25) -> bool:
+    """
+    Full pipeline:
+    1. Extract one frame from bg video using ffmpeg
+    2. Compose the frame with PIL (bg + image + text)
+    3. Use ffmpeg to loop the composed frame + bg audio for duration_s
+    """
+    print(f"\n[compositor] Creating short: {Path(output_path).name}")
+    Path(output_path).parent.mkdir(parents=True, exist_ok=True)
+
+    img_path = download_image(image_url)
+    if not img_path:
+        return False
+
+    bg_frame = None
+    composed = None
+
+    try:
+        # Step 1: Extract single frame from bg video
+        bg_frame_tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
+        bg_frame_tmp.close()
+        bg_frame = bg_frame_tmp.name
+
+        r = subprocess.run([
+            FFMPEG, "-y", "-i", bg_video_path,
+            "-vframes", "1", "-q:v", "2", bg_frame
+        ], capture_output=True)
+        if r.returncode != 0 or not Path(bg_frame).stat().st_size:
+            print("[compositor] Failed to extract bg frame")
+            return False
+
+        # Step 2: Compose frame with PIL
+        composed = compose_frame(bg_frame, img_path, hook_text, punchline_text)
+        if not composed:
+            return False
+
+        print(f"[compositor] Frame composed, encoding {duration_s}s MP4...")
+
+        # Step 3: ffmpeg — loop the composed PNG as video + silent audio
         cmd = [
-            ffmpeg,
-            "-y",  # Overwrite output
-            "-i", bg_video_path,  # Background video input
-            "-i", image_path,  # Image input
-            "-f", "lavfi",  # Audio: silent
-            "-i", "anullsrc=r=44100:cl=stereo",
-            "-t", str(duration_s),  # Limit output to specified duration
-            "-filter_complex", filter_str,  # Complex filter
-            "-map", "[final]",  # Map final video
-            "-map", "2:a",  # Map silent audio (input 2)
-            "-c:v", "libx264",  # Video codec
-            "-c:a", "aac",  # Audio codec
-            "-b:a", "128k",  # Audio bitrate
-            "-pix_fmt", "yuv420p",  # Pixel format
-            "-preset", "fast",  # Speed
+            FFMPEG, "-y",
+            "-loop", "1", "-i", composed,
+            "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo",
+            "-t", str(duration_s),
+            "-c:v", "libx264", "-preset", "fast", "-crf", "22",
+            "-vf", "scale=1080:1920,setsar=1",
+            "-c:a", "aac", "-b:a", "128k",
+            "-pix_fmt", "yuv420p",
+            "-movflags", "+faststart",
+            "-r", "30",
             str(output_path),
         ]
-        
-        print(f"[compositor] Running FFmpeg...")
-        print(f"[compositor] Output: {output_path}")
-        
-        result = subprocess.run(
-            cmd,
-            capture_output=True,
-            timeout=300,  # 5 minute timeout for encoding
-            encoding='utf-8',
-            errors='replace'
-        )
-        
+
+        result = subprocess.run(cmd, capture_output=True, timeout=300)
         if result.returncode != 0:
-            err_msg = result.stderr if result.stderr else "Unknown error"
-            print(f"[compositor] FFmpeg error: {err_msg[-500:]}")  # Last 500 chars
+            print(f"[compositor] FFmpeg error:\n{result.stderr.decode(errors='replace')[-600:]}")
             return False
-        
-        if not Path(output_path).exists():
-            print(f"[compositor] Output file not created")
-            return False
-        
-        file_size_mb = Path(output_path).stat().st_size / (1024 * 1024)
-        print(f"[compositor] Success! Output: {file_size_mb:.1f} MB")
+
+        size_mb = Path(output_path).stat().st_size / (1024 * 1024)
+        print(f"[compositor] Done: {size_mb:.1f} MB -> {output_path}")
         return True
-    
-    except subprocess.TimeoutExpired:
-        print("[compositor] FFmpeg timeout")
-        return False
+
     except Exception as e:
-        print(f"[compositor] Error: {e}")
         import traceback
+        print(f"[compositor] Exception: {e}")
         traceback.print_exc()
         return False
-
-
-def create_short(
-    bg_video_path: str,
-    image_url: str,
-    hook_text: str,
-    punchline_text: str,
-    output_path: str,
-    duration_s: int = 20,
-) -> bool:
-    """Create a viral_recaps short from Reddit post data.
-    
-    Args:
-        bg_video_path: Path to background video
-        image_url: URL to Reddit image/screenshot
-        hook_text: Hook text (already word-wrapped)
-        punchline_text: Punchline text (already word-wrapped)
-        output_path: Where to save final MP4
-        duration_s: Duration of short
-    
-    Returns:
-        True if successful, False otherwise
-    """
-    print(f"\n[compositor] Creating short: {output_path}")
-    
-    # Download image
-    image_path = download_image(image_url)
-    if not image_path:
-        print("[compositor] Failed to download image")
-        return False
-    
-    try:
-        # Resize image
-        resized_path = resize_and_optimize_image(image_path, max_width=900)
-        
-        # Composite video
-        success = composite_video(
-            bg_video_path,
-            resized_path,
-            hook_text,
-            punchline_text,
-            output_path,
-            duration_s=duration_s,
-        )
-        
-        return success
-    
     finally:
-        # Clean up temp files
-        if Path(image_path).exists():
-            Path(image_path).unlink()
-        if resized_path != image_path and Path(resized_path).exists():
-            Path(resized_path).unlink()
-
-
-if __name__ == "__main__":
-    print("[compositor] Testing meme compositor...")
-    
-    # This would require actual files, so just print test info
-    hook = "This is wild\nSeriously crazy"
-    punchline = "Can't believe it\nLol"
-    
-    print(f"Hook text escaped: {escape_ffmpeg_text(hook)}")
-    print(f"Punchline text escaped: {escape_ffmpeg_text(punchline)}")
-    print("[compositor] Test complete")
+        for p in [img_path, bg_frame, composed]:
+            if p and Path(p).exists():
+                try: Path(p).unlink()
+                except: pass

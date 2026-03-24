@@ -139,6 +139,11 @@ def compose_frame(bg_frame_path: str, image_path: str,
         return None
 
 
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+CAT_BG = str(REPO_ROOT / "data" / "cat_bg.mp4")
+MUSIC_BG = str(REPO_ROOT / "data" / "lofi_bg.mp3")
+
+
 def create_short(bg_video_path: str, image_url: str,
                  hook_text: str, punchline_text: str,
                  output_path: str, duration_s: int = 25) -> bool:
@@ -146,10 +151,14 @@ def create_short(bg_video_path: str, image_url: str,
     Full pipeline:
     1. Extract one frame from bg video using ffmpeg
     2. Compose the frame with PIL (bg + image + text)
-    3. Use ffmpeg to loop the composed frame + bg audio for duration_s
+    3. ffmpeg: loop bg video + composed frame overlay + background music
     """
     print(f"\n[compositor] Creating short: {Path(output_path).name}")
     Path(output_path).parent.mkdir(parents=True, exist_ok=True)
+
+    # Prefer the real cat bg if available
+    bg = CAT_BG if Path(CAT_BG).exists() else bg_video_path
+    has_music = Path(MUSIC_BG).exists()
 
     img_path = download_image(image_url)
     if not img_path:
@@ -159,34 +168,58 @@ def create_short(bg_video_path: str, image_url: str,
     composed = None
 
     try:
-        # Step 1: Extract single frame from bg video
+        # Step 1: Extract single frame from bg video for PIL compositing
         bg_frame_tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
         bg_frame_tmp.close()
         bg_frame = bg_frame_tmp.name
 
         r = subprocess.run([
-            FFMPEG, "-y", "-i", bg_video_path,
+            FFMPEG, "-y", "-i", bg,
             "-vframes", "1", "-q:v", "2", bg_frame
         ], capture_output=True)
         if r.returncode != 0 or not Path(bg_frame).stat().st_size:
-            print("[compositor] Failed to extract bg frame")
-            return False
+            print("[compositor] Failed to extract bg frame, using blank bg")
+            # Create blank dark frame as fallback
+            blank = Image.new("RGB", (W, H), color=(15, 12, 41))
+            blank.save(bg_frame, "PNG")
 
-        # Step 2: Compose frame with PIL
+        # Step 2: Compose frame with PIL (bg frame + reddit image + text)
         composed = compose_frame(bg_frame, img_path, hook_text, punchline_text)
         if not composed:
             return False
 
-        print(f"[compositor] Frame composed, encoding {duration_s}s MP4...")
+        print(f"[compositor] Frame composed, encoding {duration_s}s MP4 (music={'yes' if has_music else 'no'})...")
 
-        # Step 3: ffmpeg — loop the composed PNG as video + silent audio
+        # Step 3: ffmpeg — loop bg video, overlay composed frame, mix music
+        # Inputs: [0] looping bg video, [1] composed static frame, [2] music or silence
+        if has_music:
+            audio_input = ["-stream_loop", "-1", "-i", MUSIC_BG]
+            audio_map = ["-map", "2:a"]
+            audio_filter = ["-af", f"volume=0.25,afade=t=in:st=0:d=1,afade=t=out:st={duration_s-2}:d=2"]
+        else:
+            audio_input = ["-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo"]
+            audio_map = ["-map", "2:a"]
+            audio_filter = []
+
         cmd = [
             FFMPEG, "-y",
+            # bg video looping
+            "-stream_loop", "-1", "-i", bg,
+            # composed frame (static, looped)
             "-loop", "1", "-i", composed,
-            "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo",
+            # audio
+            *audio_input,
+            # trim to duration
             "-t", str(duration_s),
+            # video: overlay composed frame on top of bg video
+            "-filter_complex",
+            "[0:v]scale=1080:1920,setsar=1[bg];"
+            "[1:v]scale=1080:1920[frame];"
+            "[bg][frame]overlay=0:0[v]",
+            "-map", "[v]",
+            *audio_map,
+            *audio_filter,
             "-c:v", "libx264", "-preset", "fast", "-crf", "22",
-            "-vf", "scale=1080:1920,setsar=1",
             "-c:a", "aac", "-b:a", "128k",
             "-pix_fmt", "yuv420p",
             "-movflags", "+faststart",
@@ -196,7 +229,7 @@ def create_short(bg_video_path: str, image_url: str,
 
         result = subprocess.run(cmd, capture_output=True, timeout=300)
         if result.returncode != 0:
-            print(f"[compositor] FFmpeg error:\n{result.stderr.decode(errors='replace')[-600:]}")
+            print(f"[compositor] FFmpeg error:\n{result.stderr.decode(errors='replace')[-800:]}")
             return False
 
         size_mb = Path(output_path).stat().st_size / (1024 * 1024)

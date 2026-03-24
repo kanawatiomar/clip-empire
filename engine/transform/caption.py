@@ -20,12 +20,19 @@ from pathlib import Path
 from typing import List, Tuple, Optional
 
 # Inject ffmpeg into PATH so Whisper can find it for audio loading
-_FFMPEG_BIN = (
-    Path(os.environ.get("LOCALAPPDATA", ""))
-    / "Microsoft/WinGet/Packages"
-    / "Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe"
-    / "ffmpeg-8.0.1-full_build/bin"
-)
+def _find_ffmpeg_bin() -> Path:
+    import shutil
+    if shutil.which("ffmpeg"):
+        return Path(shutil.which("ffmpeg")).parent
+    base = Path(os.environ.get("LOCALAPPDATA", "")) / "Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe"
+    if base.exists():
+        for d in sorted(base.iterdir(), reverse=True):
+            candidate = d / "bin"
+            if (candidate / "ffmpeg.exe").exists():
+                return candidate
+    return Path(".")
+
+_FFMPEG_BIN = _find_ffmpeg_bin()
 if _FFMPEG_BIN.exists() and str(_FFMPEG_BIN) not in os.environ.get("PATH", ""):
     os.environ["PATH"] = str(_FFMPEG_BIN) + os.pathsep + os.environ.get("PATH", "")
 

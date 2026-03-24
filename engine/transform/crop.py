@@ -13,6 +13,26 @@ import os
 import subprocess
 from pathlib import Path
 
+# Resolve ffmpeg/ffprobe — use full path if not on system PATH
+def _find_bin(name: str) -> str:
+    import shutil
+    found = shutil.which(name)
+    if found:
+        return found
+    # WinGet install location
+    _base = Path(os.environ.get("LOCALAPPDATA", "")) / (
+        "Microsoft/WinGet/Packages/"
+        "Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/"
+        "ffmpeg-8.1-full_build/bin"
+    )
+    candidate = _base / f"{name}.exe"
+    if candidate.exists():
+        return str(candidate)
+    raise FileNotFoundError(f"{name} not found on PATH or WinGet location")
+
+_FFMPEG  = _find_bin("ffmpeg")
+_FFPROBE = _find_bin("ffprobe")
+
 
 TARGET_W = 1080
 TARGET_H = 1920
@@ -22,7 +42,7 @@ TARGET_FPS = 30
 def _probe_dimensions(video_path: str) -> tuple[int, int]:
     """Return (width, height) of the video using ffprobe."""
     cmd = [
-        "ffprobe", "-v", "quiet",
+        _FFPROBE, "-v", "quiet",
         "-select_streams", "v:0",
         "-show_entries", "stream=width,height",
         "-of", "csv=p=0",
@@ -80,7 +100,7 @@ class CropTransform:
             filter_graph = self._blur_background_filter(w, h, anchor=crop_anchor)
 
         cmd = [
-            "ffmpeg", "-y",
+            _FFMPEG, "-y",
             "-i", input_path,
             "-t", str(trim_to_s),
             "-filter_complex", filter_graph,

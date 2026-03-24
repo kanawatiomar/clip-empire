@@ -421,7 +421,7 @@ CHANNEL_SOURCES: dict = {
          "type": "channel", "priority": 2, "max_age_days": 30,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 20,
          "crop_anchor": "right", "min_views": 500},
-        {"platform": "twitch", "url": "https://www.twitch.tv/bugha/clips?filter=clips&range=30d",
+        {"platform": "twitch", "url": "https://www.twitch.tv/ninja/clips?filter=clips&range=30d",
          "type": "channel", "priority": 2, "max_age_days": 30,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 20,
          "crop_anchor": "right", "min_views": 500},

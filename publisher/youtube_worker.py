@@ -1,4 +1,4 @@
-import os
+﻿import os
 # -*- coding: utf-8 -*-
 
 import time
@@ -15,7 +15,7 @@ from datetime import datetime, timedelta, timezone as dt_timezone
 
 
 
-# â"€â"€ Discord alert channels (Clip Empire server) â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
+# Ã¢"â‚¬Ã¢"â‚¬ Discord alert channels (Clip Empire server) Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬
 
 # Load .env from repo root if not already set
 
@@ -41,7 +41,7 @@ _CH_QUEUED   = "1480139732284604544"  # #queued-jobs
 
 def _discord_post(channel_id: str, message: str) -> None:
 
-    """Fire-and-forget Discord message via direct API (urllib) — supports multiline messages."""
+    """Fire-and-forget Discord message via direct API (urllib) â€” supports multiline messages."""
 
     try:
 
@@ -75,7 +75,7 @@ def _discord_post(channel_id: str, message: str) -> None:
 
         print(f"[discord] Alert failed: {e}")
 
-# â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
+# Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬Ã¢"â‚¬
 
 
 
@@ -278,7 +278,7 @@ def _login_to_studio_if_needed(page: Page, cfg: YouTubeWorkerConfig, studio_url:
         # Try clicking through the interstitial (Next button, then password autofill)
         for _attempt in range(3):
             try:
-                # "Verify it's you" page → click Next (id=identifierNext or button)
+                # "Verify it's you" page â†’ click Next (id=identifierNext or button)
                 page.evaluate("""() => {
                     const el = document.getElementById('identifierNext')
                         || document.querySelector('#next')
@@ -290,7 +290,7 @@ def _login_to_studio_if_needed(page: Page, cfg: YouTubeWorkerConfig, studio_url:
             except Exception:
                 pass
             try:
-                # Password page → click saved password or submit
+                # Password page â†’ click saved password or submit
                 pwd = page.locator("input[type=password]").first
                 if pwd.count() > 0:
                     pwd.wait_for(state="visible", timeout=5000)
@@ -588,7 +588,7 @@ def _upload_thumbnail(page: Page, thumbnail_path: str) -> None:
     We click it, intercept the file chooser, and set the thumbnail file.
     """
     if not thumbnail_path or not os.path.exists(thumbnail_path):
-        print(f"[thumbnail] Skipping — file not found: {thumbnail_path}")
+        print(f"[thumbnail] Skipping â€” file not found: {thumbnail_path}")
         return
     try:
         # Scroll to thumbnail section
@@ -617,7 +617,7 @@ def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description:
 
     Then scroll to the audience section and set the made-for-kids radio.
 
-    Finally click Next twice to pass through Video elements â†' Checks.
+    Finally click Next twice to pass through Video elements Ã¢â€ ' Checks.
 
     """
 
@@ -715,7 +715,7 @@ def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description:
 
     page.keyboard.press("Tab")  # nudge focus so scroll triggers
 
-    # Try multiple selectors — YouTube has changed the name attribute over time
+    # Try multiple selectors â€” YouTube has changed the name attribute over time
     audience_selectors_not_kids = [
         "tp-yt-paper-radio-button[name='VIDEO_MADE_FOR_KIDS_NOT_MFK']",
         "tp-yt-paper-radio-button[name='VIDEO_NOT_MADE_FOR_KIDS']",
@@ -768,11 +768,11 @@ def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description:
             print(f"JS audience fallback failed: {e}")
 
     if not audience_set:
-        print("WARNING: Could not set audience — video may be saved as Draft. Check studio manually.")
+        print("WARNING: Could not set audience â€” video may be saved as Draft. Check studio manually.")
 
     page.wait_for_timeout(1000)
 
-    # ---- Next → Video elements ----
+    # ---- Next â†’ Video elements ----
 
     page.locator(SELECTORS["next_button"]).click()
 
@@ -782,7 +782,7 @@ def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description:
 
 
 
-    # ---- Next → Checks ----
+    # ---- Next â†’ Checks ----
 
     page.locator(SELECTORS["next_button"]).click()
 
@@ -800,7 +800,7 @@ def _set_visibility_and_schedule(
 
     print("Setting visibility and schedule...")
 
-    # Wait for content check to complete — next button must be enabled (not just visible)
+    # Wait for content check to complete â€” next button must be enabled (not just visible)
     _wait_for_selector(page, SELECTORS["next_button"], cfg.nav_timeout_ms)
     # Poll until next button is enabled (content check spinner gone)
     for _attempt in range(30):
@@ -852,11 +852,11 @@ def _set_visibility_and_schedule(
 
     if use_scheduling:
 
-        # ════════════════════════════════════════════════════════════════════════════════
+        # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
         # SCHEDULING PATH: Click Schedule radio, set date/time, click Schedule button
 
-        # ════════════════════════════════════════════════════════════════════════════════
+        # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
         print("Selecting SCHEDULE option...")
 
@@ -985,7 +985,7 @@ def _set_visibility_and_schedule(
 
             page.locator("ytcp-uploads-dialog").wait_for(state="detached", timeout=60000)
 
-            print("Upload dialog closed — scheduling confirmed.")
+            print("Upload dialog closed â€” scheduling confirmed.")
 
         except Exception:
 
@@ -993,11 +993,11 @@ def _set_visibility_and_schedule(
 
                 page.locator("ytcp-video-upload-success-dialog").wait_for(state="visible", timeout=15000)
 
-                print("Upload success dialog appeared — scheduling confirmed.")
+                print("Upload success dialog appeared â€” scheduling confirmed.")
 
             except Exception:
 
-                print("Dialog wait timed out — waiting 5s for scheduling to register...")
+                print("Dialog wait timed out â€” waiting 5s for scheduling to register...")
 
                 page.wait_for_timeout(5000)
 
@@ -1009,13 +1009,13 @@ def _set_visibility_and_schedule(
 
     else:
 
-        # ════════════════════════════════════════════════════════════════════════════════
+        # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
         # PUBLISH IMMEDIATELY PATH: Click Public radio and Publish button
 
-        # ════════════════════════════════════════════════════════════════════════════════
+        # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-        # Use multiple strategies to select Public — aria-checked alone is not enough
+        # Use multiple strategies to select Public â€” aria-checked alone is not enough
         # (YouTube web components can show aria-checked=true without triggering form state change)
         def _try_select_public() -> bool:
             """Returns True if done-button text became 'Publish'."""
@@ -1107,34 +1107,34 @@ def _set_visibility_and_schedule(
             pass
 
         # Handle "We're still checking your content" confirmation dialog
-        # YouTube shows this when content checks haven't completed — must click "Publish anyway"
+        # YouTube shows this when content checks haven't completed â€” must click "Publish anyway"
         page.wait_for_timeout(2000)
         try:
             # Look for any dialog with "Publish anyway" button
             publish_anyway = page.locator("tp-yt-paper-button, ytcp-button").filter(has_text="Publish anyway").first
             if publish_anyway.count() > 0 and publish_anyway.is_visible():
-                print("'We're still checking your content' dialog appeared — clicking 'Publish anyway'...")
+                print("'We're still checking your content' dialog appeared â€” clicking 'Publish anyway'...")
                 publish_anyway.click(force=True)
                 page.wait_for_timeout(1000)
-                print("Clicked 'Publish anyway' — video will publish as Public.")
+                print("Clicked 'Publish anyway' â€” video will publish as Public.")
         except Exception as e:
             print(f"Publish-anyway dialog check: {e}")
 
-        # Wait for the upload dialog to fully close — confirms YouTube accepted the publish.
+        # Wait for the upload dialog to fully close â€” confirms YouTube accepted the publish.
         # If we navigate away before this, YouTube saves as draft instead of publishing.
         # The dialog closes when YouTube finishes processing the publish action.
         try:
             # Primary: wait for the upload dialog to disappear
             page.locator("ytcp-uploads-dialog").wait_for(state="detached", timeout=60000)
-            print("Upload dialog closed — publish confirmed.")
+            print("Upload dialog closed â€” publish confirmed.")
         except Exception:
             try:
                 # Fallback: wait for post-publish success dialog
                 page.locator("ytcp-video-upload-success-dialog").wait_for(state="visible", timeout=15000)
-                print("Upload success dialog appeared — publish confirmed.")
+                print("Upload success dialog appeared â€” publish confirmed.")
             except Exception:
                 # Last resort: just wait 8 seconds for YouTube to process the click
-                print("Dialog wait timed out — waiting 8s for publish to register...")
+                print("Dialog wait timed out â€” waiting 8s for publish to register...")
                 page.wait_for_timeout(8000)
 
         return "published"
@@ -1289,7 +1289,7 @@ def _verify_upload_success(page: Page, cfg: YouTubeWorkerConfig, publish_type: s
 
 
 
-    # Could not find video URL on content page — return None so caller falls back to early_video_url
+    # Could not find video URL on content page â€” return None so caller falls back to early_video_url
     print("Could not find video URL in content page. Falling back to early-captured URL.")
 
     return None
@@ -1348,14 +1348,14 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
 
     ch = job["channel_name"]
 
-    # Skip jobs for paused channels — cancel them so they don't block the queue
+    # Skip jobs for paused channels â€” cancel them so they don't block the queue
     try:
         import sqlite3 as _sq3
         _conn = _sq3.connect("data/clip_empire.db")
         _row = _conn.execute("SELECT status FROM channels WHERE channel_name=?", (ch,)).fetchone()
         _conn.close()
         if _row and _row[0] == "paused":
-            print(f"[publisher] Channel {ch} is paused — cancelling job {job_id}")
+            print(f"[publisher] Channel {ch} is paused â€” cancelling job {job_id}")
             update_job_status(job_id, "cancelled")
             return 0
     except Exception as _e:
@@ -1422,7 +1422,7 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
 
                 headless=cfg.headless,
 
-                channel="chrome",  # use system Chrome (not Playwright Chromium — blocked by Defender)
+                channel="chrome",  # use system Chrome (not Playwright Chromium â€” blocked by Defender)
 
                 args=[
 
@@ -1464,9 +1464,9 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                 # succeeded, skip the re-upload and just mark it done.
                 _saved_early_url = get_early_url(job_id)
                 if _saved_early_url and job.get("attempts", 0) > 1:
-                    print(f"[dedup] Retry detected with saved URL {_saved_early_url} — skipping re-upload.")
+                    print(f"[dedup] Retry detected with saved URL {_saved_early_url} â€” skipping re-upload.")
                     update_job_status(job_id, "succeeded", post_url=_saved_early_url, platform_post_id=_saved_early_url.split("/")[-1])
-                    _discord_post(_CH_SUCCESS, f"✅ **{ch}** | `{job.get('caption_text','')}` (retry dedup — already uploaded)\n{_saved_early_url}")
+                    _discord_post(_CH_SUCCESS, f"âœ… **{ch}** | `{job.get('caption_text','')}` (retry dedup â€” already uploaded)\n{_saved_early_url}")
                     return 0
 
                 if not os.path.exists(video_file_path):
@@ -1489,7 +1489,7 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                 if early_video_url:
 
                     _log_step(job_id, f"captured video URL early (fallback only): {early_video_url}")
-                    # Persist immediately — crash-safe dedup on retry
+                    # Persist immediately â€” crash-safe dedup on retry
                     save_early_url(job_id, early_video_url)
 
                 # Wait for upload to finish (progress bar disappears / Next button becomes enabled)
@@ -1532,7 +1532,7 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                         (job.get("variant_id") or "",)
                     ).fetchone()
                     _creator = (_cr_row[0] or "").strip() if _cr_row else ""
-                    # Map creator key → YouTube handle
+                    # Map creator key â†’ YouTube handle
                     _HANDLE_MAP = {
                         "patrickboyle": "@PatrickBoyleOnFinance",
                         "wallstreetmillennial": "@WallStreetMillennial",
@@ -1607,11 +1607,11 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                 title = job.get("caption_text", "Unknown title")[:80]
 
                 channel_emoji = {
-                    "arc_highlightz": "🎮",
-                    "fomo_highlights": "🔥",
-                    "viral_recaps": "😂",
-                    "market_meltdowns": "📉",
-                }.get(ch, "📹")
+                    "arc_highlightz": "ðŸŽ®",
+                    "fomo_highlights": "ðŸ”¥",
+                    "viral_recaps": "ðŸ˜‚",
+                    "market_meltdowns": "ðŸ“‰",
+                }.get(ch, "ðŸ“¹")
 
                 # Determine publish status and format messages accordingly
                 if publish_type.startswith("scheduled:"):
@@ -1654,7 +1654,7 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                     review_ch = _REVIEW_CHANNEL_MAP.get(ch, "1480139743709888665")
                     if review_ch:
                         _discord_post(review_ch,
-                            f"👀 **REVIEW NEEDED** — `{ch}` {channel_emoji}\n"
+                            f"ðŸ‘€ **REVIEW NEEDED** â€” `{ch}` {channel_emoji}\n"
                             f"**{title}**\n"
                             f"Goes live: **{time_str}** MDT\n"
                             f"Preview: <{video_url}>\n"
@@ -1663,20 +1663,20 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                         )
 
                     _discord_post(_CH_SUCCESS,
-                        f"🗓️ **{ch}** {channel_emoji}\n"
+                        f"ðŸ—“ï¸ **{ch}** {channel_emoji}\n"
                         f"> {title}\n"
                         f"Scheduled for {time_str} | <{video_url}>"
                     )
                 else:
                     # Published immediately
                     _discord_post(_CH_SUCCESS,
-                        f"✅ **{ch}** {channel_emoji}\n"
+                        f"âœ… **{ch}** {channel_emoji}\n"
                         f"> {title}\n"
                         f"{video_url}"
                     )
 
                     _discord_post(_CH_QUEUED,
-                        f"✅ **{ch}** published → <{video_url}>"
+                        f"âœ… **{ch}** published â†’ <{video_url}>"
                     )
 
 
@@ -1782,6 +1782,7 @@ if __name__ == "__main__":
     print(f"Worker exited with code: {code}")
 
     raise SystemExit(code)
+
 
 
 

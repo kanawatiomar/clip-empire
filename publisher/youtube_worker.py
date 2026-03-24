@@ -256,6 +256,50 @@ def _wait_for_selector(page: Page, selector: str, timeout_ms: int) -> None:
 
 
 
+def _dismiss_browser_warning(page: Page) -> None:
+    """Click 'Skip to YouTube Studio' if the unsupported browser warning appears."""
+    try:
+        # Wait longer for the page to fully render
+        page.wait_for_timeout(3000)
+
+        # If we're not on a google/accounts page and not on studio, check for warning
+        if "studio.youtube.com" not in page.url and "accounts.google.com" not in page.url:
+            return  # not on studio, skip
+
+        # Try multiple selector patterns for the skip link
+        for sel in [
+            "a:has-text('SKIP')",
+            "a:has-text('Skip to YouTube Studio')",
+            "a[href*='studio.youtube.com']:has-text('SKIP')",
+            "ytcp-button:has-text('SKIP')",
+            ".skip-button",
+            "a.skip-nav",
+        ]:
+            try:
+                btn = page.locator(sel)
+                if btn.count() > 0:
+                    btn.first.click(timeout=5000)
+                    page.wait_for_timeout(3000)
+                    print("[publisher] Dismissed unsupported browser warning via selector")
+                    return
+            except Exception:
+                continue
+
+        # JS fallback: click any link containing "SKIP"
+        clicked = page.evaluate("""() => {
+            const links = Array.from(document.querySelectorAll('a, button'));
+            const skip = links.find(el => el.textContent && el.textContent.trim().toUpperCase().includes('SKIP'));
+            if (skip) { skip.click(); return true; }
+            return false;
+        }""")
+        if clicked:
+            page.wait_for_timeout(3000)
+            print("[publisher] Dismissed unsupported browser warning via JS")
+    except Exception as e:
+        print(f"[publisher] _dismiss_browser_warning error (non-fatal): {e}")
+        pass
+
+
 def _login_to_studio_if_needed(page: Page, cfg: YouTubeWorkerConfig, studio_url: str = YOUTUBE_STUDIO_URL) -> None:
 
     """Navigates to Studio and verifies login. Raises error if redirected or not on Studio page."""
@@ -266,9 +310,13 @@ def _login_to_studio_if_needed(page: Page, cfg: YouTubeWorkerConfig, studio_url:
     page.goto(base_url, wait_until="domcontentloaded", timeout=cfg.nav_timeout_ms)
     page.wait_for_timeout(2000)
 
+    # Dismiss "unsupported browser" warning if present (Chromium/Playwright triggers it)
+    _dismiss_browser_warning(page)
+
     # If base URL already redirected to sign-in, handle it before going to channel URL
     if "studio.youtube.com" in page.url and studio_url != base_url:
         page.goto(studio_url, wait_until="domcontentloaded", timeout=cfg.nav_timeout_ms)
+        _dismiss_browser_warning(page)
 
     url = page.url
 
@@ -1430,7 +1478,12 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
 
                     "--start-maximized",
 
-                ],
+                      "--no-first-run",
+
+                      "--no-default-browser-check",
+
+                  ],
+                  user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
 
             )
 

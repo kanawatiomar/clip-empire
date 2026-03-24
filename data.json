@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-03-24T21:18:02.603954Z",
+  "generated_at": "2026-03-24T22:18:02.486783Z",
   "repo_root": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire",
   "database_path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\data\\clip_empire.db",
   "health_score": {
-    "score": 83.1,
+    "score": 84.2,
     "grade": "B",
     "status": "Needs Attention",
     "color": "yellow",
     "breakdown": {
-      "pipeline_health": 20.8,
+      "pipeline_health": 21.9,
       "error_rate": 20.0,
       "quota_safety": 15,
       "queue_depth": 10,
@@ -16,13 +16,13 @@
       "channel_uptime": 2.3
     },
     "metrics": {
-      "uploads_today": 20,
+      "uploads_today": 21,
       "target_today": 24,
-      "pipeline_health_ratio": 0.83,
+      "pipeline_health_ratio": 0.88,
       "errors_today": 0,
-      "total_jobs_today": 31,
+      "total_jobs_today": 40,
       "error_rate": 0.0,
-      "queue_depth": 11,
+      "queue_depth": 19,
       "active_channels": 3,
       "total_channels": 13,
       "fresh_sources": 0,
@@ -33,17 +33,32 @@
     "active_channels": 3,
     "total_channels": 13,
     "jobs_today": {
-      "total": 31,
-      "queued": 10,
+      "total": 40,
+      "queued": 18,
       "running": 1,
-      "succeeded": 20,
+      "succeeded": 21,
       "failed": 0,
       "cancelled": 0
     },
-    "render_queue_depth": 11,
-    "last_updated": "2026-03-24T21:18:02.604990Z"
+    "render_queue_depth": 19,
+    "last_updated": "2026-03-24T22:18:02.487837Z"
   },
   "queue_monitor": [
+    {
+      "job_id": "d233d178-1724-422b-84bd-afbe0f9e3079",
+      "job_id_short": "d233d178",
+      "channel": "fomo_highlights",
+      "status": "succeeded",
+      "attempt": 0,
+      "created_at": "2026-03-24T11:26:07.107864",
+      "created_at_display": "2026-03-24 11:26",
+      "created_ago": "10h",
+      "updated_at": "2026-03-24T22:01:18.321965+00:00",
+      "scheduled_for": "2026-03-24 12:26",
+      "error": null,
+      "has_error": false,
+      "post_url": "https://youtube.com/shorts/FmAnWpCpmS0"
+    },
     {
       "job_id": "8f7742a9-0377-48db-9cc4-af050a9d3069",
       "job_id_short": "8f7742a9",
@@ -52,7 +67,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T11:25:58.935969",
       "created_at_display": "2026-03-24 11:25",
-      "created_ago": "9h",
+      "created_ago": "10h",
       "updated_at": "2026-03-24T21:01:18.866632+00:00",
       "scheduled_for": "2026-03-24 12:25",
       "error": null,
@@ -67,7 +82,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T11:25:50.981851",
       "created_at_display": "2026-03-24 11:25",
-      "created_ago": "9h",
+      "created_ago": "10h",
       "updated_at": "2026-03-24T20:01:19.017835+00:00",
       "scheduled_for": "2026-03-24 12:25",
       "error": null,
@@ -82,7 +97,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T11:25:42.912372",
       "created_at_display": "2026-03-24 11:25",
-      "created_ago": "9h",
+      "created_ago": "10h",
       "updated_at": "2026-03-24T19:01:18.758517+00:00",
       "scheduled_for": "2026-03-24 12:25",
       "error": null,
@@ -97,7 +112,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T08:00:37.665783",
       "created_at_display": "2026-03-24 08:00",
-      "created_ago": "13h",
+      "created_ago": "14h",
       "updated_at": "2026-03-24T18:01:18.971702+00:00",
       "scheduled_for": "2026-03-24 09:00",
       "error": null,
@@ -112,7 +127,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T09:55:28.668407",
       "created_at_display": "2026-03-24 09:55",
-      "created_ago": "11h",
+      "created_ago": "12h",
       "updated_at": "2026-03-24T18:01:18.971702+00:00",
       "scheduled_for": "2026-03-24 10:55",
       "error": null,
@@ -127,7 +142,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T08:00:27.094804",
       "created_at_display": "2026-03-24 08:00",
-      "created_ago": "13h",
+      "created_ago": "14h",
       "updated_at": "2026-03-24T17:01:19.262693+00:00",
       "scheduled_for": "2026-03-24 09:00",
       "error": null,
@@ -142,12 +157,162 @@
       "attempt": 0,
       "created_at": "2026-03-24T08:00:21.613131",
       "created_at_display": "2026-03-24 08:00",
-      "created_ago": "13h",
+      "created_ago": "14h",
       "updated_at": "2026-03-24T16:05:26.927077+00:00",
       "scheduled_for": "2026-03-24 09:00",
       "error": null,
       "has_error": false,
       "post_url": "https://youtube.com/shorts/nUmyfQHEacY"
+    },
+    {
+      "job_id": "67ccaa86-a139-4b8b-9110-c09000e44510",
+      "job_id_short": "67ccaa86",
+      "channel": "fomo_highlights",
+      "status": "running",
+      "attempt": 0,
+      "created_at": "2026-03-24T11:26:14.063850",
+      "created_at_display": "2026-03-24 11:26",
+      "created_ago": "10h",
+      "updated_at": "2026-03-24T16:01:23.058969",
+      "scheduled_for": "2026-03-24 12:26",
+      "error": "EARLY_URL:https://youtube.com/shorts/AVgdy9VkfMY",
+      "has_error": true,
+      "post_url": null
+    },
+    {
+      "job_id": "7c5d851a-1e10-439e-915d-645f7570c041",
+      "job_id_short": "7c5d851a",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-24T16:00:25.576561",
+      "created_at_display": "2026-03-24 16:00",
+      "created_ago": "6h",
+      "updated_at": "2026-03-24T16:00:25.576561",
+      "scheduled_for": "2026-03-24 17:00",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "916791fc-d055-4bb4-849b-e57b103b0d44",
+      "job_id_short": "916791fc",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-24T16:00:17.659947",
+      "created_at_display": "2026-03-24 16:00",
+      "created_ago": "6h",
+      "updated_at": "2026-03-24T16:00:17.659947",
+      "scheduled_for": "2026-03-24 17:00",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "f4b5b26f-e9e1-4e40-a264-25896b357137",
+      "job_id_short": "f4b5b26f",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-24T15:44:16.198048",
+      "created_at_display": "2026-03-24 15:44",
+      "created_ago": "6h",
+      "updated_at": "2026-03-24T15:44:16.198048",
+      "scheduled_for": "2026-03-24 22:00",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "40ece100-88b2-443c-b303-a2c60f7f3374",
+      "job_id_short": "40ece100",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-24T15:43:24.254951",
+      "created_at_display": "2026-03-24 15:43",
+      "created_ago": "6h",
+      "updated_at": "2026-03-24T15:43:24.254951",
+      "scheduled_for": "2026-03-24 20:00",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "5f8989a1-f3f6-4809-a715-ec1740561cd7",
+      "job_id_short": "5f8989a1",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-24T15:42:45.204816",
+      "created_at_display": "2026-03-24 15:42",
+      "created_ago": "6h",
+      "updated_at": "2026-03-24T15:42:45.204816",
+      "scheduled_for": "2026-03-24 18:00",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "f5024ef0-d892-41bd-a235-365f41fddb7e",
+      "job_id_short": "f5024ef0",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-24T15:42:09.355689",
+      "created_at_display": "2026-03-24 15:42",
+      "created_ago": "6h",
+      "updated_at": "2026-03-24T15:42:09.355689",
+      "scheduled_for": "2026-03-24 17:00",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "5103817e-3970-42f0-9793-26b504a4c07b",
+      "job_id_short": "5103817e",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-24T15:40:58.504402",
+      "created_at_display": "2026-03-24 15:40",
+      "created_ago": "6h",
+      "updated_at": "2026-03-24T15:40:58.504402",
+      "scheduled_for": "2026-03-24 16:00",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "05dd81e8-c3cc-4504-b604-629e6e078381",
+      "job_id_short": "05dd81e8",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-24T15:29:29.088792",
+      "created_at_display": "2026-03-24 15:29",
+      "created_ago": "6h",
+      "updated_at": "2026-03-24T15:29:29.088792",
+      "scheduled_for": "2026-03-24 16:29",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "5566a0f4-16cd-4736-a9aa-e700646de7e3",
+      "job_id_short": "5566a0f4",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-24T15:18:15.751977",
+      "created_at_display": "2026-03-24 15:18",
+      "created_ago": "6h",
+      "updated_at": "2026-03-24T15:18:15.751977",
+      "scheduled_for": "2026-03-24 16:18",
+      "error": null,
+      "has_error": false,
+      "post_url": null
     },
     {
       "job_id": "d76ef39c-8ac9-42eb-b7b3-d7bf6e5c30e4",
@@ -157,27 +322,12 @@
       "attempt": 0,
       "created_at": "2026-03-24T08:00:15.601137",
       "created_at_display": "2026-03-24 08:00",
-      "created_ago": "13h",
+      "created_ago": "14h",
       "updated_at": "2026-03-24T15:02:19.227791+00:00",
       "scheduled_for": "2026-03-24 09:00",
       "error": null,
       "has_error": false,
       "post_url": "https://youtube.com/shorts/NKPzY4OmdYY"
-    },
-    {
-      "job_id": "d233d178-1724-422b-84bd-afbe0f9e3079",
-      "job_id_short": "d233d178",
-      "channel": "fomo_highlights",
-      "status": "running",
-      "attempt": 0,
-      "created_at": "2026-03-24T11:26:07.107864",
-      "created_at_display": "2026-03-24 11:26",
-      "created_ago": "9h",
-      "updated_at": "2026-03-24T15:01:23.445118",
-      "scheduled_for": "2026-03-24 12:26",
-      "error": "EARLY_URL:https://youtube.com/shorts/FmAnWpCpmS0",
-      "has_error": true,
-      "post_url": null
     },
     {
       "job_id": "82b9fe3c-fdd7-4cd1-a8f7-5fb92dad2565",
@@ -187,7 +337,7 @@
       "attempt": 0,
       "created_at": "2026-03-23T23:41:31.342908",
       "created_at_display": "2026-03-23 23:41",
-      "created_ago": "21h",
+      "created_ago": "22h",
       "updated_at": "2026-03-24T12:01:18.917982+00:00",
       "scheduled_for": "2026-03-24 09:00",
       "error": null,
@@ -202,7 +352,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T12:00:33.560548",
       "created_at_display": "2026-03-24 12:00",
-      "created_ago": "9h",
+      "created_ago": "10h",
       "updated_at": "2026-03-24T12:00:33.560548",
       "scheduled_for": "2026-03-24 13:00",
       "error": null,
@@ -217,7 +367,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T12:00:25.944136",
       "created_at_display": "2026-03-24 12:00",
-      "created_ago": "9h",
+      "created_ago": "10h",
       "updated_at": "2026-03-24T12:00:25.944136",
       "scheduled_for": "2026-03-24 13:00",
       "error": null,
@@ -232,7 +382,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T12:00:18.182297",
       "created_at_display": "2026-03-24 12:00",
-      "created_ago": "9h",
+      "created_ago": "10h",
       "updated_at": "2026-03-24T12:00:18.182297",
       "scheduled_for": "2026-03-24 13:00",
       "error": null,
@@ -247,7 +397,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T11:26:49.869070",
       "created_at_display": "2026-03-24 11:26",
-      "created_ago": "9h",
+      "created_ago": "10h",
       "updated_at": "2026-03-24T11:26:49.869070",
       "scheduled_for": "2026-03-24 12:26",
       "error": null,
@@ -262,7 +412,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T11:26:42.610520",
       "created_at_display": "2026-03-24 11:26",
-      "created_ago": "9h",
+      "created_ago": "10h",
       "updated_at": "2026-03-24T11:26:42.610520",
       "scheduled_for": "2026-03-24 12:26",
       "error": null,
@@ -277,7 +427,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T11:26:35.683055",
       "created_at_display": "2026-03-24 11:26",
-      "created_ago": "9h",
+      "created_ago": "10h",
       "updated_at": "2026-03-24T11:26:35.683055",
       "scheduled_for": "2026-03-24 12:26",
       "error": null,
@@ -292,7 +442,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T11:26:28.684785",
       "created_at_display": "2026-03-24 11:26",
-      "created_ago": "9h",
+      "created_ago": "10h",
       "updated_at": "2026-03-24T11:26:28.684785",
       "scheduled_for": "2026-03-24 12:26",
       "error": null,
@@ -307,23 +457,8 @@
       "attempt": 0,
       "created_at": "2026-03-24T11:26:21.822975",
       "created_at_display": "2026-03-24 11:26",
-      "created_ago": "9h",
+      "created_ago": "10h",
       "updated_at": "2026-03-24T11:26:21.822975",
-      "scheduled_for": "2026-03-24 12:26",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "67ccaa86-a139-4b8b-9110-c09000e44510",
-      "job_id_short": "67ccaa86",
-      "channel": "fomo_highlights",
-      "status": "queued",
-      "attempt": 0,
-      "created_at": "2026-03-24T11:26:14.063850",
-      "created_at_display": "2026-03-24 11:26",
-      "created_ago": "9h",
-      "updated_at": "2026-03-24T11:26:14.063850",
       "scheduled_for": "2026-03-24 12:26",
       "error": null,
       "has_error": false,
@@ -337,7 +472,7 @@
       "attempt": 1,
       "created_at": "2026-03-24T08:00:32.290497",
       "created_at_display": "2026-03-24 08:00",
-      "created_ago": "13h",
+      "created_ago": "14h",
       "updated_at": "2026-03-24T11:02:22.458428",
       "scheduled_for": "2026-03-24 09:00",
       "error": "Locator.type: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --disable-blink-features=AutomationControlled --start-maximized --no-first-run --no-default-browser-check --user-data-dir=C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\profiles\\fomo_highlights --remote-debugging-pipe about:blank\n<launched> pid=13788\n[pid=13788][err] [13788:3728:0324/110139.096:ERROR:components\\device_event_log\\device_event_log_impl.cc:202] [11:01:39.097] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: Element not found. (0x490)\n[pid=13788][err] [13788:6764:0324/110139.180:ERROR:google_apis\\gcm\\engine\\registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT\n[pid=13788][err] [13788:6764:0324/110201.535:ERROR:google_apis\\gcm\\engine\\registration_request.cc:291] Registration response error message: QUOTA_EXCEEDED\nCall log:\n  - waiting for locator(\"div#textbox[aria-label='Add a title that describes your video (type @ to mention a channel)']\").first\n    - locator resolved to <div id=\"textbox\" slot=\"input\" tabindex=\"0\" role=\"textbox\" aria-required=\"true\" aria-invalid=\"false\" aria-disabled=\"false\" contenteditable=\"true\" class=\"style-scope ytcp-social-suggestions-textbox\" aria-label=\"Add a title that describes your video (type @ to mention a channel)\">reddit mildlyinfuriating 14977 c16f5052 final</div>\n  - elementHandle.type(\"mildlyinfuriating: Everyone repeat after me: \"F LA Fitness\"\")\n",
@@ -352,7 +487,7 @@
       "attempt": 1,
       "created_at": "2026-03-24T02:19:04.665238",
       "created_at_display": "2026-03-24 02:19",
-      "created_ago": "18h",
+      "created_ago": "19h",
       "updated_at": "2026-03-24T11:01:18.571301+00:00",
       "scheduled_for": "2026-03-24 03:19",
       "error": null,
@@ -367,7 +502,7 @@
       "attempt": 1,
       "created_at": "2026-03-24T02:19:10.453050",
       "created_at_display": "2026-03-24 02:19",
-      "created_ago": "18h",
+      "created_ago": "19h",
       "updated_at": "2026-03-24T11:01:18.571301+00:00",
       "scheduled_for": "2026-03-24 03:19",
       "error": null,
@@ -382,7 +517,7 @@
       "attempt": 1,
       "created_at": "2026-03-24T03:30:30.158474",
       "created_at_display": "2026-03-24 03:30",
-      "created_ago": "17h",
+      "created_ago": "18h",
       "updated_at": "2026-03-24T11:01:18.571301+00:00",
       "scheduled_for": "2026-03-24 04:30",
       "error": null,
@@ -397,7 +532,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T02:11:54.210112",
       "created_at_display": "2026-03-24 02:11",
-      "created_ago": "19h",
+      "created_ago": "20h",
       "updated_at": "2026-03-24T10:01:27.774748+00:00",
       "scheduled_for": "2026-03-24 03:11",
       "error": null,
@@ -412,7 +547,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T02:24:00.961304",
       "created_at_display": "2026-03-24 02:24",
-      "created_ago": "18h",
+      "created_ago": "19h",
       "updated_at": "2026-03-24T10:01:27.774748+00:00",
       "scheduled_for": "2026-03-24 03:24",
       "error": null,
@@ -427,7 +562,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T02:31:53.330595",
       "created_at_display": "2026-03-24 02:31",
-      "created_ago": "18h",
+      "created_ago": "19h",
       "updated_at": "2026-03-24T10:01:27.774748+00:00",
       "scheduled_for": "2026-03-24 03:31",
       "error": null,
@@ -442,7 +577,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T02:39:34.321797",
       "created_at_display": "2026-03-24 02:39",
-      "created_ago": "18h",
+      "created_ago": "19h",
       "updated_at": "2026-03-24T10:01:27.774748+00:00",
       "scheduled_for": "2026-03-24 03:39",
       "error": null,
@@ -457,7 +592,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T03:11:01.866082",
       "created_at_display": "2026-03-24 03:11",
-      "created_ago": "18h",
+      "created_ago": "19h",
       "updated_at": "2026-03-24T10:01:27.774748+00:00",
       "scheduled_for": "2026-03-24 04:11",
       "error": null,
@@ -472,7 +607,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T03:30:24.255697",
       "created_at_display": "2026-03-24 03:30",
-      "created_ago": "17h",
+      "created_ago": "18h",
       "updated_at": "2026-03-24T10:01:27.774748+00:00",
       "scheduled_for": "2026-03-24 04:30",
       "error": null,
@@ -487,7 +622,7 @@
       "attempt": 0,
       "created_at": "2026-03-23T23:37:50.017342",
       "created_at_display": "2026-03-23 23:37",
-      "created_ago": "21h",
+      "created_ago": "22h",
       "updated_at": "2026-03-24T09:01:19.031710+00:00",
       "scheduled_for": "2026-03-23 00:20",
       "error": null,
@@ -502,7 +637,7 @@
       "attempt": 0,
       "created_at": "2026-03-23T23:36:57.971765",
       "created_at_display": "2026-03-23 23:36",
-      "created_ago": "21h",
+      "created_ago": "22h",
       "updated_at": "2026-03-24T08:01:18.865566+00:00",
       "scheduled_for": "2026-03-22 21:55",
       "error": null,
@@ -1408,141 +1543,6 @@
       "error": null,
       "has_error": false,
       "post_url": null
-    },
-    {
-      "job_id": "7a21c00b-d99f-498f-b487-7f092488cf8c",
-      "job_id_short": "7a21c00b",
-      "channel": "self_made_clips",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-13T20:14:04.467780",
-      "created_at_display": "2026-03-13 20:14",
-      "created_ago": "11d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-13 20:30",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "902ea60a-c356-4c8a-975f-0ecb21eb5b9c",
-      "job_id_short": "902ea60a",
-      "channel": "self_made_clips",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-14T00:12:10.646823",
-      "created_at_display": "2026-03-14 00:12",
-      "created_ago": "10d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-14 07:00",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "d90a942d-3a25-48ea-b0e6-f352eabfbb8d",
-      "job_id_short": "d90a942d",
-      "channel": "startup_graveyard",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-14T08:11:18.382715",
-      "created_at_display": "2026-03-14 08:11",
-      "created_ago": "10d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-14 08:30",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "1d80eb43-05f6-4379-938a-4dff69abec9e",
-      "job_id_short": "1d80eb43",
-      "channel": "startup_graveyard",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-14T16:11:57.458727",
-      "created_at_display": "2026-03-14 16:11",
-      "created_ago": "10d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-14 18:00",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "f4be3cfa-a26b-4e32-8e25-702d5e7ea4d2",
-      "job_id_short": "f4be3cfa",
-      "channel": "self_made_clips",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-14T18:14:41.305656",
-      "created_at_display": "2026-03-14 18:14",
-      "created_ago": "10d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-14 18:30",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "9644d080-d6ab-4087-aece-f68bf6806c5e",
-      "job_id_short": "9644d080",
-      "channel": "gym_moments",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-14T18:18:26.386462",
-      "created_at_display": "2026-03-14 18:18",
-      "created_ago": "10d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-14 18:30",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "b9c7f585-90a4-4ec8-9fbc-9c1113f6743e",
-      "job_id_short": "b9c7f585",
-      "channel": "startup_graveyard",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-14T20:14:10.552432",
-      "created_at_display": "2026-03-14 20:14",
-      "created_ago": "10d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-14 20:30",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "498d16f0-d508-4ae1-85d6-ce6e4e7a3d63",
-      "job_id_short": "498d16f0",
-      "channel": "self_made_clips",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-14T20:17:28.779639",
-      "created_at_display": "2026-03-14 20:17",
-      "created_ago": "10d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-14 20:30",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "b5edea55-ac99-412a-9246-7dc8a221323f",
-      "job_id_short": "b5edea55",
-      "channel": "startup_graveyard",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-14T22:16:53.434942",
-      "created_at_display": "2026-03-14 22:16",
-      "created_ago": "9d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-14 11:27",
-      "error": null,
-      "has_error": false,
-      "post_url": null
     }
   ],
   "queue": {
@@ -1586,11 +1586,11 @@
       "category": "Gaming",
       "target_per_day": 15,
       "published_24h": 3,
-      "queue_depth": 0,
+      "queue_depth": 5,
       "running_jobs": 0,
       "failed_7d": 0,
-      "avg_views": 1122,
-      "rpm": 0.95,
+      "avg_views": 1160,
+      "rpm": 0.99,
       "deficit": 12,
       "completion_rate": 20.0,
       "lagging": true,
@@ -1604,19 +1604,19 @@
       "status": "active",
       "category": "Gaming",
       "target_per_day": 3,
-      "published_24h": 18,
-      "queue_depth": 10,
+      "published_24h": 19,
+      "queue_depth": 13,
       "running_jobs": 1,
       "failed_7d": 0,
       "avg_views": 18935,
       "rpm": 16.09,
       "deficit": 0,
-      "completion_rate": 600.0,
+      "completion_rate": 633.3,
       "lagging": false,
       "views_source": "source_clips_proxy",
-      "latest_title": "Someone did this to the office fridge \ud83d\ude24 #shorts",
-      "latest_url": "https://youtube.com/shorts/xWMHHpYefAI",
-      "latest_uploaded_at": "2026-03-24 21:01"
+      "latest_title": "He put $108k on the Iran deal \ud83d\udc40 #shorts",
+      "latest_url": "https://youtube.com/shorts/FmAnWpCpmS0",
+      "latest_uploaded_at": "2026-03-24 22:01"
     },
     {
       "channel": "stream_sirens",
@@ -2312,29 +2312,29 @@
           },
           {
             "date": "2026-03-24",
-            "views": null,
-            "rpm": null
+            "views": 1253.8,
+            "rpm": 1.0657
           }
         ],
         "window_7d": {
           "window_days": 7,
-          "avg": 870.84,
-          "previous_avg": 709.58,
-          "delta": 161.26,
-          "delta_pct": 22.7,
+          "avg": 1045.6,
+          "previous_avg": 30.5,
+          "delta": 1015.1,
+          "delta_pct": 3328.2,
           "direction": "up",
           "points": 7
         },
         "window_30d": {
           "window_days": 30,
-          "avg": 870.84,
-          "previous_avg": 709.58,
-          "delta": 161.26,
-          "delta_pct": 22.7,
+          "avg": 918.71,
+          "previous_avg": 870.84,
+          "delta": 47.87,
+          "delta_pct": 5.5,
           "direction": "up",
-          "points": 7
+          "points": 8
         },
-        "latest": 1838.4
+        "latest": 1253.8
       },
       "rpm": {
         "series_30d": [
@@ -2485,29 +2485,29 @@
           },
           {
             "date": "2026-03-24",
-            "views": null,
-            "rpm": null
+            "views": 1253.8,
+            "rpm": 1.0657
           }
         ],
         "window_7d": {
           "window_days": 7,
-          "avg": 0.74,
-          "previous_avg": 0.6,
-          "delta": 0.14,
-          "delta_pct": 23.3,
+          "avg": 0.89,
+          "previous_avg": 0.03,
+          "delta": 0.86,
+          "delta_pct": 2866.7,
           "direction": "up",
           "points": 7
         },
         "window_30d": {
           "window_days": 30,
-          "avg": 0.74,
-          "previous_avg": 0.6,
-          "delta": 0.14,
-          "delta_pct": 23.3,
+          "avg": 0.78,
+          "previous_avg": 0.74,
+          "delta": 0.04,
+          "delta_pct": 5.4,
           "direction": "up",
-          "points": 7
+          "points": 8
         },
-        "latest": 1.5626
+        "latest": 1.0657
       }
     },
     {
@@ -6517,6 +6517,20 @@
       "last_error": "no clips returned"
     },
     {
+      "source_id": "https://www.twitch.tv/cloakzy/clips?filter=clips&range=30d",
+      "source_key": "https://www.twitch.tv/cloakzy/clips?filter=clips&range=30d",
+      "platform": "unknown",
+      "last_fetch": "2026-03-24 21:34:33",
+      "last_fetch_display": "2026-03-24 21:34",
+      "last_fetch_ago": "43m",
+      "clips_24h": 0,
+      "status": "error",
+      "error_rate": 0.545,
+      "success_count": 5,
+      "failure_count": 6,
+      "last_error": "[WinError 2] The system cannot find the file specified"
+    },
+    {
       "source_id": "https://www.twitch.tv/emiru/clips",
       "source_key": "https://www.twitch.tv/emiru/clips",
       "platform": "unknown",
@@ -6559,6 +6573,20 @@
       "last_error": "no clips returned"
     },
     {
+      "source_id": "https://www.twitch.tv/myth/clips?filter=clips&range=30d",
+      "source_key": "https://www.twitch.tv/myth/clips?filter=clips&range=30d",
+      "platform": "unknown",
+      "last_fetch": "2026-03-24 21:30:13",
+      "last_fetch_display": "2026-03-24 21:30",
+      "last_fetch_ago": "47m",
+      "clips_24h": 0,
+      "status": "error",
+      "error_rate": 0.833,
+      "success_count": 1,
+      "failure_count": 5,
+      "last_error": "[WinError 2] The system cannot find the file specified"
+    },
+    {
       "source_id": "https://www.twitch.tv/pokimane/clips",
       "source_key": "https://www.twitch.tv/pokimane/clips",
       "platform": "unknown",
@@ -6571,6 +6599,34 @@
       "success_count": 1,
       "failure_count": 1,
       "last_error": "no clips returned"
+    },
+    {
+      "source_id": "https://www.twitch.tv/shinyatheninja/clips?filter=clips&range=30d",
+      "source_key": "https://www.twitch.tv/shinyatheninja/clips?filter=clips&range=30d",
+      "platform": "unknown",
+      "last_fetch": "2026-03-24 21:30:21",
+      "last_fetch_display": "2026-03-24 21:30",
+      "last_fetch_ago": "47m",
+      "clips_24h": 0,
+      "status": "error",
+      "error_rate": 0.833,
+      "success_count": 1,
+      "failure_count": 5,
+      "last_error": "[WinError 2] The system cannot find the file specified"
+    },
+    {
+      "source_id": "https://www.twitch.tv/taxi2g/clips?filter=clips&range=30d",
+      "source_key": "https://www.twitch.tv/taxi2g/clips?filter=clips&range=30d",
+      "platform": "unknown",
+      "last_fetch": "2026-03-24 21:30:23",
+      "last_fetch_display": "2026-03-24 21:30",
+      "last_fetch_ago": "47m",
+      "clips_24h": 0,
+      "status": "error",
+      "error_rate": 0.833,
+      "success_count": 1,
+      "failure_count": 5,
+      "last_error": "[WinError 2] The system cannot find the file specified"
     },
     {
       "source_id": "https://www.youtube.com/@AndreiJikh",
@@ -6620,7 +6676,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-09 22:10:23",
       "last_fetch_display": "2026-03-09 22:10",
-      "last_fetch_ago": "14d",
+      "last_fetch_ago": "15d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.5,
@@ -6867,6 +6923,20 @@
       "last_error": "no clips returned"
     },
     {
+      "source_id": "https://www.youtube.com/results?search_query=cloakzy+best+moments+2025+shorts",
+      "source_key": "https://www.youtube.com/results?search_query=cloakzy+best+moments+2025+shorts",
+      "platform": "youtube",
+      "last_fetch": "2026-03-24 21:34:16",
+      "last_fetch_display": "2026-03-24 21:34",
+      "last_fetch_ago": "43m",
+      "clips_24h": 0,
+      "status": "error",
+      "error_rate": 0.529,
+      "success_count": 8,
+      "failure_count": 9,
+      "last_error": "[WinError 2] The system cannot find the file specified"
+    },
+    {
       "source_id": "https://www.youtube.com/results?search_query=crypto+loss+confession+shorts",
       "source_key": "https://www.youtube.com/results?search_query=crypto+loss+confession+shorts",
       "platform": "youtube",
@@ -7054,7 +7124,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-24 05:41:17",
       "last_fetch_display": "2026-03-24 05:41",
-      "last_fetch_ago": "15h",
+      "last_fetch_ago": "16h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.111,
@@ -7068,7 +7138,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-24 05:41:56",
       "last_fetch_display": "2026-03-24 05:41",
-      "last_fetch_ago": "15h",
+      "last_fetch_ago": "16h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.077,
@@ -7082,7 +7152,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-24 05:36:00",
       "last_fetch_display": "2026-03-24 05:36",
-      "last_fetch_ago": "15h",
+      "last_fetch_ago": "16h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.077,
@@ -7096,7 +7166,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-24 05:36:05",
       "last_fetch_display": "2026-03-24 05:36",
-      "last_fetch_ago": "15h",
+      "last_fetch_ago": "16h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.182,
@@ -7117,6 +7187,20 @@
       "success_count": 26,
       "failure_count": 12,
       "last_error": "'charmap' codec can't encode character '\\u2192' in position 32: character maps to <undefined>"
+    },
+    {
+      "source_id": "https://www.twitch.tv/tfue/clips?filter=clips&range=30d",
+      "source_key": "https://www.twitch.tv/tfue/clips?filter=clips&range=30d",
+      "platform": "unknown",
+      "last_fetch": "2026-03-24 21:39:38",
+      "last_fetch_display": "2026-03-24 21:39",
+      "last_fetch_ago": "38m",
+      "clips_24h": 0,
+      "status": "warning",
+      "error_rate": 0.375,
+      "success_count": 10,
+      "failure_count": 6,
+      "last_error": "[WinError 2] The system cannot find the file specified"
     },
     {
       "source_id": "https://www.twitch.tv/valkyrae/clips",
@@ -7245,20 +7329,6 @@
       "last_error": "ffmpeg crop failed: ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev8, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --"
     },
     {
-      "source_id": "https://www.youtube.com/results?search_query=cloakzy+best+moments+2025+shorts",
-      "source_key": "https://www.youtube.com/results?search_query=cloakzy+best+moments+2025+shorts",
-      "platform": "youtube",
-      "last_fetch": "2026-03-23 22:36:53",
-      "last_fetch_display": "2026-03-23 22:36",
-      "last_fetch_ago": "22h",
-      "clips_24h": 0,
-      "status": "warning",
-      "error_rate": 0.364,
-      "success_count": 7,
-      "failure_count": 4,
-      "last_error": "'charmap' codec can't encode character '\\u2192' in position 32: character maps to <undefined>"
-    },
-    {
       "source_id": "https://www.youtube.com/results?search_query=emiru+best+clips+twitch+2025",
       "source_key": "https://www.youtube.com/results?search_query=emiru+best+clips+twitch+2025",
       "platform": "youtube",
@@ -7343,44 +7413,16 @@
       "last_error": "ffmpeg final encode failed:\nffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev8, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --ena"
     },
     {
-      "source_id": "https://www.twitch.tv/cloakzy/clips?filter=clips&range=30d",
-      "source_key": "https://www.twitch.tv/cloakzy/clips?filter=clips&range=30d",
-      "platform": "unknown",
-      "last_fetch": "2026-03-23 22:33:17",
-      "last_fetch_display": "2026-03-23 22:33",
-      "last_fetch_ago": "22h",
-      "clips_24h": 0,
-      "status": "healthy",
-      "error_rate": 0.0,
-      "success_count": 3,
-      "failure_count": 0,
-      "last_error": ""
-    },
-    {
       "source_id": "https://www.twitch.tv/hasanabi/clips",
       "source_key": "https://www.twitch.tv/hasanabi/clips",
       "platform": "unknown",
       "last_fetch": "2026-03-24 05:42:06",
       "last_fetch_display": "2026-03-24 05:42",
-      "last_fetch_ago": "15h",
+      "last_fetch_ago": "16h",
       "clips_24h": 0,
       "status": "healthy",
       "error_rate": 0.0,
       "success_count": 3,
-      "failure_count": 0,
-      "last_error": ""
-    },
-    {
-      "source_id": "https://www.twitch.tv/tfue/clips?filter=clips&range=30d",
-      "source_key": "https://www.twitch.tv/tfue/clips?filter=clips&range=30d",
-      "platform": "unknown",
-      "last_fetch": "2026-03-23 22:37:45",
-      "last_fetch_display": "2026-03-23 22:37",
-      "last_fetch_ago": "22h",
-      "clips_24h": 0,
-      "status": "healthy",
-      "error_rate": 0.0,
-      "success_count": 6,
       "failure_count": 0,
       "last_error": ""
     },
@@ -7390,7 +7432,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-24 05:41:03",
       "last_fetch_display": "2026-03-24 05:41",
-      "last_fetch_ago": "15h",
+      "last_fetch_ago": "16h",
       "clips_24h": 0,
       "status": "healthy",
       "error_rate": 0.0,
@@ -7454,15 +7496,15 @@
         "severity": "warning"
       },
       {
-        "error_type": "EARLY_URL:https://youtube.com/shorts/FmAnWpCpmS0",
+        "error_type": "EARLY_URL:https://youtube.com/shorts/AVgdy9VkfMY",
         "count": 1,
         "trend": {
           "today": 1,
           "yesterday": 0,
           "week_ago": 0
         },
-        "last_seen": "2026-03-24 15:01:23",
-        "last_seen_display": "2026-03-24 15:01",
+        "last_seen": "2026-03-24 16:01:23",
+        "last_seen_display": "2026-03-24 16:01",
         "suggestion": "Review logs for context",
         "severity": "info"
       }
@@ -7473,6 +7515,20 @@
     "log_viewer_target": "logs_dialog"
   },
   "top_clips": [
+    {
+      "clip_id": "d233d178-1724-422b-84bd-afbe0f9e3079",
+      "clip_id_short": "d233d178-172",
+      "title": "He put $108k on the Iran deal \ud83d\udc40 #shorts",
+      "source_title": null,
+      "creator": null,
+      "channel": "fomo_highlights",
+      "views": 0,
+      "likes": null,
+      "ctr_percent": null,
+      "upload_date": "2026-03-24 22:01",
+      "youtube_url": "https://youtube.com/shorts/FmAnWpCpmS0",
+      "metric_mode": "unavailable"
+    },
     {
       "clip_id": "8f7742a9-0377-48db-9cc4-af050a9d3069",
       "clip_id_short": "8f7742a9-037",
@@ -7738,23 +7794,21 @@
       "upload_date": "2026-03-24 10:01",
       "youtube_url": "https://youtube.com/shorts/h8omelMZBdc",
       "metric_mode": "unavailable"
-    },
-    {
-      "clip_id": "f1d4434b-cfe9-49d4-9c6b-2c61ce59daac",
-      "clip_id_short": "f1d4434b-cfe",
-      "title": "mildlyinfuriating: Lowes put a returned ceiling fan back on the shelf and sold it as new. Luckily S",
-      "source_title": null,
-      "creator": null,
-      "channel": "fomo_highlights",
-      "views": 0,
-      "likes": null,
-      "ctr_percent": null,
-      "upload_date": "2026-03-24 10:01",
-      "youtube_url": "https://youtube.com/shorts/KSwgY9OxqRM",
-      "metric_mode": "unavailable"
     }
   ],
   "recent_uploads": [
+    {
+      "job_id": "d233d178-1724-422b-84bd-afbe0f9e3079",
+      "job_id_short": "d233d178",
+      "channel": "fomo_highlights",
+      "status": "succeeded",
+      "updated_at": "2026-03-24T22:01:18.321965+00:00",
+      "updated_at_display": "2026-03-24 22:01",
+      "updated_ago": "16m",
+      "title": "He put $108k on the Iran deal \ud83d\udc40 #shorts",
+      "url": "https://youtube.com/shorts/FmAnWpCpmS0",
+      "error": null
+    },
     {
       "job_id": "8f7742a9-0377-48db-9cc4-af050a9d3069",
       "job_id_short": "8f7742a9",
@@ -7762,7 +7816,7 @@
       "status": "succeeded",
       "updated_at": "2026-03-24T21:01:18.866632+00:00",
       "updated_at_display": "2026-03-24 21:01",
-      "updated_ago": "16m",
+      "updated_ago": "1h",
       "title": "Someone did this to the office fridge \ud83d\ude24 #shorts",
       "url": "https://youtube.com/shorts/xWMHHpYefAI",
       "error": null
@@ -7774,7 +7828,7 @@
       "status": "succeeded",
       "updated_at": "2026-03-24T20:01:19.017835+00:00",
       "updated_at_display": "2026-03-24 20:01",
-      "updated_ago": "1h",
+      "updated_ago": "2h",
       "title": "Hospital bathrooms are a crime \ud83d\udc80 #shorts",
       "url": "https://youtube.com/shorts/lnqiHjQGf6Y",
       "error": null
@@ -7786,7 +7840,7 @@
       "status": "succeeded",
       "updated_at": "2026-03-24T19:01:18.758517+00:00",
       "updated_at_display": "2026-03-24 19:01",
-      "updated_ago": "2h",
+      "updated_ago": "3h",
       "title": "This is what my kid found at the beach \ud83d\ude33 #shorts",
       "url": "https://youtube.com/shorts/iMpU6paVxt4",
       "error": null
@@ -7798,7 +7852,7 @@
       "status": "succeeded",
       "updated_at": "2026-03-24T18:01:18.971702+00:00",
       "updated_at_display": "2026-03-24 18:01",
-      "updated_ago": "3h",
+      "updated_ago": "4h",
       "title": "wallstreetbets: Not even McD\u2019s will save you regards tomorrow\u2026",
       "url": "https://youtube.com/shorts/AkbLig8CiGw",
       "error": null
@@ -7810,7 +7864,7 @@
       "status": "succeeded",
       "updated_at": "2026-03-24T18:01:18.971702+00:00",
       "updated_at_display": "2026-03-24 18:01",
-      "updated_ago": "3h",
+      "updated_ago": "4h",
       "title": "mildlyinfuriating: Brother-in-law asked to use some tape to pack his boxes.",
       "url": "https://youtube.com/shorts/iN35qJVsig8",
       "error": null
@@ -7822,7 +7876,7 @@
       "status": "succeeded",
       "updated_at": "2026-03-24T17:01:19.262693+00:00",
       "updated_at_display": "2026-03-24 17:01",
-      "updated_ago": "4h",
+      "updated_ago": "5h",
       "title": "wallstreetbets: Who\u2019s still holding lol",
       "url": "https://youtube.com/shorts/kTU2dZ8TB6M",
       "error": null
@@ -7834,49 +7888,51 @@
       "status": "succeeded",
       "updated_at": "2026-03-24T16:05:26.927077+00:00",
       "updated_at_display": "2026-03-24 16:05",
-      "updated_ago": "5h",
+      "updated_ago": "6h",
       "title": "mildlyinfuriating: Please don\u2019t be this guy that blocks an entire sidewalk with your massive hitch.",
       "url": "https://youtube.com/shorts/nUmyfQHEacY",
       "error": null
     },
     {
-      "job_id": "d76ef39c-8ac9-42eb-b7b3-d7bf6e5c30e4",
-      "job_id_short": "d76ef39c",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "updated_at": "2026-03-24T15:02:19.227791+00:00",
-      "updated_at_display": "2026-03-24 15:02",
-      "updated_ago": "6h",
-      "title": "mildlyinfuriating: Lowes put a returned ceiling fan back on the shelf and sold it as new. Luckily S",
-      "url": "https://youtube.com/shorts/NKPzY4OmdYY",
-      "error": null
-    },
-    {
-      "job_id": "d233d178-1724-422b-84bd-afbe0f9e3079",
-      "job_id_short": "d233d178",
+      "job_id": "67ccaa86-a139-4b8b-9110-c09000e44510",
+      "job_id_short": "67ccaa86",
       "channel": "fomo_highlights",
       "status": "running",
-      "updated_at": "2026-03-24T15:01:23.445118",
-      "updated_at_display": "2026-03-24 15:01",
+      "updated_at": "2026-03-24T16:01:23.058969",
+      "updated_at_display": "2026-03-24 16:01",
       "updated_ago": "6h",
-      "title": "He put $108k on the Iran deal \ud83d\udc40 #shorts",
+      "title": "They parked like this on purpose \ud83d\udc80 #shorts",
       "url": null,
-      "error": "EARLY_URL:https://youtube.com/shorts/FmAnWpCpmS0"
+      "error": "EARLY_URL:https://youtube.com/shorts/AVgdy9VkfMY"
     },
     {
-      "job_id": "82b9fe3c-fdd7-4cd1-a8f7-5fb92dad2565",
-      "job_id_short": "82b9fe3c",
+      "job_id": "7c5d851a-1e10-439e-915d-645f7570c041",
+      "job_id_short": "7c5d851a",
       "channel": "fomo_highlights",
-      "status": "succeeded",
-      "updated_at": "2026-03-24T12:01:18.917982+00:00",
-      "updated_at_display": "2026-03-24 12:01",
-      "updated_ago": "9h",
-      "title": "Shroud Moments #4",
-      "url": "https://youtube.com/shorts/5Y9Mdr9bQ1U",
+      "status": "queued",
+      "updated_at": "2026-03-24T16:00:25.576561",
+      "updated_at_display": "2026-03-24 16:00",
+      "updated_ago": "6h",
+      "title": "Thought I bought the dip, then lost $30K! \ud83d\ude31\ud83d\udcb8",
+      "url": null,
       "error": null
     }
   ],
   "recent_clips": [
+    {
+      "job_id": "d233d178-1724-422b-84bd-afbe0f9e3079",
+      "job_id_short": "d233d178",
+      "channel": "fomo_highlights",
+      "title": "He put $108k on the Iran deal \ud83d\udc40 #shorts",
+      "title_truncated": "He put $108k on the Iran deal \ud83d\udc40 #shorts",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/FmAnWpCpmS0",
+      "views": 0,
+      "views_display": "\u00e2\u20ac\u201d",
+      "published_at": "2026-03-24T22:01:18.321965+00:00",
+      "published_at_display": "2026-03-24 22:01",
+      "published_ago": "16m"
+    },
     {
       "job_id": "8f7742a9-0377-48db-9cc4-af050a9d3069",
       "job_id_short": "8f7742a9",
@@ -7889,7 +7945,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-24T21:01:18.866632+00:00",
       "published_at_display": "2026-03-24 21:01",
-      "published_ago": "16m"
+      "published_ago": "1h"
     },
     {
       "job_id": "b3e52469-4a6d-4401-a353-fffee26cf415",
@@ -7903,7 +7959,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-24T20:01:19.017835+00:00",
       "published_at_display": "2026-03-24 20:01",
-      "published_ago": "1h"
+      "published_ago": "2h"
     },
     {
       "job_id": "e5f92acd-603a-4d11-b3ef-6caa15c45a4b",
@@ -7917,7 +7973,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-24T19:01:18.758517+00:00",
       "published_at_display": "2026-03-24 19:01",
-      "published_ago": "2h"
+      "published_ago": "3h"
     },
     {
       "job_id": "10715a8e-0d9d-44a6-abfc-8a41c66a00d6",
@@ -7931,7 +7987,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-24T18:01:18.971702+00:00",
       "published_at_display": "2026-03-24 18:01",
-      "published_ago": "3h"
+      "published_ago": "4h"
     },
     {
       "job_id": "c62eea94-a649-4c05-bd70-be2eaaa1f04c",
@@ -7945,7 +8001,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-24T18:01:18.971702+00:00",
       "published_at_display": "2026-03-24 18:01",
-      "published_ago": "3h"
+      "published_ago": "4h"
     },
     {
       "job_id": "91c5a203-e8e7-417d-a1aa-aad9875b8058",
@@ -7959,7 +8015,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-24T17:01:19.262693+00:00",
       "published_at_display": "2026-03-24 17:01",
-      "published_ago": "4h"
+      "published_ago": "5h"
     },
     {
       "job_id": "fc6cd835-26c6-4925-a4d8-c20031360d2b",
@@ -7973,7 +8029,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-24T16:05:26.927077+00:00",
       "published_at_display": "2026-03-24 16:05",
-      "published_ago": "5h"
+      "published_ago": "6h"
     },
     {
       "job_id": "d76ef39c-8ac9-42eb-b7b3-d7bf6e5c30e4",
@@ -7987,7 +8043,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-24T15:02:19.227791+00:00",
       "published_at_display": "2026-03-24 15:02",
-      "published_ago": "6h"
+      "published_ago": "7h"
     },
     {
       "job_id": "82b9fe3c-fdd7-4cd1-a8f7-5fb92dad2565",
@@ -8001,20 +8057,6 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-24T12:01:18.917982+00:00",
       "published_at_display": "2026-03-24 12:01",
-      "published_ago": "9h"
-    },
-    {
-      "job_id": "ce377567-cc17-4dfa-bf2e-23d41731b5f0",
-      "job_id_short": "ce377567",
-      "channel": "fomo_highlights",
-      "title": "wallstreetbets: Reuters: OpenAl offering private-equity firms a guaranteed return of 17.5%, and ",
-      "title_truncated": "wallstreetbets: Reuters: OpenAl offering private-equity firm...",
-      "thumbnail_path": null,
-      "post_url": null,
-      "views": 0,
-      "views_display": "\u00e2\u20ac\u201d",
-      "published_at": "2026-03-24T11:01:18.571301+00:00",
-      "published_at_display": "2026-03-24 11:01",
       "published_ago": "10h"
     }
   ],
@@ -8022,8 +8064,19 @@
     "buckets": [
       {
         "name": "Today",
-        "count": 23,
+        "count": 24,
         "items": [
+          {
+            "job_id": "d233d178-1724-422b-84bd-afbe0f9e3079",
+            "job_id_short": "d233d178",
+            "channel": "fomo_highlights",
+            "title": "He put $108k on the Iran deal \ud83d\udc40 #shorts",
+            "published_at": "2026-03-24T22:01:18.321965+00:00",
+            "published_at_display": "2026-03-24 22:01",
+            "published_ago": "16m",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/FmAnWpCpmS0"
+          },
           {
             "job_id": "8f7742a9-0377-48db-9cc4-af050a9d3069",
             "job_id_short": "8f7742a9",
@@ -8031,7 +8084,7 @@
             "title": "Someone did this to the office fridge \ud83d\ude24 #shorts",
             "published_at": "2026-03-24T21:01:18.866632+00:00",
             "published_at_display": "2026-03-24 21:01",
-            "published_ago": "16m",
+            "published_ago": "1h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/xWMHHpYefAI"
           },
@@ -8042,7 +8095,7 @@
             "title": "Hospital bathrooms are a crime \ud83d\udc80 #shorts",
             "published_at": "2026-03-24T20:01:19.017835+00:00",
             "published_at_display": "2026-03-24 20:01",
-            "published_ago": "1h",
+            "published_ago": "2h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/lnqiHjQGf6Y"
           },
@@ -8053,7 +8106,7 @@
             "title": "This is what my kid found at the beach \ud83d\ude33 #shorts",
             "published_at": "2026-03-24T19:01:18.758517+00:00",
             "published_at_display": "2026-03-24 19:01",
-            "published_ago": "2h",
+            "published_ago": "3h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/iMpU6paVxt4"
           },
@@ -8064,7 +8117,7 @@
             "title": "wallstreetbets: Not even McD\u2019s will save you regards tomo...",
             "published_at": "2026-03-24T18:01:18.971702+00:00",
             "published_at_display": "2026-03-24 18:01",
-            "published_ago": "3h",
+            "published_ago": "4h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/AkbLig8CiGw"
           },
@@ -8075,7 +8128,7 @@
             "title": "mildlyinfuriating: Brother-in-law asked to use some tape ...",
             "published_at": "2026-03-24T18:01:18.971702+00:00",
             "published_at_display": "2026-03-24 18:01",
-            "published_ago": "3h",
+            "published_ago": "4h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/iN35qJVsig8"
           },
@@ -8086,7 +8139,7 @@
             "title": "wallstreetbets: Who\u2019s still holding lol",
             "published_at": "2026-03-24T17:01:19.262693+00:00",
             "published_at_display": "2026-03-24 17:01",
-            "published_ago": "4h",
+            "published_ago": "5h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/kTU2dZ8TB6M"
           },
@@ -8097,7 +8150,7 @@
             "title": "mildlyinfuriating: Please don\u2019t be this guy that blocks a...",
             "published_at": "2026-03-24T16:05:26.927077+00:00",
             "published_at_display": "2026-03-24 16:05",
-            "published_ago": "5h",
+            "published_ago": "6h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/nUmyfQHEacY"
           },
@@ -8108,7 +8161,7 @@
             "title": "mildlyinfuriating: Lowes put a returned ceiling fan back ...",
             "published_at": "2026-03-24T15:02:19.227791+00:00",
             "published_at_display": "2026-03-24 15:02",
-            "published_ago": "6h",
+            "published_ago": "7h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/NKPzY4OmdYY"
           },
@@ -8119,7 +8172,7 @@
             "title": "Shroud Moments #4",
             "published_at": "2026-03-24T12:01:18.917982+00:00",
             "published_at_display": "2026-03-24 12:01",
-            "published_ago": "9h",
+            "published_ago": "10h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/5Y9Mdr9bQ1U"
           },
@@ -8130,7 +8183,7 @@
             "title": "wallstreetbets: Reuters: OpenAl offering private-equity f...",
             "published_at": "2026-03-24T11:01:18.571301+00:00",
             "published_at_display": "2026-03-24 11:01",
-            "published_ago": "10h",
+            "published_ago": "11h",
             "views": 0,
             "post_url": null
           },
@@ -8141,7 +8194,7 @@
             "title": "wallstreetbets: Reuters: OpenAl offering private-equity f...",
             "published_at": "2026-03-24T11:01:18.571301+00:00",
             "published_at_display": "2026-03-24 11:01",
-            "published_ago": "10h",
+            "published_ago": "11h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/4Q-bJfo1VgM"
           },
@@ -8152,7 +8205,7 @@
             "title": "wallstreetbets: Roth IRA is COOKED",
             "published_at": "2026-03-24T11:01:18.571301+00:00",
             "published_at_display": "2026-03-24 11:01",
-            "published_ago": "10h",
+            "published_ago": "11h",
             "views": 0,
             "post_url": null
           },
@@ -8163,7 +8216,7 @@
             "title": "wallstreetbets: Roth IRA is COOKED",
             "published_at": "2026-03-24T11:01:18.571301+00:00",
             "published_at_display": "2026-03-24 11:01",
-            "published_ago": "10h",
+            "published_ago": "11h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/aa1STKlgWtw"
           },
@@ -8174,7 +8227,7 @@
             "title": "mildlyinfuriating: Grandkids broke the new basketball hoo...",
             "published_at": "2026-03-24T11:01:18.571301+00:00",
             "published_at_display": "2026-03-24 11:01",
-            "published_ago": "10h",
+            "published_ago": "11h",
             "views": 0,
             "post_url": null
           },
@@ -8185,7 +8238,7 @@
             "title": "mildlyinfuriating: Grandkids broke the new basketball hoo...",
             "published_at": "2026-03-24T11:01:18.571301+00:00",
             "published_at_display": "2026-03-24 11:01",
-            "published_ago": "10h",
+            "published_ago": "11h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/O0kr1-SfbEw"
           },
@@ -8196,7 +8249,7 @@
             "title": "antiwork: My senator has 7 violations for late disclosure...",
             "published_at": "2026-03-24T10:01:27.774748+00:00",
             "published_at_display": "2026-03-24 10:01",
-            "published_ago": "11h",
+            "published_ago": "12h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/BMCC1FiRKqM"
           },
@@ -8207,7 +8260,7 @@
             "title": "mildlyinfuriating: Found on my parents\u2019 bookshelf\u2026",
             "published_at": "2026-03-24T10:01:27.774748+00:00",
             "published_at_display": "2026-03-24 10:01",
-            "published_ago": "11h",
+            "published_ago": "12h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/KqP5CVsm6uk"
           },
@@ -8218,7 +8271,7 @@
             "title": "mildlyinfuriating: RING AI Identified Me As A \u201cDark Animal\u201d",
             "published_at": "2026-03-24T10:01:27.774748+00:00",
             "published_at_display": "2026-03-24 10:01",
-            "published_ago": "11h",
+            "published_ago": "12h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/kY99O8rxh-Q"
           },
@@ -8229,7 +8282,7 @@
             "title": "mildlyinfuriating: Grandkids broke the new basketball hoo...",
             "published_at": "2026-03-24T10:01:27.774748+00:00",
             "published_at_display": "2026-03-24 10:01",
-            "published_ago": "11h",
+            "published_ago": "12h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/h8omelMZBdc"
           },
@@ -8240,7 +8293,7 @@
             "title": "mildlyinfuriating: Lowes put a returned ceiling fan back ...",
             "published_at": "2026-03-24T10:01:27.774748+00:00",
             "published_at_display": "2026-03-24 10:01",
-            "published_ago": "11h",
+            "published_ago": "12h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/KSwgY9OxqRM"
           },
@@ -8251,7 +8304,7 @@
             "title": "mildlyinfuriating: RING AI Identified Me As A \u201cDark Animal\u201d",
             "published_at": "2026-03-24T10:01:27.774748+00:00",
             "published_at_display": "2026-03-24 10:01",
-            "published_ago": "11h",
+            "published_ago": "12h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/yzkeIOKPb2w"
           },
@@ -8262,7 +8315,7 @@
             "title": "Ludwig Moments #8",
             "published_at": "2026-03-24T09:01:19.031710+00:00",
             "published_at_display": "2026-03-24 09:01",
-            "published_ago": "12h",
+            "published_ago": "13h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/PmMPoOCvy8g"
           },
@@ -8273,7 +8326,7 @@
             "title": "Hasanabi Moments #3",
             "published_at": "2026-03-24T08:01:18.865566+00:00",
             "published_at_display": "2026-03-24 08:01",
-            "published_ago": "13h",
+            "published_ago": "14h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/Crbx0xQQIns"
           }
@@ -8290,7 +8343,7 @@
             "title": "Tfue Moments #7",
             "published_at": "2026-03-23T23:01:18.888194+00:00",
             "published_at_display": "2026-03-23 23:01",
-            "published_ago": "22h",
+            "published_ago": "23h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/jeJeKF7XJiQ"
           },
@@ -8301,7 +8354,7 @@
             "title": "Tfue Moments #8",
             "published_at": "2026-03-23T23:01:18.888194+00:00",
             "published_at_display": "2026-03-23 23:01",
-            "published_ago": "22h",
+            "published_ago": "23h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/K550eW6CwmI"
           },
@@ -8312,7 +8365,7 @@
             "title": "Tfue Moments #9",
             "published_at": "2026-03-23T23:01:18.888194+00:00",
             "published_at_display": "2026-03-23 23:01",
-            "published_ago": "22h",
+            "published_ago": "23h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/_5nzm7RMYDw"
           },
@@ -8402,7 +8455,7 @@
       },
       {
         "name": "Last Week",
-        "count": 17,
+        "count": 16,
         "items": [
           {
             "job_id": "1e5e3e95-7c0b-442e-940c-4f119f17c234",
@@ -8579,17 +8632,6 @@
             "published_ago": "3d",
             "views": 0,
             "post_url": null
-          },
-          {
-            "job_id": "9064a7fa-f75f-4983-aa8d-56fe261b80b5",
-            "job_id_short": "9064a7fa",
-            "channel": "arc_highlightz",
-            "title": "Cloakzy Moments #1",
-            "published_at": "2026-03-21T20:01:18.282478+00:00",
-            "published_at_display": "2026-03-21 20:01",
-            "published_ago": "3d",
-            "views": 0,
-            "post_url": null
           }
         ]
       },
@@ -8601,74 +8643,13 @@
     ],
     "total_count": 50
   },
-  "discord_feed": [
-    {
-      "id": "1481889609037385788",
-      "channel_id": "1475223354066600036",
-      "channel_name": "bot-logs",
-      "author": "Aidan Bot",
-      "timestamp": "2026-03-13T05:40:14.972000+00:00",
-      "timestamp_display": "2026-03-13 05:40",
-      "timestamp_ago": "11d",
-      "message": "[Dashboard Test] Feature #5 Discord Feed integration smoke test at 2026-03-13 05:44 UTC",
-      "message_snippet": "[Dashboard Test] Feature #5 Discord Feed integration smoke test at 2026-03-13 05:44 UTC",
-      "url": "https://discord.com/channels/1468193294432604326/1475223354066600036/1481889609037385788"
-    },
-    {
-      "id": "1480053718010564800",
-      "channel_id": "1475223354066600036",
-      "channel_name": "bot-logs",
-      "author": "Aidan Bot",
-      "timestamp": "2026-03-08T04:05:04.442000+00:00",
-      "timestamp_display": "2026-03-08 04:05",
-      "timestamp_ago": "16d",
-      "message": "MODEL AUDIT ERROR: [WinError 2] The system cannot find the file specified",
-      "message_snippet": "MODEL AUDIT ERROR: [WinError 2] The system cannot find the file specified",
-      "url": "https://discord.com/channels/1468193294432604326/1475223354066600036/1480053718010564800"
-    },
-    {
-      "id": "1480052753446207550",
-      "channel_id": "1475223354066600036",
-      "channel_name": "bot-logs",
-      "author": "Aidan Bot",
-      "timestamp": "2026-03-08T04:01:14.472000+00:00",
-      "timestamp_display": "2026-03-08 04:01",
-      "timestamp_ago": "16d",
-      "message": "\ud83d\udcca **Bot Health Report** (21:01)\n\u26a1 Analysis by: **Local Keyword Scan**\n\n**Clip Engine**: \u26a0\ufe0f **Warning** detected (check logs)\n**Clip Engine Rage**: \u26a0\ufe0f **Warning** detected (check logs)\n**Clip Engine Viral**: \u26a0\ufe0f **Error** detected\n**Hype Scout**: \u2705 **Operational** (No system errors)",
-      "message_snippet": "\ud83d\udcca **Bot Health Report** (21:01)\n\u26a1 Analysis by: **Local Keyword Scan**\n\n**Clip Engine**: \u26a0\ufe0f **Warning** detected (check logs)\n**Clip Engine R",
-      "url": "https://discord.com/channels/1468193294432604326/1475223354066600036/1480052753446207550"
-    },
-    {
-      "id": "1480008431782985912",
-      "channel_id": "1475223354066600036",
-      "channel_name": "bot-logs",
-      "author": "Aidan Bot",
-      "timestamp": "2026-03-08T01:05:07.364000+00:00",
-      "timestamp_display": "2026-03-08 01:05",
-      "timestamp_ago": "16d",
-      "message": "MODEL AUDIT ERROR: [WinError 2] The system cannot find the file specified",
-      "message_snippet": "MODEL AUDIT ERROR: [WinError 2] The system cannot find the file specified",
-      "url": "https://discord.com/channels/1468193294432604326/1475223354066600036/1480008431782985912"
-    },
-    {
-      "id": "1479993323396661360",
-      "channel_id": "1475223354066600036",
-      "channel_name": "bot-logs",
-      "author": "Aidan Bot",
-      "timestamp": "2026-03-08T00:05:05.244000+00:00",
-      "timestamp_display": "2026-03-08 00:05",
-      "timestamp_ago": "16d",
-      "message": "MODEL AUDIT ERROR: [WinError 2] The system cannot find the file specified",
-      "message_snippet": "MODEL AUDIT ERROR: [WinError 2] The system cannot find the file specified",
-      "url": "https://discord.com/channels/1468193294432604326/1475223354066600036/1479993323396661360"
-    }
-  ],
+  "discord_feed": [],
   "logs_preview": [
     {
       "channel": "fomo_highlights",
-      "job_id_short": "d233d178",
-      "updated_at": "2026-03-24 15:01",
-      "message": "EARLY_URL:https://youtube.com/shorts/FmAnWpCpmS0"
+      "job_id_short": "67ccaa86",
+      "updated_at": "2026-03-24 16:01",
+      "message": "EARLY_URL:https://youtube.com/shorts/AVgdy9VkfMY"
     },
     {
       "channel": "fomo_highlights",
@@ -8894,15 +8875,6 @@
         "status": "queued"
       },
       {
-        "job_id": "67ccaa86-a139-4b8b-9110-c09000e44510",
-        "job_id_short": "67ccaa86",
-        "channel": "fomo_highlights",
-        "title": "They parked like this on purpose \ud83d\udc80 #shorts",
-        "scheduled_at": "2026-03-24T12:26:14",
-        "scheduled_at_iso": "2026-03-24T12:26:14",
-        "status": "queued"
-      },
-      {
         "job_id": "eeb422d4-f46a-4b56-a580-6a1fadc6ff55",
         "job_id_short": "eeb422d4",
         "channel": "fomo_highlights",
@@ -8972,6 +8944,87 @@
         "title": "This 2nd grade math question. \ud83d\udc80",
         "scheduled_at": "2026-03-24T13:00:33",
         "scheduled_at_iso": "2026-03-24T13:00:33",
+        "status": "queued"
+      },
+      {
+        "job_id": "5103817e-3970-42f0-9793-26b504a4c07b",
+        "job_id_short": "5103817e",
+        "channel": "arc_highlightz",
+        "title": "Shinyatheninja Moments #1",
+        "scheduled_at": "2026-03-24T16:00:00-06:00",
+        "scheduled_at_iso": "2026-03-24T16:00:00",
+        "status": "queued"
+      },
+      {
+        "job_id": "5566a0f4-16cd-4736-a9aa-e700646de7e3",
+        "job_id_short": "5566a0f4",
+        "channel": "fomo_highlights",
+        "title": "I use to sit on this ledge waiting for the bus. It",
+        "scheduled_at": "2026-03-24T16:18:15",
+        "scheduled_at_iso": "2026-03-24T16:18:15",
+        "status": "queued"
+      },
+      {
+        "job_id": "05dd81e8-c3cc-4504-b604-629e6e078381",
+        "job_id_short": "05dd81e8",
+        "channel": "fomo_highlights",
+        "title": "I wish I could tell him this \ud83d\udc80",
+        "scheduled_at": "2026-03-24T16:29:29",
+        "scheduled_at_iso": "2026-03-24T16:29:29",
+        "status": "queued"
+      },
+      {
+        "job_id": "f5024ef0-d892-41bd-a235-365f41fddb7e",
+        "job_id_short": "f5024ef0",
+        "channel": "arc_highlightz",
+        "title": "Tfue Moments #10",
+        "scheduled_at": "2026-03-24T17:00:00-06:00",
+        "scheduled_at_iso": "2026-03-24T17:00:00",
+        "status": "queued"
+      },
+      {
+        "job_id": "916791fc-d055-4bb4-849b-e57b103b0d44",
+        "job_id_short": "916791fc",
+        "channel": "fomo_highlights",
+        "title": "Is this really how they expect us to work? \ud83d\ude33",
+        "scheduled_at": "2026-03-24T17:00:17",
+        "scheduled_at_iso": "2026-03-24T17:00:17",
+        "status": "queued"
+      },
+      {
+        "job_id": "7c5d851a-1e10-439e-915d-645f7570c041",
+        "job_id_short": "7c5d851a",
+        "channel": "fomo_highlights",
+        "title": "Thought I bought the dip, then lost $30K! \ud83d\ude31\ud83d\udcb8",
+        "scheduled_at": "2026-03-24T17:00:25",
+        "scheduled_at_iso": "2026-03-24T17:00:25",
+        "status": "queued"
+      },
+      {
+        "job_id": "5f8989a1-f3f6-4809-a715-ec1740561cd7",
+        "job_id_short": "5f8989a1",
+        "channel": "arc_highlightz",
+        "title": "Cloakzy Moments #3",
+        "scheduled_at": "2026-03-24T18:00:00-06:00",
+        "scheduled_at_iso": "2026-03-24T18:00:00",
+        "status": "queued"
+      },
+      {
+        "job_id": "40ece100-88b2-443c-b303-a2c60f7f3374",
+        "job_id_short": "40ece100",
+        "channel": "arc_highlightz",
+        "title": "Shinyatheninja Moments #2",
+        "scheduled_at": "2026-03-24T20:00:00-06:00",
+        "scheduled_at_iso": "2026-03-24T20:00:00",
+        "status": "queued"
+      },
+      {
+        "job_id": "f4b5b26f-e9e1-4e40-a264-25896b357137",
+        "job_id_short": "f4b5b26f",
+        "channel": "arc_highlightz",
+        "title": "Tfue Moments #11",
+        "scheduled_at": "2026-03-24T22:00:00-06:00",
+        "scheduled_at_iso": "2026-03-24T22:00:00",
         "status": "queued"
       },
       {
@@ -9152,6 +9205,15 @@
         "title": "Someone did this to the office fridge \ud83d\ude24 #shorts",
         "scheduled_at": "2026-03-24T21:01:18.866632+00:00",
         "scheduled_at_iso": "2026-03-24T21:01:18.866632",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "d233d178-1724-422b-84bd-afbe0f9e3079",
+        "job_id_short": "d233d178",
+        "channel": "fomo_highlights",
+        "title": "He put $108k on the Iran deal \ud83d\udc40 #shorts",
+        "scheduled_at": "2026-03-24T22:01:18.321965+00:00",
+        "scheduled_at_iso": "2026-03-24T22:01:18.321965",
         "status": "succeeded"
       }
     ],
@@ -9533,9 +9595,9 @@
     ],
     "any_channel_high": false,
     "all_channels_safe": true,
-    "reset_time_hours": 10,
+    "reset_time_hours": 9,
     "reset_time_minutes": 41,
-    "reset_time_display": "10h 41m"
+    "reset_time_display": "9h 41m"
   },
   "revenue": {
     "total_views_30d": 0,
@@ -9555,8 +9617,8 @@
       "discovered": 0,
       "downloaded": 0,
       "processed": 0,
-      "queued": 11,
-      "uploaded": 71
+      "queued": 19,
+      "uploaded": 72
     },
     "by_channel": [
       {
@@ -9564,7 +9626,7 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 0,
+        "queued": 5,
         "uploaded": 18
       },
       {
@@ -9572,8 +9634,8 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 11,
-        "uploaded": 28
+        "queued": 14,
+        "uploaded": 29
       },
       {
         "channel": "market_meltdowns",
@@ -9593,16 +9655,16 @@
       }
     ],
     "throughput": {
-      "uploads_per_hour": 0.96,
-      "uploads_last_24h": 23
+      "uploads_per_hour": 1.0,
+      "uploads_last_24h": 24
     },
     "stage_timings": {
       "discovered_to_downloaded_hours": 0.0,
-      "queued_to_uploaded_hours": 9.9
+      "queued_to_uploaded_hours": 9.91
     },
     "bottleneck": {
       "stage": "queued",
-      "backlog": 11
+      "backlog": 19
     }
   },
   "disk": {
@@ -9610,35 +9672,35 @@
       {
         "name": "raw_clips",
         "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\raw_clips",
-        "size_bytes": 26190876989,
-        "size_human": "24.4GB",
-        "file_count": 3590
+        "size_bytes": 26592661152,
+        "size_human": "24.8GB",
+        "file_count": 3638
       },
       {
         "name": "intermediate",
         "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\intermediate",
-        "size_bytes": 1152209650,
+        "size_bytes": 1183946226,
         "size_human": "1.1GB",
-        "file_count": 115
+        "file_count": 118
       },
       {
         "name": "renders",
         "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\renders",
-        "size_bytes": 2103983525,
-        "size_human": "2.0GB",
-        "file_count": 282
+        "size_bytes": 2220787522,
+        "size_human": "2.1GB",
+        "file_count": 296
       },
       {
         "name": "renders/thumbnails",
         "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\renders\\thumbnails",
-        "size_bytes": 4106469,
-        "size_human": "3.9MB",
-        "file_count": 94
+        "size_bytes": 4272075,
+        "size_human": "4.1MB",
+        "file_count": 99
       }
     ],
-    "total_disk_bytes": 31790501838,
-    "total_disk_human": "29.6GB",
-    "percent_of_500gb": 5.9,
+    "total_disk_bytes": 32341040019,
+    "total_disk_human": "30.1GB",
+    "percent_of_500gb": 6.0,
     "warning_threshold_pct": 70,
     "error_threshold_pct": 85,
     "largest_files": [
@@ -9687,8 +9749,8 @@
         "channel": "arc_highlightz",
         "title": "Cloakzy Moments #1",
         "title_display": "Cloakzy Moments #1",
-        "views": 18866,
-        "views_display": "18.9K",
+        "views": 19043,
+        "views_display": "19.0K",
         "post_url": "https://youtube.com/shorts/u4-V68nBYaQ",
         "published_at": "2026-03-21T20:01:18.282478+00:00",
         "published_at_display": "2026-03-21 20:01",
@@ -9700,8 +9762,8 @@
         "channel": "arc_highlightz",
         "title": "Tfue Moments #6",
         "title_display": "Tfue Moments #6",
-        "views": 1917,
-        "views_display": "1.9K",
+        "views": 2020,
+        "views_display": "2.0K",
         "post_url": "https://youtube.com/shorts/awywxTpG9jA",
         "published_at": "2026-03-23T05:01:18.559641+00:00",
         "published_at_display": "2026-03-23 05:01",
@@ -9757,7 +9819,7 @@
         "post_url": "https://youtube.com/shorts/jeJeKF7XJiQ",
         "published_at": "2026-03-23T23:01:18.888194+00:00",
         "published_at_display": "2026-03-23 23:01",
-        "published_ago": "22h",
+        "published_ago": "23h",
         "thumbnail_path": null
       },
       {
@@ -9818,8 +9880,8 @@
         "channel": "arc_highlightz",
         "title": "Cloakzy Moments #1",
         "title_display": "Cloakzy Moments #1",
-        "views": 18866,
-        "views_display": "18.9K",
+        "views": 19043,
+        "views_display": "19.0K",
         "post_url": "https://youtube.com/shorts/u4-V68nBYaQ",
         "published_at": "2026-03-21T20:01:18.282478+00:00",
         "published_at_display": "2026-03-21 20:01",
@@ -9845,8 +9907,8 @@
         "channel": "arc_highlightz",
         "title": "Cloakzy Moments #1",
         "title_display": "Cloakzy Moments #1",
-        "views": 18866,
-        "views_display": "18.9K",
+        "views": 19043,
+        "views_display": "19.0K",
         "post_url": "https://youtube.com/shorts/u4-V68nBYaQ",
         "published_at": "2026-03-21T20:01:18.282478+00:00",
         "published_at_display": "2026-03-21 20:01",
@@ -9858,8 +9920,8 @@
         "channel": "arc_highlightz",
         "title": "Tfue Moments #6",
         "title_display": "Tfue Moments #6",
-        "views": 1917,
-        "views_display": "1.9K",
+        "views": 2020,
+        "views_display": "2.0K",
         "post_url": "https://youtube.com/shorts/awywxTpG9jA",
         "published_at": "2026-03-23T05:01:18.559641+00:00",
         "published_at_display": "2026-03-23 05:01",
@@ -9885,9 +9947,9 @@
   "leaderboard": [
     {
       "channel_name": "arc_highlightz",
-      "total_views": 24957,
+      "total_views": 25237,
       "uploads_30d": 18,
-      "avg_views": 1386,
+      "avg_views": 1402,
       "best_clip_title": "No clips yet",
       "best_clip_views": 0,
       "best_clip_url": "",
@@ -9897,8 +9959,8 @@
     {
       "channel_name": "fomo_highlights",
       "total_views": 1092,
-      "uploads_30d": 28,
-      "avg_views": 39,
+      "uploads_30d": 29,
+      "avg_views": 37,
       "best_clip_title": "No clips yet",
       "best_clip_views": 0,
       "best_clip_url": "",
@@ -10916,7 +10978,7 @@
           "priority": 1,
           "clips_fetched": 3,
           "last_fetched_at": "2026-03-24T05:36:57.989463",
-          "last_fetched_rel": "15h",
+          "last_fetched_rel": "16h",
           "enabled": true,
           "url": "https://www.youtube.com/@HasanAbi/videos",
           "type": "transcript"
@@ -10930,7 +10992,7 @@
           "priority": 1,
           "clips_fetched": 8,
           "last_fetched_at": "2026-03-24T05:37:50.026935",
-          "last_fetched_rel": "15h",
+          "last_fetched_rel": "16h",
           "enabled": true,
           "url": "https://www.youtube.com/@Ludwig/videos",
           "type": "transcript"
@@ -11057,13 +11119,13 @@
   ],
   "daily_summary": {
     "date": "2026-03-24",
-    "uploads_today": 20,
-    "uploads_yesterday": 29,
+    "uploads_today": 21,
+    "uploads_yesterday": 30,
     "views_gained_today": 0,
     "views_yesterday": 0,
     "errors_today": 2,
-    "quota_pct": 320.0,
-    "quota_units_used": 32000,
+    "quota_pct": 336.0,
+    "quota_units_used": 33600,
     "delta_uploads": -9,
     "delta_views": 0,
     "top_clip_today": {
@@ -11074,21 +11136,21 @@
     "top_3_channels": [
       {
         "channel": "fomo_highlights",
-        "uploads": 18
+        "uploads": 19
       },
       {
         "channel": "viral_recaps",
         "uploads": 2
       }
     ],
-    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-03-24\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 20 (-9 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 2\n  API Quota: 320.0% used (32000/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Hasanabi Moments #3\n  0 views \u00e2\u20ac\u00a2 viral_recaps\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. fomo_highlights: 18 uploads\n  2. viral_recaps: 2 uploads",
-    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-03-24\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 20 (-9 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 2\n\u00e2\u20ac\u00a2 **API Quota:** 320.0% used (`32000/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Hasanabi Moments #3_\n**0 views** \u00e2\u20ac\u00a2 **viral_recaps**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **fomo_highlights** \u00e2\u20ac\u201d 18 uploads\n2. **viral_recaps** \u00e2\u20ac\u201d 2 uploads"
+    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-03-24\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 21 (-9 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 2\n  API Quota: 336.0% used (33600/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Hasanabi Moments #3\n  0 views \u00e2\u20ac\u00a2 viral_recaps\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. fomo_highlights: 19 uploads\n  2. viral_recaps: 2 uploads",
+    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-03-24\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 21 (-9 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 2\n\u00e2\u20ac\u00a2 **API Quota:** 336.0% used (`33600/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Hasanabi Moments #3_\n**0 views** \u00e2\u20ac\u00a2 **viral_recaps**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **fomo_highlights** \u00e2\u20ac\u201d 19 uploads\n2. **viral_recaps** \u00e2\u20ac\u201d 2 uploads"
   },
   "title_performance": {
     "pattern_analysis": {
       "has_numbers": {
         "avg_views": 0.0,
-        "count": 33,
+        "count": 34,
         "total_views": 0
       },
       "has_question": {
@@ -11103,7 +11165,7 @@
       },
       "has_emoji": {
         "avg_views": 0.0,
-        "count": 13,
+        "count": 14,
         "total_views": 0
       }
     },
@@ -11151,7 +11213,7 @@
       {
         "word": "the",
         "avg_views": 0.0,
-        "occurrences": 15
+        "occurrences": 16
       },
       {
         "word": "unexpected",
@@ -11203,7 +11265,7 @@
       {
         "word": "the",
         "avg_views": 0.0,
-        "occurrences": 15
+        "occurrences": 16
       },
       {
         "word": "unexpected",
@@ -11250,12 +11312,12 @@
         "channel": "fomo_highlights",
         "best_title": "Watch this before scrolling: Nobody plays like this",
         "best_views": 0,
-        "total_titles_analyzed": 28,
+        "total_titles_analyzed": 29,
         "pattern_breakdown": {
-          "numbers_pct": 28.6,
+          "numbers_pct": 31.0,
           "questions_pct": 0.0,
-          "caps_pct": 3.6,
-          "emoji_pct": 21.4
+          "caps_pct": 3.4,
+          "emoji_pct": 24.1
         }
       },
       {
@@ -11289,7 +11351,7 @@
       {
         "style_name": "Gaming/Clips",
         "avg_views": 0,
-        "total_clips": 65,
+        "total_clips": 66,
         "best_clip": null,
         "total_views": 0,
         "is_best": true
@@ -11306,7 +11368,7 @@
     "best_style_overall": "Gaming/Clips",
     "summary_stats": {
       "total_styles": 2,
-      "total_clips_all": 71,
+      "total_clips_all": 72,
       "total_views_all": 0,
       "avg_views_overall": 0
     }
@@ -11388,8 +11450,8 @@
       {
         "hour": 12,
         "hour_label": "12:00",
-        "posts": 6,
-        "avg_views": 1250.0
+        "posts": 7,
+        "avg_views": 1257.0
       },
       {
         "hour": 13,
@@ -11468,8 +11530,8 @@
       {
         "day": 1,
         "day_name": "Tuesday",
-        "posts": 27,
-        "avg_views": 881.0
+        "posts": 28,
+        "avg_views": 896.0
       },
       {
         "day": 2,
@@ -12167,7 +12229,7 @@
           "hour": 12,
           "day": 1,
           "views": 1300.0,
-          "posts": 3,
+          "posts": 4,
           "intensity": 66.7
         },
         {
@@ -12776,7 +12838,7 @@
       "day_name": "Monday",
       "est_views": 1950.0
     },
-    "job_count": 71
+    "job_count": 72
   },
   "benchmarks": {
     "current_tier": "Starter",
@@ -12867,92 +12929,92 @@
     {
       "type": "warning",
       "title": "Channel \"market_meltdowns\" paused for 24+ hours",
-      "message": "market_meltdowns has been paused for 381 hours",
+      "message": "market_meltdowns has been paused for 382 hours",
       "channel": "market_meltdowns",
-      "created_at": "2026-03-24T21:18:02.601524",
+      "created_at": "2026-03-24T22:18:02.485269",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"self_made_clips\" paused for 24+ hours",
-      "message": "self_made_clips has been paused for 377 hours",
+      "message": "self_made_clips has been paused for 378 hours",
       "channel": "self_made_clips",
-      "created_at": "2026-03-24T21:18:02.601524",
+      "created_at": "2026-03-24T22:18:02.485269",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"rich_or_ruined\" paused for 24+ hours",
-      "message": "rich_or_ruined has been paused for 375 hours",
+      "message": "rich_or_ruined has been paused for 376 hours",
       "channel": "rich_or_ruined",
-      "created_at": "2026-03-24T21:18:02.601524",
+      "created_at": "2026-03-24T22:18:02.485269",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"startup_graveyard\" paused for 24+ hours",
-      "message": "startup_graveyard has been paused for 375 hours",
+      "message": "startup_graveyard has been paused for 376 hours",
       "channel": "startup_graveyard",
-      "created_at": "2026-03-24T21:18:02.601524",
+      "created_at": "2026-03-24T22:18:02.485269",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_sirens\" paused for 24+ hours",
-      "message": "stream_sirens has been paused for 354 hours",
+      "message": "stream_sirens has been paused for 355 hours",
       "channel": "stream_sirens",
-      "created_at": "2026-03-24T21:18:02.601524",
+      "created_at": "2026-03-24T22:18:02.485269",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_queens\" paused for 24+ hours",
-      "message": "stream_queens has been paused for 354 hours",
+      "message": "stream_queens has been paused for 355 hours",
       "channel": "stream_queens",
-      "created_at": "2026-03-24T21:18:02.601524",
+      "created_at": "2026-03-24T22:18:02.485269",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"ai_did_what\" paused for 24+ hours",
-      "message": "ai_did_what has been paused for 320 hours",
+      "message": "ai_did_what has been paused for 321 hours",
       "channel": "ai_did_what",
-      "created_at": "2026-03-24T21:18:02.601524",
+      "created_at": "2026-03-24T22:18:02.485269",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"gym_moments\" paused for 24+ hours",
-      "message": "gym_moments has been paused for 320 hours",
+      "message": "gym_moments has been paused for 321 hours",
       "channel": "gym_moments",
-      "created_at": "2026-03-24T21:18:02.601524",
+      "created_at": "2026-03-24T22:18:02.485269",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"kitchen_chaos\" paused for 24+ hours",
-      "message": "kitchen_chaos has been paused for 173 hours",
+      "message": "kitchen_chaos has been paused for 174 hours",
       "channel": "kitchen_chaos",
-      "created_at": "2026-03-24T21:18:02.601524",
+      "created_at": "2026-03-24T22:18:02.485269",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"unfiltered_clips\" paused for 24+ hours",
-      "message": "unfiltered_clips has been paused for 173 hours",
+      "message": "unfiltered_clips has been paused for 174 hours",
       "channel": "unfiltered_clips",
-      "created_at": "2026-03-24T21:18:02.601524",
+      "created_at": "2026-03-24T22:18:02.485269",
       "read": false
     }
   ],
   "checklists": [
     {
       "channel": "arc_highlightz",
-      "readiness_score": 5,
+      "readiness_score": 6,
       "total_checks": 6,
-      "badge": "needs_attention",
-      "badge_text": "Needs Attention",
-      "badge_color": "orange",
+      "badge": "launch_ready",
+      "badge_text": "Launch Ready",
+      "badge_color": "green",
       "checks": [
         {
           "label": "Has YouTube account linked",
@@ -12976,8 +13038,8 @@
         },
         {
           "label": "Has clips in queue",
-          "passed": false,
-          "icon": "\u00e2\u009d\u0152"
+          "passed": true,
+          "icon": "\u00e2\u0153\u2026"
         },
         {
           "label": "Quota not exhausted (< 90% used)",
@@ -13506,11 +13568,11 @@
         "category": "Gaming",
         "target_per_day": 15,
         "published_24h": 3,
-        "queue_depth": 0,
+        "queue_depth": 5,
         "running_jobs": 0,
         "failed_7d": 0,
-        "avg_views": 1122,
-        "rpm": 0.95,
+        "avg_views": 1160,
+        "rpm": 0.99,
         "deficit": 12,
         "completion_rate": 20.0,
         "lagging": true,
@@ -13521,13 +13583,13 @@
       }
     ],
     "lagging_count": 2,
-    "queue_backlog": 11,
+    "queue_backlog": 19,
     "analytics_channels": 13
   },
   "meta": {
     "refresh_seconds": 30,
     "channel_count": 13,
-    "job_count": 183,
+    "job_count": 192,
     "has_metrics_daily": false,
     "has_clip_assets": false,
     "note": "Trend analytics prefer metrics_daily and fall back to source clip proxy series when upload analytics are sparse."

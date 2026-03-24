@@ -132,5 +132,8 @@ def build_series_title(
     """Return a numbered series title like 'Shroud Best Plays #12'."""
     theme = classify_theme(clip_title, niche, channel_name=channel_name)
     n = next_episode(channel_name, creator, theme, db_path)
-    display_creator = creator.capitalize()
+    # Use display_name from creator profile if available (e.g. "Shinya" for shinyatheninja)
+    from engine.config.creator_profiles import get_profile
+    profile = get_profile(creator)
+    display_creator = profile.get("display_name") or creator.capitalize()
     return f"{display_creator} {theme} #{n}"

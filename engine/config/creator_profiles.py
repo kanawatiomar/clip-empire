@@ -103,6 +103,86 @@ CREATOR_PROFILES: dict[str, dict] = {
         },
     },
 
+    "shinyatheninja": {
+        "display_name": "Shinya",
+        "channel": "arc_highlightz",
+        "crop_anchor": "left",
+        "content_types": ["clutch", "skill", "funny"],
+        "hook_style": "hype",
+        "min_views": 500,
+        "llm_context": "ShinyaTheNinja is a skilled FPS/Warzone streamer known for insane clips. Keep titles short and punchy.",
+        "prefer_keywords": ["insane", "clutch", "no way", "cracked", "clip"],
+        "avoid_keywords": ["irl", "podcast", "just chatting"],
+        "hook_overrides": [
+            "SHINYA REALLY JUST DID THAT",
+            "SHINYA COOKED 🎮",
+            "HOW DID SHINYA DO THAT",
+            "SHINYA SAID WATCH THIS",
+            "CHAT LOST IT",
+            "NOT EVEN CLOSE",
+            "ZERO THOUGHT. PERFECT EXECUTION.",
+            "I WATCHED THIS 5 TIMES",
+        ],
+        "style_preset": "gaming",
+        "style_overrides": {
+            "caption": {
+                "word_highlight_color": "&H0000E5FF",
+                "margin_v": 1300,
+                "words_per_line": 3,
+            },
+            "overlay": {
+                "hook_fontsize": 92,
+                "hook_y": "h/6",
+            },
+        },
+    },
+
+    "myth": {
+        "display_name": "Myth",
+        "channel": "arc_highlightz",
+        "crop_anchor": "left",
+        "content_types": ["clutch", "skill", "funny"],
+        "hook_style": "hype",
+        "min_views": 500,
+        "llm_context": "Myth is a popular Fortnite streamer known for building skills and clutch moments.",
+        "prefer_keywords": ["insane", "clutch", "no way", "build", "myth"],
+        "avoid_keywords": ["irl", "podcast", "just chatting"],
+        "hook_overrides": [
+            "MYTH REALLY JUST DID THAT",
+            "MYTH COOKED 🎮",
+            "HOW DID MYTH DO THAT",
+            "MYTH SAID WATCH THIS",
+        ],
+        "style_preset": "gaming",
+        "style_overrides": {
+            "caption": {"word_highlight_color": "&H0000E5FF", "margin_v": 1300, "words_per_line": 3},
+            "overlay": {"hook_fontsize": 92, "hook_y": "h/6"},
+        },
+    },
+
+    "bugha": {
+        "display_name": "Bugha",
+        "channel": "arc_highlightz",
+        "crop_anchor": "right",
+        "content_types": ["clutch", "skill"],
+        "hook_style": "hype",
+        "min_views": 500,
+        "llm_context": "Bugha is the Fortnite World Cup champion. Known for insane competitive plays.",
+        "prefer_keywords": ["insane", "clutch", "no way", "competitive", "bugha"],
+        "avoid_keywords": ["irl", "podcast", "just chatting"],
+        "hook_overrides": [
+            "BUGHA REALLY JUST DID THAT",
+            "BUGHA COOKED 🎮",
+            "HOW DID BUGHA DO THAT",
+            "THE WORLD CHAMP SAID WATCH THIS",
+        ],
+        "style_preset": "gaming",
+        "style_overrides": {
+            "caption": {"word_highlight_color": "&H001AFFE4", "margin_v": 1300, "words_per_line": 3},
+            "overlay": {"hook_fontsize": 92, "hook_y": "h/6"},
+        },
+    },
+
     # ── FOMO HIGHLIGHTS CREATORS ──────────────────────────────────────────────
 
     "shroud": {

@@ -1,4 +1,4 @@
-"""smart_title.py - LLM-powered title generation + clip quality scoring.
+﻿"""smart_title.py - LLM-powered title generation + clip quality scoring.
 
 For Twitch clips we don't have audio transcripts, so we:
 1. Score clips on hype keywords in the clip TITLE (from the Twitch clip metadata)
@@ -20,7 +20,7 @@ from typing import Optional
 
 logger = logging.getLogger("clip_empire.smart_title")
 
-# ── HYPE SCORING ─────────────────────────────────────────────────────────────
+# â”€â”€ HYPE SCORING â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 # Keywords in Twitch clip titles that indicate high entertainment value.
 # Score boosts sum up; cap at 1.0.
 
@@ -52,20 +52,20 @@ BORING_KEYWORDS: list[str] = [
 ]
 
 # Minimum hype score to proceed with rendering (clips below this are skipped)
-MIN_HYPE_SCORE = 0.10  # Low bar — only skip genuinely dead clips
+MIN_HYPE_SCORE = 0.10  # Low bar â€” only skip genuinely dead clips
 
 
 def score_clip_title(title: str) -> float:
     """Score a clip title for entertainment value. Returns 0.0-1.0.
-    Returns 0.5 (neutral) for titles with no recognizable keywords — proceed anyway.
+    Returns 0.5 (neutral) for titles with no recognizable keywords â€” proceed anyway.
     Returns 0.0 only for clips with explicit BORING_KEYWORDS (definitive skip).
     """
     if not title:
-        return 0.5  # Unknown quality — proceed anyway
+        return 0.5  # Unknown quality â€” proceed anyway
 
     title_lower = title.lower()
 
-    # Check boring keywords — explicit disqualify only
+    # Check boring keywords â€” explicit disqualify only
     for boring in BORING_KEYWORDS:
         if boring in title_lower:
             logger.debug("Boring keyword '%s' in title: %s", boring, title[:60])
@@ -78,13 +78,13 @@ def score_clip_title(title: str) -> float:
 
     # Cap at 1.0; if no hype keywords found, return neutral 0.5 (not skip)
     if score == 0.0:
-        return 0.5  # Neutral — undescriptive title, but not boring
+        return 0.5  # Neutral â€” undescriptive title, but not boring
     return min(1.0, score)
 
 
 def is_boring_clip(title: str) -> bool:
     """Return True ONLY if clip has explicit boring/dead keywords (ad break, brb, etc).
-    Clips with undescriptive titles are NOT skipped — just given neutral score.
+    Clips with undescriptive titles are NOT skipped â€” just given neutral score.
     """
     if not title:
         return False
@@ -92,7 +92,7 @@ def is_boring_clip(title: str) -> bool:
     return any(boring in title_lower for boring in BORING_KEYWORDS)
 
 
-# ── LLM TITLE GENERATION ─────────────────────────────────────────────────────
+# â”€â”€ LLM TITLE GENERATION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 _USED_TITLES_PATH = Path("data/used_titles.json")
 
@@ -130,7 +130,7 @@ def generate_llm_title(
     """
     api_key = openai_api_key or os.environ.get("OPENAI_API_KEY") or _read_env_key()
     if not api_key:
-        logger.debug("No OpenAI API key — skipping LLM title generation")
+        logger.debug("No OpenAI API key â€” skipping LLM title generation")
         return None
 
     if not creator or not clip_title:
@@ -140,19 +140,26 @@ def generate_llm_title(
     recent = _load_used_titles()[-10:]
     avoid_block = ""
     if recent:
-        avoid_block = "\n\nAVOID — these patterns have been used recently:\n" + "\n".join(f'- "{t}"' for t in recent)
+        avoid_block = "\n\nAVOID â€” these patterns have been used recently:\n" + "\n".join(f'- "{t}"' for t in recent)
+
+    # Use display_name from creator profile if available
+    try:
+        from engine.config.creator_profiles import get_profile as _gp
+        _creator_display = _gp(creator).get('display_name') or _creator_display
+    except Exception:
+        _creator_display = _creator_display
 
     # Shuffle style examples each call for variety
     style_examples = [
-        f'"{creator.capitalize()} had NO idea this was coming"',
-        f'"How did {creator.capitalize()} just do that"',
-        f'"{creator.capitalize()} wasn\'t supposed to survive this"',
-        f'"Nobody expected {creator.capitalize()} to pull THIS off"',
-        f'"The moment {creator.capitalize()} completely lost it"',
-        f'"{creator.capitalize()} said the quiet part out loud"',
-        f'"This is why people watch {creator.capitalize()}"',
-        f'"{creator.capitalize()} could not believe what just happened"',
-        f'"Only {creator.capitalize()} could make this look easy"',
+        f'"{_creator_display} had NO idea this was coming"',
+        f'"How did {_creator_display} just do that"',
+        f'"{_creator_display} wasn\'t supposed to survive this"',
+        f'"Nobody expected {_creator_display} to pull THIS off"',
+        f'"The moment {_creator_display} completely lost it"',
+        f'"{_creator_display} said the quiet part out loud"',
+        f'"This is why people watch {_creator_display}"',
+        f'"{_creator_display} could not believe what just happened"',
+        f'"Only {_creator_display} could make this look easy"',
     ]
     random.shuffle(style_examples)
     styles = "\n".join(f"- {s}" for s in style_examples[:4])
@@ -169,14 +176,14 @@ def generate_llm_title(
 
     prompt = f"""You write titles for viral YouTube Shorts on a {niche} channel called "{channel_name}".
 
-Streamer: {creator.capitalize()}
+Streamer: {_creator_display}
 Clip context: "{clip_title}"{creator_context}{avoid_block}
 
 Write ONE title. Rules:
 - Max 60 characters
-- 1 emoji max, at the end (use Unicode e.g. 🎮 😤 💀 😂)
+- 1 emoji max, at the end (use Unicode e.g. ðŸŽ® ðŸ˜¤ ðŸ’€ ðŸ˜‚)
 - Include streamer's name
-- Create CURIOSITY — make viewers need to see what happened
+- Create CURIOSITY â€” make viewers need to see what happened
 - NO profanity or swearing
 - NO words: INSANE, EPIC, HILARIOUS, AMAZING, UNREAL, INCREDIBLE
 - NO multiple exclamation marks
@@ -212,13 +219,13 @@ Return ONLY the title, nothing else."""
 
         # Hard dedup: if LLM repeated a recently-used title, retry once more
         if title in recent:
-            logger.warning("LLM title '%s' is a duplicate — retrying once", title)
+            logger.warning("LLM title '%s' is a duplicate â€” retrying once", title)
             payload2 = json.dumps({
                 "model": "gpt-4o-mini",
                 "messages": [
                     {"role": "user", "content": prompt},
                     {"role": "assistant", "content": title},
-                    {"role": "user", "content": "That title was already used. Write a completely different one — different angle, different structure."},
+                    {"role": "user", "content": "That title was already used. Write a completely different one â€” different angle, different structure."},
                 ],
                 "max_tokens": 60,
                 "temperature": 1.0,
@@ -258,7 +265,7 @@ def _read_env_key() -> Optional[str]:
     return None
 
 
-# ── CENSOR INTEGRATION ────────────────────────────────────────────────────────
+# â”€â”€ CENSOR INTEGRATION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def clean_title(title: str) -> str:
     """Apply profanity filter to a title before publishing."""

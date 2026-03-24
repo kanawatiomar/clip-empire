@@ -126,7 +126,7 @@ class ViralRecapsRunner:
         print(f"         Sub: {subreddit}, Score: {score}")
         
         # Generate hook and punchline
-        hook, punchline = reddit_scraper.generate_hook_and_punchline(post_title)
+        hook, punchline = reddit_scraper.generate_hook_and_punchline(post_title, subreddit=subreddit, score=score)
         print(f"         Hook: {hook.replace(chr(10), ' / ')}")
         if punchline:
             print(f"         Punchline: {punchline.replace(chr(10), ' / ')}")

@@ -235,79 +235,78 @@ def word_wrap(text: str, max_chars: int = 20) -> str:
     return "\n".join(lines)
 
 
-def generate_hook_and_punchline(title: str) -> tuple[str, str]:
-    """Generate dramatic hook and punchline using OpenAI.
-    
-    Args:
-        title: Reddit post title
-    
-    Returns:
-        (hook, punchline) tuple
+def generate_hook_and_punchline(title: str, subreddit: str = "", score: int = 0) -> tuple[str, str]:
+    """Generate hook and punchline using smart rule-based logic. No API needed.
+
+    Analyzes the title for keywords and patterns to produce punchy,
+    formatted text that fits the finance/work drama niche.
     """
-    if not HAS_OPENAI:
-        # Fallback: use title as hook
-        hook = word_wrap(title[:100], max_chars=20)
-        return (hook, "")
-    
-    try:
-        api_key = os.environ.get("OPENAI_API_KEY")
-        if not api_key:
-            # Try to load from .env
-            env_path = Path("../.env")
-            if env_path.exists():
-                with open(env_path) as f:
-                    for line in f:
-                        if line.startswith("OPENAI_API_KEY="):
-                            api_key = line.split("=", 1)[1].strip()
-                            break
-        
-        if not api_key:
-            raise ValueError("No OPENAI_API_KEY found")
-        
-        client = OpenAI(api_key=api_key)
-        
-        prompt = f"""Generate a dramatic hook and punchline for a finance/work drama Reddit post.
-Focus on: salary drama, job losses, investment wins/losses, boss behavior, workplace frustration.
+    t = title.strip()
+    tl = t.lower()
 
-Reddit title: "{title}"
+    # --- HOOK: clean up and frame the title dramatically ---
+    # Strip trailing ellipsis/punctuation clutter
+    hook = t.rstrip(".,;: ").strip()
 
-Return ONLY a JSON object with exactly this format (no markdown, no extra text):
-{{"hook": "dramatic setup or question (max 12 words)", "punchline": "surprising outcome or reaction (max 10 words)"}}
+    # Trim to max ~80 chars naturally at a word boundary
+    if len(hook) > 80:
+        hook = hook[:80].rsplit(" ", 1)[0].rstrip(".,") + "..."
 
-Examples of good pairs:
-- Hook: "Employee asked for raise after 5 years. Boss's reply:"  Punchline: "They got a new job paying double."
-- Hook: "Guy invested his life savings in one stock"  Punchline: "It went up 500% in 6 months."
-- Hook: "Server told boss they quit mid-shift"  Punchline: "The boss's face was priceless."
+    # Add a dramatic opener based on keywords
+    openers = []
+    if any(w in tl for w in ["fired", "laid off", "terminated", "quit", "resigned"]):
+        openers = ["They got fired for this.", "This got someone fired.", "Quit on the spot after this."]
+    elif any(w in tl for w in ["boss", "manager", "hr", "supervisor"]):
+        openers = ["The boss thought this was okay.", "Manager actually said this.", "HR did nothing."]
+    elif any(w in tl for w in ["raise", "salary", "pay", "wage", "compensation"]):
+        openers = ["Asked for a raise. Got this instead.", "This is why people job-hop.", "The audacity."]
+    elif any(w in tl for w in ["stock", "invest", "market", "crypto", "trading", "loss", "profit", "gain"]):
+        openers = ["The market is ruthless.", "This investor just learned.", "Wall Street moment."]
+    elif any(w in tl for w in ["rent", "landlord", "evict", "mortgage"]):
+        openers = ["Landlords are something else.", "This landlord actually did this.", "Rent in 2025 is wild."]
+    elif any(w in tl for w in ["mcdonald", "amazon", "walmart", "corporate", "company"]):
+        openers = ["Corporate greed hits different.", "Big company energy.", "This is how they treat workers."]
 
-Be punchy, dramatic, use casual/internet language. Focus on the unexpected twist or emotional reaction."""
-        
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.7,
-            max_tokens=150,
-        )
-        
-        result_text = response.choices[0].message.content.strip()
-        
-        # Try to parse JSON
-        try:
-            result = json.loads(result_text)
-            hook = word_wrap(result.get("hook", "")[:100], max_chars=20)
-            punchline = word_wrap(result.get("punchline", ""), max_chars=22)
-            return (hook, punchline)
-        except json.JSONDecodeError:
-            # Fallback parsing
-            lines = result_text.split("\n")
-            hook = word_wrap(title[:100], max_chars=20)
-            punchline = ""
-            return (hook, punchline)
-    
-    except Exception as e:
-        print(f"[reddit] Error generating hook/punchline: {e}")
-        # Fallback: use title as hook
-        hook = word_wrap(title[:100], max_chars=20)
-        return (hook, "")
+    # --- PUNCHLINE: reaction/commentary based on score + subreddit ---
+    punchline = ""
+    if score > 50000:
+        punchline = "Over 50k people are furious right now."
+    elif score > 20000:
+        punchline = f"{score // 1000}k people can't believe this."
+    elif score > 10000:
+        punchline = "The comments absolutely roasted them."
+    elif score > 5000:
+        punchline = "And it just keeps getting worse."
+    elif score > 1000:
+        punchline = "People in the comments are livid."
+
+    # Override punchline based on keywords
+    if any(w in tl for w in ["update", "follow up", "edit:"]):
+        punchline = "The update made it even worse."
+    elif any(w in tl for w in ["win", "won", "success", "finally", "approved", "accepted"]):
+        punchline = "Sometimes the good guys do win."
+    elif any(w in tl for w in ["scam", "fraud", "fake", "lie", "lied", "deceiv"]):
+        punchline = "Red flags were there from the start."
+    elif any(w in tl for w in ["fired", "terminated"]) and any(w in tl for w in ["new job", "better", "hired"]):
+        punchline = "Got a better job the next week."
+    elif "ai" in tl.split() or "chatgpt" in tl or "robot" in tl:
+        punchline = "The robots are taking over."
+
+    # Pick opener if we have one (rotate based on score to add variety)
+    if openers:
+        opener = openers[score % len(openers)]
+        # Put opener as punchline if we don't have a better one
+        if not punchline:
+            punchline = opener
+
+    hook_wrapped = word_wrap(hook, max_chars=26)
+    punch_wrapped = word_wrap(punchline, max_chars=28) if punchline else ""
+
+    print(f"[reddit] Hook: {hook[:60]}")
+    if punchline:
+        print(f"[reddit] Punchline: {punchline[:60]}")
+
+    return (hook_wrapped, punch_wrapped)
 
 
 if __name__ == "__main__":

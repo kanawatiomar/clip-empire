@@ -425,6 +425,27 @@ CHANNEL_SOURCES: dict = {
          "type": "channel", "priority": 2, "max_age_days": 30,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 20,
          "crop_anchor": "right", "min_views": 500},
+        # Cloakzy-style: aggressive FPS/Fortnite, big energy, high clip volume
+        {"platform": "twitch", "url": "https://www.twitch.tv/swagg/clips?filter=clips&range=30d",
+         "type": "channel", "priority": 2, "max_age_days": 30,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 25,
+         "crop_anchor": "left", "min_views": 500},
+        {"platform": "twitch", "url": "https://www.twitch.tv/dubs/clips?filter=clips&range=30d",
+         "type": "channel", "priority": 2, "max_age_days": 30,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 25,
+         "crop_anchor": "left", "min_views": 500},
+        {"platform": "twitch", "url": "https://www.twitch.tv/mongraal/clips?filter=clips&range=30d",
+         "type": "channel", "priority": 2, "max_age_days": 30,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 25,
+         "crop_anchor": "right", "min_views": 500},
+        {"platform": "twitch", "url": "https://www.twitch.tv/clix/clips?filter=clips&range=30d",
+         "type": "channel", "priority": 2, "max_age_days": 30,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 25,
+         "crop_anchor": "left", "min_views": 500},
+        {"platform": "twitch", "url": "https://www.twitch.tv/reverse2k/clips?filter=clips&range=30d",
+         "type": "channel", "priority": 2, "max_age_days": 30,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 20,
+         "crop_anchor": "right", "min_views": 500},
         {"platform": "youtube",
          "url": "https://www.youtube.com/results?search_query=tfue+highlights+2025+shorts",
          "type": "search", "priority": 3, "max_age_days": 7,
@@ -436,32 +457,36 @@ CHANNEL_SOURCES: dict = {
     ],
 
     "viral_recaps": [
-        # Moistcr1tikal / penguinz0: usually centered cam, reaction-heavy
-        # min_views lowered to 200 — Moist Twitch clips rarely exceed 300 fresh (his viral content is YouTube)
+        # ── PRIORITY 1: Transcript-LLM extraction from YouTube VODs ──────────
+        # LLM reads transcript, picks the best self-contained funny/engaging moment.
+        # Same-day content — no dependency on fan clip view counts.
+        {"platform": "youtube", "url": "https://www.youtube.com/@penguinz0/videos",
+         "type": "transcript", "priority": 1, "max_age_days": 3,
+         "target_dur_s": 45, "max_per_run": 2,
+         "crop_anchor": "center", "creator": "moistcr1tikal"},
+        {"platform": "youtube", "url": "https://www.youtube.com/@HasanAbi/videos",
+         "type": "transcript", "priority": 1, "max_age_days": 3,
+         "target_dur_s": 45, "max_per_run": 2,
+         "crop_anchor": "right", "creator": "hasanabi"},
+        {"platform": "youtube", "url": "https://www.youtube.com/@Ludwig/videos",
+         "type": "transcript", "priority": 1, "max_age_days": 3,
+         "target_dur_s": 45, "max_per_run": 2,
+         "crop_anchor": "center", "creator": "ludwig"},
+
+        # ── PRIORITY 2: Twitch fan clips (fallback when no YT video today) ───
+        # min_views lowered to realistic thresholds — clips take hours to accumulate views
         {"platform": "twitch", "url": "https://www.twitch.tv/moistcr1tikal/clips",
-         "type": "channel", "priority": 1, "max_age_days": 3,
-         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 6,
+         "type": "channel", "priority": 2, "max_age_days": 3,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 4,
          "crop_anchor": "center", "min_views": 200},
-        # HasanAbi: cam on left side -> anchor right
-        # min_views lowered to 500 — Hasan clips hit 500-1200 fresh, rarely 3k+
         {"platform": "twitch", "url": "https://www.twitch.tv/hasanabi/clips",
-         "type": "channel", "priority": 1, "max_age_days": 3,
-         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 6,
+         "type": "channel", "priority": 2, "max_age_days": 3,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 4,
          "crop_anchor": "right", "min_views": 500},
-        # Ludwig: usually centered
         {"platform": "twitch", "url": "https://www.twitch.tv/ludwig/clips",
-         "type": "channel", "priority": 1, "max_age_days": 3,
-         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 6,
+         "type": "channel", "priority": 2, "max_age_days": 3,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 4,
          "crop_anchor": "center"},
-        # YouTube fallbacks
-        {"platform": "youtube",
-         "url": "https://www.youtube.com/results?search_query=penguinz0+funniest+moments+shorts+2025",
-         "type": "search", "priority": 3, "max_age_days": 7,
-         "min_dur_s": 20, "max_dur_s": 60, "crop_anchor": "center"},
-        {"platform": "youtube",
-         "url": "https://www.youtube.com/results?search_query=hasanabi+funny+clips+shorts+2025",
-         "type": "search", "priority": 3, "max_age_days": 7,
-         "min_dur_s": 20, "max_dur_s": 60, "crop_anchor": "center"},
     ],
 
     "fomo_highlights": [

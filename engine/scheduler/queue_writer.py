@@ -254,7 +254,7 @@ def _next_schedule_time(channel_name: str, db_path: str = DATABASE_PATH) -> date
             continue
         # Must not be already occupied by this channel
         occupied = any(
-            abs((candidate - s).total_seconds()) < 1800  # 30-min collision window
+            abs((candidate - s).total_seconds()) < 3600  # 60-min collision window
             for s in existing_slots
         )
         if occupied:

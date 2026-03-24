@@ -101,7 +101,7 @@ def compose_frame(bg_frame_path: Optional[str], image_path: str,
         punch_font  = _load_font(FONT_REG_PATH,  44)
 
         # --- Hook text (top) ---
-        hook_y = 55
+        hook_y = 160  # pushed down to clear phone status bar / notch
         hook_y = draw_text_wrapped(draw, hook_text, hook_font, 0, hook_y, W)
 
         # --- Reddit image (center) ---

@@ -711,51 +711,84 @@ def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description:
 
     # ---- Audience: scroll down to find it ----
 
-    page.wait_for_timeout(500)
+    page.wait_for_timeout(1000)
 
     page.keyboard.press("Tab")  # nudge focus so scroll triggers
 
-    try:
+    # Try multiple selectors — YouTube has changed the name attribute over time
+    audience_selectors_not_kids = [
+        "tp-yt-paper-radio-button[name='VIDEO_MADE_FOR_KIDS_NOT_MFK']",
+        "tp-yt-paper-radio-button[name='VIDEO_NOT_MADE_FOR_KIDS']",
+        "tp-yt-paper-radio-button[name='NOT_MADE_FOR_KIDS']",
+    ]
+    audience_selectors_kids = [
+        "tp-yt-paper-radio-button[name='VIDEO_MADE_FOR_KIDS_MFK']",
+        "tp-yt-paper-radio-button[name='VIDEO_MADE_FOR_KIDS']",
+        "tp-yt-paper-radio-button[name='MADE_FOR_KIDS']",
+    ]
+    target_selectors = audience_selectors_kids if made_for_kids else audience_selectors_not_kids
 
-        audience_radio_sel = SELECTORS["made_for_kids_radio"] if made_for_kids else SELECTORS["not_made_for_kids_radio"]
+    audience_set = False
+    for sel in target_selectors:
+        try:
+            loc = page.locator(sel).first
+            loc.scroll_into_view_if_needed(timeout=5_000)
+            page.wait_for_timeout(500)
+            if loc.get_attribute("aria-checked") != "true":
+                loc.click()
+                page.wait_for_timeout(500)
+            # Verify it's checked
+            if loc.get_attribute("aria-checked") == "true":
+                status = "made for kids" if made_for_kids else "not made for kids"
+                print(f"Audience set: {status} (selector: {sel})")
+                audience_set = True
+                break
+        except Exception:
+            continue
 
-        audience_loc = page.locator(audience_radio_sel)
+    if not audience_set:
+        # JS fallback: find any "No" radio (not made for kids) in the audience section
+        try:
+            result = page.evaluate("""
+                () => {
+                    const radios = Array.from(document.querySelectorAll('tp-yt-paper-radio-button'));
+                    const notKids = radios.find(r => {
+                        const name = r.getAttribute('name') || '';
+                        return name.includes('NOT') || name.includes('not');
+                    });
+                    if (notKids) { notKids.click(); return notKids.getAttribute('name'); }
+                    return null;
+                }
+            """)
+            if result:
+                print(f"Audience set via JS fallback: {result}")
+                audience_set = True
+                page.wait_for_timeout(500)
+        except Exception as e:
+            print(f"JS audience fallback failed: {e}")
 
-        audience_loc.scroll_into_view_if_needed(timeout=10_000)
+    if not audience_set:
+        print("WARNING: Could not set audience — video may be saved as Draft. Check studio manually.")
 
-        is_checked = audience_loc.get_attribute("aria-checked")
+    page.wait_for_timeout(1000)
 
-        if is_checked != "true":
-
-            audience_loc.click()
-
-        status = "made for kids" if made_for_kids else "not made for kids"
-
-        print(f"Audience set: {status}")
-
-    except Exception as e:
-
-        print(f"Could not set audience radio (non-fatal, defaulting to YouTube setting): {e}")
-
-
-
-    # ---- Next â†' Video elements ----
+    # ---- Next → Video elements ----
 
     page.locator(SELECTORS["next_button"]).click()
 
     print("Clicked Next (Video elements).")
 
-    page.wait_for_timeout(1000)
+    page.wait_for_timeout(2000)
 
 
 
-    # ---- Next â†' Checks ----
+    # ---- Next → Checks ----
 
     page.locator(SELECTORS["next_button"]).click()
 
     print("Clicked Next (Checks).")
 
-    page.wait_for_timeout(1000)
+    page.wait_for_timeout(3000)  # Give the content check time to run
 
 
 
@@ -767,9 +800,21 @@ def _set_visibility_and_schedule(
 
     print("Setting visibility and schedule...")
 
-    _wait_for_selector(page, SELECTORS["next_button"], cfg.nav_timeout_ms) # Ensure on Visibility page
+    # Wait for content check to complete — next button must be enabled (not just visible)
+    _wait_for_selector(page, SELECTORS["next_button"], cfg.nav_timeout_ms)
+    # Poll until next button is enabled (content check spinner gone)
+    for _attempt in range(30):
+        try:
+            btn = page.locator(SELECTORS["next_button"]).first
+            disabled = btn.get_attribute("disabled")
+            aria_disabled = btn.get_attribute("aria-disabled")
+            if disabled is None and aria_disabled != "true":
+                break
+        except Exception:
+            pass
+        page.wait_for_timeout(1000)
 
-    page.locator(SELECTORS["next_button"]).click() # To Visibility page
+    page.locator(SELECTORS["next_button"]).click()  # To Visibility page
 
     print("Clicked Next (to Visibility).")
 

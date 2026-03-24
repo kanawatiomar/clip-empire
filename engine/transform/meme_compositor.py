@@ -73,27 +73,28 @@ def draw_text_wrapped(draw: ImageDraw.Draw, text: str, font: ImageFont.FreeTypeF
     return y
 
 
-def compose_frame(bg_frame_path: str, image_path: str,
+def compose_frame(bg_frame_path: Optional[str], image_path: str,
                   hook_text: str, punchline_text: str) -> Optional[str]:
     """
-    Build a single 1080x1920 PNG frame using PIL:
-    - Background (blurred screenshot of bg video frame)
-    - Dark overlay for readability
+    Build a 1080x1920 RGBA PNG overlay using PIL:
+    - TRANSPARENT background (so bg video shows through)
+    - Semi-transparent dark strip behind text for readability
     - Reddit image centered
     - Hook text at top
     - Punchline text at bottom
-    Returns path to composed PNG.
+    Returns path to composed PNG (RGBA).
     """
     try:
-        # Load bg frame and resize to canvas
-        bg = Image.open(bg_frame_path).convert("RGB").resize((W, H), Image.Resampling.LANCZOS)
-        # Darken bg slightly
-        overlay = Image.new("RGBA", (W, H), (0, 0, 0, 120))
-        bg = bg.convert("RGBA")
-        bg.alpha_composite(overlay)
-        canvas = bg.convert("RGB")
-
+        # Start with fully transparent canvas
+        canvas = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         draw = ImageDraw.Draw(canvas)
+
+        # Dark semi-transparent strip behind hook text (top)
+        draw.rectangle([(0, 0), (W, 220)], fill=(0, 0, 0, 160))
+
+        # Dark semi-transparent strip behind punchline text (bottom)
+        if punchline_text and punchline_text.strip():
+            draw.rectangle([(0, H - 220), (W, H)], fill=(0, 0, 0, 160))
 
         # Load fonts
         hook_font   = _load_font(FONT_BOLD_PATH, 56)
@@ -126,7 +127,7 @@ def compose_frame(bg_frame_path: str, image_path: str,
             punch_y = H - 190
             draw_text_wrapped(draw, punchline_text, punch_font, 0, punch_y, W)
 
-        # Save composed frame
+        # Save as RGBA PNG (preserves transparency for ffmpeg overlay)
         out = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
         canvas.save(out.name, "PNG")
         out.close()
@@ -168,23 +169,8 @@ def create_short(bg_video_path: str, image_url: str,
     composed = None
 
     try:
-        # Step 1: Extract single frame from bg video for PIL compositing
-        bg_frame_tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".png")
-        bg_frame_tmp.close()
-        bg_frame = bg_frame_tmp.name
-
-        r = subprocess.run([
-            FFMPEG, "-y", "-i", bg,
-            "-vframes", "1", "-q:v", "2", bg_frame
-        ], capture_output=True)
-        if r.returncode != 0 or not Path(bg_frame).stat().st_size:
-            print("[compositor] Failed to extract bg frame, using blank bg")
-            # Create blank dark frame as fallback
-            blank = Image.new("RGB", (W, H), color=(15, 12, 41))
-            blank.save(bg_frame, "PNG")
-
-        # Step 2: Compose frame with PIL (bg frame + reddit image + text)
-        composed = compose_frame(bg_frame, img_path, hook_text, punchline_text)
+        # Compose transparent overlay with PIL (reddit image + text, transparent bg)
+        composed = compose_frame(None, img_path, hook_text, punchline_text)
         if not composed:
             return False
 
@@ -205,17 +191,17 @@ def create_short(bg_video_path: str, image_url: str,
             FFMPEG, "-y",
             # bg video looping
             "-stream_loop", "-1", "-i", bg,
-            # composed frame (static, looped)
+            # RGBA overlay PNG (Reddit image + text on transparent bg)
             "-loop", "1", "-i", composed,
             # audio
             *audio_input,
             # trim to duration
             "-t", str(duration_s),
-            # video: overlay composed frame on top of bg video
+            # video: scale bg, alpha-blend overlay on top
             "-filter_complex",
             "[0:v]scale=1080:1920,setsar=1[bg];"
-            "[1:v]scale=1080:1920[frame];"
-            "[bg][frame]overlay=0:0[v]",
+            "[1:v]scale=1080:1920,format=rgba[overlay];"
+            "[bg][overlay]overlay=0:0:format=auto[v]",
             "-map", "[v]",
             *audio_map,
             *audio_filter,
@@ -242,7 +228,7 @@ def create_short(bg_video_path: str, image_url: str,
         traceback.print_exc()
         return False
     finally:
-        for p in [img_path, bg_frame, composed]:
+        for p in [img_path, composed]:
             if p and Path(p).exists():
                 try: Path(p).unlink()
                 except: pass

@@ -1,28 +1,28 @@
 {
-  "generated_at": "2026-03-24T23:18:02.642562Z",
+  "generated_at": "2026-03-25T00:18:02.833349Z",
   "repo_root": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire",
   "database_path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\data\\clip_empire.db",
   "health_score": {
-    "score": 87.3,
-    "grade": "B",
-    "status": "Needs Attention",
-    "color": "yellow",
+    "score": 58.1,
+    "grade": "D",
+    "status": "Critical",
+    "color": "red",
     "breakdown": {
-      "pipeline_health": 25,
+      "pipeline_health": 0.8,
       "error_rate": 20.0,
       "quota_safety": 15,
-      "queue_depth": 10,
+      "queue_depth": 5,
       "source_freshness": 15,
       "channel_uptime": 2.3
     },
     "metrics": {
-      "uploads_today": 24,
-      "target_today": 24,
-      "pipeline_health_ratio": 1.0,
+      "uploads_today": 1,
+      "target_today": 31,
+      "pipeline_health_ratio": 0.03,
       "errors_today": 0,
-      "total_jobs_today": 40,
+      "total_jobs_today": 20,
       "error_rate": 0.0,
-      "queue_depth": 16,
+      "queue_depth": 35,
       "active_channels": 3,
       "total_channels": 13,
       "fresh_sources": 0,
@@ -33,17 +33,317 @@
     "active_channels": 3,
     "total_channels": 13,
     "jobs_today": {
-      "total": 40,
+      "total": 39,
       "queued": 16,
       "running": 0,
-      "succeeded": 24,
+      "succeeded": 23,
       "failed": 0,
       "cancelled": 0
     },
-    "render_queue_depth": 16,
-    "last_updated": "2026-03-24T23:18:02.643583Z"
+    "render_queue_depth": 35,
+    "last_updated": "2026-03-25T00:18:02.833349Z"
   },
   "queue_monitor": [
+    {
+      "job_id": "0d328257-5cea-41a6-9c55-92120e8817c1",
+      "job_id_short": "0d328257",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-25T00:01:33.258540+00:00",
+      "created_at_display": "2026-03-25 00:01",
+      "created_ago": "16m",
+      "updated_at": "2026-03-25T00:01:33.258540+00:00",
+      "scheduled_for": "2026-03-25 00:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "e5e44df4-5250-4484-aee5-c4b4a9d9d5e7",
+      "job_id_short": "e5e44df4",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-25T00:01:33.260626+00:00",
+      "created_at_display": "2026-03-25 00:01",
+      "created_ago": "16m",
+      "updated_at": "2026-03-25T00:01:33.260626+00:00",
+      "scheduled_for": "2026-03-25 00:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "d5ac24b5-5146-4c09-b91e-647ced80e527",
+      "job_id_short": "d5ac24b5",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-25T00:01:33.260626+00:00",
+      "created_at_display": "2026-03-25 00:01",
+      "created_ago": "16m",
+      "updated_at": "2026-03-25T00:01:33.260626+00:00",
+      "scheduled_for": "2026-03-25 00:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "888037e0-7616-4264-80c8-a5f069db169c",
+      "job_id_short": "888037e0",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-25T00:01:33.260626+00:00",
+      "created_at_display": "2026-03-25 00:01",
+      "created_ago": "16m",
+      "updated_at": "2026-03-25T00:01:33.260626+00:00",
+      "scheduled_for": "2026-03-25 00:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "5fbe8d23-b618-47a9-8d7d-f3404b265ca6",
+      "job_id_short": "5fbe8d23",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-25T00:01:33.260626+00:00",
+      "created_at_display": "2026-03-25 00:01",
+      "created_ago": "16m",
+      "updated_at": "2026-03-25T00:01:33.260626+00:00",
+      "scheduled_for": "2026-03-25 00:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "81b1a341-024e-4918-8427-dfdc509fab76",
+      "job_id_short": "81b1a341",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-25T00:01:33.260626+00:00",
+      "created_at_display": "2026-03-25 00:01",
+      "created_ago": "16m",
+      "updated_at": "2026-03-25T00:01:33.260626+00:00",
+      "scheduled_for": "2026-03-25 00:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "1fb152c8-bae6-47b9-897a-9e4f61f80195",
+      "job_id_short": "1fb152c8",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-25T00:01:33.260626+00:00",
+      "created_at_display": "2026-03-25 00:01",
+      "created_ago": "16m",
+      "updated_at": "2026-03-25T00:01:33.260626+00:00",
+      "scheduled_for": "2026-03-25 00:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "a61f3767-a87f-4d90-b049-bfc201a9ba0d",
+      "job_id_short": "a61f3767",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-25T00:01:33.260626+00:00",
+      "created_at_display": "2026-03-25 00:01",
+      "created_ago": "16m",
+      "updated_at": "2026-03-25T00:01:33.260626+00:00",
+      "scheduled_for": "2026-03-25 00:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "faff5868-27b4-4a22-b6be-cfc7d366f13f",
+      "job_id_short": "faff5868",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-25T00:01:33.260626+00:00",
+      "created_at_display": "2026-03-25 00:01",
+      "created_ago": "16m",
+      "updated_at": "2026-03-25T00:01:33.260626+00:00",
+      "scheduled_for": "2026-03-25 00:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "4716c640-2d52-474f-a99b-742285856c05",
+      "job_id_short": "4716c640",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-25T00:01:33.260626+00:00",
+      "created_at_display": "2026-03-25 00:01",
+      "created_ago": "16m",
+      "updated_at": "2026-03-25T00:01:33.260626+00:00",
+      "scheduled_for": "2026-03-25 00:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "ec8599e2-821e-4f75-8dcf-f2e6957cb5a1",
+      "job_id_short": "ec8599e2",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-25T00:01:33.261635+00:00",
+      "created_at_display": "2026-03-25 00:01",
+      "created_ago": "16m",
+      "updated_at": "2026-03-25T00:01:33.261635+00:00",
+      "scheduled_for": "2026-03-25 00:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "d6b8cedc-bb4c-42c5-8b5b-15fab3b58478",
+      "job_id_short": "d6b8cedc",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-25T00:01:33.261635+00:00",
+      "created_at_display": "2026-03-25 00:01",
+      "created_ago": "16m",
+      "updated_at": "2026-03-25T00:01:33.261635+00:00",
+      "scheduled_for": "2026-03-25 00:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "b69e849d-ca2d-456e-85f8-8a0afbcb2983",
+      "job_id_short": "b69e849d",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-25T00:01:33.261635+00:00",
+      "created_at_display": "2026-03-25 00:01",
+      "created_ago": "16m",
+      "updated_at": "2026-03-25T00:01:33.261635+00:00",
+      "scheduled_for": "2026-03-25 00:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "f2cff0e1-d5c1-43cf-8821-883814c63db3",
+      "job_id_short": "f2cff0e1",
+      "channel": "viral_recaps",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-25T00:01:33.261635+00:00",
+      "created_at_display": "2026-03-25 00:01",
+      "created_ago": "16m",
+      "updated_at": "2026-03-25T00:01:33.261635+00:00",
+      "scheduled_for": "2026-03-25 00:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "125609b9-af86-4010-a68a-11149a217888",
+      "job_id_short": "125609b9",
+      "channel": "viral_recaps",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-25T00:01:33.261635+00:00",
+      "created_at_display": "2026-03-25 00:01",
+      "created_ago": "16m",
+      "updated_at": "2026-03-25T00:01:33.261635+00:00",
+      "scheduled_for": "2026-03-25 00:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "641b5ab8-b56a-4cbc-ab9f-db9bd38ce56a",
+      "job_id_short": "641b5ab8",
+      "channel": "viral_recaps",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-25T00:01:33.261635+00:00",
+      "created_at_display": "2026-03-25 00:01",
+      "created_ago": "16m",
+      "updated_at": "2026-03-25T00:01:33.261635+00:00",
+      "scheduled_for": "2026-03-25 00:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "1e9c048a-6b80-4f21-8881-4dd9c1689ad1",
+      "job_id_short": "1e9c048a",
+      "channel": "viral_recaps",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-25T00:01:33.261635+00:00",
+      "created_at_display": "2026-03-25 00:01",
+      "created_ago": "16m",
+      "updated_at": "2026-03-25T00:01:33.261635+00:00",
+      "scheduled_for": "2026-03-25 00:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "d8893fa1-97b2-4a3b-8e61-eab212866bfa",
+      "job_id_short": "d8893fa1",
+      "channel": "viral_recaps",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-25T00:01:33.261635+00:00",
+      "created_at_display": "2026-03-25 00:01",
+      "created_ago": "16m",
+      "updated_at": "2026-03-25T00:01:33.261635+00:00",
+      "scheduled_for": "2026-03-25 00:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "00e736da-8ed0-4dbd-a7a9-74feb7730ee0",
+      "job_id_short": "00e736da",
+      "channel": "viral_recaps",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-25T00:01:33.261635+00:00",
+      "created_at_display": "2026-03-25 00:01",
+      "created_ago": "16m",
+      "updated_at": "2026-03-25T00:01:33.261635+00:00",
+      "scheduled_for": "2026-03-25 00:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "eeb422d4-f46a-4b56-a580-6a1fadc6ff55",
+      "job_id_short": "eeb422d4",
+      "channel": "fomo_highlights",
+      "status": "succeeded",
+      "attempt": 0,
+      "created_at": "2026-03-24T11:26:21.822975",
+      "created_at_display": "2026-03-24 11:26",
+      "created_ago": "12h",
+      "updated_at": "2026-03-25T00:01:19.758702+00:00",
+      "scheduled_for": "2026-03-24 12:26",
+      "error": null,
+      "has_error": false,
+      "post_url": "https://youtube.com/shorts/bBqbwqaDbwU"
+    },
     {
       "job_id": "67ccaa86-a139-4b8b-9110-c09000e44510",
       "job_id_short": "67ccaa86",
@@ -52,7 +352,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T11:26:14.063850",
       "created_at_display": "2026-03-24 11:26",
-      "created_ago": "11h",
+      "created_ago": "12h",
       "updated_at": "2026-03-24T23:01:20.906554+00:00",
       "scheduled_for": "2026-03-24 12:26",
       "error": null,
@@ -67,7 +367,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T15:40:58.504402",
       "created_at_display": "2026-03-24 15:40",
-      "created_ago": "7h",
+      "created_ago": "8h",
       "updated_at": "2026-03-24T23:01:20.906554+00:00",
       "scheduled_for": "2026-03-24 16:00",
       "error": null,
@@ -82,7 +382,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T11:26:07.107864",
       "created_at_display": "2026-03-24 11:26",
-      "created_ago": "11h",
+      "created_ago": "12h",
       "updated_at": "2026-03-24T22:01:18.321965+00:00",
       "scheduled_for": "2026-03-24 12:26",
       "error": null,
@@ -97,7 +397,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T11:25:58.935969",
       "created_at_display": "2026-03-24 11:25",
-      "created_ago": "11h",
+      "created_ago": "12h",
       "updated_at": "2026-03-24T21:01:18.866632+00:00",
       "scheduled_for": "2026-03-24 12:25",
       "error": null,
@@ -112,7 +412,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T11:25:50.981851",
       "created_at_display": "2026-03-24 11:25",
-      "created_ago": "11h",
+      "created_ago": "12h",
       "updated_at": "2026-03-24T20:01:19.017835+00:00",
       "scheduled_for": "2026-03-24 12:25",
       "error": null,
@@ -127,12 +427,42 @@
       "attempt": 0,
       "created_at": "2026-03-24T11:25:42.912372",
       "created_at_display": "2026-03-24 11:25",
-      "created_ago": "11h",
+      "created_ago": "12h",
       "updated_at": "2026-03-24T19:01:18.758517+00:00",
       "scheduled_for": "2026-03-24 12:25",
       "error": null,
       "has_error": false,
       "post_url": "https://youtube.com/shorts/iMpU6paVxt4"
+    },
+    {
+      "job_id": "f5024ef0-d892-41bd-a235-365f41fddb7e",
+      "job_id_short": "f5024ef0",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "attempt": 1,
+      "created_at": "2026-03-24T15:42:09.355689",
+      "created_at_display": "2026-03-24 15:42",
+      "created_ago": "8h",
+      "updated_at": "2026-03-24T18:11:07.084973",
+      "scheduled_for": "2026-03-24 17:00",
+      "error": "BrowserType.launch_persistent_context: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> C:\\Users\\kanaw\\AppData\\Local\\ms-playwright\\chromium-1208\\chrome-win64\\chrome.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --disable-blink-features=AutomationControlled --start-maximized --user-data-dir=C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\profiles\\arc_highlightz --remote-debugging-pipe about:blank\n<launched> pid=8652\nCall log:\n  - <launching> C:\\Users\\kanaw\\AppData\\Local\\ms-playwright\\chromium-1208\\chrome-win64\\chrome.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --disable-blink-features=AutomationControlled --start-maximized --user-data-dir=C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\profiles\\arc_highlightz --remote-debugging-pipe about:blank\n  - <launched> pid=8652\n  - [pid=8652] <gracefully close start>\n  - [pid=8652] <kill>\n  - [pid=8652] <will force kill>\n  - [pid=8652] taskkill stderr: ERROR: The process \"8652\" not found.\n  - [pid=8652] <process did exit: exitCode=2147483651, signal=null>\n  - [pid=8652] starting temporary directories cleanup\n  - [pid=8652] finished temporary directories cleanup\n  - [pid=8652] <gracefully close end>\n",
+      "has_error": true,
+      "post_url": null
+    },
+    {
+      "job_id": "729594d1-7597-4be2-a680-2862083da812",
+      "job_id_short": "729594d1",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "attempt": 1,
+      "created_at": "2026-03-24T11:26:28.684785",
+      "created_at_display": "2026-03-24 11:26",
+      "created_ago": "12h",
+      "updated_at": "2026-03-24T18:08:13.203622",
+      "scheduled_for": "2026-03-24 12:26",
+      "error": "BrowserType.launch_persistent_context: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> C:\\Users\\kanaw\\AppData\\Local\\ms-playwright\\chromium-1208\\chrome-win64\\chrome.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --disable-blink-features=AutomationControlled --start-maximized --user-data-dir=C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\profiles\\fomo_highlights --remote-debugging-pipe about:blank\n<launched> pid=28456\nCall log:\n  - <launching> C:\\Users\\kanaw\\AppData\\Local\\ms-playwright\\chromium-1208\\chrome-win64\\chrome.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --disable-blink-features=AutomationControlled --start-maximized --user-data-dir=C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\profiles\\fomo_highlights --remote-debugging-pipe about:blank\n  - <launched> pid=28456\n  - [pid=28456] <gracefully close start>\n  - [pid=28456] <kill>\n  - [pid=28456] <will force kill>\n  - [pid=28456] taskkill stderr: ERROR: The process \"28456\" not found.\n  - [pid=28456] <process did exit: exitCode=2147483651, signal=null>\n  - [pid=28456] starting temporary directories cleanup\n  - [pid=28456] finished temporary directories cleanup\n  - [pid=28456] <gracefully close end>\n",
+      "has_error": true,
+      "post_url": null
     },
     {
       "job_id": "10715a8e-0d9d-44a6-abfc-8a41c66a00d6",
@@ -142,7 +472,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T08:00:37.665783",
       "created_at_display": "2026-03-24 08:00",
-      "created_ago": "15h",
+      "created_ago": "16h",
       "updated_at": "2026-03-24T18:01:18.971702+00:00",
       "scheduled_for": "2026-03-24 09:00",
       "error": null,
@@ -157,27 +487,12 @@
       "attempt": 0,
       "created_at": "2026-03-24T09:55:28.668407",
       "created_at_display": "2026-03-24 09:55",
-      "created_ago": "13h",
+      "created_ago": "14h",
       "updated_at": "2026-03-24T18:01:18.971702+00:00",
       "scheduled_for": "2026-03-24 10:55",
       "error": null,
       "has_error": false,
       "post_url": "https://youtube.com/shorts/iN35qJVsig8"
-    },
-    {
-      "job_id": "eeb422d4-f46a-4b56-a580-6a1fadc6ff55",
-      "job_id_short": "eeb422d4",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "attempt": 0,
-      "created_at": "2026-03-24T11:26:21.822975",
-      "created_at_display": "2026-03-24 11:26",
-      "created_ago": "11h",
-      "updated_at": "2026-03-24T17:04:44.193476",
-      "scheduled_for": "2026-03-24 12:26",
-      "error": "EARLY_URL:https://youtube.com/shorts/bBqbwqaDbwU",
-      "has_error": true,
-      "post_url": "https://youtube.com/shorts/bBqbwqaDbwU"
     },
     {
       "job_id": "91c5a203-e8e7-417d-a1aa-aad9875b8058",
@@ -187,7 +502,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T08:00:27.094804",
       "created_at_display": "2026-03-24 08:00",
-      "created_ago": "15h",
+      "created_ago": "16h",
       "updated_at": "2026-03-24T17:01:19.262693+00:00",
       "scheduled_for": "2026-03-24 09:00",
       "error": null,
@@ -202,7 +517,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T08:00:21.613131",
       "created_at_display": "2026-03-24 08:00",
-      "created_ago": "15h",
+      "created_ago": "16h",
       "updated_at": "2026-03-24T16:05:26.927077+00:00",
       "scheduled_for": "2026-03-24 09:00",
       "error": null,
@@ -217,7 +532,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T16:00:25.576561",
       "created_at_display": "2026-03-24 16:00",
-      "created_ago": "7h",
+      "created_ago": "8h",
       "updated_at": "2026-03-24T16:00:25.576561",
       "scheduled_for": "2026-03-24 17:00",
       "error": null,
@@ -232,7 +547,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T16:00:17.659947",
       "created_at_display": "2026-03-24 16:00",
-      "created_ago": "7h",
+      "created_ago": "8h",
       "updated_at": "2026-03-24T16:00:17.659947",
       "scheduled_for": "2026-03-24 17:00",
       "error": null,
@@ -247,7 +562,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T15:44:16.198048",
       "created_at_display": "2026-03-24 15:44",
-      "created_ago": "7h",
+      "created_ago": "8h",
       "updated_at": "2026-03-24T15:44:16.198048",
       "scheduled_for": "2026-03-24 22:00",
       "error": null,
@@ -262,7 +577,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T15:43:24.254951",
       "created_at_display": "2026-03-24 15:43",
-      "created_ago": "7h",
+      "created_ago": "8h",
       "updated_at": "2026-03-24T15:43:24.254951",
       "scheduled_for": "2026-03-24 20:00",
       "error": null,
@@ -277,24 +592,9 @@
       "attempt": 0,
       "created_at": "2026-03-24T15:42:45.204816",
       "created_at_display": "2026-03-24 15:42",
-      "created_ago": "7h",
+      "created_ago": "8h",
       "updated_at": "2026-03-24T15:42:45.204816",
       "scheduled_for": "2026-03-24 18:00",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "f5024ef0-d892-41bd-a235-365f41fddb7e",
-      "job_id_short": "f5024ef0",
-      "channel": "arc_highlightz",
-      "status": "queued",
-      "attempt": 0,
-      "created_at": "2026-03-24T15:42:09.355689",
-      "created_at_display": "2026-03-24 15:42",
-      "created_ago": "7h",
-      "updated_at": "2026-03-24T15:42:09.355689",
-      "scheduled_for": "2026-03-24 17:00",
       "error": null,
       "has_error": false,
       "post_url": null
@@ -307,7 +607,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T15:29:29.088792",
       "created_at_display": "2026-03-24 15:29",
-      "created_ago": "7h",
+      "created_ago": "8h",
       "updated_at": "2026-03-24T15:29:29.088792",
       "scheduled_for": "2026-03-24 16:29",
       "error": null,
@@ -322,7 +622,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T15:18:15.751977",
       "created_at_display": "2026-03-24 15:18",
-      "created_ago": "7h",
+      "created_ago": "8h",
       "updated_at": "2026-03-24T15:18:15.751977",
       "scheduled_for": "2026-03-24 16:18",
       "error": null,
@@ -337,7 +637,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T08:00:15.601137",
       "created_at_display": "2026-03-24 08:00",
-      "created_ago": "15h",
+      "created_ago": "16h",
       "updated_at": "2026-03-24T15:02:19.227791+00:00",
       "scheduled_for": "2026-03-24 09:00",
       "error": null,
@@ -352,7 +652,7 @@
       "attempt": 0,
       "created_at": "2026-03-23T23:41:31.342908",
       "created_at_display": "2026-03-23 23:41",
-      "created_ago": "23h",
+      "created_ago": "1d",
       "updated_at": "2026-03-24T12:01:18.917982+00:00",
       "scheduled_for": "2026-03-24 09:00",
       "error": null,
@@ -367,7 +667,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T12:00:33.560548",
       "created_at_display": "2026-03-24 12:00",
-      "created_ago": "11h",
+      "created_ago": "12h",
       "updated_at": "2026-03-24T12:00:33.560548",
       "scheduled_for": "2026-03-24 13:00",
       "error": null,
@@ -382,7 +682,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T12:00:25.944136",
       "created_at_display": "2026-03-24 12:00",
-      "created_ago": "11h",
+      "created_ago": "12h",
       "updated_at": "2026-03-24T12:00:25.944136",
       "scheduled_for": "2026-03-24 13:00",
       "error": null,
@@ -397,7 +697,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T12:00:18.182297",
       "created_at_display": "2026-03-24 12:00",
-      "created_ago": "11h",
+      "created_ago": "12h",
       "updated_at": "2026-03-24T12:00:18.182297",
       "scheduled_for": "2026-03-24 13:00",
       "error": null,
@@ -412,7 +712,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T11:26:49.869070",
       "created_at_display": "2026-03-24 11:26",
-      "created_ago": "11h",
+      "created_ago": "12h",
       "updated_at": "2026-03-24T11:26:49.869070",
       "scheduled_for": "2026-03-24 12:26",
       "error": null,
@@ -427,7 +727,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T11:26:42.610520",
       "created_at_display": "2026-03-24 11:26",
-      "created_ago": "11h",
+      "created_ago": "12h",
       "updated_at": "2026-03-24T11:26:42.610520",
       "scheduled_for": "2026-03-24 12:26",
       "error": null,
@@ -442,23 +742,8 @@
       "attempt": 0,
       "created_at": "2026-03-24T11:26:35.683055",
       "created_at_display": "2026-03-24 11:26",
-      "created_ago": "11h",
+      "created_ago": "12h",
       "updated_at": "2026-03-24T11:26:35.683055",
-      "scheduled_for": "2026-03-24 12:26",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "729594d1-7597-4be2-a680-2862083da812",
-      "job_id_short": "729594d1",
-      "channel": "fomo_highlights",
-      "status": "queued",
-      "attempt": 0,
-      "created_at": "2026-03-24T11:26:28.684785",
-      "created_at_display": "2026-03-24 11:26",
-      "created_ago": "11h",
-      "updated_at": "2026-03-24T11:26:28.684785",
       "scheduled_for": "2026-03-24 12:26",
       "error": null,
       "has_error": false,
@@ -472,7 +757,7 @@
       "attempt": 1,
       "created_at": "2026-03-24T08:00:32.290497",
       "created_at_display": "2026-03-24 08:00",
-      "created_ago": "15h",
+      "created_ago": "16h",
       "updated_at": "2026-03-24T11:02:22.458428",
       "scheduled_for": "2026-03-24 09:00",
       "error": "Locator.type: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --disable-blink-features=AutomationControlled --start-maximized --no-first-run --no-default-browser-check --user-data-dir=C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\profiles\\fomo_highlights --remote-debugging-pipe about:blank\n<launched> pid=13788\n[pid=13788][err] [13788:3728:0324/110139.096:ERROR:components\\device_event_log\\device_event_log_impl.cc:202] [11:01:39.097] USB: usb_service_win.cc:104 SetupDiGetDeviceProperty({{A45C254E-DF1C-4EFD-8020-67D146A850E0}, 6}) failed: Element not found. (0x490)\n[pid=13788][err] [13788:6764:0324/110139.180:ERROR:google_apis\\gcm\\engine\\registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT\n[pid=13788][err] [13788:6764:0324/110201.535:ERROR:google_apis\\gcm\\engine\\registration_request.cc:291] Registration response error message: QUOTA_EXCEEDED\nCall log:\n  - waiting for locator(\"div#textbox[aria-label='Add a title that describes your video (type @ to mention a channel)']\").first\n    - locator resolved to <div id=\"textbox\" slot=\"input\" tabindex=\"0\" role=\"textbox\" aria-required=\"true\" aria-invalid=\"false\" aria-disabled=\"false\" contenteditable=\"true\" class=\"style-scope ytcp-social-suggestions-textbox\" aria-label=\"Add a title that describes your video (type @ to mention a channel)\">reddit mildlyinfuriating 14977 c16f5052 final</div>\n  - elementHandle.type(\"mildlyinfuriating: Everyone repeat after me: \"F LA Fitness\"\")\n",
@@ -487,7 +772,7 @@
       "attempt": 1,
       "created_at": "2026-03-24T02:19:04.665238",
       "created_at_display": "2026-03-24 02:19",
-      "created_ago": "20h",
+      "created_ago": "21h",
       "updated_at": "2026-03-24T11:01:18.571301+00:00",
       "scheduled_for": "2026-03-24 03:19",
       "error": null,
@@ -502,7 +787,7 @@
       "attempt": 1,
       "created_at": "2026-03-24T02:19:10.453050",
       "created_at_display": "2026-03-24 02:19",
-      "created_ago": "20h",
+      "created_ago": "21h",
       "updated_at": "2026-03-24T11:01:18.571301+00:00",
       "scheduled_for": "2026-03-24 03:19",
       "error": null,
@@ -517,7 +802,7 @@
       "attempt": 1,
       "created_at": "2026-03-24T03:30:30.158474",
       "created_at_display": "2026-03-24 03:30",
-      "created_ago": "19h",
+      "created_ago": "20h",
       "updated_at": "2026-03-24T11:01:18.571301+00:00",
       "scheduled_for": "2026-03-24 04:30",
       "error": null,
@@ -532,7 +817,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T02:11:54.210112",
       "created_at_display": "2026-03-24 02:11",
-      "created_ago": "21h",
+      "created_ago": "22h",
       "updated_at": "2026-03-24T10:01:27.774748+00:00",
       "scheduled_for": "2026-03-24 03:11",
       "error": null,
@@ -547,7 +832,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T02:24:00.961304",
       "created_at_display": "2026-03-24 02:24",
-      "created_ago": "20h",
+      "created_ago": "21h",
       "updated_at": "2026-03-24T10:01:27.774748+00:00",
       "scheduled_for": "2026-03-24 03:24",
       "error": null,
@@ -562,7 +847,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T02:31:53.330595",
       "created_at_display": "2026-03-24 02:31",
-      "created_ago": "20h",
+      "created_ago": "21h",
       "updated_at": "2026-03-24T10:01:27.774748+00:00",
       "scheduled_for": "2026-03-24 03:31",
       "error": null,
@@ -577,7 +862,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T02:39:34.321797",
       "created_at_display": "2026-03-24 02:39",
-      "created_ago": "20h",
+      "created_ago": "21h",
       "updated_at": "2026-03-24T10:01:27.774748+00:00",
       "scheduled_for": "2026-03-24 03:39",
       "error": null,
@@ -592,7 +877,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T03:11:01.866082",
       "created_at_display": "2026-03-24 03:11",
-      "created_ago": "20h",
+      "created_ago": "21h",
       "updated_at": "2026-03-24T10:01:27.774748+00:00",
       "scheduled_for": "2026-03-24 04:11",
       "error": null,
@@ -607,7 +892,7 @@
       "attempt": 0,
       "created_at": "2026-03-24T03:30:24.255697",
       "created_at_display": "2026-03-24 03:30",
-      "created_ago": "19h",
+      "created_ago": "20h",
       "updated_at": "2026-03-24T10:01:27.774748+00:00",
       "scheduled_for": "2026-03-24 04:30",
       "error": null,
@@ -622,7 +907,7 @@
       "attempt": 0,
       "created_at": "2026-03-23T23:37:50.017342",
       "created_at_display": "2026-03-23 23:37",
-      "created_ago": "23h",
+      "created_ago": "1d",
       "updated_at": "2026-03-24T09:01:19.031710+00:00",
       "scheduled_for": "2026-03-23 00:20",
       "error": null,
@@ -637,7 +922,7 @@
       "attempt": 0,
       "created_at": "2026-03-23T23:36:57.971765",
       "created_at_display": "2026-03-23 23:36",
-      "created_ago": "23h",
+      "created_ago": "1d",
       "updated_at": "2026-03-24T08:01:18.865566+00:00",
       "scheduled_for": "2026-03-22 21:55",
       "error": null,
@@ -1087,7 +1372,7 @@
       "attempt": 0,
       "created_at": "2026-03-18T00:13:31.499761",
       "created_at_display": "2026-03-18 00:13",
-      "created_ago": "6d",
+      "created_ago": "7d",
       "updated_at": "2026-03-19 13:20:18",
       "scheduled_for": "2026-03-18 07:00",
       "error": null,
@@ -1117,7 +1402,7 @@
       "attempt": 0,
       "created_at": "2026-03-19T00:13:40.795976",
       "created_at_display": "2026-03-19 00:13",
-      "created_ago": "5d",
+      "created_ago": "6d",
       "updated_at": "2026-03-19 13:20:18",
       "scheduled_for": "2026-03-19 07:00",
       "error": null,
@@ -1258,291 +1543,6 @@
       "error": "Not logged in (redirected to https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fstudio.youtube.com%252F%26feature%3Dredirect_login&dsh=S-1254335802%3A1773763110707698&hl=en&ifkv=ASfE1-ruuK8k4PAjsywwgFbBOlmWITLtOOnwQbjBldfjgdPD0PiSqGIZ0aS45OMR_UqHlmGW7322iA&passive=true&service=youtube&uilel=3&flowName=GlifWebSignIn&flowEntry=ServiceLogin). Manual login required for channel.",
       "has_error": true,
       "post_url": null
-    },
-    {
-      "job_id": "678a5b3f-89d2-4a6a-b8a3-690ba6e343d5",
-      "job_id_short": "678a5b3f",
-      "channel": "market_meltdowns",
-      "status": "cancelled",
-      "attempt": 2,
-      "created_at": "2026-03-10T14:06:33.972177",
-      "created_at_display": "2026-03-10 14:06",
-      "created_ago": "14d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-10 17:00",
-      "error": "Not logged in (redirected to https://accounts.google.com/v3/signin/confirmidentifier?continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fstudio.youtube.com%252Fchannel%252FUC5QYd9at6NXNsUZrUj2sQ-w%26feature%3Dredirect_login&dsh=S1511656262%3A1773192608651721&hl=en&ifkv=ASfE1-roF5Icfq3WraNZMk3M0CCgYh2RUKEEBDxE9EFTe1ZyLTJs1TT6VHfExbtoAlQ-K0qV1zx9KQ&passive=true&service=youtube&uilel=3&flowName=GlifWebSignIn&flowEntry=ServiceLogin). Manual login required for channel.",
-      "has_error": true,
-      "post_url": null
-    },
-    {
-      "job_id": "579597de-81ea-4033-9311-888f1a8374c7",
-      "job_id_short": "579597de",
-      "channel": "market_meltdowns",
-      "status": "cancelled",
-      "attempt": 2,
-      "created_at": "2026-03-10T16:06:38.472798",
-      "created_at_display": "2026-03-10 16:06",
-      "created_ago": "14d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-10 20:00",
-      "error": "Not logged in (redirected to https://accounts.google.com/v3/signin/confirmidentifier?continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fstudio.youtube.com%252Fchannel%252FUC5QYd9at6NXNsUZrUj2sQ-w%26feature%3Dredirect_login&dsh=S1511656262%3A1773199805137913&hl=en&ifkv=ASfE1-pgYHl7qXzqqsq0V-OVBZiybF1kS6nlO_iWVhrU50UI-Z3G9lLR8ArCPqeI5GiZFxvicq_J&passive=true&service=youtube&uilel=3&flowName=GlifWebSignIn&flowEntry=ServiceLogin). Manual login required for channel.",
-      "has_error": true,
-      "post_url": null
-    },
-    {
-      "job_id": "79330624-5b4e-4faf-964b-45416d6b204f",
-      "job_id_short": "79330624",
-      "channel": "market_meltdowns",
-      "status": "cancelled",
-      "attempt": 2,
-      "created_at": "2026-03-10T18:07:26.338921",
-      "created_at_display": "2026-03-10 18:07",
-      "created_ago": "14d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-10 20:00",
-      "error": "Not logged in (redirected to https://accounts.google.com/v3/signin/confirmidentifier?continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fstudio.youtube.com%252Fchannel%252FUC5QYd9at6NXNsUZrUj2sQ-w%26feature%3Dredirect_login&dsh=S-216078543%3A1773202675316152&hl=en&ifkv=ASfE1-rosvJMwzZc1EEfXhFwv8tFqGEW2aP0Bgj91wl4BmNWJF-T8-3r5Cfwie5kNtH_vKwWz_tPCg&passive=true&service=youtube&uilel=3&flowName=GlifWebSignIn&flowEntry=ServiceLogin). Manual login required for channel.",
-      "has_error": true,
-      "post_url": null
-    },
-    {
-      "job_id": "29ceb605-4a56-4b40-b12e-78d73c616546",
-      "job_id_short": "29ceb605",
-      "channel": "market_meltdowns",
-      "status": "cancelled",
-      "attempt": 1,
-      "created_at": "2026-03-10T20:10:54.476813",
-      "created_at_display": "2026-03-10 20:10",
-      "created_ago": "14d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-10 20:30",
-      "error": "Not logged in (redirected to https://accounts.google.com/v3/signin/confirmidentifier?continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fstudio.youtube.com%252Fchannel%252FUC5QYd9at6NXNsUZrUj2sQ-w%26feature%3Dredirect_login&dsh=S472644331%3A1773198004809451&hl=en&ifkv=ASfE1-rZoO-YH-mCgvp2O-a8gmT3qlP-sE8nnMIMTtQWNd6Q7GuPCBfxoPKvCMBv1b4tGp0PhGqlpw&passive=true&service=youtube&uilel=3&flowName=GlifWebSignIn&flowEntry=ServiceLogin). Manual login required for channel.",
-      "has_error": true,
-      "post_url": null
-    },
-    {
-      "job_id": "78f659dc-5c0d-4e6c-912d-7d2970b81904",
-      "job_id_short": "78f659dc",
-      "channel": "market_meltdowns",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-10T22:23:26.779494",
-      "created_at_display": "2026-03-10 22:23",
-      "created_ago": "14d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-10 19:25",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "5865cb1d-af47-4855-9475-ed710365e548",
-      "job_id_short": "5865cb1d",
-      "channel": "market_meltdowns",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-11T00:07:10.776578",
-      "created_at_display": "2026-03-11 00:07",
-      "created_ago": "13d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-11 07:00",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "bd1675b9-b4c9-42da-81e5-24efd62280dd",
-      "job_id_short": "bd1675b9",
-      "channel": "market_meltdowns",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-11T02:07:26.550095",
-      "created_at_display": "2026-03-11 02:07",
-      "created_ago": "13d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-11 12:00",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "fa440d06-a708-4a16-a485-4228b6b1b010",
-      "job_id_short": "fa440d06",
-      "channel": "gym_moments",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-11T22:18:31.031825",
-      "created_at_display": "2026-03-11 22:18",
-      "created_ago": "13d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-11 22:30",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "26a70d1a-194a-422e-9f1a-8155541a96bd",
-      "job_id_short": "26a70d1a",
-      "channel": "market_meltdowns",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-12T00:09:31.962931",
-      "created_at_display": "2026-03-12 00:09",
-      "created_ago": "12d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-12 07:00",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "5771d834-a91b-46aa-b9b7-3a40149f2a3b",
-      "job_id_short": "5771d834",
-      "channel": "market_meltdowns",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-12T02:31:24.872011",
-      "created_at_display": "2026-03-12 02:31",
-      "created_ago": "12d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-12 12:00",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "8cc6200e-0473-4781-b822-66623ea51915",
-      "job_id_short": "8cc6200e",
-      "channel": "market_meltdowns",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-12T08:08:33.464318",
-      "created_at_display": "2026-03-12 08:08",
-      "created_ago": "12d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-12 17:00",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "f8bf2d77-21dd-4042-a1fb-8db1be879d67",
-      "job_id_short": "f8bf2d77",
-      "channel": "market_meltdowns",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-12T10:08:45.003339",
-      "created_at_display": "2026-03-12 10:08",
-      "created_ago": "12d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-12 20:00",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "ba1fcfd1-b569-4405-90f2-5bfeca9ac788",
-      "job_id_short": "ba1fcfd1",
-      "channel": "market_meltdowns",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-12T14:08:58.228687",
-      "created_at_display": "2026-03-12 14:08",
-      "created_ago": "12d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-12 20:00",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "e7a62d40-a5c0-4516-8bdb-ac4b1771ebae",
-      "job_id_short": "e7a62d40",
-      "channel": "market_meltdowns",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-12T18:06:12.288297",
-      "created_at_display": "2026-03-12 18:06",
-      "created_ago": "12d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-12 20:00",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "f245a092-b530-4ed5-870b-93a5de960a18",
-      "job_id_short": "f245a092",
-      "channel": "gym_moments",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-12T20:18:03.661574",
-      "created_at_display": "2026-03-12 20:18",
-      "created_ago": "12d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-12 01:27",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "f9cbdb17-f5ac-4c4d-8881-8fdcdaff54ad",
-      "job_id_short": "f9cbdb17",
-      "channel": "startup_graveyard",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-12T22:25:43.553248",
-      "created_at_display": "2026-03-12 22:25",
-      "created_ago": "12d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-12 23:00",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "0f6e4cc9-6ae2-48d3-921f-7402f77f968b",
-      "job_id_short": "0f6e4cc9",
-      "channel": "rich_or_ruined",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-13T06:10:29.197156",
-      "created_at_display": "2026-03-13 06:10",
-      "created_ago": "11d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-13 07:00",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "cdbcfd4b-1afb-407e-85bb-1c1d13acb789",
-      "job_id_short": "cdbcfd4b",
-      "channel": "self_made_clips",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-13T12:17:46.783454",
-      "created_at_display": "2026-03-13 12:17",
-      "created_ago": "11d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-13 12:30",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "ef3b8e28-cfa6-4987-af5f-21a63ecb5e0d",
-      "job_id_short": "ef3b8e28",
-      "channel": "startup_graveyard",
-      "status": "cancelled",
-      "attempt": 0,
-      "created_at": "2026-03-13T18:15:26.653275",
-      "created_at_display": "2026-03-13 18:15",
-      "created_ago": "11d",
-      "updated_at": "2026-03-17 16:01:04",
-      "scheduled_for": "2026-03-13 18:30",
-      "error": null,
-      "has_error": false,
-      "post_url": null
     }
   ],
   "queue": {
@@ -1565,15 +1565,15 @@
       "channel": "viral_recaps",
       "status": "active",
       "category": "Comedy",
-      "target_per_day": 6,
+      "target_per_day": 8,
       "published_24h": 2,
-      "queue_depth": 0,
+      "queue_depth": 6,
       "running_jobs": 0,
       "failed_7d": 0,
       "avg_views": 370,
       "rpm": 0.31,
-      "deficit": 4,
-      "completion_rate": 33.3,
+      "deficit": 6,
+      "completion_rate": 25.0,
       "lagging": true,
       "views_source": "source_clips_proxy",
       "latest_title": "Ludwig Moments #8",
@@ -1586,7 +1586,7 @@
       "category": "Gaming",
       "target_per_day": 15,
       "published_24h": 1,
-      "queue_depth": 4,
+      "queue_depth": 14,
       "running_jobs": 0,
       "failed_7d": 0,
       "avg_views": 1160,
@@ -1603,20 +1603,20 @@
       "channel": "fomo_highlights",
       "status": "active",
       "category": "Gaming",
-      "target_per_day": 3,
+      "target_per_day": 8,
       "published_24h": 21,
-      "queue_depth": 12,
+      "queue_depth": 15,
       "running_jobs": 0,
       "failed_7d": 0,
       "avg_views": 18935,
       "rpm": 16.09,
       "deficit": 0,
-      "completion_rate": 700.0,
+      "completion_rate": 262.5,
       "lagging": false,
       "views_source": "source_clips_proxy",
-      "latest_title": "They parked like this on purpose \ud83d\udc80 #shorts",
-      "latest_url": "https://youtube.com/shorts/AVgdy9VkfMY",
-      "latest_uploaded_at": "2026-03-24 23:01"
+      "latest_title": "The design is actually criminal \ud83d\ude2d #shorts",
+      "latest_url": "https://youtube.com/shorts/bBqbwqaDbwU",
+      "latest_uploaded_at": "2026-03-25 00:01"
     },
     {
       "channel": "stream_sirens",
@@ -1722,8 +1722,8 @@
       "queue_depth": 0,
       "running_jobs": 0,
       "failed_7d": 0,
-      "avg_views": 4040,
-      "rpm": 3.43,
+      "avg_views": 3660,
+      "rpm": 3.11,
       "deficit": 5,
       "completion_rate": 0.0,
       "lagging": false,
@@ -1760,8 +1760,8 @@
       "queue_depth": 0,
       "running_jobs": 0,
       "failed_7d": 0,
-      "avg_views": 913,
-      "rpm": 0.78,
+      "avg_views": 884,
+      "rpm": 0.75,
       "deficit": 5,
       "completion_rate": 0.0,
       "lagging": false,
@@ -1816,11 +1816,6 @@
       "views": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -1962,6 +1957,11 @@
           },
           {
             "date": "2026-03-24",
+            "views": null,
+            "rpm": null
+          },
+          {
+            "date": "2026-03-25",
             "views": null,
             "rpm": null
           }
@@ -1989,11 +1989,6 @@
       "rpm": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -2135,6 +2130,11 @@
           },
           {
             "date": "2026-03-24",
+            "views": null,
+            "rpm": null
+          },
+          {
+            "date": "2026-03-25",
             "views": null,
             "rpm": null
           }
@@ -2166,11 +2166,6 @@
       "views": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -2314,6 +2309,11 @@
             "date": "2026-03-24",
             "views": 1253.8,
             "rpm": 1.0657
+          },
+          {
+            "date": "2026-03-25",
+            "views": null,
+            "rpm": null
           }
         ],
         "window_7d": {
@@ -2339,11 +2339,6 @@
       "rpm": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -2487,6 +2482,11 @@
             "date": "2026-03-24",
             "views": 1253.8,
             "rpm": 1.0657
+          },
+          {
+            "date": "2026-03-25",
+            "views": null,
+            "rpm": null
           }
         ],
         "window_7d": {
@@ -2516,11 +2516,6 @@
       "views": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -2664,6 +2659,11 @@
             "date": "2026-03-24",
             "views": 71936.0,
             "rpm": 61.1456
+          },
+          {
+            "date": "2026-03-25",
+            "views": null,
+            "rpm": null
           }
         ],
         "window_7d": {
@@ -2689,11 +2689,6 @@
       "rpm": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -2837,6 +2832,11 @@
             "date": "2026-03-24",
             "views": 71936.0,
             "rpm": 61.1456
+          },
+          {
+            "date": "2026-03-25",
+            "views": null,
+            "rpm": null
           }
         ],
         "window_7d": {
@@ -2866,11 +2866,6 @@
       "views": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -3012,6 +3007,11 @@
           },
           {
             "date": "2026-03-24",
+            "views": null,
+            "rpm": null
+          },
+          {
+            "date": "2026-03-25",
             "views": null,
             "rpm": null
           }
@@ -3039,11 +3039,6 @@
       "rpm": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -3185,6 +3180,11 @@
           },
           {
             "date": "2026-03-24",
+            "views": null,
+            "rpm": null
+          },
+          {
+            "date": "2026-03-25",
             "views": null,
             "rpm": null
           }
@@ -3216,11 +3216,6 @@
       "views": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -3362,6 +3357,11 @@
           },
           {
             "date": "2026-03-24",
+            "views": null,
+            "rpm": null
+          },
+          {
+            "date": "2026-03-25",
             "views": null,
             "rpm": null
           }
@@ -3389,11 +3389,6 @@
       "rpm": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -3535,6 +3530,11 @@
           },
           {
             "date": "2026-03-24",
+            "views": null,
+            "rpm": null
+          },
+          {
+            "date": "2026-03-25",
             "views": null,
             "rpm": null
           }
@@ -3566,11 +3566,6 @@
       "views": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -3712,6 +3707,11 @@
           },
           {
             "date": "2026-03-24",
+            "views": null,
+            "rpm": null
+          },
+          {
+            "date": "2026-03-25",
             "views": null,
             "rpm": null
           }
@@ -3739,11 +3739,6 @@
       "rpm": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -3885,6 +3880,11 @@
           },
           {
             "date": "2026-03-24",
+            "views": null,
+            "rpm": null
+          },
+          {
+            "date": "2026-03-25",
             "views": null,
             "rpm": null
           }
@@ -3916,11 +3916,6 @@
       "views": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -4062,6 +4057,11 @@
           },
           {
             "date": "2026-03-24",
+            "views": null,
+            "rpm": null
+          },
+          {
+            "date": "2026-03-25",
             "views": null,
             "rpm": null
           }
@@ -4089,11 +4089,6 @@
       "rpm": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -4235,6 +4230,11 @@
           },
           {
             "date": "2026-03-24",
+            "views": null,
+            "rpm": null
+          },
+          {
+            "date": "2026-03-25",
             "views": null,
             "rpm": null
           }
@@ -4266,11 +4266,6 @@
       "views": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -4412,6 +4407,11 @@
           },
           {
             "date": "2026-03-24",
+            "views": null,
+            "rpm": null
+          },
+          {
+            "date": "2026-03-25",
             "views": null,
             "rpm": null
           }
@@ -4439,11 +4439,6 @@
       "rpm": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -4585,6 +4580,11 @@
           },
           {
             "date": "2026-03-24",
+            "views": null,
+            "rpm": null
+          },
+          {
+            "date": "2026-03-25",
             "views": null,
             "rpm": null
           }
@@ -4616,11 +4616,6 @@
       "views": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -4762,6 +4757,11 @@
           },
           {
             "date": "2026-03-24",
+            "views": null,
+            "rpm": null
+          },
+          {
+            "date": "2026-03-25",
             "views": null,
             "rpm": null
           }
@@ -4789,11 +4789,6 @@
       "rpm": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -4935,6 +4930,11 @@
           },
           {
             "date": "2026-03-24",
+            "views": null,
+            "rpm": null
+          },
+          {
+            "date": "2026-03-25",
             "views": null,
             "rpm": null
           }
@@ -4966,11 +4966,6 @@
       "views": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -5112,6 +5107,11 @@
           },
           {
             "date": "2026-03-24",
+            "views": null,
+            "rpm": null
+          },
+          {
+            "date": "2026-03-25",
             "views": null,
             "rpm": null
           }
@@ -5139,11 +5139,6 @@
       "rpm": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -5285,6 +5280,11 @@
           },
           {
             "date": "2026-03-24",
+            "views": null,
+            "rpm": null
+          },
+          {
+            "date": "2026-03-25",
             "views": null,
             "rpm": null
           }
@@ -5316,11 +5316,6 @@
       "views": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -5462,6 +5457,11 @@
           },
           {
             "date": "2026-03-24",
+            "views": null,
+            "rpm": null
+          },
+          {
+            "date": "2026-03-25",
             "views": null,
             "rpm": null
           }
@@ -5489,11 +5489,6 @@
       "rpm": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -5635,6 +5630,11 @@
           },
           {
             "date": "2026-03-24",
+            "views": null,
+            "rpm": null
+          },
+          {
+            "date": "2026-03-25",
             "views": null,
             "rpm": null
           }
@@ -5666,11 +5666,6 @@
       "views": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -5812,6 +5807,11 @@
           },
           {
             "date": "2026-03-24",
+            "views": null,
+            "rpm": null
+          },
+          {
+            "date": "2026-03-25",
             "views": null,
             "rpm": null
           }
@@ -5839,11 +5839,6 @@
       "rpm": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -5985,6 +5980,11 @@
           },
           {
             "date": "2026-03-24",
+            "views": null,
+            "rpm": null
+          },
+          {
+            "date": "2026-03-25",
             "views": null,
             "rpm": null
           }
@@ -6016,11 +6016,6 @@
       "views": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -6164,6 +6159,11 @@
             "date": "2026-03-24",
             "views": 1034.5,
             "rpm": 0.8793
+          },
+          {
+            "date": "2026-03-25",
+            "views": null,
+            "rpm": null
           }
         ],
         "window_7d": {
@@ -6189,11 +6189,6 @@
       "rpm": {
         "series_30d": [
           {
-            "date": "2026-02-23",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-02-24",
             "views": null,
             "rpm": null
@@ -6337,6 +6332,11 @@
             "date": "2026-03-24",
             "views": 1034.5,
             "rpm": 0.8793
+          },
+          {
+            "date": "2026-03-25",
+            "views": null,
+            "rpm": null
           }
         ],
         "window_7d": {
@@ -6368,7 +6368,7 @@
       "platform": "tiktok",
       "last_fetch": "2026-03-10 00:17:19",
       "last_fetch_display": "2026-03-10 00:17",
-      "last_fetch_ago": "14d",
+      "last_fetch_ago": "15d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6396,7 +6396,7 @@
       "platform": "tiktok",
       "last_fetch": "2026-03-09 00:10:23",
       "last_fetch_display": "2026-03-09 00:10",
-      "last_fetch_ago": "15d",
+      "last_fetch_ago": "16d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6410,7 +6410,7 @@
       "platform": "tiktok",
       "last_fetch": "2026-03-17 23:29:56",
       "last_fetch_display": "2026-03-17 23:29",
-      "last_fetch_ago": "6d",
+      "last_fetch_ago": "7d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6466,7 +6466,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-17 23:31:27",
       "last_fetch_display": "2026-03-17 23:31",
-      "last_fetch_ago": "6d",
+      "last_fetch_ago": "7d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6480,7 +6480,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-17 23:31:26",
       "last_fetch_display": "2026-03-17 23:31",
-      "last_fetch_ago": "6d",
+      "last_fetch_ago": "7d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6494,7 +6494,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-17 23:31:26",
       "last_fetch_display": "2026-03-17 23:31",
-      "last_fetch_ago": "6d",
+      "last_fetch_ago": "7d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6522,7 +6522,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-24 21:34:33",
       "last_fetch_display": "2026-03-24 21:34",
-      "last_fetch_ago": "1h",
+      "last_fetch_ago": "2h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.545,
@@ -6536,7 +6536,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-17 23:33:18",
       "last_fetch_display": "2026-03-17 23:33",
-      "last_fetch_ago": "6d",
+      "last_fetch_ago": "7d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.5,
@@ -6550,7 +6550,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-17 23:33:34",
       "last_fetch_display": "2026-03-17 23:33",
-      "last_fetch_ago": "6d",
+      "last_fetch_ago": "7d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.5,
@@ -6564,7 +6564,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-17 23:33:23",
       "last_fetch_display": "2026-03-17 23:33",
-      "last_fetch_ago": "6d",
+      "last_fetch_ago": "7d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.5,
@@ -6578,7 +6578,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-24 21:30:13",
       "last_fetch_display": "2026-03-24 21:30",
-      "last_fetch_ago": "1h",
+      "last_fetch_ago": "2h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.833,
@@ -6592,7 +6592,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-17 23:33:16",
       "last_fetch_display": "2026-03-17 23:33",
-      "last_fetch_ago": "6d",
+      "last_fetch_ago": "7d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.5,
@@ -6606,7 +6606,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-24 21:30:21",
       "last_fetch_display": "2026-03-24 21:30",
-      "last_fetch_ago": "1h",
+      "last_fetch_ago": "2h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.833,
@@ -6620,7 +6620,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-24 21:30:23",
       "last_fetch_display": "2026-03-24 21:30",
-      "last_fetch_ago": "1h",
+      "last_fetch_ago": "2h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.833,
@@ -6634,7 +6634,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-09 00:05:17",
       "last_fetch_display": "2026-03-09 00:05",
-      "last_fetch_ago": "15d",
+      "last_fetch_ago": "16d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6704,7 +6704,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-17 23:29:54",
       "last_fetch_display": "2026-03-17 23:29",
-      "last_fetch_ago": "6d",
+      "last_fetch_ago": "7d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6718,7 +6718,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-17 23:29:53",
       "last_fetch_display": "2026-03-17 23:29",
-      "last_fetch_ago": "6d",
+      "last_fetch_ago": "7d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6746,7 +6746,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-09 00:17:34",
       "last_fetch_display": "2026-03-09 00:17",
-      "last_fetch_ago": "15d",
+      "last_fetch_ago": "16d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.667,
@@ -6760,7 +6760,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-09 00:10:17",
       "last_fetch_display": "2026-03-09 00:10",
-      "last_fetch_ago": "15d",
+      "last_fetch_ago": "16d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6802,7 +6802,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-10 00:17:16",
       "last_fetch_display": "2026-03-10 00:17",
-      "last_fetch_ago": "14d",
+      "last_fetch_ago": "15d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6900,7 +6900,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-09 00:10:36",
       "last_fetch_display": "2026-03-09 00:10",
-      "last_fetch_ago": "15d",
+      "last_fetch_ago": "16d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6928,7 +6928,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-24 21:34:16",
       "last_fetch_display": "2026-03-24 21:34",
-      "last_fetch_ago": "1h",
+      "last_fetch_ago": "2h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.529,
@@ -6956,7 +6956,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-17 23:38:34",
       "last_fetch_display": "2026-03-17 23:38",
-      "last_fetch_ago": "6d",
+      "last_fetch_ago": "7d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6970,7 +6970,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-09 00:15:07",
       "last_fetch_display": "2026-03-09 00:15",
-      "last_fetch_ago": "15d",
+      "last_fetch_ago": "16d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.667,
@@ -6998,7 +6998,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-17 23:31:26",
       "last_fetch_display": "2026-03-17 23:31",
-      "last_fetch_ago": "6d",
+      "last_fetch_ago": "7d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -7054,7 +7054,7 @@
       "platform": "tiktok",
       "last_fetch": "2026-03-17 23:28:50",
       "last_fetch_display": "2026-03-17 23:28",
-      "last_fetch_ago": "6d",
+      "last_fetch_ago": "7d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.0,
@@ -7096,7 +7096,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-17 23:32:34",
       "last_fetch_display": "2026-03-17 23:32",
-      "last_fetch_ago": "6d",
+      "last_fetch_ago": "7d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.0,
@@ -7124,7 +7124,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-24 05:41:17",
       "last_fetch_display": "2026-03-24 05:41",
-      "last_fetch_ago": "17h",
+      "last_fetch_ago": "18h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.111,
@@ -7138,7 +7138,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-24 05:41:56",
       "last_fetch_display": "2026-03-24 05:41",
-      "last_fetch_ago": "17h",
+      "last_fetch_ago": "18h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.077,
@@ -7152,7 +7152,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-24 05:36:00",
       "last_fetch_display": "2026-03-24 05:36",
-      "last_fetch_ago": "17h",
+      "last_fetch_ago": "18h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.077,
@@ -7166,7 +7166,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-24 05:36:05",
       "last_fetch_display": "2026-03-24 05:36",
-      "last_fetch_ago": "17h",
+      "last_fetch_ago": "18h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.182,
@@ -7194,7 +7194,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-24 21:39:38",
       "last_fetch_display": "2026-03-24 21:39",
-      "last_fetch_ago": "1h",
+      "last_fetch_ago": "2h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.375,
@@ -7208,7 +7208,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-17 23:33:26",
       "last_fetch_display": "2026-03-17 23:33",
-      "last_fetch_ago": "6d",
+      "last_fetch_ago": "7d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.0,
@@ -7334,7 +7334,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-17 23:42:35",
       "last_fetch_display": "2026-03-17 23:42",
-      "last_fetch_ago": "6d",
+      "last_fetch_ago": "7d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.0,
@@ -7390,7 +7390,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-17 23:32:32",
       "last_fetch_display": "2026-03-17 23:32",
-      "last_fetch_ago": "6d",
+      "last_fetch_ago": "7d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.0,
@@ -7418,7 +7418,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-24 05:42:06",
       "last_fetch_display": "2026-03-24 05:42",
-      "last_fetch_ago": "17h",
+      "last_fetch_ago": "18h",
       "clips_24h": 0,
       "status": "healthy",
       "error_rate": 0.0,
@@ -7432,7 +7432,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-24 05:41:03",
       "last_fetch_display": "2026-03-24 05:41",
-      "last_fetch_ago": "17h",
+      "last_fetch_ago": "18h",
       "clips_24h": 0,
       "status": "healthy",
       "error_rate": 0.0,
@@ -7457,6 +7457,19 @@
         "severity": "critical"
       },
       {
+        "error_type": "BrowserType.launch_persistent_context: Target page",
+        "count": 5,
+        "trend": {
+          "today": 2,
+          "yesterday": 0,
+          "week_ago": 0
+        },
+        "last_seen": "2026-03-24 18:11:07",
+        "last_seen_display": "2026-03-24 18:11",
+        "suggestion": "Review logs for context",
+        "severity": "warning"
+      },
+      {
         "error_type": "account_terminated",
         "count": 5,
         "trend": {
@@ -7466,19 +7479,6 @@
         },
         "last_seen": "2026-03-10 13:00:07",
         "last_seen_display": "2026-03-10 13:00",
-        "suggestion": "Review logs for context",
-        "severity": "warning"
-      },
-      {
-        "error_type": "BrowserType.launch_persistent_context: Target page",
-        "count": 3,
-        "trend": {
-          "today": 0,
-          "yesterday": 0,
-          "week_ago": 0
-        },
-        "last_seen": "2026-03-08 20:26:52",
-        "last_seen_display": "2026-03-08 20:26",
         "suggestion": "Review logs for context",
         "severity": "warning"
       },
@@ -7496,25 +7496,39 @@
         "severity": "warning"
       },
       {
-        "error_type": "EARLY_URL:https://youtube.com/shorts/bBqbwqaDbwU",
+        "error_type": "Locator.type: Target page, context or browser has ",
         "count": 1,
         "trend": {
           "today": 1,
           "yesterday": 0,
           "week_ago": 0
         },
-        "last_seen": "2026-03-24 17:04:44",
-        "last_seen_display": "2026-03-24 17:04",
+        "last_seen": "2026-03-24 11:02:22",
+        "last_seen_display": "2026-03-24 11:02",
         "suggestion": "Review logs for context",
         "severity": "info"
       }
     ],
-    "total_errors": 26,
-    "distinct_errors": 7,
+    "total_errors": 27,
+    "distinct_errors": 6,
     "log_viewer_label": "View Full Logs",
     "log_viewer_target": "logs_dialog"
   },
   "top_clips": [
+    {
+      "clip_id": "eeb422d4-f46a-4b56-a580-6a1fadc6ff55",
+      "clip_id_short": "eeb422d4-f46",
+      "title": "The design is actually criminal \ud83d\ude2d #shorts",
+      "source_title": null,
+      "creator": null,
+      "channel": "fomo_highlights",
+      "views": 0,
+      "likes": null,
+      "ctr_percent": null,
+      "upload_date": "2026-03-25 00:01",
+      "youtube_url": "https://youtube.com/shorts/bBqbwqaDbwU",
+      "metric_mode": "unavailable"
+    },
     {
       "clip_id": "67ccaa86-a139-4b8b-9110-c09000e44510",
       "clip_id_short": "67ccaa86-a13",
@@ -7625,20 +7639,6 @@
       "ctr_percent": null,
       "upload_date": "2026-03-24 18:01",
       "youtube_url": "https://youtube.com/shorts/iN35qJVsig8",
-      "metric_mode": "unavailable"
-    },
-    {
-      "clip_id": "eeb422d4-f46a-4b56-a580-6a1fadc6ff55",
-      "clip_id_short": "eeb422d4-f46",
-      "title": "The design is actually criminal \ud83d\ude2d #shorts",
-      "source_title": null,
-      "creator": null,
-      "channel": "fomo_highlights",
-      "views": 0,
-      "likes": null,
-      "ctr_percent": null,
-      "upload_date": "2026-03-24 17:04",
-      "youtube_url": "https://youtube.com/shorts/bBqbwqaDbwU",
       "metric_mode": "unavailable"
     },
     {
@@ -7798,127 +7798,141 @@
   ],
   "recent_uploads": [
     {
-      "job_id": "67ccaa86-a139-4b8b-9110-c09000e44510",
-      "job_id_short": "67ccaa86",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "updated_at": "2026-03-24T23:01:20.906554+00:00",
-      "updated_at_display": "2026-03-24 23:01",
-      "updated_ago": "16m",
-      "title": "They parked like this on purpose \ud83d\udc80 #shorts",
-      "url": "https://youtube.com/shorts/AVgdy9VkfMY",
-      "error": null
-    },
-    {
-      "job_id": "5103817e-3970-42f0-9793-26b504a4c07b",
-      "job_id_short": "5103817e",
+      "job_id": "0d328257-5cea-41a6-9c55-92120e8817c1",
+      "job_id_short": "0d328257",
       "channel": "arc_highlightz",
-      "status": "succeeded",
-      "updated_at": "2026-03-24T23:01:20.906554+00:00",
-      "updated_at_display": "2026-03-24 23:01",
+      "status": "queued",
+      "updated_at": "2026-03-25T00:01:33.258540+00:00",
+      "updated_at_display": "2026-03-25 00:01",
       "updated_ago": "16m",
-      "title": "Shinyatheninja Moments #1",
-      "url": "https://youtube.com/shorts/ZwWgKYrtWzM",
+      "title": "Arc Highlightz clip",
+      "url": null,
       "error": null
     },
     {
-      "job_id": "d233d178-1724-422b-84bd-afbe0f9e3079",
-      "job_id_short": "d233d178",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "updated_at": "2026-03-24T22:01:18.321965+00:00",
-      "updated_at_display": "2026-03-24 22:01",
-      "updated_ago": "1h",
-      "title": "He put $108k on the Iran deal \ud83d\udc40 #shorts",
-      "url": "https://youtube.com/shorts/FmAnWpCpmS0",
+      "job_id": "e5e44df4-5250-4484-aee5-c4b4a9d9d5e7",
+      "job_id_short": "e5e44df4",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "updated_at": "2026-03-25T00:01:33.260626+00:00",
+      "updated_at_display": "2026-03-25 00:01",
+      "updated_ago": "16m",
+      "title": "Arc Highlightz clip",
+      "url": null,
       "error": null
     },
     {
-      "job_id": "8f7742a9-0377-48db-9cc4-af050a9d3069",
-      "job_id_short": "8f7742a9",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "updated_at": "2026-03-24T21:01:18.866632+00:00",
-      "updated_at_display": "2026-03-24 21:01",
-      "updated_ago": "2h",
-      "title": "Someone did this to the office fridge \ud83d\ude24 #shorts",
-      "url": "https://youtube.com/shorts/xWMHHpYefAI",
+      "job_id": "d5ac24b5-5146-4c09-b91e-647ced80e527",
+      "job_id_short": "d5ac24b5",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "updated_at": "2026-03-25T00:01:33.260626+00:00",
+      "updated_at_display": "2026-03-25 00:01",
+      "updated_ago": "16m",
+      "title": "Arc Highlightz clip",
+      "url": null,
       "error": null
     },
     {
-      "job_id": "b3e52469-4a6d-4401-a353-fffee26cf415",
-      "job_id_short": "b3e52469",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "updated_at": "2026-03-24T20:01:19.017835+00:00",
-      "updated_at_display": "2026-03-24 20:01",
-      "updated_ago": "3h",
-      "title": "Hospital bathrooms are a crime \ud83d\udc80 #shorts",
-      "url": "https://youtube.com/shorts/lnqiHjQGf6Y",
+      "job_id": "888037e0-7616-4264-80c8-a5f069db169c",
+      "job_id_short": "888037e0",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "updated_at": "2026-03-25T00:01:33.260626+00:00",
+      "updated_at_display": "2026-03-25 00:01",
+      "updated_ago": "16m",
+      "title": "Arc Highlightz clip",
+      "url": null,
       "error": null
     },
     {
-      "job_id": "e5f92acd-603a-4d11-b3ef-6caa15c45a4b",
-      "job_id_short": "e5f92acd",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "updated_at": "2026-03-24T19:01:18.758517+00:00",
-      "updated_at_display": "2026-03-24 19:01",
-      "updated_ago": "4h",
-      "title": "This is what my kid found at the beach \ud83d\ude33 #shorts",
-      "url": "https://youtube.com/shorts/iMpU6paVxt4",
+      "job_id": "5fbe8d23-b618-47a9-8d7d-f3404b265ca6",
+      "job_id_short": "5fbe8d23",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "updated_at": "2026-03-25T00:01:33.260626+00:00",
+      "updated_at_display": "2026-03-25 00:01",
+      "updated_ago": "16m",
+      "title": "Perfect wall usage",
+      "url": null,
       "error": null
     },
     {
-      "job_id": "10715a8e-0d9d-44a6-abfc-8a41c66a00d6",
-      "job_id_short": "10715a8e",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "updated_at": "2026-03-24T18:01:18.971702+00:00",
-      "updated_at_display": "2026-03-24 18:01",
-      "updated_ago": "5h",
-      "title": "wallstreetbets: Not even McD\u2019s will save you regards tomorrow\u2026",
-      "url": "https://youtube.com/shorts/AkbLig8CiGw",
+      "job_id": "81b1a341-024e-4918-8427-dfdc509fab76",
+      "job_id_short": "81b1a341",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "updated_at": "2026-03-25T00:01:33.260626+00:00",
+      "updated_at_display": "2026-03-25 00:01",
+      "updated_ago": "16m",
+      "title": "sheeeeesh",
+      "url": null,
       "error": null
     },
     {
-      "job_id": "c62eea94-a649-4c05-bd70-be2eaaa1f04c",
-      "job_id_short": "c62eea94",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "updated_at": "2026-03-24T18:01:18.971702+00:00",
-      "updated_at_display": "2026-03-24 18:01",
-      "updated_ago": "5h",
-      "title": "mildlyinfuriating: Brother-in-law asked to use some tape to pack his boxes.",
-      "url": "https://youtube.com/shorts/iN35qJVsig8",
+      "job_id": "1fb152c8-bae6-47b9-897a-9e4f61f80195",
+      "job_id_short": "1fb152c8",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "updated_at": "2026-03-25T00:01:33.260626+00:00",
+      "updated_at_display": "2026-03-25 00:01",
+      "updated_ago": "16m",
+      "title": "cheating?",
+      "url": null,
       "error": null
     },
     {
-      "job_id": "eeb422d4-f46a-4b56-a580-6a1fadc6ff55",
-      "job_id_short": "eeb422d4",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "updated_at": "2026-03-24T17:04:44.193476",
-      "updated_at_display": "2026-03-24 17:04",
-      "updated_ago": "6h",
-      "title": "The design is actually criminal \ud83d\ude2d #shorts",
-      "url": "https://youtube.com/shorts/bBqbwqaDbwU",
-      "error": "EARLY_URL:https://youtube.com/shorts/bBqbwqaDbwU"
+      "job_id": "a61f3767-a87f-4d90-b049-bfc201a9ba0d",
+      "job_id_short": "a61f3767",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "updated_at": "2026-03-25T00:01:33.260626+00:00",
+      "updated_at_display": "2026-03-25 00:01",
+      "updated_ago": "16m",
+      "title": "LOL",
+      "url": null,
+      "error": null
     },
     {
-      "job_id": "91c5a203-e8e7-417d-a1aa-aad9875b8058",
-      "job_id_short": "91c5a203",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "updated_at": "2026-03-24T17:01:19.262693+00:00",
-      "updated_at_display": "2026-03-24 17:01",
-      "updated_ago": "6h",
-      "title": "wallstreetbets: Who\u2019s still holding lol",
-      "url": "https://youtube.com/shorts/kTU2dZ8TB6M",
+      "job_id": "faff5868-27b4-4a22-b6be-cfc7d366f13f",
+      "job_id_short": "faff5868",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "updated_at": "2026-03-25T00:01:33.260626+00:00",
+      "updated_at_display": "2026-03-25 00:01",
+      "updated_ago": "16m",
+      "title": "Arc Highlightz clip",
+      "url": null,
+      "error": null
+    },
+    {
+      "job_id": "4716c640-2d52-474f-a99b-742285856c05",
+      "job_id_short": "4716c640",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "updated_at": "2026-03-25T00:01:33.260626+00:00",
+      "updated_at_display": "2026-03-25 00:01",
+      "updated_ago": "16m",
+      "title": "Arc Highlightz clip",
+      "url": null,
       "error": null
     }
   ],
   "recent_clips": [
+    {
+      "job_id": "eeb422d4-f46a-4b56-a580-6a1fadc6ff55",
+      "job_id_short": "eeb422d4",
+      "channel": "fomo_highlights",
+      "title": "The design is actually criminal \ud83d\ude2d #shorts",
+      "title_truncated": "The design is actually criminal \ud83d\ude2d #shorts",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/bBqbwqaDbwU",
+      "views": 0,
+      "views_display": "\u00e2\u20ac\u201d",
+      "published_at": "2026-03-25T00:01:19.758702+00:00",
+      "published_at_display": "2026-03-25 00:01",
+      "published_ago": "16m"
+    },
     {
       "job_id": "67ccaa86-a139-4b8b-9110-c09000e44510",
       "job_id_short": "67ccaa86",
@@ -7931,7 +7945,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-24T23:01:20.906554+00:00",
       "published_at_display": "2026-03-24 23:01",
-      "published_ago": "16m"
+      "published_ago": "1h"
     },
     {
       "job_id": "5103817e-3970-42f0-9793-26b504a4c07b",
@@ -7941,11 +7955,11 @@
       "title_truncated": "Shinyatheninja Moments #1",
       "thumbnail_path": null,
       "post_url": "https://youtube.com/shorts/ZwWgKYrtWzM",
-      "views": 0,
-      "views_display": "\u00e2\u20ac\u201d",
+      "views": 1,
+      "views_display": "1",
       "published_at": "2026-03-24T23:01:20.906554+00:00",
       "published_at_display": "2026-03-24 23:01",
-      "published_ago": "16m"
+      "published_ago": "1h"
     },
     {
       "job_id": "d233d178-1724-422b-84bd-afbe0f9e3079",
@@ -7959,7 +7973,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-24T22:01:18.321965+00:00",
       "published_at_display": "2026-03-24 22:01",
-      "published_ago": "1h"
+      "published_ago": "2h"
     },
     {
       "job_id": "8f7742a9-0377-48db-9cc4-af050a9d3069",
@@ -7973,7 +7987,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-24T21:01:18.866632+00:00",
       "published_at_display": "2026-03-24 21:01",
-      "published_ago": "2h"
+      "published_ago": "3h"
     },
     {
       "job_id": "b3e52469-4a6d-4401-a353-fffee26cf415",
@@ -7987,7 +8001,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-24T20:01:19.017835+00:00",
       "published_at_display": "2026-03-24 20:01",
-      "published_ago": "3h"
+      "published_ago": "4h"
     },
     {
       "job_id": "e5f92acd-603a-4d11-b3ef-6caa15c45a4b",
@@ -8001,7 +8015,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-24T19:01:18.758517+00:00",
       "published_at_display": "2026-03-24 19:01",
-      "published_ago": "4h"
+      "published_ago": "5h"
     },
     {
       "job_id": "10715a8e-0d9d-44a6-abfc-8a41c66a00d6",
@@ -8015,7 +8029,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-24T18:01:18.971702+00:00",
       "published_at_display": "2026-03-24 18:01",
-      "published_ago": "5h"
+      "published_ago": "6h"
     },
     {
       "job_id": "c62eea94-a649-4c05-bd70-be2eaaa1f04c",
@@ -8029,20 +8043,6 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-24T18:01:18.971702+00:00",
       "published_at_display": "2026-03-24 18:01",
-      "published_ago": "5h"
-    },
-    {
-      "job_id": "eeb422d4-f46a-4b56-a580-6a1fadc6ff55",
-      "job_id_short": "eeb422d4",
-      "channel": "fomo_highlights",
-      "title": "The design is actually criminal \ud83d\ude2d #shorts",
-      "title_truncated": "The design is actually criminal \ud83d\ude2d #shorts",
-      "thumbnail_path": null,
-      "post_url": "https://youtube.com/shorts/bBqbwqaDbwU",
-      "views": 0,
-      "views_display": "\u00e2\u20ac\u201d",
-      "published_at": "2026-03-24T17:04:44.193476",
-      "published_at_display": "2026-03-24 17:04",
       "published_ago": "6h"
     },
     {
@@ -8057,14 +8057,31 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-24T17:01:19.262693+00:00",
       "published_at_display": "2026-03-24 17:01",
-      "published_ago": "6h"
+      "published_ago": "7h"
     }
   ],
   "upload_timeline": {
     "buckets": [
       {
         "name": "Today",
-        "count": 27,
+        "count": 1,
+        "items": [
+          {
+            "job_id": "eeb422d4-f46a-4b56-a580-6a1fadc6ff55",
+            "job_id_short": "eeb422d4",
+            "channel": "fomo_highlights",
+            "title": "The design is actually criminal \ud83d\ude2d #shorts",
+            "published_at": "2026-03-25T00:01:19.758702+00:00",
+            "published_at_display": "2026-03-25 00:01",
+            "published_ago": "16m",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/bBqbwqaDbwU"
+          }
+        ]
+      },
+      {
+        "name": "Yesterday",
+        "count": 26,
         "items": [
           {
             "job_id": "67ccaa86-a139-4b8b-9110-c09000e44510",
@@ -8073,7 +8090,7 @@
             "title": "They parked like this on purpose \ud83d\udc80 #shorts",
             "published_at": "2026-03-24T23:01:20.906554+00:00",
             "published_at_display": "2026-03-24 23:01",
-            "published_ago": "16m",
+            "published_ago": "1h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/AVgdy9VkfMY"
           },
@@ -8084,7 +8101,7 @@
             "title": "Shinyatheninja Moments #1",
             "published_at": "2026-03-24T23:01:20.906554+00:00",
             "published_at_display": "2026-03-24 23:01",
-            "published_ago": "16m",
+            "published_ago": "1h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/ZwWgKYrtWzM"
           },
@@ -8095,7 +8112,7 @@
             "title": "He put $108k on the Iran deal \ud83d\udc40 #shorts",
             "published_at": "2026-03-24T22:01:18.321965+00:00",
             "published_at_display": "2026-03-24 22:01",
-            "published_ago": "1h",
+            "published_ago": "2h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/FmAnWpCpmS0"
           },
@@ -8106,7 +8123,7 @@
             "title": "Someone did this to the office fridge \ud83d\ude24 #shorts",
             "published_at": "2026-03-24T21:01:18.866632+00:00",
             "published_at_display": "2026-03-24 21:01",
-            "published_ago": "2h",
+            "published_ago": "3h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/xWMHHpYefAI"
           },
@@ -8117,7 +8134,7 @@
             "title": "Hospital bathrooms are a crime \ud83d\udc80 #shorts",
             "published_at": "2026-03-24T20:01:19.017835+00:00",
             "published_at_display": "2026-03-24 20:01",
-            "published_ago": "3h",
+            "published_ago": "4h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/lnqiHjQGf6Y"
           },
@@ -8128,7 +8145,7 @@
             "title": "This is what my kid found at the beach \ud83d\ude33 #shorts",
             "published_at": "2026-03-24T19:01:18.758517+00:00",
             "published_at_display": "2026-03-24 19:01",
-            "published_ago": "4h",
+            "published_ago": "5h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/iMpU6paVxt4"
           },
@@ -8139,7 +8156,7 @@
             "title": "wallstreetbets: Not even McD\u2019s will save you regards tomo...",
             "published_at": "2026-03-24T18:01:18.971702+00:00",
             "published_at_display": "2026-03-24 18:01",
-            "published_ago": "5h",
+            "published_ago": "6h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/AkbLig8CiGw"
           },
@@ -8150,20 +8167,9 @@
             "title": "mildlyinfuriating: Brother-in-law asked to use some tape ...",
             "published_at": "2026-03-24T18:01:18.971702+00:00",
             "published_at_display": "2026-03-24 18:01",
-            "published_ago": "5h",
-            "views": 0,
-            "post_url": "https://youtube.com/shorts/iN35qJVsig8"
-          },
-          {
-            "job_id": "eeb422d4-f46a-4b56-a580-6a1fadc6ff55",
-            "job_id_short": "eeb422d4",
-            "channel": "fomo_highlights",
-            "title": "The design is actually criminal \ud83d\ude2d #shorts",
-            "published_at": "2026-03-24T17:04:44.193476",
-            "published_at_display": "2026-03-24 17:04",
             "published_ago": "6h",
             "views": 0,
-            "post_url": "https://youtube.com/shorts/bBqbwqaDbwU"
+            "post_url": "https://youtube.com/shorts/iN35qJVsig8"
           },
           {
             "job_id": "91c5a203-e8e7-417d-a1aa-aad9875b8058",
@@ -8172,7 +8178,7 @@
             "title": "wallstreetbets: Who\u2019s still holding lol",
             "published_at": "2026-03-24T17:01:19.262693+00:00",
             "published_at_display": "2026-03-24 17:01",
-            "published_ago": "6h",
+            "published_ago": "7h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/kTU2dZ8TB6M"
           },
@@ -8183,7 +8189,7 @@
             "title": "mildlyinfuriating: Please don\u2019t be this guy that blocks a...",
             "published_at": "2026-03-24T16:05:26.927077+00:00",
             "published_at_display": "2026-03-24 16:05",
-            "published_ago": "7h",
+            "published_ago": "8h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/nUmyfQHEacY"
           },
@@ -8194,7 +8200,7 @@
             "title": "mildlyinfuriating: Lowes put a returned ceiling fan back ...",
             "published_at": "2026-03-24T15:02:19.227791+00:00",
             "published_at_display": "2026-03-24 15:02",
-            "published_ago": "8h",
+            "published_ago": "9h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/NKPzY4OmdYY"
           },
@@ -8205,7 +8211,7 @@
             "title": "Shroud Moments #4",
             "published_at": "2026-03-24T12:01:18.917982+00:00",
             "published_at_display": "2026-03-24 12:01",
-            "published_ago": "11h",
+            "published_ago": "12h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/5Y9Mdr9bQ1U"
           },
@@ -8216,7 +8222,7 @@
             "title": "wallstreetbets: Reuters: OpenAl offering private-equity f...",
             "published_at": "2026-03-24T11:01:18.571301+00:00",
             "published_at_display": "2026-03-24 11:01",
-            "published_ago": "12h",
+            "published_ago": "13h",
             "views": 0,
             "post_url": null
           },
@@ -8227,7 +8233,7 @@
             "title": "wallstreetbets: Reuters: OpenAl offering private-equity f...",
             "published_at": "2026-03-24T11:01:18.571301+00:00",
             "published_at_display": "2026-03-24 11:01",
-            "published_ago": "12h",
+            "published_ago": "13h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/4Q-bJfo1VgM"
           },
@@ -8238,7 +8244,7 @@
             "title": "wallstreetbets: Roth IRA is COOKED",
             "published_at": "2026-03-24T11:01:18.571301+00:00",
             "published_at_display": "2026-03-24 11:01",
-            "published_ago": "12h",
+            "published_ago": "13h",
             "views": 0,
             "post_url": null
           },
@@ -8249,7 +8255,7 @@
             "title": "wallstreetbets: Roth IRA is COOKED",
             "published_at": "2026-03-24T11:01:18.571301+00:00",
             "published_at_display": "2026-03-24 11:01",
-            "published_ago": "12h",
+            "published_ago": "13h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/aa1STKlgWtw"
           },
@@ -8260,7 +8266,7 @@
             "title": "mildlyinfuriating: Grandkids broke the new basketball hoo...",
             "published_at": "2026-03-24T11:01:18.571301+00:00",
             "published_at_display": "2026-03-24 11:01",
-            "published_ago": "12h",
+            "published_ago": "13h",
             "views": 0,
             "post_url": null
           },
@@ -8271,7 +8277,7 @@
             "title": "mildlyinfuriating: Grandkids broke the new basketball hoo...",
             "published_at": "2026-03-24T11:01:18.571301+00:00",
             "published_at_display": "2026-03-24 11:01",
-            "published_ago": "12h",
+            "published_ago": "13h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/O0kr1-SfbEw"
           },
@@ -8282,7 +8288,7 @@
             "title": "antiwork: My senator has 7 violations for late disclosure...",
             "published_at": "2026-03-24T10:01:27.774748+00:00",
             "published_at_display": "2026-03-24 10:01",
-            "published_ago": "13h",
+            "published_ago": "14h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/BMCC1FiRKqM"
           },
@@ -8293,7 +8299,7 @@
             "title": "mildlyinfuriating: Found on my parents\u2019 bookshelf\u2026",
             "published_at": "2026-03-24T10:01:27.774748+00:00",
             "published_at_display": "2026-03-24 10:01",
-            "published_ago": "13h",
+            "published_ago": "14h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/KqP5CVsm6uk"
           },
@@ -8304,7 +8310,7 @@
             "title": "mildlyinfuriating: RING AI Identified Me As A \u201cDark Animal\u201d",
             "published_at": "2026-03-24T10:01:27.774748+00:00",
             "published_at_display": "2026-03-24 10:01",
-            "published_ago": "13h",
+            "published_ago": "14h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/kY99O8rxh-Q"
           },
@@ -8315,7 +8321,7 @@
             "title": "mildlyinfuriating: Grandkids broke the new basketball hoo...",
             "published_at": "2026-03-24T10:01:27.774748+00:00",
             "published_at_display": "2026-03-24 10:01",
-            "published_ago": "13h",
+            "published_ago": "14h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/h8omelMZBdc"
           },
@@ -8326,7 +8332,7 @@
             "title": "mildlyinfuriating: Lowes put a returned ceiling fan back ...",
             "published_at": "2026-03-24T10:01:27.774748+00:00",
             "published_at_display": "2026-03-24 10:01",
-            "published_ago": "13h",
+            "published_ago": "14h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/KSwgY9OxqRM"
           },
@@ -8337,7 +8343,7 @@
             "title": "mildlyinfuriating: RING AI Identified Me As A \u201cDark Animal\u201d",
             "published_at": "2026-03-24T10:01:27.774748+00:00",
             "published_at_display": "2026-03-24 10:01",
-            "published_ago": "13h",
+            "published_ago": "14h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/yzkeIOKPb2w"
           },
@@ -8348,7 +8354,7 @@
             "title": "Ludwig Moments #8",
             "published_at": "2026-03-24T09:01:19.031710+00:00",
             "published_at_display": "2026-03-24 09:01",
-            "published_ago": "14h",
+            "published_ago": "15h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/PmMPoOCvy8g"
           },
@@ -8359,14 +8365,14 @@
             "title": "Hasanabi Moments #3",
             "published_at": "2026-03-24T08:01:18.865566+00:00",
             "published_at_display": "2026-03-24 08:01",
-            "published_ago": "15h",
+            "published_ago": "16h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/Crbx0xQQIns"
           }
         ]
       },
       {
-        "name": "Yesterday",
+        "name": "This Week",
         "count": 10,
         "items": [
           {
@@ -8482,11 +8488,6 @@
         ]
       },
       {
-        "name": "This Week",
-        "count": 0,
-        "items": []
-      },
-      {
         "name": "Last Week",
         "count": 13,
         "items": [
@@ -8541,7 +8542,7 @@
             "title": "Ludwig Moments #3",
             "published_at": "2026-03-22T00:01:18.069643+00:00",
             "published_at_display": "2026-03-22 00:01",
-            "published_ago": "2d",
+            "published_ago": "3d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/PqKjX0e8pzE"
           },
@@ -8646,10 +8647,16 @@
   "discord_feed": [],
   "logs_preview": [
     {
+      "channel": "arc_highlightz",
+      "job_id_short": "f5024ef0",
+      "updated_at": "2026-03-24 18:11",
+      "message": "BrowserType.launch_persistent_context: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> C:\\Users\\kanaw\\AppData\\Local\\ms-playwright\\chromium-1208\\chrome-win64\\chrome.exe --disable-field-trial-config --disable-backgr"
+    },
+    {
       "channel": "fomo_highlights",
-      "job_id_short": "eeb422d4",
-      "updated_at": "2026-03-24 17:04",
-      "message": "EARLY_URL:https://youtube.com/shorts/bBqbwqaDbwU"
+      "job_id_short": "729594d1",
+      "updated_at": "2026-03-24 18:08",
+      "message": "BrowserType.launch_persistent_context: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> C:\\Users\\kanaw\\AppData\\Local\\ms-playwright\\chromium-1208\\chrome-win64\\chrome.exe --disable-field-trial-config --disable-backgr"
     },
     {
       "channel": "fomo_highlights",
@@ -8684,12 +8691,6 @@
     {
       "channel": "market_meltdowns",
       "job_id_short": "579597de",
-      "updated_at": "2026-03-17 16:01",
-      "message": "Not logged in (redirected to https://accounts.google.com/v3/signin/confirmidentifier?continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fstudio.youtube.com%252"
-    },
-    {
-      "channel": "market_meltdowns",
-      "job_id_short": "79330624",
       "updated_at": "2026-03-17 16:01",
       "message": "Not logged in (redirected to https://accounts.google.com/v3/signin/confirmidentifier?continue=https%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26hl%3Den%26next%3Dhttps%253A%252F%252Fstudio.youtube.com%252"
     }
@@ -8789,7 +8790,7 @@
       "min_views": 5000,
       "max_per_run": 6,
       "crop_anchor": "right",
-      "daily_target": 3,
+      "daily_target": 8,
       "source_count": 5
     },
     "gym_moments": {
@@ -8859,7 +8860,7 @@
       "min_views": 0,
       "max_per_run": 2,
       "crop_anchor": "center",
-      "daily_target": 6,
+      "daily_target": 8,
       "source_count": 6
     }
   },
@@ -9145,15 +9146,6 @@
         "status": "succeeded"
       },
       {
-        "job_id": "eeb422d4-f46a-4b56-a580-6a1fadc6ff55",
-        "job_id_short": "eeb422d4",
-        "channel": "fomo_highlights",
-        "title": "The design is actually criminal \ud83d\ude2d #shorts",
-        "scheduled_at": "2026-03-24T17:04:44.193476",
-        "scheduled_at_iso": "2026-03-24T17:04:44.193476",
-        "status": "succeeded"
-      },
-      {
         "job_id": "10715a8e-0d9d-44a6-abfc-8a41c66a00d6",
         "job_id_short": "10715a8e",
         "channel": "fomo_highlights",
@@ -9226,50 +9218,185 @@
         "status": "succeeded"
       }
     ],
-    "2026-03-17": [
+    "2026-03-25": [
       {
-        "job_id": "c7509db1-0525-4eda-8e87-d3cd38b0839a",
-        "job_id_short": "c7509db1",
+        "job_id": "0d328257-5cea-41a6-9c55-92120e8817c1",
+        "job_id_short": "0d328257",
         "channel": "arc_highlightz",
-        "title": "Tfue Moments #10",
-        "scheduled_at": "2026-03-17T09:51:46.505837",
-        "scheduled_at_iso": "2026-03-17T09:51:46.505837",
-        "status": "succeeded"
+        "title": "Arc Highlightz clip",
+        "scheduled_at": "2026-03-25T00:01:33.258540+00:00",
+        "scheduled_at_iso": "2026-03-25T00:01:33.258540",
+        "status": "queued"
       },
       {
-        "job_id": "81e94eb6-f1f9-4563-9010-ee08f9e8e699",
-        "job_id_short": "81e94eb6",
-        "channel": "viral_recaps",
-        "title": "Moistcr1tikal Moments #1",
-        "scheduled_at": "2026-03-17T09:57:05.298876",
-        "scheduled_at_iso": "2026-03-17T09:57:05.298876",
-        "status": "succeeded"
+        "job_id": "e5e44df4-5250-4484-aee5-c4b4a9d9d5e7",
+        "job_id_short": "e5e44df4",
+        "channel": "arc_highlightz",
+        "title": "Arc Highlightz clip",
+        "scheduled_at": "2026-03-25T00:01:33.260626+00:00",
+        "scheduled_at_iso": "2026-03-25T00:01:33.260626",
+        "status": "queued"
       },
       {
-        "job_id": "ae4a959f-68ce-4ab9-a58c-62b849d967e3",
-        "job_id_short": "ae4a959f",
-        "channel": "viral_recaps",
-        "title": "Moistcr1tikal Moments #2",
-        "scheduled_at": "2026-03-17T14:10:17.591578",
-        "scheduled_at_iso": "2026-03-17T14:10:17.591578",
-        "status": "succeeded"
+        "job_id": "d5ac24b5-5146-4c09-b91e-647ced80e527",
+        "job_id_short": "d5ac24b5",
+        "channel": "arc_highlightz",
+        "title": "Arc Highlightz clip",
+        "scheduled_at": "2026-03-25T00:01:33.260626+00:00",
+        "scheduled_at_iso": "2026-03-25T00:01:33.260626",
+        "status": "queued"
       },
       {
-        "job_id": "9e776c64-3273-42d9-8d73-3e24306accf2",
-        "job_id_short": "9e776c64",
+        "job_id": "888037e0-7616-4264-80c8-a5f069db169c",
+        "job_id_short": "888037e0",
+        "channel": "arc_highlightz",
+        "title": "Arc Highlightz clip",
+        "scheduled_at": "2026-03-25T00:01:33.260626+00:00",
+        "scheduled_at_iso": "2026-03-25T00:01:33.260626",
+        "status": "queued"
+      },
+      {
+        "job_id": "5fbe8d23-b618-47a9-8d7d-f3404b265ca6",
+        "job_id_short": "5fbe8d23",
+        "channel": "arc_highlightz",
+        "title": "Perfect wall usage",
+        "scheduled_at": "2026-03-25T00:01:33.260626+00:00",
+        "scheduled_at_iso": "2026-03-25T00:01:33.260626",
+        "status": "queued"
+      },
+      {
+        "job_id": "81b1a341-024e-4918-8427-dfdc509fab76",
+        "job_id_short": "81b1a341",
+        "channel": "arc_highlightz",
+        "title": "sheeeeesh",
+        "scheduled_at": "2026-03-25T00:01:33.260626+00:00",
+        "scheduled_at_iso": "2026-03-25T00:01:33.260626",
+        "status": "queued"
+      },
+      {
+        "job_id": "1fb152c8-bae6-47b9-897a-9e4f61f80195",
+        "job_id_short": "1fb152c8",
+        "channel": "arc_highlightz",
+        "title": "cheating?",
+        "scheduled_at": "2026-03-25T00:01:33.260626+00:00",
+        "scheduled_at_iso": "2026-03-25T00:01:33.260626",
+        "status": "queued"
+      },
+      {
+        "job_id": "a61f3767-a87f-4d90-b049-bfc201a9ba0d",
+        "job_id_short": "a61f3767",
+        "channel": "arc_highlightz",
+        "title": "LOL",
+        "scheduled_at": "2026-03-25T00:01:33.260626+00:00",
+        "scheduled_at_iso": "2026-03-25T00:01:33.260626",
+        "status": "queued"
+      },
+      {
+        "job_id": "faff5868-27b4-4a22-b6be-cfc7d366f13f",
+        "job_id_short": "faff5868",
+        "channel": "arc_highlightz",
+        "title": "Arc Highlightz clip",
+        "scheduled_at": "2026-03-25T00:01:33.260626+00:00",
+        "scheduled_at_iso": "2026-03-25T00:01:33.260626",
+        "status": "queued"
+      },
+      {
+        "job_id": "4716c640-2d52-474f-a99b-742285856c05",
+        "job_id_short": "4716c640",
+        "channel": "arc_highlightz",
+        "title": "Arc Highlightz clip",
+        "scheduled_at": "2026-03-25T00:01:33.260626+00:00",
+        "scheduled_at_iso": "2026-03-25T00:01:33.260626",
+        "status": "queued"
+      },
+      {
+        "job_id": "ec8599e2-821e-4f75-8dcf-f2e6957cb5a1",
+        "job_id_short": "ec8599e2",
         "channel": "fomo_highlights",
-        "title": "Shroud Moments #1",
-        "scheduled_at": "2026-03-17T14:10:18.153201",
-        "scheduled_at_iso": "2026-03-17T14:10:18.153201",
-        "status": "succeeded"
+        "title": "Fomo Highlights clip",
+        "scheduled_at": "2026-03-25T00:01:33.261635+00:00",
+        "scheduled_at_iso": "2026-03-25T00:01:33.261635",
+        "status": "queued"
       },
       {
-        "job_id": "a6071996-76c1-47c0-a571-3eaccd123023",
-        "job_id_short": "a6071996",
+        "job_id": "d6b8cedc-bb4c-42c5-8b5b-15fab3b58478",
+        "job_id_short": "d6b8cedc",
+        "channel": "fomo_highlights",
+        "title": "Fomo Highlights clip",
+        "scheduled_at": "2026-03-25T00:01:33.261635+00:00",
+        "scheduled_at_iso": "2026-03-25T00:01:33.261635",
+        "status": "queued"
+      },
+      {
+        "job_id": "b69e849d-ca2d-456e-85f8-8a0afbcb2983",
+        "job_id_short": "b69e849d",
+        "channel": "fomo_highlights",
+        "title": "Fomo Highlights clip",
+        "scheduled_at": "2026-03-25T00:01:33.261635+00:00",
+        "scheduled_at_iso": "2026-03-25T00:01:33.261635",
+        "status": "queued"
+      },
+      {
+        "job_id": "f2cff0e1-d5c1-43cf-8821-883814c63db3",
+        "job_id_short": "f2cff0e1",
         "channel": "viral_recaps",
-        "title": "Ludwig Moments #1",
-        "scheduled_at": "2026-03-17T14:16:01.327373",
-        "scheduled_at_iso": "2026-03-17T14:16:01.327373",
+        "title": "Viral Recaps clip",
+        "scheduled_at": "2026-03-25T00:01:33.261635+00:00",
+        "scheduled_at_iso": "2026-03-25T00:01:33.261635",
+        "status": "queued"
+      },
+      {
+        "job_id": "125609b9-af86-4010-a68a-11149a217888",
+        "job_id_short": "125609b9",
+        "channel": "viral_recaps",
+        "title": "Viral Recaps clip",
+        "scheduled_at": "2026-03-25T00:01:33.261635+00:00",
+        "scheduled_at_iso": "2026-03-25T00:01:33.261635",
+        "status": "queued"
+      },
+      {
+        "job_id": "641b5ab8-b56a-4cbc-ab9f-db9bd38ce56a",
+        "job_id_short": "641b5ab8",
+        "channel": "viral_recaps",
+        "title": "Viral Recaps clip",
+        "scheduled_at": "2026-03-25T00:01:33.261635+00:00",
+        "scheduled_at_iso": "2026-03-25T00:01:33.261635",
+        "status": "queued"
+      },
+      {
+        "job_id": "1e9c048a-6b80-4f21-8881-4dd9c1689ad1",
+        "job_id_short": "1e9c048a",
+        "channel": "viral_recaps",
+        "title": "Viral Recaps clip",
+        "scheduled_at": "2026-03-25T00:01:33.261635+00:00",
+        "scheduled_at_iso": "2026-03-25T00:01:33.261635",
+        "status": "queued"
+      },
+      {
+        "job_id": "d8893fa1-97b2-4a3b-8e61-eab212866bfa",
+        "job_id_short": "d8893fa1",
+        "channel": "viral_recaps",
+        "title": "Viral Recaps clip",
+        "scheduled_at": "2026-03-25T00:01:33.261635+00:00",
+        "scheduled_at_iso": "2026-03-25T00:01:33.261635",
+        "status": "queued"
+      },
+      {
+        "job_id": "00e736da-8ed0-4dbd-a7a9-74feb7730ee0",
+        "job_id_short": "00e736da",
+        "channel": "viral_recaps",
+        "title": "Viral Recaps clip",
+        "scheduled_at": "2026-03-25T00:01:33.261635+00:00",
+        "scheduled_at_iso": "2026-03-25T00:01:33.261635",
+        "status": "queued"
+      },
+      {
+        "job_id": "eeb422d4-f46a-4b56-a580-6a1fadc6ff55",
+        "job_id_short": "eeb422d4",
+        "channel": "fomo_highlights",
+        "title": "The design is actually criminal \ud83d\ude2d #shorts",
+        "scheduled_at": "2026-03-25T00:01:19.758702+00:00",
+        "scheduled_at_iso": "2026-03-25T00:01:19.758702",
         "status": "succeeded"
       }
     ],
@@ -9461,13 +9588,13 @@
         "status": "succeeded"
       }
     ],
-    "2026-03-25": [],
     "2026-03-26": [],
     "2026-03-27": [],
     "2026-03-28": [],
     "2026-03-29": [],
     "2026-03-30": [],
-    "2026-03-31": []
+    "2026-03-31": [],
+    "2026-04-01": []
   },
   "quota": {
     "quota_by_channel": [
@@ -9493,13 +9620,13 @@
       },
       {
         "channel": "fomo_highlights",
-        "uploads_today": 0,
-        "units_used": 0,
-        "units_remaining": 10000,
+        "uploads_today": 1,
+        "units_used": 1600,
+        "units_remaining": 8400,
         "units_total": 10000,
-        "pct_used": 0.0,
+        "pct_used": 16.0,
         "status": "green",
-        "display_text": "0/10000 units (0.0%)"
+        "display_text": "1600/10000 units (16.0%)"
       },
       {
         "channel": "gym_moments",
@@ -9604,9 +9731,9 @@
     ],
     "any_channel_high": false,
     "all_channels_safe": true,
-    "reset_time_hours": 8,
+    "reset_time_hours": 7,
     "reset_time_minutes": 41,
-    "reset_time_display": "8h 41m"
+    "reset_time_display": "7h 41m"
   },
   "revenue": {
     "total_views_30d": 0,
@@ -9626,7 +9753,7 @@
       "discovered": 0,
       "downloaded": 0,
       "processed": 0,
-      "queued": 16,
+      "queued": 35,
       "uploaded": 75
     },
     "by_channel": [
@@ -9635,7 +9762,7 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 4,
+        "queued": 14,
         "uploaded": 19
       },
       {
@@ -9643,7 +9770,7 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 12,
+        "queued": 15,
         "uploaded": 31
       },
       {
@@ -9659,7 +9786,7 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 0,
+        "queued": 6,
         "uploaded": 19
       }
     ],
@@ -9669,11 +9796,11 @@
     },
     "stage_timings": {
       "discovered_to_downloaded_hours": 0.0,
-      "queued_to_uploaded_hours": 9.84
+      "queued_to_uploaded_hours": 9.93
     },
     "bottleneck": {
       "stage": "queued",
-      "backlog": 16
+      "backlog": 35
     }
   },
   "disk": {
@@ -9707,7 +9834,7 @@
         "file_count": 99
       }
     ],
-    "total_disk_bytes": 32403517618,
+    "total_disk_bytes": 32423342930,
     "total_disk_human": "30.2GB",
     "percent_of_500gb": 6.0,
     "warning_threshold_pct": 70,
@@ -9758,8 +9885,8 @@
         "channel": "arc_highlightz",
         "title": "Cloakzy Moments #1",
         "title_display": "Cloakzy Moments #1",
-        "views": 19247,
-        "views_display": "19.2K",
+        "views": 19562,
+        "views_display": "19.6K",
         "post_url": "https://youtube.com/shorts/u4-V68nBYaQ",
         "published_at": "2026-03-21T20:01:18.282478+00:00",
         "published_at_display": "2026-03-21 20:01",
@@ -9771,7 +9898,7 @@
         "channel": "arc_highlightz",
         "title": "Tfue Moments #6",
         "title_display": "Tfue Moments #6",
-        "views": 2020,
+        "views": 2021,
         "views_display": "2.0K",
         "post_url": "https://youtube.com/shorts/awywxTpG9jA",
         "published_at": "2026-03-23T05:01:18.559641+00:00",
@@ -9815,7 +9942,7 @@
         "post_url": "https://youtube.com/shorts/IcaWcciAOzM",
         "published_at": "2026-03-08T23:18:37.825820",
         "published_at_display": "2026-03-08 23:18",
-        "published_ago": "15d",
+        "published_ago": "16d",
         "thumbnail_path": null
       },
       {
@@ -9889,8 +10016,8 @@
         "channel": "arc_highlightz",
         "title": "Cloakzy Moments #1",
         "title_display": "Cloakzy Moments #1",
-        "views": 19247,
-        "views_display": "19.2K",
+        "views": 19562,
+        "views_display": "19.6K",
         "post_url": "https://youtube.com/shorts/u4-V68nBYaQ",
         "published_at": "2026-03-21T20:01:18.282478+00:00",
         "published_at_display": "2026-03-21 20:01",
@@ -9906,7 +10033,7 @@
         "post_url": "https://youtube.com/shorts/IcaWcciAOzM",
         "published_at": "2026-03-08T23:18:37.825820",
         "published_at_display": "2026-03-08 23:18",
-        "published_ago": "15d",
+        "published_ago": "16d",
         "thumbnail_path": null
       }
     ],
@@ -9916,8 +10043,8 @@
         "channel": "arc_highlightz",
         "title": "Cloakzy Moments #1",
         "title_display": "Cloakzy Moments #1",
-        "views": 19247,
-        "views_display": "19.2K",
+        "views": 19562,
+        "views_display": "19.6K",
         "post_url": "https://youtube.com/shorts/u4-V68nBYaQ",
         "published_at": "2026-03-21T20:01:18.282478+00:00",
         "published_at_display": "2026-03-21 20:01",
@@ -9929,7 +10056,7 @@
         "channel": "arc_highlightz",
         "title": "Tfue Moments #6",
         "title_display": "Tfue Moments #6",
-        "views": 2020,
+        "views": 2021,
         "views_display": "2.0K",
         "post_url": "https://youtube.com/shorts/awywxTpG9jA",
         "published_at": "2026-03-23T05:01:18.559641+00:00",
@@ -9956,9 +10083,9 @@
   "leaderboard": [
     {
       "channel_name": "arc_highlightz",
-      "total_views": 25442,
+      "total_views": 25759,
       "uploads_30d": 19,
-      "avg_views": 1339,
+      "avg_views": 1355,
       "best_clip_title": "No clips yet",
       "best_clip_views": 0,
       "best_clip_url": "",
@@ -10973,7 +11100,7 @@
           "priority": 1,
           "clips_fetched": 3,
           "last_fetched_at": "2026-03-22T23:39:01.315167",
-          "last_fetched_rel": "1d",
+          "last_fetched_rel": "2d",
           "enabled": true,
           "url": "https://www.youtube.com/@penguinz0/videos",
           "type": "transcript"
@@ -10987,7 +11114,7 @@
           "priority": 1,
           "clips_fetched": 3,
           "last_fetched_at": "2026-03-24T05:36:57.989463",
-          "last_fetched_rel": "17h",
+          "last_fetched_rel": "18h",
           "enabled": true,
           "url": "https://www.youtube.com/@HasanAbi/videos",
           "type": "transcript"
@@ -11001,7 +11128,7 @@
           "priority": 1,
           "clips_fetched": 8,
           "last_fetched_at": "2026-03-24T05:37:50.026935",
-          "last_fetched_rel": "17h",
+          "last_fetched_rel": "18h",
           "enabled": true,
           "url": "https://www.youtube.com/@Ludwig/videos",
           "type": "transcript"
@@ -11128,13 +11255,13 @@
   ],
   "daily_summary": {
     "date": "2026-03-24",
-    "uploads_today": 24,
-    "uploads_yesterday": 33,
+    "uploads_today": 23,
+    "uploads_yesterday": 32,
     "views_gained_today": 0,
     "views_yesterday": 0,
-    "errors_today": 2,
-    "quota_pct": 384.0,
-    "quota_units_used": 38400,
+    "errors_today": 3,
+    "quota_pct": 368.0,
+    "quota_units_used": 36800,
     "delta_uploads": -9,
     "delta_views": 0,
     "top_clip_today": {
@@ -11145,7 +11272,7 @@
     "top_3_channels": [
       {
         "channel": "fomo_highlights",
-        "uploads": 21
+        "uploads": 20
       },
       {
         "channel": "viral_recaps",
@@ -11156,8 +11283,8 @@
         "uploads": 1
       }
     ],
-    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-03-24\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 24 (-9 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 2\n  API Quota: 384.0% used (38400/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Hasanabi Moments #3\n  0 views \u00e2\u20ac\u00a2 viral_recaps\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. fomo_highlights: 21 uploads\n  2. viral_recaps: 2 uploads\n  3. arc_highlightz: 1 uploads",
-    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-03-24\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 24 (-9 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 2\n\u00e2\u20ac\u00a2 **API Quota:** 384.0% used (`38400/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Hasanabi Moments #3_\n**0 views** \u00e2\u20ac\u00a2 **viral_recaps**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **fomo_highlights** \u00e2\u20ac\u201d 21 uploads\n2. **viral_recaps** \u00e2\u20ac\u201d 2 uploads\n3. **arc_highlightz** \u00e2\u20ac\u201d 1 uploads"
+    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-03-24\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 23 (-9 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 3\n  API Quota: 368.0% used (36800/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Hasanabi Moments #3\n  0 views \u00e2\u20ac\u00a2 viral_recaps\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. fomo_highlights: 20 uploads\n  2. viral_recaps: 2 uploads\n  3. arc_highlightz: 1 uploads",
+    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-03-24\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 23 (-9 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 3\n\u00e2\u20ac\u00a2 **API Quota:** 368.0% used (`36800/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Hasanabi Moments #3_\n**0 views** \u00e2\u20ac\u00a2 **viral_recaps**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **fomo_highlights** \u00e2\u20ac\u201d 20 uploads\n2. **viral_recaps** \u00e2\u20ac\u201d 2 uploads\n3. **arc_highlightz** \u00e2\u20ac\u201d 1 uploads"
   },
   "title_performance": {
     "pattern_analysis": {
@@ -12942,81 +13069,81 @@
     {
       "type": "warning",
       "title": "Channel \"market_meltdowns\" paused for 24+ hours",
-      "message": "market_meltdowns has been paused for 383 hours",
+      "message": "market_meltdowns has been paused for 384 hours",
       "channel": "market_meltdowns",
-      "created_at": "2026-03-24T23:18:02.640904",
+      "created_at": "2026-03-25T00:18:02.827249",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"self_made_clips\" paused for 24+ hours",
-      "message": "self_made_clips has been paused for 379 hours",
+      "message": "self_made_clips has been paused for 380 hours",
       "channel": "self_made_clips",
-      "created_at": "2026-03-24T23:18:02.640904",
+      "created_at": "2026-03-25T00:18:02.827249",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"rich_or_ruined\" paused for 24+ hours",
-      "message": "rich_or_ruined has been paused for 377 hours",
+      "message": "rich_or_ruined has been paused for 378 hours",
       "channel": "rich_or_ruined",
-      "created_at": "2026-03-24T23:18:02.640904",
+      "created_at": "2026-03-25T00:18:02.827249",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"startup_graveyard\" paused for 24+ hours",
-      "message": "startup_graveyard has been paused for 377 hours",
+      "message": "startup_graveyard has been paused for 378 hours",
       "channel": "startup_graveyard",
-      "created_at": "2026-03-24T23:18:02.640904",
+      "created_at": "2026-03-25T00:18:02.827249",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_sirens\" paused for 24+ hours",
-      "message": "stream_sirens has been paused for 356 hours",
+      "message": "stream_sirens has been paused for 357 hours",
       "channel": "stream_sirens",
-      "created_at": "2026-03-24T23:18:02.640904",
+      "created_at": "2026-03-25T00:18:02.827249",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_queens\" paused for 24+ hours",
-      "message": "stream_queens has been paused for 356 hours",
+      "message": "stream_queens has been paused for 357 hours",
       "channel": "stream_queens",
-      "created_at": "2026-03-24T23:18:02.640904",
+      "created_at": "2026-03-25T00:18:02.827249",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"ai_did_what\" paused for 24+ hours",
-      "message": "ai_did_what has been paused for 322 hours",
+      "message": "ai_did_what has been paused for 323 hours",
       "channel": "ai_did_what",
-      "created_at": "2026-03-24T23:18:02.640904",
+      "created_at": "2026-03-25T00:18:02.827249",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"gym_moments\" paused for 24+ hours",
-      "message": "gym_moments has been paused for 322 hours",
+      "message": "gym_moments has been paused for 323 hours",
       "channel": "gym_moments",
-      "created_at": "2026-03-24T23:18:02.640904",
+      "created_at": "2026-03-25T00:18:02.827249",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"kitchen_chaos\" paused for 24+ hours",
-      "message": "kitchen_chaos has been paused for 175 hours",
+      "message": "kitchen_chaos has been paused for 176 hours",
       "channel": "kitchen_chaos",
-      "created_at": "2026-03-24T23:18:02.640904",
+      "created_at": "2026-03-25T00:18:02.827249",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"unfiltered_clips\" paused for 24+ hours",
-      "message": "unfiltered_clips has been paused for 175 hours",
+      "message": "unfiltered_clips has been paused for 176 hours",
       "channel": "unfiltered_clips",
-      "created_at": "2026-03-24T23:18:02.640904",
+      "created_at": "2026-03-25T00:18:02.827249",
       "read": false
     }
   ],
@@ -13063,11 +13190,11 @@
     },
     {
       "channel": "fomo_highlights",
-      "readiness_score": 5,
+      "readiness_score": 6,
       "total_checks": 6,
-      "badge": "needs_attention",
-      "badge_text": "Needs Attention",
-      "badge_color": "orange",
+      "badge": "launch_ready",
+      "badge_text": "Launch Ready",
+      "badge_color": "green",
       "checks": [
         {
           "label": "Has YouTube account linked",
@@ -13096,18 +13223,18 @@
         },
         {
           "label": "Quota not exhausted (< 90% used)",
-          "passed": false,
-          "icon": "\u00e2\u009d\u0152"
+          "passed": true,
+          "icon": "\u00e2\u0153\u2026"
         }
       ]
     },
     {
       "channel": "viral_recaps",
-      "readiness_score": 5,
+      "readiness_score": 6,
       "total_checks": 6,
-      "badge": "needs_attention",
-      "badge_text": "Needs Attention",
-      "badge_color": "orange",
+      "badge": "launch_ready",
+      "badge_text": "Launch Ready",
+      "badge_color": "green",
       "checks": [
         {
           "label": "Has YouTube account linked",
@@ -13131,8 +13258,8 @@
         },
         {
           "label": "Has clips in queue",
-          "passed": false,
-          "icon": "\u00e2\u009d\u0152"
+          "passed": true,
+          "icon": "\u00e2\u0153\u2026"
         },
         {
           "label": "Quota not exhausted (< 90% used)",
@@ -13560,15 +13687,15 @@
         "channel": "viral_recaps",
         "status": "active",
         "category": "Comedy",
-        "target_per_day": 6,
+        "target_per_day": 8,
         "published_24h": 2,
-        "queue_depth": 0,
+        "queue_depth": 6,
         "running_jobs": 0,
         "failed_7d": 0,
         "avg_views": 370,
         "rpm": 0.31,
-        "deficit": 4,
-        "completion_rate": 33.3,
+        "deficit": 6,
+        "completion_rate": 25.0,
         "lagging": true,
         "views_source": "source_clips_proxy",
         "latest_title": "Ludwig Moments #8",
@@ -13581,7 +13708,7 @@
         "category": "Gaming",
         "target_per_day": 15,
         "published_24h": 1,
-        "queue_depth": 4,
+        "queue_depth": 14,
         "running_jobs": 0,
         "failed_7d": 0,
         "avg_views": 1160,
@@ -13596,13 +13723,13 @@
       }
     ],
     "lagging_count": 2,
-    "queue_backlog": 16,
+    "queue_backlog": 35,
     "analytics_channels": 13
   },
   "meta": {
     "refresh_seconds": 30,
     "channel_count": 13,
-    "job_count": 192,
+    "job_count": 211,
     "has_metrics_daily": false,
     "has_clip_assets": false,
     "note": "Trend analytics prefer metrics_daily and fall back to source clip proxy series when upload analytics are sparse."

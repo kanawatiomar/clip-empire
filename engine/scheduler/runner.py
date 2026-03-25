@@ -67,6 +67,7 @@ class Runner:
         self.dry_run = dry_run
         self.skip_caption = skip_caption
         self.keep_intermediate = keep_intermediate
+        self.db_path = db_path
         self.trend_radar_enabled = trend_radar_enabled
         self.policy_filter_enabled = policy_filter_enabled
         self.sora_lane_enabled = sora_lane_enabled
@@ -157,8 +158,10 @@ class Runner:
 
         # Get sources for this channel
         sources = CHANNEL_SOURCES.get(channel_name, [])
-        if self.trend_radar_enabled:
-            sources = self.trend_radar.augment_sources(channel_name, list(sources))
+        # DISABLED: trend_radar augmentation causes contamination with random YouTube content
+        # arc_highlightz should ONLY use configured Twitch sources (gaming channels)
+        # if self.trend_radar_enabled:
+        #     sources = self.trend_radar.augment_sources(channel_name, list(sources))
         if not sources:
             print(f"[runner] {channel_name}: no sources configured")
             return []

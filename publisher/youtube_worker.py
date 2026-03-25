@@ -285,6 +285,10 @@ def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description:
 
     # ---- Audience: scroll down to find it ----
     page.wait_for_timeout(500)
+    # Press Escape FIRST to dismiss any hashtag autocomplete popup in the title field
+    # (YouTube suggests completions like #12 → #12th, #4 → #4k; Tab would accept them)
+    page.keyboard.press("Escape")
+    page.wait_for_timeout(200)
     page.keyboard.press("Tab")  # nudge focus so scroll triggers
 
     audience_selectors_not_kids = [

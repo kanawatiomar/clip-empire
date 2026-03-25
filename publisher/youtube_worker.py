@@ -445,6 +445,7 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
             context = p.chromium.launch_persistent_context(
                 user_data_dir=profile_path,
                 headless=cfg.headless,
+                channel="chrome",
                 args=[
                     "--disable-blink-features=AutomationControlled",
                     "--start-maximized",

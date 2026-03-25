@@ -331,6 +331,20 @@ class QueueWriter:
         """
         _ensure_channel_in_db(channel_name, self.db_path)
 
+        # Dedup: refuse to queue if this render file was already published or queued
+        try:
+            conn = sqlite3.connect(self.db_path)
+            dup = conn.execute(
+                "SELECT job_id FROM publish_jobs WHERE render_path=? AND status IN ('queued','running','succeeded') LIMIT 1",
+                (render_path,)
+            ).fetchone()
+            conn.close()
+            if dup:
+                print(f"[queue] SKIP {channel_name}: render_path already in queue/published ({dup[0][:8]})")
+                return ""
+        except Exception as e:
+            print(f"[queue] dedup check error: {e}")
+
         # Hard daily cap: refuse to queue if today's target is already met
         try:
             import pytz

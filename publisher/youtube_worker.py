@@ -238,10 +238,40 @@ def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description:
     # ---- Title ----
     title_loc = page.locator(SELECTORS["title_textbox"]).first
     title_loc.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
-    title_loc.click()
-    title_loc.press("Control+a")
-    title_loc.type(title, delay=30)
-    print(f"Title set: {title}")
+    page.wait_for_timeout(500)
+
+    # Approach: JS clear + keyboard type (most reliable for YouTube contenteditable)
+    try:
+        title_loc.scroll_into_view_if_needed()
+        title_loc.click()
+        page.wait_for_timeout(300)
+        # Select all & delete via keyboard
+        page.keyboard.press("Control+a")
+        page.wait_for_timeout(200)
+        page.keyboard.press("Delete")
+        page.wait_for_timeout(300)
+        # Type the new title slowly
+        page.keyboard.type(title, delay=50)
+        page.wait_for_timeout(400)
+        # Verify it actually stuck
+        actual = title_loc.inner_text().strip()
+        if actual and actual != title:
+            # Retry: JS set + input event
+            page.evaluate(
+                """([el, text]) => {
+                    el.textContent = text;
+                    el.dispatchEvent(new Event('input', {bubbles: true}));
+                    el.dispatchEvent(new Event('change', {bubbles: true}));
+                }""",
+                [title_loc.element_handle(), title]
+            )
+            page.wait_for_timeout(300)
+        print(f"Title set: {title} (actual: {title_loc.inner_text().strip()[:60]})")
+    except Exception as e:
+        print(f"Title set error: {e}. Falling back to basic type.")
+        title_loc.click()
+        title_loc.press("Control+a")
+        title_loc.type(title, delay=50)
 
     # ---- Description ----
     desc_loc = page.locator(SELECTORS["description_textbox"]).first

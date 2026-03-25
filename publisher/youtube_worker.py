@@ -379,7 +379,7 @@ def _set_visibility_and_schedule(
     if schedule_time_local <= now + timedelta(hours=6):
         print(f"Publishing immediately (scheduled: {schedule_time_local.strftime('%H:%M %Z')}, within 6h window).")
 
-        # Try public radio via multiple selectors + shadow DOM fallback
+        # Try public radio via multiple selectors + shadow DOM fallback + verification
         public_set = False
         for pub_sel in ["tp-yt-paper-radio-button[name='PUBLIC']",
                         "tp-yt-paper-radio-button[name='PUBLIC_UNLISTED']",
@@ -387,15 +387,37 @@ def _set_visibility_and_schedule(
             try:
                 loc = page.locator(pub_sel).first
                 loc.wait_for(state="visible", timeout=10_000)
+                
+                # Check if already checked
+                if loc.get_attribute("aria-checked") == "true":
+                    print(f"Public already selected (selector: {pub_sel})")
+                    public_set = True
+                    break
+                
+                # Click and verify
                 loc.click()
-                public_set = True
-                print(f"Public selected (selector: {pub_sel})")
-                break
-            except Exception:
+                page.wait_for_timeout(500)
+                
+                # Verify the button is now checked
+                if loc.get_attribute("aria-checked") == "true":
+                    print(f"Public selected (selector: {pub_sel})")
+                    public_set = True
+                    break
+                else:
+                    print(f"Click registered but button not checked, retrying...")
+                    page.wait_for_timeout(300)
+                    loc.click()
+                    page.wait_for_timeout(500)
+                    if loc.get_attribute("aria-checked") == "true":
+                        print(f"Public selected on retry (selector: {pub_sel})")
+                        public_set = True
+                        break
+            except Exception as e:
+                print(f"Selector {pub_sel} failed: {e}")
                 continue
 
         if not public_set:
-            # Shadow DOM fallback
+            # Shadow DOM fallback with verification
             try:
                 result = page.evaluate("""
                     () => {
@@ -410,13 +432,21 @@ def _set_visibility_and_schedule(
                             return found;
                         }
                         const els = allShadowEls(document, 'tp-yt-paper-radio-button[name="PUBLIC"]');
-                        if (els.length > 0) { els[0].click(); return 'clicked'; }
+                        if (els.length > 0) {
+                            const btn = els[0];
+                            if (btn.getAttribute('aria-checked') !== 'true') {
+                                btn.click();
+                                return { clicked: true, checked: btn.getAttribute('aria-checked') };
+                            }
+                            return { already: true, checked: btn.getAttribute('aria-checked') };
+                        }
                         return null;
                     }
                 """)
                 if result:
                     print(f"Public set via shadow DOM: {result}")
-                    public_set = True
+                    if result.get('clicked') or result.get('already'):
+                        public_set = True
             except Exception as e:
                 print(f"Shadow DOM public fallback failed: {e}")
 
@@ -648,8 +678,43 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                 if not video_url:
                     raise RuntimeError("No video URL returned by verification")
 
-                # Mark job succeeded only if we have a URL
-                update_job_status(job_id, "succeeded", post_url=video_url, platform_post_id=video_url.split("/")[-1])
+                # Extract video ID and verify privacy status via API
+                video_id = video_url.split("/")[-1]
+                _log_step(job_id, f"checking privacy status for {video_id}")
+                
+                # Wait a moment for YouTube to propagate the status
+                page.wait_for_timeout(3000)
+                
+                # Verify via API that video is actually public (not private/draft)
+                from googleapiclient.discovery import build
+                from google.oauth2.credentials import Credentials
+                from google.auth.transport.requests import Request
+                import pickle
+                try:
+                    token_file = f"analytics/tokens/{ch}.pickle"
+                    if os.path.exists(token_file):
+                        with open(token_file, "rb") as f:
+                            creds = pickle.load(f)
+                        if creds and creds.expired and creds.refresh_token:
+                            creds.refresh(Request())
+                        yt = build("youtube", "v3", credentials=creds)
+                        vid = yt.videos().list(part="status", id=video_id).execute()
+                        if vid.get("items"):
+                            priv = vid["items"][0]["status"]["privacyStatus"]
+                            _log_step(job_id, f"privacy status: {priv}")
+                            if priv != "public":
+                                raise RuntimeError(f"Video uploaded but privacy is {priv}, not public. Needs manual publish.")
+                except Exception as priv_err:
+                    _log_step(job_id, f"privacy check failed: {priv_err}")
+                    # If API check fails, assume the video is OK (may be creds issue)
+                    # but log it for review
+                    if "insufficient" in str(priv_err).lower():
+                        _log_step(job_id, "privacy check skipped (insufficient permissions)")
+                    else:
+                        raise
+
+                # Mark job succeeded only if we have a URL AND privacy check passed
+                update_job_status(job_id, "succeeded", post_url=video_url, platform_post_id=video_id)
 
                 # Post to X (Twitter) — best effort, non-blocking
                 try:

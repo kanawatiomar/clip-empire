@@ -7,7 +7,7 @@ from datetime import datetime, timedelta, timezone as dt_timezone
 from playwright.sync_api import sync_playwright, Page, expect, TimeoutError as PWTimeout
 import pytz # Will need 'pip install pytz'
 
-from publisher.queue import get_next_job, update_job_status, fail_job
+from publisher.db_queue import get_next_job, update_job_status, fail_job
 from accounts.channel_definitions import CHANNELS # To get made_for_kids status
 
 LOGS_DIR = os.path.join(os.getcwd(), "logs")
@@ -453,6 +453,18 @@ def _set_visibility_and_schedule(
         page.locator(SELECTORS["publish_button"]).wait_for(state="visible", timeout=cfg.nav_timeout_ms)
         page.locator(SELECTORS["publish_button"]).click()
         print("Clicked Publish.")
+
+        # Handle "We're still checking your content" warning modal
+        # YouTube shows this when content checks aren't complete yet — must click "Publish anyway"
+        try:
+            publish_anyway = page.locator("ytcp-button:has-text('Publish anyway'), button:has-text('Publish anyway')").first
+            publish_anyway.wait_for(state="visible", timeout=5000)
+            publish_anyway.click()
+            print("Clicked 'Publish anyway' (content check warning dismissed).")
+            page.wait_for_timeout(1000)
+        except Exception:
+            pass  # No modal — that's fine
+
         return "published"
     else:
         print(f"Scheduling for {schedule_time_local.strftime('%Y-%m-%d %H:%M %Z')}")
@@ -682,36 +694,46 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                 video_id = video_url.split("/")[-1]
                 _log_step(job_id, f"checking privacy status for {video_id}")
                 
-                # Wait a moment for YouTube to propagate the status
-                page.wait_for_timeout(3000)
-                
                 # Verify via API that video is actually public (not private/draft)
+                # Retry up to 3x with increasing delays — YouTube processing can lag
                 from googleapiclient.discovery import build
-                from google.oauth2.credentials import Credentials
                 from google.auth.transport.requests import Request
                 import pickle
-                try:
-                    token_file = f"analytics/tokens/{ch}.pickle"
-                    if os.path.exists(token_file):
+                
+                privacy_verified = False
+                token_file = f"analytics/tokens/{ch}.pickle"
+                if os.path.exists(token_file):
+                    try:
                         with open(token_file, "rb") as f:
                             creds = pickle.load(f)
                         if creds and creds.expired and creds.refresh_token:
                             creds.refresh(Request())
                         yt = build("youtube", "v3", credentials=creds)
-                        vid = yt.videos().list(part="status", id=video_id).execute()
-                        if vid.get("items"):
-                            priv = vid["items"][0]["status"]["privacyStatus"]
-                            _log_step(job_id, f"privacy status: {priv}")
-                            if priv != "public":
-                                raise RuntimeError(f"Video uploaded but privacy is {priv}, not public. Needs manual publish.")
-                except Exception as priv_err:
-                    _log_step(job_id, f"privacy check failed: {priv_err}")
-                    # If API check fails, assume the video is OK (may be creds issue)
-                    # but log it for review
-                    if "insufficient" in str(priv_err).lower():
-                        _log_step(job_id, "privacy check skipped (insufficient permissions)")
-                    else:
-                        raise
+                        
+                        for check_attempt in range(4):
+                            wait_s = [3, 8, 15, 25][check_attempt]
+                            page.wait_for_timeout(wait_s * 1000)
+                            vid = yt.videos().list(part="status", id=video_id).execute()
+                            if vid.get("items"):
+                                priv = vid["items"][0]["status"]["privacyStatus"]
+                                _log_step(job_id, f"privacy check {check_attempt+1}/4: {priv}")
+                                if priv == "public":
+                                    privacy_verified = True
+                                    break
+                                elif check_attempt == 3:
+                                    raise RuntimeError(f"Video uploaded but still private after 4 checks. Needs manual publish in YouTube Studio.")
+                            else:
+                                _log_step(job_id, f"privacy check {check_attempt+1}/4: video not found in API yet, retrying...")
+                    except Exception as priv_err:
+                        _log_step(job_id, f"privacy check error: {priv_err}")
+                        if "insufficient" in str(priv_err).lower():
+                            _log_step(job_id, "privacy check skipped (insufficient API scope)")
+                            privacy_verified = True  # Can't verify, assume OK
+                        else:
+                            raise
+                else:
+                    _log_step(job_id, "no API token found, skipping privacy check")
+                    privacy_verified = True
 
                 # Mark job succeeded only if we have a URL AND privacy check passed
                 update_job_status(job_id, "succeeded", post_url=video_url, platform_post_id=video_id)

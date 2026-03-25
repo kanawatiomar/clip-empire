@@ -67,13 +67,21 @@ def _wrap_hook(text: str, max_chars: int = 20) -> tuple[str, int]:
 
 
 def _esc(text: str) -> str:
-    """Escape text for ffmpeg drawtext filter."""
-    return (
+    """Escape text for ffmpeg drawtext filter.
+    
+    Preserves \\n newline markers (used by drawtext for line breaks).
+    """
+    # Temporarily protect \n markers before escaping backslashes
+    placeholder = "\x00NL\x00"
+    text = text.replace(r"\n", placeholder)
+    text = (
         text.replace("\\", "\\\\")
         .replace("'", "\\'")
         .replace(":", "\\:")
         .replace(",", "\\,")
     )
+    # Restore \n markers
+    return text.replace(placeholder, r"\n")
 
 
 class OverlayTransform:

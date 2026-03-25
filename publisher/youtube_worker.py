@@ -743,19 +743,21 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                 update_job_status(job_id, "succeeded", post_url=video_url, platform_post_id=video_id)
 
                 # Post to X (Twitter) — best effort, non-blocking
-                try:
-                    from publisher.x_worker import post_video_tweet, build_tweet_text
-                    render_path = job.get("render_path")
-                    caption = job.get("caption_text", "")
-                    creator = job.get("creator", "")  # May be in job; if not, try platform_variants
-                    
-                    if render_path and os.path.exists(render_path):
-                        tweet_text = build_tweet_text(caption, creator=creator)
-                        x_url = post_video_tweet(render_path, tweet_text)
-                        if x_url:
-                            print(f"[X] Posted: {x_url}")
-                except Exception as x_exc:
-                    print(f"[X] Cross-post skipped (non-fatal): {x_exc}")
+                # Only post to X for arc_highlightz (that's the account with X creds configured)
+                if ch == "arc_highlightz":
+                    try:
+                        from publisher.x_worker import post_video_tweet, build_tweet_text
+                        render_path = job.get("render_path")
+                        caption = job.get("caption_text", "")
+                        creator = job.get("creator", "")  # May be in job; if not, try platform_variants
+                        
+                        if render_path and os.path.exists(render_path):
+                            tweet_text = build_tweet_text(caption, creator=creator)
+                            x_url = post_video_tweet(render_path, tweet_text)
+                            if x_url:
+                                print(f"[X] Posted: {x_url}")
+                    except Exception as x_exc:
+                        print(f"[X] Cross-post skipped (non-fatal): {x_exc}")
 
                 context.close()
                 return 0

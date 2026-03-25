@@ -152,19 +152,52 @@ def get_x_account(channel_name: str) -> Optional[str]:
 
 # ── Caption builder ──────────────────────────────────────────────────────────
 
-def build_tweet_text(caption: str, hashtags: Optional[str] = None) -> str:
-    """Build tweet text from caption + hashtags, max 280 chars."""
-    tags = ""
-    if hashtags:
-        tag_list = [h if h.startswith("#") else f"#{h}"
-                    for h in hashtags.replace(",", " ").split()[:4]]
-        tags = " " + " ".join(tag_list)
+# Creator-specific hashtags (no game-specific tags that might be wrong)
+_CREATOR_HASHTAGS = {
+    "tfue":            "#Tfue #TwitchClips #Gaming #GamingClips #Clutch",
+    "cloakzy":         "#Cloakzy #TwitchClips #Gaming #GamingClips",
+    "shinyatheninja":  "#Shinya #TwitchClips #Gaming #GamingClips",
+    "myth":            "#Myth #TwitchClips #Gaming #GamingClips",
+    "bugha":           "#Bugha #TwitchClips #Gaming #GamingClips",
+}
+_DEFAULT_HASHTAGS = "#TwitchClips #Gaming #GamingClips #Clutch"
 
-    base = caption or "🎮 Check this out"
-    # Trim base to fit hashtags in 280
-    max_base = 280 - len(tags) - 1
+
+def build_tweet_text(caption: str, hashtags: Optional[str] = None, creator: str = "") -> str:
+    """Build Twitter-native tweet text — punchy, with creator-appropriate hashtags."""
+    import random
+
+    openers = [
+        "this clip is actually insane 💀",
+        "bro said hold on real quick 😭",
+        "no way he just did that 🎮",
+        "the lobby was NOT ready",
+        "this one broke me 💀",
+        "ok this is actually crazy",
+        "chat would've lost it 🔥",
+        "lowkey one of the best clips i've seen",
+        "this guy is cooked 💀",
+        "not even close lmaooo",
+        "the timing on this 😭",
+        "someone call 911",
+    ]
+
+    opener = random.choice(openers)
+
+    # Add creator mention
+    creator_tag = ""
+    if creator and creator.lower() != "unknown":
+        creator_tag = f" (via {creator.capitalize()})"
+
+    # Use creator-specific hashtags, not generic Fortnite tags
+    creator_key = (creator or "").lower().strip()
+    tag_str = _CREATOR_HASHTAGS.get(creator_key, _DEFAULT_HASHTAGS)
+    tags = f"\n\n{tag_str}"
+
+    base = f"{opener}{creator_tag}"
+    max_base = 280 - len(tags)
     if len(base) > max_base:
-        base = base[:max_base - 1] + "…"
+        base = base[:max_base - 1] + "..."
     return base + tags
 
 

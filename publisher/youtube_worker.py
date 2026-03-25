@@ -374,21 +374,94 @@ def _set_visibility_and_schedule(
     now = datetime.now(tz)
     schedule_time_local = schedule_at.astimezone(tz)
 
-    # Publish immediately if scheduled time is in the past or within 5 minutes
-    if schedule_time_local <= now + timedelta(minutes=5):
-        print("Publishing immediately (schedule time is past/soon).")
-        pub_loc = page.locator(SELECTORS["public_radio"])
-        pub_loc.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
-        pub_loc.click()
+    # Publish immediately if scheduled time is in the past or within 6 hours
+    # (scheduling via Studio is unreliable; simpler to just go live promptly)
+    if schedule_time_local <= now + timedelta(hours=6):
+        print(f"Publishing immediately (scheduled: {schedule_time_local.strftime('%H:%M %Z')}, within 6h window).")
+
+        # Try public radio via multiple selectors + shadow DOM fallback
+        public_set = False
+        for pub_sel in ["tp-yt-paper-radio-button[name='PUBLIC']",
+                        "tp-yt-paper-radio-button[name='PUBLIC_UNLISTED']",
+                        "#privacy-radios tp-yt-paper-radio-button"]:
+            try:
+                loc = page.locator(pub_sel).first
+                loc.wait_for(state="visible", timeout=10_000)
+                loc.click()
+                public_set = True
+                print(f"Public selected (selector: {pub_sel})")
+                break
+            except Exception:
+                continue
+
+        if not public_set:
+            # Shadow DOM fallback
+            try:
+                result = page.evaluate("""
+                    () => {
+                        function allShadowEls(root, sel) {
+                            let found = [];
+                            try {
+                                found = found.concat(Array.from(root.querySelectorAll(sel)));
+                                for (const el of root.querySelectorAll('*')) {
+                                    if (el.shadowRoot) found = found.concat(allShadowEls(el.shadowRoot, sel));
+                                }
+                            } catch(e) {}
+                            return found;
+                        }
+                        const els = allShadowEls(document, 'tp-yt-paper-radio-button[name="PUBLIC"]');
+                        if (els.length > 0) { els[0].click(); return 'clicked'; }
+                        return null;
+                    }
+                """)
+                if result:
+                    print(f"Public set via shadow DOM: {result}")
+                    public_set = True
+            except Exception as e:
+                print(f"Shadow DOM public fallback failed: {e}")
+
         page.locator(SELECTORS["publish_button"]).wait_for(state="visible", timeout=cfg.nav_timeout_ms)
         page.locator(SELECTORS["publish_button"]).click()
         print("Clicked Publish.")
         return "published"
     else:
         print(f"Scheduling for {schedule_time_local.strftime('%Y-%m-%d %H:%M %Z')}")
-        sched_loc = page.locator(SELECTORS["schedule_radio"])
-        sched_loc.wait_for(state="visible", timeout=cfg.nav_timeout_ms)
-        sched_loc.click()
+
+        # Try schedule radio with shadow DOM fallback
+        sched_set = False
+        for sched_sel in ["tp-yt-paper-radio-button[name='SCHEDULE']",
+                          "tp-yt-paper-radio-button[name='SCHEDULED']"]:
+            try:
+                loc = page.locator(sched_sel).first
+                loc.wait_for(state="visible", timeout=10_000)
+                loc.click()
+                sched_set = True
+                break
+            except Exception:
+                continue
+        if not sched_set:
+            try:
+                page.evaluate("""
+                    () => {
+                        function allShadowEls(root, sel) {
+                            let found = [];
+                            try { found = found.concat(Array.from(root.querySelectorAll(sel)));
+                                for (const el of root.querySelectorAll('*')) {
+                                    if (el.shadowRoot) found = found.concat(allShadowEls(el.shadowRoot, sel));
+                                } } catch(e) {}
+                            return found;
+                        }
+                        const els = allShadowEls(document, 'tp-yt-paper-radio-button[name="SCHEDULE"]');
+                        if (els.length > 0) { els[0].click(); return 'clicked'; }
+                    }
+                """)
+                sched_set = True
+            except Exception:
+                pass
+        if not sched_set:
+            print("WARN: schedule radio not found, falling back to publish immediately")
+            page.locator(SELECTORS["publish_button"]).click()
+            return "published"
         page.wait_for_timeout(500)
 
         # Date input
@@ -581,11 +654,18 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                 context.close()
                 return 0
 
-            except Exception:
+            except Exception as inner_exc:
+                # Print primary exception BEFORE trying to save artifacts
+                import traceback
+                print(f"[ERROR] Primary exception: {inner_exc}")
+                traceback.print_exc()
                 # Save artifacts BEFORE playwright stops
                 if page is not None:
-                    _save_failure_artifacts(page, job_id)
-                raise
+                    try:
+                        _save_failure_artifacts(page, job_id)
+                    except Exception as art_exc:
+                        print(f"[WARN] Failed to save artifacts: {art_exc}")
+                raise inner_exc
 
     except Exception as e:
         error_class = "unknown_error"

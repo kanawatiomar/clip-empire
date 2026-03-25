@@ -62,12 +62,26 @@ class DedupTracker:
 
     @staticmethod
     def _url_hash(url: str) -> str:
-        """Normalize a URL to a dedup key.
+        """Normalize a URL to a stable dedup key.
 
-        Strips query params that don't affect identity (like ?si= tracking).
+        For Twitch clips: extracts the clip slug (stable across URL variants).
+        Two URL formats refer to the same clip:
+          https://www.twitch.tv/{channel}/clip/{slug}
+          https://clips.twitch.tv/{slug}
+        We hash the slug only so both formats dedup correctly.
         """
-        # Strip common tracking params
         import urllib.parse as up
+        import re
+        url = (url or "").strip()
+        # Extract Twitch clip slug
+        m = re.search(r'/clip/([A-Za-z0-9_-]+)', url)
+        if not m:
+            # Try clips.twitch.tv/{slug} format
+            m = re.search(r'clips\.twitch\.tv/([A-Za-z0-9_-]+)', url)
+        if m:
+            slug = m.group(1)
+            return url_fingerprint("twitch:clip:" + slug)[:16]
+        # Fallback: normalize URL (strip query/fragment/trailing slash)
         try:
             parsed = up.urlparse(url)
             qs = up.parse_qs(parsed.query)

@@ -286,17 +286,71 @@ def _fill_details(page: Page, cfg: YouTubeWorkerConfig, title: str, description:
     # ---- Audience: scroll down to find it ----
     page.wait_for_timeout(500)
     page.keyboard.press("Tab")  # nudge focus so scroll triggers
-    try:
-        audience_radio_sel = SELECTORS["made_for_kids_radio"] if made_for_kids else SELECTORS["not_made_for_kids_radio"]
-        audience_loc = page.locator(audience_radio_sel)
-        audience_loc.scroll_into_view_if_needed(timeout=10_000)
-        is_checked = audience_loc.get_attribute("aria-checked")
-        if is_checked != "true":
-            audience_loc.click()
-        status = "made for kids" if made_for_kids else "not made for kids"
-        print(f"Audience set: {status}")
-    except Exception as e:
-        print(f"Could not set audience radio (non-fatal, defaulting to YouTube setting): {e}")
+
+    audience_selectors_not_kids = [
+        "tp-yt-paper-radio-button[name='VIDEO_MADE_FOR_KIDS_NOT_MFK']",
+        "tp-yt-paper-radio-button[name='VIDEO_NOT_MADE_FOR_KIDS']",
+        "tp-yt-paper-radio-button[name='NOT_MADE_FOR_KIDS']",
+    ]
+    audience_selectors_kids = [
+        "tp-yt-paper-radio-button[name='VIDEO_MADE_FOR_KIDS_MFK']",
+        "tp-yt-paper-radio-button[name='VIDEO_MADE_FOR_KIDS']",
+        "tp-yt-paper-radio-button[name='MADE_FOR_KIDS']",
+    ]
+    target_selectors = audience_selectors_kids if made_for_kids else audience_selectors_not_kids
+
+    audience_set = False
+    for sel in target_selectors:
+        try:
+            loc = page.locator(sel).first
+            loc.scroll_into_view_if_needed(timeout=5_000)
+            page.wait_for_timeout(500)
+            if loc.get_attribute("aria-checked") != "true":
+                loc.click()
+                page.wait_for_timeout(500)
+            if loc.get_attribute("aria-checked") == "true":
+                status = "made for kids" if made_for_kids else "not made for kids"
+                print(f"Audience set: {status} (selector: {sel})")
+                audience_set = True
+                break
+        except Exception:
+            continue
+
+    if not audience_set:
+        # JS fallback — recursive shadow DOM search
+        try:
+            result = page.evaluate("""
+                () => {
+                    function allShadowEls(root, sel) {
+                        let found = [];
+                        try {
+                            found = found.concat(Array.from(root.querySelectorAll(sel)));
+                            for (const el of root.querySelectorAll('*')) {
+                                if (el.shadowRoot) found = found.concat(allShadowEls(el.shadowRoot, sel));
+                            }
+                        } catch(e) {}
+                        return found;
+                    }
+                    const notKidsNames = ['VIDEO_MADE_FOR_KIDS_NOT_MFK','VIDEO_NOT_MADE_FOR_KIDS','NOT_MADE_FOR_KIDS'];
+                    for (const name of notKidsNames) {
+                        const els = allShadowEls(document, 'tp-yt-paper-radio-button[name="' + name + '"]');
+                        if (els.length > 0) { els[0].click(); return 'clicked:' + name; }
+                    }
+                    const all = allShadowEls(document, 'tp-yt-paper-radio-button');
+                    const notKids = all.find(r => { const n = r.getAttribute('name') || ''; return n.includes('NOT') || n.includes('not'); });
+                    if (notKids) { notKids.click(); return 'clicked-fallback:' + notKids.getAttribute('name'); }
+                    return null;
+                }
+            """)
+            if result:
+                print(f"Audience set via shadow DOM JS: {result}")
+                audience_set = True
+                page.wait_for_timeout(500)
+        except Exception as e:
+            print(f"JS audience shadow fallback failed: {e}")
+
+    if not audience_set:
+        print("WARNING: Could not set audience - video may land as Draft. Check Studio manually.")
 
     # ---- Next → Video elements ----
     page.locator(SELECTORS["next_button"]).click()

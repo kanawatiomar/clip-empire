@@ -1,4 +1,4 @@
-﻿"""Writes processed clips into the publish_jobs queue.
+"""Writes processed clips into the publish_jobs queue.
 
 Creates the necessary platform_variants record (so foreign key is satisfied)
 then calls add_publish_job() from publisher/queue.py.
@@ -18,7 +18,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Optional, List
 
-from publisher.queue import add_publish_job
+from publisher.job_queue import add_publish_job
 from engine.config.templates import get_title, get_hashtags
 from engine.transform.ab import choose_variant
 from engine.config.series import build_series_title
@@ -27,7 +27,7 @@ from accounts.channel_definitions import CHANNELS
 
 DATABASE_PATH = "data/clip_empire.db"
 
-# Spread posts across these hours (Denver time → converted to UTC for storage)
+# Spread posts across these hours (Denver time ? converted to UTC for storage)
 POST_WINDOW_START_H = 7   # earliest possible post (7am local)
 POST_WINDOW_END_H = 23    # latest possible post (11pm local)
 MAX_JOBS_PER_SLOT = 3     # max uploads across all channels per 30-min slot
@@ -36,13 +36,13 @@ MAX_JOBS_PER_SLOT = 3     # max uploads across all channels per 30-min slot
 # for this many hours, giving Omar time to review before they go live.
 REVIEW_BUFFER_HOURS = 4
 
-# ── Peak posting windows by niche ─────────────────────────────────────────────
+# -- Peak posting windows by niche ---------------------------------------------
 # Format: list of (hour_start, hour_end) tuples in local time (America/Denver)
 # Based on YouTube Shorts peak engagement research:
-#   Gaming:  teen/young adult audience — late morning, afternoon, evening
-#   Finance: working professionals — commute times + lunch + evening
-#   Business: entrepreneurs — morning focus, evening
-#   Tech/AI: broad — throughout day, peaks evening
+#   Gaming:  teen/young adult audience � late morning, afternoon, evening
+#   Finance: working professionals � commute times + lunch + evening
+#   Business: entrepreneurs � morning focus, evening
+#   Tech/AI: broad � throughout day, peaks evening
 #   Fitness: morning workout crowd + evening
 #   Food:    lunch + evening scroll
 #   True Crime: evening/late night
@@ -57,7 +57,7 @@ NICHE_PEAK_WINDOWS: dict[str, list[tuple[int, int]]] = {
     "Experimental": [(9, 11), (13, 15), (19, 22)],
 }
 
-# Niche → channel mapping (for scheduler)
+# Niche ? channel mapping (for scheduler)
 CHANNEL_NICHE_MAP: dict[str, str] = {
     "arc_highlightz":   "Gaming",
     "fomo_highlights":  "Gaming",
@@ -105,7 +105,7 @@ def _create_dummy_variant(
 ) -> str:
     """Create a minimal platform_variants record for the foreign key requirement.
 
-    In the full pipeline, platform_variants would point to a clip_asset → segment → source.
+    In the full pipeline, platform_variants would point to a clip_asset ? segment ? source.
     For now, we create a standalone variant with a dummy clip_id.
     """
     conn = sqlite3.connect(db_path)
@@ -183,7 +183,7 @@ def _next_schedule_time(channel_name: str, db_path: str = DATABASE_PATH) -> date
     niche = CHANNEL_NICHE_MAP.get(channel_name, "Experimental")
 
     # Get daily target for this channel
-    daily_target = 3  # conservative default — better distribution per video
+    daily_target = 3  # conservative default � better distribution per video
     try:
         conn = sqlite3.connect(db_path)
         row = conn.execute(
@@ -267,7 +267,7 @@ def _next_schedule_time(channel_name: str, db_path: str = DATABASE_PATH) -> date
             continue
         return candidate
 
-    # All peak slots taken — find next available slot after last existing
+    # All peak slots taken � find next available slot after last existing
     if last_slot:
         next_time = last_slot + timedelta(minutes=min_gap_minutes)
     else:
@@ -392,7 +392,7 @@ class QueueWriter:
             from engine.config.series import classify_theme, next_episode
             theme = classify_theme(clip_title or "", niche, channel_name=channel_name)
             ep_num = next_episode(channel_name, creator, theme, self.db_path)
-            # e.g. "#ShroudBestPlays4" — no space, YouTube hashtag format
+            # e.g. "#ShroudBestPlays4" � no space, YouTube hashtag format
             series_hashtag = f"#{creator.capitalize().replace(' ', '')}{theme.replace(' ', '')}{ep_num}"
 
         # 3. Title: LLM curiosity-bait, else series title, else A/B template
@@ -402,7 +402,7 @@ class QueueWriter:
                 auto_hook = caption.split(":")[0].strip()[:80]
                 ab_label = "L"   # L = LLM
             else:
-                # No LLM — use series title as primary
+                # No LLM � use series title as primary
                 series_name = f"{creator.capitalize()} {theme} #{ep_num}"
                 caption = series_name
                 auto_hook = caption.split("#")[0].strip()[:80]

@@ -407,30 +407,48 @@ CHANNEL_SOURCES: dict = {
         #   take breaks or top clips from recent days are already used.
         # range=30d → Twitch serves clips sorted by recent popularity (not all-time top)
         # max_per_run=3 → 3 clips per creator per day (5 creators = 15 max/day)
-        # min_views=500 — 2000 threshold exhausted entire 30d pool; 500 still filters junk
-        # Added Myth, Bugha, Benjyfishy as additional Fortnite creators for supply depth
+        # min_views=100 — lowered from 500; pool was exhausting too fast
+        # range=30d — recent/trending clips; falls back to range=all for depth
+        # Added Myth, Bugha, Benjyfishy, Ninja as additional creators for supply depth
+        # PRIORITY 1: Recent 30-day window (fresh clips)
         {"platform": "twitch", "url": "https://www.twitch.tv/tfue/clips?filter=clips&range=30d",
          "type": "channel", "priority": 1, "max_age_days": 30,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 3,
-         "crop_anchor": "right", "min_views": 500},
+         "crop_anchor": "right", "min_views": 100},
         {"platform": "twitch", "url": "https://www.twitch.tv/cloakzy/clips?filter=clips&range=30d",
          "type": "channel", "priority": 1, "max_age_days": 30,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 3,
-         "crop_anchor": "left", "min_views": 500},
+         "crop_anchor": "left", "min_views": 100},
         {"platform": "twitch", "url": "https://www.twitch.tv/myth/clips?filter=clips&range=30d",
          "type": "channel", "priority": 2, "max_age_days": 30,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 3,
-         "crop_anchor": "right", "min_views": 500},
+         "crop_anchor": "right", "min_views": 100},
         {"platform": "twitch", "url": "https://www.twitch.tv/shinyatheninja/clips?filter=clips&range=30d",
          "type": "channel", "priority": 2, "max_age_days": 30,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 3,
-         "crop_anchor": "right", "min_views": 500},
+         "crop_anchor": "right", "min_views": 100},
         {"platform": "twitch", "url": "https://www.twitch.tv/taxi2g/clips?filter=clips&range=30d",
          "type": "channel", "priority": 2, "max_age_days": 30,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 3,
-         "crop_anchor": "left", "min_views": 500},
-        # YouTube search sources REMOVED — only Twitch clips allowed for arc_highlightz
-        # (YouTube search was pulling random non-gaming content like Arju Khatun videos)
+         "crop_anchor": "left", "min_views": 100},
+        # PRIORITY 3: Additional streamers for supply depth
+        {"platform": "twitch", "url": "https://www.twitch.tv/ninja/clips?filter=clips&range=30d",
+         "type": "channel", "priority": 3, "max_age_days": 30,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 3,
+         "crop_anchor": "right", "min_views": 100},
+        {"platform": "twitch", "url": "https://www.twitch.tv/bugha/clips?filter=clips&range=30d",
+         "type": "channel", "priority": 3, "max_age_days": 30,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 3,
+         "crop_anchor": "right", "min_views": 100},
+        # PRIORITY 4: All-time top clips fallback (deep pool, used when 30d pool exhausted)
+        {"platform": "twitch", "url": "https://www.twitch.tv/tfue/clips?filter=clips&range=all",
+         "type": "channel", "priority": 4, "max_age_days": 3650,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 3,
+         "crop_anchor": "right", "min_views": 5000},
+        {"platform": "twitch", "url": "https://www.twitch.tv/cloakzy/clips?filter=clips&range=all",
+         "type": "channel", "priority": 4, "max_age_days": 3650,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 3,
+         "crop_anchor": "left", "min_views": 5000},
     ],
 
     "viral_recaps": [

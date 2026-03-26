@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-26T13:18:03.339606Z",
+  "generated_at": "2026-03-26T14:18:03.788401Z",
   "repo_root": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire",
   "database_path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\data\\clip_empire.db",
   "health_score": {
@@ -20,9 +20,9 @@
       "target_today": 31,
       "pipeline_health_ratio": 0.16,
       "errors_today": 0,
-      "total_jobs_today": 25,
+      "total_jobs_today": 31,
       "error_rate": 0.0,
-      "queue_depth": 39,
+      "queue_depth": 44,
       "active_channels": 3,
       "total_channels": 13,
       "fresh_sources": 0,
@@ -33,17 +33,107 @@
     "active_channels": 3,
     "total_channels": 13,
     "jobs_today": {
-      "total": 25,
-      "queued": 20,
+      "total": 31,
+      "queued": 26,
       "running": 0,
       "succeeded": 5,
       "failed": 0,
       "cancelled": 0
     },
-    "render_queue_depth": 39,
-    "last_updated": "2026-03-26T13:18:03.339606Z"
+    "render_queue_depth": 44,
+    "last_updated": "2026-03-26T14:18:03.788401Z"
   },
   "queue_monitor": [
+    {
+      "job_id": "525fc773-1f36-463c-b25c-8261ae8a8c19",
+      "job_id_short": "525fc773",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "attempt": 1,
+      "created_at": "2026-03-26T08:00:43.143598",
+      "created_at_display": "2026-03-26 08:00",
+      "created_ago": "6h",
+      "updated_at": "2026-03-26T08:02:10.011658",
+      "scheduled_for": "2026-03-26 09:00",
+      "error": "('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})",
+      "has_error": true,
+      "post_url": null
+    },
+    {
+      "job_id": "76f25ef4-25b0-4a8e-9bbe-f87fe40409c7",
+      "job_id_short": "76f25ef4",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-26T08:01:15.327499",
+      "created_at_display": "2026-03-26 08:01",
+      "created_ago": "6h",
+      "updated_at": "2026-03-26T08:01:15.327499",
+      "scheduled_for": "2026-03-26 09:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "1fd9c160-c4d5-46ae-83f4-0fdb4e98bc78",
+      "job_id_short": "1fd9c160",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-26T08:01:07.982859",
+      "created_at_display": "2026-03-26 08:01",
+      "created_ago": "6h",
+      "updated_at": "2026-03-26T08:01:07.982859",
+      "scheduled_for": "2026-03-26 09:01",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "fc8ea64d-9904-4b25-be07-5f427a1d73f5",
+      "job_id_short": "fc8ea64d",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-26T08:00:58.679029",
+      "created_at_display": "2026-03-26 08:00",
+      "created_ago": "6h",
+      "updated_at": "2026-03-26T08:00:58.679029",
+      "scheduled_for": "2026-03-26 09:00",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "2ee9a5af-cc3f-4eec-b0cf-b4ef8721794d",
+      "job_id_short": "2ee9a5af",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-26T08:00:50.833693",
+      "created_at_display": "2026-03-26 08:00",
+      "created_ago": "6h",
+      "updated_at": "2026-03-26T08:00:50.833693",
+      "scheduled_for": "2026-03-26 09:00",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "916791fc-d055-4bb4-849b-e57b103b0d44",
+      "job_id_short": "916791fc",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "attempt": 2,
+      "created_at": "2026-03-24T16:00:17.659947",
+      "created_at_display": "2026-03-24 16:00",
+      "created_ago": "1d",
+      "updated_at": "2026-03-26T07:32:11.223259",
+      "scheduled_for": "2026-03-24 17:00",
+      "error": "('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})",
+      "has_error": true,
+      "post_url": null
+    },
     {
       "job_id": "8ae126de-b594-4fe9-911d-79e10d87a8db",
       "job_id_short": "8ae126de",
@@ -52,7 +142,7 @@
       "attempt": 0,
       "created_at": "2026-03-26T01:07:16.275630",
       "created_at_display": "2026-03-26 01:07",
-      "created_ago": "12h",
+      "created_ago": "13h",
       "updated_at": "2026-03-26T07:04:15.656187",
       "scheduled_for": "2026-03-26 11:00",
       "error": null,
@@ -82,7 +172,7 @@
       "attempt": 0,
       "created_at": "2026-03-26T01:06:30.425921",
       "created_at_display": "2026-03-26 01:06",
-      "created_ago": "12h",
+      "created_ago": "13h",
       "updated_at": "2026-03-26T06:04:57.762518",
       "scheduled_for": "2026-03-26 10:00",
       "error": null,
@@ -97,7 +187,7 @@
       "attempt": 1,
       "created_at": "2026-03-26T03:08:49.550605",
       "created_at_display": "2026-03-26 03:08",
-      "created_ago": "10h",
+      "created_ago": "11h",
       "updated_at": "2026-03-26T05:32:36.824153",
       "scheduled_for": "2026-03-26 09:00",
       "error": "('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})",
@@ -112,7 +202,7 @@
       "attempt": 0,
       "created_at": "2026-03-26T00:14:12.192464",
       "created_at_display": "2026-03-26 00:14",
-      "created_ago": "13h",
+      "created_ago": "14h",
       "updated_at": "2026-03-26T05:03:10.657695",
       "scheduled_for": "2026-03-26 09:00",
       "error": null,
@@ -142,7 +232,7 @@
       "attempt": 0,
       "created_at": "2026-03-26T04:06:46.677692",
       "created_at_display": "2026-03-26 04:06",
-      "created_ago": "9h",
+      "created_ago": "10h",
       "updated_at": "2026-03-26T04:06:46.677692",
       "scheduled_for": "2026-03-26 19:00",
       "error": null,
@@ -157,7 +247,7 @@
       "attempt": 0,
       "created_at": "2026-03-26T04:06:11.345296",
       "created_at_display": "2026-03-26 04:06",
-      "created_ago": "9h",
+      "created_ago": "10h",
       "updated_at": "2026-03-26T04:06:11.345296",
       "scheduled_for": "2026-03-26 18:00",
       "error": null,
@@ -172,7 +262,7 @@
       "attempt": 0,
       "created_at": "2026-03-26T04:05:28.909452",
       "created_at_display": "2026-03-26 04:05",
-      "created_ago": "9h",
+      "created_ago": "10h",
       "updated_at": "2026-03-26T04:05:28.909452",
       "scheduled_for": "2026-03-26 18:00",
       "error": null,
@@ -187,7 +277,7 @@
       "attempt": 0,
       "created_at": "2026-03-26T00:13:38.948671",
       "created_at_display": "2026-03-26 00:13",
-      "created_ago": "13h",
+      "created_ago": "14h",
       "updated_at": "2026-03-26T04:02:36.165933",
       "scheduled_for": "2026-03-26 08:00",
       "error": null,
@@ -217,7 +307,7 @@
       "attempt": 0,
       "created_at": "2026-03-26T03:08:10.567734",
       "created_at_display": "2026-03-26 03:08",
-      "created_ago": "10h",
+      "created_ago": "11h",
       "updated_at": "2026-03-26T03:08:10.567734",
       "scheduled_for": "2026-03-26 18:00",
       "error": null,
@@ -232,7 +322,7 @@
       "attempt": 0,
       "created_at": "2026-03-26T03:06:54.787909",
       "created_at_display": "2026-03-26 03:06",
-      "created_ago": "10h",
+      "created_ago": "11h",
       "updated_at": "2026-03-26T03:06:54.787909",
       "scheduled_for": "2026-03-26 17:00",
       "error": null,
@@ -247,7 +337,7 @@
       "attempt": 0,
       "created_at": "2026-03-26T03:06:00.076557",
       "created_at_display": "2026-03-26 03:06",
-      "created_ago": "10h",
+      "created_ago": "11h",
       "updated_at": "2026-03-26T03:06:00.076557",
       "scheduled_for": "2026-03-26 16:00",
       "error": null,
@@ -262,7 +352,7 @@
       "attempt": 0,
       "created_at": "2026-03-26T00:12:50.806083",
       "created_at_display": "2026-03-26 00:12",
-      "created_ago": "13h",
+      "created_ago": "14h",
       "updated_at": "2026-03-26T03:02:36.498971",
       "scheduled_for": "2026-03-26 07:00",
       "error": null,
@@ -292,7 +382,7 @@
       "attempt": 0,
       "created_at": "2026-03-26T02:07:23.361437",
       "created_at_display": "2026-03-26 02:07",
-      "created_ago": "11h",
+      "created_ago": "12h",
       "updated_at": "2026-03-26T02:07:23.361437",
       "scheduled_for": "2026-03-26 15:00",
       "error": null,
@@ -307,7 +397,7 @@
       "attempt": 0,
       "created_at": "2026-03-26T02:06:25.710809",
       "created_at_display": "2026-03-26 02:06",
-      "created_ago": "11h",
+      "created_ago": "12h",
       "updated_at": "2026-03-26T02:06:25.710809",
       "scheduled_for": "2026-03-26 14:00",
       "error": null,
@@ -322,7 +412,7 @@
       "attempt": 0,
       "created_at": "2026-03-26T02:05:46.914590",
       "created_at_display": "2026-03-26 02:05",
-      "created_ago": "11h",
+      "created_ago": "12h",
       "updated_at": "2026-03-26T02:05:46.914590",
       "scheduled_for": "2026-03-26 13:00",
       "error": null,
@@ -367,7 +457,7 @@
       "attempt": 0,
       "created_at": "2026-03-26T01:08:20.429804",
       "created_at_display": "2026-03-26 01:08",
-      "created_ago": "12h",
+      "created_ago": "13h",
       "updated_at": "2026-03-26T01:08:20.429804",
       "scheduled_for": "2026-03-26 12:00",
       "error": null,
@@ -412,7 +502,7 @@
       "attempt": 2,
       "created_at": "2026-03-25T20:00:44.432176",
       "created_at_display": "2026-03-25 20:00",
-      "created_ago": "17h",
+      "created_ago": "18h",
       "updated_at": "2026-03-26T00:02:05.571018",
       "scheduled_for": "2026-03-25 21:00",
       "error": "('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})",
@@ -427,7 +517,7 @@
       "attempt": 2,
       "created_at": "2026-03-25T16:00:50.733230",
       "created_at_display": "2026-03-25 16:00",
-      "created_ago": "21h",
+      "created_ago": "22h",
       "updated_at": "2026-03-25T23:32:04.986452",
       "scheduled_for": "2026-03-25 17:00",
       "error": "('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})",
@@ -442,7 +532,7 @@
       "attempt": 2,
       "created_at": "2026-03-25T16:00:42.263544",
       "created_at_display": "2026-03-25 16:00",
-      "created_ago": "21h",
+      "created_ago": "22h",
       "updated_at": "2026-03-25T23:02:04.142459",
       "scheduled_for": "2026-03-25 17:00",
       "error": "('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})",
@@ -607,7 +697,7 @@
       "attempt": 0,
       "created_at": "2026-03-25T13:21:25.276958",
       "created_at_display": "2026-03-25 13:21",
-      "created_ago": "23h",
+      "created_ago": "1d",
       "updated_at": "2026-03-25T17:02:51.246690",
       "scheduled_for": "2026-03-25 19:00",
       "error": null,
@@ -652,7 +742,7 @@
       "attempt": 0,
       "created_at": "2026-03-25T13:20:51.885530",
       "created_at_display": "2026-03-25 13:20",
-      "created_ago": "23h",
+      "created_ago": "1d",
       "updated_at": "2026-03-25T15:02:33.948993",
       "scheduled_for": "2026-03-25 15:00",
       "error": null,
@@ -804,21 +894,6 @@
       "created_at_display": "2026-03-24 16:00",
       "created_ago": "1d",
       "updated_at": "2026-03-25T05:02:12.873623",
-      "scheduled_for": "2026-03-24 17:00",
-      "error": "module 'queue' has no attribute 'LifoQueue'",
-      "has_error": true,
-      "post_url": null
-    },
-    {
-      "job_id": "916791fc-d055-4bb4-849b-e57b103b0d44",
-      "job_id_short": "916791fc",
-      "channel": "fomo_highlights",
-      "status": "queued",
-      "attempt": 1,
-      "created_at": "2026-03-24T16:00:17.659947",
-      "created_at_display": "2026-03-24 16:00",
-      "created_ago": "1d",
-      "updated_at": "2026-03-25T04:32:10.613028",
       "scheduled_for": "2026-03-24 17:00",
       "error": "module 'queue' has no attribute 'LifoQueue'",
       "has_error": true,
@@ -1468,81 +1543,6 @@
       "error": null,
       "has_error": false,
       "post_url": "https://youtube.com/shorts/KqP5CVsm6uk"
-    },
-    {
-      "job_id": "fc8c6c13-0a66-48b7-9ea6-b4c7f7ad6916",
-      "job_id_short": "fc8c6c13",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "attempt": 0,
-      "created_at": "2026-03-24T02:31:53.330595",
-      "created_at_display": "2026-03-24 02:31",
-      "created_ago": "2d",
-      "updated_at": "2026-03-24T10:01:27.774748+00:00",
-      "scheduled_for": "2026-03-24 03:31",
-      "error": null,
-      "has_error": false,
-      "post_url": "https://youtube.com/shorts/kY99O8rxh-Q"
-    },
-    {
-      "job_id": "fbed6e29-4b2d-4c49-a58c-dbbbbe303d8f",
-      "job_id_short": "fbed6e29",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "attempt": 0,
-      "created_at": "2026-03-24T02:39:34.321797",
-      "created_at_display": "2026-03-24 02:39",
-      "created_ago": "2d",
-      "updated_at": "2026-03-24T10:01:27.774748+00:00",
-      "scheduled_for": "2026-03-24 03:39",
-      "error": null,
-      "has_error": false,
-      "post_url": "https://youtube.com/shorts/h8omelMZBdc"
-    },
-    {
-      "job_id": "f1d4434b-cfe9-49d4-9c6b-2c61ce59daac",
-      "job_id_short": "f1d4434b",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "attempt": 0,
-      "created_at": "2026-03-24T03:11:01.866082",
-      "created_at_display": "2026-03-24 03:11",
-      "created_ago": "2d",
-      "updated_at": "2026-03-24T10:01:27.774748+00:00",
-      "scheduled_for": "2026-03-24 04:11",
-      "error": null,
-      "has_error": false,
-      "post_url": "https://youtube.com/shorts/KSwgY9OxqRM"
-    },
-    {
-      "job_id": "4dd219dd-4038-4dda-b84d-43326ddeefc6",
-      "job_id_short": "4dd219dd",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "attempt": 0,
-      "created_at": "2026-03-24T03:30:24.255697",
-      "created_at_display": "2026-03-24 03:30",
-      "created_ago": "2d",
-      "updated_at": "2026-03-24T10:01:27.774748+00:00",
-      "scheduled_for": "2026-03-24 04:30",
-      "error": null,
-      "has_error": false,
-      "post_url": "https://youtube.com/shorts/yzkeIOKPb2w"
-    },
-    {
-      "job_id": "4847a7ba-5110-4e42-8fb9-5a52ceffe714",
-      "job_id_short": "4847a7ba",
-      "channel": "viral_recaps",
-      "status": "succeeded",
-      "attempt": 0,
-      "created_at": "2026-03-23T23:37:50.017342",
-      "created_at_display": "2026-03-23 23:37",
-      "created_ago": "2d",
-      "updated_at": "2026-03-24T09:01:19.031710+00:00",
-      "scheduled_for": "2026-03-23 00:20",
-      "error": null,
-      "has_error": false,
-      "post_url": "https://youtube.com/shorts/PmMPoOCvy8g"
     }
   ],
   "queue": {
@@ -1605,7 +1605,7 @@
       "category": "Gaming",
       "target_per_day": 8,
       "published_24h": 0,
-      "queue_depth": 28,
+      "queue_depth": 33,
       "running_jobs": 0,
       "failed_7d": 0,
       "avg_views": 15149,
@@ -6704,7 +6704,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-26 09:22:29",
       "last_fetch_display": "2026-03-26 09:22",
-      "last_fetch_ago": "3h",
+      "last_fetch_ago": "4h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6718,7 +6718,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-26 09:25:56",
       "last_fetch_display": "2026-03-26 09:25",
-      "last_fetch_ago": "3h",
+      "last_fetch_ago": "4h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6760,7 +6760,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-10 14:04:34",
       "last_fetch_display": "2026-03-10 14:04",
-      "last_fetch_ago": "15d",
+      "last_fetch_ago": "16d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6802,7 +6802,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-10 14:06:01",
       "last_fetch_display": "2026-03-10 14:06",
-      "last_fetch_ago": "15d",
+      "last_fetch_ago": "16d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6872,7 +6872,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-26 08:21:08",
       "last_fetch_display": "2026-03-26 08:21",
-      "last_fetch_ago": "4h",
+      "last_fetch_ago": "5h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6914,7 +6914,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-26 06:07:53",
       "last_fetch_display": "2026-03-26 06:07",
-      "last_fetch_ago": "7h",
+      "last_fetch_ago": "8h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.541,
@@ -6942,7 +6942,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-26 11:14:48",
       "last_fetch_display": "2026-03-26 11:14",
-      "last_fetch_ago": "2h",
+      "last_fetch_ago": "3h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6970,7 +6970,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-26 11:09:48",
       "last_fetch_display": "2026-03-26 11:09",
-      "last_fetch_ago": "2h",
+      "last_fetch_ago": "3h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -7138,7 +7138,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-26 10:06:17",
       "last_fetch_display": "2026-03-26 10:06",
-      "last_fetch_ago": "3h",
+      "last_fetch_ago": "4h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.422,
@@ -7150,13 +7150,13 @@
       "source_id": "https://www.twitch.tv/ludwig/clips",
       "source_key": "https://www.twitch.tv/ludwig/clips",
       "platform": "unknown",
-      "last_fetch": "2026-03-26 13:04:57",
-      "last_fetch_display": "2026-03-26 13:04",
+      "last_fetch": "2026-03-26 14:04:52",
+      "last_fetch_display": "2026-03-26 14:04",
       "last_fetch_ago": "13m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.067,
-      "success_count": 14,
+      "error_rate": 0.062,
+      "success_count": 15,
       "failure_count": 1,
       "last_error": "ffmpeg overlay failed: ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev8, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --"
     },
@@ -7164,13 +7164,13 @@
       "source_id": "https://www.twitch.tv/moistcr1tikal/clips",
       "source_key": "https://www.twitch.tv/moistcr1tikal/clips",
       "platform": "unknown",
-      "last_fetch": "2026-03-26 13:05:00",
-      "last_fetch_display": "2026-03-26 13:05",
+      "last_fetch": "2026-03-26 14:04:55",
+      "last_fetch_display": "2026-03-26 14:04",
       "last_fetch_ago": "13m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.053,
-      "success_count": 18,
+      "error_rate": 0.05,
+      "success_count": 19,
       "failure_count": 1,
       "last_error": "ffmpeg overlay failed: ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev8, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --"
     },
@@ -7180,7 +7180,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-26 09:07:01",
       "last_fetch_display": "2026-03-26 09:07",
-      "last_fetch_ago": "4h",
+      "last_fetch_ago": "5h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.25,
@@ -7192,13 +7192,13 @@
       "source_id": "https://www.twitch.tv/nickmercs/clips",
       "source_key": "https://www.twitch.tv/nickmercs/clips",
       "platform": "unknown",
-      "last_fetch": "2026-03-26 13:04:50",
-      "last_fetch_display": "2026-03-26 13:04",
+      "last_fetch": "2026-03-26 14:04:45",
+      "last_fetch_display": "2026-03-26 14:04",
       "last_fetch_ago": "13m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.05,
-      "success_count": 19,
+      "error_rate": 0.048,
+      "success_count": 20,
       "failure_count": 1,
       "last_error": "ffmpeg overlay failed: ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev8, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --"
     },
@@ -7208,7 +7208,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-26 09:07:11",
       "last_fetch_display": "2026-03-26 09:07",
-      "last_fetch_ago": "4h",
+      "last_fetch_ago": "5h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.25,
@@ -7220,13 +7220,13 @@
       "source_id": "https://www.twitch.tv/shroud/clips",
       "source_key": "https://www.twitch.tv/shroud/clips",
       "platform": "unknown",
-      "last_fetch": "2026-03-26 13:04:56",
-      "last_fetch_display": "2026-03-26 13:04",
+      "last_fetch": "2026-03-26 14:04:51",
+      "last_fetch_display": "2026-03-26 14:04",
       "last_fetch_ago": "13m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.111,
-      "success_count": 16,
+      "error_rate": 0.105,
+      "success_count": 17,
       "failure_count": 2,
       "last_error": "ffmpeg overlay failed: ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev8, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --"
     },
@@ -7250,7 +7250,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-26 10:04:47",
       "last_fetch_display": "2026-03-26 10:04",
-      "last_fetch_ago": "3h",
+      "last_fetch_ago": "4h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.373,
@@ -7472,13 +7472,13 @@
       "source_id": "https://www.twitch.tv/hasanabi/clips",
       "source_key": "https://www.twitch.tv/hasanabi/clips",
       "platform": "unknown",
-      "last_fetch": "2026-03-26 13:05:11",
-      "last_fetch_display": "2026-03-26 13:05",
+      "last_fetch": "2026-03-26 14:05:05",
+      "last_fetch_display": "2026-03-26 14:05",
       "last_fetch_ago": "12m",
       "clips_24h": 0,
       "status": "healthy",
       "error_rate": 0.0,
-      "success_count": 8,
+      "success_count": 9,
       "failure_count": 0,
       "last_error": ""
     },
@@ -7488,7 +7488,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-26 09:07:30",
       "last_fetch_display": "2026-03-26 09:07",
-      "last_fetch_ago": "4h",
+      "last_fetch_ago": "5h",
       "clips_24h": 0,
       "status": "healthy",
       "error_rate": 0.0,
@@ -7500,13 +7500,13 @@
       "source_id": "https://www.twitch.tv/timthetatman/clips",
       "source_key": "https://www.twitch.tv/timthetatman/clips",
       "platform": "unknown",
-      "last_fetch": "2026-03-26 13:04:42",
-      "last_fetch_display": "2026-03-26 13:04",
+      "last_fetch": "2026-03-26 14:04:38",
+      "last_fetch_display": "2026-03-26 14:04",
       "last_fetch_ago": "13m",
       "clips_24h": 0,
       "status": "healthy",
       "error_rate": 0.0,
-      "success_count": 20,
+      "success_count": 21,
       "failure_count": 0,
       "last_error": ""
     }
@@ -7515,14 +7515,14 @@
     "top_errors": [
       {
         "error_type": "('invalid_grant: Token has been expired or revoked",
-        "count": 22,
+        "count": 24,
         "trend": {
-          "today": 10,
+          "today": 12,
           "yesterday": 12,
           "week_ago": 0
         },
-        "last_seen": "2026-03-26 06:32:09",
-        "last_seen_display": "2026-03-26 06:32",
+        "last_seen": "2026-03-26 08:02:10",
+        "last_seen_display": "2026-03-26 08:02",
         "suggestion": "Review logs for context",
         "severity": "critical"
       },
@@ -7541,10 +7541,10 @@
       },
       {
         "error_type": "module 'queue' has no attribute 'LifoQueue'",
-        "count": 7,
+        "count": 6,
         "trend": {
           "today": 0,
-          "yesterday": 7,
+          "yesterday": 6,
           "week_ago": 0
         },
         "last_seen": "2026-03-25 11:39:04",
@@ -7579,7 +7579,7 @@
         "severity": "warning"
       }
     ],
-    "total_errors": 64,
+    "total_errors": 65,
     "distinct_errors": 11,
     "log_viewer_label": "View Full Logs",
     "log_viewer_target": "logs_dialog"
@@ -7868,13 +7868,97 @@
   ],
   "recent_uploads": [
     {
+      "job_id": "525fc773-1f36-463c-b25c-8261ae8a8c19",
+      "job_id_short": "525fc773",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "updated_at": "2026-03-26T08:02:10.011658",
+      "updated_at_display": "2026-03-26 08:02",
+      "updated_ago": "6h",
+      "title": "I work in a 'windowed' room with no view! \ud83d\ude33",
+      "url": null,
+      "error": "('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})"
+    },
+    {
+      "job_id": "76f25ef4-25b0-4a8e-9bbe-f87fe40409c7",
+      "job_id_short": "76f25ef4",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "updated_at": "2026-03-26T08:01:15.327499",
+      "updated_at_display": "2026-03-26 08:01",
+      "updated_ago": "6h",
+      "title": "Why does this always happen on my commute? \ud83d\ude21",
+      "url": null,
+      "error": null
+    },
+    {
+      "job_id": "1fd9c160-c4d5-46ae-83f4-0fdb4e98bc78",
+      "job_id_short": "1fd9c160",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "updated_at": "2026-03-26T08:01:07.982859",
+      "updated_at_display": "2026-03-26 08:01",
+      "updated_ago": "6h",
+      "title": "Billionaire says work 70 hours for 'national pride'? \ud83d\ude33",
+      "url": null,
+      "error": null
+    },
+    {
+      "job_id": "fc8ea64d-9904-4b25-be07-5f427a1d73f5",
+      "job_id_short": "fc8ea64d",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "updated_at": "2026-03-26T08:00:58.679029",
+      "updated_at_display": "2026-03-26 08:00",
+      "updated_ago": "6h",
+      "title": "I just paid for a kitchen hood that\u2019s missing parts! \ud83d\ude21",
+      "url": null,
+      "error": null
+    },
+    {
+      "job_id": "2ee9a5af-cc3f-4eec-b0cf-b4ef8721794d",
+      "job_id_short": "2ee9a5af",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "updated_at": "2026-03-26T08:00:50.833693",
+      "updated_at_display": "2026-03-26 08:00",
+      "updated_ago": "6h",
+      "title": "Ads taking over your screen? Seriously? \ud83d\ude21",
+      "url": null,
+      "error": null
+    },
+    {
+      "job_id": "916791fc-d055-4bb4-849b-e57b103b0d44",
+      "job_id_short": "916791fc",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "updated_at": "2026-03-26T07:32:11.223259",
+      "updated_at_display": "2026-03-26 07:32",
+      "updated_ago": "6h",
+      "title": "Is this really how they expect us to work? \ud83d\ude33",
+      "url": null,
+      "error": "('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})"
+    },
+    {
+      "job_id": "916791fc-d055-4bb4-849b-e57b103b0d44",
+      "job_id_short": "916791fc",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "updated_at": "2026-03-26T07:32:11.223259",
+      "updated_at_display": "2026-03-26 07:32",
+      "updated_ago": "6h",
+      "title": "Is this really how they expect us to work? \ud83d\ude33",
+      "url": null,
+      "error": "('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})"
+    },
+    {
       "job_id": "8ae126de-b594-4fe9-911d-79e10d87a8db",
       "job_id_short": "8ae126de",
       "channel": "arc_highlightz",
       "status": "succeeded",
       "updated_at": "2026-03-26T07:04:15.656187",
       "updated_at_display": "2026-03-26 07:04",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "Myth Moments #2",
       "url": "https://youtube.com/shorts/3mhwHas86Go",
       "error": null
@@ -7886,7 +7970,7 @@
       "status": "queued",
       "updated_at": "2026-03-26T06:32:09.455533",
       "updated_at_display": "2026-03-26 06:32",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "I wish I could tell him this \ud83d\udc80",
       "url": null,
       "error": "('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})"
@@ -7898,94 +7982,10 @@
       "status": "queued",
       "updated_at": "2026-03-26T06:32:09.455533",
       "updated_at_display": "2026-03-26 06:32",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "I wish I could tell him this \ud83d\udc80",
       "url": null,
       "error": "('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})"
-    },
-    {
-      "job_id": "a1fc7be4-26df-4afa-b1e4-32f20edb483d",
-      "job_id_short": "a1fc7be4",
-      "channel": "arc_highlightz",
-      "status": "succeeded",
-      "updated_at": "2026-03-26T06:04:57.762518",
-      "updated_at_display": "2026-03-26 06:04",
-      "updated_ago": "7h",
-      "title": "Myth Moments #1",
-      "url": "https://youtube.com/shorts/V7T6ubq8tag",
-      "error": null
-    },
-    {
-      "job_id": "23185877-d55c-4d45-830a-212b824372ad",
-      "job_id_short": "23185877",
-      "channel": "fomo_highlights",
-      "status": "queued",
-      "updated_at": "2026-03-26T05:32:36.824153",
-      "updated_at_display": "2026-03-26 05:32",
-      "updated_ago": "7h",
-      "title": "Chexxtra plays Moments #1",
-      "url": null,
-      "error": "('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})"
-    },
-    {
-      "job_id": "5ec8a540-0bd8-4d4b-901d-68b37690927f",
-      "job_id_short": "5ec8a540",
-      "channel": "arc_highlightz",
-      "status": "succeeded",
-      "updated_at": "2026-03-26T05:03:10.657695",
-      "updated_at_display": "2026-03-26 05:03",
-      "updated_ago": "8h",
-      "title": "Cloakzy Moments #7",
-      "url": "https://youtube.com/shorts/kOLs2ejYcGY",
-      "error": null
-    },
-    {
-      "job_id": "5566a0f4-16cd-4736-a9aa-e700646de7e3",
-      "job_id_short": "5566a0f4",
-      "channel": "fomo_highlights",
-      "status": "queued",
-      "updated_at": "2026-03-26T04:32:25.576091",
-      "updated_at_display": "2026-03-26 04:32",
-      "updated_ago": "8h",
-      "title": "I use to sit on this ledge waiting for the bus. It seems \ud83d\udc80",
-      "url": null,
-      "error": "('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})"
-    },
-    {
-      "job_id": "5566a0f4-16cd-4736-a9aa-e700646de7e3",
-      "job_id_short": "5566a0f4",
-      "channel": "fomo_highlights",
-      "status": "queued",
-      "updated_at": "2026-03-26T04:32:25.576091",
-      "updated_at_display": "2026-03-26 04:32",
-      "updated_ago": "8h",
-      "title": "I use to sit on this ledge waiting for the bus. It seems \ud83d\udc80",
-      "url": null,
-      "error": "('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})"
-    },
-    {
-      "job_id": "50a82991-ff69-4073-bc4d-b8068eb40dbb",
-      "job_id_short": "50a82991",
-      "channel": "arc_highlightz",
-      "status": "queued",
-      "updated_at": "2026-03-26T04:06:46.677692",
-      "updated_at_display": "2026-03-26 04:06",
-      "updated_ago": "9h",
-      "title": "Taxi2g Moments #4",
-      "url": null,
-      "error": null
-    },
-    {
-      "job_id": "0ec1ff4c-0e09-4a71-8897-fa4a36df0773",
-      "job_id_short": "0ec1ff4c",
-      "channel": "arc_highlightz",
-      "status": "queued",
-      "updated_at": "2026-03-26T04:06:11.345296",
-      "updated_at_display": "2026-03-26 04:06",
-      "updated_ago": "9h",
-      "title": "Taxi2g Moments #3",
-      "url": null,
-      "error": null
     }
   ],
   "recent_clips": [
@@ -8001,7 +8001,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-26T07:04:15.656187",
       "published_at_display": "2026-03-26 07:04",
-      "published_ago": "6h"
+      "published_ago": "7h"
     },
     {
       "job_id": "a1fc7be4-26df-4afa-b1e4-32f20edb483d",
@@ -8015,7 +8015,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-26T06:04:57.762518",
       "published_at_display": "2026-03-26 06:04",
-      "published_ago": "7h"
+      "published_ago": "8h"
     },
     {
       "job_id": "5ec8a540-0bd8-4d4b-901d-68b37690927f",
@@ -8025,11 +8025,11 @@
       "title_truncated": "Cloakzy Moments #7",
       "thumbnail_path": null,
       "post_url": "https://youtube.com/shorts/kOLs2ejYcGY",
-      "views": 289,
-      "views_display": "289",
+      "views": 386,
+      "views_display": "386",
       "published_at": "2026-03-26T05:03:10.657695",
       "published_at_display": "2026-03-26 05:03",
-      "published_ago": "8h"
+      "published_ago": "9h"
     },
     {
       "job_id": "1b429e47-4761-4766-bb0e-bb7c8eab4de4",
@@ -8039,11 +8039,11 @@
       "title_truncated": "Cloakzy Moments #6",
       "thumbnail_path": null,
       "post_url": "https://youtube.com/shorts/YlZob5oHgD8",
-      "views": 126,
-      "views_display": "126",
+      "views": 150,
+      "views_display": "150",
       "published_at": "2026-03-26T04:02:36.165933",
       "published_at_display": "2026-03-26 04:02",
-      "published_ago": "9h"
+      "published_ago": "10h"
     },
     {
       "job_id": "79331b97-4e73-42f7-a93e-045338eb8a5e",
@@ -8053,11 +8053,11 @@
       "title_truncated": "Cloakzy Moments #5",
       "thumbnail_path": null,
       "post_url": "https://youtube.com/shorts/mbiNd_aKXI8",
-      "views": 214,
-      "views_display": "214",
+      "views": 279,
+      "views_display": "279",
       "published_at": "2026-03-26T03:02:36.498971",
       "published_at_display": "2026-03-26 03:02",
-      "published_ago": "10h"
+      "published_ago": "11h"
     },
     {
       "job_id": "6cd86312-0abc-4012-85e4-5670af3f5026",
@@ -8071,7 +8071,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-25T17:02:51.246690",
       "published_at_display": "2026-03-25 17:02",
-      "published_ago": "20h"
+      "published_ago": "21h"
     },
     {
       "job_id": "1f715478-29f8-4279-b087-6e6c6afa34a4",
@@ -8085,7 +8085,7 @@
       "views_display": "3",
       "published_at": "2026-03-25T15:42:44.199682",
       "published_at_display": "2026-03-25 15:42",
-      "published_ago": "21h"
+      "published_ago": "22h"
     },
     {
       "job_id": "1f715478-29f8-4279-b087-6e6c6afa34a4",
@@ -8099,7 +8099,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-25T15:42:44.199682",
       "published_at_display": "2026-03-25 15:42",
-      "published_ago": "21h"
+      "published_ago": "22h"
     },
     {
       "job_id": "2de13386-87e9-4201-8dd6-14bf7d945ff6",
@@ -8113,7 +8113,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-25T15:32:34.015715",
       "published_at_display": "2026-03-25 15:32",
-      "published_ago": "21h"
+      "published_ago": "22h"
     },
     {
       "job_id": "4adf34db-a5ec-4842-b492-9a8719fe0879",
@@ -8127,7 +8127,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-25T15:02:33.948993",
       "published_at_display": "2026-03-25 15:02",
-      "published_ago": "22h"
+      "published_ago": "23h"
     }
   ],
   "upload_timeline": {
@@ -8143,7 +8143,7 @@
             "title": "Myth Moments #2",
             "published_at": "2026-03-26T07:04:15.656187",
             "published_at_display": "2026-03-26 07:04",
-            "published_ago": "6h",
+            "published_ago": "7h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/3mhwHas86Go"
           },
@@ -8154,7 +8154,7 @@
             "title": "Myth Moments #1",
             "published_at": "2026-03-26T06:04:57.762518",
             "published_at_display": "2026-03-26 06:04",
-            "published_ago": "7h",
+            "published_ago": "8h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/V7T6ubq8tag"
           },
@@ -8165,7 +8165,7 @@
             "title": "Cloakzy Moments #7",
             "published_at": "2026-03-26T05:03:10.657695",
             "published_at_display": "2026-03-26 05:03",
-            "published_ago": "8h",
+            "published_ago": "9h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/kOLs2ejYcGY"
           },
@@ -8176,7 +8176,7 @@
             "title": "Cloakzy Moments #6",
             "published_at": "2026-03-26T04:02:36.165933",
             "published_at_display": "2026-03-26 04:02",
-            "published_ago": "9h",
+            "published_ago": "10h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/YlZob5oHgD8"
           },
@@ -8187,7 +8187,7 @@
             "title": "Cloakzy Moments #5",
             "published_at": "2026-03-26T03:02:36.498971",
             "published_at_display": "2026-03-26 03:02",
-            "published_ago": "10h",
+            "published_ago": "11h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/mbiNd_aKXI8"
           }
@@ -8204,7 +8204,7 @@
             "title": "Moistcr1tikal Moments #5",
             "published_at": "2026-03-25T17:02:51.246690",
             "published_at_display": "2026-03-25 17:02",
-            "published_ago": "20h",
+            "published_ago": "21h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/-KlOuUheBbw"
           },
@@ -8215,7 +8215,7 @@
             "title": "Cloakzy Moments #4",
             "published_at": "2026-03-25T15:42:44.199682",
             "published_at_display": "2026-03-25 15:42",
-            "published_ago": "21h",
+            "published_ago": "22h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/pVJrxd-7XHA"
           },
@@ -8226,7 +8226,7 @@
             "title": "Cloakzy Moments #4",
             "published_at": "2026-03-25T15:42:44.199682",
             "published_at_display": "2026-03-25 15:42",
-            "published_ago": "21h",
+            "published_ago": "22h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/vIXYSAZtlvc"
           },
@@ -8237,7 +8237,7 @@
             "title": "Arju khatun Moments #1",
             "published_at": "2026-03-25T15:32:34.015715",
             "published_at_display": "2026-03-25 15:32",
-            "published_ago": "21h",
+            "published_ago": "22h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/l4FWPRxzeNA"
           },
@@ -8248,7 +8248,7 @@
             "title": "Moistcr1tikal Moments #4",
             "published_at": "2026-03-25T15:02:33.948993",
             "published_at_display": "2026-03-25 15:02",
-            "published_ago": "22h",
+            "published_ago": "23h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/uHgSow17_lQ"
           },
@@ -8259,7 +8259,7 @@
             "title": "Shinyatheninja Moments #3",
             "published_at": "2026-03-25T14:33:12.357102",
             "published_at_display": "2026-03-25 14:33",
-            "published_ago": "22h",
+            "published_ago": "23h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/2Dc0F_RnlyY"
           },
@@ -8717,6 +8717,18 @@
   "logs_preview": [
     {
       "channel": "fomo_highlights",
+      "job_id_short": "525fc773",
+      "updated_at": "2026-03-26 08:02",
+      "message": "('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})"
+    },
+    {
+      "channel": "fomo_highlights",
+      "job_id_short": "916791fc",
+      "updated_at": "2026-03-26 07:32",
+      "message": "('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})"
+    },
+    {
+      "channel": "fomo_highlights",
       "job_id_short": "05dd81e8",
       "updated_at": "2026-03-26 06:32",
       "message": "('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})"
@@ -8749,18 +8761,6 @@
       "channel": "fomo_highlights",
       "job_id_short": "6c0e3096",
       "updated_at": "2026-03-26 02:02",
-      "message": "('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})"
-    },
-    {
-      "channel": "fomo_highlights",
-      "job_id_short": "0812b570",
-      "updated_at": "2026-03-26 01:32",
-      "message": "('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})"
-    },
-    {
-      "channel": "fomo_highlights",
-      "job_id_short": "dd035592",
-      "updated_at": "2026-03-26 01:02",
       "message": "('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})"
     }
   ],
@@ -9660,6 +9660,51 @@
         "status": "queued"
       },
       {
+        "job_id": "525fc773-1f36-463c-b25c-8261ae8a8c19",
+        "job_id_short": "525fc773",
+        "channel": "fomo_highlights",
+        "title": "I work in a 'windowed' room with no view! \ud83d\ude33",
+        "scheduled_at": "2026-03-26T09:00:43",
+        "scheduled_at_iso": "2026-03-26T09:00:43",
+        "status": "queued"
+      },
+      {
+        "job_id": "2ee9a5af-cc3f-4eec-b0cf-b4ef8721794d",
+        "job_id_short": "2ee9a5af",
+        "channel": "fomo_highlights",
+        "title": "Ads taking over your screen? Seriously? \ud83d\ude21",
+        "scheduled_at": "2026-03-26T09:00:50",
+        "scheduled_at_iso": "2026-03-26T09:00:50",
+        "status": "queued"
+      },
+      {
+        "job_id": "fc8ea64d-9904-4b25-be07-5f427a1d73f5",
+        "job_id_short": "fc8ea64d",
+        "channel": "fomo_highlights",
+        "title": "I just paid for a kitchen hood that\u2019s missing part",
+        "scheduled_at": "2026-03-26T09:00:58",
+        "scheduled_at_iso": "2026-03-26T09:00:58",
+        "status": "queued"
+      },
+      {
+        "job_id": "1fd9c160-c4d5-46ae-83f4-0fdb4e98bc78",
+        "job_id_short": "1fd9c160",
+        "channel": "fomo_highlights",
+        "title": "Billionaire says work 70 hours for 'national pride",
+        "scheduled_at": "2026-03-26T09:01:07",
+        "scheduled_at_iso": "2026-03-26T09:01:07",
+        "status": "queued"
+      },
+      {
+        "job_id": "76f25ef4-25b0-4a8e-9bbe-f87fe40409c7",
+        "job_id_short": "76f25ef4",
+        "channel": "fomo_highlights",
+        "title": "Why does this always happen on my commute? \ud83d\ude21",
+        "scheduled_at": "2026-03-26T09:01:15",
+        "scheduled_at_iso": "2026-03-26T09:01:15",
+        "status": "queued"
+      },
+      {
         "job_id": "b09e449a-7e07-48ee-b71d-32a86228cd52",
         "job_id_short": "b09e449a",
         "channel": "arc_highlightz",
@@ -10126,9 +10171,9 @@
     ],
     "any_channel_high": false,
     "all_channels_safe": true,
-    "reset_time_hours": 18,
+    "reset_time_hours": 17,
     "reset_time_minutes": 41,
-    "reset_time_display": "18h 41m"
+    "reset_time_display": "17h 41m"
   },
   "revenue": {
     "total_views_30d": 0,
@@ -10148,7 +10193,7 @@
       "discovered": 0,
       "downloaded": 0,
       "processed": 0,
-      "queued": 39,
+      "queued": 44,
       "uploaded": 107
     },
     "by_channel": [
@@ -10165,7 +10210,7 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 28,
+        "queued": 33,
         "uploaded": 37
       },
       {
@@ -10195,7 +10240,7 @@
     },
     "bottleneck": {
       "stage": "queued",
-      "backlog": 39
+      "backlog": 44
     }
   },
   "disk": {
@@ -10217,9 +10262,9 @@
       {
         "name": "renders",
         "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\renders",
-        "size_bytes": 2668393190,
+        "size_bytes": 2689773285,
         "size_human": "2.5GB",
-        "file_count": 362
+        "file_count": 367
       },
       {
         "name": "renders/thumbnails",
@@ -10229,7 +10274,7 @@
         "file_count": 123
       }
     ],
-    "total_disk_bytes": 35393686157,
+    "total_disk_bytes": 35442118960,
     "total_disk_human": "33.0GB",
     "percent_of_500gb": 6.6,
     "warning_threshold_pct": 70,
@@ -10369,6 +10414,19 @@
       {
         "rank": 8,
         "channel": "arc_highlightz",
+        "title": "Cloakzy Moments #7",
+        "title_display": "Cloakzy Moments #7",
+        "views": 386,
+        "views_display": "386",
+        "post_url": "https://youtube.com/shorts/kOLs2ejYcGY",
+        "published_at": "2026-03-26T05:03:10.657695",
+        "published_at_display": "2026-03-26 05:03",
+        "published_ago": "9h",
+        "thumbnail_path": null
+      },
+      {
+        "rank": 9,
+        "channel": "arc_highlightz",
         "title": "Watch this before scrolling: Nobody plays like this",
         "title_display": "Watch this before scrolling: Nobody plays like this",
         "views": 357,
@@ -10380,7 +10438,7 @@
         "thumbnail_path": null
       },
       {
-        "rank": 9,
+        "rank": 10,
         "channel": "arc_highlightz",
         "title": "Watch this before scrolling: Chat couldn't believe what {creator} just did",
         "title_display": "Watch this before scrolling: Chat couldn't believe what {creator} just did",
@@ -10390,19 +10448,6 @@
         "published_at": "2026-03-09T00:21:31.861816",
         "published_at_display": "2026-03-09 00:21",
         "published_ago": "17d",
-        "thumbnail_path": null
-      },
-      {
-        "rank": 10,
-        "channel": "arc_highlightz",
-        "title": "Cloakzy Moments #2",
-        "title_display": "Cloakzy Moments #2",
-        "views": 315,
-        "views_display": "315",
-        "post_url": "https://youtube.com/shorts/SN3bx2lP93E",
-        "published_at": "2026-03-23T05:01:18.559641+00:00",
-        "published_at_display": "2026-03-23 05:01",
-        "published_ago": "3d",
         "thumbnail_path": null
       }
     ],
@@ -10478,9 +10523,9 @@
   "leaderboard": [
     {
       "channel_name": "arc_highlightz",
-      "total_views": 30947,
+      "total_views": 31133,
       "uploads_30d": 38,
-      "avg_views": 814,
+      "avg_views": 819,
       "best_clip_title": "No clips yet",
       "best_clip_views": 0,
       "best_clip_url": "",
@@ -11523,7 +11568,7 @@
           "priority": 1,
           "clips_fetched": 5,
           "last_fetched_at": "2026-03-25T19:21:25.283592",
-          "last_fetched_rel": "17h",
+          "last_fetched_rel": "18h",
           "enabled": true,
           "url": "https://www.youtube.com/@penguinz0/videos",
           "type": "transcript"
@@ -11682,7 +11727,7 @@
     "uploads_yesterday": 17,
     "views_gained_today": 0,
     "views_yesterday": 0,
-    "errors_today": 10,
+    "errors_today": 12,
     "quota_pct": 80.0,
     "quota_units_used": 8000,
     "delta_uploads": -12,
@@ -11698,8 +11743,8 @@
         "uploads": 5
       }
     ],
-    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-03-26\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 5 (-12 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 10\n  API Quota: 80.0% used (8000/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Cloakzy Moments #5\n  0 views \u00e2\u20ac\u00a2 arc_highlightz\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. arc_highlightz: 5 uploads",
-    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-03-26\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 5 (-12 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 10\n\u00e2\u20ac\u00a2 **API Quota:** 80.0% used (`8000/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Cloakzy Moments #5_\n**0 views** \u00e2\u20ac\u00a2 **arc_highlightz**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **arc_highlightz** \u00e2\u20ac\u201d 5 uploads"
+    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-03-26\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 5 (-12 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 12\n  API Quota: 80.0% used (8000/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Cloakzy Moments #5\n  0 views \u00e2\u20ac\u00a2 arc_highlightz\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. arc_highlightz: 5 uploads",
+    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-03-26\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 5 (-12 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 12\n\u00e2\u20ac\u00a2 **API Quota:** 80.0% used (`8000/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Cloakzy Moments #5_\n**0 views** \u00e2\u20ac\u00a2 **arc_highlightz**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **arc_highlightz** \u00e2\u20ac\u201d 5 uploads"
   },
   "title_performance": {
     "pattern_analysis": {
@@ -13387,15 +13432,6 @@
     ],
     "scheduled_posts": [
       {
-        "job_id": "8b39c1dd",
-        "channel": "arc_highlightz",
-        "title": "Shinyatheninja Moments #6",
-        "scheduled_at": "2026-03-26T14:00:00-06:00",
-        "hour": 14,
-        "day": 3,
-        "day_name": "Thursday"
-      },
-      {
         "job_id": "a4cf380b",
         "channel": "arc_highlightz",
         "title": "Myth Moments #3",
@@ -13557,81 +13593,81 @@
     {
       "type": "warning",
       "title": "Channel \"market_meltdowns\" paused for 24+ hours",
-      "message": "market_meltdowns has been paused for 421 hours",
+      "message": "market_meltdowns has been paused for 422 hours",
       "channel": "market_meltdowns",
-      "created_at": "2026-03-26T13:18:03.336614",
+      "created_at": "2026-03-26T14:18:03.785758",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"self_made_clips\" paused for 24+ hours",
-      "message": "self_made_clips has been paused for 417 hours",
+      "message": "self_made_clips has been paused for 418 hours",
       "channel": "self_made_clips",
-      "created_at": "2026-03-26T13:18:03.336614",
+      "created_at": "2026-03-26T14:18:03.785758",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"rich_or_ruined\" paused for 24+ hours",
-      "message": "rich_or_ruined has been paused for 415 hours",
+      "message": "rich_or_ruined has been paused for 416 hours",
       "channel": "rich_or_ruined",
-      "created_at": "2026-03-26T13:18:03.336614",
+      "created_at": "2026-03-26T14:18:03.785758",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"startup_graveyard\" paused for 24+ hours",
-      "message": "startup_graveyard has been paused for 415 hours",
+      "message": "startup_graveyard has been paused for 416 hours",
       "channel": "startup_graveyard",
-      "created_at": "2026-03-26T13:18:03.336614",
+      "created_at": "2026-03-26T14:18:03.785758",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_sirens\" paused for 24+ hours",
-      "message": "stream_sirens has been paused for 394 hours",
+      "message": "stream_sirens has been paused for 395 hours",
       "channel": "stream_sirens",
-      "created_at": "2026-03-26T13:18:03.336614",
+      "created_at": "2026-03-26T14:18:03.785758",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_queens\" paused for 24+ hours",
-      "message": "stream_queens has been paused for 394 hours",
+      "message": "stream_queens has been paused for 395 hours",
       "channel": "stream_queens",
-      "created_at": "2026-03-26T13:18:03.336614",
+      "created_at": "2026-03-26T14:18:03.785758",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"ai_did_what\" paused for 24+ hours",
-      "message": "ai_did_what has been paused for 360 hours",
+      "message": "ai_did_what has been paused for 361 hours",
       "channel": "ai_did_what",
-      "created_at": "2026-03-26T13:18:03.336614",
+      "created_at": "2026-03-26T14:18:03.785758",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"gym_moments\" paused for 24+ hours",
-      "message": "gym_moments has been paused for 360 hours",
+      "message": "gym_moments has been paused for 361 hours",
       "channel": "gym_moments",
-      "created_at": "2026-03-26T13:18:03.336614",
+      "created_at": "2026-03-26T14:18:03.785758",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"kitchen_chaos\" paused for 24+ hours",
-      "message": "kitchen_chaos has been paused for 213 hours",
+      "message": "kitchen_chaos has been paused for 214 hours",
       "channel": "kitchen_chaos",
-      "created_at": "2026-03-26T13:18:03.336614",
+      "created_at": "2026-03-26T14:18:03.785758",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"unfiltered_clips\" paused for 24+ hours",
-      "message": "unfiltered_clips has been paused for 213 hours",
+      "message": "unfiltered_clips has been paused for 214 hours",
       "channel": "unfiltered_clips",
-      "created_at": "2026-03-26T13:18:03.336614",
+      "created_at": "2026-03-26T14:18:03.785758",
       "read": false
     }
   ],
@@ -14215,7 +14251,7 @@
         "category": "Gaming",
         "target_per_day": 8,
         "published_24h": 0,
-        "queue_depth": 28,
+        "queue_depth": 33,
         "running_jobs": 0,
         "failed_7d": 0,
         "avg_views": 15149,
@@ -14230,13 +14266,13 @@
       }
     ],
     "lagging_count": 3,
-    "queue_backlog": 39,
+    "queue_backlog": 44,
     "analytics_channels": 13
   },
   "meta": {
     "refresh_seconds": 30,
     "channel_count": 13,
-    "job_count": 253,
+    "job_count": 258,
     "has_metrics_daily": false,
     "has_clip_assets": false,
     "note": "Trend analytics prefer metrics_daily and fall back to source clip proxy series when upload analytics are sparse."

@@ -429,14 +429,8 @@ CHANNEL_SOURCES: dict = {
          "type": "channel", "priority": 2, "max_age_days": 30,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 3,
          "crop_anchor": "left", "min_views": 500},
-        {"platform": "youtube",
-         "url": "https://www.youtube.com/results?search_query=tfue+highlights+2025+shorts",
-         "type": "search", "priority": 3, "max_age_days": 7,
-         "min_dur_s": 20, "max_dur_s": 60, "crop_anchor": "center"},
-        {"platform": "youtube",
-         "url": "https://www.youtube.com/results?search_query=cloakzy+best+moments+2025+shorts",
-         "type": "search", "priority": 3, "max_age_days": 7,
-         "min_dur_s": 20, "max_dur_s": 60, "crop_anchor": "center"},
+        # YouTube search sources REMOVED — only Twitch clips allowed for arc_highlightz
+        # (YouTube search was pulling random non-gaming content like Arju Khatun videos)
     ],
 
     "viral_recaps": [

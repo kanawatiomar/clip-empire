@@ -35,11 +35,12 @@ def _strip_emoji(text: str) -> str:
     return re.sub(r' {2,}', ' ', ascii_only).strip()
 
 
-def _wrap_hook(text: str, max_chars: int = 20) -> tuple[str, int]:
+def _wrap_hook(text: str, max_chars: int = 16) -> tuple[list[str], int]:
     """Word-wrap hook text to fit 1080px canvas.
-    
-    Returns (wrapped_text, adjusted_fontsize).
-    Lines > max_chars trigger wrapping; also reduces fontsize for very long lines.
+
+    Returns (lines_list, adjusted_fontsize).
+    Returns a list of lines so callers can draw each line separately (avoids
+    relying on ffmpeg drawtext \\n escape, which is unreliable across versions).
     """
     words = text.split()
     lines: list[str] = []
@@ -54,7 +55,8 @@ def _wrap_hook(text: str, max_chars: int = 20) -> tuple[str, int]:
     if current:
         lines.append(current)
 
-    wrapped = r"\n".join(lines)
+    if not lines:
+        lines = [text]
 
     # Scale font down for long single lines
     longest = max(len(l) for l in lines)
@@ -63,7 +65,7 @@ def _wrap_hook(text: str, max_chars: int = 20) -> tuple[str, int]:
     else:
         fontsize = 88
 
-    return wrapped, fontsize
+    return lines, fontsize
 
 
 def _esc(text: str) -> str:
@@ -160,8 +162,9 @@ class OverlayTransform:
 
         fontfile     = s.get("fontfile", "C:/Windows/Fonts/Impact.ttf")
         cta_fs       = s.get("cta_fontsize", 56)
-        # Auto-wrap hook and scale font down for long text
-        hook, _hook_fontsize = _wrap_hook(hook)
+        # Auto-wrap hook into list of lines; draw each line as a separate drawtext
+        # (avoids relying on \n escape in ffmpeg drawtext, which strips the backslash)
+        hook_lines, _hook_fontsize = _wrap_hook(hook)
         hook_fs      = s.get("hook_fontsize", _hook_fontsize)
         fontcolor    = s.get("fontcolor", "white")
         borderw      = s.get("borderw", 5)
@@ -169,22 +172,38 @@ class OverlayTransform:
         shadowx      = s.get("shadowx", 3)
         shadowy      = s.get("shadowy", 3)
         shadowcolor  = s.get("shadowcolor", "black@0.7")
-        hook_y       = s.get("hook_y", "h/4")
+        hook_y_base  = s.get("hook_y", "h/4")
 
         outline = f"borderw={borderw}:bordercolor={bordercolor}"
         shadow  = f"shadowx={shadowx}:shadowy={shadowy}:shadowcolor={shadowcolor}"
 
-        # Hook text — large, upper area, 0 → hook_end
-        hook_filter = (
-            f"drawtext=fontfile='{fontfile}':"
-            f"text='{_esc(hook)}':"
-            f"fontsize={hook_fs}:"
-            f"fontcolor={fontcolor}:"
-            f"{outline}:{shadow}:"
-            f"x=(w-text_w)/2:y={hook_y}:"
-            f"enable='between(t,0,{hook_end:.1f})':"
-            f"alpha='if(lt(t,0.2),t/0.2,if(gt(t,{hook_end:.1f}-0.15),({hook_end:.1f}-t)/0.15,1))'"
-        )
+        # Hook text — one drawtext filter per line, stacked vertically
+        # line_height ≈ fontsize * 1.15 to give a little breathing room
+        line_height = int(hook_fs * 1.15)
+        n_lines = len(hook_lines)
+        # Centre the block: start at hook_y_base - half total block height
+        # hook_y_base is an ffmpeg expression like "h/4", so we build a numeric offset
+        # by calculating pixel offset from that anchor point
+        half_block = (n_lines - 1) * line_height // 2
+
+        hook_filters = []
+        for i, line in enumerate(hook_lines):
+            y_offset = i * line_height - half_block
+            if y_offset >= 0:
+                y_expr = f"{hook_y_base}+{y_offset}"
+            else:
+                y_expr = f"{hook_y_base}-{abs(y_offset)}"
+            hook_filters.append(
+                f"drawtext=fontfile='{fontfile}':"
+                f"text='{_esc(line)}':"
+                f"fontsize={hook_fs}:"
+                f"fontcolor={fontcolor}:"
+                f"{outline}:{shadow}:"
+                f"x=(w-text_w)/2:y={y_expr}:"
+                f"enable='between(t,0,{hook_end:.1f})':"
+                f"alpha='if(lt(t,0.2),t/0.2,if(gt(t,{hook_end:.1f}-0.15),({hook_end:.1f}-t)/0.15,1))'"
+            )
+        hook_filter = ",".join(hook_filters)
 
         # CTA text — smaller, lower area, cta_start → end
         cta_filter = (

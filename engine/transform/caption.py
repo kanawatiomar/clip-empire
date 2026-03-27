@@ -216,6 +216,11 @@ class CaptionTransform:
         }
 
         def _censor(word: str) -> str:
+            # Strip non-ASCII characters (Whisper sometimes outputs Chinese/Japanese
+            # characters for unclear audio even when language="en")
+            word = "".join(c for c in word if ord(c) < 128)
+            if not word.strip():
+                return ""
             clean = word.strip().lower().strip(".,!?;:'\"")
             if clean in _PROFANITY:
                 return word[0] + "*" * (len(word) - 1) if len(word) > 1 else "*"
@@ -228,11 +233,13 @@ class CaptionTransform:
             if seg_words:
                 for w in seg_words:
                     if w.get("word", "").strip():
-                        all_words.append({
-                            "word":  _censor(w["word"].strip()),
-                            "start": float(w.get("start", seg["start"])),
-                            "end":   float(w.get("end",   seg["end"])),
-                        })
+                        censored = _censor(w["word"].strip())
+                        if censored.strip():  # skip words that became empty after non-ASCII strip
+                            all_words.append({
+                                "word":  censored,
+                                "start": float(w.get("start", seg["start"])),
+                                "end":   float(w.get("end",   seg["end"])),
+                            })
             else:
                 # No word timestamps — fall back to segment-level line
                 text = seg.get("text", "").strip()

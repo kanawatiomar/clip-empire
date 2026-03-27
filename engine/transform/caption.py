@@ -16,6 +16,7 @@ from __future__ import annotations
 import os
 import re
 import subprocess
+import sys
 from pathlib import Path
 from typing import List, Tuple, Optional
 
@@ -105,9 +106,15 @@ class CaptionTransform:
     def process(self, video_path: str, clip_id: str, channel_name: str = "", creator: str = "") -> str:
         """Transcribe video and write an ASS subtitle file.
 
+        Runs Whisper in an isolated subprocess to prevent PyTorch/C-level crashes
+        from killing the main engine process.
+
         Returns:
             Path to the .ass file.
         """
+        import subprocess
+        import json as _json
+
         ass_path = str(self.output_dir / f"{clip_id}.ass")
 
         if os.path.exists(ass_path):
@@ -115,23 +122,29 @@ class CaptionTransform:
 
         print(f"[caption] Transcribing {os.path.basename(video_path)}...")
 
-        model = self._load_whisper()
+        model_size = self._get_model_size()
 
+        # Run Whisper in a subprocess — isolates any crash from the main engine
         try:
-            import torch
-            device = "cuda" if torch.cuda.is_available() else "cpu"
-        except ImportError:
-            device = "cpu"
-
-        result = model.transcribe(
-            video_path,
-            language=self.language,
-            task="transcribe",
-            verbose=False,
-            word_timestamps=True,
-        )
-
-        segments = result.get("segments", [])
+            result = subprocess.run(
+                [
+                    sys.executable, "-m", "engine.transform.whisper_worker",
+                    video_path, model_size, self.language,
+                ],
+                capture_output=True,
+                text=True,
+                timeout=300,  # 5-minute hard timeout per clip
+                cwd=str(Path(__file__).parent.parent.parent),  # clip_empire root
+            )
+            if result.returncode != 0:
+                err = result.stderr.strip()[-500:] if result.stderr else "(no stderr)"
+                raise RuntimeError(f"Whisper worker exited {result.returncode}: {err}")
+            data = _json.loads(result.stdout)
+            segments = data.get("segments", [])
+        except subprocess.TimeoutExpired:
+            raise RuntimeError(f"Whisper timed out after 300s on {os.path.basename(video_path)}")
+        except (_json.JSONDecodeError, KeyError) as e:
+            raise RuntimeError(f"Whisper worker bad output: {e}")
         ass_content = self._build_ass(segments, channel_name=channel_name, creator=creator)
 
         with open(ass_path, "w", encoding="utf-8") as f:

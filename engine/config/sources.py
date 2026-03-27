@@ -419,13 +419,16 @@ CHANNEL_SOURCES: dict = {
          "type": "channel", "priority": 1, "max_age_days": 30,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 3,
          "crop_anchor": "left", "min_views": 100},
-        # REMOVED: myth, shinyatheninja, taxi2g — data showed 0-4 views per clip
-        # Channel is branded Tfue + Cloakzy; those are the only names with search traffic
-        # PRIORITY 3: Supply depth — Fortnite/FPS players adjacent to Tfue/Cloakzy brand
+        # PRIORITY 2: Secondary creators — growing/adjacent to Tfue/Cloakzy audience
+        {"platform": "twitch", "url": "https://www.twitch.tv/taxi2g/clips?filter=clips&range=30d",
+         "type": "channel", "priority": 2, "max_age_days": 30,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 3,
+         "crop_anchor": "left", "min_views": 100},
         {"platform": "twitch", "url": "https://www.twitch.tv/ninja/clips?filter=clips&range=30d",
-         "type": "channel", "priority": 3, "max_age_days": 30,
+         "type": "channel", "priority": 2, "max_age_days": 30,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 2,
-         "crop_anchor": "right", "min_views": 500},
+         "crop_anchor": "right", "min_views": 200},
+        # PRIORITY 3: Supply depth
         {"platform": "twitch", "url": "https://www.twitch.tv/nickmercs/clips?filter=clips&range=30d",
          "type": "channel", "priority": 3, "max_age_days": 30,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 2,

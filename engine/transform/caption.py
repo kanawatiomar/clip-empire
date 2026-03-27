@@ -182,6 +182,32 @@ class CaptionTransform:
 
         events: List[str] = []
 
+        # Profanity censor — replace known swear words with asterisks
+        # Keeps YouTube from age-restricting the video due to visible captions
+        _PROFANITY = {
+            "fuck", "fucked", "fucking", "fucker", "fucks", "fuckin",
+            "shit", "shits", "shitting", "shitty",
+            "bitch", "bitches", "bitching",
+            "ass", "asses", "asshole", "assholes",
+            "cunt", "cunts",
+            "dick", "dicks",
+            "cock", "cocks",
+            "pussy", "pussies",
+            "bastard", "bastards",
+            "damn", "damned",
+            "hell",
+            "wtf", "stfu",
+            "nigga", "nigger",
+            "faggot", "fag",
+            "retard", "retarded",
+        }
+
+        def _censor(word: str) -> str:
+            clean = word.strip().lower().strip(".,!?;:'\"")
+            if clean in _PROFANITY:
+                return word[0] + "*" * (len(word) - 1) if len(word) > 1 else "*"
+            return word
+
         # Collect all words with timestamps across all segments
         all_words: List[dict] = []
         for seg in segments:
@@ -190,7 +216,7 @@ class CaptionTransform:
                 for w in seg_words:
                     if w.get("word", "").strip():
                         all_words.append({
-                            "word":  w["word"].strip(),
+                            "word":  _censor(w["word"].strip()),
                             "start": float(w.get("start", seg["start"])),
                             "end":   float(w.get("end",   seg["end"])),
                         })

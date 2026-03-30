@@ -69,9 +69,9 @@ def _is_vertical(path: str) -> bool:
     return h > w
 
 
-def _make_title_card(title: str, work_dir: str) -> str:
+def _make_title_card(title: str, work_dir: str, filename: str = "title_card.mp4") -> str:
     """Generate a 3-second title card (black bg, white text)."""
-    out = os.path.join(work_dir, "title_card.mp4")
+    out = os.path.join(work_dir, filename)
     # Escape special characters for drawtext
     safe_title = title.replace("'", "\u2019").replace(":", "\\:")
     subprocess.run(
@@ -208,8 +208,10 @@ def build_montage(
         normalized = []
         for i, clip in enumerate(clips):
             if clip.get("is_title_card"):
-                print(f"[assembler] Creating creator card: {clip.get('creator_display', '???')}")
-                card = _make_title_card(clip["creator_display"], work_dir)
+                display = clip.get("creator_display", "???")
+                safe_name = display.lower().replace(" ", "_").replace("/", "_")
+                print(f"[assembler] Creating creator card: {display}")
+                card = _make_title_card(display, work_dir, filename=f"creator_card_{safe_name}_{i}.mp4")
                 normalized.append(card)
                 continue
             clip_path = clip.get("path") or clip.get("render_path", "")

@@ -69,11 +69,39 @@ def _is_vertical(path: str) -> bool:
     return h > w
 
 
+def _get_clip_duration(path: str) -> float:
+    """Return clip duration in seconds via ffprobe."""
+    try:
+        result = subprocess.run(
+            [FFPROBE_BIN, "-v", "error",
+             "-show_entries", "format=duration",
+             "-of", "default=noprint_wrappers=1:nokey=1", path],
+            capture_output=True, text=True, timeout=15,
+        )
+        return float(result.stdout.strip())
+    except Exception:
+        return 0.0
+
+
 def _make_title_card(title: str, work_dir: str, filename: str = "title_card.mp4") -> str:
-    """Generate a 3-second title card (black bg, white text)."""
+    """Generate a creator title card with fade-in and fade-out transitions.
+
+    Card is TITLE_CARD_DUR seconds long:
+    - 0.0-0.4s: fade in from black
+    - 0.4-2.6s: hold
+    - 2.6-3.0s: fade out to black
+    """
     out = os.path.join(work_dir, filename)
-    # Escape special characters for drawtext
     safe_title = title.replace("'", "\u2019").replace(":", "\\:")
+    fade_out_start = TITLE_CARD_DUR - 0.4
+    vf = (
+        f"drawtext=text='{safe_title}'"
+        f":fontfile='{_FONT_PATH_FF}':fontsize=80"
+        f":fontcolor=white:x=(w-text_w)/2:y=(h-text_h)/2"
+        f":borderw=3:bordercolor=black,"
+        f"fade=t=in:st=0:d=0.4,"
+        f"fade=t=out:st={fade_out_start:.1f}:d=0.4"
+    )
     subprocess.run(
         [
             FFMPEG_BIN, "-y", "-hide_banner", "-loglevel", "warning",
@@ -82,12 +110,7 @@ def _make_title_card(title: str, work_dir: str, filename: str = "title_card.mp4"
             "-f", "lavfi", "-i",
             f"anullsrc=r=48000:cl=stereo",
             "-t", str(TITLE_CARD_DUR),
-            "-vf", (
-                f"drawtext=text='{safe_title}'"
-                f":fontfile='{_FONT_PATH_FF}':fontsize=72"
-                f":fontcolor=white:x=(w-text_w)/2:y=(h-text_h)/2"
-                f":borderw=3:bordercolor=black"
-            ),
+            "-vf", vf,
             "-c:v", "libx264", "-preset", "fast", "-crf", "22",
             "-c:a", "aac", "-b:a", "192k",
             "-pix_fmt", "yuv420p",
@@ -125,24 +148,47 @@ def _make_outro_card(work_dir: str) -> str:
     return out
 
 
-def _normalize_clip(clip_path: str, index: int, work_dir: str) -> str:
+def _normalize_clip(
+    clip_path: str,
+    index: int,
+    work_dir: str,
+    fade_in: bool = False,
+    fade_out: bool = False,
+    fade_dur: float = 0.4,
+) -> str:
     """Re-encode a single clip to 1920x1080 30fps with pillarboxing if needed.
 
     Vertical clips get black bars on the sides. Horizontal clips get
     scaled/padded to exactly 1920x1080.
 
     Args:
-        clip_path: Direct path to the video file.
-        index:     Sequence number (for output filename).
-        work_dir:  Temporary working directory.
+        clip_path:  Direct path to the video file.
+        index:      Sequence number (for output filename).
+        work_dir:   Temporary working directory.
+        fade_in:    Add fade-in from black at start.
+        fade_out:   Add fade-out to black at end.
+        fade_dur:   Duration of fade in seconds.
     """
     out = os.path.join(work_dir, f"clip_{index:03d}.mp4")
     # Scale to fit within 1920x1080, then pad to exactly that size
-    vf = (
-        f"scale={OUT_W}:{OUT_H}:force_original_aspect_ratio=decrease,"
-        f"pad={OUT_W}:{OUT_H}:(ow-iw)/2:(oh-ih)/2:color=black,"
-        f"setsar=1,fps=30"
-    )
+    vf_parts = [
+        f"scale={OUT_W}:{OUT_H}:force_original_aspect_ratio=decrease",
+        f"pad={OUT_W}:{OUT_H}:(ow-iw)/2:(oh-ih)/2:color=black",
+        "setsar=1",
+        "fps=30",
+    ]
+
+    if fade_in:
+        vf_parts.append(f"fade=t=in:st=0:d={fade_dur}")
+
+    if fade_out:
+        # Need clip duration to calculate fade-out start
+        dur = _get_clip_duration(clip_path)
+        if dur > fade_dur * 2:
+            fade_out_start = dur - fade_dur
+            vf_parts.append(f"fade=t=out:st={fade_out_start:.2f}:d={fade_dur}")
+
+    vf = ",".join(vf_parts)
     subprocess.run(
         [
             FFMPEG_BIN, "-y", "-hide_banner", "-loglevel", "warning",
@@ -215,8 +261,17 @@ def build_montage(
                 normalized.append(card)
                 continue
             clip_path = clip.get("path") or clip.get("render_path", "")
+
+            # Determine fade flags based on neighbors
+            prev_is_title = i > 0 and clips[i - 1].get("is_title_card", False)
+            next_is_title = i < len(clips) - 1 and clips[i + 1].get("is_title_card", False)
+
             print(f"[assembler] Normalizing clip {i+1}/{len(clips)}: {clip.get('title', 'untitled')}")
-            norm_path = _normalize_clip(clip_path, i, work_dir)
+            norm_path = _normalize_clip(
+                clip_path, i, work_dir,
+                fade_in=prev_is_title,
+                fade_out=next_is_title,
+            )
             normalized.append(norm_path)
 
         # 3. Write concat list

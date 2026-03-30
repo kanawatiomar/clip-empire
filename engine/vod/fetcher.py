@@ -114,7 +114,10 @@ def _download_audio(vod_url: str, out_wav: str) -> bool:
     ydl_opts = {
         "quiet": True,
         "no_warnings": True,
-        "format": "bestaudio/best",
+        # "audio_only" is Twitch's native audio-only stream (~48kbps AAC)
+        # Falls back to bestaudio if not available (non-Twitch sources)
+        # Twitch VOD audio-only stream (much smaller than video, ~900MB for 9h)
+        "format": "Audio_Only/bestaudio/best",
         "outtmpl": out_template,
         "postprocessors": [{
             "key": "FFmpegExtractAudio",
@@ -122,7 +125,6 @@ def _download_audio(vod_url: str, out_wav: str) -> bool:
             "preferredquality": "0",
         }],
         "postprocessor_args": {"ffmpeg": ["-ac", "1", "-ar", "16000"]},
-        "ffmpeg_location": str(_FFMPEG_BIN_DIR),
     }
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:

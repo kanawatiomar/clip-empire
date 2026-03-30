@@ -55,6 +55,7 @@ def fetch_top_clips(
     output_dir: Optional[str] = None,
     min_dur_s: float = 15.0,
     max_dur_s: float = 90.0,
+    min_views: Optional[int] = None,
 ) -> list[dict]:
     """Download top `count` Twitch clips for `creator` in original 16:9.
 
@@ -115,6 +116,11 @@ def fetch_top_clips(
         dur = _probe_duration(str(expected))
         if dur < min_dur_s or dur > max_dur_s:
             print(f"[fetcher] Skipping {clip_id} (dur={dur:.1f}s out of range)")
+            continue
+
+        views = entry.get("view_count") or 0
+        if min_views and views < min_views:
+            print(f"[fetcher] Skipping {clip_id} (views={views} < {min_views})")
             continue
 
         downloaded.append({

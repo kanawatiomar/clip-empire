@@ -103,6 +103,7 @@ def run_montage(
     dry_run: bool = False,
     min_clips: int = 3,
     min_duration_s: float = 120.0,
+    all_time: bool = False,
 ) -> Optional[str]:
     """Fetch, score, assemble and queue a long-form montage.
 
@@ -116,13 +117,17 @@ def run_montage(
     clips_by_creator: dict[str, list[dict]] = {}
     all_creators_display: list[str] = []
 
+    # All-time mode: higher thresholds, more clips fetched
+    min_views_override = 10000 if all_time else None
+
     for cfg in creator_cfg:
         creator = cfg["name"]
         display = cfg["display"]
-        count = cfg["fetch"]
-        top_n = cfg["top_n"]
+        count = cfg["fetch"] if not all_time else 30
+        top_n = cfg["top_n"] if not all_time else 6
 
-        clips = fetch_top_clips(creator, count=count, range_days=range_days)
+        clips = fetch_top_clips(creator, count=count, range_days=range_days,
+                                min_views=min_views_override)
 
         if not clips:
             print(f"[runner] No clips fetched for {display}, skipping")
@@ -171,8 +176,14 @@ def run_montage(
         return None
 
     month_str = datetime.now().strftime("%B %Y")
-    title = _generate_title(all_creators_display, month_str)
-    description = _generate_description(all_creators_display, month_str)
+    year_str = datetime.now().strftime("%Y")
+    if all_time:
+        creators_str = " & ".join(all_creators_display[:2]) if len(all_creators_display) > 1 else all_creators_display[0]
+        title = f"{creators_str} Greatest Clips of All Time"
+        description = _generate_description(all_creators_display, f"All Time • {year_str}")
+    else:
+        title = _generate_title(all_creators_display, month_str)
+        description = _generate_description(all_creators_display, month_str)
     hashtags = _generate_hashtags(all_creators_display)
 
     print(f"\n[runner] Title: {title}")
@@ -186,7 +197,8 @@ def run_montage(
     date_str = datetime.now().strftime("%Y%m%d")
     out_dir = Path("rendered_clips") / channel
     out_dir.mkdir(parents=True, exist_ok=True)
-    output_path = str(out_dir / f"montage_{date_str}.mp4")
+    prefix = "alltime" if all_time else "montage"
+    output_path = str(out_dir / f"{prefix}_{date_str}.mp4")
 
     # Build montage (assembler handles creator sections with title cards)
     # Flatten into a single ordered list with title card markers
@@ -207,7 +219,7 @@ def run_montage(
         return None
 
     # Log clip usage for dedup tracking
-    video_id = f"montage_{datetime.now().strftime('%Y%m%d')}"
+    video_id = f"{prefix}_{datetime.now().strftime('%Y%m%d')}"
     log_montage_clips(ordered_clips, video_id=video_id, channel_name=channel)
     print(f"[runner] Logged {len(all_clips)} clip(s) to dedup tracker (video_id={video_id})")
 

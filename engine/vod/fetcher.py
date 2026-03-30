@@ -1,10 +1,10 @@
-"""VOD fetcher — downloads Twitch VOD audio, finds energy peaks, extracts video clips.
+"""VOD fetcher — uses chat density to find peak moments, then extracts video clips.
 
-Strategy (audio-first to save bandwidth):
-  1. List recent VODs for creator via yt-dlp --flat-playlist
-  2. Download AUDIO ONLY of the VOD (small, fast)
-  3. Run sliding-window RMS energy analysis → find top N peak moments
-  4. Download VIDEO for only those moments using yt-dlp --download-sections
+Strategy (chat-first, much faster than audio download):
+  1. List recent VODs for creator via yt-dlp
+  2. Fetch chat log via Twitch public API (~2-10s, no video download needed)
+  3. Find timestamps with peak chat activity (hype moments)
+  4. Download VIDEO clips for only those moments using yt-dlp --download-sections
   5. Write segments to DB (engine/vod/db.py)
 
 Output clips: raw_clips/vod_highlights/{creator}/{vod_id}_{start_s}_{end_s}.mp4
@@ -28,6 +28,7 @@ from engine.vod.db import (
     update_clip_path,
     vod_already_processed,
 )
+from engine.vod.sampler import sample_vod_peaks
 
 # ── ffmpeg/ffprobe paths (mirrors encode.py) ───────────────────────────────
 _FFMPEG_BIN_DIR = Path(os.environ.get("LOCALAPPDATA", "")) / (
@@ -314,67 +315,50 @@ def ingest_vod_highlights(
 
         print(f"[vod.fetcher] Processing VOD {vod_id}: '{vod.get('title', '')}' ({dur/3600:.1f}h)")
 
-        with tempfile.TemporaryDirectory() as tmpdir:
-            audio_path = os.path.join(tmpdir, f"{vod_id}.wav")
+        # Use grid audio sampling to find peak moments
+        # Downloads 20 x 30s windows evenly spaced → ~17MB vs 900MB for full audio
+        peaks = sample_vod_peaks(vod_url, dur, top_n=top_moments)
 
-            print(f"[vod.fetcher]   Downloading audio track...")
-            if not _download_audio(vod_url, audio_path):
-                print(f"[vod.fetcher]   Audio download failed, skipping VOD")
-                continue
+        if not peaks:
+            print(f"[vod.fetcher]   No peaks found, skipping VOD")
+            # Insert a placeholder so we don't retry this VOD forever
+            insert_segment(vod_id=vod_id, vod_url=vod_url, creator=creator,
+                           channel_name=channel_name, start_ts=0, end_ts=0,
+                           energy_score=0, clip_path="__no_data__")
+            continue
 
-            print(f"[vod.fetcher]   Analyzing energy peaks...")
-            rms_data = _rms_peaks(audio_path)
-            peak_times = _find_peaks(rms_data, top_n=top_moments)
-            print(f"[vod.fetcher]   Found {len(peak_times)} peak moment(s)")
+        for i, (peak_t, density_score) in enumerate(peaks):
+            start_s = max(0.0, peak_t - CLIP_PAD)
+            end_s   = min(peak_t + (CLIP_MAX_DUR - CLIP_PAD), dur if dur > 0 else peak_t + 90)
+            energy_score = round(density_score, 3)
 
-            if not peak_times:
-                print(f"[vod.fetcher]   No peaks found, skipping VOD")
-                continue
+            # Insert DB record first (before downloading clip)
+            segment_id = insert_segment(
+                vod_id=vod_id,
+                vod_url=vod_url,
+                creator=creator,
+                channel_name=channel_name,
+                start_ts=start_s,
+                end_ts=end_s,
+                energy_score=energy_score,
+                clip_path="",
+            )
 
-            # Compute mean RMS for energy normalization
-            rms_values = [r for _, r in rms_data]
-            mean_rms = sum(rms_values) / len(rms_values) if rms_values else 1.0
-            rms_lookup = {t: r for t, r in rms_data}
+            # Download video clip for this moment
+            clip_filename = f"{vod_id}_{int(start_s)}_{int(end_s)}.mp4"
+            clip_path = str(out_base / clip_filename)
 
-            for i, peak_t in enumerate(peak_times):
-                start_s = max(0.0, peak_t - CLIP_PAD)
-                end_s   = peak_t + (CLIP_MAX_DUR - CLIP_PAD)
+            print(f"[vod.fetcher]   Extracting clip {i+1}/{len(peaks)}: "
+                  f"{_timestamp_to_hhmmss(start_s)}→{_timestamp_to_hhmmss(end_s)} "
+                  f"(chat_density={energy_score:.1f}×)")
 
-                # Clamp to VOD duration if known
-                if dur > 0:
-                    end_s = min(end_s, dur)
-
-                # Normalize energy score (ratio of peak to mean)
-                peak_rms = rms_lookup.get(peak_t, 0.0)
-                energy_score = round(peak_rms / mean_rms if mean_rms > 0 else 0.0, 3)
-
-                # Insert DB record first (before downloading clip)
-                segment_id = insert_segment(
-                    vod_id=vod_id,
-                    vod_url=vod_url,
-                    creator=creator,
-                    channel_name=channel_name,
-                    start_ts=start_s,
-                    end_ts=end_s,
-                    energy_score=energy_score,
-                    clip_path="",
-                )
-
-                # Download video clip for this moment
-                clip_filename = f"{vod_id}_{int(start_s)}_{int(end_s)}.mp4"
-                clip_path = str(out_base / clip_filename)
-
-                print(f"[vod.fetcher]   Extracting clip {i+1}/{len(peak_times)}: "
-                      f"{_timestamp_to_hhmmss(start_s)}→{_timestamp_to_hhmmss(end_s)} "
-                      f"(energy={energy_score:.2f})")
-
-                if _extract_clip(vod_url, start_s, end_s, clip_path):
-                    update_clip_path(segment_id, clip_path)
-                    segment_ids.append(segment_id)
-                    print(f"[vod.fetcher]     → {clip_filename}")
-                else:
-                    print(f"[vod.fetcher]     Extract failed, segment recorded without file")
-                    segment_ids.append(segment_id)
+            if _extract_clip(vod_url, start_s, end_s, clip_path):
+                update_clip_path(segment_id, clip_path)
+                segment_ids.append(segment_id)
+                print(f"[vod.fetcher]     → {clip_filename}")
+            else:
+                print(f"[vod.fetcher]     Extract failed, segment recorded without file")
+                segment_ids.append(segment_id)
 
     print(f"[vod.fetcher] Done. {len(segment_ids)} segment(s) added for {creator}")
     return segment_ids

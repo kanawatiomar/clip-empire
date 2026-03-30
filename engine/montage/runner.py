@@ -178,8 +178,12 @@ def run_montage(
     month_str = datetime.now().strftime("%B %Y")
     year_str = datetime.now().strftime("%Y")
     if all_time:
-        creators_str = " & ".join(all_creators_display[:2]) if len(all_creators_display) > 1 else all_creators_display[0]
-        title = f"{creators_str} Greatest Clips of All Time"
+        if len(all_creators_display) == 1:
+            title = f"{all_creators_display[0]} Greatest Clips of All Time"
+        elif len(all_creators_display) == 2:
+            title = f"{all_creators_display[0]} & {all_creators_display[1]} Greatest Clips of All Time"
+        else:
+            title = f"Greatest Gaming Clips of All Time ft. {', '.join(all_creators_display)}"
         description = _generate_description(all_creators_display, f"All Time • {year_str}")
     else:
         title = _generate_title(all_creators_display, month_str)

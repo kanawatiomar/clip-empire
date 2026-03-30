@@ -20,7 +20,7 @@ from typing import Optional
 _FFMPEG_BIN_DIR = Path(os.environ.get("LOCALAPPDATA", "")) / (
     "Microsoft/WinGet/Packages/"
     "Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/"
-    "ffmpeg-8.1-full_build/bin"
+    "ffmpeg-8.0.1-full_build/bin"
 )
 FFMPEG_BIN = str(_FFMPEG_BIN_DIR / "ffmpeg.exe") if (_FFMPEG_BIN_DIR / "ffmpeg.exe").exists() else "ffmpeg"
 FFPROBE_BIN = str(_FFMPEG_BIN_DIR / "ffprobe.exe") if (_FFMPEG_BIN_DIR / "ffprobe.exe").exists() else "ffprobe"
@@ -28,7 +28,13 @@ FFPROBE_BIN = str(_FFMPEG_BIN_DIR / "ffprobe.exe") if (_FFMPEG_BIN_DIR / "ffprob
 OUT_W, OUT_H = 1920, 1080
 TITLE_CARD_DUR = 3
 OUTRO_CARD_DUR = 3
-FONT = "Impact"
+
+# Windows font path — use arial as universal fallback, Impact if available
+_IMPACT_PATH = Path("C:/Windows/Fonts/impact.ttf")
+_ARIAL_PATH = Path("C:/Windows/Fonts/arial.ttf")
+_FONT_PATH = str(_IMPACT_PATH) if _IMPACT_PATH.exists() else str(_ARIAL_PATH)
+# ffmpeg drawtext needs forward slashes and escaped colons
+_FONT_PATH_FF = _FONT_PATH.replace("\\", "/").replace(":", "\\:")
 
 DATA_DIR = Path(__file__).resolve().parents[2] / "data"
 
@@ -78,7 +84,7 @@ def _make_title_card(title: str, work_dir: str) -> str:
             "-t", str(TITLE_CARD_DUR),
             "-vf", (
                 f"drawtext=text='{safe_title}'"
-                f":fontfile=Impact.ttf:fontsize=72"
+                f":fontfile='{_FONT_PATH_FF}':fontsize=72"
                 f":fontcolor=white:x=(w-text_w)/2:y=(h-text_h)/2"
                 f":borderw=3:bordercolor=black"
             ),
@@ -105,7 +111,7 @@ def _make_outro_card(work_dir: str) -> str:
             "-t", str(OUTRO_CARD_DUR),
             "-vf", (
                 "drawtext=text='Subscribe for more\\!'"
-                ":fontfile=Impact.ttf:fontsize=80"
+                f":fontfile='{_FONT_PATH_FF}':fontsize=80"
                 ":fontcolor=white:x=(w-text_w)/2:y=(h-text_h)/2"
                 ":borderw=3:bordercolor=black"
             ),
@@ -183,7 +189,11 @@ def build_montage(
     else:
         Path(output_path).parent.mkdir(parents=True, exist_ok=True)
 
-    total_dur = sum(c["duration_s"] for c in clips)
+    # Accept either 'duration_s' (DB selector) or 'duration' (fetcher) — skip title card markers
+    total_dur = sum(
+        c.get("duration_s") or c.get("duration", 0)
+        for c in clips if not c.get("is_title_card")
+    )
     print(f"[assembler] Building montage: {len(clips)} clips, ~{total_dur:.0f}s")
 
     with tempfile.TemporaryDirectory(prefix="montage_") as work_dir:
@@ -316,6 +326,7 @@ def _apply_branding(input_path: str, output_path: str, channel_name: str = "Arc 
     watermark_filter = (
         f"drawtext="
         f"text='{channel_name}':"
+        f"fontfile='{_FONT_PATH_FF}':"
         f"fontsize=36:"
         f"fontcolor=white@0.55:"
         f"x=w-tw-28:"
@@ -337,7 +348,8 @@ def _apply_branding(input_path: str, output_path: str, channel_name: str = "Arc 
     # Subscribe text on top of red box
     sub_text_filter = (
         f"drawtext="
-        f"text='\u25b6  SUBSCRIBE':"
+        f"text='SUBSCRIBE':"
+        f"fontfile='{_FONT_PATH_FF}':"
         f"fontsize=26:"
         f"fontcolor=white:"
         f"x=38:"

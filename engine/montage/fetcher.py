@@ -18,7 +18,7 @@ import yt_dlp
 _FFMPEG_BIN_DIR = Path(os.environ.get("LOCALAPPDATA", "")) / (
     "Microsoft/WinGet/Packages/"
     "Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/"
-    "ffmpeg-8.1-full_build/bin"
+    "ffmpeg-8.0.1-full_build/bin"
 )
 FFMPEG_BIN = str(_FFMPEG_BIN_DIR / "ffmpeg.exe") if (_FFMPEG_BIN_DIR / "ffmpeg.exe").exists() else "ffmpeg"
 FFPROBE_BIN = str(_FFMPEG_BIN_DIR / "ffprobe.exe") if (_FFMPEG_BIN_DIR / "ffprobe.exe").exists() else "ffprobe"

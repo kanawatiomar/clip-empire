@@ -30,7 +30,10 @@ _RANGE_MAP = {7: "7d", 14: "14d", 30: "30d", 90: "90d"}
 
 
 def _twitch_clips_url(creator: str, range_days: int = 30) -> str:
-    range_str = _RANGE_MAP.get(range_days, "30d")
+    if range_days >= 365:
+        range_str = "all"
+    else:
+        range_str = _RANGE_MAP.get(range_days, "30d")
     return f"https://www.twitch.tv/{creator}/clips?filter=clips&range={range_str}"
 
 

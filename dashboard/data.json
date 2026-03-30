@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-30T06:18:03.421775Z",
+  "generated_at": "2026-03-30T07:18:03.542465Z",
   "repo_root": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire",
   "database_path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\data\\clip_empire.db",
   "health_score": {
@@ -20,9 +20,9 @@
       "target_today": 31,
       "pipeline_health_ratio": 0.0,
       "errors_today": 0,
-      "total_jobs_today": 3,
+      "total_jobs_today": 4,
       "error_rate": 0.0,
-      "queue_depth": 3,
+      "queue_depth": 4,
       "active_channels": 3,
       "total_channels": 13,
       "fresh_sources": 0,
@@ -33,17 +33,32 @@
     "active_channels": 3,
     "total_channels": 13,
     "jobs_today": {
-      "total": 3,
-      "queued": 3,
+      "total": 4,
+      "queued": 4,
       "running": 0,
       "succeeded": 0,
       "failed": 0,
       "cancelled": 0
     },
-    "render_queue_depth": 3,
-    "last_updated": "2026-03-30T06:18:03.421775Z"
+    "render_queue_depth": 4,
+    "last_updated": "2026-03-30T07:18:03.542465Z"
   },
   "queue_monitor": [
+    {
+      "job_id": "b2233fbf-6dd4-449e-87b2-e2960a65c185",
+      "job_id_short": "b2233fbf",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-03-30T01:05:41.158607",
+      "created_at_display": "2026-03-30 01:05",
+      "created_ago": "6h",
+      "updated_at": "2026-03-30T01:05:41.158607",
+      "scheduled_for": "2026-03-30 10:00",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
     {
       "job_id": "0a566d72-4225-483d-901f-a95f65df7050",
       "job_id_short": "0a566d72",
@@ -52,7 +67,7 @@
       "attempt": 0,
       "created_at": "2026-03-30T00:08:29.260735",
       "created_at_display": "2026-03-30 00:08",
-      "created_ago": "6h",
+      "created_ago": "7h",
       "updated_at": "2026-03-30T00:08:29.260735",
       "scheduled_for": "2026-03-30 09:00",
       "error": null,
@@ -67,7 +82,7 @@
       "attempt": 0,
       "created_at": "2026-03-30T00:07:16.603133",
       "created_at_display": "2026-03-30 00:07",
-      "created_ago": "6h",
+      "created_ago": "7h",
       "updated_at": "2026-03-30T00:07:16.603133",
       "scheduled_for": "2026-03-30 08:00",
       "error": null,
@@ -82,7 +97,7 @@
       "attempt": 0,
       "created_at": "2026-03-30T00:06:12.423796",
       "created_at_display": "2026-03-30 00:06",
-      "created_ago": "6h",
+      "created_ago": "7h",
       "updated_at": "2026-03-30T00:06:12.423796",
       "scheduled_for": "2026-03-30 07:00",
       "error": null,
@@ -97,7 +112,7 @@
       "attempt": 0,
       "created_at": "2026-03-29T15:10:03.065186",
       "created_at_display": "2026-03-29 15:10",
-      "created_ago": "15h",
+      "created_ago": "16h",
       "updated_at": "2026-03-29T15:31:22.245890",
       "scheduled_for": "2026-03-29 15:30",
       "error": null,
@@ -1528,21 +1543,6 @@
       "error": null,
       "has_error": false,
       "post_url": "https://youtube.com/shorts/psQE35ZKTto"
-    },
-    {
-      "job_id": "f6fc6ca2-ffb2-4cd0-99a8-9ebe0fafe47a",
-      "job_id_short": "f6fc6ca2",
-      "channel": "arc_highlightz",
-      "status": "succeeded",
-      "attempt": 0,
-      "created_at": "2026-03-27T01:06:28.797501",
-      "created_at_display": "2026-03-27 01:06",
-      "created_ago": "3d",
-      "updated_at": "2026-03-27T07:03:02.158630",
-      "scheduled_for": "2026-03-27 11:00",
-      "error": null,
-      "has_error": false,
-      "post_url": "https://youtube.com/shorts/rcaLGr4N6c0"
     }
   ],
   "queue": {
@@ -1604,14 +1604,14 @@
       "status": "active",
       "category": "Gaming",
       "target_per_day": 15,
-      "published_24h": 7,
-      "queue_depth": 3,
+      "published_24h": 6,
+      "queue_depth": 4,
       "running_jobs": 0,
       "failed_7d": 0,
-      "avg_views": 14665,
-      "rpm": 12.47,
-      "deficit": 8,
-      "completion_rate": 46.7,
+      "avg_views": 14479,
+      "rpm": 12.31,
+      "deficit": 9,
+      "completion_rate": 40.0,
       "lagging": true,
       "views_source": "source_clips_proxy",
       "latest_title": "Nickmercs Moments #6",
@@ -2312,29 +2312,29 @@
           },
           {
             "date": "2026-03-30",
-            "views": 334.33,
-            "rpm": 0.2842
+            "views": 392.0,
+            "rpm": 0.3332
           }
         ],
         "window_7d": {
           "window_days": 7,
-          "avg": 12036.73,
+          "avg": 12044.97,
           "previous_avg": 870.84,
-          "delta": 11165.89,
-          "delta_pct": 1282.2,
+          "delta": 11174.13,
+          "delta_pct": 1283.1,
           "direction": "up",
           "points": 7
         },
         "window_30d": {
           "window_days": 30,
-          "avg": 6453.79,
+          "avg": 6457.9,
           "previous_avg": 6924.51,
-          "delta": -470.72,
-          "delta_pct": -6.8,
+          "delta": -466.61,
+          "delta_pct": -6.7,
           "direction": "down",
           "points": 14
         },
-        "latest": 334.33
+        "latest": 392.0
       },
       "rpm": {
         "series_30d": [
@@ -2485,16 +2485,16 @@
           },
           {
             "date": "2026-03-30",
-            "views": 334.33,
-            "rpm": 0.2842
+            "views": 392.0,
+            "rpm": 0.3332
           }
         ],
         "window_7d": {
           "window_days": 7,
-          "avg": 10.23,
+          "avg": 10.24,
           "previous_avg": 0.74,
-          "delta": 9.49,
-          "delta_pct": 1282.4,
+          "delta": 9.5,
+          "delta_pct": 1283.8,
           "direction": "up",
           "points": 7
         },
@@ -2507,7 +2507,7 @@
           "direction": "down",
           "points": 14
         },
-        "latest": 0.2842
+        "latest": 0.3332
       }
     },
     {
@@ -7136,41 +7136,41 @@
       "source_id": "https://www.twitch.tv/cloakzy/clips?filter=clips&range=30d",
       "source_key": "https://www.twitch.tv/cloakzy/clips?filter=clips&range=30d",
       "platform": "unknown",
-      "last_fetch": "2026-03-30 06:07:22",
-      "last_fetch_display": "2026-03-30 06:07",
-      "last_fetch_ago": "10m",
+      "last_fetch": "2026-03-30 07:05:49",
+      "last_fetch_display": "2026-03-30 07:05",
+      "last_fetch_ago": "12m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.342,
-      "success_count": 77,
-      "failure_count": 40,
-      "last_error": "ffmpeg overlay failed: ffmpeg version 8.1-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev11, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enabl"
+      "error_rate": 0.345,
+      "success_count": 78,
+      "failure_count": 41,
+      "last_error": "ffmpeg crop failed: ffmpeg version 8.1-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev11, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enabl"
     },
     {
       "source_id": "https://www.twitch.tv/cloakzy/clips?filter=clips&range=all",
       "source_key": "https://www.twitch.tv/cloakzy/clips?filter=clips&range=all",
       "platform": "unknown",
-      "last_fetch": "2026-03-30 05:09:29",
-      "last_fetch_display": "2026-03-30 05:09",
-      "last_fetch_ago": "1h",
+      "last_fetch": "2026-03-30 07:06:57",
+      "last_fetch_display": "2026-03-30 07:06",
+      "last_fetch_ago": "11m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.429,
-      "success_count": 24,
-      "failure_count": 18,
+      "error_rate": 0.432,
+      "success_count": 25,
+      "failure_count": 19,
       "last_error": "ffmpeg crop failed: ffmpeg version 8.1-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev11, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enabl"
     },
     {
       "source_id": "https://www.twitch.tv/ludwig/clips",
       "source_key": "https://www.twitch.tv/ludwig/clips",
       "platform": "unknown",
-      "last_fetch": "2026-03-30 06:08:57",
-      "last_fetch_display": "2026-03-30 06:08",
-      "last_fetch_ago": "9m",
+      "last_fetch": "2026-03-30 07:07:24",
+      "last_fetch_display": "2026-03-30 07:07",
+      "last_fetch_ago": "10m",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.012,
-      "success_count": 81,
+      "success_count": 82,
       "failure_count": 1,
       "last_error": "ffmpeg overlay failed: ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev8, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --"
     },
@@ -7178,13 +7178,13 @@
       "source_id": "https://www.twitch.tv/moistcr1tikal/clips",
       "source_key": "https://www.twitch.tv/moistcr1tikal/clips",
       "platform": "unknown",
-      "last_fetch": "2026-03-30 06:08:59",
-      "last_fetch_display": "2026-03-30 06:08",
-      "last_fetch_ago": "9m",
+      "last_fetch": "2026-03-30 07:07:26",
+      "last_fetch_display": "2026-03-30 07:07",
+      "last_fetch_ago": "10m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.012,
-      "success_count": 85,
+      "error_rate": 0.011,
+      "success_count": 86,
       "failure_count": 1,
       "last_error": "ffmpeg overlay failed: ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev8, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --"
     },
@@ -7206,13 +7206,13 @@
       "source_id": "https://www.twitch.tv/nickmercs/clips",
       "source_key": "https://www.twitch.tv/nickmercs/clips",
       "platform": "unknown",
-      "last_fetch": "2026-03-30 06:08:40",
-      "last_fetch_display": "2026-03-30 06:08",
-      "last_fetch_ago": "9m",
+      "last_fetch": "2026-03-30 07:07:07",
+      "last_fetch_display": "2026-03-30 07:07",
+      "last_fetch_ago": "10m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.014,
-      "success_count": 73,
+      "error_rate": 0.013,
+      "success_count": 74,
       "failure_count": 1,
       "last_error": "ffmpeg overlay failed: ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev8, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --"
     },
@@ -7220,28 +7220,28 @@
       "source_id": "https://www.twitch.tv/nickmercs/clips?filter=clips&range=30d",
       "source_key": "https://www.twitch.tv/nickmercs/clips?filter=clips&range=30d",
       "platform": "unknown",
-      "last_fetch": "2026-03-30 05:08:58",
-      "last_fetch_display": "2026-03-30 05:08",
-      "last_fetch_ago": "1h",
+      "last_fetch": "2026-03-30 07:06:27",
+      "last_fetch_display": "2026-03-30 07:06",
+      "last_fetch_ago": "11m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.413,
-      "success_count": 27,
-      "failure_count": 19,
+      "error_rate": 0.417,
+      "success_count": 28,
+      "failure_count": 20,
       "last_error": "ffmpeg crop failed: ffmpeg version 8.1-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev11, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enabl"
     },
     {
       "source_id": "https://www.twitch.tv/ninja/clips?filter=clips&range=30d",
       "source_key": "https://www.twitch.tv/ninja/clips?filter=clips&range=30d",
       "platform": "unknown",
-      "last_fetch": "2026-03-30 05:08:34",
-      "last_fetch_display": "2026-03-30 05:08",
-      "last_fetch_ago": "1h",
+      "last_fetch": "2026-03-30 07:06:01",
+      "last_fetch_display": "2026-03-30 07:06",
+      "last_fetch_ago": "12m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.379,
-      "success_count": 36,
-      "failure_count": 22,
+      "error_rate": 0.383,
+      "success_count": 37,
+      "failure_count": 23,
       "last_error": "ffmpeg crop failed: ffmpeg version 8.1-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev11, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enabl"
     },
     {
@@ -7262,13 +7262,13 @@
       "source_id": "https://www.twitch.tv/shroud/clips",
       "source_key": "https://www.twitch.tv/shroud/clips",
       "platform": "unknown",
-      "last_fetch": "2026-03-30 06:08:45",
-      "last_fetch_display": "2026-03-30 06:08",
-      "last_fetch_ago": "9m",
+      "last_fetch": "2026-03-30 07:07:12",
+      "last_fetch_display": "2026-03-30 07:07",
+      "last_fetch_ago": "10m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.028,
-      "success_count": 70,
+      "error_rate": 0.027,
+      "success_count": 71,
       "failure_count": 2,
       "last_error": "ffmpeg overlay failed: ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev8, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --"
     },
@@ -7276,14 +7276,14 @@
       "source_id": "https://www.twitch.tv/taxi2g/clips?filter=clips&range=30d",
       "source_key": "https://www.twitch.tv/taxi2g/clips?filter=clips&range=30d",
       "platform": "unknown",
-      "last_fetch": "2026-03-30 05:08:43",
-      "last_fetch_display": "2026-03-30 05:08",
-      "last_fetch_ago": "1h",
+      "last_fetch": "2026-03-30 07:06:11",
+      "last_fetch_display": "2026-03-30 07:06",
+      "last_fetch_ago": "11m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.429,
-      "success_count": 28,
-      "failure_count": 21,
+      "error_rate": 0.431,
+      "success_count": 29,
+      "failure_count": 22,
       "last_error": "ffmpeg crop failed: ffmpeg version 8.1-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev11, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enabl"
     },
     {
@@ -7304,13 +7304,13 @@
       "source_id": "https://www.twitch.tv/tfue/clips?filter=clips&range=30d",
       "source_key": "https://www.twitch.tv/tfue/clips?filter=clips&range=30d",
       "platform": "unknown",
-      "last_fetch": "2026-03-30 06:04:57",
-      "last_fetch_display": "2026-03-30 06:04",
+      "last_fetch": "2026-03-30 07:04:43",
+      "last_fetch_display": "2026-03-30 07:04",
       "last_fetch_ago": "13m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.246,
-      "success_count": 86,
+      "error_rate": 0.243,
+      "success_count": 87,
       "failure_count": 28,
       "last_error": "ffmpeg overlay failed: ffmpeg version 8.1-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev11, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enabl"
     },
@@ -7318,14 +7318,14 @@
       "source_id": "https://www.twitch.tv/tfue/clips?filter=clips&range=all",
       "source_key": "https://www.twitch.tv/tfue/clips?filter=clips&range=all",
       "platform": "unknown",
-      "last_fetch": "2026-03-30 05:09:14",
-      "last_fetch_display": "2026-03-30 05:09",
-      "last_fetch_ago": "1h",
+      "last_fetch": "2026-03-30 07:06:42",
+      "last_fetch_display": "2026-03-30 07:06",
+      "last_fetch_ago": "11m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.419,
-      "success_count": 25,
-      "failure_count": 18,
+      "error_rate": 0.422,
+      "success_count": 26,
+      "failure_count": 19,
       "last_error": "ffmpeg crop failed: ffmpeg version 8.1-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev11, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enabl"
     },
     {
@@ -7542,13 +7542,13 @@
       "source_id": "https://www.twitch.tv/hasanabi/clips",
       "source_key": "https://www.twitch.tv/hasanabi/clips",
       "platform": "unknown",
-      "last_fetch": "2026-03-30 06:08:54",
-      "last_fetch_display": "2026-03-30 06:08",
-      "last_fetch_ago": "9m",
+      "last_fetch": "2026-03-30 07:07:22",
+      "last_fetch_display": "2026-03-30 07:07",
+      "last_fetch_ago": "10m",
       "clips_24h": 0,
       "status": "healthy",
       "error_rate": 0.0,
-      "success_count": 75,
+      "success_count": 76,
       "failure_count": 0,
       "last_error": ""
     },
@@ -7556,13 +7556,13 @@
       "source_id": "https://www.twitch.tv/timthetatman/clips",
       "source_key": "https://www.twitch.tv/timthetatman/clips",
       "platform": "unknown",
-      "last_fetch": "2026-03-30 06:08:31",
-      "last_fetch_display": "2026-03-30 06:08",
-      "last_fetch_ago": "9m",
+      "last_fetch": "2026-03-30 07:06:58",
+      "last_fetch_display": "2026-03-30 07:06",
+      "last_fetch_ago": "11m",
       "clips_24h": 0,
       "status": "healthy",
       "error_rate": 0.0,
-      "success_count": 74,
+      "success_count": 75,
       "failure_count": 0,
       "last_error": ""
     }
@@ -7924,13 +7924,25 @@
   ],
   "recent_uploads": [
     {
+      "job_id": "b2233fbf-6dd4-449e-87b2-e2960a65c185",
+      "job_id_short": "b2233fbf",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "updated_at": "2026-03-30T01:05:41.158607",
+      "updated_at_display": "2026-03-30 01:05",
+      "updated_ago": "6h",
+      "title": "Nickmercs Moments #7",
+      "url": null,
+      "error": null
+    },
+    {
       "job_id": "0a566d72-4225-483d-901f-a95f65df7050",
       "job_id_short": "0a566d72",
       "channel": "arc_highlightz",
       "status": "queued",
       "updated_at": "2026-03-30T00:08:29.260735",
       "updated_at_display": "2026-03-30 00:08",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "Taxi2g Moments #12",
       "url": null,
       "error": null
@@ -7942,7 +7954,7 @@
       "status": "queued",
       "updated_at": "2026-03-30T00:07:16.603133",
       "updated_at_display": "2026-03-30 00:07",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "Tfue Moments #23",
       "url": null,
       "error": null
@@ -7954,7 +7966,7 @@
       "status": "queued",
       "updated_at": "2026-03-30T00:06:12.423796",
       "updated_at_display": "2026-03-30 00:06",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "Taxi2g Moments #11",
       "url": null,
       "error": null
@@ -7966,7 +7978,7 @@
       "status": "succeeded",
       "updated_at": "2026-03-29T15:31:22.245890",
       "updated_at_display": "2026-03-29 15:31",
-      "updated_ago": "14h",
+      "updated_ago": "15h",
       "title": "Hasanabi Moments #6",
       "url": "https://youtube.com/shorts/LGt2dR1XOPk",
       "error": null
@@ -7978,7 +7990,7 @@
       "status": "succeeded",
       "updated_at": "2026-03-29T13:04:00.424382",
       "updated_at_display": "2026-03-29 13:04",
-      "updated_ago": "17h",
+      "updated_ago": "18h",
       "title": "Nickmercs Moments #6",
       "url": "https://youtube.com/shorts/TeIX_Y3pTpM",
       "error": null
@@ -7990,7 +8002,7 @@
       "status": "succeeded",
       "updated_at": "2026-03-29T12:02:26.566535",
       "updated_at_display": "2026-03-29 12:02",
-      "updated_ago": "18h",
+      "updated_ago": "19h",
       "title": "Tfue Moments #22",
       "url": "https://youtube.com/shorts/zXF68bVkDiA",
       "error": null
@@ -8002,7 +8014,7 @@
       "status": "succeeded",
       "updated_at": "2026-03-29T11:01:21.043986",
       "updated_at_display": "2026-03-29 11:01",
-      "updated_ago": "19h",
+      "updated_ago": "20h",
       "title": "Ninja Moments #8",
       "url": "https://youtube.com/shorts/_gfvu45k1mQ",
       "error": null
@@ -8014,7 +8026,7 @@
       "status": "succeeded",
       "updated_at": "2026-03-29T10:11:18.226798",
       "updated_at_display": "2026-03-29 10:11",
-      "updated_ago": "20h",
+      "updated_ago": "21h",
       "title": "Tfue Moments #21",
       "url": "https://youtube.com/shorts/P219vidxdgE",
       "error": null
@@ -8026,21 +8038,9 @@
       "status": "succeeded",
       "updated_at": "2026-03-29T09:02:17.620461",
       "updated_at_display": "2026-03-29 09:02",
-      "updated_ago": "21h",
+      "updated_ago": "22h",
       "title": "Taxi2g Moments #10",
       "url": "https://youtube.com/shorts/Hn3u0Wstew0",
-      "error": null
-    },
-    {
-      "job_id": "9cb567a9-2924-49ad-98cf-3a5023803dc5",
-      "job_id_short": "9cb567a9",
-      "channel": "arc_highlightz",
-      "status": "succeeded",
-      "updated_at": "2026-03-29T08:01:18.450806",
-      "updated_at_display": "2026-03-29 08:01",
-      "updated_ago": "22h",
-      "title": "Cloakzy Moments #16",
-      "url": "https://youtube.com/shorts/7BPXA3xi4-8",
       "error": null
     }
   ],
@@ -8057,7 +8057,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-03-29T15:31:22.245890",
       "published_at_display": "2026-03-29 15:31",
-      "published_ago": "14h"
+      "published_ago": "15h"
     },
     {
       "job_id": "45012f5d-c189-4ddd-8806-3eebdbe96a12",
@@ -8071,7 +8071,7 @@
       "views_display": "4",
       "published_at": "2026-03-29T13:04:00.424382",
       "published_at_display": "2026-03-29 13:04",
-      "published_ago": "17h"
+      "published_ago": "18h"
     },
     {
       "job_id": "5c190ae1-a263-4909-8385-000fb1340f8c",
@@ -8085,7 +8085,7 @@
       "views_display": "2",
       "published_at": "2026-03-29T12:02:26.566535",
       "published_at_display": "2026-03-29 12:02",
-      "published_ago": "18h"
+      "published_ago": "19h"
     },
     {
       "job_id": "f87de21a-425a-4760-9072-5ac27448be23",
@@ -8099,7 +8099,7 @@
       "views_display": "1",
       "published_at": "2026-03-29T11:01:21.043986",
       "published_at_display": "2026-03-29 11:01",
-      "published_ago": "19h"
+      "published_ago": "20h"
     },
     {
       "job_id": "c40d4fd4-d006-4951-bdec-b98ca0a01945",
@@ -8113,7 +8113,7 @@
       "views_display": "1",
       "published_at": "2026-03-29T10:11:18.226798",
       "published_at_display": "2026-03-29 10:11",
-      "published_ago": "20h"
+      "published_ago": "21h"
     },
     {
       "job_id": "90b6d6a7-0529-484a-8522-ad6cc8c9eb4d",
@@ -8127,7 +8127,7 @@
       "views_display": "2",
       "published_at": "2026-03-29T09:02:17.620461",
       "published_at_display": "2026-03-29 09:02",
-      "published_ago": "21h"
+      "published_ago": "22h"
     },
     {
       "job_id": "9cb567a9-2924-49ad-98cf-3a5023803dc5",
@@ -8141,7 +8141,7 @@
       "views_display": "1",
       "published_at": "2026-03-29T08:01:18.450806",
       "published_at_display": "2026-03-29 08:01",
-      "published_ago": "22h"
+      "published_ago": "23h"
     },
     {
       "job_id": "9ef43f64-8d81-4537-bf3b-bc405df0d488",
@@ -8155,7 +8155,7 @@
       "views_display": "3",
       "published_at": "2026-03-29T07:02:39.766985",
       "published_at_display": "2026-03-29 07:02",
-      "published_ago": "23h"
+      "published_ago": "1d"
     },
     {
       "job_id": "795d95f2-eb15-4355-b8dc-98fbf1a69400",
@@ -8204,7 +8204,7 @@
             "title": "Hasanabi Moments #6",
             "published_at": "2026-03-29T15:31:22.245890",
             "published_at_display": "2026-03-29 15:31",
-            "published_ago": "14h",
+            "published_ago": "15h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/LGt2dR1XOPk"
           },
@@ -8215,7 +8215,7 @@
             "title": "Nickmercs Moments #6",
             "published_at": "2026-03-29T13:04:00.424382",
             "published_at_display": "2026-03-29 13:04",
-            "published_ago": "17h",
+            "published_ago": "18h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/TeIX_Y3pTpM"
           },
@@ -8226,7 +8226,7 @@
             "title": "Tfue Moments #22",
             "published_at": "2026-03-29T12:02:26.566535",
             "published_at_display": "2026-03-29 12:02",
-            "published_ago": "18h",
+            "published_ago": "19h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/zXF68bVkDiA"
           },
@@ -8237,7 +8237,7 @@
             "title": "Ninja Moments #8",
             "published_at": "2026-03-29T11:01:21.043986",
             "published_at_display": "2026-03-29 11:01",
-            "published_ago": "19h",
+            "published_ago": "20h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/_gfvu45k1mQ"
           },
@@ -8248,7 +8248,7 @@
             "title": "Tfue Moments #21",
             "published_at": "2026-03-29T10:11:18.226798",
             "published_at_display": "2026-03-29 10:11",
-            "published_ago": "20h",
+            "published_ago": "21h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/P219vidxdgE"
           },
@@ -8259,7 +8259,7 @@
             "title": "Taxi2g Moments #10",
             "published_at": "2026-03-29T09:02:17.620461",
             "published_at_display": "2026-03-29 09:02",
-            "published_ago": "21h",
+            "published_ago": "22h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/Hn3u0Wstew0"
           },
@@ -8270,7 +8270,7 @@
             "title": "Cloakzy Moments #16",
             "published_at": "2026-03-29T08:01:18.450806",
             "published_at_display": "2026-03-29 08:01",
-            "published_ago": "22h",
+            "published_ago": "23h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/7BPXA3xi4-8"
           },
@@ -8281,7 +8281,7 @@
             "title": "Tfue Moments #20",
             "published_at": "2026-03-29T07:02:39.766985",
             "published_at_display": "2026-03-29 07:02",
-            "published_ago": "23h",
+            "published_ago": "1d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/TX7wfTSHAuI"
           },
@@ -8534,7 +8534,7 @@
             "title": "Tfue Moments #17",
             "published_at": "2026-03-28T07:02:54.684560",
             "published_at_display": "2026-03-28 07:02",
-            "published_ago": "1d",
+            "published_ago": "2d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/zn75MeJ_sCc"
           },
@@ -8655,7 +8655,7 @@
             "title": "Ninja Moments #1",
             "published_at": "2026-03-27T07:03:02.158630",
             "published_at_display": "2026-03-27 07:03",
-            "published_ago": "2d",
+            "published_ago": "3d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/rcaLGr4N6c0"
           },
@@ -9015,6 +9015,15 @@
         "title": "Taxi2g Moments #12",
         "scheduled_at": "2026-03-30T09:00:00-06:00",
         "scheduled_at_iso": "2026-03-30T09:00:00",
+        "status": "queued"
+      },
+      {
+        "job_id": "b2233fbf-6dd4-449e-87b2-e2960a65c185",
+        "job_id_short": "b2233fbf",
+        "channel": "arc_highlightz",
+        "title": "Nickmercs Moments #7",
+        "scheduled_at": "2026-03-30T10:00:00-06:00",
+        "scheduled_at_iso": "2026-03-30T10:00:00",
         "status": "queued"
       }
     ],
@@ -10228,9 +10237,9 @@
     ],
     "any_channel_high": false,
     "all_channels_safe": true,
-    "reset_time_hours": 1,
+    "reset_time_hours": 0,
     "reset_time_minutes": 41,
-    "reset_time_display": "1h 41m"
+    "reset_time_display": "0h 41m"
   },
   "revenue": {
     "total_views_30d": 0,
@@ -10250,7 +10259,7 @@
       "discovered": 0,
       "downloaded": 0,
       "processed": 0,
-      "queued": 3,
+      "queued": 4,
       "uploaded": 159
     },
     "by_channel": [
@@ -10259,7 +10268,7 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 3,
+        "queued": 4,
         "uploaded": 85
       },
       {
@@ -10288,8 +10297,8 @@
       }
     ],
     "throughput": {
-      "uploads_per_hour": 0.33,
-      "uploads_last_24h": 8
+      "uploads_per_hour": 0.29,
+      "uploads_last_24h": 7
     },
     "stage_timings": {
       "discovered_to_downloaded_hours": 0.0,
@@ -10297,7 +10306,7 @@
     },
     "bottleneck": {
       "stage": "queued",
-      "backlog": 3
+      "backlog": 4
     }
   },
   "disk": {
@@ -10305,7 +10314,7 @@
       {
         "name": "raw_clips",
         "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\raw_clips",
-        "size_bytes": 29283957102,
+        "size_bytes": 29283957151,
         "size_human": "27.3GB",
         "file_count": 3884
       },
@@ -10314,24 +10323,24 @@
         "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\intermediate",
         "size_bytes": 1596698995,
         "size_human": "1.5GB",
-        "file_count": 318
+        "file_count": 324
       },
       {
         "name": "renders",
         "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\renders",
-        "size_bytes": 6930234347,
+        "size_bytes": 6939708889,
         "size_human": "6.5GB",
-        "file_count": 726
+        "file_count": 728
       },
       {
         "name": "renders/thumbnails",
         "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\renders\\thumbnails",
-        "size_bytes": 6965131,
-        "size_human": "6.6MB",
-        "file_count": 167
+        "size_bytes": 7002895,
+        "size_human": "6.7MB",
+        "file_count": 168
       }
     ],
-    "total_disk_bytes": 41179439261,
+    "total_disk_bytes": 41188962622,
     "total_disk_human": "38.4GB",
     "percent_of_500gb": 7.7,
     "warning_threshold_pct": 70,
@@ -10580,7 +10589,7 @@
   "leaderboard": [
     {
       "channel_name": "arc_highlightz",
-      "total_views": 37319,
+      "total_views": 37326,
       "uploads_30d": 85,
       "avg_views": 439,
       "best_clip_title": "No clips yet",
@@ -11611,7 +11620,7 @@
           "priority": 1,
           "clips_fetched": 6,
           "last_fetched_at": "2026-03-29T21:10:03.074877",
-          "last_fetched_rel": "9h",
+          "last_fetched_rel": "10h",
           "enabled": true,
           "url": "https://www.youtube.com/@HasanAbi/videos",
           "type": "transcript"
@@ -13452,15 +13461,6 @@
     ],
     "scheduled_posts": [
       {
-        "job_id": "8afc3f2b",
-        "channel": "arc_highlightz",
-        "title": "Taxi2g Moments #11",
-        "scheduled_at": "2026-03-30T07:00:00-06:00",
-        "hour": 7,
-        "day": 0,
-        "day_name": "Monday"
-      },
-      {
         "job_id": "a4a30ce6",
         "channel": "arc_highlightz",
         "title": "Tfue Moments #23",
@@ -13475,6 +13475,15 @@
         "title": "Taxi2g Moments #12",
         "scheduled_at": "2026-03-30T09:00:00-06:00",
         "hour": 9,
+        "day": 0,
+        "day_name": "Monday"
+      },
+      {
+        "job_id": "b2233fbf",
+        "channel": "arc_highlightz",
+        "title": "Nickmercs Moments #7",
+        "scheduled_at": "2026-03-30T10:00:00-06:00",
+        "hour": 10,
         "day": 0,
         "day_name": "Monday"
       }
@@ -13577,81 +13586,81 @@
     {
       "type": "warning",
       "title": "Channel \"market_meltdowns\" paused for 24+ hours",
-      "message": "market_meltdowns has been paused for 510 hours",
+      "message": "market_meltdowns has been paused for 511 hours",
       "channel": "market_meltdowns",
-      "created_at": "2026-03-30T06:18:03.416129",
+      "created_at": "2026-03-30T07:18:03.538391",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"self_made_clips\" paused for 24+ hours",
-      "message": "self_made_clips has been paused for 506 hours",
+      "message": "self_made_clips has been paused for 507 hours",
       "channel": "self_made_clips",
-      "created_at": "2026-03-30T06:18:03.416129",
+      "created_at": "2026-03-30T07:18:03.538391",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"rich_or_ruined\" paused for 24+ hours",
-      "message": "rich_or_ruined has been paused for 504 hours",
+      "message": "rich_or_ruined has been paused for 505 hours",
       "channel": "rich_or_ruined",
-      "created_at": "2026-03-30T06:18:03.416129",
+      "created_at": "2026-03-30T07:18:03.538391",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"startup_graveyard\" paused for 24+ hours",
-      "message": "startup_graveyard has been paused for 504 hours",
+      "message": "startup_graveyard has been paused for 505 hours",
       "channel": "startup_graveyard",
-      "created_at": "2026-03-30T06:18:03.416129",
+      "created_at": "2026-03-30T07:18:03.538391",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_sirens\" paused for 24+ hours",
-      "message": "stream_sirens has been paused for 483 hours",
+      "message": "stream_sirens has been paused for 484 hours",
       "channel": "stream_sirens",
-      "created_at": "2026-03-30T06:18:03.416129",
+      "created_at": "2026-03-30T07:18:03.538391",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_queens\" paused for 24+ hours",
-      "message": "stream_queens has been paused for 483 hours",
+      "message": "stream_queens has been paused for 484 hours",
       "channel": "stream_queens",
-      "created_at": "2026-03-30T06:18:03.416129",
+      "created_at": "2026-03-30T07:18:03.538391",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"ai_did_what\" paused for 24+ hours",
-      "message": "ai_did_what has been paused for 449 hours",
+      "message": "ai_did_what has been paused for 450 hours",
       "channel": "ai_did_what",
-      "created_at": "2026-03-30T06:18:03.416129",
+      "created_at": "2026-03-30T07:18:03.538391",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"gym_moments\" paused for 24+ hours",
-      "message": "gym_moments has been paused for 449 hours",
+      "message": "gym_moments has been paused for 450 hours",
       "channel": "gym_moments",
-      "created_at": "2026-03-30T06:18:03.416129",
+      "created_at": "2026-03-30T07:18:03.538391",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"kitchen_chaos\" paused for 24+ hours",
-      "message": "kitchen_chaos has been paused for 302 hours",
+      "message": "kitchen_chaos has been paused for 303 hours",
       "channel": "kitchen_chaos",
-      "created_at": "2026-03-30T06:18:03.416129",
+      "created_at": "2026-03-30T07:18:03.538391",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"unfiltered_clips\" paused for 24+ hours",
-      "message": "unfiltered_clips has been paused for 302 hours",
+      "message": "unfiltered_clips has been paused for 303 hours",
       "channel": "unfiltered_clips",
-      "created_at": "2026-03-30T06:18:03.416129",
+      "created_at": "2026-03-30T07:18:03.538391",
       "read": false
     }
   ],
@@ -14234,14 +14243,14 @@
         "status": "active",
         "category": "Gaming",
         "target_per_day": 15,
-        "published_24h": 7,
-        "queue_depth": 3,
+        "published_24h": 6,
+        "queue_depth": 4,
         "running_jobs": 0,
         "failed_7d": 0,
-        "avg_views": 14665,
-        "rpm": 12.47,
-        "deficit": 8,
-        "completion_rate": 46.7,
+        "avg_views": 14479,
+        "rpm": 12.31,
+        "deficit": 9,
+        "completion_rate": 40.0,
         "lagging": true,
         "views_source": "source_clips_proxy",
         "latest_title": "Nickmercs Moments #6",
@@ -14250,13 +14259,13 @@
       }
     ],
     "lagging_count": 3,
-    "queue_backlog": 3,
+    "queue_backlog": 4,
     "analytics_channels": 13
   },
   "meta": {
     "refresh_seconds": 30,
     "channel_count": 13,
-    "job_count": 328,
+    "job_count": 329,
     "has_metrics_daily": false,
     "has_clip_assets": false,
     "note": "Trend analytics prefer metrics_daily and fall back to source clip proxy series when upload analytics are sparse."

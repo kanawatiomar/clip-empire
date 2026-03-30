@@ -53,6 +53,24 @@ def _out_dir(creator: str) -> Path:
     return d
 
 
+# ── ffmpeg PATH helper ────────────────────────────────────────────────────
+
+def _with_ffmpeg_in_path(func):
+    """Temporarily add ffmpeg bin dir to PATH so yt-dlp partial downloads work."""
+    import functools
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        ffmpeg_dir = str(_FFMPEG_BIN_DIR)
+        original_path = os.environ.get("PATH", "")
+        if ffmpeg_dir not in original_path:
+            os.environ["PATH"] = ffmpeg_dir + os.pathsep + original_path
+        try:
+            return func(*args, **kwargs)
+        finally:
+            os.environ["PATH"] = original_path
+    return wrapper
+
+
 # ── VOD listing ────────────────────────────────────────────────────────────
 
 def list_recent_vods(creator: str, max_vods: int = 3) -> list[dict]:
@@ -89,6 +107,7 @@ def list_recent_vods(creator: str, max_vods: int = 3) -> list[dict]:
 
 # ── Audio download + energy analysis ──────────────────────────────────────
 
+@_with_ffmpeg_in_path
 def _download_audio(vod_url: str, out_wav: str) -> bool:
     """Download audio-only track from a VOD and convert to mono 16kHz WAV for analysis."""
     out_template = out_wav.replace(".wav", ".%(ext)s")
@@ -203,6 +222,22 @@ def _timestamp_to_hhmmss(seconds: float) -> str:
 
 # ── Video clip extraction ──────────────────────────────────────────────────
 
+def _with_ffmpeg_in_path(func):
+    """Decorator: temporarily add our ffmpeg bin dir to PATH so yt-dlp finds it."""
+    import functools
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        ffmpeg_dir = str(_FFMPEG_BIN_DIR)
+        original_path = os.environ.get("PATH", "")
+        if ffmpeg_dir not in original_path:
+            os.environ["PATH"] = ffmpeg_dir + os.pathsep + original_path
+        try:
+            return func(*args, **kwargs)
+        finally:
+            os.environ["PATH"] = original_path
+    return wrapper
+
+
 def _extract_clip(
     vod_url: str,
     start_s: float,
@@ -210,9 +245,18 @@ def _extract_clip(
     out_path: str,
 ) -> bool:
     """Download a specific time range from a VOD as a video clip."""
+    return _extract_clip_impl(vod_url, start_s, end_s, out_path)
+
+
+@_with_ffmpeg_in_path
+def _extract_clip_impl(
+    vod_url: str,
+    start_s: float,
+    end_s: float,
+    out_path: str,
+) -> bool:
     start_str = _timestamp_to_hhmmss(start_s)
     end_str   = _timestamp_to_hhmmss(end_s)
-    section   = f"*{start_str}-{end_str}"
     ydl_opts = {
         "quiet": True,
         "no_warnings": True,
@@ -221,7 +265,6 @@ def _extract_clip(
         "merge_output_format": "mp4",
         "download_ranges": yt_dlp.utils.download_range_func(None, [(start_s, end_s)]),
         "force_keyframes_at_cuts": True,
-        "ffmpeg_location": str(_FFMPEG_BIN_DIR),
     }
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:

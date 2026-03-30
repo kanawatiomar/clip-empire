@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import os
 import random
+import shutil
 import subprocess
 import tempfile
 from datetime import datetime
@@ -261,5 +262,103 @@ def build_montage(
                 check=True, capture_output=True, timeout=600,
             )
 
+        # 6. Apply branding overlays (watermark + subscribe animation)
+        print("[assembler] Applying branding overlays...")
+        branded_path = output_path.replace(".mp4", "_branded.mp4") if output_path.endswith(".mp4") else output_path + "_branded.mp4"
+        _apply_branding(output_path, branded_path, channel_name="Arc Highlightz")
+        # Replace final output with branded version
+        shutil.move(branded_path, output_path)
+
     print(f"[assembler] Montage saved to {output_path}")
     return output_path
+
+
+def _get_video_duration_s(path: str) -> float:
+    """Return video duration in seconds."""
+    try:
+        result = subprocess.run(
+            [FFPROBE_BIN, "-v", "error",
+             "-show_entries", "format=duration",
+             "-of", "default=noprint_wrappers=1:nokey=1", path],
+            capture_output=True, text=True, timeout=15,
+        )
+        return float(result.stdout.strip())
+    except Exception:
+        return 0.0
+
+
+def _apply_branding(input_path: str, output_path: str, channel_name: str = "Arc Highlightz") -> None:
+    """Burn channel watermark + periodic subscribe animation into the video.
+
+    Watermark:
+      - Channel name, bottom-right, semi-transparent white with drop shadow
+      - Persistent throughout the video
+
+    Subscribe button:
+      - Red box + "▶ SUBSCRIBE" text
+      - Appears for 4s every 120s starting at t=30
+      - Fades in/out via alpha (simulated with enable)
+    """
+    dur = _get_video_duration_s(input_path)
+    if dur <= 0:
+        shutil.copy2(input_path, output_path)
+        return
+
+    # Build subscribe button enable expression: appears at t=30, 150, 270, 390, ...
+    sub_intervals = []
+    t = 30.0
+    while t + 4 < dur:
+        sub_intervals.append(f"between(t,{t:.0f},{t+4:.0f})")
+        t += 120.0
+    sub_enable = "+".join(sub_intervals) if sub_intervals else "0"
+
+    # Watermark: bottom-right corner, semi-transparent
+    watermark_filter = (
+        f"drawtext="
+        f"text='{channel_name}':"
+        f"fontsize=36:"
+        f"fontcolor=white@0.55:"
+        f"x=w-tw-28:"
+        f"y=h-th-22:"
+        f"shadowcolor=black@0.6:"
+        f"shadowx=2:shadowy=2"
+    )
+
+    # Subscribe box (red background): bottom-left corner when subscribe button shows
+    sub_box_filter = (
+        f"drawbox="
+        f"x=24:y=h-74:"
+        f"w=280:h=50:"
+        f"color=0xFF0000@0.88:"
+        f"t=fill:"
+        f"enable='{sub_enable}'"
+    )
+
+    # Subscribe text on top of red box
+    sub_text_filter = (
+        f"drawtext="
+        f"text='\u25b6  SUBSCRIBE':"
+        f"fontsize=26:"
+        f"fontcolor=white:"
+        f"x=38:"
+        f"y=h-58:"
+        f"enable='{sub_enable}'"
+    )
+
+    vf = ",".join([watermark_filter, sub_box_filter, sub_text_filter])
+
+    result = subprocess.run(
+        [
+            FFMPEG_BIN, "-y", "-hide_banner", "-loglevel", "warning",
+            "-i", input_path,
+            "-vf", vf,
+            "-c:v", "libx264", "-preset", "fast", "-crf", "22",
+            "-c:a", "copy",
+            output_path,
+        ],
+        capture_output=True, timeout=600,
+    )
+    if result.returncode != 0:
+        # If overlay fails (e.g. font issue), just copy without branding
+        print(f"[assembler] Warning: branding overlay failed ({result.stderr[:200]}), skipping")
+        shutil.copy2(input_path, output_path)

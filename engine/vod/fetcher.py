@@ -21,6 +21,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
+import yt_dlp
+
 from engine.vod.db import (
     insert_segment,
     update_clip_path,
@@ -35,9 +37,6 @@ _FFMPEG_BIN_DIR = Path(os.environ.get("LOCALAPPDATA", "")) / (
 )
 FFMPEG_BIN  = str(_FFMPEG_BIN_DIR / "ffmpeg.exe")  if (_FFMPEG_BIN_DIR / "ffmpeg.exe").exists()  else "ffmpeg"
 FFPROBE_BIN = str(_FFMPEG_BIN_DIR / "ffprobe.exe") if (_FFMPEG_BIN_DIR / "ffprobe.exe").exists() else "ffprobe"
-
-# ── yt-dlp ─────────────────────────────────────────────────────────────────
-_YTDLP = "yt-dlp"
 
 # ── Config ─────────────────────────────────────────────────────────────────
 CLIP_MIN_DUR   = 20     # seconds — minimum moment window
@@ -61,52 +60,65 @@ def list_recent_vods(creator: str, max_vods: int = 3) -> list[dict]:
 
     Returns list of dicts: {id, url, title, duration_s}
     """
-    url = f"https://www.twitch.tv/{creator}/videos?filter=archives&sort=time"
-    result = subprocess.run(
-        [_YTDLP, "--flat-playlist", "--print",
-         "%(id)s\t%(webpage_url)s\t%(title)s\t%(duration)s",
-         "--playlist-end", str(max_vods),
-         "--no-warnings", "--quiet",
-         url],
-        capture_output=True, text=True, timeout=60,
-    )
+    url = f"https://www.twitch.tv/{creator}/videos"
+    ydl_opts = {
+        "quiet": True,
+        "no_warnings": True,
+        "extract_flat": "in_playlist",
+        "playlistend": max_vods,
+    }
     vods = []
-    for line in result.stdout.strip().splitlines():
-        parts = line.split("\t")
-        if len(parts) < 3:
-            continue
-        vod_id   = parts[0]
-        vod_url  = parts[1] if len(parts) > 1 else f"https://www.twitch.tv/videos/{vod_id}"
-        title    = parts[2] if len(parts) > 2 else ""
-        try:
-            duration = float(parts[3]) if len(parts) > 3 else 0.0
-        except ValueError:
-            duration = 0.0
-        vods.append({"id": vod_id, "url": vod_url, "title": title, "duration_s": duration})
+    try:
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info = ydl.extract_info(url, download=False)
+            entries = (info or {}).get("entries", []) or []
+            for entry in entries:
+                if not entry:
+                    continue
+                vod_id  = str(entry.get("id", ""))
+                # yt-dlp flat-playlist returns IDs like "v2735556296"; strip the 'v' prefix
+                vod_id_clean = vod_id.lstrip("v")
+                vod_url = f"https://www.twitch.tv/videos/{vod_id_clean}"
+                title   = entry.get("title", "")
+                dur     = float(entry.get("duration") or 0)
+                vods.append({"id": vod_id_clean, "url": vod_url, "title": title, "duration_s": dur})
+    except Exception as e:
+        print(f"[vod.fetcher] list_recent_vods error: {e}")
     return vods
 
 
 # ── Audio download + energy analysis ──────────────────────────────────────
 
 def _download_audio(vod_url: str, out_wav: str) -> bool:
-    """Download audio-only track from a VOD and convert to mono WAV for analysis."""
+    """Download audio-only track from a VOD and convert to mono 16kHz WAV for analysis."""
+    out_template = out_wav.replace(".wav", ".%(ext)s")
+    ydl_opts = {
+        "quiet": True,
+        "no_warnings": True,
+        "format": "bestaudio/best",
+        "outtmpl": out_template,
+        "postprocessors": [{
+            "key": "FFmpegExtractAudio",
+            "preferredcodec": "wav",
+            "preferredquality": "0",
+        }],
+        "postprocessor_args": {"ffmpeg": ["-ac", "1", "-ar", "16000"]},
+        "ffmpeg_location": str(_FFMPEG_BIN_DIR),
+    }
     try:
-        subprocess.run(
-            [_YTDLP, "-x", "--audio-format", "wav",
-             "--audio-quality", "0",
-             "--postprocessor-args", "ffmpeg:-ac 1 -ar 16000",
-             "-o", out_wav.replace(".wav", ".%(ext)s"),
-             "--no-warnings",
-             vod_url],
-            check=True, capture_output=True, timeout=600,
-        )
-        # yt-dlp may output as .wav already or need renaming
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([vod_url])
+        # yt-dlp outputs as .wav after postprocessing
         if not os.path.exists(out_wav):
-            # try without extension
             base = out_wav.replace(".wav", "")
-            for ext in [".wav", ".mp3", ".m4a", ".opus"]:
+            for ext in [".wav", ".mp3", ".m4a", ".opus", ".webm"]:
                 if os.path.exists(base + ext):
-                    os.rename(base + ext, out_wav)
+                    # Convert to WAV via ffmpeg
+                    subprocess.run(
+                        [FFMPEG_BIN, "-y", "-i", base + ext,
+                         "-ac", "1", "-ar", "16000", out_wav],
+                        capture_output=True, timeout=120,
+                    )
                     break
         return os.path.exists(out_wav)
     except Exception as e:
@@ -201,18 +213,19 @@ def _extract_clip(
     start_str = _timestamp_to_hhmmss(start_s)
     end_str   = _timestamp_to_hhmmss(end_s)
     section   = f"*{start_str}-{end_str}"
+    ydl_opts = {
+        "quiet": True,
+        "no_warnings": True,
+        "format": "bestvideo[height<=1080]+bestaudio/best[height<=1080]/best",
+        "outtmpl": out_path,
+        "merge_output_format": "mp4",
+        "download_ranges": yt_dlp.utils.download_range_func(None, [(start_s, end_s)]),
+        "force_keyframes_at_cuts": True,
+        "ffmpeg_location": str(_FFMPEG_BIN_DIR),
+    }
     try:
-        subprocess.run(
-            [_YTDLP,
-             "--download-sections", section,
-             "-f", "bestvideo[height<=1080]+bestaudio/best[height<=1080]",
-             "--merge-output-format", "mp4",
-             "-o", out_path,
-             "--no-warnings",
-             "--force-keyframes-at-cuts",
-             vod_url],
-            check=True, capture_output=True, timeout=300,
-        )
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([vod_url])
         return os.path.exists(out_path)
     except Exception as e:
         print(f"[vod.fetcher] Clip extract failed ({start_str}→{end_str}): {e}")

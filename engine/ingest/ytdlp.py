@@ -18,6 +18,7 @@ from typing import List, Dict, Any, Optional
 
 from engine.config.sources import SOURCE_DEFAULTS
 from engine.ingest.base import RawClip
+from engine.vod.db import get_ready_segments, mark_used
 
 
 def _extract_broadcaster(url: str, info: dict) -> str:
@@ -77,6 +78,11 @@ class YtDlpIngester:
         Returns a list of RawClip objects for successfully downloaded clips.
         """
         platform = source_config.get("platform", "youtube")
+
+        # ── VOD highlights: clips are pre-downloaded, read from DB ─────────
+        if platform == "vod_highlights":
+            return self._fetch_vod_highlights(source_config, limit, channel_name)
+
         url = source_config["url"]
         source_type = source_config.get("type", "channel")
         min_dur = source_config.get("min_dur_s", SOURCE_DEFAULTS["min_dur_s"])
@@ -91,6 +97,14 @@ class YtDlpIngester:
 
         if source_type == "subreddit":
             clips = self._fetch_reddit(url, limit, min_dur, max_dur, out_dir, channel_name)
+        elif source_type == "transcript":
+            from engine.ingest.transcript_select import fetch_transcript_clips
+            clips = fetch_transcript_clips(
+                source_config=source_config,
+                limit=limit,
+                channel_name=channel_name,
+                download_dir=self.download_dir,
+            )
         elif source_type == "longform":
             clips = self._fetch_longform(
                 url=url,
@@ -141,13 +155,25 @@ class YtDlpIngester:
         if min_views > 0:
             match_filter += f" & view_count>={min_views}"
 
+        # For Twitch clips, force landscape format — Twitch now serves both
+        # portrait and landscape versions. Portrait gets picked by default but
+        # produces a zoomed-in result when our crop pipeline processes it.
+        if "twitch.tv" in url:
+            fmt = (
+                "bestvideo[format_id!*=portrait][ext=mp4]+bestaudio[ext=m4a]"
+                "/best[format_id!*=portrait][ext=mp4]"
+                "/best[ext=mp4]/best"
+            )
+        else:
+            fmt = "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"
+
         cmd = [
             YTDLP_BIN,
             "--no-playlist" if "watch?v=" in url or "tiktok.com" in url else "--yes-playlist",
             "--match-filter", match_filter,
             "--dateafter", cutoff,
             "--max-downloads", str(limit),
-            "--format", "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best",
+            "--format", fmt,
             "--merge-output-format", "mp4",
             "--write-info-json",
             "--no-write-comments",
@@ -434,5 +460,72 @@ class YtDlpIngester:
                 },
             )
             clips.append(clip)
+
+        return clips
+
+    def _fetch_vod_highlights(
+        self,
+        source_config: Dict[str, Any],
+        limit: int,
+        channel_name: str,
+    ) -> List[RawClip]:
+        """Return pre-downloaded VOD highlight clips from the vod_segments DB.
+
+        Clips are already on disk — no downloading needed. We just read
+        `status='ready'` rows, return RawClip objects, and mark them as
+        `used_short` so they aren't served twice.
+        """
+        creator = source_config.get("creator", "")
+        min_energy = source_config.get("min_energy", 0.0)
+        min_dur = source_config.get("min_dur_s", 15)
+        max_dur = source_config.get("max_dur_s", 180)
+
+        segments = get_ready_segments(
+            creator=creator,
+            channel_name=channel_name,
+            limit=limit + 5,  # fetch extra to account for missing files / dur filters
+            min_energy=min_energy,
+        )
+
+        clips: List[RawClip] = []
+        for seg in segments:
+            clip_path = seg.get("clip_path", "")
+            if not clip_path or not os.path.exists(clip_path):
+                continue
+
+            duration = seg.get("duration_s", 0.0)
+            if duration < min_dur or duration > max_dur:
+                continue
+
+            clip = RawClip(
+                clip_id=seg["segment_id"],
+                source_url=seg.get("vod_url", ""),
+                download_path=clip_path,
+                duration_s=duration,
+                title=f"VOD Highlight - {seg.get('creator', '').title()}",
+                platform="vod_highlights",
+                creator=seg.get("creator", ""),
+                view_count=int(seg.get("energy_score", 0) * 1000),  # proxy for ranking
+                metadata={
+                    "vod_id": seg.get("vod_id", ""),
+                    "start_ts": seg.get("start_ts", 0),
+                    "end_ts": seg.get("end_ts", 0),
+                    "energy_score": seg.get("energy_score", 0),
+                    "crop_anchor": source_config.get("crop_anchor", "center"),
+                    "is_vod_highlight": True,
+                },
+            )
+
+            # Mark as consumed so it won't be served again
+            mark_used(seg["segment_id"], "used_short")
+
+            clips.append(clip)
+            if len(clips) >= limit:
+                break
+
+        if clips:
+            print(f"[vod_ingest] Serving {len(clips)} VOD highlight(s) for {creator} ({channel_name})")
+        else:
+            print(f"[vod_ingest] No ready VOD highlights for {creator} ({channel_name})")
 
         return clips

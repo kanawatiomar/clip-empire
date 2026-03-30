@@ -442,6 +442,26 @@ CHANNEL_SOURCES: dict = {
          "type": "channel", "priority": 4, "max_age_days": 3650,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 3,
          "crop_anchor": "left", "min_views": 5000},
+        # PRIORITY 5: VOD highlights — fresh content extracted from full Twitch VODs
+        # These are pre-downloaded by `python -m engine.vod.cli --channel arc_highlightz`
+        # Run that command periodically (e.g. daily) to populate the pool.
+        # Higher priority than all-time fallback (4) — VOD clips are truly fresh.
+        {"platform": "vod_highlights", "type": "vod_highlights",
+         "creator": "tfue", "priority": 3, "max_per_run": 2,
+         "min_dur_s": 20, "max_dur_s": 65, "min_energy": 1.2,
+         "crop_anchor": "right", "url": "vod://tfue"},
+        {"platform": "vod_highlights", "type": "vod_highlights",
+         "creator": "cloakzy", "priority": 3, "max_per_run": 2,
+         "min_dur_s": 20, "max_dur_s": 65, "min_energy": 1.2,
+         "crop_anchor": "left", "url": "vod://cloakzy"},
+        {"platform": "vod_highlights", "type": "vod_highlights",
+         "creator": "ninja", "priority": 3, "max_per_run": 2,
+         "min_dur_s": 20, "max_dur_s": 65, "min_energy": 1.2,
+         "crop_anchor": "right", "url": "vod://ninja"},
+        {"platform": "vod_highlights", "type": "vod_highlights",
+         "creator": "taxi2g", "priority": 3, "max_per_run": 2,
+         "min_dur_s": 20, "max_dur_s": 65, "min_energy": 1.2,
+         "crop_anchor": "left", "url": "vod://taxi2g"},
     ],
 
     "viral_recaps": [

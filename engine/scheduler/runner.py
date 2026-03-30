@@ -41,6 +41,7 @@ from engine.scheduler.budget import BudgetManager
 from engine.scheduler.queue_writer import QueueWriter
 from engine.ops.feedback import PerformanceFeedback
 from engine.ops.source_health import SourceHealthMonitor
+from engine.dedup.tracker import log_usage, extract_slug
 
 
 # Directories (relative to repo root)
@@ -401,6 +402,22 @@ class Runner:
                 creator=getattr(clip, "creator", None),
                 clip_title=getattr(clip, "title", None),
             )
+
+            # 5b. Log to cross-format dedup tracker
+            try:
+                src_url = getattr(clip, "source_url", "") or ""
+                slug = extract_slug(src_url) if src_url else getattr(clip, "clip_id", "")
+                if slug:
+                    log_usage(
+                        clip_slug=slug,
+                        video_id=job_id or f"short_{getattr(clip, 'clip_id', 'unknown')[:8]}",
+                        video_type="short",
+                        channel_name=channel_name,
+                        creator=getattr(clip, "creator", ""),
+                        clip_url=src_url,
+                    )
+            except Exception:
+                pass  # dedup logging is non-fatal
 
             # 6. Clean up intermediate files if not keeping
             if not self.keep_intermediate:

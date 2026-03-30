@@ -15,6 +15,7 @@ from typing import Optional
 from engine.montage.fetcher import fetch_top_clips
 from engine.montage.scorer import score_clips
 from engine.montage.assembler import build_montage
+from engine.dedup.tracker import filter_montage_clips, log_montage_clips, extract_slug
 from publisher.db_queue import add_publish_job, get_db_connection
 
 DATABASE_PATH = "data/clip_empire.db"
@@ -135,7 +136,14 @@ def run_montage(
             for c in clips:
                 c["energy_score"] = 0.0
 
-        selected = clips[:top_n]
+        # Dedup: filter out clips used in a montage recently
+        allowed, blocked = filter_montage_clips(clips)
+        if blocked:
+            print(f"[runner] {display}: {len(blocked)} clip(s) blocked by dedup (used in montage recently)")
+        # Deprioritize clips that appeared in a Short recently (sort to end)
+        allowed.sort(key=lambda c: (c.get("short_reuse", False), -c.get("energy_score", 0), -c.get("view_count", 0)))
+
+        selected = allowed[:top_n]
         if selected:
             clips_by_creator[display] = selected
             all_creators_display.append(display)
@@ -197,6 +205,11 @@ def run_montage(
     except Exception as e:
         print(f"[runner] Montage build failed: {e}")
         return None
+
+    # Log clip usage for dedup tracking
+    video_id = f"montage_{datetime.now().strftime('%Y%m%d')}"
+    log_montage_clips(ordered_clips, video_id=video_id, channel_name=channel)
+    print(f"[runner] Logged {len(all_clips)} clip(s) to dedup tracker (video_id={video_id})")
 
     # Queue for upload
     _queue_montage_upload(channel, output_path, title, description, hashtags)

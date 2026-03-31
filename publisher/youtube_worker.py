@@ -161,9 +161,13 @@ def _extract_video_url_from_dialog(page: Page) -> Optional[str]:
                     return href
             except Exception:
                 continue
-        # JS fallback
+        # JS fallback — ONLY look inside the upload dialog, not the whole page
+        # (whole-page search can grab links from previously loaded videos in the sidebar)
         hrefs = page.evaluate("""() => {
-            return Array.from(document.querySelectorAll('a[href]'))
+            const dialog = document.querySelector('ytcp-uploads-dialog') || document.querySelector('[dialog-name="video-upload"]');
+            const scope = dialog || document.querySelector('ytcp-video-upload-dialog');
+            if (!scope) return [];
+            return Array.from(scope.querySelectorAll('a[href]'))
                 .map(a => a.getAttribute('href'))
                 .filter(h => h && (h.includes('youtube.com/shorts') || h.includes('youtube.com/watch')));
         }""")
@@ -639,12 +643,18 @@ def _verify_upload_success(page: Page, cfg: YouTubeWorkerConfig, publish_type: s
             except Exception:
                 continue
 
-        # JS eval — catches relative hrefs like /shorts/XXXX
+        # JS eval — find the FIRST video row's link (most recently uploaded = top of list)
         try:
             hrefs = page.evaluate("""() => {
-                return Array.from(document.querySelectorAll('a[href]'))
-                    .map(a => a.href)
-                    .filter(h => h.includes('youtube.com/shorts') || h.includes('youtube.com/watch'));
+                // Only grab links that are inside video row elements (not sidebar nav)
+                const rows = document.querySelectorAll('ytcp-video-row, tr.video-list-table-row, ytcp-uploads-table tr');
+                for (const row of rows) {
+                    const links = Array.from(row.querySelectorAll('a[href]'))
+                        .map(a => a.href)
+                        .filter(h => h.includes('youtube.com/shorts') || h.includes('youtube.com/watch'));
+                    if (links.length) return links;
+                }
+                return [];
             }""")
             if hrefs:
                 print(f"Upload verified (JS)! URL: {hrefs[0]}")

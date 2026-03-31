@@ -175,6 +175,58 @@ def _extract_video_url_from_dialog(page: Page) -> Optional[str]:
     return None
 
 
+def _wait_for_upload_complete(page: Page, cfg: YouTubeWorkerConfig, max_wait_s: int = 1200) -> None:
+    """Wait until the YouTube upload progress indicator disappears or shows 'processed'.
+
+    YouTube shows a progress bar with text like "Uploading 47%..." or "Processing...".
+    When complete, it shows "Checks complete" or the upload bar disappears entirely.
+    Times out after max_wait_s seconds (default 20 min — covers large montages).
+    """
+    import time as _time
+    deadline = _time.time() + max_wait_s
+    poll_interval_ms = 5000  # check every 5s
+
+    while _time.time() < deadline:
+        # Check for upload/processing progress text
+        progress_el = page.locator("ytcp-video-upload-progress, .progress-label, [class*='upload-progress']").first
+        try:
+            progress_text = progress_el.inner_text(timeout=2000).lower()
+        except Exception:
+            progress_text = ""
+
+        # Also check the subtitle/status text in the upload dialog
+        try:
+            status_text = page.locator("ytcp-uploads-dialog .subtitle-text, ytcp-uploads-still-processing").first.inner_text(timeout=2000).lower()
+        except Exception:
+            status_text = ""
+
+        combined = progress_text + " " + status_text
+
+        # Done conditions
+        if any(x in combined for x in ["checks complete", "upload complete", "processing complete", "ready to publish"]):
+            print(f"[upload_wait] Upload complete: '{combined.strip()[:80]}'")
+            return
+
+        # Still in progress
+        if any(x in combined for x in ["uploading", "processing", "%"]):
+            print(f"[upload_wait] Still uploading/processing: '{combined.strip()[:80]}'")
+            page.wait_for_timeout(poll_interval_ms)
+            continue
+
+        # No progress bar visible — upload is either done or not started
+        # Wait one more cycle to be sure, then proceed
+        page.wait_for_timeout(poll_interval_ms)
+        try:
+            still_there = progress_el.is_visible()
+        except Exception:
+            still_there = False
+        if not still_there:
+            print("[upload_wait] Progress bar gone — assuming upload complete")
+            return
+
+    print(f"[upload_wait] WARNING: upload wait timed out after {max_wait_s}s, proceeding anyway")
+
+
 def _upload_file(page: Page, cfg: YouTubeWorkerConfig, video_path: str) -> None:
     """Set the file on the upload dialog.
 
@@ -676,10 +728,24 @@ def run_once(cfg: Optional[YouTubeWorkerConfig] = None, channel_name: Optional[s
                 if early_video_url:
                     _log_step(job_id, f"captured video URL early: {early_video_url}")
 
-                page.wait_for_timeout(3000)
+                # Wait for the upload to finish before filling details.
+                # For large files (montages) this can take 5-15 min.
+                # We poll the upload progress text until it's gone or shows "processed".
+                _log_step(job_id, "waiting for upload to complete...")
+                _wait_for_upload_complete(page, cfg)
+
+                # Split caption_text into title + description.
+                # Montage runner stores them as "title\n\ndescription".
+                # Shorts engine may store only the title (no \n\n).
+                _raw_caption = job["caption_text"] or ""
+                if "\n\n" in _raw_caption:
+                    _title_text, _desc_text = _raw_caption.split("\n\n", 1)
+                else:
+                    _title_text = _raw_caption.strip()
+                    _desc_text = _raw_caption.strip()
 
                 _log_step(job_id, "fill details")
-                _fill_details(page, cfg, job["caption_text"], job["caption_text"], made_for_kids_status)
+                _fill_details(page, cfg, _title_text, _desc_text, made_for_kids_status)
 
                 # schedule_at is stored as ISO string; treat as UTC if naive.
                 _log_step(job_id, "visibility/schedule")

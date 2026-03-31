@@ -83,13 +83,20 @@ def _get_clip_duration(path: str) -> float:
         return 0.0
 
 
-def _make_title_card(title: str, work_dir: str, filename: str = "title_card.mp4") -> str:
+def _make_title_card(
+    title: str,
+    work_dir: str,
+    filename: str = "title_card.mp4",
+    bg_music: Optional[str] = None,
+) -> str:
     """Generate a creator title card with fade-in and fade-out transitions.
 
     Card is TITLE_CARD_DUR seconds long:
     - 0.0-0.4s: fade in from black
     - 0.4-2.6s: hold
     - 2.6-3.0s: fade out to black
+
+    If bg_music is provided, it is mixed into the card audio at -18dB.
     """
     out = os.path.join(work_dir, filename)
     safe_title = title.replace("'", "\u2019").replace(":", "\\:")
@@ -102,8 +109,28 @@ def _make_title_card(title: str, work_dir: str, filename: str = "title_card.mp4"
         f"fade=t=in:st=0:d=0.4,"
         f"fade=t=out:st={fade_out_start:.1f}:d=0.4"
     )
-    subprocess.run(
-        [
+
+    if bg_music:
+        # Mix background music into the card audio at -18dB
+        cmd = [
+            FFMPEG_BIN, "-y", "-hide_banner", "-loglevel", "warning",
+            "-f", "lavfi", "-i",
+            f"color=c=black:s={OUT_W}x{OUT_H}:d={TITLE_CARD_DUR}:r=30",
+            "-stream_loop", "-1", "-i", bg_music,
+            "-t", str(TITLE_CARD_DUR),
+            "-vf", vf,
+            "-filter_complex",
+            "[1:a]volume=0.125,atrim=0:" + str(TITLE_CARD_DUR) + "[music];"
+            "[music]apad=whole_dur=" + str(TITLE_CARD_DUR) + "[out]",
+            "-map", "0:v", "-map", "[out]",
+            "-c:v", "libx264", "-preset", "fast", "-crf", "22",
+            "-c:a", "aac", "-b:a", "192k",
+            "-pix_fmt", "yuv420p",
+            "-shortest",
+            out,
+        ]
+    else:
+        cmd = [
             FFMPEG_BIN, "-y", "-hide_banner", "-loglevel", "warning",
             "-f", "lavfi", "-i",
             f"color=c=black:s={OUT_W}x{OUT_H}:d={TITLE_CARD_DUR}:r=30",
@@ -115,37 +142,19 @@ def _make_title_card(title: str, work_dir: str, filename: str = "title_card.mp4"
             "-c:a", "aac", "-b:a", "192k",
             "-pix_fmt", "yuv420p",
             out,
-        ],
-        check=True, capture_output=True, timeout=30,
-    )
+        ]
+    subprocess.run(cmd, check=True, capture_output=True, timeout=30)
     return out
 
 
-def _make_outro_card(work_dir: str) -> str:
-    """Generate a 3-second outro card."""
-    out = os.path.join(work_dir, "outro_card.mp4")
-    subprocess.run(
-        [
-            FFMPEG_BIN, "-y", "-hide_banner", "-loglevel", "warning",
-            "-f", "lavfi", "-i",
-            f"color=c=black:s={OUT_W}x{OUT_H}:d={OUTRO_CARD_DUR}:r=30",
-            "-f", "lavfi", "-i",
-            f"anullsrc=r=48000:cl=stereo",
-            "-t", str(OUTRO_CARD_DUR),
-            "-vf", (
-                "drawtext=text='Subscribe for more\\!'"
-                f":fontfile='{_FONT_PATH_FF}':fontsize=80"
-                ":fontcolor=white:x=(w-text_w)/2:y=(h-text_h)/2"
-                ":borderw=3:bordercolor=black"
-            ),
-            "-c:v", "libx264", "-preset", "fast", "-crf", "22",
-            "-c:a", "aac", "-b:a", "192k",
-            "-pix_fmt", "yuv420p",
-            out,
-        ],
-        check=True, capture_output=True, timeout=30,
+def _make_outro_card(work_dir: str, bg_music: Optional[str] = None) -> str:
+    """Generate a 3-second outro card (with optional background music)."""
+    return _make_title_card(
+        "Subscribe for more!",
+        work_dir,
+        filename="outro_card.mp4",
+        bg_music=bg_music,
     )
-    return out
 
 
 def _normalize_clip(
@@ -243,21 +252,26 @@ def build_montage(
     print(f"[assembler] Building montage: {len(clips)} clips, ~{total_dur:.0f}s")
 
     with tempfile.TemporaryDirectory(prefix="montage_") as work_dir:
-        # 1. Generate title and outro cards
+        # 1. Find background music (used only on title/outro cards)
+        bg_music = _find_bg_music()
+        if bg_music:
+            print(f"[assembler] Background music on title cards: {Path(bg_music).name}")
+
+        # 2. Generate title and outro cards
         print("[assembler] Creating title card...")
-        title_card = _make_title_card(title, work_dir)
+        title_card = _make_title_card(title, work_dir, bg_music=bg_music)
 
         print("[assembler] Creating outro card...")
-        outro_card = _make_outro_card(work_dir)
+        outro_card = _make_outro_card(work_dir, bg_music=bg_music)
 
-        # 2. Normalize each clip to 1920x1080 30fps
+        # 3. Normalize each clip to 1920x1080 30fps
         normalized = []
         for i, clip in enumerate(clips):
             if clip.get("is_title_card"):
                 display = clip.get("creator_display", "???")
                 safe_name = display.lower().replace(" ", "_").replace("/", "_")
                 print(f"[assembler] Creating creator card: {display}")
-                card = _make_title_card(display, work_dir, filename=f"creator_card_{safe_name}_{i}.mp4")
+                card = _make_title_card(display, work_dir, filename=f"creator_card_{safe_name}_{i}.mp4", bg_music=bg_music)
                 normalized.append(card)
                 continue
             clip_path = clip.get("path") or clip.get("render_path", "")
@@ -295,39 +309,17 @@ def build_montage(
             check=True, capture_output=True, timeout=300,
         )
 
-        # 5. Mix in background music if available
-        bg_music = _find_bg_music()
-        if bg_music:
-            print(f"[assembler] Mixing background music: {Path(bg_music).name}")
-            subprocess.run(
-                [
-                    FFMPEG_BIN, "-y", "-hide_banner", "-loglevel", "warning",
-                    "-i", concat_out,
-                    "-stream_loop", "-1", "-i", bg_music,
-                    "-filter_complex",
-                    "[0:a]volume=1.0[game];"
-                    "[1:a]volume=0.125[music];"  # ~-18dB
-                    "[game][music]amix=inputs=2:duration=first:dropout_transition=2[out]",
-                    "-map", "0:v", "-map", "[out]",
-                    "-c:v", "libx264", "-preset", "fast", "-crf", "22",
-                    "-c:a", "aac", "-b:a", "192k",
-                    "-shortest",
-                    output_path,
-                ],
-                check=True, capture_output=True, timeout=600,
-            )
-        else:
-            print("[assembler] No background music found, re-encoding without")
-            subprocess.run(
-                [
-                    FFMPEG_BIN, "-y", "-hide_banner", "-loglevel", "warning",
-                    "-i", concat_out,
-                    "-c:v", "libx264", "-preset", "fast", "-crf", "22",
-                    "-c:a", "aac", "-b:a", "192k",
-                    output_path,
-                ],
-                check=True, capture_output=True, timeout=600,
-            )
+        # 5. Re-encode concat output (music is already baked into title cards)
+        subprocess.run(
+            [
+                FFMPEG_BIN, "-y", "-hide_banner", "-loglevel", "warning",
+                "-i", concat_out,
+                "-c:v", "libx264", "-preset", "fast", "-crf", "22",
+                "-c:a", "aac", "-b:a", "192k",
+                output_path,
+            ],
+            check=True, capture_output=True, timeout=600,
+        )
 
         # 6. Apply branding overlays (watermark + subscribe animation)
         print("[assembler] Applying branding overlays...")

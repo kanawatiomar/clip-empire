@@ -120,7 +120,7 @@ def _make_title_card(
             "-t", str(TITLE_CARD_DUR),
             "-vf", vf,
             "-filter_complex",
-            "[1:a]volume=0.125,atrim=0:" + str(TITLE_CARD_DUR) + "[music];"
+            "[1:a]aresample=48000,volume=0.125,atrim=0:" + str(TITLE_CARD_DUR) + "[music];"
             "[music]apad=whole_dur=" + str(TITLE_CARD_DUR) + "[out]",
             "-map", "0:v", "-map", "[out]",
             "-c:v", "libx264", "-preset", "fast", "-crf", "22",
@@ -203,10 +203,13 @@ def _normalize_clip(
             FFMPEG_BIN, "-y", "-hide_banner", "-loglevel", "warning",
             "-i", clip_path,
             "-vf", vf,
+            # Force constant frame rate to fix VFR/60fps→30fps audio pitch issues
+            "-vsync", "cfr",
             "-c:v", "libx264", "-preset", "fast", "-crf", "22",
+            # Audio: resample to 48kHz stereo; async=1 fixes pts drift from VFR clips
+            "-af", "aresample=48000:async=1",
             "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2",
             "-pix_fmt", "yuv420p",
-            "-shortest",
             out,
         ],
         check=True, capture_output=True, timeout=120,
@@ -296,17 +299,23 @@ def build_montage(
                 f.write(f"file '{p}'\n")
             f.write(f"file '{outro_card}'\n")
 
-        # 4. Concatenate all segments
+        # 4. Concatenate all segments (re-encode to ensure consistent audio/video sync)
         concat_out = os.path.join(work_dir, "concat_raw.mp4")
         subprocess.run(
             [
                 FFMPEG_BIN, "-y", "-hide_banner", "-loglevel", "warning",
                 "-f", "concat", "-safe", "0",
                 "-i", concat_list,
-                "-c", "copy",
+                # Re-encode instead of stream copy — normalizes audio pts and ensures
+                # no pitch/speed drift when clips have different original frame rates
+                "-vsync", "cfr",
+                "-c:v", "libx264", "-preset", "fast", "-crf", "22",
+                "-af", "aresample=48000:async=1",
+                "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2",
+                "-pix_fmt", "yuv420p",
                 concat_out,
             ],
-            check=True, capture_output=True, timeout=300,
+            check=True, capture_output=True, timeout=600,
         )
 
         # 5. Re-encode concat output (music is already baked into title cards)

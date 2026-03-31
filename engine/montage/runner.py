@@ -157,7 +157,8 @@ def run_montage(
             for c in selected:
                 score = c.get("energy_score", 0)
                 views = c.get("view_count", 0)
-                print(f"  [{views:,}v | energy={score:.2f}] {c.get('title', c.get('clip_id', '?'))}")
+                safe_title = (c.get('title', c.get('clip_id', '?')) or '').encode('ascii', errors='replace').decode('ascii')
+                print(f"  [{views:,}v | energy={score:.2f}] {safe_title}")
 
     if not clips_by_creator:
         print("[runner] No clips found for any creator.")

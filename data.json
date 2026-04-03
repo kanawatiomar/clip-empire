@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-04-03T08:18:05.831128Z",
+  "generated_at": "2026-04-03T09:18:06.207249Z",
   "repo_root": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire",
   "database_path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\data\\clip_empire.db",
   "health_score": {
-    "score": 67.9,
+    "score": 68.6,
     "grade": "C",
     "status": "Needs Attention",
     "color": "yellow",
     "breakdown": {
-      "pipeline_health": 0.0,
+      "pipeline_health": 0.7,
       "error_rate": 20.0,
       "quota_safety": 15,
       "queue_depth": 15,
@@ -16,13 +16,13 @@
       "channel_uptime": 2.9
     },
     "metrics": {
-      "uploads_today": 0,
+      "uploads_today": 1,
       "target_today": 34,
-      "pipeline_health_ratio": 0.0,
+      "pipeline_health_ratio": 0.03,
       "errors_today": 0,
       "total_jobs_today": 2,
       "error_rate": 0.0,
-      "queue_depth": 2,
+      "queue_depth": 1,
       "active_channels": 4,
       "total_channels": 14,
       "fresh_sources": 0,
@@ -34,16 +34,31 @@
     "total_channels": 14,
     "jobs_today": {
       "total": 2,
-      "queued": 2,
+      "queued": 1,
       "running": 0,
-      "succeeded": 0,
+      "succeeded": 1,
       "failed": 0,
       "cancelled": 0
     },
-    "render_queue_depth": 2,
-    "last_updated": "2026-04-03T08:18:05.832652Z"
+    "render_queue_depth": 1,
+    "last_updated": "2026-04-03T09:18:06.207249Z"
   },
   "queue_monitor": [
+    {
+      "job_id": "1082ee9b-1c73-42e3-82e7-2e1ab3e20218",
+      "job_id_short": "1082ee9b",
+      "channel": "arc_highlightz",
+      "status": "succeeded",
+      "attempt": 0,
+      "created_at": "2026-04-03T00:07:49.617364",
+      "created_at_display": "2026-04-03 00:07",
+      "created_ago": "9h",
+      "updated_at": "2026-04-03T03:07:34.698180",
+      "scheduled_for": "2026-04-03 07:00",
+      "error": null,
+      "has_error": false,
+      "post_url": "https://youtube.com/shorts/m25762ZIffA"
+    },
     {
       "job_id": "6e252bbd-70dd-44db-be78-da43d7890f9a",
       "job_id_short": "6e252bbd",
@@ -52,24 +67,9 @@
       "attempt": 0,
       "created_at": "2026-04-03T02:08:13.351178",
       "created_at_display": "2026-04-03 02:08",
-      "created_ago": "6h",
+      "created_ago": "7h",
       "updated_at": "2026-04-03T02:08:13.351178",
       "scheduled_for": "2026-04-03 08:00",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "1082ee9b-1c73-42e3-82e7-2e1ab3e20218",
-      "job_id_short": "1082ee9b",
-      "channel": "arc_highlightz",
-      "status": "queued",
-      "attempt": 0,
-      "created_at": "2026-04-03T00:07:49.617364",
-      "created_at_display": "2026-04-03 00:07",
-      "created_ago": "8h",
-      "updated_at": "2026-04-03T00:07:49.617364",
-      "scheduled_for": "2026-04-03 07:00",
       "error": null,
       "has_error": false,
       "post_url": null
@@ -82,7 +82,7 @@
       "attempt": 0,
       "created_at": "2026-04-02T22:07:51.030330",
       "created_at_display": "2026-04-02 22:07",
-      "created_ago": "10h",
+      "created_ago": "11h",
       "updated_at": "2026-04-02T23:40:56.040483",
       "scheduled_for": "2026-04-02 23:00",
       "error": null,
@@ -97,7 +97,7 @@
       "attempt": 0,
       "created_at": "2026-04-02T22:09:38.262317",
       "created_at_display": "2026-04-02 22:09",
-      "created_ago": "10h",
+      "created_ago": "11h",
       "updated_at": "2026-04-02T23:08:04.465940",
       "scheduled_for": "2026-04-02 22:30",
       "error": null,
@@ -112,7 +112,7 @@
       "attempt": 0,
       "created_at": "2026-04-03T03:06:18.212021+00:00",
       "created_at_display": "2026-04-03 03:06",
-      "created_ago": "5h",
+      "created_ago": "6h",
       "updated_at": "2026-04-02T22:36:05.390369",
       "scheduled_for": "2026-04-03 04:06",
       "error": null,
@@ -127,7 +127,7 @@
       "attempt": 0,
       "created_at": "2026-04-03T03:05:21.664361+00:00",
       "created_at_display": "2026-04-03 03:05",
-      "created_ago": "5h",
+      "created_ago": "6h",
       "updated_at": "2026-04-02T22:06:08.085194",
       "scheduled_for": "2026-04-03 04:05",
       "error": null,
@@ -142,7 +142,7 @@
       "attempt": 0,
       "created_at": "2026-04-03T03:03:19.494868+00:00",
       "created_at_display": "2026-04-03 03:03",
-      "created_ago": "5h",
+      "created_ago": "6h",
       "updated_at": "2026-04-02T21:32:11.689595",
       "scheduled_for": "2026-04-03 04:03",
       "error": null,
@@ -157,7 +157,7 @@
       "attempt": 0,
       "created_at": "2026-04-02T20:08:10.724887",
       "created_at_display": "2026-04-02 20:08",
-      "created_ago": "12h",
+      "created_ago": "13h",
       "updated_at": "2026-04-02T20:40:49.808082",
       "scheduled_for": "2026-04-02 21:00",
       "error": null,
@@ -172,7 +172,7 @@
       "attempt": 0,
       "created_at": "2026-04-02T18:12:36.828255",
       "created_at_display": "2026-04-02 18:12",
-      "created_ago": "14h",
+      "created_ago": "15h",
       "updated_at": "2026-04-02T19:01:28.804818",
       "scheduled_for": "2026-04-02 19:00",
       "error": null,
@@ -187,7 +187,7 @@
       "attempt": 0,
       "created_at": "2026-04-02T18:10:59.878446",
       "created_at_display": "2026-04-02 18:10",
-      "created_ago": "14h",
+      "created_ago": "15h",
       "updated_at": "2026-04-02T18:32:21.483793",
       "scheduled_for": "2026-04-02 19:00",
       "error": null,
@@ -202,7 +202,7 @@
       "attempt": 0,
       "created_at": "2026-04-02T23:02:32.651646+00:00",
       "created_at_display": "2026-04-02 23:02",
-      "created_ago": "9h",
+      "created_ago": "10h",
       "updated_at": "2026-04-02T17:32:57.074574",
       "scheduled_for": "2026-04-03 00:02",
       "error": null,
@@ -217,7 +217,7 @@
       "attempt": 0,
       "created_at": "2026-04-02T16:04:23.506903",
       "created_at_display": "2026-04-02 16:04",
-      "created_ago": "16h",
+      "created_ago": "17h",
       "updated_at": "2026-04-02T16:33:49.758875",
       "scheduled_for": "2026-04-02 17:00",
       "error": null,
@@ -232,7 +232,7 @@
       "attempt": 0,
       "created_at": "2026-04-02T14:11:25.463103",
       "created_at_display": "2026-04-02 14:11",
-      "created_ago": "18h",
+      "created_ago": "19h",
       "updated_at": "2026-04-02T15:04:16.158411",
       "scheduled_for": "2026-04-02 15:00",
       "error": null,
@@ -247,7 +247,7 @@
       "attempt": 0,
       "created_at": "2026-04-02T12:10:11.970794",
       "created_at_display": "2026-04-02 12:10",
-      "created_ago": "20h",
+      "created_ago": "21h",
       "updated_at": "2026-04-02T12:35:49.371207",
       "scheduled_for": "2026-04-02 13:00",
       "error": null,
@@ -262,7 +262,7 @@
       "attempt": 0,
       "created_at": "2026-04-02T14:11:37.767657+00:00",
       "created_at_display": "2026-04-02 14:11",
-      "created_ago": "18h",
+      "created_ago": "19h",
       "updated_at": "2026-04-02T09:03:47.171826",
       "scheduled_for": "2026-04-02 15:11",
       "error": null,
@@ -277,7 +277,7 @@
       "attempt": 0,
       "created_at": "2026-04-02T14:10:55.546946+00:00",
       "created_at_display": "2026-04-02 14:10",
-      "created_ago": "18h",
+      "created_ago": "19h",
       "updated_at": "2026-04-02T08:40:49.857314",
       "scheduled_for": "2026-04-02 15:10",
       "error": null,
@@ -562,7 +562,7 @@
       "attempt": 0,
       "created_at": "2026-03-31T08:44:15.108070",
       "created_at_display": "2026-03-31 08:44",
-      "created_ago": "2d",
+      "created_ago": "3d",
       "updated_at": "2026-03-31T11:01:24.986844",
       "scheduled_for": "2026-03-31 09:00",
       "error": null,
@@ -1042,7 +1042,7 @@
       "attempt": 0,
       "created_at": "2026-03-30T09:06:18.131008",
       "created_at_display": "2026-03-30 09:06",
-      "created_ago": "3d",
+      "created_ago": "4d",
       "updated_at": "2026-03-30T09:31:20.414445",
       "scheduled_for": "2026-03-30 12:00",
       "error": null,
@@ -1576,25 +1576,6 @@
   },
   "channel_performance": [
     {
-      "channel": "fomo_highlights",
-      "status": "active",
-      "category": "Gaming",
-      "target_per_day": 8,
-      "published_24h": 6,
-      "queue_depth": 0,
-      "running_jobs": 0,
-      "failed_7d": 1,
-      "avg_views": 24036,
-      "rpm": 20.43,
-      "deficit": 2,
-      "completion_rate": 75.0,
-      "lagging": true,
-      "views_source": "source_clips_proxy",
-      "latest_title": "Gold Is Falling During a War \u2014 Here's Why That's Unusual \ud83d\udcc9\ud83c\udfc5",
-      "latest_url": "https://youtube.com/shorts/j02PPJnVFNw",
-      "latest_uploaded_at": "2026-04-02 22:36"
-    },
-    {
       "channel": "test_channel",
       "status": "active",
       "category": "experimental",
@@ -1612,6 +1593,25 @@
       "latest_title": "Test Caption 1",
       "latest_url": "https://youtube.com/test",
       "latest_uploaded_at": "2026-03-30 22:14"
+    },
+    {
+      "channel": "fomo_highlights",
+      "status": "active",
+      "category": "Gaming",
+      "target_per_day": 8,
+      "published_24h": 4,
+      "queue_depth": 0,
+      "running_jobs": 0,
+      "failed_7d": 1,
+      "avg_views": 24036,
+      "rpm": 20.43,
+      "deficit": 4,
+      "completion_rate": 50.0,
+      "lagging": true,
+      "views_source": "source_clips_proxy",
+      "latest_title": "Gold Is Falling During a War \u2014 Here's Why That's Unusual \ud83d\udcc9\ud83c\udfc5",
+      "latest_url": "https://youtube.com/shorts/j02PPJnVFNw",
+      "latest_uploaded_at": "2026-04-02 22:36"
     },
     {
       "channel": "viral_recaps",
@@ -1637,19 +1637,19 @@
       "status": "active",
       "category": "Gaming",
       "target_per_day": 15,
-      "published_24h": 6,
-      "queue_depth": 2,
+      "published_24h": 7,
+      "queue_depth": 1,
       "running_jobs": 0,
       "failed_7d": 0,
       "avg_views": 12235,
       "rpm": 10.4,
-      "deficit": 9,
-      "completion_rate": 40.0,
+      "deficit": 8,
+      "completion_rate": 46.7,
       "lagging": true,
       "views_source": "source_clips_proxy",
-      "latest_title": "Tfue Moments #33",
-      "latest_url": "https://youtube.com/shorts/9zvQWbRKfK8",
-      "latest_uploaded_at": "2026-04-02 23:40"
+      "latest_title": "Cloakzy Moments #21",
+      "latest_url": "https://youtube.com/shorts/m25762ZIffA",
+      "latest_uploaded_at": "2026-04-03 03:07"
     },
     {
       "channel": "stream_queens",
@@ -6653,7 +6653,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-02 12:11:16",
       "last_fetch_display": "2026-04-02 12:11",
-      "last_fetch_ago": "20h",
+      "last_fetch_ago": "21h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.8,
@@ -6961,7 +6961,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-26 08:21:08",
       "last_fetch_display": "2026-03-26 08:21",
-      "last_fetch_ago": "7d",
+      "last_fetch_ago": "8d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -7227,7 +7227,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-03 08:06:47",
       "last_fetch_display": "2026-04-03 08:06",
-      "last_fetch_ago": "11m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.28,
@@ -7241,7 +7241,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-02 16:21:23",
       "last_fetch_display": "2026-04-02 16:21",
-      "last_fetch_ago": "15h",
+      "last_fetch_ago": "16h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.333,
@@ -7255,7 +7255,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-03 08:08:46",
       "last_fetch_display": "2026-04-03 08:08",
-      "last_fetch_ago": "9m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.009,
@@ -7269,7 +7269,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-03 08:08:36",
       "last_fetch_display": "2026-04-03 08:08",
-      "last_fetch_ago": "9m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.018,
@@ -7283,7 +7283,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-03 08:08:33",
       "last_fetch_display": "2026-04-03 08:08",
-      "last_fetch_ago": "9m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.009,
@@ -7297,7 +7297,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-26 09:07:01",
       "last_fetch_display": "2026-03-26 09:07",
-      "last_fetch_ago": "7d",
+      "last_fetch_ago": "8d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.25,
@@ -7311,7 +7311,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-03 08:08:26",
       "last_fetch_display": "2026-04-03 08:08",
-      "last_fetch_ago": "9m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.009,
@@ -7325,7 +7325,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-02 16:20:52",
       "last_fetch_display": "2026-04-02 16:20",
-      "last_fetch_ago": "15h",
+      "last_fetch_ago": "16h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.316,
@@ -7339,7 +7339,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-02 16:20:27",
       "last_fetch_display": "2026-04-02 16:20",
-      "last_fetch_ago": "15h",
+      "last_fetch_ago": "16h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.286,
@@ -7353,7 +7353,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-26 09:07:11",
       "last_fetch_display": "2026-03-26 09:07",
-      "last_fetch_ago": "7d",
+      "last_fetch_ago": "8d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.25,
@@ -7367,7 +7367,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-03 08:08:31",
       "last_fetch_display": "2026-04-03 08:08",
-      "last_fetch_ago": "9m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.019,
@@ -7381,7 +7381,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-02 16:20:36",
       "last_fetch_display": "2026-04-02 16:20",
-      "last_fetch_ago": "15h",
+      "last_fetch_ago": "16h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.318,
@@ -7409,7 +7409,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-03 08:06:40",
       "last_fetch_display": "2026-04-03 08:06",
-      "last_fetch_ago": "11m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.196,
@@ -7423,7 +7423,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-02 16:21:07",
       "last_fetch_display": "2026-04-02 16:21",
-      "last_fetch_ago": "15h",
+      "last_fetch_ago": "16h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.324,
@@ -7647,7 +7647,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-03 08:08:15",
       "last_fetch_display": "2026-04-03 08:08",
-      "last_fetch_ago": "9m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "healthy",
       "error_rate": 0.0,
@@ -7730,6 +7730,20 @@
     "log_viewer_target": "logs_dialog"
   },
   "top_clips": [
+    {
+      "clip_id": "engine_auto_ee91408c",
+      "clip_id_short": "engine_auto_",
+      "title": "Cloakzy Moments #21",
+      "source_title": null,
+      "creator": null,
+      "channel": "arc_highlightz",
+      "views": 0,
+      "likes": null,
+      "ctr_percent": null,
+      "upload_date": "2026-04-03 03:07",
+      "youtube_url": "https://youtube.com/shorts/m25762ZIffA",
+      "metric_mode": "unavailable"
+    },
     {
       "clip_id": "engine_auto_31a34c35",
       "clip_id_short": "engine_auto_",
@@ -7995,23 +8009,21 @@
       "upload_date": "2026-04-01 09:30",
       "youtube_url": "https://youtube.com/shorts/vT2LIQSWp_I",
       "metric_mode": "unavailable"
-    },
-    {
-      "clip_id": "afcc0487-3dd5-4ac2-a1ac-838b614b6fec",
-      "clip_id_short": "afcc0487-3dd",
-      "title": "Nasdaq Rips To Close Q1 \u2014 Iran De-Escalation Sparks Rally \ud83d\udcc8",
-      "source_title": null,
-      "creator": null,
-      "channel": "fomo_highlights",
-      "views": 0,
-      "likes": null,
-      "ctr_percent": null,
-      "upload_date": "2026-04-01 09:02",
-      "youtube_url": "https://youtube.com/shorts/rBZCVxWn38I",
-      "metric_mode": "unavailable"
     }
   ],
   "recent_uploads": [
+    {
+      "job_id": "1082ee9b-1c73-42e3-82e7-2e1ab3e20218",
+      "job_id_short": "1082ee9b",
+      "channel": "arc_highlightz",
+      "status": "succeeded",
+      "updated_at": "2026-04-03T03:07:34.698180",
+      "updated_at_display": "2026-04-03 03:07",
+      "updated_ago": "6h",
+      "title": "Cloakzy Moments #21",
+      "url": "https://youtube.com/shorts/m25762ZIffA",
+      "error": null
+    },
     {
       "job_id": "6e252bbd-70dd-44db-be78-da43d7890f9a",
       "job_id_short": "6e252bbd",
@@ -8019,20 +8031,8 @@
       "status": "queued",
       "updated_at": "2026-04-03T02:08:13.351178",
       "updated_at_display": "2026-04-03 02:08",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "Tfue Moments #34",
-      "url": null,
-      "error": null
-    },
-    {
-      "job_id": "1082ee9b-1c73-42e3-82e7-2e1ab3e20218",
-      "job_id_short": "1082ee9b",
-      "channel": "arc_highlightz",
-      "status": "queued",
-      "updated_at": "2026-04-03T00:07:49.617364",
-      "updated_at_display": "2026-04-03 00:07",
-      "updated_ago": "8h",
-      "title": "Cloakzy Moments #21",
       "url": null,
       "error": null
     },
@@ -8043,7 +8043,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-02T23:40:56.040483",
       "updated_at_display": "2026-04-02 23:40",
-      "updated_ago": "8h",
+      "updated_ago": "9h",
       "title": "Tfue Moments #33",
       "url": "https://youtube.com/shorts/9zvQWbRKfK8",
       "error": null
@@ -8055,7 +8055,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-02T23:08:04.465940",
       "updated_at_display": "2026-04-02 23:08",
-      "updated_ago": "9h",
+      "updated_ago": "10h",
       "title": "Hasanabi Moments #8",
       "url": "https://youtube.com/shorts/26440tDrIVQ",
       "error": null
@@ -8067,7 +8067,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-02T22:36:05.390369",
       "updated_at_display": "2026-04-02 22:36",
-      "updated_ago": "9h",
+      "updated_ago": "10h",
       "title": "Gold Is Falling During a War \u2014 Here's Why That's Unusual \ud83d\udcc9\ud83c\udfc5",
       "url": "https://youtube.com/shorts/j02PPJnVFNw",
       "error": null
@@ -8079,7 +8079,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-02T22:06:08.085194",
       "updated_at_display": "2026-04-02 22:06",
-      "updated_ago": "10h",
+      "updated_ago": "11h",
       "title": "Oil Just Had Its Biggest Day in 6 Years \u2014 Here's Why \ud83d\udee2\ufe0f\ud83d\udd25",
       "url": "https://youtube.com/shorts/EsN8Nul5S0M",
       "error": null
@@ -8091,7 +8091,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-02T21:32:11.689595",
       "updated_at_display": "2026-04-02 21:32",
-      "updated_ago": "10h",
+      "updated_ago": "11h",
       "title": "Oil Just Had Its Biggest Day in 6 Years \u2014 Here's Why \ud83d\udee2\ufe0f\ud83d\udd25",
       "url": "https://youtube.com/shorts/IZw4QqFTyvY",
       "error": null
@@ -8103,7 +8103,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-02T20:40:49.808082",
       "updated_at_display": "2026-04-02 20:40",
-      "updated_ago": "11h",
+      "updated_ago": "12h",
       "title": "Tfue Moments #32",
       "url": "https://youtube.com/shorts/G9q7NBoaiu8",
       "error": null
@@ -8115,7 +8115,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-02T19:01:28.804818",
       "updated_at_display": "2026-04-02 19:01",
-      "updated_ago": "13h",
+      "updated_ago": "14h",
       "title": "Hasanabi Moments #7",
       "url": "https://youtube.com/shorts/S_vkfPS564o",
       "error": null
@@ -8127,13 +8127,27 @@
       "status": "succeeded",
       "updated_at": "2026-04-02T18:32:21.483793",
       "updated_at_display": "2026-04-02 18:32",
-      "updated_ago": "13h",
+      "updated_ago": "14h",
       "title": "Tfue Moments #31",
       "url": "https://youtube.com/shorts/5NGLHOsQ5t4",
       "error": null
     }
   ],
   "recent_clips": [
+    {
+      "job_id": "1082ee9b-1c73-42e3-82e7-2e1ab3e20218",
+      "job_id_short": "1082ee9b",
+      "channel": "arc_highlightz",
+      "title": "Cloakzy Moments #21",
+      "title_truncated": "Cloakzy Moments #21",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/m25762ZIffA",
+      "views": 0,
+      "views_display": "\u00e2\u20ac\u201d",
+      "published_at": "2026-04-03T03:07:34.698180",
+      "published_at_display": "2026-04-03 03:07",
+      "published_ago": "6h"
+    },
     {
       "job_id": "398e52fe-b647-4d23-82e8-8c264e69058e",
       "job_id_short": "398e52fe",
@@ -8146,7 +8160,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-02T23:40:56.040483",
       "published_at_display": "2026-04-02 23:40",
-      "published_ago": "8h"
+      "published_ago": "9h"
     },
     {
       "job_id": "3a948e84-98a1-4eec-8ce5-9616b7a21533",
@@ -8160,7 +8174,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-02T23:08:04.465940",
       "published_at_display": "2026-04-02 23:08",
-      "published_ago": "9h"
+      "published_ago": "10h"
     },
     {
       "job_id": "60bd9a57-041d-4948-a9d0-5170c69c6a13",
@@ -8174,7 +8188,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-02T22:36:05.390369",
       "published_at_display": "2026-04-02 22:36",
-      "published_ago": "9h"
+      "published_ago": "10h"
     },
     {
       "job_id": "0b454f6d-eecd-4c66-9112-7f7a0a0c7972",
@@ -8188,7 +8202,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-02T22:06:08.085194",
       "published_at_display": "2026-04-02 22:06",
-      "published_ago": "10h"
+      "published_ago": "11h"
     },
     {
       "job_id": "6fa1f48b-85d7-428a-8cae-ac2f2d1221a3",
@@ -8202,7 +8216,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-02T21:32:11.689595",
       "published_at_display": "2026-04-02 21:32",
-      "published_ago": "10h"
+      "published_ago": "11h"
     },
     {
       "job_id": "e8d60d74-4420-40a6-9adb-8d79fa103d3c",
@@ -8216,7 +8230,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-02T20:40:49.808082",
       "published_at_display": "2026-04-02 20:40",
-      "published_ago": "11h"
+      "published_ago": "12h"
     },
     {
       "job_id": "27b33518-031e-4669-b413-536de4d60a45",
@@ -8230,7 +8244,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-02T19:01:28.804818",
       "published_at_display": "2026-04-02 19:01",
-      "published_ago": "13h"
+      "published_ago": "14h"
     },
     {
       "job_id": "87e83d50-7d36-4744-a258-54428b5121ca",
@@ -8240,11 +8254,11 @@
       "title_truncated": "Tfue Moments #31",
       "thumbnail_path": null,
       "post_url": "https://youtube.com/shorts/5NGLHOsQ5t4",
-      "views": 712,
-      "views_display": "712",
+      "views": 954,
+      "views_display": "954",
       "published_at": "2026-04-02T18:32:21.483793",
       "published_at_display": "2026-04-02 18:32",
-      "published_ago": "13h"
+      "published_ago": "14h"
     },
     {
       "job_id": "662d20dd-6b24-4364-b07a-c2e2c76153aa",
@@ -8258,20 +8272,6 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-02T17:32:57.074574",
       "published_at_display": "2026-04-02 17:32",
-      "published_ago": "14h"
-    },
-    {
-      "job_id": "2d4cf306-e57c-47a5-a273-038d0e594317",
-      "job_id_short": "2d4cf306",
-      "channel": "arc_highlightz",
-      "title": "Tfue Moments #30",
-      "title_truncated": "Tfue Moments #30",
-      "thumbnail_path": null,
-      "post_url": "https://youtube.com/shorts/jzP6fMGeerk",
-      "views": 0,
-      "views_display": "\u00e2\u20ac\u201d",
-      "published_at": "2026-04-02T16:33:49.758875",
-      "published_at_display": "2026-04-02 16:33",
       "published_ago": "15h"
     }
   ],
@@ -8279,8 +8279,20 @@
     "buckets": [
       {
         "name": "Today",
-        "count": 0,
-        "items": []
+        "count": 1,
+        "items": [
+          {
+            "job_id": "1082ee9b-1c73-42e3-82e7-2e1ab3e20218",
+            "job_id_short": "1082ee9b",
+            "channel": "arc_highlightz",
+            "title": "Cloakzy Moments #21",
+            "published_at": "2026-04-03T03:07:34.698180",
+            "published_at_display": "2026-04-03 03:07",
+            "published_ago": "6h",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/m25762ZIffA"
+          }
+        ]
       },
       {
         "name": "Yesterday",
@@ -8293,7 +8305,7 @@
             "title": "Tfue Moments #33",
             "published_at": "2026-04-02T23:40:56.040483",
             "published_at_display": "2026-04-02 23:40",
-            "published_ago": "8h",
+            "published_ago": "9h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/9zvQWbRKfK8"
           },
@@ -8304,7 +8316,7 @@
             "title": "Hasanabi Moments #8",
             "published_at": "2026-04-02T23:08:04.465940",
             "published_at_display": "2026-04-02 23:08",
-            "published_ago": "9h",
+            "published_ago": "10h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/26440tDrIVQ"
           },
@@ -8315,7 +8327,7 @@
             "title": "Gold Is Falling During a War \u2014 Here's Why That's Unusual \ud83d\udcc9\ud83c\udfc5",
             "published_at": "2026-04-02T22:36:05.390369",
             "published_at_display": "2026-04-02 22:36",
-            "published_ago": "9h",
+            "published_ago": "10h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/j02PPJnVFNw"
           },
@@ -8326,7 +8338,7 @@
             "title": "Oil Just Had Its Biggest Day in 6 Years \u2014 Here's Why \ud83d\udee2\ufe0f\ud83d\udd25",
             "published_at": "2026-04-02T22:06:08.085194",
             "published_at_display": "2026-04-02 22:06",
-            "published_ago": "10h",
+            "published_ago": "11h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/EsN8Nul5S0M"
           },
@@ -8337,7 +8349,7 @@
             "title": "Oil Just Had Its Biggest Day in 6 Years \u2014 Here's Why \ud83d\udee2\ufe0f\ud83d\udd25",
             "published_at": "2026-04-02T21:32:11.689595",
             "published_at_display": "2026-04-02 21:32",
-            "published_ago": "10h",
+            "published_ago": "11h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/IZw4QqFTyvY"
           },
@@ -8348,7 +8360,7 @@
             "title": "Tfue Moments #32",
             "published_at": "2026-04-02T20:40:49.808082",
             "published_at_display": "2026-04-02 20:40",
-            "published_ago": "11h",
+            "published_ago": "12h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/G9q7NBoaiu8"
           },
@@ -8359,7 +8371,7 @@
             "title": "Hasanabi Moments #7",
             "published_at": "2026-04-02T19:01:28.804818",
             "published_at_display": "2026-04-02 19:01",
-            "published_ago": "13h",
+            "published_ago": "14h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/S_vkfPS564o"
           },
@@ -8370,7 +8382,7 @@
             "title": "Tfue Moments #31",
             "published_at": "2026-04-02T18:32:21.483793",
             "published_at_display": "2026-04-02 18:32",
-            "published_ago": "13h",
+            "published_ago": "14h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/5NGLHOsQ5t4"
           },
@@ -8381,7 +8393,7 @@
             "title": "Friday's Jobs Report Could Shake Markets \u2014 Here's the Num...",
             "published_at": "2026-04-02T17:32:57.074574",
             "published_at_display": "2026-04-02 17:32",
-            "published_ago": "14h",
+            "published_ago": "15h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/BbuMCPhAphw"
           },
@@ -8392,7 +8404,7 @@
             "title": "Tfue Moments #30",
             "published_at": "2026-04-02T16:33:49.758875",
             "published_at_display": "2026-04-02 16:33",
-            "published_ago": "15h",
+            "published_ago": "16h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/jzP6fMGeerk"
           },
@@ -8403,7 +8415,7 @@
             "title": "Tfue Moments #29",
             "published_at": "2026-04-02T15:04:16.158411",
             "published_at_display": "2026-04-02 15:04",
-            "published_ago": "17h",
+            "published_ago": "18h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/LOHgjwxRCGo"
           },
@@ -8414,7 +8426,7 @@
             "title": "Tfue Moments #28",
             "published_at": "2026-04-02T12:35:49.371207",
             "published_at_display": "2026-04-02 12:35",
-            "published_ago": "19h",
+            "published_ago": "20h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/yLdGbddTkzs"
           },
@@ -8425,7 +8437,7 @@
             "title": "Oil Soars, Dow Tanks as Trump Threatens Iran \ud83d\udee2\ufe0f\ud83d\udcc9",
             "published_at": "2026-04-02T09:03:47.171826",
             "published_at_display": "2026-04-02 09:03",
-            "published_ago": "23h",
+            "published_ago": "1d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/tO_vqJHu6ic"
           },
@@ -8436,7 +8448,7 @@
             "title": "Markets Drop as Trump Says Iran War 'Not Over' \ud83d\udcc9\u26a0\ufe0f",
             "published_at": "2026-04-02T08:40:49.857314",
             "published_at_display": "2026-04-02 08:40",
-            "published_ago": "23h",
+            "published_ago": "1d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/gMHU4YWXdM4"
           },
@@ -8455,7 +8467,7 @@
       },
       {
         "name": "This Week",
-        "count": 35,
+        "count": 34,
         "items": [
           {
             "job_id": "2715cf7d-8c20-4561-8b3d-41fa296d4f39",
@@ -8508,7 +8520,7 @@
             "title": "Nasdaq Rips To Close Q1 \u2014 Iran De-Escalation Sparks Rally \ud83d\udcc8",
             "published_at": "2026-04-01T09:02:20.813272",
             "published_at_display": "2026-04-01 09:02",
-            "published_ago": "1d",
+            "published_ago": "2d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/rBZCVxWn38I"
           },
@@ -8519,7 +8531,7 @@
             "title": "Trump Speaks On Iran War \u2014 Oil Crashes Below $100 \ud83d\udea8",
             "published_at": "2026-04-01T08:30:50.026432",
             "published_at_display": "2026-04-01 08:30",
-            "published_ago": "1d",
+            "published_ago": "2d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/2y4CVkftX-4"
           },
@@ -8695,7 +8707,7 @@
             "title": "Oil On A Knife's Edge: Hormuz Could Spike Prices 50% \u26a1\ud83d\udee2\ufe0f",
             "published_at": "2026-03-31T09:11:43.652949",
             "published_at_display": "2026-03-31 09:11",
-            "published_ago": "2d",
+            "published_ago": "3d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/fESMgUGk0TA"
           },
@@ -8706,7 +8718,7 @@
             "title": "Only 2 Ways To Protect Your $$ From Trump's Iran War \ud83d\udcb0\ud83d\udee1\ufe0f",
             "published_at": "2026-03-31T09:01:54.542081",
             "published_at_display": "2026-03-31 09:01",
-            "published_ago": "2d",
+            "published_ago": "3d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/JQqJJNktrGQ"
           },
@@ -8717,7 +8729,7 @@
             "title": "War Watch: Bitcoin & Ethereum Diverge as Iran Risk Grows \ud83d\udcc9\u26a1",
             "published_at": "2026-03-31T08:31:13.307296",
             "published_at_display": "2026-03-31 08:31",
-            "published_ago": "2d",
+            "published_ago": "3d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/sTwkVxRAn9E"
           },
@@ -8830,17 +8842,6 @@
             "published_ago": "3d",
             "views": 0,
             "post_url": "https://www.youtube.com/watch?v=A2n__VRKhtI"
-          },
-          {
-            "job_id": "f4c28550-a2f7-4aae-837a-6275f9a95efc",
-            "job_id_short": "f4c28550",
-            "channel": "test_channel",
-            "title": "Test Caption 1",
-            "published_at": "2026-03-30T22:14:54.178998",
-            "published_at_display": "2026-03-30 22:14",
-            "published_ago": "3d",
-            "views": 0,
-            "post_url": "https://youtube.com/test"
           }
         ]
       },
@@ -9091,15 +9092,6 @@
   "schedule": {
     "2026-04-03": [
       {
-        "job_id": "1082ee9b-1c73-42e3-82e7-2e1ab3e20218",
-        "job_id_short": "1082ee9b",
-        "channel": "arc_highlightz",
-        "title": "Cloakzy Moments #21",
-        "scheduled_at": "2026-04-03T07:00:00-06:00",
-        "scheduled_at_iso": "2026-04-03T07:00:00",
-        "status": "queued"
-      },
-      {
         "job_id": "6e252bbd-70dd-44db-be78-da43d7890f9a",
         "job_id_short": "6e252bbd",
         "channel": "arc_highlightz",
@@ -9107,6 +9099,15 @@
         "scheduled_at": "2026-04-03T08:00:00-06:00",
         "scheduled_at_iso": "2026-04-03T08:00:00",
         "status": "queued"
+      },
+      {
+        "job_id": "1082ee9b-1c73-42e3-82e7-2e1ab3e20218",
+        "job_id_short": "1082ee9b",
+        "channel": "arc_highlightz",
+        "title": "Cloakzy Moments #21",
+        "scheduled_at": "2026-04-03T03:07:34.698180",
+        "scheduled_at_iso": "2026-04-03T03:07:34.698180",
+        "status": "succeeded"
       }
     ],
     "2026-03-27": [
@@ -10140,9 +10141,9 @@
     ],
     "any_channel_high": false,
     "all_channels_safe": true,
-    "reset_time_hours": 23,
+    "reset_time_hours": 22,
     "reset_time_minutes": 41,
-    "reset_time_display": "23h 41m"
+    "reset_time_display": "22h 41m"
   },
   "revenue": {
     "total_views_30d": 0,
@@ -10162,8 +10163,8 @@
       "discovered": 0,
       "downloaded": 0,
       "processed": 0,
-      "queued": 2,
-      "uploaded": 213
+      "queued": 1,
+      "uploaded": 214
     },
     "by_channel": [
       {
@@ -10171,8 +10172,8 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 2,
-        "uploaded": 109
+        "queued": 1,
+        "uploaded": 110
       },
       {
         "channel": "fomo_highlights",
@@ -10208,16 +10209,16 @@
       }
     ],
     "throughput": {
-      "uploads_per_hour": 0.58,
-      "uploads_last_24h": 14
+      "uploads_per_hour": 0.54,
+      "uploads_last_24h": 13
     },
     "stage_timings": {
       "discovered_to_downloaded_hours": 0.0,
-      "queued_to_uploaded_hours": 5.83
+      "queued_to_uploaded_hours": 5.81
     },
     "bottleneck": {
       "stage": "queued",
-      "backlog": 2
+      "backlog": 1
     }
   },
   "disk": {
@@ -10251,7 +10252,7 @@
         "file_count": 191
       }
     ],
-    "total_disk_bytes": 52625137500,
+    "total_disk_bytes": 52605721984,
     "total_disk_human": "49.0GB",
     "percent_of_500gb": 9.8,
     "warning_threshold_pct": 70,
@@ -10378,6 +10379,19 @@
       {
         "rank": 7,
         "channel": "arc_highlightz",
+        "title": "Tfue Moments #31",
+        "title_display": "Tfue Moments #31",
+        "views": 954,
+        "views_display": "954",
+        "post_url": "https://youtube.com/shorts/5NGLHOsQ5t4",
+        "published_at": "2026-04-02T18:32:21.483793",
+        "published_at_display": "2026-04-02 18:32",
+        "published_ago": "14h",
+        "thumbnail_path": null
+      },
+      {
+        "rank": 8,
+        "channel": "arc_highlightz",
         "title": "Tfue Moments #4",
         "title_display": "Tfue Moments #4",
         "views": 916,
@@ -10389,7 +10403,7 @@
         "thumbnail_path": null
       },
       {
-        "rank": 8,
+        "rank": 9,
         "channel": "fomo_highlights",
         "title": "Tfue just broke the game \ud83c\udfae",
         "title_display": "Tfue just broke the game \ud83c\udfae",
@@ -10402,7 +10416,7 @@
         "thumbnail_path": null
       },
       {
-        "rank": 9,
+        "rank": 10,
         "channel": "arc_highlightz",
         "title": "Tfue Moments #12",
         "title_display": "Tfue Moments #12",
@@ -10412,19 +10426,6 @@
         "published_at": "2026-03-25T11:37:12.628950",
         "published_at_display": "2026-03-25 11:37",
         "published_ago": "8d",
-        "thumbnail_path": null
-      },
-      {
-        "rank": 10,
-        "channel": "arc_highlightz",
-        "title": "Cloakzy Moments #8",
-        "title_display": "Cloakzy Moments #8",
-        "views": 841,
-        "views_display": "841",
-        "post_url": "https://youtube.com/shorts/Yf2I2VJMVgU",
-        "published_at": "2026-03-28T03:02:35.186946",
-        "published_at_display": "2026-03-28 03:02",
-        "published_ago": "6d",
         "thumbnail_path": null
       }
     ],
@@ -10500,9 +10501,9 @@
   "leaderboard": [
     {
       "channel_name": "arc_highlightz",
-      "total_views": 39586,
-      "uploads_30d": 109,
-      "avg_views": 363,
+      "total_views": 39828,
+      "uploads_30d": 110,
+      "avg_views": 362,
       "best_clip_title": "No clips yet",
       "best_clip_views": 0,
       "best_clip_url": "",
@@ -11523,7 +11524,7 @@
           "priority": 3,
           "clips_fetched": 36,
           "last_fetched_at": "2026-04-03T08:08:13.370315",
-          "last_fetched_rel": "9m",
+          "last_fetched_rel": "1h",
           "enabled": true,
           "url": "vod://tfue",
           "type": "vod_highlights"
@@ -11537,7 +11538,7 @@
           "priority": 3,
           "clips_fetched": 20,
           "last_fetched_at": "2026-04-03T06:07:49.633156",
-          "last_fetched_rel": "2h",
+          "last_fetched_rel": "3h",
           "enabled": true,
           "url": "vod://cloakzy",
           "type": "vod_highlights"
@@ -11598,7 +11599,7 @@
           "priority": 1,
           "clips_fetched": 8,
           "last_fetched_at": "2026-04-03T04:09:38.283072",
-          "last_fetched_rel": "4h",
+          "last_fetched_rel": "5h",
           "enabled": true,
           "url": "https://www.youtube.com/@HasanAbi/videos",
           "type": "transcript"
@@ -11739,25 +11740,34 @@
   ],
   "daily_summary": {
     "date": "2026-04-03",
-    "uploads_today": 0,
-    "uploads_yesterday": 15,
+    "uploads_today": 1,
+    "uploads_yesterday": 16,
     "views_gained_today": 0,
     "views_yesterday": 0,
     "errors_today": 0,
-    "quota_pct": 0.0,
-    "quota_units_used": 0,
+    "quota_pct": 16.0,
+    "quota_units_used": 1600,
     "delta_uploads": -15,
     "delta_views": 0,
-    "top_clip_today": null,
-    "top_3_channels": [],
-    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-04-03\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 0 (-15 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 0.0% used (0/10000 units)",
-    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-04-03\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 0 (-15 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 0.0% used (`0/10000` units)"
+    "top_clip_today": {
+      "title": "Cloakzy Moments #21",
+      "views": 0,
+      "channel": "arc_highlightz"
+    },
+    "top_3_channels": [
+      {
+        "channel": "arc_highlightz",
+        "uploads": 1
+      }
+    ],
+    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-04-03\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 1 (-15 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 16.0% used (1600/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Cloakzy Moments #21\n  0 views \u00e2\u20ac\u00a2 arc_highlightz\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. arc_highlightz: 1 uploads",
+    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-04-03\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 1 (-15 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 16.0% used (`1600/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Cloakzy Moments #21_\n**0 views** \u00e2\u20ac\u00a2 **arc_highlightz**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **arc_highlightz** \u00e2\u20ac\u201d 1 uploads"
   },
   "title_performance": {
     "pattern_analysis": {
       "has_numbers": {
         "avg_views": 0.0,
-        "count": 149,
+        "count": 150,
         "total_views": 0
       },
       "has_question": {
@@ -11815,7 +11825,7 @@
       {
         "word": "cloakzy",
         "avg_views": 0.0,
-        "occurrences": 25
+        "occurrences": 26
       },
       {
         "word": "the",
@@ -11867,7 +11877,7 @@
       {
         "word": "cloakzy",
         "avg_views": 0.0,
-        "occurrences": 25
+        "occurrences": 26
       },
       {
         "word": "the",
@@ -11912,12 +11922,12 @@
         "channel": "arc_highlightz",
         "best_title": "Watch this before scrolling: Nobody plays like this",
         "best_views": 0,
-        "total_titles_analyzed": 109,
+        "total_titles_analyzed": 110,
         "pattern_breakdown": {
-          "numbers_pct": 89.9,
+          "numbers_pct": 90.0,
           "questions_pct": 0.9,
           "caps_pct": 0.9,
-          "emoji_pct": 2.8
+          "emoji_pct": 2.7
         }
       },
       {
@@ -11975,7 +11985,7 @@
       {
         "style_name": "Gaming/Clips",
         "avg_views": 0,
-        "total_clips": 206,
+        "total_clips": 207,
         "best_clip": null,
         "total_views": 0,
         "is_best": true
@@ -12000,7 +12010,7 @@
     "best_style_overall": "Gaming/Clips",
     "summary_stats": {
       "total_styles": 3,
-      "total_clips_all": 213,
+      "total_clips_all": 214,
       "total_views_all": 0,
       "avg_views_overall": 0
     }
@@ -12052,8 +12062,8 @@
       {
         "hour": 7,
         "hour_label": "07:00",
-        "posts": 8,
-        "avg_views": 600.0
+        "posts": 9,
+        "avg_views": 593.0
       },
       {
         "hour": 8,
@@ -12180,8 +12190,8 @@
       {
         "day": 4,
         "day_name": "Friday",
-        "posts": 15,
-        "avg_views": 612.0
+        "posts": 16,
+        "avg_views": 608.0
       },
       {
         "day": 5,
@@ -12627,7 +12637,7 @@
           "hour": 7,
           "day": 4,
           "views": 540.0,
-          "posts": 1,
+          "posts": 2,
           "intensity": 30.0
         },
         {
@@ -13470,7 +13480,7 @@
       "day_name": "Monday",
       "est_views": 1800.0
     },
-    "job_count": 213
+    "job_count": 214
   },
   "benchmarks": {
     "current_tier": "Starter",
@@ -13561,81 +13571,81 @@
     {
       "type": "warning",
       "title": "Channel \"market_meltdowns\" paused for 24+ hours",
-      "message": "market_meltdowns has been paused for 608 hours",
+      "message": "market_meltdowns has been paused for 609 hours",
       "channel": "market_meltdowns",
-      "created_at": "2026-04-03T08:18:05.828052",
+      "created_at": "2026-04-03T09:18:06.203175",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"self_made_clips\" paused for 24+ hours",
-      "message": "self_made_clips has been paused for 604 hours",
+      "message": "self_made_clips has been paused for 605 hours",
       "channel": "self_made_clips",
-      "created_at": "2026-04-03T08:18:05.828052",
+      "created_at": "2026-04-03T09:18:06.203175",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"rich_or_ruined\" paused for 24+ hours",
-      "message": "rich_or_ruined has been paused for 602 hours",
+      "message": "rich_or_ruined has been paused for 603 hours",
       "channel": "rich_or_ruined",
-      "created_at": "2026-04-03T08:18:05.828052",
+      "created_at": "2026-04-03T09:18:06.203175",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"startup_graveyard\" paused for 24+ hours",
-      "message": "startup_graveyard has been paused for 602 hours",
+      "message": "startup_graveyard has been paused for 603 hours",
       "channel": "startup_graveyard",
-      "created_at": "2026-04-03T08:18:05.828052",
+      "created_at": "2026-04-03T09:18:06.203175",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_sirens\" paused for 24+ hours",
-      "message": "stream_sirens has been paused for 581 hours",
+      "message": "stream_sirens has been paused for 582 hours",
       "channel": "stream_sirens",
-      "created_at": "2026-04-03T08:18:05.828052",
+      "created_at": "2026-04-03T09:18:06.203175",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_queens\" paused for 24+ hours",
-      "message": "stream_queens has been paused for 581 hours",
+      "message": "stream_queens has been paused for 582 hours",
       "channel": "stream_queens",
-      "created_at": "2026-04-03T08:18:05.828052",
+      "created_at": "2026-04-03T09:18:06.203175",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"ai_did_what\" paused for 24+ hours",
-      "message": "ai_did_what has been paused for 547 hours",
+      "message": "ai_did_what has been paused for 548 hours",
       "channel": "ai_did_what",
-      "created_at": "2026-04-03T08:18:05.828052",
+      "created_at": "2026-04-03T09:18:06.203175",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"gym_moments\" paused for 24+ hours",
-      "message": "gym_moments has been paused for 547 hours",
+      "message": "gym_moments has been paused for 548 hours",
       "channel": "gym_moments",
-      "created_at": "2026-04-03T08:18:05.828052",
+      "created_at": "2026-04-03T09:18:06.203175",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"kitchen_chaos\" paused for 24+ hours",
-      "message": "kitchen_chaos has been paused for 400 hours",
+      "message": "kitchen_chaos has been paused for 401 hours",
       "channel": "kitchen_chaos",
-      "created_at": "2026-04-03T08:18:05.828052",
+      "created_at": "2026-04-03T09:18:06.203175",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"unfiltered_clips\" paused for 24+ hours",
-      "message": "unfiltered_clips has been paused for 400 hours",
+      "message": "unfiltered_clips has been paused for 401 hours",
       "channel": "unfiltered_clips",
-      "created_at": "2026-04-03T08:18:05.828052",
+      "created_at": "2026-04-03T09:18:06.203175",
       "read": false
     }
   ],
@@ -14216,25 +14226,6 @@
   "insights": {
     "lagging_channels": [
       {
-        "channel": "fomo_highlights",
-        "status": "active",
-        "category": "Gaming",
-        "target_per_day": 8,
-        "published_24h": 6,
-        "queue_depth": 0,
-        "running_jobs": 0,
-        "failed_7d": 1,
-        "avg_views": 24036,
-        "rpm": 20.43,
-        "deficit": 2,
-        "completion_rate": 75.0,
-        "lagging": true,
-        "views_source": "source_clips_proxy",
-        "latest_title": "Gold Is Falling During a War \u2014 Here's Why That's Unusual \ud83d\udcc9\ud83c\udfc5",
-        "latest_url": "https://youtube.com/shorts/j02PPJnVFNw",
-        "latest_uploaded_at": "2026-04-02 22:36"
-      },
-      {
         "channel": "test_channel",
         "status": "active",
         "category": "experimental",
@@ -14252,6 +14243,25 @@
         "latest_title": "Test Caption 1",
         "latest_url": "https://youtube.com/test",
         "latest_uploaded_at": "2026-03-30 22:14"
+      },
+      {
+        "channel": "fomo_highlights",
+        "status": "active",
+        "category": "Gaming",
+        "target_per_day": 8,
+        "published_24h": 4,
+        "queue_depth": 0,
+        "running_jobs": 0,
+        "failed_7d": 1,
+        "avg_views": 24036,
+        "rpm": 20.43,
+        "deficit": 4,
+        "completion_rate": 50.0,
+        "lagging": true,
+        "views_source": "source_clips_proxy",
+        "latest_title": "Gold Is Falling During a War \u2014 Here's Why That's Unusual \ud83d\udcc9\ud83c\udfc5",
+        "latest_url": "https://youtube.com/shorts/j02PPJnVFNw",
+        "latest_uploaded_at": "2026-04-02 22:36"
       },
       {
         "channel": "viral_recaps",
@@ -14277,23 +14287,23 @@
         "status": "active",
         "category": "Gaming",
         "target_per_day": 15,
-        "published_24h": 6,
-        "queue_depth": 2,
+        "published_24h": 7,
+        "queue_depth": 1,
         "running_jobs": 0,
         "failed_7d": 0,
         "avg_views": 12235,
         "rpm": 10.4,
-        "deficit": 9,
-        "completion_rate": 40.0,
+        "deficit": 8,
+        "completion_rate": 46.7,
         "lagging": true,
         "views_source": "source_clips_proxy",
-        "latest_title": "Tfue Moments #33",
-        "latest_url": "https://youtube.com/shorts/9zvQWbRKfK8",
-        "latest_uploaded_at": "2026-04-02 23:40"
+        "latest_title": "Cloakzy Moments #21",
+        "latest_url": "https://youtube.com/shorts/m25762ZIffA",
+        "latest_uploaded_at": "2026-04-03 03:07"
       }
     ],
     "lagging_count": 4,
-    "queue_backlog": 2,
+    "queue_backlog": 1,
     "analytics_channels": 13
   },
   "meta": {

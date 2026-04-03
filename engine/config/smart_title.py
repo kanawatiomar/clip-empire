@@ -20,7 +20,7 @@ from typing import Optional
 
 logger = logging.getLogger("clip_empire.smart_title")
 
-# â”€â”€ HYPE SCORING â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# â"€â"€ HYPE SCORING â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 # Keywords in Twitch clip titles that indicate high entertainment value.
 # Score boosts sum up; cap at 1.0.
 
@@ -52,20 +52,20 @@ BORING_KEYWORDS: list[str] = [
 ]
 
 # Minimum hype score to proceed with rendering (clips below this are skipped)
-MIN_HYPE_SCORE = 0.10  # Low bar â€” only skip genuinely dead clips
+MIN_HYPE_SCORE = 0.10  # Low bar â€" only skip genuinely dead clips
 
 
 def score_clip_title(title: str) -> float:
     """Score a clip title for entertainment value. Returns 0.0-1.0.
-    Returns 0.5 (neutral) for titles with no recognizable keywords â€” proceed anyway.
+    Returns 0.5 (neutral) for titles with no recognizable keywords â€" proceed anyway.
     Returns 0.0 only for clips with explicit BORING_KEYWORDS (definitive skip).
     """
     if not title:
-        return 0.5  # Unknown quality â€” proceed anyway
+        return 0.5  # Unknown quality â€" proceed anyway
 
     title_lower = title.lower()
 
-    # Check boring keywords â€” explicit disqualify only
+    # Check boring keywords â€" explicit disqualify only
     for boring in BORING_KEYWORDS:
         if boring in title_lower:
             logger.debug("Boring keyword '%s' in title: %s", boring, title[:60])
@@ -78,13 +78,13 @@ def score_clip_title(title: str) -> float:
 
     # Cap at 1.0; if no hype keywords found, return neutral 0.5 (not skip)
     if score == 0.0:
-        return 0.5  # Neutral â€” undescriptive title, but not boring
+        return 0.5  # Neutral â€" undescriptive title, but not boring
     return min(1.0, score)
 
 
 def is_boring_clip(title: str) -> bool:
     """Return True ONLY if clip has explicit boring/dead keywords (ad break, brb, etc).
-    Clips with undescriptive titles are NOT skipped â€” just given neutral score.
+    Clips with undescriptive titles are NOT skipped â€" just given neutral score.
     """
     if not title:
         return False
@@ -92,7 +92,7 @@ def is_boring_clip(title: str) -> bool:
     return any(boring in title_lower for boring in BORING_KEYWORDS)
 
 
-# â”€â”€ LLM TITLE GENERATION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# â"€â"€ LLM TITLE GENERATION â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 
 _USED_TITLES_PATH = Path("data/used_titles.json")
 
@@ -130,7 +130,7 @@ def generate_llm_title(
     """
     api_key = openai_api_key or os.environ.get("OPENAI_API_KEY") or _read_env_key()
     if not api_key:
-        logger.debug("No OpenAI API key â€” skipping LLM title generation")
+        logger.debug("No OpenAI API key â€" skipping LLM title generation")
         return None
 
     if not creator or not clip_title:
@@ -140,7 +140,7 @@ def generate_llm_title(
     recent = _load_used_titles()[-10:]
     avoid_block = ""
     if recent:
-        avoid_block = "\n\nAVOID â€” these patterns have been used recently:\n" + "\n".join(f'- "{t}"' for t in recent)
+        avoid_block = "\n\nAVOID â€" these patterns have been used recently:\n" + "\n".join(f'- "{t}"' for t in recent)
 
     # Use display_name from creator profile if available
     try:
@@ -174,22 +174,32 @@ def generate_llm_title(
     except Exception:
         pass
 
-    prompt = f"""You write titles for viral YouTube Shorts on a {niche} channel called "{channel_name}".
+    prompt = f"""You write titles for viral YouTube Shorts on a {niche} gaming channel called "{channel_name}".
 
 Streamer: {_creator_display}
 Clip context: "{clip_title}"{creator_context}{avoid_block}
 
 Write ONE title. Rules:
 - Max 60 characters
-- 1 emoji max, at the end (use Unicode e.g. ðŸŽ® ðŸ˜¤ ðŸ’€ ðŸ˜‚)
-- Include streamer's name
-- Create CURIOSITY â€” make viewers need to see what happened
-- NO profanity or swearing
-- NO words: INSANE, EPIC, HILARIOUS, AMAZING, UNREAL, INCREDIBLE
+- 1 emoji max, at the end (optional — only if it adds emotion)
+- Always include the streamer's name
+- Create CURIOSITY — make viewers need to see what happened
+- Include searchable keywords: the game name (Fortnite/Warzone/etc if known), action type (clutch/rage/fail/funny)
+- NO profanity
+- NO banned words: INSANE, EPIC, HILARIOUS, AMAZING, UNREAL, INCREDIBLE
 - NO multiple exclamation marks
-- NO hashtags
+- NO hashtags in the title itself
 
-Style examples (study these):
+Top-performing title patterns from this channel (study and match this energy):
+- "Cloakzy had NO idea this was coming"
+- "Wait for what Tfue does next..."
+- "When Tfue hits DIFFERENT"
+- "This Tfue clip is UNREAL"
+- "Tfue Chaotic Moments" (good for series)
+- "The moment {_creator_display} completely lost it"
+- "Only {_creator_display} could pull this off"
+
+More style examples:
 {styles}
 
 Return ONLY the title, nothing else."""
@@ -219,13 +229,13 @@ Return ONLY the title, nothing else."""
 
         # Hard dedup: if LLM repeated a recently-used title, retry once more
         if title in recent:
-            logger.warning("LLM title '%s' is a duplicate â€” retrying once", title)
+            logger.warning("LLM title '%s' is a duplicate â€" retrying once", title)
             payload2 = json.dumps({
                 "model": "gpt-4o-mini",
                 "messages": [
                     {"role": "user", "content": prompt},
                     {"role": "assistant", "content": title},
-                    {"role": "user", "content": "That title was already used. Write a completely different one â€” different angle, different structure."},
+                    {"role": "user", "content": "That title was already used. Write a completely different one â€" different angle, different structure."},
                 ],
                 "max_tokens": 60,
                 "temperature": 1.0,
@@ -265,7 +275,7 @@ def _read_env_key() -> Optional[str]:
     return None
 
 
-# â”€â”€ CENSOR INTEGRATION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# â"€â"€ CENSOR INTEGRATION â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
 
 def clean_title(title: str) -> str:
     """Apply profanity filter to a title before publishing."""

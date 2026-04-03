@@ -39,10 +39,10 @@ REVIEW_BUFFER_HOURS = 4
 # -- Peak posting windows by niche ---------------------------------------------
 # Format: list of (hour_start, hour_end) tuples in local time (America/Denver)
 # Based on YouTube Shorts peak engagement research:
-#   Gaming:  teen/young adult audience — late morning, afternoon, evening
-#   Finance: working professionals — commute times + lunch + evening
-#   Business: entrepreneurs — morning focus, evening
-#   Tech/AI: broad — throughout day, peaks evening
+#   Gaming:  teen/young adult audience ï¿½ late morning, afternoon, evening
+#   Finance: working professionals ï¿½ commute times + lunch + evening
+#   Business: entrepreneurs ï¿½ morning focus, evening
+#   Tech/AI: broad ï¿½ throughout day, peaks evening
 #   Fitness: morning workout crowd + evening
 #   Food:    lunch + evening scroll
 #   True Crime: evening/late night
@@ -183,7 +183,7 @@ def _next_schedule_time(channel_name: str, db_path: str = DATABASE_PATH) -> date
     niche = CHANNEL_NICHE_MAP.get(channel_name, "Experimental")
 
     # Get daily target for this channel
-    daily_target = 3  # conservative default — better distribution per video
+    daily_target = 3  # conservative default ï¿½ better distribution per video
     try:
         conn = sqlite3.connect(db_path)
         row = conn.execute(
@@ -267,7 +267,7 @@ def _next_schedule_time(channel_name: str, db_path: str = DATABASE_PATH) -> date
             continue
         return candidate
 
-    # All peak slots taken — find next available slot after last existing
+    # All peak slots taken ï¿½ find next available slot after last existing
     if last_slot:
         next_time = last_slot + timedelta(minutes=min_gap_minutes)
     else:
@@ -392,7 +392,7 @@ class QueueWriter:
             from engine.config.series import classify_theme, next_episode
             theme = classify_theme(clip_title or "", niche, channel_name=channel_name)
             ep_num = next_episode(channel_name, creator, theme, self.db_path)
-            # e.g. "#ShroudBestPlays4" — no space, YouTube hashtag format
+            # e.g. "#ShroudBestPlays4" ï¿½ no space, YouTube hashtag format
             series_hashtag = f"#{creator.capitalize().replace(' ', '')}{theme.replace(' ', '')}{ep_num}"
 
         # 3. Title: LLM curiosity-bait, else series title, else A/B template
@@ -402,10 +402,20 @@ class QueueWriter:
                 auto_hook = caption.split(":")[0].strip()[:80]
                 ab_label = "L"   # L = LLM
             else:
-                # No LLM — use series title as primary
-                series_name = f"{creator.capitalize()} {theme} #{ep_num}"
+                # No LLM â€” use a descriptive series title with game keyword
+                # More SEO-friendly than plain "Tfue Moments #X"
+                import random as _rand
+                _game_tags = {
+                    "tfue": "Fortnite", "cloakzy": "Fortnite", "ninja": "Fortnite",
+                    "taxi2g": "Fortnite", "nickmercs": "Warzone", "myth": "Fortnite",
+                    "bugha": "Fortnite", "benjyfishy": "Fortnite",
+                }
+                _adj = _rand.choice(["Chaotic", "Unreal", "Wild", "Clutch", "Funny", "Crazy"])
+                _game = _game_tags.get(creator.lower(), "")
+                _game_suffix = f" ({_game})" if _game else ""
+                series_name = f"{creator.capitalize()} {_adj} {theme} #{ep_num}{_game_suffix}"
                 caption = series_name
-                auto_hook = caption.split("#")[0].strip()[:80]
+                auto_hook = f"{creator.capitalize()} {_adj} {theme}"[:80]
                 ab_label = "S"   # S = Series
         else:
             auto_title, auto_hook, ab_label = choose_variant(channel_name, creator=creator)

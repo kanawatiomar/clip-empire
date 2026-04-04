@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-04-04T14:18:03.702734Z",
+  "generated_at": "2026-04-04T15:18:03.907792Z",
   "repo_root": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire",
   "database_path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\data\\clip_empire.db",
   "health_score": {
-    "score": 67.9,
+    "score": 69.3,
     "grade": "C",
     "status": "Needs Attention",
     "color": "yellow",
     "breakdown": {
-      "pipeline_health": 0.0,
+      "pipeline_health": 1.5,
       "error_rate": 20.0,
       "quota_safety": 15,
       "queue_depth": 15,
@@ -16,13 +16,13 @@
       "channel_uptime": 2.9
     },
     "metrics": {
-      "uploads_today": 0,
+      "uploads_today": 2,
       "target_today": 34,
-      "pipeline_health_ratio": 0.0,
+      "pipeline_health_ratio": 0.06,
       "errors_today": 0,
       "total_jobs_today": 2,
       "error_rate": 0.0,
-      "queue_depth": 2,
+      "queue_depth": 0,
       "active_channels": 4,
       "total_channels": 14,
       "fresh_sources": 0,
@@ -34,45 +34,45 @@
     "total_channels": 14,
     "jobs_today": {
       "total": 2,
-      "queued": 2,
+      "queued": 0,
       "running": 0,
-      "succeeded": 0,
+      "succeeded": 2,
       "failed": 0,
       "cancelled": 0
     },
-    "render_queue_depth": 2,
-    "last_updated": "2026-04-04T14:18:03.702734Z"
+    "render_queue_depth": 0,
+    "last_updated": "2026-04-04T15:18:03.908805Z"
   },
   "queue_monitor": [
-    {
-      "job_id": "5e6a1d3b-ae64-483e-82aa-e80ac4633393",
-      "job_id_short": "5e6a1d3b",
-      "channel": "fomo_highlights",
-      "status": "queued",
-      "attempt": 0,
-      "created_at": "2026-04-04T14:08:05.333682+00:00",
-      "created_at_display": "2026-04-04 14:08",
-      "created_ago": "9m",
-      "updated_at": "2026-04-04T14:08:05.333682+00:00",
-      "scheduled_for": "2026-04-04 15:08",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
     {
       "job_id": "48415c24-87dd-4b83-986f-f84aedc83b99",
       "job_id_short": "48415c24",
       "channel": "arc_highlightz",
-      "status": "queued",
+      "status": "succeeded",
       "attempt": 0,
       "created_at": "2026-04-04T08:10:19.760517",
       "created_at_display": "2026-04-04 08:10",
-      "created_ago": "6h",
-      "updated_at": "2026-04-04T08:10:19.760517",
+      "created_ago": "7h",
+      "updated_at": "2026-04-04T09:03:52.426576",
       "scheduled_for": "2026-04-04 09:00",
       "error": null,
       "has_error": false,
-      "post_url": null
+      "post_url": "https://youtube.com/shorts/cO3jCs9mJxQ"
+    },
+    {
+      "job_id": "5e6a1d3b-ae64-483e-82aa-e80ac4633393",
+      "job_id_short": "5e6a1d3b",
+      "channel": "fomo_highlights",
+      "status": "succeeded",
+      "attempt": 0,
+      "created_at": "2026-04-04T14:08:05.333682+00:00",
+      "created_at_display": "2026-04-04 14:08",
+      "created_ago": "1h",
+      "updated_at": "2026-04-04T08:39:38.264738",
+      "scheduled_for": "2026-04-04 15:08",
+      "error": null,
+      "has_error": false,
+      "post_url": "https://youtube.com/shorts/_u-AryfFbOg"
     },
     {
       "job_id": "5fc51338-5ea3-4681-bc76-14fabbdd2c8f",
@@ -82,7 +82,7 @@
       "attempt": 0,
       "created_at": "2026-04-04T03:02:57.295318+00:00",
       "created_at_display": "2026-04-04 03:02",
-      "created_ago": "11h",
+      "created_ago": "12h",
       "updated_at": "2026-04-03T21:39:03.330130",
       "scheduled_for": "2026-04-04 04:02",
       "error": null,
@@ -97,7 +97,7 @@
       "attempt": 0,
       "created_at": "2026-04-03T20:03:14.356668",
       "created_at_display": "2026-04-03 20:03",
-      "created_ago": "18h",
+      "created_ago": "19h",
       "updated_at": "2026-04-03T20:34:50.933122",
       "scheduled_for": "2026-04-03 21:00",
       "error": null,
@@ -112,7 +112,7 @@
       "attempt": 0,
       "created_at": "2026-04-03T18:06:28.345089",
       "created_at_display": "2026-04-03 18:06",
-      "created_ago": "20h",
+      "created_ago": "21h",
       "updated_at": "2026-04-03T18:34:55.861982",
       "scheduled_for": "2026-04-03 19:00",
       "error": null,
@@ -127,7 +127,7 @@
       "attempt": 0,
       "created_at": "2026-04-03T19:09:05.115755+00:00",
       "created_at_display": "2026-04-03 19:09",
-      "created_ago": "19h",
+      "created_ago": "20h",
       "updated_at": "2026-04-03T14:10:04.758253",
       "scheduled_for": "2026-04-03 20:09",
       "error": null,
@@ -142,7 +142,7 @@
       "attempt": 0,
       "created_at": "2026-04-03T19:08:14.800850+00:00",
       "created_at_display": "2026-04-03 19:08",
-      "created_ago": "19h",
+      "created_ago": "20h",
       "updated_at": "2026-04-03T13:32:08.607733",
       "scheduled_for": "2026-04-03 20:08",
       "error": null,
@@ -727,7 +727,7 @@
       "attempt": 0,
       "created_at": "2026-03-31T15:10:51.758886+00:00",
       "created_at_display": "2026-03-31 15:10",
-      "created_ago": "3d",
+      "created_ago": "4d",
       "updated_at": "2026-03-31T10:30:49.831567",
       "scheduled_for": "2026-03-31 16:10",
       "error": null,
@@ -742,7 +742,7 @@
       "attempt": 0,
       "created_at": "2026-03-31T15:10:51.753273+00:00",
       "created_at_display": "2026-03-31 15:10",
-      "created_ago": "3d",
+      "created_ago": "4d",
       "updated_at": "2026-03-31T10:00:50.128644",
       "scheduled_for": "2026-03-31 16:10",
       "error": null,
@@ -757,7 +757,7 @@
       "attempt": 0,
       "created_at": "2026-03-31T15:10:51.745869+00:00",
       "created_at_display": "2026-03-31 15:10",
-      "created_ago": "3d",
+      "created_ago": "4d",
       "updated_at": "2026-03-31T09:31:05.969102",
       "scheduled_for": "2026-03-31 16:10",
       "error": null,
@@ -1282,7 +1282,7 @@
       "attempt": 0,
       "created_at": "2026-03-29T15:10:03.065186",
       "created_at_display": "2026-03-29 15:10",
-      "created_ago": "5d",
+      "created_ago": "6d",
       "updated_at": "2026-03-29T15:31:22.245890",
       "scheduled_for": "2026-03-29 15:30",
       "error": null,
@@ -1599,19 +1599,19 @@
       "status": "active",
       "category": "Gaming",
       "target_per_day": 8,
-      "published_24h": 1,
-      "queue_depth": 1,
+      "published_24h": 2,
+      "queue_depth": 0,
       "running_jobs": 0,
       "failed_7d": 1,
       "avg_views": 24036,
       "rpm": 20.43,
-      "deficit": 7,
-      "completion_rate": 12.5,
+      "deficit": 6,
+      "completion_rate": 25.0,
       "lagging": true,
       "views_source": "source_clips_proxy",
-      "latest_title": "AIOS Tech Has 180 Days or Gets Delisted \ud83d\udea8 The Penny Stock Trap",
-      "latest_url": "https://youtube.com/shorts/mMo_6tkVCOM",
-      "latest_uploaded_at": "2026-04-03 21:39"
+      "latest_title": "Banks Paying 4% APY Right Now \ud83d\udcb0 (Most People Don't Know)",
+      "latest_url": "https://youtube.com/shorts/_u-AryfFbOg",
+      "latest_uploaded_at": "2026-04-04 08:39"
     },
     {
       "channel": "viral_recaps",
@@ -1637,19 +1637,19 @@
       "status": "active",
       "category": "Gaming",
       "target_per_day": 15,
-      "published_24h": 2,
-      "queue_depth": 1,
+      "published_24h": 3,
+      "queue_depth": 0,
       "running_jobs": 0,
       "failed_7d": 0,
       "avg_views": 11625,
       "rpm": 9.88,
-      "deficit": 13,
-      "completion_rate": 13.3,
+      "deficit": 12,
+      "completion_rate": 20.0,
       "lagging": true,
       "views_source": "source_clips_proxy",
-      "latest_title": "Tfue Wild Moments #36 (Fortnite)",
-      "latest_url": "https://youtube.com/shorts/9diu-sjN380",
-      "latest_uploaded_at": "2026-04-03 20:34"
+      "latest_title": "Taxi2g Clutch Moments #13 (Fortnite)",
+      "latest_url": "https://youtube.com/shorts/cO3jCs9mJxQ",
+      "latest_uploaded_at": "2026-04-04 09:03"
     },
     {
       "channel": "stream_queens",
@@ -6947,7 +6947,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-09 14:18:24",
       "last_fetch_display": "2026-03-09 14:18",
-      "last_fetch_ago": "25d",
+      "last_fetch_ago": "26d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -7171,7 +7171,7 @@
       "platform": "tiktok",
       "last_fetch": "2026-03-17 14:18:32",
       "last_fetch_display": "2026-03-17 14:18",
-      "last_fetch_ago": "17d",
+      "last_fetch_ago": "18d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.25,
@@ -7227,7 +7227,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-04 14:09:16",
       "last_fetch_display": "2026-04-04 14:09",
-      "last_fetch_ago": "8m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.26,
@@ -7241,7 +7241,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-04 12:06:45",
       "last_fetch_display": "2026-04-04 12:06",
-      "last_fetch_ago": "2h",
+      "last_fetch_ago": "3h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.299,
@@ -7255,7 +7255,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-04 14:10:52",
       "last_fetch_display": "2026-04-04 14:10",
-      "last_fetch_ago": "7m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.008,
@@ -7269,7 +7269,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-04 14:10:41",
       "last_fetch_display": "2026-04-04 14:10",
-      "last_fetch_ago": "7m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.017,
@@ -7283,7 +7283,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-04 14:10:39",
       "last_fetch_display": "2026-04-04 14:10",
-      "last_fetch_ago": "7m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.008,
@@ -7311,7 +7311,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-04 14:10:32",
       "last_fetch_display": "2026-04-04 14:10",
-      "last_fetch_ago": "7m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.008,
@@ -7325,7 +7325,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-04 12:06:14",
       "last_fetch_display": "2026-04-04 12:06",
-      "last_fetch_ago": "2h",
+      "last_fetch_ago": "3h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.279,
@@ -7339,7 +7339,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-04 14:09:28",
       "last_fetch_display": "2026-04-04 14:09",
-      "last_fetch_ago": "8m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.255,
@@ -7367,7 +7367,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-04 14:10:36",
       "last_fetch_display": "2026-04-04 14:10",
-      "last_fetch_ago": "7m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.017,
@@ -7381,7 +7381,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-04 14:09:37",
       "last_fetch_display": "2026-04-04 14:09",
-      "last_fetch_ago": "8m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.281,
@@ -7409,7 +7409,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-04 14:09:05",
       "last_fetch_display": "2026-04-04 14:09",
-      "last_fetch_ago": "8m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.18,
@@ -7423,7 +7423,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-04 12:06:29",
       "last_fetch_display": "2026-04-04 12:06",
-      "last_fetch_ago": "2h",
+      "last_fetch_ago": "3h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.287,
@@ -7521,7 +7521,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-17 14:18:21",
       "last_fetch_display": "2026-03-17 14:18",
-      "last_fetch_ago": "17d",
+      "last_fetch_ago": "18d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.2,
@@ -7647,7 +7647,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-04 14:10:21",
       "last_fetch_display": "2026-04-04 14:10",
-      "last_fetch_ago": "7m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "healthy",
       "error_rate": 0.0,
@@ -7730,6 +7730,34 @@
     "log_viewer_target": "logs_dialog"
   },
   "top_clips": [
+    {
+      "clip_id": "engine_auto_e973576d",
+      "clip_id_short": "engine_auto_",
+      "title": "Taxi2g Clutch Moments #13 (Fortnite)",
+      "source_title": null,
+      "creator": null,
+      "channel": "arc_highlightz",
+      "views": 0,
+      "likes": null,
+      "ctr_percent": null,
+      "upload_date": "2026-04-04 09:03",
+      "youtube_url": "https://youtube.com/shorts/cO3jCs9mJxQ",
+      "metric_mode": "unavailable"
+    },
+    {
+      "clip_id": "5e6a1d3b-ae64-483e-82aa-e80ac4633393",
+      "clip_id_short": "5e6a1d3b-ae6",
+      "title": "Banks Paying 4% APY Right Now \ud83d\udcb0 (Most People Don't Know)",
+      "source_title": null,
+      "creator": null,
+      "channel": "fomo_highlights",
+      "views": 0,
+      "likes": null,
+      "ctr_percent": null,
+      "upload_date": "2026-04-04 08:39",
+      "youtube_url": "https://youtube.com/shorts/_u-AryfFbOg",
+      "metric_mode": "unavailable"
+    },
     {
       "clip_id": "5fc51338-5ea3-4681-bc76-14fabbdd2c8f",
       "clip_id_short": "5fc51338-5ea",
@@ -7981,59 +8009,31 @@
       "upload_date": "2026-04-02 18:32",
       "youtube_url": "https://youtube.com/shorts/5NGLHOsQ5t4",
       "metric_mode": "unavailable"
-    },
-    {
-      "clip_id": "662d20dd-6b24-4364-b07a-c2e2c76153aa",
-      "clip_id_short": "662d20dd-6b2",
-      "title": "Friday's Jobs Report Could Shake Markets \u2014 Here's the Number \ud83d\udcca",
-      "source_title": null,
-      "creator": null,
-      "channel": "fomo_highlights",
-      "views": 0,
-      "likes": null,
-      "ctr_percent": null,
-      "upload_date": "2026-04-02 17:32",
-      "youtube_url": "https://youtube.com/shorts/BbuMCPhAphw",
-      "metric_mode": "unavailable"
-    },
-    {
-      "clip_id": "engine_auto_3a77b6f3",
-      "clip_id_short": "engine_auto_",
-      "title": "Tfue Moments #30",
-      "source_title": null,
-      "creator": null,
-      "channel": "arc_highlightz",
-      "views": 0,
-      "likes": null,
-      "ctr_percent": null,
-      "upload_date": "2026-04-02 16:33",
-      "youtube_url": "https://youtube.com/shorts/jzP6fMGeerk",
-      "metric_mode": "unavailable"
     }
   ],
   "recent_uploads": [
     {
-      "job_id": "5e6a1d3b-ae64-483e-82aa-e80ac4633393",
-      "job_id_short": "5e6a1d3b",
-      "channel": "fomo_highlights",
-      "status": "queued",
-      "updated_at": "2026-04-04T14:08:05.333682+00:00",
-      "updated_at_display": "2026-04-04 14:08",
-      "updated_ago": "9m",
-      "title": "Banks Paying 4% APY Right Now \ud83d\udcb0 (Most People Don't Know)",
-      "url": null,
-      "error": null
-    },
-    {
       "job_id": "48415c24-87dd-4b83-986f-f84aedc83b99",
       "job_id_short": "48415c24",
       "channel": "arc_highlightz",
-      "status": "queued",
-      "updated_at": "2026-04-04T08:10:19.760517",
-      "updated_at_display": "2026-04-04 08:10",
+      "status": "succeeded",
+      "updated_at": "2026-04-04T09:03:52.426576",
+      "updated_at_display": "2026-04-04 09:03",
       "updated_ago": "6h",
       "title": "Taxi2g Clutch Moments #13 (Fortnite)",
-      "url": null,
+      "url": "https://youtube.com/shorts/cO3jCs9mJxQ",
+      "error": null
+    },
+    {
+      "job_id": "5e6a1d3b-ae64-483e-82aa-e80ac4633393",
+      "job_id_short": "5e6a1d3b",
+      "channel": "fomo_highlights",
+      "status": "succeeded",
+      "updated_at": "2026-04-04T08:39:38.264738",
+      "updated_at_display": "2026-04-04 08:39",
+      "updated_ago": "6h",
+      "title": "Banks Paying 4% APY Right Now \ud83d\udcb0 (Most People Don't Know)",
+      "url": "https://youtube.com/shorts/_u-AryfFbOg",
       "error": null
     },
     {
@@ -8043,7 +8043,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-03T21:39:03.330130",
       "updated_at_display": "2026-04-03 21:39",
-      "updated_ago": "16h",
+      "updated_ago": "17h",
       "title": "AIOS Tech Has 180 Days or Gets Delisted \ud83d\udea8 The Penny Stock Trap",
       "url": "https://youtube.com/shorts/mMo_6tkVCOM",
       "error": null
@@ -8055,7 +8055,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-03T20:34:50.933122",
       "updated_at_display": "2026-04-03 20:34",
-      "updated_ago": "17h",
+      "updated_ago": "18h",
       "title": "Tfue Wild Moments #36 (Fortnite)",
       "url": "https://youtube.com/shorts/9diu-sjN380",
       "error": null
@@ -8067,7 +8067,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-03T18:34:55.861982",
       "updated_at_display": "2026-04-03 18:34",
-      "updated_ago": "19h",
+      "updated_ago": "20h",
       "title": "Myth Funny Moments #4 (Fortnite)",
       "url": "https://youtube.com/shorts/1lJD83MpQew",
       "error": null
@@ -8135,6 +8135,34 @@
   ],
   "recent_clips": [
     {
+      "job_id": "48415c24-87dd-4b83-986f-f84aedc83b99",
+      "job_id_short": "48415c24",
+      "channel": "arc_highlightz",
+      "title": "Taxi2g Clutch Moments #13 (Fortnite)",
+      "title_truncated": "Taxi2g Clutch Moments #13 (Fortnite)",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/cO3jCs9mJxQ",
+      "views": 0,
+      "views_display": "\u00e2\u20ac\u201d",
+      "published_at": "2026-04-04T09:03:52.426576",
+      "published_at_display": "2026-04-04 09:03",
+      "published_ago": "6h"
+    },
+    {
+      "job_id": "5e6a1d3b-ae64-483e-82aa-e80ac4633393",
+      "job_id_short": "5e6a1d3b",
+      "channel": "fomo_highlights",
+      "title": "Banks Paying 4% APY Right Now \ud83d\udcb0 (Most People Don't Know)",
+      "title_truncated": "Banks Paying 4% APY Right Now \ud83d\udcb0 (Most People Don't Know)",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/_u-AryfFbOg",
+      "views": 0,
+      "views_display": "\u00e2\u20ac\u201d",
+      "published_at": "2026-04-04T08:39:38.264738",
+      "published_at_display": "2026-04-04 08:39",
+      "published_ago": "6h"
+    },
+    {
       "job_id": "5fc51338-5ea3-4681-bc76-14fabbdd2c8f",
       "job_id_short": "5fc51338",
       "channel": "fomo_highlights",
@@ -8146,7 +8174,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-03T21:39:03.330130",
       "published_at_display": "2026-04-03 21:39",
-      "published_ago": "16h"
+      "published_ago": "17h"
     },
     {
       "job_id": "d95c309b-3acd-4c7f-8177-320651a2f329",
@@ -8160,7 +8188,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-03T20:34:50.933122",
       "published_at_display": "2026-04-03 20:34",
-      "published_ago": "17h"
+      "published_ago": "18h"
     },
     {
       "job_id": "fe001f63-9348-4f68-885d-43c8bbd8da64",
@@ -8170,11 +8198,11 @@
       "title_truncated": "Myth Funny Moments #4 (Fortnite)",
       "thumbnail_path": null,
       "post_url": "https://youtube.com/shorts/1lJD83MpQew",
-      "views": 1036,
+      "views": 1037,
       "views_display": "1.0K",
       "published_at": "2026-04-03T18:34:55.861982",
       "published_at_display": "2026-04-03 18:34",
-      "published_ago": "19h"
+      "published_ago": "20h"
     },
     {
       "job_id": "47842523-9c69-4c1d-98aa-c9e786f9fee6",
@@ -8245,42 +8273,37 @@
       "published_at": "2026-04-03T05:07:31.525996",
       "published_at_display": "2026-04-03 05:07",
       "published_ago": "1d"
-    },
-    {
-      "job_id": "6e252bbd-70dd-44db-be78-da43d7890f9a",
-      "job_id_short": "6e252bbd",
-      "channel": "arc_highlightz",
-      "title": "Tfue Moments #34",
-      "title_truncated": "Tfue Moments #34",
-      "thumbnail_path": null,
-      "post_url": "https://youtube.com/shorts/Wr4J2goLcek",
-      "views": 0,
-      "views_display": "\u00e2\u20ac\u201d",
-      "published_at": "2026-04-03T04:07:01.636623",
-      "published_at_display": "2026-04-03 04:07",
-      "published_ago": "1d"
-    },
-    {
-      "job_id": "1082ee9b-1c73-42e3-82e7-2e1ab3e20218",
-      "job_id_short": "1082ee9b",
-      "channel": "arc_highlightz",
-      "title": "Cloakzy Moments #21",
-      "title_truncated": "Cloakzy Moments #21",
-      "thumbnail_path": null,
-      "post_url": "https://youtube.com/shorts/m25762ZIffA",
-      "views": 0,
-      "views_display": "\u00e2\u20ac\u201d",
-      "published_at": "2026-04-03T03:07:34.698180",
-      "published_at_display": "2026-04-03 03:07",
-      "published_ago": "1d"
     }
   ],
   "upload_timeline": {
     "buckets": [
       {
         "name": "Today",
-        "count": 0,
-        "items": []
+        "count": 2,
+        "items": [
+          {
+            "job_id": "48415c24-87dd-4b83-986f-f84aedc83b99",
+            "job_id_short": "48415c24",
+            "channel": "arc_highlightz",
+            "title": "Taxi2g Clutch Moments #13 (Fortnite)",
+            "published_at": "2026-04-04T09:03:52.426576",
+            "published_at_display": "2026-04-04 09:03",
+            "published_ago": "6h",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/cO3jCs9mJxQ"
+          },
+          {
+            "job_id": "5e6a1d3b-ae64-483e-82aa-e80ac4633393",
+            "job_id_short": "5e6a1d3b",
+            "channel": "fomo_highlights",
+            "title": "Banks Paying 4% APY Right Now \ud83d\udcb0 (Most People Don't Know)",
+            "published_at": "2026-04-04T08:39:38.264738",
+            "published_at_display": "2026-04-04 08:39",
+            "published_ago": "6h",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/_u-AryfFbOg"
+          }
+        ]
       },
       {
         "name": "Yesterday",
@@ -8293,7 +8316,7 @@
             "title": "AIOS Tech Has 180 Days or Gets Delisted \ud83d\udea8 The Penny Stock...",
             "published_at": "2026-04-03T21:39:03.330130",
             "published_at_display": "2026-04-03 21:39",
-            "published_ago": "16h",
+            "published_ago": "17h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/mMo_6tkVCOM"
           },
@@ -8304,7 +8327,7 @@
             "title": "Tfue Wild Moments #36 (Fortnite)",
             "published_at": "2026-04-03T20:34:50.933122",
             "published_at_display": "2026-04-03 20:34",
-            "published_ago": "17h",
+            "published_ago": "18h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/9diu-sjN380"
           },
@@ -8315,7 +8338,7 @@
             "title": "Myth Funny Moments #4 (Fortnite)",
             "published_at": "2026-04-03T18:34:55.861982",
             "published_at_display": "2026-04-03 18:34",
-            "published_ago": "19h",
+            "published_ago": "20h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/1lJD83MpQew"
           },
@@ -8400,7 +8423,7 @@
       },
       {
         "name": "This Week",
-        "count": 40,
+        "count": 38,
         "items": [
           {
             "job_id": "398e52fe-b647-4d23-82e8-8c264e69058e",
@@ -8519,7 +8542,7 @@
             "title": "Tfue Moments #29",
             "published_at": "2026-04-02T15:04:16.158411",
             "published_at_display": "2026-04-02 15:04",
-            "published_ago": "1d",
+            "published_ago": "2d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/LOHgjwxRCGo"
           },
@@ -8717,7 +8740,7 @@
             "title": "BND Pays $0.25/Share \u2014 While Stocks Panic, Bonds Pay \ud83d\udcb5\ud83d\udcca",
             "published_at": "2026-03-31T15:00:55.784341",
             "published_at_display": "2026-03-31 15:00",
-            "published_ago": "3d",
+            "published_ago": "4d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/zSDP5P7zLn4"
           },
@@ -8728,7 +8751,7 @@
             "title": "$4 Gas = Rate CUTS? The Fed's Counterintuitive Move \ud83e\udd2f\ud83d\udcc9",
             "published_at": "2026-03-31T14:30:48.681777",
             "published_at_display": "2026-03-31 14:30",
-            "published_ago": "3d",
+            "published_ago": "4d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/JL8-vDNee2A"
           },
@@ -8819,28 +8842,6 @@
             "published_ago": "4d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/JQqJJNktrGQ"
-          },
-          {
-            "job_id": "45303d4d-f629-4702-982b-d8ac376ded30",
-            "job_id_short": "45303d4d",
-            "channel": "fomo_highlights",
-            "title": "War Watch: Bitcoin & Ethereum Diverge as Iran Risk Grows \ud83d\udcc9\u26a1",
-            "published_at": "2026-03-31T08:31:13.307296",
-            "published_at_display": "2026-03-31 08:31",
-            "published_ago": "4d",
-            "views": 0,
-            "post_url": "https://youtube.com/shorts/sTwkVxRAn9E"
-          },
-          {
-            "job_id": "408b7f03-5de2-4060-97ea-329c67eee007",
-            "job_id_short": "408b7f03",
-            "channel": "fomo_highlights",
-            "title": "real estate firms are quietly making more per deal \ud83d\udcc8 here...",
-            "published_at": "2026-03-31T00:32:42.033531",
-            "published_at_display": "2026-03-31 00:32",
-            "published_ago": "4d",
-            "views": 0,
-            "post_url": null
           }
         ]
       },
@@ -9089,26 +9090,6 @@
     }
   },
   "schedule": {
-    "2026-04-04": [
-      {
-        "job_id": "48415c24-87dd-4b83-986f-f84aedc83b99",
-        "job_id_short": "48415c24",
-        "channel": "arc_highlightz",
-        "title": "Taxi2g Clutch Moments #13 (Fortnite)",
-        "scheduled_at": "2026-04-04T09:00:00-06:00",
-        "scheduled_at_iso": "2026-04-04T09:00:00",
-        "status": "queued"
-      },
-      {
-        "job_id": "5e6a1d3b-ae64-483e-82aa-e80ac4633393",
-        "job_id_short": "5e6a1d3b",
-        "channel": "fomo_highlights",
-        "title": "Banks Paying 4% APY Right Now \ud83d\udcb0 (Most People Don't",
-        "scheduled_at": "2026-04-04T15:08:05",
-        "scheduled_at_iso": "2026-04-04T15:08:05",
-        "status": "queued"
-      }
-    ],
     "2026-03-28": [
       {
         "job_id": "b1b6e731-f2c6-43dc-84db-bad659cb058e",
@@ -9978,6 +9959,26 @@
         "status": "succeeded"
       }
     ],
+    "2026-04-04": [
+      {
+        "job_id": "5e6a1d3b-ae64-483e-82aa-e80ac4633393",
+        "job_id_short": "5e6a1d3b",
+        "channel": "fomo_highlights",
+        "title": "Banks Paying 4% APY Right Now \ud83d\udcb0 (Most People Don't",
+        "scheduled_at": "2026-04-04T08:39:38.264738",
+        "scheduled_at_iso": "2026-04-04T08:39:38.264738",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "48415c24-87dd-4b83-986f-f84aedc83b99",
+        "job_id_short": "48415c24",
+        "channel": "arc_highlightz",
+        "title": "Taxi2g Clutch Moments #13 (Fortnite)",
+        "scheduled_at": "2026-04-04T09:03:52.426576",
+        "scheduled_at_iso": "2026-04-04T09:03:52.426576",
+        "status": "succeeded"
+      }
+    ],
     "2026-04-05": [],
     "2026-04-06": [],
     "2026-04-07": [],
@@ -10131,9 +10132,9 @@
     ],
     "any_channel_high": false,
     "all_channels_safe": true,
-    "reset_time_hours": 17,
+    "reset_time_hours": 16,
     "reset_time_minutes": 41,
-    "reset_time_display": "17h 41m"
+    "reset_time_display": "16h 41m"
   },
   "revenue": {
     "total_views_30d": 0,
@@ -10153,8 +10154,8 @@
       "discovered": 0,
       "downloaded": 0,
       "processed": 0,
-      "queued": 2,
-      "uploaded": 223
+      "queued": 0,
+      "uploaded": 225
     },
     "by_channel": [
       {
@@ -10162,16 +10163,16 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 1,
-        "uploaded": 115
+        "queued": 0,
+        "uploaded": 116
       },
       {
         "channel": "fomo_highlights",
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 1,
-        "uploaded": 67
+        "queued": 0,
+        "uploaded": 68
       },
       {
         "channel": "market_meltdowns",
@@ -10199,16 +10200,16 @@
       }
     ],
     "throughput": {
-      "uploads_per_hour": 0.12,
-      "uploads_last_24h": 3
+      "uploads_per_hour": 0.21,
+      "uploads_last_24h": 5
     },
     "stage_timings": {
       "discovered_to_downloaded_hours": 0.0,
-      "queued_to_uploaded_hours": 5.5
+      "queued_to_uploaded_hours": 5.43
     },
     "bottleneck": {
       "stage": "queued",
-      "backlog": 2
+      "backlog": 0
     }
   },
   "disk": {
@@ -10242,8 +10243,8 @@
         "file_count": 196
       }
     ],
-    "total_disk_bytes": 53737680237,
-    "total_disk_human": "50.0GB",
+    "total_disk_bytes": 53761493506,
+    "total_disk_human": "50.1GB",
     "percent_of_500gb": 10.0,
     "warning_threshold_pct": 70,
     "error_threshold_pct": 85,
@@ -10345,12 +10346,12 @@
         "channel": "arc_highlightz",
         "title": "Myth Funny Moments #4 (Fortnite)",
         "title_display": "Myth Funny Moments #4 (Fortnite)",
-        "views": 1036,
+        "views": 1037,
         "views_display": "1.0K",
         "post_url": "https://youtube.com/shorts/1lJD83MpQew",
         "published_at": "2026-04-03T18:34:55.861982",
         "published_at_display": "2026-04-03 18:34",
-        "published_ago": "19h",
+        "published_ago": "20h",
         "thumbnail_path": null
       },
       {
@@ -10402,7 +10403,7 @@
         "post_url": "https://youtube.com/shorts/yoaq8cjXc2g",
         "published_at": "2026-03-15T15:03:29.441957",
         "published_at_display": "2026-03-15 15:03",
-        "published_ago": "19d",
+        "published_ago": "20d",
         "thumbnail_path": null
       },
       {
@@ -10491,9 +10492,9 @@
   "leaderboard": [
     {
       "channel_name": "arc_highlightz",
-      "total_views": 40941,
-      "uploads_30d": 115,
-      "avg_views": 356,
+      "total_views": 40942,
+      "uploads_30d": 116,
+      "avg_views": 352,
       "best_clip_title": "No clips yet",
       "best_clip_views": 0,
       "best_clip_url": "",
@@ -10503,7 +10504,7 @@
     {
       "channel_name": "fomo_highlights",
       "total_views": 1092,
-      "uploads_30d": 67,
+      "uploads_30d": 68,
       "avg_views": 16,
       "best_clip_title": "No clips yet",
       "best_clip_views": 0,
@@ -11514,7 +11515,7 @@
           "priority": 3,
           "clips_fetched": 38,
           "last_fetched_at": "2026-04-04T02:03:14.372653",
-          "last_fetched_rel": "12h",
+          "last_fetched_rel": "13h",
           "enabled": true,
           "url": "vod://tfue",
           "type": "vod_highlights"
@@ -11556,7 +11557,7 @@
           "priority": 3,
           "clips_fetched": 13,
           "last_fetched_at": "2026-04-04T14:10:19.792951",
-          "last_fetched_rel": "7m",
+          "last_fetched_rel": "1h",
           "enabled": true,
           "url": "vod://taxi2g",
           "type": "vod_highlights"
@@ -11730,25 +11731,38 @@
   ],
   "daily_summary": {
     "date": "2026-04-04",
-    "uploads_today": 0,
-    "uploads_yesterday": 10,
+    "uploads_today": 2,
+    "uploads_yesterday": 12,
     "views_gained_today": 0,
     "views_yesterday": 0,
     "errors_today": 0,
-    "quota_pct": 0.0,
-    "quota_units_used": 0,
+    "quota_pct": 32.0,
+    "quota_units_used": 3200,
     "delta_uploads": -10,
     "delta_views": 0,
-    "top_clip_today": null,
-    "top_3_channels": [],
-    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-04-04\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 0 (-10 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 0.0% used (0/10000 units)",
-    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-04-04\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 0 (-10 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 0.0% used (`0/10000` units)"
+    "top_clip_today": {
+      "title": "Banks Paying 4% APY Right Now \ud83d\udcb0 (Most People Don't Know)",
+      "views": 0,
+      "channel": "fomo_highlights"
+    },
+    "top_3_channels": [
+      {
+        "channel": "fomo_highlights",
+        "uploads": 1
+      },
+      {
+        "channel": "arc_highlightz",
+        "uploads": 1
+      }
+    ],
+    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-04-04\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 2 (-10 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 32.0% used (3200/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Banks Paying 4% APY Right Now \ud83d\udcb0 (Most People Don't Know)\n  0 views \u00e2\u20ac\u00a2 fomo_highlights\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. fomo_highlights: 1 uploads\n  2. arc_highlightz: 1 uploads",
+    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-04-04\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 2 (-10 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 32.0% used (`3200/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Banks Paying 4% APY Right Now \ud83d\udcb0 (Most People Don't Know)_\n**0 views** \u00e2\u20ac\u00a2 **fomo_highlights**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **fomo_highlights** \u00e2\u20ac\u201d 1 uploads\n2. **arc_highlightz** \u00e2\u20ac\u201d 1 uploads"
   },
   "title_performance": {
     "pattern_analysis": {
       "has_numbers": {
         "avg_views": 0.0,
-        "count": 158,
+        "count": 160,
         "total_views": 0
       },
       "has_question": {
@@ -11763,7 +11777,7 @@
       },
       "has_emoji": {
         "avg_views": 0.0,
-        "count": 51,
+        "count": 52,
         "total_views": 0
       }
     },
@@ -11814,7 +11828,7 @@
         "occurrences": 25
       },
       {
-        "word": "unexpected",
+        "word": "most",
         "avg_views": 0.0,
         "occurrences": 2
       }
@@ -11866,7 +11880,7 @@
         "occurrences": 25
       },
       {
-        "word": "unexpected",
+        "word": "most",
         "avg_views": 0.0,
         "occurrences": 2
       }
@@ -11903,9 +11917,9 @@
         "channel": "arc_highlightz",
         "best_title": "Watch this before scrolling: Nobody plays like this",
         "best_views": 0,
-        "total_titles_analyzed": 115,
+        "total_titles_analyzed": 116,
         "pattern_breakdown": {
-          "numbers_pct": 90.4,
+          "numbers_pct": 90.5,
           "questions_pct": 0.9,
           "caps_pct": 0.9,
           "emoji_pct": 2.6
@@ -11915,12 +11929,12 @@
         "channel": "fomo_highlights",
         "best_title": "Watch this before scrolling: Nobody plays like this",
         "best_views": 0,
-        "total_titles_analyzed": 67,
+        "total_titles_analyzed": 68,
         "pattern_breakdown": {
-          "numbers_pct": 44.8,
-          "questions_pct": 7.5,
+          "numbers_pct": 45.6,
+          "questions_pct": 7.4,
           "caps_pct": 1.5,
-          "emoji_pct": 65.7
+          "emoji_pct": 66.2
         }
       },
       {
@@ -11966,7 +11980,7 @@
       {
         "style_name": "Gaming/Clips",
         "avg_views": 0,
-        "total_clips": 216,
+        "total_clips": 218,
         "best_clip": null,
         "total_views": 0,
         "is_best": true
@@ -11991,7 +12005,7 @@
     "best_style_overall": "Gaming/Clips",
     "summary_stats": {
       "total_styles": 3,
-      "total_clips_all": 223,
+      "total_clips_all": 225,
       "total_views_all": 0,
       "avg_views_overall": 0
     }
@@ -12055,8 +12069,8 @@
       {
         "hour": 9,
         "hour_label": "09:00",
-        "posts": 23,
-        "avg_views": 676.0
+        "posts": 24,
+        "avg_views": 668.0
       },
       {
         "hour": 10,
@@ -12091,8 +12105,8 @@
       {
         "hour": 15,
         "hour_label": "15:00",
-        "posts": 23,
-        "avg_views": 965.0
+        "posts": 24,
+        "avg_views": 958.0
       },
       {
         "hour": 16,
@@ -12177,8 +12191,8 @@
       {
         "day": 5,
         "day_name": "Saturday",
-        "posts": 23,
-        "avg_views": 814.0
+        "posts": 25,
+        "avg_views": 800.0
       },
       {
         "day": 6,
@@ -12727,7 +12741,7 @@
           "hour": 9,
           "day": 5,
           "views": 480.0,
-          "posts": 1,
+          "posts": 2,
           "intensity": 26.7
         },
         {
@@ -13033,7 +13047,7 @@
           "hour": 15,
           "day": 5,
           "views": 800.0,
-          "posts": 4,
+          "posts": 5,
           "intensity": 44.4
         },
         {
@@ -13453,17 +13467,7 @@
         }
       ]
     ],
-    "scheduled_posts": [
-      {
-        "job_id": "5e6a1d3b",
-        "channel": "fomo_highlights",
-        "title": "Banks Paying 4% APY Right Now \ud83d\udcb0 (Most People Don't",
-        "scheduled_at": "2026-04-04T15:08:05",
-        "hour": 15,
-        "day": 5,
-        "day_name": "Saturday"
-      }
-    ],
+    "scheduled_posts": [],
     "next_best_slot": {
       "date": "2026-04-06",
       "hour": 23,
@@ -13471,7 +13475,7 @@
       "day_name": "Monday",
       "est_views": 1800.0
     },
-    "job_count": 223
+    "job_count": 225
   },
   "benchmarks": {
     "current_tier": "Starter",
@@ -13562,92 +13566,92 @@
     {
       "type": "warning",
       "title": "Channel \"market_meltdowns\" paused for 24+ hours",
-      "message": "market_meltdowns has been paused for 638 hours",
+      "message": "market_meltdowns has been paused for 639 hours",
       "channel": "market_meltdowns",
-      "created_at": "2026-04-04T14:18:03.698458",
+      "created_at": "2026-04-04T15:18:03.905599",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"self_made_clips\" paused for 24+ hours",
-      "message": "self_made_clips has been paused for 634 hours",
+      "message": "self_made_clips has been paused for 635 hours",
       "channel": "self_made_clips",
-      "created_at": "2026-04-04T14:18:03.698458",
+      "created_at": "2026-04-04T15:18:03.905599",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"rich_or_ruined\" paused for 24+ hours",
-      "message": "rich_or_ruined has been paused for 632 hours",
+      "message": "rich_or_ruined has been paused for 633 hours",
       "channel": "rich_or_ruined",
-      "created_at": "2026-04-04T14:18:03.698458",
+      "created_at": "2026-04-04T15:18:03.905599",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"startup_graveyard\" paused for 24+ hours",
-      "message": "startup_graveyard has been paused for 632 hours",
+      "message": "startup_graveyard has been paused for 633 hours",
       "channel": "startup_graveyard",
-      "created_at": "2026-04-04T14:18:03.698458",
+      "created_at": "2026-04-04T15:18:03.905599",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_sirens\" paused for 24+ hours",
-      "message": "stream_sirens has been paused for 611 hours",
+      "message": "stream_sirens has been paused for 612 hours",
       "channel": "stream_sirens",
-      "created_at": "2026-04-04T14:18:03.698458",
+      "created_at": "2026-04-04T15:18:03.905599",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_queens\" paused for 24+ hours",
-      "message": "stream_queens has been paused for 611 hours",
+      "message": "stream_queens has been paused for 612 hours",
       "channel": "stream_queens",
-      "created_at": "2026-04-04T14:18:03.698458",
+      "created_at": "2026-04-04T15:18:03.905599",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"ai_did_what\" paused for 24+ hours",
-      "message": "ai_did_what has been paused for 577 hours",
+      "message": "ai_did_what has been paused for 578 hours",
       "channel": "ai_did_what",
-      "created_at": "2026-04-04T14:18:03.698458",
+      "created_at": "2026-04-04T15:18:03.905599",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"gym_moments\" paused for 24+ hours",
-      "message": "gym_moments has been paused for 577 hours",
+      "message": "gym_moments has been paused for 578 hours",
       "channel": "gym_moments",
-      "created_at": "2026-04-04T14:18:03.698458",
+      "created_at": "2026-04-04T15:18:03.905599",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"kitchen_chaos\" paused for 24+ hours",
-      "message": "kitchen_chaos has been paused for 430 hours",
+      "message": "kitchen_chaos has been paused for 431 hours",
       "channel": "kitchen_chaos",
-      "created_at": "2026-04-04T14:18:03.698458",
+      "created_at": "2026-04-04T15:18:03.905599",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"unfiltered_clips\" paused for 24+ hours",
-      "message": "unfiltered_clips has been paused for 430 hours",
+      "message": "unfiltered_clips has been paused for 431 hours",
       "channel": "unfiltered_clips",
-      "created_at": "2026-04-04T14:18:03.698458",
+      "created_at": "2026-04-04T15:18:03.905599",
       "read": false
     }
   ],
   "checklists": [
     {
       "channel": "arc_highlightz",
-      "readiness_score": 6,
+      "readiness_score": 5,
       "total_checks": 6,
-      "badge": "launch_ready",
-      "badge_text": "Launch Ready",
-      "badge_color": "green",
+      "badge": "needs_attention",
+      "badge_text": "Needs Attention",
+      "badge_color": "orange",
       "checks": [
         {
           "label": "Has YouTube account linked",
@@ -13671,8 +13675,8 @@
         },
         {
           "label": "Has clips in queue",
-          "passed": true,
-          "icon": "\u00e2\u0153\u2026"
+          "passed": false,
+          "icon": "\u00e2\u009d\u0152"
         },
         {
           "label": "Quota not exhausted (< 90% used)",
@@ -13683,11 +13687,11 @@
     },
     {
       "channel": "fomo_highlights",
-      "readiness_score": 6,
+      "readiness_score": 5,
       "total_checks": 6,
-      "badge": "launch_ready",
-      "badge_text": "Launch Ready",
-      "badge_color": "green",
+      "badge": "needs_attention",
+      "badge_text": "Needs Attention",
+      "badge_color": "orange",
       "checks": [
         {
           "label": "Has YouTube account linked",
@@ -13711,8 +13715,8 @@
         },
         {
           "label": "Has clips in queue",
-          "passed": true,
-          "icon": "\u00e2\u0153\u2026"
+          "passed": false,
+          "icon": "\u00e2\u009d\u0152"
         },
         {
           "label": "Quota not exhausted (< 90% used)",
@@ -14240,19 +14244,19 @@
         "status": "active",
         "category": "Gaming",
         "target_per_day": 8,
-        "published_24h": 1,
-        "queue_depth": 1,
+        "published_24h": 2,
+        "queue_depth": 0,
         "running_jobs": 0,
         "failed_7d": 1,
         "avg_views": 24036,
         "rpm": 20.43,
-        "deficit": 7,
-        "completion_rate": 12.5,
+        "deficit": 6,
+        "completion_rate": 25.0,
         "lagging": true,
         "views_source": "source_clips_proxy",
-        "latest_title": "AIOS Tech Has 180 Days or Gets Delisted \ud83d\udea8 The Penny Stock Trap",
-        "latest_url": "https://youtube.com/shorts/mMo_6tkVCOM",
-        "latest_uploaded_at": "2026-04-03 21:39"
+        "latest_title": "Banks Paying 4% APY Right Now \ud83d\udcb0 (Most People Don't Know)",
+        "latest_url": "https://youtube.com/shorts/_u-AryfFbOg",
+        "latest_uploaded_at": "2026-04-04 08:39"
       },
       {
         "channel": "viral_recaps",
@@ -14278,23 +14282,23 @@
         "status": "active",
         "category": "Gaming",
         "target_per_day": 15,
-        "published_24h": 2,
-        "queue_depth": 1,
+        "published_24h": 3,
+        "queue_depth": 0,
         "running_jobs": 0,
         "failed_7d": 0,
         "avg_views": 11625,
         "rpm": 9.88,
-        "deficit": 13,
-        "completion_rate": 13.3,
+        "deficit": 12,
+        "completion_rate": 20.0,
         "lagging": true,
         "views_source": "source_clips_proxy",
-        "latest_title": "Tfue Wild Moments #36 (Fortnite)",
-        "latest_url": "https://youtube.com/shorts/9diu-sjN380",
-        "latest_uploaded_at": "2026-04-03 20:34"
+        "latest_title": "Taxi2g Clutch Moments #13 (Fortnite)",
+        "latest_url": "https://youtube.com/shorts/cO3jCs9mJxQ",
+        "latest_uploaded_at": "2026-04-04 09:03"
       }
     ],
     "lagging_count": 4,
-    "queue_backlog": 2,
+    "queue_backlog": 0,
     "analytics_channels": 13
   },
   "meta": {

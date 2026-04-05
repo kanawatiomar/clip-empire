@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-04-05T05:18:04.401882Z",
+  "generated_at": "2026-04-05T06:18:04.740423Z",
   "repo_root": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire",
   "database_path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\data\\clip_empire.db",
   "health_score": {
-    "score": 67.9,
+    "score": 68.6,
     "grade": "C",
     "status": "Needs Attention",
     "color": "yellow",
     "breakdown": {
-      "pipeline_health": 0.0,
+      "pipeline_health": 0.7,
       "error_rate": 20.0,
       "quota_safety": 15,
       "queue_depth": 15,
@@ -16,11 +16,11 @@
       "channel_uptime": 2.9
     },
     "metrics": {
-      "uploads_today": 0,
+      "uploads_today": 1,
       "target_today": 34,
-      "pipeline_health_ratio": 0.0,
+      "pipeline_health_ratio": 0.03,
       "errors_today": 0,
-      "total_jobs_today": 0,
+      "total_jobs_today": 2,
       "error_rate": 0.0,
       "queue_depth": 1,
       "active_channels": 4,
@@ -33,31 +33,46 @@
     "active_channels": 4,
     "total_channels": 14,
     "jobs_today": {
-      "total": 6,
+      "total": 2,
       "queued": 1,
       "running": 0,
-      "succeeded": 5,
+      "succeeded": 1,
       "failed": 0,
       "cancelled": 0
     },
     "render_queue_depth": 1,
-    "last_updated": "2026-04-05T05:18:04.401882Z"
+    "last_updated": "2026-04-05T06:18:04.740423Z"
   },
   "queue_monitor": [
+    {
+      "job_id": "4866a7ce-46a4-4144-bca5-af60ca8b3cc2",
+      "job_id_short": "4866a7ce",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-04-05T00:02:50.379426",
+      "created_at_display": "2026-04-05 00:02",
+      "created_ago": "6h",
+      "updated_at": "2026-04-05T00:02:50.379426",
+      "scheduled_for": "2026-04-05 07:00",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
     {
       "job_id": "c7c8385b-f98d-485c-a742-c0f51695aa71",
       "job_id_short": "c7c8385b",
       "channel": "fomo_highlights",
-      "status": "queued",
+      "status": "succeeded",
       "attempt": 0,
       "created_at": "2026-04-04T23:03:06.283945+00:00",
       "created_at_display": "2026-04-04 23:03",
-      "created_ago": "6h",
-      "updated_at": "2026-04-04T23:03:06.283945+00:00",
+      "created_ago": "7h",
+      "updated_at": "2026-04-05T00:01:16.519552",
       "scheduled_for": "2026-04-05 00:03",
       "error": null,
       "has_error": false,
-      "post_url": null
+      "post_url": "https://youtube.com/shorts/b8Bht-bAqVc"
     },
     {
       "job_id": "0e27a5e0-1e46-4b2b-ae84-566a0b835c6f",
@@ -67,7 +82,7 @@
       "attempt": 0,
       "created_at": "2026-04-04T23:02:25.613241+00:00",
       "created_at_display": "2026-04-04 23:02",
-      "created_ago": "6h",
+      "created_ago": "7h",
       "updated_at": "2026-04-04T17:30:56.410680",
       "scheduled_for": "2026-04-05 00:02",
       "error": null,
@@ -82,7 +97,7 @@
       "attempt": 0,
       "created_at": "2026-04-04T23:01:41.142990+00:00",
       "created_at_display": "2026-04-04 23:01",
-      "created_ago": "6h",
+      "created_ago": "7h",
       "updated_at": "2026-04-04T17:04:12.037453",
       "scheduled_for": "2026-04-05 00:01",
       "error": null,
@@ -97,7 +112,7 @@
       "attempt": 0,
       "created_at": "2026-04-04T19:03:35.213477+00:00",
       "created_at_display": "2026-04-04 19:03",
-      "created_ago": "10h",
+      "created_ago": "11h",
       "updated_at": "2026-04-04T13:33:12.642642",
       "scheduled_for": "2026-04-04 20:03",
       "error": null,
@@ -112,7 +127,7 @@
       "attempt": 0,
       "created_at": "2026-04-04T08:10:19.760517",
       "created_at_display": "2026-04-04 08:10",
-      "created_ago": "21h",
+      "created_ago": "22h",
       "updated_at": "2026-04-04T09:03:52.426576",
       "scheduled_for": "2026-04-04 09:00",
       "error": null,
@@ -127,7 +142,7 @@
       "attempt": 0,
       "created_at": "2026-04-04T14:08:05.333682+00:00",
       "created_at_display": "2026-04-04 14:08",
-      "created_ago": "15h",
+      "created_ago": "16h",
       "updated_at": "2026-04-04T08:39:38.264738",
       "scheduled_for": "2026-04-04 15:08",
       "error": null,
@@ -607,7 +622,7 @@
       "attempt": 0,
       "created_at": "2026-04-01T06:03:09.308142",
       "created_at_display": "2026-04-01 06:03",
-      "created_ago": "3d",
+      "created_ago": "4d",
       "updated_at": "2026-04-01T06:31:19.389760",
       "scheduled_for": "2026-04-01 10:00",
       "error": null,
@@ -877,7 +892,7 @@
       "attempt": 0,
       "created_at": "2026-03-31T06:13:20.059828+00:00",
       "created_at_display": "2026-03-31 06:13",
-      "created_ago": "4d",
+      "created_ago": "5d",
       "updated_at": "2026-03-31T06:13:20.059828+00:00",
       "scheduled_for": "2026-03-31 07:13",
       "error": null,
@@ -892,7 +907,7 @@
       "attempt": 0,
       "created_at": "2026-03-31T06:07:10.166655+00:00",
       "created_at_display": "2026-03-31 06:07",
-      "created_ago": "4d",
+      "created_ago": "5d",
       "updated_at": "2026-03-31T06:07:10.166655+00:00",
       "scheduled_for": "2026-03-31 07:07",
       "error": null,
@@ -997,7 +1012,7 @@
       "attempt": 1,
       "created_at": "2026-03-31T06:09:01.388004+00:00",
       "created_at_display": "2026-03-31 06:09",
-      "created_ago": "4d",
+      "created_ago": "5d",
       "updated_at": "2026-03-31T00:30:53.109007",
       "scheduled_for": "2026-03-31 07:09",
       "error": "Locator.click: Target page, context or browser has been closed",
@@ -1012,7 +1027,7 @@
       "attempt": 1,
       "created_at": "2026-03-31T06:08:06.797490+00:00",
       "created_at_display": "2026-03-31 06:08",
-      "created_ago": "4d",
+      "created_ago": "5d",
       "updated_at": "2026-03-31T00:30:27.539332",
       "scheduled_for": "2026-03-31 07:08",
       "error": "Locator.wait_for: Target page, context or browser has been closed",
@@ -1042,7 +1057,7 @@
       "attempt": 0,
       "created_at": "2026-03-31T05:28:09.471601+00:00",
       "created_at_display": "2026-03-31 05:28",
-      "created_ago": "4d",
+      "created_ago": "5d",
       "updated_at": "2026-03-31T00:29:57.263874",
       "scheduled_for": "2026-03-31 06:28",
       "error": null,
@@ -1528,21 +1543,6 @@
       "error": null,
       "has_error": false,
       "post_url": "https://youtube.com/shorts/BhNj6A3OMvE"
-    },
-    {
-      "job_id": "00e736da-8ed0-4dbd-a7a9-74feb7730ee0",
-      "job_id_short": "00e736da",
-      "channel": "viral_recaps",
-      "status": "succeeded",
-      "attempt": 3,
-      "created_at": "2026-03-25T00:01:33.261635+00:00",
-      "created_at_display": "2026-03-25 00:01",
-      "created_ago": "11d",
-      "updated_at": "2026-03-29T01:31:06.621297",
-      "scheduled_for": "2026-03-29 06:28",
-      "error": "Locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"div#textbox[aria-label='Add a title that describes your video (type @ to mention a channel)']\").first\n    - locator resolved to <div id=\"textbox\" slot=\"input\" tabindex=\"0\" role=\"textbox\" aria-disabled=\"true\" aria-required=\"true\" aria-invalid=\"false\" contenteditable=\"false\" class=\"style-scope ytcp-social-suggestions-textbox\" aria-label=\"Add a title that describes your video (type @ to mention a channel)\">reddit mildlyinfuriating 47539 d39bd37c final</div>\n  - attempting click action\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n    - waiting 20ms\n    2 \u00d7 waiting for element to be visible, enabled and stable\n      - element is not enabled\n    - retrying click action\n      - waiting 100ms\n    58 \u00d7 waiting for element to be visible, enabled and stable\n       - element is not enabled\n     - retrying click action\n       - waiting 500ms\n",
-      "has_error": true,
-      "post_url": "https://www.youtube.com/watch?v=hciDx3x1RIc"
     }
   ],
   "queue": {
@@ -1576,6 +1576,25 @@
   },
   "channel_performance": [
     {
+      "channel": "fomo_highlights",
+      "status": "active",
+      "category": "Gaming",
+      "target_per_day": 8,
+      "published_24h": 5,
+      "queue_depth": 0,
+      "running_jobs": 0,
+      "failed_7d": 1,
+      "avg_views": 35970,
+      "rpm": 30.57,
+      "deficit": 3,
+      "completion_rate": 62.5,
+      "lagging": true,
+      "views_source": "source_clips_proxy",
+      "latest_title": "Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet? \ud83d\udcb0\ud83d\udcc8",
+      "latest_url": "https://youtube.com/shorts/b8Bht-bAqVc",
+      "latest_uploaded_at": "2026-04-05 00:01"
+    },
+    {
       "channel": "test_channel",
       "status": "active",
       "category": "experimental",
@@ -1593,25 +1612,6 @@
       "latest_title": "Test Caption 1",
       "latest_url": "https://youtube.com/test",
       "latest_uploaded_at": "2026-03-30 22:14"
-    },
-    {
-      "channel": "fomo_highlights",
-      "status": "active",
-      "category": "Gaming",
-      "target_per_day": 8,
-      "published_24h": 4,
-      "queue_depth": 1,
-      "running_jobs": 0,
-      "failed_7d": 1,
-      "avg_views": 35970,
-      "rpm": 30.57,
-      "deficit": 4,
-      "completion_rate": 50.0,
-      "lagging": true,
-      "views_source": "source_clips_proxy",
-      "latest_title": "BND Pays $0.25/Share \u2014 While Stocks Panic, Bonds Pay \ud83d\udcb5\ud83d\udcca",
-      "latest_url": "https://youtube.com/shorts/9e0Q0WTGqjI",
-      "latest_uploaded_at": "2026-04-04 17:30"
     },
     {
       "channel": "viral_recaps",
@@ -1638,11 +1638,11 @@
       "category": "Gaming",
       "target_per_day": 15,
       "published_24h": 1,
-      "queue_depth": 0,
+      "queue_depth": 1,
       "running_jobs": 0,
       "failed_7d": 0,
-      "avg_views": 11625,
-      "rpm": 9.88,
+      "avg_views": 11508,
+      "rpm": 9.78,
       "deficit": 14,
       "completion_rate": 6.7,
       "lagging": true,
@@ -2345,29 +2345,29 @@
           },
           {
             "date": "2026-04-05",
-            "views": null,
-            "rpm": null
+            "views": 161.0,
+            "rpm": 0.1368
           }
         ],
         "window_7d": {
           "window_days": 7,
-          "avg": 5960.86,
-          "previous_avg": 7515.09,
-          "delta": -1554.23,
-          "delta_pct": -20.7,
+          "avg": 672.92,
+          "previous_avg": 12251.59,
+          "delta": -11578.67,
+          "delta_pct": -94.5,
           "direction": "down",
           "points": 7
         },
         "window_30d": {
           "window_days": 30,
-          "avg": 4977.27,
-          "previous_avg": 5234.15,
-          "delta": -256.88,
-          "delta_pct": -4.9,
+          "avg": 4736.45,
+          "previous_avg": 4977.27,
+          "delta": -240.82,
+          "delta_pct": -4.8,
           "direction": "down",
-          "points": 19
+          "points": 20
         },
-        "latest": 353.33
+        "latest": 161.0
       },
       "rpm": {
         "series_30d": [
@@ -2518,29 +2518,29 @@
           },
           {
             "date": "2026-04-05",
-            "views": null,
-            "rpm": null
+            "views": 161.0,
+            "rpm": 0.1368
           }
         ],
         "window_7d": {
           "window_days": 7,
-          "avg": 5.07,
-          "previous_avg": 6.39,
-          "delta": -1.32,
-          "delta_pct": -20.7,
+          "avg": 0.57,
+          "previous_avg": 10.41,
+          "delta": -9.84,
+          "delta_pct": -94.5,
           "direction": "down",
           "points": 7
         },
         "window_30d": {
           "window_days": 30,
-          "avg": 4.23,
-          "previous_avg": 4.45,
-          "delta": -0.22,
-          "delta_pct": -4.9,
+          "avg": 4.03,
+          "previous_avg": 4.23,
+          "delta": -0.2,
+          "delta_pct": -4.7,
           "direction": "down",
-          "points": 19
+          "points": 20
         },
-        "latest": 0.3003
+        "latest": 0.1368
       }
     },
     {
@@ -6485,7 +6485,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-14 06:17:13",
       "last_fetch_display": "2026-03-14 06:17",
-      "last_fetch_ago": "21d",
+      "last_fetch_ago": "22d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6905,7 +6905,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-09 06:01:26",
       "last_fetch_display": "2026-03-09 06:01",
-      "last_fetch_ago": "26d",
+      "last_fetch_ago": "27d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6989,7 +6989,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-09 06:00:55",
       "last_fetch_display": "2026-03-09 06:00",
-      "last_fetch_ago": "26d",
+      "last_fetch_ago": "27d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -7003,7 +7003,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-26 06:07:53",
       "last_fetch_display": "2026-03-26 06:07",
-      "last_fetch_ago": "9d",
+      "last_fetch_ago": "10d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.541,
@@ -7225,13 +7225,13 @@
       "source_id": "https://www.twitch.tv/cloakzy/clips?filter=clips&range=30d",
       "source_key": "https://www.twitch.tv/cloakzy/clips?filter=clips&range=30d",
       "platform": "unknown",
-      "last_fetch": "2026-04-04 18:08:13",
-      "last_fetch_display": "2026-04-04 18:08",
-      "last_fetch_ago": "11h",
+      "last_fetch": "2026-04-05 06:02:02",
+      "last_fetch_display": "2026-04-05 06:02",
+      "last_fetch_ago": "15m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.257,
-      "success_count": 136,
+      "error_rate": 0.255,
+      "success_count": 137,
       "failure_count": 47,
       "last_error": "ffmpeg overlay failed: ffmpeg version 8.1-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev11, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enabl"
     },
@@ -7241,7 +7241,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-04 18:09:22",
       "last_fetch_display": "2026-04-04 18:09",
-      "last_fetch_ago": "11h",
+      "last_fetch_ago": "12h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.291,
@@ -7253,13 +7253,13 @@
       "source_id": "https://www.twitch.tv/hasanabi/clips",
       "source_key": "https://www.twitch.tv/hasanabi/clips",
       "platform": "unknown",
-      "last_fetch": "2026-04-04 16:18:03",
-      "last_fetch_display": "2026-04-04 16:18",
-      "last_fetch_ago": "12h",
+      "last_fetch": "2026-04-05 06:03:22",
+      "last_fetch_display": "2026-04-05 06:03",
+      "last_fetch_ago": "14m",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.008,
-      "success_count": 118,
+      "success_count": 119,
       "failure_count": 1,
       "last_error": "ffmpeg overlay failed: ffmpeg version 8.1-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev11, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enabl"
     },
@@ -7267,13 +7267,13 @@
       "source_id": "https://www.twitch.tv/ludwig/clips",
       "source_key": "https://www.twitch.tv/ludwig/clips",
       "platform": "unknown",
-      "last_fetch": "2026-04-04 18:09:46",
-      "last_fetch_display": "2026-04-04 18:09",
-      "last_fetch_ago": "11h",
+      "last_fetch": "2026-04-05 06:03:13",
+      "last_fetch_display": "2026-04-05 06:03",
+      "last_fetch_ago": "14m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.017,
-      "success_count": 119,
+      "error_rate": 0.016,
+      "success_count": 120,
       "failure_count": 2,
       "last_error": "ffmpeg overlay failed: ffmpeg version 8.1-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev11, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enabl"
     },
@@ -7281,13 +7281,13 @@
       "source_id": "https://www.twitch.tv/moistcr1tikal/clips",
       "source_key": "https://www.twitch.tv/moistcr1tikal/clips",
       "platform": "unknown",
-      "last_fetch": "2026-04-04 18:09:44",
-      "last_fetch_display": "2026-04-04 18:09",
-      "last_fetch_ago": "11h",
+      "last_fetch": "2026-04-05 06:03:10",
+      "last_fetch_display": "2026-04-05 06:03",
+      "last_fetch_ago": "14m",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.008,
-      "success_count": 127,
+      "success_count": 128,
       "failure_count": 1,
       "last_error": "ffmpeg overlay failed: ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev8, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --"
     },
@@ -7309,13 +7309,13 @@
       "source_id": "https://www.twitch.tv/nickmercs/clips",
       "source_key": "https://www.twitch.tv/nickmercs/clips",
       "platform": "unknown",
-      "last_fetch": "2026-04-04 18:09:37",
-      "last_fetch_display": "2026-04-04 18:09",
-      "last_fetch_ago": "11h",
+      "last_fetch": "2026-04-05 06:03:04",
+      "last_fetch_display": "2026-04-05 06:03",
+      "last_fetch_ago": "14m",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.008,
-      "success_count": 122,
+      "success_count": 123,
       "failure_count": 1,
       "last_error": "ffmpeg overlay failed: ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev8, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --"
     },
@@ -7325,7 +7325,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-04 18:08:51",
       "last_fetch_display": "2026-04-04 18:08",
-      "last_fetch_ago": "11h",
+      "last_fetch_ago": "12h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.273,
@@ -7339,7 +7339,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-04 18:08:26",
       "last_fetch_display": "2026-04-04 18:08",
-      "last_fetch_ago": "11h",
+      "last_fetch_ago": "12h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.25,
@@ -7365,13 +7365,13 @@
       "source_id": "https://www.twitch.tv/shroud/clips",
       "source_key": "https://www.twitch.tv/shroud/clips",
       "platform": "unknown",
-      "last_fetch": "2026-04-04 18:09:41",
-      "last_fetch_display": "2026-04-04 18:09",
-      "last_fetch_ago": "11h",
+      "last_fetch": "2026-04-05 06:03:08",
+      "last_fetch_display": "2026-04-05 06:03",
+      "last_fetch_ago": "14m",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.017,
-      "success_count": 117,
+      "success_count": 118,
       "failure_count": 2,
       "last_error": "ffmpeg overlay failed: ffmpeg version 8.0.1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev8, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --"
     },
@@ -7381,7 +7381,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-04 18:08:34",
       "last_fetch_display": "2026-04-04 18:08",
-      "last_fetch_ago": "11h",
+      "last_fetch_ago": "12h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.276,
@@ -7407,13 +7407,13 @@
       "source_id": "https://www.twitch.tv/tfue/clips?filter=clips&range=30d",
       "source_key": "https://www.twitch.tv/tfue/clips?filter=clips&range=30d",
       "platform": "unknown",
-      "last_fetch": "2026-04-04 18:08:04",
-      "last_fetch_display": "2026-04-04 18:08",
-      "last_fetch_ago": "11h",
+      "last_fetch": "2026-04-05 06:01:47",
+      "last_fetch_display": "2026-04-05 06:01",
+      "last_fetch_ago": "16m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.178,
-      "success_count": 148,
+      "error_rate": 0.177,
+      "success_count": 149,
       "failure_count": 32,
       "last_error": "ffmpeg overlay failed: ffmpeg version 8.1-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev11, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enabl"
     },
@@ -7423,7 +7423,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-04 18:09:06",
       "last_fetch_display": "2026-04-04 18:09",
-      "last_fetch_ago": "11h",
+      "last_fetch_ago": "12h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.28,
@@ -7591,7 +7591,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-14 06:17:12",
       "last_fetch_display": "2026-03-14 06:17",
-      "last_fetch_ago": "21d",
+      "last_fetch_ago": "22d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.0,
@@ -7645,13 +7645,13 @@
       "source_id": "https://www.twitch.tv/timthetatman/clips",
       "source_key": "https://www.twitch.tv/timthetatman/clips",
       "platform": "unknown",
-      "last_fetch": "2026-04-04 18:09:27",
-      "last_fetch_display": "2026-04-04 18:09",
-      "last_fetch_ago": "11h",
+      "last_fetch": "2026-04-05 06:02:52",
+      "last_fetch_display": "2026-04-05 06:02",
+      "last_fetch_ago": "15m",
       "clips_24h": 0,
       "status": "healthy",
       "error_rate": 0.0,
-      "success_count": 125,
+      "success_count": 126,
       "failure_count": 0,
       "last_error": ""
     }
@@ -7664,7 +7664,7 @@
         "trend": {
           "today": 0,
           "yesterday": 0,
-          "week_ago": 0
+          "week_ago": 58
         },
         "last_seen": "2026-03-31 00:32:42",
         "last_seen_display": "2026-03-31 00:32",
@@ -7730,6 +7730,20 @@
     "log_viewer_target": "logs_dialog"
   },
   "top_clips": [
+    {
+      "clip_id": "c7c8385b-f98d-485c-a742-c0f51695aa71",
+      "clip_id_short": "c7c8385b-f98",
+      "title": "Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet? \ud83d\udcb0\ud83d\udcc8",
+      "source_title": null,
+      "creator": null,
+      "channel": "fomo_highlights",
+      "views": 0,
+      "likes": null,
+      "ctr_percent": null,
+      "upload_date": "2026-04-05 00:01",
+      "youtube_url": "https://youtube.com/shorts/b8Bht-bAqVc",
+      "metric_mode": "unavailable"
+    },
     {
       "clip_id": "0e27a5e0-1e46-4b2b-ae84-566a0b835c6f",
       "clip_id_short": "0e27a5e0-1e4",
@@ -7995,33 +8009,31 @@
       "upload_date": "2026-04-02 22:06",
       "youtube_url": "https://youtube.com/shorts/EsN8Nul5S0M",
       "metric_mode": "unavailable"
-    },
-    {
-      "clip_id": "6fa1f48b-85d7-428a-8cae-ac2f2d1221a3",
-      "clip_id_short": "6fa1f48b-85d",
-      "title": "Oil Just Had Its Biggest Day in 6 Years \u2014 Here's Why \ud83d\udee2\ufe0f\ud83d\udd25",
-      "source_title": null,
-      "creator": null,
-      "channel": "fomo_highlights",
-      "views": 0,
-      "likes": null,
-      "ctr_percent": null,
-      "upload_date": "2026-04-02 21:32",
-      "youtube_url": "https://youtube.com/shorts/IZw4QqFTyvY",
-      "metric_mode": "unavailable"
     }
   ],
   "recent_uploads": [
     {
+      "job_id": "4866a7ce-46a4-4144-bca5-af60ca8b3cc2",
+      "job_id_short": "4866a7ce",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "updated_at": "2026-04-05T00:02:50.379426",
+      "updated_at_display": "2026-04-05 00:02",
+      "updated_ago": "6h",
+      "title": "Cloakzy Clutch Moments #22 (Fortnite)",
+      "url": null,
+      "error": null
+    },
+    {
       "job_id": "c7c8385b-f98d-485c-a742-c0f51695aa71",
       "job_id_short": "c7c8385b",
       "channel": "fomo_highlights",
-      "status": "queued",
-      "updated_at": "2026-04-04T23:03:06.283945+00:00",
-      "updated_at_display": "2026-04-04 23:03",
+      "status": "succeeded",
+      "updated_at": "2026-04-05T00:01:16.519552",
+      "updated_at_display": "2026-04-05 00:01",
       "updated_ago": "6h",
       "title": "Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet? \ud83d\udcb0\ud83d\udcc8",
-      "url": null,
+      "url": "https://youtube.com/shorts/b8Bht-bAqVc",
       "error": null
     },
     {
@@ -8031,7 +8043,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-04T17:30:56.410680",
       "updated_at_display": "2026-04-04 17:30",
-      "updated_ago": "11h",
+      "updated_ago": "12h",
       "title": "BND Pays $0.25/Share \u2014 While Stocks Panic, Bonds Pay \ud83d\udcb5\ud83d\udcca",
       "url": "https://youtube.com/shorts/9e0Q0WTGqjI",
       "error": null
@@ -8043,7 +8055,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-04T17:04:12.037453",
       "updated_at_display": "2026-04-04 17:04",
-      "updated_ago": "12h",
+      "updated_ago": "13h",
       "title": "$4 Gas = Rate CUTS? The Fed's Counterintuitive Move \ud83e\udd2f\ud83d\udcc9",
       "url": "https://youtube.com/shorts/3CIbC1fxSwM",
       "error": null
@@ -8055,7 +8067,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-04T13:33:12.642642",
       "updated_at_display": "2026-04-04 13:33",
-      "updated_ago": "15h",
+      "updated_ago": "16h",
       "title": "Trump Says 'Get Your Own Oil' \u26fd Gas Prices Could Explode",
       "url": "https://youtube.com/shorts/P73qlU4ypcs",
       "error": null
@@ -8067,7 +8079,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-04T09:03:52.426576",
       "updated_at_display": "2026-04-04 09:03",
-      "updated_ago": "20h",
+      "updated_ago": "21h",
       "title": "Taxi2g Clutch Moments #13 (Fortnite)",
       "url": "https://youtube.com/shorts/cO3jCs9mJxQ",
       "error": null
@@ -8079,7 +8091,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-04T08:39:38.264738",
       "updated_at_display": "2026-04-04 08:39",
-      "updated_ago": "20h",
+      "updated_ago": "21h",
       "title": "Banks Paying 4% APY Right Now \ud83d\udcb0 (Most People Don't Know)",
       "url": "https://youtube.com/shorts/_u-AryfFbOg",
       "error": null
@@ -8119,21 +8131,23 @@
       "title": "Myth Funny Moments #4 (Fortnite)",
       "url": "https://youtube.com/shorts/1lJD83MpQew",
       "error": null
-    },
-    {
-      "job_id": "47842523-9c69-4c1d-98aa-c9e786f9fee6",
-      "job_id_short": "47842523",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "updated_at": "2026-04-03T14:10:04.758253",
-      "updated_at_display": "2026-04-03 14:10",
-      "updated_ago": "1d",
-      "title": "Short Sellers Are Fleeing Block \ud83d\ude80 Is This Your Signal?",
-      "url": "https://youtube.com/shorts/70tB1KbVVTI",
-      "error": null
     }
   ],
   "recent_clips": [
+    {
+      "job_id": "c7c8385b-f98d-485c-a742-c0f51695aa71",
+      "job_id_short": "c7c8385b",
+      "channel": "fomo_highlights",
+      "title": "Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet? \ud83d\udcb0\ud83d\udcc8",
+      "title_truncated": "Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet? \ud83d\udcb0\ud83d\udcc8",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/b8Bht-bAqVc",
+      "views": 0,
+      "views_display": "\u00e2\u20ac\u201d",
+      "published_at": "2026-04-05T00:01:16.519552",
+      "published_at_display": "2026-04-05 00:01",
+      "published_ago": "6h"
+    },
     {
       "job_id": "0e27a5e0-1e46-4b2b-ae84-566a0b835c6f",
       "job_id_short": "0e27a5e0",
@@ -8146,7 +8160,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-04T17:30:56.410680",
       "published_at_display": "2026-04-04 17:30",
-      "published_ago": "11h"
+      "published_ago": "12h"
     },
     {
       "job_id": "ae4c350a-10f0-4fdc-ac25-82d84f8beab3",
@@ -8160,7 +8174,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-04T17:04:12.037453",
       "published_at_display": "2026-04-04 17:04",
-      "published_ago": "12h"
+      "published_ago": "13h"
     },
     {
       "job_id": "a00571c5-7f36-4e68-96be-41c2f894e124",
@@ -8174,7 +8188,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-04T13:33:12.642642",
       "published_at_display": "2026-04-04 13:33",
-      "published_ago": "15h"
+      "published_ago": "16h"
     },
     {
       "job_id": "48415c24-87dd-4b83-986f-f84aedc83b99",
@@ -8188,7 +8202,7 @@
       "views_display": "2",
       "published_at": "2026-04-04T09:03:52.426576",
       "published_at_display": "2026-04-04 09:03",
-      "published_ago": "20h"
+      "published_ago": "21h"
     },
     {
       "job_id": "5e6a1d3b-ae64-483e-82aa-e80ac4633393",
@@ -8202,7 +8216,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-04T08:39:38.264738",
       "published_at_display": "2026-04-04 08:39",
-      "published_ago": "20h"
+      "published_ago": "21h"
     },
     {
       "job_id": "5fc51338-5ea3-4681-bc76-14fabbdd2c8f",
@@ -8259,28 +8273,26 @@
       "published_at": "2026-04-03T14:10:04.758253",
       "published_at_display": "2026-04-03 14:10",
       "published_ago": "1d"
-    },
-    {
-      "job_id": "8937d8ee-0d66-43c7-bd31-ee0563d8f39f",
-      "job_id_short": "8937d8ee",
-      "channel": "fomo_highlights",
-      "title": "Jobs Report CRUSHES Estimates \ud83d\udcca 178K vs 59K Expected",
-      "title_truncated": "Jobs Report CRUSHES Estimates \ud83d\udcca 178K vs 59K Expected",
-      "thumbnail_path": null,
-      "post_url": "https://youtube.com/shorts/1jbfO6Q2pzk",
-      "views": 0,
-      "views_display": "\u00e2\u20ac\u201d",
-      "published_at": "2026-04-03T13:32:08.607733",
-      "published_at_display": "2026-04-03 13:32",
-      "published_ago": "1d"
     }
   ],
   "upload_timeline": {
     "buckets": [
       {
         "name": "Today",
-        "count": 0,
-        "items": []
+        "count": 1,
+        "items": [
+          {
+            "job_id": "c7c8385b-f98d-485c-a742-c0f51695aa71",
+            "job_id_short": "c7c8385b",
+            "channel": "fomo_highlights",
+            "title": "Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet? \ud83d\udcb0\ud83d\udcc8",
+            "published_at": "2026-04-05T00:01:16.519552",
+            "published_at_display": "2026-04-05 00:01",
+            "published_ago": "6h",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/b8Bht-bAqVc"
+          }
+        ]
       },
       {
         "name": "Yesterday",
@@ -8293,7 +8305,7 @@
             "title": "BND Pays $0.25/Share \u2014 While Stocks Panic, Bonds Pay \ud83d\udcb5\ud83d\udcca",
             "published_at": "2026-04-04T17:30:56.410680",
             "published_at_display": "2026-04-04 17:30",
-            "published_ago": "11h",
+            "published_ago": "12h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/9e0Q0WTGqjI"
           },
@@ -8304,7 +8316,7 @@
             "title": "$4 Gas = Rate CUTS? The Fed's Counterintuitive Move \ud83e\udd2f\ud83d\udcc9",
             "published_at": "2026-04-04T17:04:12.037453",
             "published_at_display": "2026-04-04 17:04",
-            "published_ago": "12h",
+            "published_ago": "13h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/3CIbC1fxSwM"
           },
@@ -8315,7 +8327,7 @@
             "title": "Trump Says 'Get Your Own Oil' \u26fd Gas Prices Could Explode",
             "published_at": "2026-04-04T13:33:12.642642",
             "published_at_display": "2026-04-04 13:33",
-            "published_ago": "15h",
+            "published_ago": "16h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/P73qlU4ypcs"
           },
@@ -8326,7 +8338,7 @@
             "title": "Taxi2g Clutch Moments #13 (Fortnite)",
             "published_at": "2026-04-04T09:03:52.426576",
             "published_at_display": "2026-04-04 09:03",
-            "published_ago": "20h",
+            "published_ago": "21h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/cO3jCs9mJxQ"
           },
@@ -8337,7 +8349,7 @@
             "title": "Banks Paying 4% APY Right Now \ud83d\udcb0 (Most People Don't Know)",
             "published_at": "2026-04-04T08:39:38.264738",
             "published_at_display": "2026-04-04 08:39",
-            "published_ago": "20h",
+            "published_ago": "21h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/_u-AryfFbOg"
           }
@@ -8345,7 +8357,7 @@
       },
       {
         "name": "This Week",
-        "count": 45,
+        "count": 44,
         "items": [
           {
             "job_id": "5fc51338-5ea3-4681-bc76-14fabbdd2c8f",
@@ -8706,7 +8718,7 @@
             "title": "Tfue Moments #27",
             "published_at": "2026-04-01T05:31:30.629245",
             "published_at_display": "2026-04-01 05:31",
-            "published_ago": "3d",
+            "published_ago": "4d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/WbMAd2svqs0"
           },
@@ -8830,17 +8842,6 @@
             "published_ago": "4d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/fW35rwTFG_Y"
-          },
-          {
-            "job_id": "33618a79-d7e5-435a-b113-73c17fa440aa",
-            "job_id_short": "33618a79",
-            "channel": "fomo_highlights",
-            "title": "Only 2 Ways To Protect Your $$ From Trump's Iran War \ud83d\udcb0\ud83d\udee1\ufe0f",
-            "published_at": "2026-03-31T10:00:50.128644",
-            "published_at_display": "2026-03-31 10:00",
-            "published_ago": "4d",
-            "views": 0,
-            "post_url": "https://youtube.com/shorts/Q9bHMHZUbI4"
           }
         ]
       },
@@ -9091,13 +9092,22 @@
   "schedule": {
     "2026-04-05": [
       {
+        "job_id": "4866a7ce-46a4-4144-bca5-af60ca8b3cc2",
+        "job_id_short": "4866a7ce",
+        "channel": "arc_highlightz",
+        "title": "Cloakzy Clutch Moments #22 (Fortnite)",
+        "scheduled_at": "2026-04-05T07:00:00-06:00",
+        "scheduled_at_iso": "2026-04-05T07:00:00",
+        "status": "queued"
+      },
+      {
         "job_id": "c7c8385b-f98d-485c-a742-c0f51695aa71",
         "job_id_short": "c7c8385b",
         "channel": "fomo_highlights",
         "title": "Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet",
-        "scheduled_at": "2026-04-05T00:03:06",
-        "scheduled_at_iso": "2026-04-05T00:03:06",
-        "status": "queued"
+        "scheduled_at": "2026-04-05T00:01:16.519552",
+        "scheduled_at_iso": "2026-04-05T00:01:16.519552",
+        "status": "succeeded"
       }
     ],
     "2026-03-29": [
@@ -9893,13 +9903,13 @@
       },
       {
         "channel": "fomo_highlights",
-        "uploads_today": 0,
-        "units_used": 0,
-        "units_remaining": 10000,
+        "uploads_today": 1,
+        "units_used": 1600,
+        "units_remaining": 8400,
         "units_total": 10000,
-        "pct_used": 0.0,
+        "pct_used": 16.0,
         "status": "green",
-        "display_text": "0/10000 units (0.0%)"
+        "display_text": "1600/10000 units (16.0%)"
       },
       {
         "channel": "gym_moments",
@@ -10014,9 +10024,9 @@
     ],
     "any_channel_high": false,
     "all_channels_safe": true,
-    "reset_time_hours": 2,
+    "reset_time_hours": 1,
     "reset_time_minutes": 41,
-    "reset_time_display": "2h 41m"
+    "reset_time_display": "1h 41m"
   },
   "revenue": {
     "total_views_30d": 0,
@@ -10037,7 +10047,7 @@
       "downloaded": 0,
       "processed": 0,
       "queued": 1,
-      "uploaded": 228
+      "uploaded": 229
     },
     "by_channel": [
       {
@@ -10045,7 +10055,7 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 0,
+        "queued": 1,
         "uploaded": 116
       },
       {
@@ -10053,8 +10063,8 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 1,
-        "uploaded": 71
+        "queued": 0,
+        "uploaded": 72
       },
       {
         "channel": "market_meltdowns",
@@ -10082,12 +10092,12 @@
       }
     ],
     "throughput": {
-      "uploads_per_hour": 0.21,
-      "uploads_last_24h": 5
+      "uploads_per_hour": 0.25,
+      "uploads_last_24h": 6
     },
     "stage_timings": {
       "discovered_to_downloaded_hours": 0.0,
-      "queued_to_uploaded_hours": 5.29
+      "queued_to_uploaded_hours": 5.27
     },
     "bottleneck": {
       "stage": "queued",
@@ -10099,9 +10109,9 @@
       {
         "name": "raw_clips",
         "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\raw_clips",
-        "size_bytes": 39088801110,
+        "size_bytes": 39112141956,
         "size_human": "36.4GB",
-        "file_count": 4226
+        "file_count": 4228
       },
       {
         "name": "intermediate",
@@ -10113,19 +10123,19 @@
       {
         "name": "renders",
         "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\renders",
-        "size_bytes": 7856046414,
+        "size_bytes": 7875178348,
         "size_human": "7.3GB",
-        "file_count": 878
+        "file_count": 880
       },
       {
         "name": "renders/thumbnails",
         "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\renders\\thumbnails",
-        "size_bytes": 8114475,
-        "size_human": "7.7MB",
-        "file_count": 196
+        "size_bytes": 8147121,
+        "size_human": "7.8MB",
+        "file_count": 197
       }
     ],
-    "total_disk_bytes": 53794940262,
+    "total_disk_bytes": 53822391176,
     "total_disk_human": "50.1GB",
     "percent_of_500gb": 10.0,
     "warning_threshold_pct": 70,
@@ -10386,7 +10396,7 @@
     {
       "channel_name": "fomo_highlights",
       "total_views": 1092,
-      "uploads_30d": 71,
+      "uploads_30d": 72,
       "avg_views": 15,
       "best_clip_title": "No clips yet",
       "best_clip_views": 0,
@@ -11409,9 +11419,9 @@
           "creator_name": "cloakzy",
           "min_views": 0,
           "priority": 3,
-          "clips_fetched": 20,
-          "last_fetched_at": "2026-04-03T06:07:49.633156",
-          "last_fetched_rel": "1d",
+          "clips_fetched": 21,
+          "last_fetched_at": "2026-04-05T06:02:50.398222",
+          "last_fetched_rel": "15m",
           "enabled": true,
           "url": "vod://cloakzy",
           "type": "vod_highlights"
@@ -11439,7 +11449,7 @@
           "priority": 3,
           "clips_fetched": 13,
           "last_fetched_at": "2026-04-04T14:10:19.792951",
-          "last_fetched_rel": "15h",
+          "last_fetched_rel": "16h",
           "enabled": true,
           "url": "vod://taxi2g",
           "type": "vod_highlights"
@@ -11486,7 +11496,7 @@
           "priority": 1,
           "clips_fetched": 10,
           "last_fetched_at": "2026-04-01T05:36:54.873492",
-          "last_fetched_rel": "3d",
+          "last_fetched_rel": "4d",
           "enabled": true,
           "url": "https://www.youtube.com/@Ludwig/videos",
           "type": "transcript"
@@ -11612,44 +11622,40 @@
     }
   ],
   "daily_summary": {
-    "date": "2026-04-04",
-    "uploads_today": 5,
-    "uploads_yesterday": 15,
+    "date": "2026-04-05",
+    "uploads_today": 1,
+    "uploads_yesterday": 6,
     "views_gained_today": 0,
     "views_yesterday": 0,
     "errors_today": 0,
-    "quota_pct": 80.0,
-    "quota_units_used": 8000,
-    "delta_uploads": -10,
+    "quota_pct": 16.0,
+    "quota_units_used": 1600,
+    "delta_uploads": -5,
     "delta_views": 0,
     "top_clip_today": {
-      "title": "Banks Paying 4% APY Right Now \ud83d\udcb0 (Most People Don't Know)",
+      "title": "Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet? \ud83d\udcb0\ud83d\udcc8",
       "views": 0,
       "channel": "fomo_highlights"
     },
     "top_3_channels": [
       {
         "channel": "fomo_highlights",
-        "uploads": 4
-      },
-      {
-        "channel": "arc_highlightz",
         "uploads": 1
       }
     ],
-    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-04-04\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 5 (-10 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 80.0% used (8000/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Banks Paying 4% APY Right Now \ud83d\udcb0 (Most People Don't Know)\n  0 views \u00e2\u20ac\u00a2 fomo_highlights\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. fomo_highlights: 4 uploads\n  2. arc_highlightz: 1 uploads",
-    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-04-04\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 5 (-10 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 80.0% used (`8000/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Banks Paying 4% APY Right Now \ud83d\udcb0 (Most People Don't Know)_\n**0 views** \u00e2\u20ac\u00a2 **fomo_highlights**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **fomo_highlights** \u00e2\u20ac\u201d 4 uploads\n2. **arc_highlightz** \u00e2\u20ac\u201d 1 uploads"
+    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-04-05\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 1 (-5 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 16.0% used (1600/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet? \ud83d\udcb0\ud83d\udcc8\n  0 views \u00e2\u20ac\u00a2 fomo_highlights\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. fomo_highlights: 1 uploads",
+    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-04-05\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 1 (-5 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 16.0% used (`1600/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet? \ud83d\udcb0\ud83d\udcc8_\n**0 views** \u00e2\u20ac\u00a2 **fomo_highlights**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **fomo_highlights** \u00e2\u20ac\u201d 1 uploads"
   },
   "title_performance": {
     "pattern_analysis": {
       "has_numbers": {
         "avg_views": 0.0,
-        "count": 162,
+        "count": 163,
         "total_views": 0
       },
       "has_question": {
         "avg_views": 0.0,
-        "count": 10,
+        "count": 11,
         "total_views": 0
       },
       "has_caps": {
@@ -11659,7 +11665,7 @@
       },
       "has_emoji": {
         "avg_views": 0.0,
-        "count": 54,
+        "count": 55,
         "total_views": 0
       }
     },
@@ -11811,12 +11817,12 @@
         "channel": "fomo_highlights",
         "best_title": "Watch this before scrolling: Nobody plays like this",
         "best_views": 0,
-        "total_titles_analyzed": 71,
+        "total_titles_analyzed": 72,
         "pattern_breakdown": {
-          "numbers_pct": 46.5,
-          "questions_pct": 8.5,
+          "numbers_pct": 47.2,
+          "questions_pct": 9.7,
           "caps_pct": 1.4,
-          "emoji_pct": 66.2
+          "emoji_pct": 66.7
         }
       },
       {
@@ -11862,7 +11868,7 @@
       {
         "style_name": "Gaming/Clips",
         "avg_views": 0,
-        "total_clips": 221,
+        "total_clips": 222,
         "best_clip": null,
         "total_views": 0,
         "is_best": true
@@ -11887,7 +11893,7 @@
     "best_style_overall": "Gaming/Clips",
     "summary_stats": {
       "total_styles": 3,
-      "total_clips_all": 228,
+      "total_clips_all": 229,
       "total_views_all": 0,
       "avg_views_overall": 0
     }
@@ -11897,8 +11903,8 @@
       {
         "hour": 0,
         "hour_label": "00:00",
-        "posts": 13,
-        "avg_views": 309.0
+        "posts": 14,
+        "avg_views": 302.0
       },
       {
         "hour": 1,
@@ -12079,8 +12085,8 @@
       {
         "day": 6,
         "day_name": "Sunday",
-        "posts": 32,
-        "avg_views": 750.0
+        "posts": 33,
+        "avg_views": 734.0
       }
     ],
     "best_hours": [
@@ -12171,7 +12177,7 @@
           "hour": 0,
           "day": 6,
           "views": 210.0,
-          "posts": 2,
+          "posts": 3,
           "intensity": 11.7
         }
       ],
@@ -13349,7 +13355,17 @@
         }
       ]
     ],
-    "scheduled_posts": [],
+    "scheduled_posts": [
+      {
+        "job_id": "4866a7ce",
+        "channel": "arc_highlightz",
+        "title": "Cloakzy Clutch Moments #22 (Fortnite)",
+        "scheduled_at": "2026-04-05T07:00:00-06:00",
+        "hour": 7,
+        "day": 6,
+        "day_name": "Sunday"
+      }
+    ],
     "next_best_slot": {
       "date": "2026-04-06",
       "hour": 23,
@@ -13357,7 +13373,7 @@
       "day_name": "Monday",
       "est_views": 1800.0
     },
-    "job_count": 228
+    "job_count": 229
   },
   "benchmarks": {
     "current_tier": "Starter",
@@ -13448,87 +13464,87 @@
     {
       "type": "warning",
       "title": "Channel \"market_meltdowns\" paused for 24+ hours",
-      "message": "market_meltdowns has been paused for 653 hours",
+      "message": "market_meltdowns has been paused for 654 hours",
       "channel": "market_meltdowns",
-      "created_at": "2026-04-05T05:18:04.399523",
+      "created_at": "2026-04-05T06:18:04.737227",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"self_made_clips\" paused for 24+ hours",
-      "message": "self_made_clips has been paused for 649 hours",
+      "message": "self_made_clips has been paused for 650 hours",
       "channel": "self_made_clips",
-      "created_at": "2026-04-05T05:18:04.399523",
+      "created_at": "2026-04-05T06:18:04.737227",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"rich_or_ruined\" paused for 24+ hours",
-      "message": "rich_or_ruined has been paused for 647 hours",
+      "message": "rich_or_ruined has been paused for 648 hours",
       "channel": "rich_or_ruined",
-      "created_at": "2026-04-05T05:18:04.399523",
+      "created_at": "2026-04-05T06:18:04.737227",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"startup_graveyard\" paused for 24+ hours",
-      "message": "startup_graveyard has been paused for 647 hours",
+      "message": "startup_graveyard has been paused for 648 hours",
       "channel": "startup_graveyard",
-      "created_at": "2026-04-05T05:18:04.399523",
+      "created_at": "2026-04-05T06:18:04.737227",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_sirens\" paused for 24+ hours",
-      "message": "stream_sirens has been paused for 626 hours",
+      "message": "stream_sirens has been paused for 627 hours",
       "channel": "stream_sirens",
-      "created_at": "2026-04-05T05:18:04.399523",
+      "created_at": "2026-04-05T06:18:04.737227",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_queens\" paused for 24+ hours",
-      "message": "stream_queens has been paused for 626 hours",
+      "message": "stream_queens has been paused for 627 hours",
       "channel": "stream_queens",
-      "created_at": "2026-04-05T05:18:04.399523",
+      "created_at": "2026-04-05T06:18:04.737227",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"ai_did_what\" paused for 24+ hours",
-      "message": "ai_did_what has been paused for 592 hours",
+      "message": "ai_did_what has been paused for 593 hours",
       "channel": "ai_did_what",
-      "created_at": "2026-04-05T05:18:04.399523",
+      "created_at": "2026-04-05T06:18:04.737227",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"gym_moments\" paused for 24+ hours",
-      "message": "gym_moments has been paused for 592 hours",
+      "message": "gym_moments has been paused for 593 hours",
       "channel": "gym_moments",
-      "created_at": "2026-04-05T05:18:04.399523",
+      "created_at": "2026-04-05T06:18:04.737227",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"kitchen_chaos\" paused for 24+ hours",
-      "message": "kitchen_chaos has been paused for 445 hours",
+      "message": "kitchen_chaos has been paused for 446 hours",
       "channel": "kitchen_chaos",
-      "created_at": "2026-04-05T05:18:04.399523",
+      "created_at": "2026-04-05T06:18:04.737227",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"unfiltered_clips\" paused for 24+ hours",
-      "message": "unfiltered_clips has been paused for 445 hours",
+      "message": "unfiltered_clips has been paused for 446 hours",
       "channel": "unfiltered_clips",
-      "created_at": "2026-04-05T05:18:04.399523",
+      "created_at": "2026-04-05T06:18:04.737227",
       "read": false
     }
   ],
   "checklists": [
     {
-      "channel": "fomo_highlights",
+      "channel": "arc_highlightz",
       "readiness_score": 6,
       "total_checks": 6,
       "badge": "launch_ready",
@@ -13568,7 +13584,7 @@
       ]
     },
     {
-      "channel": "arc_highlightz",
+      "channel": "fomo_highlights",
       "readiness_score": 5,
       "total_checks": 6,
       "badge": "needs_attention",
@@ -14103,6 +14119,25 @@
   "insights": {
     "lagging_channels": [
       {
+        "channel": "fomo_highlights",
+        "status": "active",
+        "category": "Gaming",
+        "target_per_day": 8,
+        "published_24h": 5,
+        "queue_depth": 0,
+        "running_jobs": 0,
+        "failed_7d": 1,
+        "avg_views": 35970,
+        "rpm": 30.57,
+        "deficit": 3,
+        "completion_rate": 62.5,
+        "lagging": true,
+        "views_source": "source_clips_proxy",
+        "latest_title": "Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet? \ud83d\udcb0\ud83d\udcc8",
+        "latest_url": "https://youtube.com/shorts/b8Bht-bAqVc",
+        "latest_uploaded_at": "2026-04-05 00:01"
+      },
+      {
         "channel": "test_channel",
         "status": "active",
         "category": "experimental",
@@ -14120,25 +14155,6 @@
         "latest_title": "Test Caption 1",
         "latest_url": "https://youtube.com/test",
         "latest_uploaded_at": "2026-03-30 22:14"
-      },
-      {
-        "channel": "fomo_highlights",
-        "status": "active",
-        "category": "Gaming",
-        "target_per_day": 8,
-        "published_24h": 4,
-        "queue_depth": 1,
-        "running_jobs": 0,
-        "failed_7d": 1,
-        "avg_views": 35970,
-        "rpm": 30.57,
-        "deficit": 4,
-        "completion_rate": 50.0,
-        "lagging": true,
-        "views_source": "source_clips_proxy",
-        "latest_title": "BND Pays $0.25/Share \u2014 While Stocks Panic, Bonds Pay \ud83d\udcb5\ud83d\udcca",
-        "latest_url": "https://youtube.com/shorts/9e0Q0WTGqjI",
-        "latest_uploaded_at": "2026-04-04 17:30"
       },
       {
         "channel": "viral_recaps",
@@ -14165,11 +14181,11 @@
         "category": "Gaming",
         "target_per_day": 15,
         "published_24h": 1,
-        "queue_depth": 0,
+        "queue_depth": 1,
         "running_jobs": 0,
         "failed_7d": 0,
-        "avg_views": 11625,
-        "rpm": 9.88,
+        "avg_views": 11508,
+        "rpm": 9.78,
         "deficit": 14,
         "completion_rate": 6.7,
         "lagging": true,
@@ -14186,7 +14202,7 @@
   "meta": {
     "refresh_seconds": 30,
     "channel_count": 14,
-    "job_count": 411,
+    "job_count": 412,
     "has_metrics_daily": false,
     "has_clip_assets": false,
     "note": "Trend analytics prefer metrics_daily and fall back to source clip proxy series when upload analytics are sparse."

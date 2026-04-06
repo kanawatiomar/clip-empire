@@ -184,7 +184,7 @@ Write ONE title. Rules:
 - 1 emoji max, at the end (optional — only if it adds emotion)
 - Always include the streamer's name
 - Create CURIOSITY — make viewers need to see what happened
-- Include searchable keywords: the game name (Fortnite/Warzone/etc if known), action type (clutch/rage/fail/funny)
+- Include searchable action/context keywords naturally (clutch/rage/fail/funny), but keep titles clean and human
 - NO profanity
 - NO banned words: INSANE, EPIC, HILARIOUS, AMAZING, UNREAL, INCREDIBLE
 - NO multiple exclamation marks

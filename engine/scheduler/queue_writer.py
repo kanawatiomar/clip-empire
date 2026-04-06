@@ -405,15 +405,8 @@ class QueueWriter:
                 # No LLM — use a descriptive series title with game keyword
                 # More SEO-friendly than plain "Tfue Moments #X"
                 import random as _rand
-                _game_tags = {
-                    "tfue": "Fortnite", "cloakzy": "Fortnite", "ninja": "Fortnite",
-                    "taxi2g": "Fortnite", "nickmercs": "Warzone", "myth": "Fortnite",
-                    "bugha": "Fortnite", "benjyfishy": "Fortnite",
-                }
                 _adj = _rand.choice(["Chaotic", "Unreal", "Wild", "Clutch", "Funny", "Crazy"])
-                _game = _game_tags.get(creator.lower(), "")
-                _game_suffix = f" ({_game})" if _game else ""
-                series_name = f"{creator.capitalize()} {_adj} {theme} #{ep_num}{_game_suffix}"
+                series_name = f"{creator.capitalize()} {_adj} {theme} #{ep_num}"
                 caption = series_name
                 auto_hook = f"{creator.capitalize()} {_adj} {theme}"[:80]
                 ab_label = "S"   # S = Series

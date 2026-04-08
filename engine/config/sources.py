@@ -5,19 +5,19 @@ Each channel entry maps to a list of source objects:
   - platform:  "youtube" | "tiktok" | "twitch" | "reddit"
   - url:        full URL to channel/profile/subreddit/clips page
   - type:       "channel" | "profile" | "subreddit" | "search" | "longform"
-  - priority:   1 (high) → 3 (low) — sources are tried in priority order
+  - priority:   1 (high) → 3 (low) - sources are tried in priority order
   - max_age_days: skip clips older than this
 
 ── COPYRIGHT POLICY ──────────────────────────────────────────────────────────
-✅ SAFE:   type="longform" — downloads full video, extracts our own highlight
+✅ SAFE:   type="longform" - downloads full video, extracts our own highlight
            (transformative fair use; we pick the moment, add overlays + captions)
-✅ SAFE:   Twitch clips — fan-created clips from a different platform
+✅ SAFE:   Twitch clips - fan-created clips from a different platform
 ❌ RISKY:  Reposting existing YouTube Shorts verbatim (not transformative)
 ❌ RISKY:  type="channel" pointing to YouTube /shorts tab = repost risk
 
 RULE: For YouTube sources, always use type="longform" (extract from full videos).
       Never use type="channel" for YouTube unless it's a search or playlist of
-      third-party compilations. Gaming uses Twitch clips — no YouTube needed.
+      third-party compilations. Gaming uses Twitch clips - no YouTube needed.
 ──────────────────────────────────────────────────────────────────────────────
 
   - min_dur_s / max_dur_s: clip duration window (15-180 defaults)
@@ -44,7 +44,7 @@ SOURCE_DEFAULTS = {
 
 
 
-SOURCES: dict  # forward reference — assigned below
+SOURCES: dict  # forward reference - assigned below
 CHANNEL_SOURCES: dict = {
 
 
@@ -54,9 +54,9 @@ CHANNEL_SOURCES: dict = {
 
 
     "market_meltdowns": [
-        # Mid-tier finance creators — original commentary, no ContentID.
-        # Avoid mega-creators (Graham Stephan, Meet Kevin) — ContentID risk.
-        # All use type="longform" — we extract peak audio moments ourselves (transformative).
+        # Mid-tier finance creators - original commentary, no ContentID.
+        # Avoid mega-creators (Graham Stephan, Meet Kevin) - ContentID risk.
+        # All use type="longform" - we extract peak audio moments ourselves (transformative).
         {"platform": "youtube", "url": "https://www.youtube.com/@PatrickBoyleOnFinance/videos",
          "type": "longform", "priority": 1, "max_age_days": 30, "target_dur_s": 45,
          "creator": "patrickboyle", "crop_anchor": "top"},
@@ -337,8 +337,8 @@ CHANNEL_SOURCES: dict = {
     # ── FEMALE STREAMERS ─────────────────────────────────────────────────────
 
     "stream_sirens": [
-        # Hot-tub / suggestive era streamers — pull Twitch clips (reactions, drama, viral moments)
-        # Strategy: funny/viral moments only, avoid explicit content — stays YouTube-safe
+        # Hot-tub / suggestive era streamers - pull Twitch clips (reactions, drama, viral moments)
+        # Strategy: funny/viral moments only, avoid explicit content - stays YouTube-safe
         {"platform": "twitch", "url": "https://www.twitch.tv/amouranth/clips",
          "type": "channel", "priority": 1, "max_age_days": 7,
          "min_dur_s": 15, "max_dur_s": 60, "max_per_run": 6,
@@ -355,7 +355,7 @@ CHANNEL_SOURCES: dict = {
          "type": "channel", "priority": 2, "max_age_days": 30,
          "min_dur_s": 15, "max_dur_s": 60, "max_per_run": 4,
          "crop_anchor": "center", "min_views": 1000},
-        # YouTube fallback — drama/reaction compilations
+        # YouTube fallback - drama/reaction compilations
         {"platform": "youtube",
          "url": "https://www.youtube.com/results?search_query=amouranth+funny+moments+twitch+clips+2025",
          "type": "search", "priority": 3, "max_age_days": 14,
@@ -363,7 +363,7 @@ CHANNEL_SOURCES: dict = {
     ],
 
     "stream_queens": [
-        # Top female streamers — gaming, variety, wholesome/funny/viral moments
+        # Top female streamers - gaming, variety, wholesome/funny/viral moments
         {"platform": "twitch", "url": "https://www.twitch.tv/pokimane/clips",
          "type": "channel", "priority": 1, "max_age_days": 7,
          "min_dur_s": 15, "max_dur_s": 60, "max_per_run": 6,
@@ -403,13 +403,13 @@ CHANNEL_SOURCES: dict = {
         #   right  -> crop window shifts right (webcam bottom-right, action left)
         #   center -> standard center crop
         # min_views: only take clips with this many views (quality filter)
-        # max_age_days: 30 — wide window so engine doesn't starve when streamers
+        # max_age_days: 30 - wide window so engine doesn't starve when streamers
         #   take breaks or top clips from recent days are already used.
         # range=30d → Twitch serves clips sorted by recent popularity (not all-time top)
         # max_per_run=3 → 3 clips per creator per day (5 creators = 15 max/day)
-        # min_views=100 — lowered from 500; pool was exhausting too fast
-        # range=30d — recent/trending clips; falls back to range=all for depth
-        # Added Myth, Bugha, Benjyfishy, Ninja as additional creators for supply depth
+        # min_views=100 - lowered from 500; pool was exhausting too fast
+        # range=30d - recent/trending clips; falls back to range=all for depth
+        # Added Myth, Bugha, Ninja as additional creators for supply depth
         # PRIORITY 1: Recent 30-day window (fresh clips)
         {"platform": "twitch", "url": "https://www.twitch.tv/tfue/clips?filter=clips&range=30d",
          "type": "channel", "priority": 1, "max_age_days": 30,
@@ -419,7 +419,7 @@ CHANNEL_SOURCES: dict = {
          "type": "channel", "priority": 1, "max_age_days": 30,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 3,
          "crop_anchor": "left", "min_views": 100},
-        # PRIORITY 2: Secondary creators — growing/adjacent to Tfue/Cloakzy audience
+        # PRIORITY 2: Secondary creators - growing/adjacent to Tfue/Cloakzy audience
         {"platform": "twitch", "url": "https://www.twitch.tv/taxi2g/clips?filter=clips&range=30d",
          "type": "channel", "priority": 2, "max_age_days": 30,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 3,
@@ -429,6 +429,14 @@ CHANNEL_SOURCES: dict = {
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 2,
          "crop_anchor": "right", "min_views": 200},
         # PRIORITY 3: Supply depth
+        {"platform": "twitch", "url": "https://www.twitch.tv/myth/clips?filter=clips&range=30d",
+         "type": "channel", "priority": 3, "max_age_days": 30,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 2,
+         "crop_anchor": "right", "min_views": 150},
+        {"platform": "twitch", "url": "https://www.twitch.tv/bugha/clips?filter=clips&range=30d",
+         "type": "channel", "priority": 3, "max_age_days": 30,
+         "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 2,
+         "crop_anchor": "right", "min_views": 150},
         {"platform": "twitch", "url": "https://www.twitch.tv/nickmercs/clips?filter=clips&range=30d",
          "type": "channel", "priority": 3, "max_age_days": 30,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 2,
@@ -442,10 +450,10 @@ CHANNEL_SOURCES: dict = {
          "type": "channel", "priority": 4, "max_age_days": 3650,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 3,
          "crop_anchor": "left", "min_views": 5000},
-        # PRIORITY 5: VOD highlights — fresh content extracted from full Twitch VODs
+        # PRIORITY 5: VOD highlights - fresh content extracted from full Twitch VODs
         # These are pre-downloaded by `python -m engine.vod.cli --channel arc_highlightz`
         # Run that command periodically (e.g. daily) to populate the pool.
-        # Higher priority than all-time fallback (4) — VOD clips are truly fresh.
+        # Higher priority than all-time fallback (4) - VOD clips are truly fresh.
         {"platform": "vod_highlights", "type": "vod_highlights",
          "creator": "tfue", "priority": 3, "max_per_run": 2,
          "min_dur_s": 20, "max_dur_s": 65, "min_energy": 1.2,
@@ -467,7 +475,7 @@ CHANNEL_SOURCES: dict = {
     "viral_recaps": [
         # ── PRIORITY 1: Transcript-LLM extraction from YouTube VODs ──────────
         # LLM reads transcript, picks the best self-contained funny/engaging moment.
-        # Same-day content — no dependency on fan clip view counts.
+        # Same-day content - no dependency on fan clip view counts.
         {"platform": "youtube", "url": "https://www.youtube.com/@penguinz0/videos",
          "type": "transcript", "priority": 1, "max_age_days": 3,
          "target_dur_s": 45, "max_per_run": 2,
@@ -482,7 +490,7 @@ CHANNEL_SOURCES: dict = {
          "crop_anchor": "center", "creator": "ludwig"},
 
         # ── PRIORITY 2: Twitch fan clips (fallback when no YT video today) ───
-        # min_views lowered to realistic thresholds — clips take hours to accumulate views
+        # min_views lowered to realistic thresholds - clips take hours to accumulate views
         {"platform": "twitch", "url": "https://www.twitch.tv/moistcr1tikal/clips",
          "type": "channel", "priority": 2, "max_age_days": 3,
          "min_dur_s": 20, "max_dur_s": 60, "max_per_run": 4,
@@ -499,7 +507,7 @@ CHANNEL_SOURCES: dict = {
 
     "fomo_highlights": [
         # Shroud: cam bottom-left -> anchor right to keep gameplay on right side
-        # min_views raised to 5000 — higher view clips = more likely to be exciting plays, not boring scope/idle moments
+        # min_views raised to 5000 - higher view clips = more likely to be exciting plays, not boring scope/idle moments
         {"platform": "twitch", "url": "https://www.twitch.tv/shroud/clips",
          "type": "channel", "priority": 1, "max_age_days": 7,
          "min_dur_s": 20, "max_dur_s": 45, "max_per_run": 6,

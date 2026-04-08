@@ -45,7 +45,6 @@ CREATOR_GAME_HINTS: dict[str, str] = {
     "taxi2g": "fortnite",
     "ninja": "fortnite",
     "bugha": "fortnite",
-    "benjyfishy": "fortnite",
     "nickmercs": "warzone",
     "shroud": "valorant",
     "timthetatman": "warzone",

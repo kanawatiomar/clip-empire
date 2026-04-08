@@ -1,8 +1,11 @@
 """Cross-channel dedup tracker.
 
-Tracks every source URL ever used by any channel in the empire.
-Prevents the same clip from being posted by multiple channels or twice
-on the same channel.
+Tracks source URLs used by the empire and applies a cooldown-based dedup
+window rather than blocking a clip forever.
+
+Why: permanent exact-match dedup eventually starves Twitch clip pools after a
+few weeks, especially on channels that reuse the same creators. We still avoid
+spammy reposts, but old clips can re-enter rotation after a sensible cooldown.
 
 State stored in `source_clips` table (auto-migrated by data/migrate.py).
 """
@@ -10,14 +13,21 @@ State stored in `source_clips` table (auto-migrated by data/migrate.py).
 from __future__ import annotations
 
 import sqlite3
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import List, Optional
+import json
 
 from engine.ingest.base import RawClip
 from engine.ingest.fingerprint import url_fingerprint
 
 
 DATABASE_PATH = "data/clip_empire.db"
+
+# Short-form cooldowns (days)
+# Daily clips channels need a much shorter reuse window than long-form montage.
+# We still avoid near-term reposts, but don't permanently starve the creator pool.
+SHORT_CHANNEL_COOLDOWN_DAYS = 7
+SHORT_GLOBAL_COOLDOWN_DAYS = 3
 
 
 class DedupTracker:
@@ -44,6 +54,19 @@ class DedupTracker:
             )
         """)
         conn.execute("CREATE INDEX IF NOT EXISTS idx_source_clips_url_hash ON source_clips(url_hash)")
+        for col, ddl in (
+            ("content_game", "ALTER TABLE source_clips ADD COLUMN content_game TEXT"),
+            ("content_mode", "ALTER TABLE source_clips ADD COLUMN content_mode TEXT"),
+            ("content_labels", "ALTER TABLE source_clips ADD COLUMN content_labels TEXT"),
+            ("classifier_version", "ALTER TABLE source_clips ADD COLUMN classifier_version TEXT"),
+            ("classifier_confidence", "ALTER TABLE source_clips ADD COLUMN classifier_confidence REAL"),
+        ):
+            try:
+                cols = {row[1] for row in conn.execute("PRAGMA table_info(source_clips)").fetchall()}
+                if col not in cols:
+                    conn.execute(ddl)
+            except Exception:
+                pass
         conn.execute("""
             CREATE TABLE IF NOT EXISTS clip_fingerprints (
                 clip_id TEXT PRIMARY KEY,
@@ -92,42 +115,46 @@ class DedupTracker:
             normalized = url
         return url_fingerprint(normalized)[:16]
 
-    def is_used(self, clip: RawClip, channel_name: str = "") -> bool:
-        """Return True if this source URL has been used by ANY channel."""
+    def is_used(self, clip: RawClip, channel_name: str = "", days: int = SHORT_GLOBAL_COOLDOWN_DAYS) -> bool:
+        """Return True if this source URL was used by ANY channel within the cooldown window."""
         url_hash = self._url_hash(clip.source_url)
+        cutoff = (datetime.utcnow() - timedelta(days=days)).isoformat()
         conn = sqlite3.connect(self.db_path)
         cur = conn.execute(
-            "SELECT 1 FROM source_clips WHERE url_hash = ? LIMIT 1", (url_hash,)
+            "SELECT 1 FROM source_clips WHERE url_hash = ? AND used_at >= ? LIMIT 1",
+            (url_hash, cutoff),
         )
         result = cur.fetchone() is not None
         conn.close()
         return result
 
-    def is_used_by_channel(self, clip: RawClip, channel_name: str) -> bool:
-        """Return True only if used by this specific channel."""
+    def is_used_by_channel(self, clip: RawClip, channel_name: str, days: int = SHORT_CHANNEL_COOLDOWN_DAYS) -> bool:
+        """Return True only if used by this specific channel within the cooldown window."""
         url_hash = self._url_hash(clip.source_url)
+        cutoff = (datetime.utcnow() - timedelta(days=days)).isoformat()
         conn = sqlite3.connect(self.db_path)
         cur = conn.execute(
-            "SELECT 1 FROM source_clips WHERE url_hash = ? AND channel_name = ? LIMIT 1",
-            (url_hash, channel_name),
+            "SELECT 1 FROM source_clips WHERE url_hash = ? AND channel_name = ? AND used_at >= ? LIMIT 1",
+            (url_hash, channel_name, cutoff),
         )
         result = cur.fetchone() is not None
         conn.close()
         return result
 
     def filter_unused(self, clips: List[RawClip], channel_name: str = "", global_dedup: bool = True) -> List[RawClip]:
-        """Filter clips list to only those not previously used.
+        """Filter clips list to only those not used within the active cooldown windows.
 
-        global_dedup=True:  skip if used by ANY channel (strict, avoids cross-posting)
-        global_dedup=False: skip only if used by this specific channel
+        global_dedup=True:  block recent cross-channel reposts, and block longer
+                            recent reposts on the same channel.
+        global_dedup=False: block only recent reposts on this specific channel.
         """
         result = []
         for clip in clips:
-            if global_dedup and self.is_used(clip):
-                print(f"[dedup] Skipping (global) used: {clip.source_url[:60]}")
+            if channel_name and self.is_used_by_channel(clip, channel_name):
+                print(f"[dedup] Skipping (channel cooldown) used: {clip.source_url[:60]}")
                 continue
-            if not global_dedup and self.is_used_by_channel(clip, channel_name):
-                print(f"[dedup] Skipping (channel) used: {clip.source_url[:60]}")
+            if global_dedup and self.is_used(clip, channel_name=channel_name):
+                print(f"[dedup] Skipping (global cooldown) used: {clip.source_url[:60]}")
                 continue
             result.append(clip)
         return result
@@ -182,11 +209,14 @@ class DedupTracker:
         url_hash = self._url_hash(clip.source_url)
         conn = sqlite3.connect(self.db_path)
         try:
+            metadata = getattr(clip, "metadata", {}) or {}
+            profile = metadata.get("content_profile", {}) or {}
             conn.execute("""
                 INSERT OR IGNORE INTO source_clips
                     (clip_id, source_url, url_hash, platform, creator, title,
-                     channel_name, download_path, duration_s, view_count, used_at, status)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                     channel_name, download_path, duration_s, view_count, used_at, status,
+                     content_game, content_mode, content_labels, classifier_version, classifier_confidence)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, (
                 clip.clip_id,
                 clip.source_url,
@@ -200,6 +230,11 @@ class DedupTracker:
                 clip.view_count,
                 datetime.utcnow().isoformat(),
                 "used",
+                profile.get("primary_game"),
+                profile.get("primary_mode"),
+                json.dumps(profile.get("labels", []), ensure_ascii=False),
+                profile.get("classifier_version"),
+                profile.get("confidence"),
             ))
             conn.commit()
         finally:

@@ -33,6 +33,7 @@ from engine.ingest.trend_radar import TrendRadar
 from engine.ingest.safety import ClipPolicyFilter
 from engine.ingest.fingerprint import url_fingerprint, visual_fingerprint
 from engine.ingest.sora_lane import SoraLane
+from engine.classification import classify_clip, content_summary
 from engine.transform.crop import CropTransform
 from engine.transform.caption import CaptionTransform
 from engine.transform.overlay import OverlayTransform
@@ -251,6 +252,11 @@ class Runner:
                 if not hasattr(clip, "metadata") or clip.metadata is None:
                     clip.metadata = {}
                 clip.metadata["crop_anchor"] = source_config.get("crop_anchor", "center")
+                profile = classify_clip(clip, channel_name=channel_name)
+                clip.metadata["content_profile"] = profile.to_metadata()
+                clip.metadata["content_labels"] = list(profile.labels)
+                clip.metadata["content_game"] = profile.primary_game
+                clip.metadata["content_mode"] = profile.primary_mode
 
             # Filter deduplication (DB + in-session)
             fresh_clips = self.dedup.filter_unused(raw_clips, channel_name=channel_name)
@@ -304,6 +310,18 @@ class Runner:
         print(f"\n[pipeline] Processing clip {cid}: '{clip.title[:50]}'")
         print(f"           Source: {clip.source_url[:70]}")
         print(f"           Duration: {clip.duration_s:.1f}s | {clip.width}x{clip.height}")
+        try:
+            profile = classify_clip(clip, channel_name=channel_name)
+            clip.metadata = clip.metadata or {}
+            clip.metadata["content_profile"] = profile.to_metadata()
+            clip.metadata["content_labels"] = list(profile.labels)
+            clip.metadata["content_game"] = profile.primary_game
+            clip.metadata["content_mode"] = profile.primary_mode
+            summary = content_summary(profile)
+            if summary:
+                print(f"           Content: {summary} (conf={profile.confidence:.2f})")
+        except Exception as e:
+            print(f"[pipeline] Content classifier failed (non-fatal): {e}")
 
         if self.dry_run:
             print(f"[pipeline] DRY RUN - skipping actual processing")
@@ -401,6 +419,7 @@ class Runner:
                 render_path=final,
                 creator=getattr(clip, "creator", None),
                 clip_title=getattr(clip, "title", None),
+                content_profile=(clip.metadata or {}).get("content_profile"),
             )
 
             # 5b. Log to cross-format dedup tracker

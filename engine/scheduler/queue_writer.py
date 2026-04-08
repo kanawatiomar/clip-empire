@@ -314,6 +314,7 @@ class QueueWriter:
         schedule_at: Optional[datetime] = None,
         creator: Optional[str] = None,
         clip_title: Optional[str] = None,
+        content_profile: Optional[dict] = None,
     ) -> str:
         """Add a clip to the publish queue.
 
@@ -325,6 +326,7 @@ class QueueWriter:
             schedule_at:  When to post (auto-scheduled if None).
             creator:      Streamer/broadcaster name (used in series titles).
             clip_title:   Raw clip title (used for series theme classification).
+            content_profile: Detected content labels/game/mode for better titling.
 
         Returns:
             job_id of the created publish job.
@@ -369,6 +371,14 @@ class QueueWriter:
             print(f"[queue] daily cap check error: {e}")
 
         niche = CHANNELS.get(channel_name, {}).get("niche", "Gaming")
+        content_profile = content_profile or {}
+        detected_game = content_profile.get("primary_game")
+        detected_mode = content_profile.get("primary_mode")
+        content_labels = list(content_profile.get("labels") or [])
+        context_suffix = ""
+        if detected_game or detected_mode:
+            bits = [b for b in (detected_game, detected_mode) if b]
+            context_suffix = f" | detected content: {', '.join(bits)}"
 
         # 1. Try LLM title generation (GPT-4o-mini curiosity-bait)
         llm_title = None
@@ -377,7 +387,7 @@ class QueueWriter:
                 from engine.config.smart_title import generate_llm_title, clean_title
                 raw_llm = generate_llm_title(
                     creator=creator,
-                    clip_title=clip_title or "",
+                    clip_title=(clip_title or "") + context_suffix,
                     channel_name=channel_name,
                     niche=niche,
                 )
@@ -406,7 +416,10 @@ class QueueWriter:
                 # More SEO-friendly than plain "Tfue Moments #X"
                 import random as _rand
                 _adj = _rand.choice(["Chaotic", "Unreal", "Wild", "Clutch", "Funny", "Crazy"])
-                series_name = f"{creator.capitalize()} {_adj} {theme} #{ep_num}"
+                series_topic = theme
+                if detected_game and detected_game.replace("_", " ").lower() not in theme.lower():
+                    series_topic = f"{detected_game.replace('_', ' ').title()} {theme}"
+                series_name = f"{creator.capitalize()} {_adj} {series_topic} #{ep_num}"
                 caption = series_name
                 auto_hook = f"{creator.capitalize()} {_adj} {theme}"[:80]
                 ab_label = "S"   # S = Series
@@ -425,6 +438,14 @@ class QueueWriter:
         tags = list(hashtags or get_hashtags(channel_name))
         if series_hashtag and series_hashtag not in tags:
             tags.append(series_hashtag)
+        if detected_game:
+            game_tag = detected_game.replace("_", "")
+            if game_tag not in tags:
+                tags.append(game_tag)
+        for label in content_labels[:2]:
+            clean = label.replace("_", "")
+            if clean not in tags:
+                tags.append(clean)
         # schedule_at = the OPTIMAL peak publishing time (unchanged).
         # The publisher picks jobs up REVIEW_BUFFER_HOURS early (see publisher/queue.py),
         # uploads them to YouTube as Scheduled, and sends Omar a review alert.

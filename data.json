@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-04-11T08:18:09.233226Z",
+  "generated_at": "2026-04-11T09:18:06.718149Z",
   "repo_root": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire",
   "database_path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\data\\clip_empire.db",
   "health_score": {
-    "score": 67.9,
+    "score": 68.6,
     "grade": "C",
     "status": "Needs Attention",
     "color": "yellow",
     "breakdown": {
-      "pipeline_health": 0.0,
+      "pipeline_health": 0.7,
       "error_rate": 20.0,
       "quota_safety": 15,
       "queue_depth": 15,
@@ -16,13 +16,13 @@
       "channel_uptime": 2.9
     },
     "metrics": {
-      "uploads_today": 0,
+      "uploads_today": 1,
       "target_today": 34,
-      "pipeline_health_ratio": 0.0,
+      "pipeline_health_ratio": 0.03,
       "errors_today": 0,
       "total_jobs_today": 4,
       "error_rate": 0.0,
-      "queue_depth": 4,
+      "queue_depth": 3,
       "active_channels": 4,
       "total_channels": 14,
       "fresh_sources": 0,
@@ -34,16 +34,31 @@
     "total_channels": 14,
     "jobs_today": {
       "total": 4,
-      "queued": 4,
+      "queued": 3,
       "running": 0,
-      "succeeded": 0,
+      "succeeded": 1,
       "failed": 0,
       "cancelled": 0
     },
-    "render_queue_depth": 4,
-    "last_updated": "2026-04-11T08:18:09.233226Z"
+    "render_queue_depth": 3,
+    "last_updated": "2026-04-11T09:18:06.718149Z"
   },
   "queue_monitor": [
+    {
+      "job_id": "ecf5b9c5-e139-4c83-ab4b-6e90292d00c7",
+      "job_id_short": "ecf5b9c5",
+      "channel": "arc_highlightz",
+      "status": "succeeded",
+      "attempt": 0,
+      "created_at": "2026-04-11T00:02:53.546645",
+      "created_at_display": "2026-04-11 00:02",
+      "created_ago": "9h",
+      "updated_at": "2026-04-11T03:01:48.557583",
+      "scheduled_for": "2026-04-11 07:00",
+      "error": null,
+      "has_error": false,
+      "post_url": "https://youtube.com/shorts/jJRQmrRhFvU"
+    },
     {
       "job_id": "de40997b-1a3e-4839-9139-e9f1e2f37221",
       "job_id_short": "de40997b",
@@ -52,7 +67,7 @@
       "attempt": 0,
       "created_at": "2026-04-11T02:04:23.609135",
       "created_at_display": "2026-04-11 02:04",
-      "created_ago": "6h",
+      "created_ago": "7h",
       "updated_at": "2026-04-11T02:04:23.609135",
       "scheduled_for": "2026-04-11 15:00",
       "error": null,
@@ -67,7 +82,7 @@
       "attempt": 0,
       "created_at": "2026-04-11T02:03:10.387476",
       "created_at_display": "2026-04-11 02:03",
-      "created_ago": "6h",
+      "created_ago": "7h",
       "updated_at": "2026-04-11T02:03:10.387476",
       "scheduled_for": "2026-04-11 08:00",
       "error": null,
@@ -82,24 +97,9 @@
       "attempt": 0,
       "created_at": "2026-04-11T00:03:51.088277",
       "created_at_display": "2026-04-11 00:03",
-      "created_ago": "8h",
+      "created_ago": "9h",
       "updated_at": "2026-04-11T00:03:51.088277",
       "scheduled_for": "2026-04-11 09:00",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "ecf5b9c5-e139-4c83-ab4b-6e90292d00c7",
-      "job_id_short": "ecf5b9c5",
-      "channel": "arc_highlightz",
-      "status": "queued",
-      "attempt": 0,
-      "created_at": "2026-04-11T00:02:53.546645",
-      "created_at_display": "2026-04-11 00:02",
-      "created_ago": "8h",
-      "updated_at": "2026-04-11T00:02:53.546645",
-      "scheduled_for": "2026-04-11 07:00",
       "error": null,
       "has_error": false,
       "post_url": null
@@ -112,7 +112,7 @@
       "attempt": 0,
       "created_at": "2026-04-10T22:02:52.604369",
       "created_at_display": "2026-04-10 22:02",
-      "created_ago": "10h",
+      "created_ago": "11h",
       "updated_at": "2026-04-10T23:01:30.065990",
       "scheduled_for": "2026-04-10 23:00",
       "error": null,
@@ -127,7 +127,7 @@
       "attempt": 0,
       "created_at": "2026-04-11T03:04:48.456211+00:00",
       "created_at_display": "2026-04-11 03:04",
-      "created_ago": "5h",
+      "created_ago": "6h",
       "updated_at": "2026-04-10T22:31:13.548842",
       "scheduled_for": "2026-04-11 04:04",
       "error": null,
@@ -142,7 +142,7 @@
       "attempt": 0,
       "created_at": "2026-04-11T03:03:46.682020+00:00",
       "created_at_display": "2026-04-11 03:03",
-      "created_ago": "5h",
+      "created_ago": "6h",
       "updated_at": "2026-04-10T22:00:50.760583",
       "scheduled_for": "2026-04-11 04:03",
       "error": null,
@@ -157,7 +157,7 @@
       "attempt": 0,
       "created_at": "2026-04-11T03:02:40.216904+00:00",
       "created_at_display": "2026-04-11 03:02",
-      "created_ago": "5h",
+      "created_ago": "6h",
       "updated_at": "2026-04-10T21:30:50.968808",
       "scheduled_for": "2026-04-11 04:02",
       "error": null,
@@ -172,7 +172,7 @@
       "attempt": 0,
       "created_at": "2026-04-10T23:02:31.752258+00:00",
       "created_at_display": "2026-04-10 23:02",
-      "created_ago": "9h",
+      "created_ago": "10h",
       "updated_at": "2026-04-10T18:00:53.916436",
       "scheduled_for": "2026-04-11 00:02",
       "error": null,
@@ -187,7 +187,7 @@
       "attempt": 0,
       "created_at": "2026-04-10T23:01:29.216101+00:00",
       "created_at_display": "2026-04-10 23:01",
-      "created_ago": "9h",
+      "created_ago": "10h",
       "updated_at": "2026-04-10T17:30:51.239033",
       "scheduled_for": "2026-04-11 00:01",
       "error": null,
@@ -202,7 +202,7 @@
       "attempt": 0,
       "created_at": "2026-04-10T14:02:53.090617",
       "created_at_display": "2026-04-10 14:02",
-      "created_ago": "18h",
+      "created_ago": "19h",
       "updated_at": "2026-04-10T15:02:10.612160",
       "scheduled_for": "2026-04-10 16:00",
       "error": null,
@@ -217,7 +217,7 @@
       "attempt": 0,
       "created_at": "2026-04-10T19:03:56.726102+00:00",
       "created_at_display": "2026-04-10 19:03",
-      "created_ago": "13h",
+      "created_ago": "14h",
       "updated_at": "2026-04-10T14:31:13.745621",
       "scheduled_for": "2026-04-10 20:03",
       "error": null,
@@ -232,7 +232,7 @@
       "attempt": 0,
       "created_at": "2026-04-10T19:02:47.996384+00:00",
       "created_at_display": "2026-04-10 19:02",
-      "created_ago": "13h",
+      "created_ago": "14h",
       "updated_at": "2026-04-10T14:01:02.562926",
       "scheduled_for": "2026-04-10 20:02",
       "error": null,
@@ -247,7 +247,7 @@
       "attempt": 0,
       "created_at": "2026-04-10T19:01:48.834672+00:00",
       "created_at_display": "2026-04-10 19:01",
-      "created_ago": "13h",
+      "created_ago": "14h",
       "updated_at": "2026-04-10T13:31:38.029235",
       "scheduled_for": "2026-04-10 20:01",
       "error": null,
@@ -262,7 +262,7 @@
       "attempt": 0,
       "created_at": "2026-04-10T12:04:47.585758",
       "created_at_display": "2026-04-10 12:04",
-      "created_ago": "20h",
+      "created_ago": "21h",
       "updated_at": "2026-04-10T12:31:33.604514",
       "scheduled_for": "2026-04-10 15:00",
       "error": null,
@@ -292,7 +292,7 @@
       "attempt": 0,
       "created_at": "2026-04-10T10:06:05.166708",
       "created_at_display": "2026-04-10 10:06",
-      "created_ago": "22h",
+      "created_ago": "23h",
       "updated_at": "2026-04-10T10:31:36.469137",
       "scheduled_for": "2026-04-10 11:00",
       "error": null,
@@ -322,7 +322,7 @@
       "attempt": 0,
       "created_at": "2026-04-10T14:02:21.723722+00:00",
       "created_at_display": "2026-04-10 14:02",
-      "created_ago": "18h",
+      "created_ago": "19h",
       "updated_at": "2026-04-10T08:31:24.668814",
       "scheduled_for": "2026-04-10 15:02",
       "error": null,
@@ -1599,14 +1599,14 @@
       "status": "active",
       "category": "Comedy",
       "target_per_day": 8,
-      "published_24h": 2,
+      "published_24h": 1,
       "queue_depth": 2,
       "running_jobs": 0,
       "failed_7d": 0,
       "avg_views": 151,
       "rpm": 0.13,
-      "deficit": 6,
-      "completion_rate": 25.0,
+      "deficit": 7,
+      "completion_rate": 12.5,
       "lagging": true,
       "views_source": "source_clips_proxy",
       "latest_title": "Ludwig Funny Moments #27",
@@ -1618,33 +1618,33 @@
       "status": "active",
       "category": "Gaming",
       "target_per_day": 15,
-      "published_24h": 3,
-      "queue_depth": 2,
+      "published_24h": 4,
+      "queue_depth": 1,
       "running_jobs": 0,
       "failed_7d": 0,
       "avg_views": 13915,
       "rpm": 11.83,
-      "deficit": 12,
-      "completion_rate": 20.0,
+      "deficit": 11,
+      "completion_rate": 26.7,
       "lagging": true,
       "views_source": "source_clips_proxy",
-      "latest_title": "Taxi2g Funny Fortnite Moments #19",
-      "latest_url": "https://youtube.com/shorts/pQcYsgSyp8c",
-      "latest_uploaded_at": "2026-04-10 23:01"
+      "latest_title": "Myth Clutch Fortnite Moments #6",
+      "latest_url": "https://youtube.com/shorts/jJRQmrRhFvU",
+      "latest_uploaded_at": "2026-04-11 03:01"
     },
     {
       "channel": "fomo_highlights",
       "status": "active",
       "category": "Gaming",
       "target_per_day": 8,
-      "published_24h": 10,
+      "published_24h": 9,
       "queue_depth": 0,
       "running_jobs": 0,
       "failed_7d": 0,
       "avg_views": 7304,
       "rpm": 6.21,
       "deficit": 0,
-      "completion_rate": 125.0,
+      "completion_rate": 112.5,
       "lagging": false,
       "views_source": "source_clips_proxy",
       "latest_title": "Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet? \ud83d\udcb0\ud83d\udcc8",
@@ -6975,7 +6975,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-26 08:21:08",
       "last_fetch_display": "2026-03-26 08:21",
-      "last_fetch_ago": "15d",
+      "last_fetch_ago": "16d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -7255,7 +7255,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-11 08:01:55",
       "last_fetch_display": "2026-04-11 08:01",
-      "last_fetch_ago": "16m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.179,
@@ -7269,7 +7269,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-11 04:09:38",
       "last_fetch_display": "2026-04-11 04:09",
-      "last_fetch_ago": "4h",
+      "last_fetch_ago": "5h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.173,
@@ -7283,7 +7283,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-11 02:02:58",
       "last_fetch_display": "2026-04-11 02:02",
-      "last_fetch_ago": "6h",
+      "last_fetch_ago": "7h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.03,
@@ -7297,7 +7297,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-11 08:03:36",
       "last_fetch_display": "2026-04-11 08:03",
-      "last_fetch_ago": "14m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.035,
@@ -7311,7 +7311,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-11 02:03:00",
       "last_fetch_display": "2026-04-11 02:03",
-      "last_fetch_ago": "6h",
+      "last_fetch_ago": "7h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.037,
@@ -7325,7 +7325,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-11 08:02:20",
       "last_fetch_display": "2026-04-11 08:02",
-      "last_fetch_ago": "15m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.074,
@@ -7339,7 +7339,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-11 08:03:19",
       "last_fetch_display": "2026-04-11 08:03",
-      "last_fetch_ago": "14m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.208,
@@ -7353,7 +7353,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-11 04:09:10",
       "last_fetch_display": "2026-04-11 04:09",
-      "last_fetch_ago": "4h",
+      "last_fetch_ago": "5h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.165,
@@ -7367,7 +7367,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-11 08:02:07",
       "last_fetch_display": "2026-04-11 08:02",
-      "last_fetch_ago": "15m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.154,
@@ -7381,7 +7381,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-26 09:07:11",
       "last_fetch_display": "2026-03-26 09:07",
-      "last_fetch_ago": "15d",
+      "last_fetch_ago": "16d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.25,
@@ -7395,7 +7395,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-11 08:03:24",
       "last_fetch_display": "2026-04-11 08:03",
-      "last_fetch_ago": "14m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.197,
@@ -7409,7 +7409,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-11 08:02:16",
       "last_fetch_display": "2026-04-11 08:02",
-      "last_fetch_ago": "15m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.167,
@@ -7437,7 +7437,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-11 08:01:47",
       "last_fetch_display": "2026-04-11 08:01",
-      "last_fetch_ago": "16m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.127,
@@ -7451,7 +7451,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-11 04:09:24",
       "last_fetch_display": "2026-04-11 04:09",
-      "last_fetch_ago": "4h",
+      "last_fetch_ago": "5h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.168,
@@ -7465,7 +7465,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-11 08:03:13",
       "last_fetch_display": "2026-04-11 08:03",
-      "last_fetch_ago": "14m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.178,
@@ -7759,6 +7759,20 @@
   },
   "top_clips": [
     {
+      "clip_id": "engine_auto_762a82f0",
+      "clip_id_short": "engine_auto_",
+      "title": "Myth Clutch Fortnite Moments #6",
+      "source_title": null,
+      "creator": null,
+      "channel": "arc_highlightz",
+      "views": 0,
+      "likes": null,
+      "ctr_percent": null,
+      "upload_date": "2026-04-11 03:01",
+      "youtube_url": "https://youtube.com/shorts/jJRQmrRhFvU",
+      "metric_mode": "unavailable"
+    },
+    {
       "clip_id": "engine_auto_023aeb0f",
       "clip_id_short": "engine_auto_",
       "title": "Taxi2g Funny Fortnite Moments #19",
@@ -8023,23 +8037,21 @@
       "upload_date": "2026-04-09 21:01",
       "youtube_url": "https://youtube.com/shorts/N7RRXTE25_0",
       "metric_mode": "unavailable"
-    },
-    {
-      "clip_id": "engine_auto_02584bc9",
-      "clip_id_short": "engine_auto_",
-      "title": "Ludwig Unreal Moments #26",
-      "source_title": null,
-      "creator": null,
-      "channel": "viral_recaps",
-      "views": 0,
-      "likes": null,
-      "ctr_percent": null,
-      "upload_date": "2026-04-09 20:31",
-      "youtube_url": "https://youtube.com/shorts/643NCqVVjd8",
-      "metric_mode": "unavailable"
     }
   ],
   "recent_uploads": [
+    {
+      "job_id": "ecf5b9c5-e139-4c83-ab4b-6e90292d00c7",
+      "job_id_short": "ecf5b9c5",
+      "channel": "arc_highlightz",
+      "status": "succeeded",
+      "updated_at": "2026-04-11T03:01:48.557583",
+      "updated_at_display": "2026-04-11 03:01",
+      "updated_ago": "6h",
+      "title": "Myth Clutch Fortnite Moments #6",
+      "url": "https://youtube.com/shorts/jJRQmrRhFvU",
+      "error": null
+    },
     {
       "job_id": "de40997b-1a3e-4839-9139-e9f1e2f37221",
       "job_id_short": "de40997b",
@@ -8047,7 +8059,7 @@
       "status": "queued",
       "updated_at": "2026-04-11T02:04:23.609135",
       "updated_at_display": "2026-04-11 02:04",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "Ludwig Wild Moments #29",
       "url": null,
       "error": null
@@ -8059,7 +8071,7 @@
       "status": "queued",
       "updated_at": "2026-04-11T02:03:10.387476",
       "updated_at_display": "2026-04-11 02:03",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "Myth Clutch League Of Legends Moments #7",
       "url": null,
       "error": null
@@ -8071,20 +8083,8 @@
       "status": "queued",
       "updated_at": "2026-04-11T00:03:51.088277",
       "updated_at_display": "2026-04-11 00:03",
-      "updated_ago": "8h",
+      "updated_ago": "9h",
       "title": "Ludwig Funny Moments #28",
-      "url": null,
-      "error": null
-    },
-    {
-      "job_id": "ecf5b9c5-e139-4c83-ab4b-6e90292d00c7",
-      "job_id_short": "ecf5b9c5",
-      "channel": "arc_highlightz",
-      "status": "queued",
-      "updated_at": "2026-04-11T00:02:53.546645",
-      "updated_at_display": "2026-04-11 00:02",
-      "updated_ago": "8h",
-      "title": "Myth Clutch Fortnite Moments #6",
       "url": null,
       "error": null
     },
@@ -8095,7 +8095,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-10T23:01:30.065990",
       "updated_at_display": "2026-04-10 23:01",
-      "updated_ago": "9h",
+      "updated_ago": "10h",
       "title": "Taxi2g Funny Fortnite Moments #19",
       "url": "https://youtube.com/shorts/pQcYsgSyp8c",
       "error": null
@@ -8107,7 +8107,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-10T22:31:13.548842",
       "updated_at_display": "2026-04-10 22:31",
-      "updated_ago": "9h",
+      "updated_ago": "10h",
       "title": "Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet? \ud83d\udcb0\ud83d\udcc8",
       "url": "https://youtube.com/shorts/BaxBD9GbNTM",
       "error": null
@@ -8119,7 +8119,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-10T22:00:50.760583",
       "updated_at_display": "2026-04-10 22:00",
-      "updated_ago": "10h",
+      "updated_ago": "11h",
       "title": "BND Pays $0.25/Share \u2014 While Stocks Panic, Bonds Pay \ud83d\udcb5\ud83d\udcca",
       "url": "https://youtube.com/shorts/HcFfklx9gaQ",
       "error": null
@@ -8131,7 +8131,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-10T21:30:50.968808",
       "updated_at_display": "2026-04-10 21:30",
-      "updated_ago": "10h",
+      "updated_ago": "11h",
       "title": "$4 Gas = Rate CUTS? The Fed's Counterintuitive Move \ud83e\udd2f\ud83d\udcc9",
       "url": "https://youtube.com/shorts/yIjd_KhcPPI",
       "error": null
@@ -8143,7 +8143,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-10T18:00:53.916436",
       "updated_at_display": "2026-04-10 18:00",
-      "updated_ago": "14h",
+      "updated_ago": "15h",
       "title": "3.3% CPI: Energy Shock Keeps Inflation Hot \u26a0\ufe0f\u26fd",
       "url": "https://youtube.com/shorts/bJoKAHdhB_M",
       "error": null
@@ -8155,13 +8155,27 @@
       "status": "succeeded",
       "updated_at": "2026-04-10T17:30:51.239033",
       "updated_at_display": "2026-04-10 17:30",
-      "updated_ago": "14h",
+      "updated_ago": "15h",
       "title": "Consumer Sentiment Just Hit a Record Low \ud83d\ude2c\ud83d\udcc9",
       "url": "https://youtube.com/shorts/--SFDRt4MLk",
       "error": null
     }
   ],
   "recent_clips": [
+    {
+      "job_id": "ecf5b9c5-e139-4c83-ab4b-6e90292d00c7",
+      "job_id_short": "ecf5b9c5",
+      "channel": "arc_highlightz",
+      "title": "Myth Clutch Fortnite Moments #6",
+      "title_truncated": "Myth Clutch Fortnite Moments #6",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/jJRQmrRhFvU",
+      "views": 0,
+      "views_display": "\u00e2\u20ac\u201d",
+      "published_at": "2026-04-11T03:01:48.557583",
+      "published_at_display": "2026-04-11 03:01",
+      "published_ago": "6h"
+    },
     {
       "job_id": "4b33a58e-51d8-4091-a03e-d7a77fbaf0fa",
       "job_id_short": "4b33a58e",
@@ -8174,7 +8188,7 @@
       "views_display": "108",
       "published_at": "2026-04-10T23:01:30.065990",
       "published_at_display": "2026-04-10 23:01",
-      "published_ago": "9h"
+      "published_ago": "10h"
     },
     {
       "job_id": "0601849a-38f2-4412-a95e-14ac0ae9f32a",
@@ -8188,7 +8202,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-10T22:31:13.548842",
       "published_at_display": "2026-04-10 22:31",
-      "published_ago": "9h"
+      "published_ago": "10h"
     },
     {
       "job_id": "92e6d8f2-3c6c-4d2b-8495-d1282d35f62b",
@@ -8202,7 +8216,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-10T22:00:50.760583",
       "published_at_display": "2026-04-10 22:00",
-      "published_ago": "10h"
+      "published_ago": "11h"
     },
     {
       "job_id": "342f1fa8-a6fa-4083-bfa3-4ebe7b7b7081",
@@ -8216,7 +8230,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-10T21:30:50.968808",
       "published_at_display": "2026-04-10 21:30",
-      "published_ago": "10h"
+      "published_ago": "11h"
     },
     {
       "job_id": "999b5901-2961-4a81-b099-39a00eb64698",
@@ -8230,7 +8244,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-10T18:00:53.916436",
       "published_at_display": "2026-04-10 18:00",
-      "published_ago": "14h"
+      "published_ago": "15h"
     },
     {
       "job_id": "8119fdd8-1c88-40ae-81c5-f0f102236325",
@@ -8244,7 +8258,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-10T17:30:51.239033",
       "published_at_display": "2026-04-10 17:30",
-      "published_ago": "14h"
+      "published_ago": "15h"
     },
     {
       "job_id": "339c972e-1ecd-403d-87c1-39dc57d72f65",
@@ -8258,7 +8272,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-10T15:02:10.612160",
       "published_at_display": "2026-04-10 15:02",
-      "published_ago": "17h"
+      "published_ago": "18h"
     },
     {
       "job_id": "15550edf-b6a3-4b81-87ef-393b867ccfaa",
@@ -8272,7 +8286,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-10T14:31:13.745621",
       "published_at_display": "2026-04-10 14:31",
-      "published_ago": "17h"
+      "published_ago": "18h"
     },
     {
       "job_id": "58d0a647-4069-44de-909e-5b2ba85b0ab8",
@@ -8286,29 +8300,27 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-10T14:01:02.562926",
       "published_at_display": "2026-04-10 14:01",
-      "published_ago": "18h"
-    },
-    {
-      "job_id": "32c9ffdd-25d6-461d-b8b8-f5af5c860d29",
-      "job_id_short": "32c9ffdd",
-      "channel": "fomo_highlights",
-      "title": "Fed Study: Tariffs Added 0.8% to Core Inflation \ud83d\ude2c\ud83d\udcc8",
-      "title_truncated": "Fed Study: Tariffs Added 0.8% to Core Inflation \ud83d\ude2c\ud83d\udcc8",
-      "thumbnail_path": null,
-      "post_url": "https://youtube.com/shorts/jkE-VP92pCY",
-      "views": 0,
-      "views_display": "\u00e2\u20ac\u201d",
-      "published_at": "2026-04-10T13:31:38.029235",
-      "published_at_display": "2026-04-10 13:31",
-      "published_ago": "18h"
+      "published_ago": "19h"
     }
   ],
   "upload_timeline": {
     "buckets": [
       {
         "name": "Today",
-        "count": 0,
-        "items": []
+        "count": 1,
+        "items": [
+          {
+            "job_id": "ecf5b9c5-e139-4c83-ab4b-6e90292d00c7",
+            "job_id_short": "ecf5b9c5",
+            "channel": "arc_highlightz",
+            "title": "Myth Clutch Fortnite Moments #6",
+            "published_at": "2026-04-11T03:01:48.557583",
+            "published_at_display": "2026-04-11 03:01",
+            "published_ago": "6h",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/jJRQmrRhFvU"
+          }
+        ]
       },
       {
         "name": "Yesterday",
@@ -8321,7 +8333,7 @@
             "title": "Taxi2g Funny Fortnite Moments #19",
             "published_at": "2026-04-10T23:01:30.065990",
             "published_at_display": "2026-04-10 23:01",
-            "published_ago": "9h",
+            "published_ago": "10h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/pQcYsgSyp8c"
           },
@@ -8332,7 +8344,7 @@
             "title": "Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet? \ud83d\udcb0\ud83d\udcc8",
             "published_at": "2026-04-10T22:31:13.548842",
             "published_at_display": "2026-04-10 22:31",
-            "published_ago": "9h",
+            "published_ago": "10h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/BaxBD9GbNTM"
           },
@@ -8343,7 +8355,7 @@
             "title": "BND Pays $0.25/Share \u2014 While Stocks Panic, Bonds Pay \ud83d\udcb5\ud83d\udcca",
             "published_at": "2026-04-10T22:00:50.760583",
             "published_at_display": "2026-04-10 22:00",
-            "published_ago": "10h",
+            "published_ago": "11h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/HcFfklx9gaQ"
           },
@@ -8354,7 +8366,7 @@
             "title": "$4 Gas = Rate CUTS? The Fed's Counterintuitive Move \ud83e\udd2f\ud83d\udcc9",
             "published_at": "2026-04-10T21:30:50.968808",
             "published_at_display": "2026-04-10 21:30",
-            "published_ago": "10h",
+            "published_ago": "11h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/yIjd_KhcPPI"
           },
@@ -8365,7 +8377,7 @@
             "title": "3.3% CPI: Energy Shock Keeps Inflation Hot \u26a0\ufe0f\u26fd",
             "published_at": "2026-04-10T18:00:53.916436",
             "published_at_display": "2026-04-10 18:00",
-            "published_ago": "14h",
+            "published_ago": "15h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/bJoKAHdhB_M"
           },
@@ -8376,7 +8388,7 @@
             "title": "Consumer Sentiment Just Hit a Record Low \ud83d\ude2c\ud83d\udcc9",
             "published_at": "2026-04-10T17:30:51.239033",
             "published_at_display": "2026-04-10 17:30",
-            "published_ago": "14h",
+            "published_ago": "15h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/--SFDRt4MLk"
           },
@@ -8387,7 +8399,7 @@
             "title": "Taxi2g Unreal Fortnite Moments #18",
             "published_at": "2026-04-10T15:02:10.612160",
             "published_at_display": "2026-04-10 15:02",
-            "published_ago": "17h",
+            "published_ago": "18h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/TNVXkg0z1QI"
           },
@@ -8398,7 +8410,7 @@
             "title": "Blackstone\u2019s $2B Data Center Bet Signals AI Demand Boom \ud83d\ude80",
             "published_at": "2026-04-10T14:31:13.745621",
             "published_at_display": "2026-04-10 14:31",
-            "published_ago": "17h",
+            "published_ago": "18h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/wLDXClmWcbk"
           },
@@ -8409,7 +8421,7 @@
             "title": "Nasdaq Up, Dow Down: Energy Inflation Splits the Market \u26a1\ud83d\udcca",
             "published_at": "2026-04-10T14:01:02.562926",
             "published_at_display": "2026-04-10 14:01",
-            "published_ago": "18h",
+            "published_ago": "19h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/sgBMvzXOfQY"
           },
@@ -8420,7 +8432,7 @@
             "title": "Fed Study: Tariffs Added 0.8% to Core Inflation \ud83d\ude2c\ud83d\udcc8",
             "published_at": "2026-04-10T13:31:38.029235",
             "published_at_display": "2026-04-10 13:31",
-            "published_ago": "18h",
+            "published_ago": "19h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/jkE-VP92pCY"
           },
@@ -8431,7 +8443,7 @@
             "title": "Ludwig Funny Moments #27",
             "published_at": "2026-04-10T12:31:33.604514",
             "published_at_display": "2026-04-10 12:31",
-            "published_ago": "19h",
+            "published_ago": "20h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/PifcdJM4B8A"
           },
@@ -8442,7 +8454,7 @@
             "title": "Timthetatman Chaotic Warzone Moments #1",
             "published_at": "2026-04-10T11:01:14.650769",
             "published_at_display": "2026-04-10 11:01",
-            "published_ago": "21h",
+            "published_ago": "22h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/1DF2Kwxuk0A"
           },
@@ -8453,7 +8465,7 @@
             "title": "Cloakzy Clutch Warzone Moments #28",
             "published_at": "2026-04-10T10:31:36.469137",
             "published_at_display": "2026-04-10 10:31",
-            "published_ago": "21h",
+            "published_ago": "22h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/AxomV3lr2jY"
           },
@@ -8464,7 +8476,7 @@
             "title": "Moistcr1tikal Wild League Of Legends Moments #7",
             "published_at": "2026-04-10T09:02:58.257162",
             "published_at_display": "2026-04-10 09:02",
-            "published_ago": "23h",
+            "published_ago": "1d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/BrJzAr4tu5o"
           },
@@ -8475,7 +8487,7 @@
             "title": "Housing Crash in 2026? CEO Says the Data Says No \ud83c\udfe0\ud83d\udcc9",
             "published_at": "2026-04-10T08:31:24.668814",
             "published_at_display": "2026-04-10 08:31",
-            "published_ago": "23h",
+            "published_ago": "1d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/13Au45DymCE"
           }
@@ -8483,7 +8495,7 @@
       },
       {
         "name": "This Week",
-        "count": 35,
+        "count": 34,
         "items": [
           {
             "job_id": "062e22a9-0b6b-4c60-94d4-0c96a3721e39",
@@ -8613,7 +8625,7 @@
             "title": "CoreWeave Raises $3B for AI Boom \u2014 Stock Still Jumps 4% \ud83d\ude80",
             "published_at": "2026-04-09T08:30:54.942636",
             "published_at_display": "2026-04-09 08:30",
-            "published_ago": "1d",
+            "published_ago": "2d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/o7lHTaDbaQg"
           },
@@ -8701,7 +8713,7 @@
             "title": "Dow Futures +1,300 as Oil Crashes on Cease-Fire \ud83d\udcc8\ud83d\udee2\ufe0f",
             "published_at": "2026-04-08T09:02:37.117568",
             "published_at_display": "2026-04-08 09:02",
-            "published_ago": "2d",
+            "published_ago": "3d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/LQ_55ricGyA"
           },
@@ -8712,7 +8724,7 @@
             "title": "Trump\u2019s 50% Iran Arms Tariff Threat Shocks Markets \u26a0\ufe0f",
             "published_at": "2026-04-08T08:30:53.898992",
             "published_at_display": "2026-04-08 08:30",
-            "published_ago": "2d",
+            "published_ago": "3d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/UNNGXwBxyhw"
           },
@@ -8858,17 +8870,6 @@
             "published_ago": "3d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/bCU79XB6P38"
-          },
-          {
-            "job_id": "fd8c99c2-8b69-4e12-89ed-1cf85887bf8e",
-            "job_id_short": "fd8c99c2",
-            "channel": "arc_highlightz",
-            "title": "Taxi2g Crazy Moments #15",
-            "published_at": "2026-04-07T12:31:32.266763",
-            "published_at_display": "2026-04-07 12:31",
-            "published_ago": "3d",
-            "views": 0,
-            "post_url": "https://youtube.com/shorts/wZc8VIyGH0o"
           }
         ]
       },
@@ -9119,15 +9120,6 @@
   "schedule": {
     "2026-04-11": [
       {
-        "job_id": "ecf5b9c5-e139-4c83-ab4b-6e90292d00c7",
-        "job_id_short": "ecf5b9c5",
-        "channel": "arc_highlightz",
-        "title": "Myth Clutch Fortnite Moments #6",
-        "scheduled_at": "2026-04-11T07:00:00-06:00",
-        "scheduled_at_iso": "2026-04-11T07:00:00",
-        "status": "queued"
-      },
-      {
         "job_id": "fbb0db8d-dc2e-45ec-9451-9fbadbf3e799",
         "job_id_short": "fbb0db8d",
         "channel": "arc_highlightz",
@@ -9153,6 +9145,15 @@
         "scheduled_at": "2026-04-11T15:00:00-06:00",
         "scheduled_at_iso": "2026-04-11T15:00:00",
         "status": "queued"
+      },
+      {
+        "job_id": "ecf5b9c5-e139-4c83-ab4b-6e90292d00c7",
+        "job_id_short": "ecf5b9c5",
+        "channel": "arc_highlightz",
+        "title": "Myth Clutch Fortnite Moments #6",
+        "scheduled_at": "2026-04-11T03:01:48.557583",
+        "scheduled_at_iso": "2026-04-11T03:01:48.557583",
+        "status": "succeeded"
       }
     ],
     "2026-04-04": [
@@ -10213,9 +10214,9 @@
     ],
     "any_channel_high": false,
     "all_channels_safe": true,
-    "reset_time_hours": 23,
+    "reset_time_hours": 22,
     "reset_time_minutes": 41,
-    "reset_time_display": "23h 41m"
+    "reset_time_display": "22h 41m"
   },
   "revenue": {
     "total_views_30d": 0,
@@ -10235,8 +10236,8 @@
       "discovered": 0,
       "downloaded": 0,
       "processed": 0,
-      "queued": 4,
-      "uploaded": 322
+      "queued": 3,
+      "uploaded": 323
     },
     "by_channel": [
       {
@@ -10244,8 +10245,8 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 2,
-        "uploaded": 138
+        "queued": 1,
+        "uploaded": 139
       },
       {
         "channel": "fomo_highlights",
@@ -10281,8 +10282,8 @@
       }
     ],
     "throughput": {
-      "uploads_per_hour": 0.62,
-      "uploads_last_24h": 15
+      "uploads_per_hour": 0.58,
+      "uploads_last_24h": 14
     },
     "stage_timings": {
       "discovered_to_downloaded_hours": 0.0,
@@ -10290,7 +10291,7 @@
     },
     "bottleneck": {
       "stage": "queued",
-      "backlog": 4
+      "backlog": 3
     }
   },
   "disk": {
@@ -10324,8 +10325,8 @@
         "file_count": 244
       }
     ],
-    "total_disk_bytes": 177886837503,
-    "total_disk_human": "165.7GB",
+    "total_disk_bytes": 177855749400,
+    "total_disk_human": "165.6GB",
     "percent_of_500gb": 33.1,
     "warning_threshold_pct": 70,
     "error_threshold_pct": 85,
@@ -10574,8 +10575,8 @@
     {
       "channel_name": "arc_highlightz",
       "total_views": 43243,
-      "uploads_30d": 131,
-      "avg_views": 330,
+      "uploads_30d": 132,
+      "avg_views": 327,
       "best_clip_title": "No clips yet",
       "best_clip_views": 0,
       "best_clip_url": "",
@@ -11638,7 +11639,7 @@
           "priority": 3,
           "clips_fetched": 26,
           "last_fetched_at": "2026-04-10T16:06:05.182939",
-          "last_fetched_rel": "16h",
+          "last_fetched_rel": "17h",
           "enabled": true,
           "url": "vod://cloakzy",
           "type": "vod_highlights"
@@ -11666,7 +11667,7 @@
           "priority": 3,
           "clips_fetched": 19,
           "last_fetched_at": "2026-04-11T04:02:52.619555",
-          "last_fetched_rel": "4h",
+          "last_fetched_rel": "5h",
           "enabled": true,
           "url": "vod://taxi2g",
           "type": "vod_highlights"
@@ -11685,7 +11686,7 @@
           "priority": 1,
           "clips_fetched": 7,
           "last_fetched_at": "2026-04-10T14:07:23.528998",
-          "last_fetched_rel": "18h",
+          "last_fetched_rel": "19h",
           "enabled": true,
           "url": "https://www.youtube.com/@penguinz0/videos",
           "type": "transcript"
@@ -11713,7 +11714,7 @@
           "priority": 1,
           "clips_fetched": 29,
           "last_fetched_at": "2026-04-11T08:04:23.623686",
-          "last_fetched_rel": "13m",
+          "last_fetched_rel": "1h",
           "enabled": true,
           "url": "https://www.youtube.com/@Ludwig/videos",
           "type": "transcript"
@@ -11840,25 +11841,34 @@
   ],
   "daily_summary": {
     "date": "2026-04-11",
-    "uploads_today": 0,
-    "uploads_yesterday": 15,
+    "uploads_today": 1,
+    "uploads_yesterday": 16,
     "views_gained_today": 0,
     "views_yesterday": 0,
     "errors_today": 0,
-    "quota_pct": 0.0,
-    "quota_units_used": 0,
+    "quota_pct": 16.0,
+    "quota_units_used": 1600,
     "delta_uploads": -15,
     "delta_views": 0,
-    "top_clip_today": null,
-    "top_3_channels": [],
-    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-04-11\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 0 (-15 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 0.0% used (0/10000 units)",
-    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-04-11\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 0 (-15 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 0.0% used (`0/10000` units)"
+    "top_clip_today": {
+      "title": "Myth Clutch Fortnite Moments #6",
+      "views": 0,
+      "channel": "arc_highlightz"
+    },
+    "top_3_channels": [
+      {
+        "channel": "arc_highlightz",
+        "uploads": 1
+      }
+    ],
+    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-04-11\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 1 (-15 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 16.0% used (1600/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Myth Clutch Fortnite Moments #6\n  0 views \u00e2\u20ac\u00a2 arc_highlightz\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. arc_highlightz: 1 uploads",
+    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-04-11\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 1 (-15 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 16.0% used (`1600/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Myth Clutch Fortnite Moments #6_\n**0 views** \u00e2\u20ac\u00a2 **arc_highlightz**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **arc_highlightz** \u00e2\u20ac\u201d 1 uploads"
   },
   "title_performance": {
     "pattern_analysis": {
       "has_numbers": {
         "avg_views": 0.0,
-        "count": 240,
+        "count": 241,
         "total_views": 0
       },
       "has_question": {
@@ -12013,9 +12023,9 @@
         "channel": "arc_highlightz",
         "best_title": "Watch this before scrolling: Nobody plays like this",
         "best_views": 0,
-        "total_titles_analyzed": 138,
+        "total_titles_analyzed": 139,
         "pattern_breakdown": {
-          "numbers_pct": 92.0,
+          "numbers_pct": 92.1,
           "questions_pct": 0.7,
           "caps_pct": 0.7,
           "emoji_pct": 2.2
@@ -12076,7 +12086,7 @@
       {
         "style_name": "Gaming/Clips",
         "avg_views": 0,
-        "total_clips": 315,
+        "total_clips": 316,
         "best_clip": null,
         "total_views": 0,
         "is_best": true
@@ -12101,7 +12111,7 @@
     "best_style_overall": "Gaming/Clips",
     "summary_stats": {
       "total_styles": 3,
-      "total_clips_all": 322,
+      "total_clips_all": 323,
       "total_views_all": 0,
       "avg_views_overall": 0
     }
@@ -12153,8 +12163,8 @@
       {
         "hour": 7,
         "hour_label": "07:00",
-        "posts": 11,
-        "avg_views": 584.0
+        "posts": 12,
+        "avg_views": 575.0
       },
       {
         "hour": 8,
@@ -12287,8 +12297,8 @@
       {
         "day": 5,
         "day_name": "Saturday",
-        "posts": 31,
-        "avg_views": 723.0
+        "posts": 32,
+        "avg_views": 715.0
       },
       {
         "day": 6,
@@ -12735,7 +12745,7 @@
           "hour": 7,
           "day": 5,
           "views": 480.0,
-          "posts": 1,
+          "posts": 2,
           "intensity": 28.1
         },
         {
@@ -13565,15 +13575,6 @@
     ],
     "scheduled_posts": [
       {
-        "job_id": "ce7e5ddd",
-        "channel": "viral_recaps",
-        "title": "Ludwig Funny Moments #28",
-        "scheduled_at": "2026-04-11T09:00:00-06:00",
-        "hour": 9,
-        "day": 5,
-        "day_name": "Saturday"
-      },
-      {
         "job_id": "de40997b",
         "channel": "viral_recaps",
         "title": "Ludwig Wild Moments #29",
@@ -13590,7 +13591,7 @@
       "day_name": "Tuesday",
       "est_views": 1710.0
     },
-    "job_count": 322
+    "job_count": 323
   },
   "benchmarks": {
     "current_tier": "Starter",
@@ -13681,81 +13682,81 @@
     {
       "type": "warning",
       "title": "Channel \"market_meltdowns\" paused for 24+ hours",
-      "message": "market_meltdowns has been paused for 800 hours",
+      "message": "market_meltdowns has been paused for 801 hours",
       "channel": "market_meltdowns",
-      "created_at": "2026-04-11T08:18:09.224721",
+      "created_at": "2026-04-11T09:18:06.714621",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"self_made_clips\" paused for 24+ hours",
-      "message": "self_made_clips has been paused for 796 hours",
+      "message": "self_made_clips has been paused for 797 hours",
       "channel": "self_made_clips",
-      "created_at": "2026-04-11T08:18:09.224721",
+      "created_at": "2026-04-11T09:18:06.714621",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"rich_or_ruined\" paused for 24+ hours",
-      "message": "rich_or_ruined has been paused for 794 hours",
+      "message": "rich_or_ruined has been paused for 795 hours",
       "channel": "rich_or_ruined",
-      "created_at": "2026-04-11T08:18:09.224721",
+      "created_at": "2026-04-11T09:18:06.714621",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"startup_graveyard\" paused for 24+ hours",
-      "message": "startup_graveyard has been paused for 794 hours",
+      "message": "startup_graveyard has been paused for 795 hours",
       "channel": "startup_graveyard",
-      "created_at": "2026-04-11T08:18:09.224721",
+      "created_at": "2026-04-11T09:18:06.714621",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_sirens\" paused for 24+ hours",
-      "message": "stream_sirens has been paused for 773 hours",
+      "message": "stream_sirens has been paused for 774 hours",
       "channel": "stream_sirens",
-      "created_at": "2026-04-11T08:18:09.224721",
+      "created_at": "2026-04-11T09:18:06.714621",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_queens\" paused for 24+ hours",
-      "message": "stream_queens has been paused for 773 hours",
+      "message": "stream_queens has been paused for 774 hours",
       "channel": "stream_queens",
-      "created_at": "2026-04-11T08:18:09.224721",
+      "created_at": "2026-04-11T09:18:06.714621",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"ai_did_what\" paused for 24+ hours",
-      "message": "ai_did_what has been paused for 739 hours",
+      "message": "ai_did_what has been paused for 740 hours",
       "channel": "ai_did_what",
-      "created_at": "2026-04-11T08:18:09.224721",
+      "created_at": "2026-04-11T09:18:06.714621",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"gym_moments\" paused for 24+ hours",
-      "message": "gym_moments has been paused for 739 hours",
+      "message": "gym_moments has been paused for 740 hours",
       "channel": "gym_moments",
-      "created_at": "2026-04-11T08:18:09.224721",
+      "created_at": "2026-04-11T09:18:06.714621",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"kitchen_chaos\" paused for 24+ hours",
-      "message": "kitchen_chaos has been paused for 592 hours",
+      "message": "kitchen_chaos has been paused for 593 hours",
       "channel": "kitchen_chaos",
-      "created_at": "2026-04-11T08:18:09.224721",
+      "created_at": "2026-04-11T09:18:06.714621",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"unfiltered_clips\" paused for 24+ hours",
-      "message": "unfiltered_clips has been paused for 592 hours",
+      "message": "unfiltered_clips has been paused for 593 hours",
       "channel": "unfiltered_clips",
-      "created_at": "2026-04-11T08:18:09.224721",
+      "created_at": "2026-04-11T09:18:06.714621",
       "read": false
     }
   ],
@@ -14359,14 +14360,14 @@
         "status": "active",
         "category": "Comedy",
         "target_per_day": 8,
-        "published_24h": 2,
+        "published_24h": 1,
         "queue_depth": 2,
         "running_jobs": 0,
         "failed_7d": 0,
         "avg_views": 151,
         "rpm": 0.13,
-        "deficit": 6,
-        "completion_rate": 25.0,
+        "deficit": 7,
+        "completion_rate": 12.5,
         "lagging": true,
         "views_source": "source_clips_proxy",
         "latest_title": "Ludwig Funny Moments #27",
@@ -14378,23 +14379,23 @@
         "status": "active",
         "category": "Gaming",
         "target_per_day": 15,
-        "published_24h": 3,
-        "queue_depth": 2,
+        "published_24h": 4,
+        "queue_depth": 1,
         "running_jobs": 0,
         "failed_7d": 0,
         "avg_views": 13915,
         "rpm": 11.83,
-        "deficit": 12,
-        "completion_rate": 20.0,
+        "deficit": 11,
+        "completion_rate": 26.7,
         "lagging": true,
         "views_source": "source_clips_proxy",
-        "latest_title": "Taxi2g Funny Fortnite Moments #19",
-        "latest_url": "https://youtube.com/shorts/pQcYsgSyp8c",
-        "latest_uploaded_at": "2026-04-10 23:01"
+        "latest_title": "Myth Clutch Fortnite Moments #6",
+        "latest_url": "https://youtube.com/shorts/jJRQmrRhFvU",
+        "latest_uploaded_at": "2026-04-11 03:01"
       }
     ],
     "lagging_count": 3,
-    "queue_backlog": 4,
+    "queue_backlog": 3,
     "analytics_channels": 13
   },
   "meta": {

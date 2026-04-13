@@ -416,10 +416,7 @@ class QueueWriter:
                 # More SEO-friendly than plain "Tfue Moments #X"
                 import random as _rand
                 _adj = _rand.choice(["Chaotic", "Unreal", "Wild", "Clutch", "Funny", "Crazy"])
-                series_topic = theme
-                if detected_game and detected_game.replace("_", " ").lower() not in theme.lower():
-                    series_topic = f"{detected_game.replace('_', ' ').title()} {theme}"
-                series_name = f"{creator.capitalize()} {_adj} {series_topic} #{ep_num}"
+                series_name = f"{creator.capitalize()} {_adj} {theme} #{ep_num}"
                 caption = series_name
                 auto_hook = f"{creator.capitalize()} {_adj} {theme}"[:80]
                 ab_label = "S"   # S = Series

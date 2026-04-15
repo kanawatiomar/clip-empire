@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-04-15T16:18:10.067522Z",
+  "generated_at": "2026-04-15T17:18:10.489664Z",
   "repo_root": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire",
   "database_path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\data\\clip_empire.db",
   "health_score": {
-    "score": 71.5,
+    "score": 73.0,
     "grade": "C",
     "status": "Needs Attention",
     "color": "yellow",
     "breakdown": {
-      "pipeline_health": 3.7,
+      "pipeline_health": 5.1,
       "error_rate": 20.0,
       "quota_safety": 15,
       "queue_depth": 15,
@@ -16,13 +16,13 @@
       "channel_uptime": 2.9
     },
     "metrics": {
-      "uploads_today": 5,
+      "uploads_today": 7,
       "target_today": 34,
-      "pipeline_health_ratio": 0.15,
+      "pipeline_health_ratio": 0.21,
       "errors_today": 0,
       "total_jobs_today": 8,
       "error_rate": 0.0,
-      "queue_depth": 3,
+      "queue_depth": 1,
       "active_channels": 4,
       "total_channels": 14,
       "fresh_sources": 0,
@@ -34,30 +34,45 @@
     "total_channels": 14,
     "jobs_today": {
       "total": 8,
-      "queued": 3,
+      "queued": 1,
       "running": 0,
-      "succeeded": 5,
+      "succeeded": 7,
       "failed": 0,
       "cancelled": 0
     },
-    "render_queue_depth": 3,
-    "last_updated": "2026-04-15T16:18:10.067522Z"
+    "render_queue_depth": 1,
+    "last_updated": "2026-04-15T17:18:10.490696Z"
   },
   "queue_monitor": [
+    {
+      "job_id": "2daec958-0ede-4912-a4fb-fa4b69d44d6b",
+      "job_id_short": "2daec958",
+      "channel": "viral_recaps",
+      "status": "succeeded",
+      "attempt": 0,
+      "created_at": "2026-04-15T04:16:57.615071",
+      "created_at_display": "2026-04-15 04:16",
+      "created_ago": "13h",
+      "updated_at": "2026-04-15T11:06:49.176975",
+      "scheduled_for": "2026-04-15 15:00",
+      "error": null,
+      "has_error": false,
+      "post_url": "https://youtube.com/shorts/b6RaozvXGXE"
+    },
     {
       "job_id": "e8c74a3f-a417-4252-a7fa-13ca0cbfc7d1",
       "job_id_short": "e8c74a3f",
       "channel": "fomo_highlights",
-      "status": "queued",
+      "status": "succeeded",
       "attempt": 0,
       "created_at": "2026-04-15T14:15:22.334330+00:00",
       "created_at_display": "2026-04-15 14:15",
-      "created_ago": "2h",
-      "updated_at": "2026-04-15T14:15:22.334330+00:00",
+      "created_ago": "3h",
+      "updated_at": "2026-04-15T10:36:20.295931",
       "scheduled_for": "2026-04-15 15:15",
       "error": null,
       "has_error": false,
-      "post_url": null
+      "post_url": "https://youtube.com/shorts/xvK52tRm0_s"
     },
     {
       "job_id": "0a4fe439-201e-4e58-b5fc-03f92aecb93c",
@@ -67,7 +82,7 @@
       "attempt": 0,
       "created_at": "2026-04-15T14:14:01.926151+00:00",
       "created_at_display": "2026-04-15 14:14",
-      "created_ago": "2h",
+      "created_ago": "3h",
       "updated_at": "2026-04-15T10:03:43.384979",
       "scheduled_for": "2026-04-15 15:14",
       "error": null,
@@ -82,7 +97,7 @@
       "attempt": 0,
       "created_at": "2026-04-15T14:11:36.819755+00:00",
       "created_at_display": "2026-04-15 14:11",
-      "created_ago": "2h",
+      "created_ago": "3h",
       "updated_at": "2026-04-15T09:32:18.580211",
       "scheduled_for": "2026-04-15 15:11",
       "error": null,
@@ -97,7 +112,7 @@
       "attempt": 0,
       "created_at": "2026-04-15T14:09:12.759044+00:00",
       "created_at_display": "2026-04-15 14:09",
-      "created_ago": "2h",
+      "created_ago": "3h",
       "updated_at": "2026-04-15T09:03:55.233988",
       "scheduled_for": "2026-04-15 15:09",
       "error": null,
@@ -112,7 +127,7 @@
       "attempt": 0,
       "created_at": "2026-04-15T14:06:58.548178+00:00",
       "created_at_display": "2026-04-15 14:06",
-      "created_ago": "2h",
+      "created_ago": "3h",
       "updated_at": "2026-04-15T08:38:46.081153",
       "scheduled_for": "2026-04-15 15:06",
       "error": null,
@@ -127,7 +142,7 @@
       "attempt": 0,
       "created_at": "2026-04-15T06:14:23.473495",
       "created_at_display": "2026-04-15 06:14",
-      "created_ago": "10h",
+      "created_ago": "11h",
       "updated_at": "2026-04-15T06:14:23.473495",
       "scheduled_for": "2026-04-15 19:00",
       "error": null,
@@ -142,27 +157,12 @@
       "attempt": 0,
       "created_at": "2026-04-15T00:05:14.974424",
       "created_at_display": "2026-04-15 00:05",
-      "created_ago": "16h",
+      "created_ago": "17h",
       "updated_at": "2026-04-15T05:06:10.702193",
       "scheduled_for": "2026-04-15 09:00",
       "error": null,
       "has_error": false,
       "post_url": "https://youtube.com/shorts/5TJ6u8hk3Ns"
-    },
-    {
-      "job_id": "2daec958-0ede-4912-a4fb-fa4b69d44d6b",
-      "job_id_short": "2daec958",
-      "channel": "viral_recaps",
-      "status": "queued",
-      "attempt": 0,
-      "created_at": "2026-04-15T04:16:57.615071",
-      "created_at_display": "2026-04-15 04:16",
-      "created_ago": "12h",
-      "updated_at": "2026-04-15T04:16:57.615071",
-      "scheduled_for": "2026-04-15 15:00",
-      "error": null,
-      "has_error": false,
-      "post_url": null
     },
     {
       "job_id": "ab8a636f-8013-41be-a835-07884bfae7c7",
@@ -172,7 +172,7 @@
       "attempt": 0,
       "created_at": "2026-04-14T22:14:24.471995",
       "created_at_display": "2026-04-14 22:14",
-      "created_ago": "18h",
+      "created_ago": "19h",
       "updated_at": "2026-04-14T23:01:43.414827",
       "scheduled_for": "2026-04-14 16:45",
       "error": null,
@@ -187,7 +187,7 @@
       "attempt": 0,
       "created_at": "2026-04-15T03:04:21.635476+00:00",
       "created_at_display": "2026-04-15 03:04",
-      "created_ago": "13h",
+      "created_ago": "14h",
       "updated_at": "2026-04-14T22:30:53.358808",
       "scheduled_for": "2026-04-15 04:04",
       "error": null,
@@ -202,7 +202,7 @@
       "attempt": 0,
       "created_at": "2026-04-15T03:03:20.967432+00:00",
       "created_at_display": "2026-04-15 03:03",
-      "created_ago": "13h",
+      "created_ago": "14h",
       "updated_at": "2026-04-14T22:01:05.816056",
       "scheduled_for": "2026-04-15 04:03",
       "error": null,
@@ -217,7 +217,7 @@
       "attempt": 0,
       "created_at": "2026-04-15T03:02:19.156783+00:00",
       "created_at_display": "2026-04-15 03:02",
-      "created_ago": "13h",
+      "created_ago": "14h",
       "updated_at": "2026-04-14T21:30:56.423392",
       "scheduled_for": "2026-04-15 04:02",
       "error": null,
@@ -232,7 +232,7 @@
       "attempt": 0,
       "created_at": "2026-04-14T23:01:25.399970+00:00",
       "created_at_display": "2026-04-14 23:01",
-      "created_ago": "17h",
+      "created_ago": "18h",
       "updated_at": "2026-04-14T18:31:10.874988",
       "scheduled_for": "2026-04-15 00:01",
       "error": null,
@@ -262,7 +262,7 @@
       "attempt": 0,
       "created_at": "2026-04-14T19:01:22.284278+00:00",
       "created_at_display": "2026-04-14 19:01",
-      "created_ago": "21h",
+      "created_ago": "22h",
       "updated_at": "2026-04-14T13:31:20.822946",
       "scheduled_for": "2026-04-14 20:01",
       "error": null,
@@ -1600,7 +1600,7 @@
       "category": "Comedy",
       "target_per_day": 8,
       "published_24h": 3,
-      "queue_depth": 2,
+      "queue_depth": 1,
       "running_jobs": 0,
       "failed_7d": 0,
       "avg_views": 197,
@@ -1609,9 +1609,9 @@
       "completion_rate": 37.5,
       "lagging": true,
       "views_source": "source_clips_proxy",
-      "latest_title": "Hasanabi Crazy Moments #12",
-      "latest_url": "https://youtube.com/shorts/5TJ6u8hk3Ns",
-      "latest_uploaded_at": "2026-04-15 05:06"
+      "latest_title": "Ludwig Clutch Moments #42",
+      "latest_url": "https://youtube.com/shorts/b6RaozvXGXE",
+      "latest_uploaded_at": "2026-04-15 11:06"
     },
     {
       "channel": "arc_highlightz",
@@ -1637,19 +1637,19 @@
       "status": "active",
       "category": "Gaming",
       "target_per_day": 8,
-      "published_24h": 8,
-      "queue_depth": 1,
+      "published_24h": 9,
+      "queue_depth": 0,
       "running_jobs": 0,
       "failed_7d": 0,
       "avg_views": 7304,
       "rpm": 6.21,
       "deficit": 0,
-      "completion_rate": 100.0,
+      "completion_rate": 112.5,
       "lagging": false,
       "views_source": "source_clips_proxy",
-      "latest_title": "\ud83d\udcc8 Markets Pause Near Records \u2014 Iran Deal Could Ignite the Next Leg Up",
-      "latest_url": "https://youtube.com/shorts/urXQV-57xXg",
-      "latest_uploaded_at": "2026-04-15 10:03"
+      "latest_title": "\ud83d\udd25 Nasdaq's 10-Day Win Streak \u2014 Nvidia & Google Just Hit Buy Zones",
+      "latest_url": "https://youtube.com/shorts/xvK52tRm0_s",
+      "latest_uploaded_at": "2026-04-15 10:36"
     },
     {
       "channel": "stream_queens",
@@ -7255,7 +7255,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-15 16:07:55",
       "last_fetch_display": "2026-04-15 16:07",
-      "last_fetch_ago": "10m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.139,
@@ -7269,7 +7269,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-15 16:09:14",
       "last_fetch_display": "2026-04-15 16:09",
-      "last_fetch_ago": "8m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.123,
@@ -7283,7 +7283,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-15 16:09:26",
       "last_fetch_display": "2026-04-15 16:09",
-      "last_fetch_ago": "8m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.024,
@@ -7297,7 +7297,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-15 14:27:53",
       "last_fetch_display": "2026-04-15 14:27",
-      "last_fetch_ago": "1h",
+      "last_fetch_ago": "2h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.036,
@@ -7311,7 +7311,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-15 02:03:41",
       "last_fetch_display": "2026-04-15 02:03",
-      "last_fetch_ago": "14h",
+      "last_fetch_ago": "15h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.103,
@@ -7325,7 +7325,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-15 16:08:24",
       "last_fetch_display": "2026-04-15 16:08",
-      "last_fetch_ago": "9m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.045,
@@ -7339,7 +7339,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-15 12:13:14",
       "last_fetch_display": "2026-04-15 12:13",
-      "last_fetch_ago": "4h",
+      "last_fetch_ago": "5h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.398,
@@ -7353,7 +7353,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-15 16:08:42",
       "last_fetch_display": "2026-04-15 16:08",
-      "last_fetch_ago": "9m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.116,
@@ -7367,7 +7367,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-15 16:08:07",
       "last_fetch_display": "2026-04-15 16:08",
-      "last_fetch_ago": "9m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.11,
@@ -7395,7 +7395,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-15 12:13:17",
       "last_fetch_display": "2026-04-15 12:13",
-      "last_fetch_ago": "4h",
+      "last_fetch_ago": "5h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.39,
@@ -7409,7 +7409,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-15 16:08:16",
       "last_fetch_display": "2026-04-15 16:08",
-      "last_fetch_ago": "9m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.116,
@@ -7437,7 +7437,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-15 16:07:45",
       "last_fetch_display": "2026-04-15 16:07",
-      "last_fetch_ago": "10m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.097,
@@ -7451,7 +7451,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-15 16:08:57",
       "last_fetch_display": "2026-04-15 16:08",
-      "last_fetch_ago": "9m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.119,
@@ -7465,7 +7465,7 @@
       "platform": "unknown",
       "last_fetch": "2026-04-15 12:13:08",
       "last_fetch_display": "2026-04-15 12:13",
-      "last_fetch_ago": "4h",
+      "last_fetch_ago": "5h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.134,
@@ -7759,6 +7759,34 @@
   },
   "top_clips": [
     {
+      "clip_id": "engine_auto_e5d94f80",
+      "clip_id_short": "engine_auto_",
+      "title": "Ludwig Clutch Moments #42",
+      "source_title": null,
+      "creator": null,
+      "channel": "viral_recaps",
+      "views": 0,
+      "likes": null,
+      "ctr_percent": null,
+      "upload_date": "2026-04-15 11:06",
+      "youtube_url": "https://youtube.com/shorts/b6RaozvXGXE",
+      "metric_mode": "unavailable"
+    },
+    {
+      "clip_id": "e8c74a3f-a417-4252-a7fa-13ca0cbfc7d1",
+      "clip_id_short": "e8c74a3f-a41",
+      "title": "\ud83d\udd25 Nasdaq's 10-Day Win Streak \u2014 Nvidia & Google Just Hit Buy Zones",
+      "source_title": null,
+      "creator": null,
+      "channel": "fomo_highlights",
+      "views": 0,
+      "likes": null,
+      "ctr_percent": null,
+      "upload_date": "2026-04-15 10:36",
+      "youtube_url": "https://youtube.com/shorts/xvK52tRm0_s",
+      "metric_mode": "unavailable"
+    },
+    {
       "clip_id": "0a4fe439-201e-4e58-b5fc-03f92aecb93c",
       "clip_id_short": "0a4fe439-201",
       "title": "\ud83d\udcc8 Markets Pause Near Records \u2014 Iran Deal Could Ignite the Next Leg Up",
@@ -8009,47 +8037,31 @@
       "upload_date": "2026-04-13 21:30",
       "youtube_url": "https://youtube.com/shorts/0sqwnMzJ4Wo",
       "metric_mode": "unavailable"
-    },
-    {
-      "clip_id": "c7c63c11-9277-48ef-b1a6-57de798db4ae",
-      "clip_id_short": "c7c63c11-927",
-      "title": "Oracle Gave Its New CFO $26M Right After Layoffs \ud83d\ude2c\ud83d\udcc9",
-      "source_title": null,
-      "creator": null,
-      "channel": "fomo_highlights",
-      "views": 0,
-      "likes": null,
-      "ctr_percent": null,
-      "upload_date": "2026-04-13 18:01",
-      "youtube_url": "https://youtube.com/shorts/IPTKvLxQsuk",
-      "metric_mode": "unavailable"
-    },
-    {
-      "clip_id": "d83c6a1e-68a6-4630-919b-5a04ff14575b",
-      "clip_id_short": "d83c6a1e-68a",
-      "title": "Hormuz Blockade Could Trigger a Bigger Global Shock \u26a0\ufe0f\ud83c\udf0d",
-      "source_title": null,
-      "creator": null,
-      "channel": "fomo_highlights",
-      "views": 0,
-      "likes": null,
-      "ctr_percent": null,
-      "upload_date": "2026-04-13 17:31",
-      "youtube_url": "https://youtube.com/shorts/E0hz86N6Bs4",
-      "metric_mode": "unavailable"
     }
   ],
   "recent_uploads": [
     {
+      "job_id": "2daec958-0ede-4912-a4fb-fa4b69d44d6b",
+      "job_id_short": "2daec958",
+      "channel": "viral_recaps",
+      "status": "succeeded",
+      "updated_at": "2026-04-15T11:06:49.176975",
+      "updated_at_display": "2026-04-15 11:06",
+      "updated_ago": "6h",
+      "title": "Ludwig Clutch Moments #42",
+      "url": "https://youtube.com/shorts/b6RaozvXGXE",
+      "error": null
+    },
+    {
       "job_id": "e8c74a3f-a417-4252-a7fa-13ca0cbfc7d1",
       "job_id_short": "e8c74a3f",
       "channel": "fomo_highlights",
-      "status": "queued",
-      "updated_at": "2026-04-15T14:15:22.334330+00:00",
-      "updated_at_display": "2026-04-15 14:15",
-      "updated_ago": "2h",
+      "status": "succeeded",
+      "updated_at": "2026-04-15T10:36:20.295931",
+      "updated_at_display": "2026-04-15 10:36",
+      "updated_ago": "6h",
       "title": "\ud83d\udd25 Nasdaq's 10-Day Win Streak \u2014 Nvidia & Google Just Hit Buy Zones",
-      "url": null,
+      "url": "https://youtube.com/shorts/xvK52tRm0_s",
       "error": null
     },
     {
@@ -8059,7 +8071,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-15T10:03:43.384979",
       "updated_at_display": "2026-04-15 10:03",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "\ud83d\udcc8 Markets Pause Near Records \u2014 Iran Deal Could Ignite the Next Leg Up",
       "url": "https://youtube.com/shorts/urXQV-57xXg",
       "error": null
@@ -8071,7 +8083,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-15T09:32:18.580211",
       "updated_at_display": "2026-04-15 09:32",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "\ud83d\udcc8 Markets Pause Near Records \u2014 Iran Deal Could Ignite the Next Leg Up",
       "url": "https://youtube.com/shorts/MlUidOd65Ko",
       "error": null
@@ -8083,7 +8095,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-15T09:03:55.233988",
       "updated_at_display": "2026-04-15 09:03",
-      "updated_ago": "7h",
+      "updated_ago": "8h",
       "title": "\ud83d\udcc8 Markets Pause Near Records \u2014 Iran Deal Could Ignite the Next Leg Up",
       "url": "https://youtube.com/shorts/dzX_WVYkBv8",
       "error": null
@@ -8095,7 +8107,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-15T08:38:46.081153",
       "updated_at_display": "2026-04-15 08:38",
-      "updated_ago": "7h",
+      "updated_ago": "8h",
       "title": "\ud83d\udcc8 Markets Pause Near Records \u2014 Iran Deal Could Ignite the Next Leg Up",
       "url": "https://youtube.com/shorts/2ujrVzybHLs",
       "error": null
@@ -8107,7 +8119,7 @@
       "status": "queued",
       "updated_at": "2026-04-15T06:14:23.473495",
       "updated_at_display": "2026-04-15 06:14",
-      "updated_ago": "10h",
+      "updated_ago": "11h",
       "title": "Ludwig Unreal Moments #43",
       "url": null,
       "error": null
@@ -8119,21 +8131,9 @@
       "status": "succeeded",
       "updated_at": "2026-04-15T05:06:10.702193",
       "updated_at_display": "2026-04-15 05:06",
-      "updated_ago": "11h",
+      "updated_ago": "12h",
       "title": "Hasanabi Crazy Moments #12",
       "url": "https://youtube.com/shorts/5TJ6u8hk3Ns",
-      "error": null
-    },
-    {
-      "job_id": "2daec958-0ede-4912-a4fb-fa4b69d44d6b",
-      "job_id_short": "2daec958",
-      "channel": "viral_recaps",
-      "status": "queued",
-      "updated_at": "2026-04-15T04:16:57.615071",
-      "updated_at_display": "2026-04-15 04:16",
-      "updated_ago": "12h",
-      "title": "Ludwig Clutch Moments #42",
-      "url": null,
       "error": null
     },
     {
@@ -8143,7 +8143,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-14T23:01:43.414827",
       "updated_at_display": "2026-04-14 23:01",
-      "updated_ago": "17h",
+      "updated_ago": "18h",
       "title": "Ludwig Unreal Moments #41",
       "url": "https://youtube.com/shorts/P-T6DWki0rM",
       "error": null
@@ -8155,13 +8155,41 @@
       "status": "succeeded",
       "updated_at": "2026-04-14T22:30:53.358808",
       "updated_at_display": "2026-04-14 22:30",
-      "updated_ago": "17h",
+      "updated_ago": "18h",
       "title": "Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet? \ud83d\udcb0\ud83d\udcc8",
       "url": "https://youtube.com/shorts/QZTkpd9ngxk",
       "error": null
     }
   ],
   "recent_clips": [
+    {
+      "job_id": "2daec958-0ede-4912-a4fb-fa4b69d44d6b",
+      "job_id_short": "2daec958",
+      "channel": "viral_recaps",
+      "title": "Ludwig Clutch Moments #42",
+      "title_truncated": "Ludwig Clutch Moments #42",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/b6RaozvXGXE",
+      "views": 0,
+      "views_display": "\u00e2\u20ac\u201d",
+      "published_at": "2026-04-15T11:06:49.176975",
+      "published_at_display": "2026-04-15 11:06",
+      "published_ago": "6h"
+    },
+    {
+      "job_id": "e8c74a3f-a417-4252-a7fa-13ca0cbfc7d1",
+      "job_id_short": "e8c74a3f",
+      "channel": "fomo_highlights",
+      "title": "\ud83d\udd25 Nasdaq's 10-Day Win Streak \u2014 Nvidia & Google Just Hit Buy Zones",
+      "title_truncated": "\ud83d\udd25 Nasdaq's 10-Day Win Streak \u2014 Nvidia & Google Just Hit Buy ...",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/xvK52tRm0_s",
+      "views": 0,
+      "views_display": "\u00e2\u20ac\u201d",
+      "published_at": "2026-04-15T10:36:20.295931",
+      "published_at_display": "2026-04-15 10:36",
+      "published_ago": "6h"
+    },
     {
       "job_id": "0a4fe439-201e-4e58-b5fc-03f92aecb93c",
       "job_id_short": "0a4fe439",
@@ -8174,7 +8202,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-15T10:03:43.384979",
       "published_at_display": "2026-04-15 10:03",
-      "published_ago": "6h"
+      "published_ago": "7h"
     },
     {
       "job_id": "7b2743af-de36-4d47-b69b-4f8a79b0c9ee",
@@ -8188,7 +8216,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-15T09:32:18.580211",
       "published_at_display": "2026-04-15 09:32",
-      "published_ago": "6h"
+      "published_ago": "7h"
     },
     {
       "job_id": "1c5cefaf-9df4-4ac7-869e-64f6f122555e",
@@ -8202,7 +8230,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-15T09:03:55.233988",
       "published_at_display": "2026-04-15 09:03",
-      "published_ago": "7h"
+      "published_ago": "8h"
     },
     {
       "job_id": "09898649-76c7-4de8-8d18-6c21fac802e0",
@@ -8216,7 +8244,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-15T08:38:46.081153",
       "published_at_display": "2026-04-15 08:38",
-      "published_ago": "7h"
+      "published_ago": "8h"
     },
     {
       "job_id": "936ae24b-ca2b-4fd0-a6c4-20f9e89cbe19",
@@ -8230,7 +8258,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-15T05:06:10.702193",
       "published_at_display": "2026-04-15 05:06",
-      "published_ago": "11h"
+      "published_ago": "12h"
     },
     {
       "job_id": "ab8a636f-8013-41be-a835-07884bfae7c7",
@@ -8244,7 +8272,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-14T23:01:43.414827",
       "published_at_display": "2026-04-14 23:01",
-      "published_ago": "17h"
+      "published_ago": "18h"
     },
     {
       "job_id": "2e0eb007-6c04-4791-9724-fe05acc42dc8",
@@ -8258,7 +8286,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-14T22:30:53.358808",
       "published_at_display": "2026-04-14 22:30",
-      "published_ago": "17h"
+      "published_ago": "18h"
     },
     {
       "job_id": "494dc851-a350-41bb-aea8-5ba24035ddb8",
@@ -8272,43 +8300,37 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-14T22:01:05.816056",
       "published_at_display": "2026-04-14 22:01",
-      "published_ago": "18h"
-    },
-    {
-      "job_id": "00fcc4bf-b161-4eab-929b-b508e6377c91",
-      "job_id_short": "00fcc4bf",
-      "channel": "fomo_highlights",
-      "title": "$4 Gas = Rate CUTS? The Fed's Counterintuitive Move \ud83e\udd2f\ud83d\udcc9",
-      "title_truncated": "$4 Gas = Rate CUTS? The Fed's Counterintuitive Move \ud83e\udd2f\ud83d\udcc9",
-      "thumbnail_path": null,
-      "post_url": "https://youtube.com/shorts/ONnUXWn4se4",
-      "views": 0,
-      "views_display": "\u00e2\u20ac\u201d",
-      "published_at": "2026-04-14T21:30:56.423392",
-      "published_at_display": "2026-04-14 21:30",
-      "published_ago": "18h"
-    },
-    {
-      "job_id": "cc5a085f-9ef2-4c74-9d67-ac58c130434d",
-      "job_id_short": "cc5a085f",
-      "channel": "fomo_highlights",
-      "title": "Wholesale Inflation Cools \u2014 Bullish for Stocks? \ud83d\udcc9\ud83d\udcc8",
-      "title_truncated": "Wholesale Inflation Cools \u2014 Bullish for Stocks? \ud83d\udcc9\ud83d\udcc8",
-      "thumbnail_path": null,
-      "post_url": "https://youtube.com/shorts/o2DlDYkT3s0",
-      "views": 0,
-      "views_display": "\u00e2\u20ac\u201d",
-      "published_at": "2026-04-14T18:31:10.874988",
-      "published_at_display": "2026-04-14 18:31",
-      "published_ago": "21h"
+      "published_ago": "19h"
     }
   ],
   "upload_timeline": {
     "buckets": [
       {
         "name": "Today",
-        "count": 5,
+        "count": 7,
         "items": [
+          {
+            "job_id": "2daec958-0ede-4912-a4fb-fa4b69d44d6b",
+            "job_id_short": "2daec958",
+            "channel": "viral_recaps",
+            "title": "Ludwig Clutch Moments #42",
+            "published_at": "2026-04-15T11:06:49.176975",
+            "published_at_display": "2026-04-15 11:06",
+            "published_ago": "6h",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/b6RaozvXGXE"
+          },
+          {
+            "job_id": "e8c74a3f-a417-4252-a7fa-13ca0cbfc7d1",
+            "job_id_short": "e8c74a3f",
+            "channel": "fomo_highlights",
+            "title": "\ud83d\udd25 Nasdaq's 10-Day Win Streak \u2014 Nvidia & Google Just Hit B...",
+            "published_at": "2026-04-15T10:36:20.295931",
+            "published_at_display": "2026-04-15 10:36",
+            "published_ago": "6h",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/xvK52tRm0_s"
+          },
           {
             "job_id": "0a4fe439-201e-4e58-b5fc-03f92aecb93c",
             "job_id_short": "0a4fe439",
@@ -8316,7 +8338,7 @@
             "title": "\ud83d\udcc8 Markets Pause Near Records \u2014 Iran Deal Could Ignite the...",
             "published_at": "2026-04-15T10:03:43.384979",
             "published_at_display": "2026-04-15 10:03",
-            "published_ago": "6h",
+            "published_ago": "7h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/urXQV-57xXg"
           },
@@ -8327,7 +8349,7 @@
             "title": "\ud83d\udcc8 Markets Pause Near Records \u2014 Iran Deal Could Ignite the...",
             "published_at": "2026-04-15T09:32:18.580211",
             "published_at_display": "2026-04-15 09:32",
-            "published_ago": "6h",
+            "published_ago": "7h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/MlUidOd65Ko"
           },
@@ -8338,7 +8360,7 @@
             "title": "\ud83d\udcc8 Markets Pause Near Records \u2014 Iran Deal Could Ignite the...",
             "published_at": "2026-04-15T09:03:55.233988",
             "published_at_display": "2026-04-15 09:03",
-            "published_ago": "7h",
+            "published_ago": "8h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/dzX_WVYkBv8"
           },
@@ -8349,7 +8371,7 @@
             "title": "\ud83d\udcc8 Markets Pause Near Records \u2014 Iran Deal Could Ignite the...",
             "published_at": "2026-04-15T08:38:46.081153",
             "published_at_display": "2026-04-15 08:38",
-            "published_ago": "7h",
+            "published_ago": "8h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/2ujrVzybHLs"
           },
@@ -8360,7 +8382,7 @@
             "title": "Hasanabi Crazy Moments #12",
             "published_at": "2026-04-15T05:06:10.702193",
             "published_at_display": "2026-04-15 05:06",
-            "published_ago": "11h",
+            "published_ago": "12h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/5TJ6u8hk3Ns"
           }
@@ -8377,7 +8399,7 @@
             "title": "Ludwig Unreal Moments #41",
             "published_at": "2026-04-14T23:01:43.414827",
             "published_at_display": "2026-04-14 23:01",
-            "published_ago": "17h",
+            "published_ago": "18h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/P-T6DWki0rM"
           },
@@ -8388,7 +8410,7 @@
             "title": "Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet? \ud83d\udcb0\ud83d\udcc8",
             "published_at": "2026-04-14T22:30:53.358808",
             "published_at_display": "2026-04-14 22:30",
-            "published_ago": "17h",
+            "published_ago": "18h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/QZTkpd9ngxk"
           },
@@ -8399,7 +8421,7 @@
             "title": "BND Pays $0.25/Share \u2014 While Stocks Panic, Bonds Pay \ud83d\udcb5\ud83d\udcca",
             "published_at": "2026-04-14T22:01:05.816056",
             "published_at_display": "2026-04-14 22:01",
-            "published_ago": "18h",
+            "published_ago": "19h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/98-5RMajXFQ"
           },
@@ -8410,7 +8432,7 @@
             "title": "$4 Gas = Rate CUTS? The Fed's Counterintuitive Move \ud83e\udd2f\ud83d\udcc9",
             "published_at": "2026-04-14T21:30:56.423392",
             "published_at_display": "2026-04-14 21:30",
-            "published_ago": "18h",
+            "published_ago": "19h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/ONnUXWn4se4"
           },
@@ -8421,7 +8443,7 @@
             "title": "Wholesale Inflation Cools \u2014 Bullish for Stocks? \ud83d\udcc9\ud83d\udcc8",
             "published_at": "2026-04-14T18:31:10.874988",
             "published_at_display": "2026-04-14 18:31",
-            "published_ago": "21h",
+            "published_ago": "22h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/o2DlDYkT3s0"
           },
@@ -8432,7 +8454,7 @@
             "title": "Ludwig Clutch Moments #40",
             "published_at": "2026-04-14T16:31:22.900475",
             "published_at_display": "2026-04-14 16:31",
-            "published_ago": "23h",
+            "published_ago": "1d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/05VvzjlaVdE"
           },
@@ -8548,7 +8570,7 @@
             "title": "Tfue Chaotic Moments #39",
             "published_at": "2026-04-13T16:31:38.735904",
             "published_at_display": "2026-04-13 16:31",
-            "published_ago": "1d",
+            "published_ago": "2d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/Qg9kZGanMZQ"
           },
@@ -8633,7 +8655,7 @@
       },
       {
         "name": "Last Week",
-        "count": 22,
+        "count": 20,
         "items": [
           {
             "job_id": "2f0ed2d3-5d85-4aa4-9519-5868da7aa958",
@@ -8854,28 +8876,6 @@
             "published_ago": "3d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/Y-nC1AE98Go"
-          },
-          {
-            "job_id": "9ab3284a-6eb7-4ee5-b751-316c45f41109",
-            "job_id_short": "9ab3284a",
-            "channel": "viral_recaps",
-            "title": "Ludwig Funny Moments #34",
-            "published_at": "2026-04-11T22:31:16.741637",
-            "published_at_display": "2026-04-11 22:31",
-            "published_ago": "3d",
-            "views": 0,
-            "post_url": "https://youtube.com/shorts/bMeXLHRjEl8"
-          },
-          {
-            "job_id": "5db33aa1-c5bf-46a6-8727-3c444c034eab",
-            "job_id_short": "5db33aa1",
-            "channel": "fomo_highlights",
-            "title": "Wall Street Sees 43% Upside in Uber After the Selloff \ud83d\ude97\ud83d\udcc8",
-            "published_at": "2026-04-11T21:31:01.968085",
-            "published_at_display": "2026-04-11 21:31",
-            "published_ago": "3d",
-            "views": 0,
-            "post_url": "https://youtube.com/shorts/EzwJw3E02Ig"
           }
         ]
       },
@@ -9121,24 +9121,6 @@
   "schedule": {
     "2026-04-15": [
       {
-        "job_id": "2daec958-0ede-4912-a4fb-fa4b69d44d6b",
-        "job_id_short": "2daec958",
-        "channel": "viral_recaps",
-        "title": "Ludwig Clutch Moments #42",
-        "scheduled_at": "2026-04-15T15:00:00-06:00",
-        "scheduled_at_iso": "2026-04-15T15:00:00",
-        "status": "queued"
-      },
-      {
-        "job_id": "e8c74a3f-a417-4252-a7fa-13ca0cbfc7d1",
-        "job_id_short": "e8c74a3f",
-        "channel": "fomo_highlights",
-        "title": "\ud83d\udd25 Nasdaq's 10-Day Win Streak \u2014 Nvidia & Google Jus",
-        "scheduled_at": "2026-04-15T15:15:22",
-        "scheduled_at_iso": "2026-04-15T15:15:22",
-        "status": "queued"
-      },
-      {
         "job_id": "aff66637-3fad-4b98-a638-d06dcddaa9a2",
         "job_id_short": "aff66637",
         "channel": "viral_recaps",
@@ -9190,6 +9172,24 @@
         "title": "\ud83d\udcc8 Markets Pause Near Records \u2014 Iran Deal Could Ign",
         "scheduled_at": "2026-04-15T10:03:43.384979",
         "scheduled_at_iso": "2026-04-15T10:03:43.384979",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "e8c74a3f-a417-4252-a7fa-13ca0cbfc7d1",
+        "job_id_short": "e8c74a3f",
+        "channel": "fomo_highlights",
+        "title": "\ud83d\udd25 Nasdaq's 10-Day Win Streak \u2014 Nvidia & Google Jus",
+        "scheduled_at": "2026-04-15T10:36:20.295931",
+        "scheduled_at_iso": "2026-04-15T10:36:20.295931",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "2daec958-0ede-4912-a4fb-fa4b69d44d6b",
+        "job_id_short": "2daec958",
+        "channel": "viral_recaps",
+        "title": "Ludwig Clutch Moments #42",
+        "scheduled_at": "2026-04-15T11:06:49.176975",
+        "scheduled_at_iso": "2026-04-15T11:06:49.176975",
         "status": "succeeded"
       }
     ],
@@ -10314,9 +10314,9 @@
     ],
     "any_channel_high": false,
     "all_channels_safe": true,
-    "reset_time_hours": 15,
+    "reset_time_hours": 14,
     "reset_time_minutes": 41,
-    "reset_time_display": "15h 41m"
+    "reset_time_display": "14h 41m"
   },
   "revenue": {
     "total_views_30d": 0,
@@ -10336,8 +10336,8 @@
       "discovered": 0,
       "downloaded": 0,
       "processed": 0,
-      "queued": 3,
-      "uploaded": 393
+      "queued": 1,
+      "uploaded": 395
     },
     "by_channel": [
       {
@@ -10353,8 +10353,8 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 1,
-        "uploaded": 156
+        "queued": 0,
+        "uploaded": 157
       },
       {
         "channel": "market_meltdowns",
@@ -10377,21 +10377,21 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 2,
-        "uploaded": 71
+        "queued": 1,
+        "uploaded": 72
       }
     ],
     "throughput": {
-      "uploads_per_hour": 0.46,
-      "uploads_last_24h": 11
+      "uploads_per_hour": 0.5,
+      "uploads_last_24h": 12
     },
     "stage_timings": {
       "discovered_to_downloaded_hours": 0.0,
-      "queued_to_uploaded_hours": 2.42
+      "queued_to_uploaded_hours": 2.41
     },
     "bottleneck": {
       "stage": "queued",
-      "backlog": 3
+      "backlog": 1
     }
   },
   "disk": {
@@ -10425,9 +10425,9 @@
         "file_count": 279
       }
     ],
-    "total_disk_bytes": 371770829173,
-    "total_disk_human": "346.2GB",
-    "percent_of_500gb": 69.2,
+    "total_disk_bytes": 371801686837,
+    "total_disk_human": "346.3GB",
+    "percent_of_500gb": 69.3,
     "warning_threshold_pct": 70,
     "error_threshold_pct": 85,
     "largest_files": [
@@ -10686,7 +10686,7 @@
     {
       "channel_name": "fomo_highlights",
       "total_views": 1092,
-      "uploads_30d": 149,
+      "uploads_30d": 150,
       "avg_views": 7,
       "best_clip_title": "No clips yet",
       "best_clip_views": 0,
@@ -10697,7 +10697,7 @@
     {
       "channel_name": "viral_recaps",
       "total_views": 0,
-      "uploads_30d": 66,
+      "uploads_30d": 67,
       "avg_views": 0,
       "best_clip_title": "No clips yet",
       "best_clip_views": 0,
@@ -11800,7 +11800,7 @@
           "priority": 1,
           "clips_fetched": 12,
           "last_fetched_at": "2026-04-15T06:05:14.990914",
-          "last_fetched_rel": "10h",
+          "last_fetched_rel": "11h",
           "enabled": true,
           "url": "https://www.youtube.com/@HasanAbi/videos",
           "type": "transcript"
@@ -11814,7 +11814,7 @@
           "priority": 1,
           "clips_fetched": 43,
           "last_fetched_at": "2026-04-15T12:14:23.497053",
-          "last_fetched_rel": "4h",
+          "last_fetched_rel": "5h",
           "enabled": true,
           "url": "https://www.youtube.com/@Ludwig/videos",
           "type": "transcript"
@@ -11941,13 +11941,13 @@
   ],
   "daily_summary": {
     "date": "2026-04-15",
-    "uploads_today": 5,
-    "uploads_yesterday": 15,
+    "uploads_today": 7,
+    "uploads_yesterday": 17,
     "views_gained_today": 0,
     "views_yesterday": 0,
     "errors_today": 0,
-    "quota_pct": 80.0,
-    "quota_units_used": 8000,
+    "quota_pct": 112.0,
+    "quota_units_used": 11200,
     "delta_uploads": -10,
     "delta_views": 0,
     "top_clip_today": {
@@ -11958,21 +11958,21 @@
     "top_3_channels": [
       {
         "channel": "fomo_highlights",
-        "uploads": 4
+        "uploads": 5
       },
       {
         "channel": "viral_recaps",
-        "uploads": 1
+        "uploads": 2
       }
     ],
-    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-04-15\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 5 (-10 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 80.0% used (8000/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Hasanabi Crazy Moments #12\n  0 views \u00e2\u20ac\u00a2 viral_recaps\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. fomo_highlights: 4 uploads\n  2. viral_recaps: 1 uploads",
-    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-04-15\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 5 (-10 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 80.0% used (`8000/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Hasanabi Crazy Moments #12_\n**0 views** \u00e2\u20ac\u00a2 **viral_recaps**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **fomo_highlights** \u00e2\u20ac\u201d 4 uploads\n2. **viral_recaps** \u00e2\u20ac\u201d 1 uploads"
+    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-04-15\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 7 (-10 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 112.0% used (11200/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Hasanabi Crazy Moments #12\n  0 views \u00e2\u20ac\u00a2 viral_recaps\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. fomo_highlights: 5 uploads\n  2. viral_recaps: 2 uploads",
+    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-04-15\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 7 (-10 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 112.0% used (`11200/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Hasanabi Crazy Moments #12_\n**0 views** \u00e2\u20ac\u00a2 **viral_recaps**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **fomo_highlights** \u00e2\u20ac\u201d 5 uploads\n2. **viral_recaps** \u00e2\u20ac\u201d 2 uploads"
   },
   "title_performance": {
     "pattern_analysis": {
       "has_numbers": {
         "avg_views": 0.0,
-        "count": 295,
+        "count": 297,
         "total_views": 0
       },
       "has_question": {
@@ -11987,7 +11987,7 @@
       },
       "has_emoji": {
         "avg_views": 0.0,
-        "count": 131,
+        "count": 132,
         "total_views": 0
       }
     },
@@ -12139,12 +12139,12 @@
         "channel": "fomo_highlights",
         "best_title": "Watch this before scrolling: Nobody plays like this",
         "best_views": 0,
-        "total_titles_analyzed": 156,
+        "total_titles_analyzed": 157,
         "pattern_breakdown": {
-          "numbers_pct": 55.1,
-          "questions_pct": 16.0,
+          "numbers_pct": 55.4,
+          "questions_pct": 15.9,
           "caps_pct": 0.6,
-          "emoji_pct": 79.5
+          "emoji_pct": 79.6
         }
       },
       {
@@ -12175,9 +12175,9 @@
         "channel": "viral_recaps",
         "best_title": "Watch this before scrolling: The most unexpected moment of the day",
         "best_views": 0,
-        "total_titles_analyzed": 71,
+        "total_titles_analyzed": 72,
         "pattern_breakdown": {
-          "numbers_pct": 84.5,
+          "numbers_pct": 84.7,
           "questions_pct": 1.4,
           "caps_pct": 0.0,
           "emoji_pct": 2.8
@@ -12190,7 +12190,7 @@
       {
         "style_name": "Gaming/Clips",
         "avg_views": 0,
-        "total_clips": 386,
+        "total_clips": 388,
         "best_clip": null,
         "total_views": 0,
         "is_best": true
@@ -12215,7 +12215,7 @@
     "best_style_overall": "Gaming/Clips",
     "summary_stats": {
       "total_styles": 3,
-      "total_clips_all": 393,
+      "total_clips_all": 395,
       "total_views_all": 0,
       "avg_views_overall": 0
     }
@@ -12315,8 +12315,8 @@
       {
         "hour": 15,
         "hour_label": "15:00",
-        "posts": 58,
-        "avg_views": 986.0
+        "posts": 60,
+        "avg_views": 990.0
       },
       {
         "hour": 16,
@@ -12383,8 +12383,8 @@
       {
         "day": 2,
         "day_name": "Wednesday",
-        "posts": 49,
-        "avg_views": 797.0
+        "posts": 51,
+        "avg_views": 809.0
       },
       {
         "day": 3,
@@ -13236,7 +13236,7 @@
           "hour": 15,
           "day": 2,
           "views": 1100.0,
-          "posts": 12,
+          "posts": 14,
           "intensity": 63.4
         },
         {
@@ -13695,7 +13695,7 @@
       "day_name": "Tuesday",
       "est_views": 1736.0
     },
-    "job_count": 393
+    "job_count": 395
   },
   "benchmarks": {
     "current_tier": "Starter",
@@ -13786,125 +13786,85 @@
     {
       "type": "warning",
       "title": "Channel \"market_meltdowns\" paused for 24+ hours",
-      "message": "market_meltdowns has been paused for 904 hours",
+      "message": "market_meltdowns has been paused for 905 hours",
       "channel": "market_meltdowns",
-      "created_at": "2026-04-15T16:18:10.048764",
+      "created_at": "2026-04-15T17:18:10.484993",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"self_made_clips\" paused for 24+ hours",
-      "message": "self_made_clips has been paused for 900 hours",
+      "message": "self_made_clips has been paused for 901 hours",
       "channel": "self_made_clips",
-      "created_at": "2026-04-15T16:18:10.048764",
+      "created_at": "2026-04-15T17:18:10.484993",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"rich_or_ruined\" paused for 24+ hours",
-      "message": "rich_or_ruined has been paused for 898 hours",
+      "message": "rich_or_ruined has been paused for 899 hours",
       "channel": "rich_or_ruined",
-      "created_at": "2026-04-15T16:18:10.048764",
+      "created_at": "2026-04-15T17:18:10.484993",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"startup_graveyard\" paused for 24+ hours",
-      "message": "startup_graveyard has been paused for 898 hours",
+      "message": "startup_graveyard has been paused for 899 hours",
       "channel": "startup_graveyard",
-      "created_at": "2026-04-15T16:18:10.048764",
+      "created_at": "2026-04-15T17:18:10.484993",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_sirens\" paused for 24+ hours",
-      "message": "stream_sirens has been paused for 877 hours",
+      "message": "stream_sirens has been paused for 878 hours",
       "channel": "stream_sirens",
-      "created_at": "2026-04-15T16:18:10.048764",
+      "created_at": "2026-04-15T17:18:10.484993",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_queens\" paused for 24+ hours",
-      "message": "stream_queens has been paused for 877 hours",
+      "message": "stream_queens has been paused for 878 hours",
       "channel": "stream_queens",
-      "created_at": "2026-04-15T16:18:10.048764",
+      "created_at": "2026-04-15T17:18:10.484993",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"ai_did_what\" paused for 24+ hours",
-      "message": "ai_did_what has been paused for 843 hours",
+      "message": "ai_did_what has been paused for 844 hours",
       "channel": "ai_did_what",
-      "created_at": "2026-04-15T16:18:10.048764",
+      "created_at": "2026-04-15T17:18:10.484993",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"gym_moments\" paused for 24+ hours",
-      "message": "gym_moments has been paused for 843 hours",
+      "message": "gym_moments has been paused for 844 hours",
       "channel": "gym_moments",
-      "created_at": "2026-04-15T16:18:10.048764",
+      "created_at": "2026-04-15T17:18:10.484993",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"kitchen_chaos\" paused for 24+ hours",
-      "message": "kitchen_chaos has been paused for 696 hours",
+      "message": "kitchen_chaos has been paused for 697 hours",
       "channel": "kitchen_chaos",
-      "created_at": "2026-04-15T16:18:10.048764",
+      "created_at": "2026-04-15T17:18:10.484993",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"unfiltered_clips\" paused for 24+ hours",
-      "message": "unfiltered_clips has been paused for 696 hours",
+      "message": "unfiltered_clips has been paused for 697 hours",
       "channel": "unfiltered_clips",
-      "created_at": "2026-04-15T16:18:10.048764",
+      "created_at": "2026-04-15T17:18:10.484993",
       "read": false
     }
   ],
   "checklists": [
-    {
-      "channel": "fomo_highlights",
-      "readiness_score": 6,
-      "total_checks": 6,
-      "badge": "launch_ready",
-      "badge_text": "Launch Ready",
-      "badge_color": "green",
-      "checks": [
-        {
-          "label": "Has YouTube account linked",
-          "passed": true,
-          "icon": "\u00e2\u0153\u2026"
-        },
-        {
-          "label": "Has at least 1 source configured",
-          "passed": true,
-          "icon": "\u00e2\u0153\u2026"
-        },
-        {
-          "label": "Has uploaded at least 1 clip",
-          "passed": true,
-          "icon": "\u00e2\u0153\u2026"
-        },
-        {
-          "label": "Status is active",
-          "passed": true,
-          "icon": "\u00e2\u0153\u2026"
-        },
-        {
-          "label": "Has clips in queue",
-          "passed": true,
-          "icon": "\u00e2\u0153\u2026"
-        },
-        {
-          "label": "Quota not exhausted (< 90% used)",
-          "passed": true,
-          "icon": "\u00e2\u0153\u2026"
-        }
-      ]
-    },
     {
       "channel": "viral_recaps",
       "readiness_score": 6,
@@ -13947,6 +13907,46 @@
     },
     {
       "channel": "arc_highlightz",
+      "readiness_score": 5,
+      "total_checks": 6,
+      "badge": "needs_attention",
+      "badge_text": "Needs Attention",
+      "badge_color": "orange",
+      "checks": [
+        {
+          "label": "Has YouTube account linked",
+          "passed": true,
+          "icon": "\u00e2\u0153\u2026"
+        },
+        {
+          "label": "Has at least 1 source configured",
+          "passed": true,
+          "icon": "\u00e2\u0153\u2026"
+        },
+        {
+          "label": "Has uploaded at least 1 clip",
+          "passed": true,
+          "icon": "\u00e2\u0153\u2026"
+        },
+        {
+          "label": "Status is active",
+          "passed": true,
+          "icon": "\u00e2\u0153\u2026"
+        },
+        {
+          "label": "Has clips in queue",
+          "passed": false,
+          "icon": "\u00e2\u009d\u0152"
+        },
+        {
+          "label": "Quota not exhausted (< 90% used)",
+          "passed": true,
+          "icon": "\u00e2\u0153\u2026"
+        }
+      ]
+    },
+    {
+      "channel": "fomo_highlights",
       "readiness_score": 5,
       "total_checks": 6,
       "badge": "needs_attention",
@@ -14465,7 +14465,7 @@
         "category": "Comedy",
         "target_per_day": 8,
         "published_24h": 3,
-        "queue_depth": 2,
+        "queue_depth": 1,
         "running_jobs": 0,
         "failed_7d": 0,
         "avg_views": 197,
@@ -14474,9 +14474,9 @@
         "completion_rate": 37.5,
         "lagging": true,
         "views_source": "source_clips_proxy",
-        "latest_title": "Hasanabi Crazy Moments #12",
-        "latest_url": "https://youtube.com/shorts/5TJ6u8hk3Ns",
-        "latest_uploaded_at": "2026-04-15 05:06"
+        "latest_title": "Ludwig Clutch Moments #42",
+        "latest_url": "https://youtube.com/shorts/b6RaozvXGXE",
+        "latest_uploaded_at": "2026-04-15 11:06"
       },
       {
         "channel": "arc_highlightz",
@@ -14499,7 +14499,7 @@
       }
     ],
     "lagging_count": 3,
-    "queue_backlog": 3,
+    "queue_backlog": 1,
     "analytics_channels": 13
   },
   "meta": {

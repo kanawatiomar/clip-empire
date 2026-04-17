@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-04-17T18:18:10.530367Z",
+  "generated_at": "2026-04-17T19:18:10.456770Z",
   "repo_root": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire",
   "database_path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\data\\clip_empire.db",
   "health_score": {
-    "score": 69.3,
+    "score": 70.1,
     "grade": "C",
     "status": "Needs Attention",
     "color": "yellow",
     "breakdown": {
-      "pipeline_health": 1.5,
+      "pipeline_health": 2.2,
       "error_rate": 20.0,
       "quota_safety": 15,
       "queue_depth": 15,
@@ -16,13 +16,13 @@
       "channel_uptime": 2.9
     },
     "metrics": {
-      "uploads_today": 2,
+      "uploads_today": 3,
       "target_today": 34,
-      "pipeline_health_ratio": 0.06,
+      "pipeline_health_ratio": 0.09,
       "errors_today": 0,
-      "total_jobs_today": 3,
+      "total_jobs_today": 6,
       "error_rate": 0.0,
-      "queue_depth": 1,
+      "queue_depth": 3,
       "active_channels": 4,
       "total_channels": 14,
       "fresh_sources": 0,
@@ -33,31 +33,76 @@
     "active_channels": 4,
     "total_channels": 14,
     "jobs_today": {
-      "total": 3,
-      "queued": 1,
+      "total": 6,
+      "queued": 3,
       "running": 0,
-      "succeeded": 2,
+      "succeeded": 3,
       "failed": 0,
       "cancelled": 0
     },
-    "render_queue_depth": 1,
-    "last_updated": "2026-04-17T18:18:10.531410Z"
+    "render_queue_depth": 3,
+    "last_updated": "2026-04-17T19:18:10.456770Z"
   },
   "queue_monitor": [
+    {
+      "job_id": "18a5a1eb-c114-4fd2-b299-af367cb467b8",
+      "job_id_short": "18a5a1eb",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-04-17T19:04:52.843467+00:00",
+      "created_at_display": "2026-04-17 19:04",
+      "created_ago": "13m",
+      "updated_at": "2026-04-17T19:04:52.843467+00:00",
+      "scheduled_for": "2026-04-17 20:04",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "f7352621-e957-4da5-9b7f-d55a15c39d5a",
+      "job_id_short": "f7352621",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-04-17T19:03:48.243153+00:00",
+      "created_at_display": "2026-04-17 19:03",
+      "created_ago": "14m",
+      "updated_at": "2026-04-17T19:03:48.243153+00:00",
+      "scheduled_for": "2026-04-17 20:03",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "fef8f954-1c47-4765-b4a8-ccbfa8e19aa0",
+      "job_id_short": "fef8f954",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-04-17T19:02:42.246221+00:00",
+      "created_at_display": "2026-04-17 19:02",
+      "created_ago": "15m",
+      "updated_at": "2026-04-17T19:02:42.246221+00:00",
+      "scheduled_for": "2026-04-17 20:02",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
     {
       "job_id": "e9ac9841-101b-429d-a9e0-7eb5cfa66c4f",
       "job_id_short": "e9ac9841",
       "channel": "fomo_highlights",
-      "status": "queued",
+      "status": "succeeded",
       "attempt": 0,
       "created_at": "2026-04-17T16:59:30.328569+00:00",
       "created_at_display": "2026-04-17 16:59",
-      "created_ago": "1h",
-      "updated_at": "2026-04-17T16:59:30.328569+00:00",
+      "created_ago": "2h",
+      "updated_at": "2026-04-17T12:31:14.227625",
       "scheduled_for": "2026-04-17 17:59",
       "error": null,
       "has_error": false,
-      "post_url": null
+      "post_url": "https://youtube.com/shorts/BRjgOpEOyCA"
     },
     {
       "job_id": "5fe23040-d7cc-40c4-b840-3c62bbbae77d",
@@ -67,7 +112,7 @@
       "attempt": 0,
       "created_at": "2026-04-17T16:58:22.154850+00:00",
       "created_at_display": "2026-04-17 16:58",
-      "created_ago": "1h",
+      "created_ago": "2h",
       "updated_at": "2026-04-17T12:01:00.190255",
       "scheduled_for": "2026-04-17 17:58",
       "error": null,
@@ -82,7 +127,7 @@
       "attempt": 0,
       "created_at": "2026-04-17T16:57:13.803789+00:00",
       "created_at_display": "2026-04-17 16:57",
-      "created_ago": "1h",
+      "created_ago": "2h",
       "updated_at": "2026-04-17T11:31:03.130314",
       "scheduled_for": "2026-04-17 17:57",
       "error": null,
@@ -97,7 +142,7 @@
       "attempt": 0,
       "created_at": "2026-04-17T03:07:10.439655+00:00",
       "created_at_display": "2026-04-17 03:07",
-      "created_ago": "15h",
+      "created_ago": "16h",
       "updated_at": "2026-04-16T22:30:55.477467",
       "scheduled_for": "2026-04-17 04:07",
       "error": null,
@@ -112,7 +157,7 @@
       "attempt": 0,
       "created_at": "2026-04-17T03:06:09.978634+00:00",
       "created_at_display": "2026-04-17 03:06",
-      "created_ago": "15h",
+      "created_ago": "16h",
       "updated_at": "2026-04-16T22:01:01.859704",
       "scheduled_for": "2026-04-17 04:06",
       "error": null,
@@ -127,7 +172,7 @@
       "attempt": 0,
       "created_at": "2026-04-17T03:05:08.980952+00:00",
       "created_at_display": "2026-04-17 03:05",
-      "created_ago": "15h",
+      "created_ago": "16h",
       "updated_at": "2026-04-16T21:31:07.512126",
       "scheduled_for": "2026-04-17 04:05",
       "error": null,
@@ -142,7 +187,7 @@
       "attempt": 0,
       "created_at": "2026-04-16T23:07:09.058625+00:00",
       "created_at_display": "2026-04-16 23:07",
-      "created_ago": "19h",
+      "created_ago": "20h",
       "updated_at": "2026-04-16T18:30:53.242547",
       "scheduled_for": "2026-04-17 00:07",
       "error": null,
@@ -157,7 +202,7 @@
       "attempt": 0,
       "created_at": "2026-04-16T23:06:08.657419+00:00",
       "created_at_display": "2026-04-16 23:06",
-      "created_ago": "19h",
+      "created_ago": "20h",
       "updated_at": "2026-04-16T18:00:53.807609",
       "scheduled_for": "2026-04-17 00:06",
       "error": null,
@@ -172,7 +217,7 @@
       "attempt": 0,
       "created_at": "2026-04-16T23:05:05.071508+00:00",
       "created_at_display": "2026-04-16 23:05",
-      "created_ago": "19h",
+      "created_ago": "20h",
       "updated_at": "2026-04-16T17:31:12.656460",
       "scheduled_for": "2026-04-17 00:05",
       "error": null,
@@ -187,7 +232,7 @@
       "attempt": 0,
       "created_at": "2026-04-16T19:03:46.819616+00:00",
       "created_at_display": "2026-04-16 19:03",
-      "created_ago": "23h",
+      "created_ago": "1d",
       "updated_at": "2026-04-16T14:01:00.387967",
       "scheduled_for": "2026-04-16 20:03",
       "error": null,
@@ -202,7 +247,7 @@
       "attempt": 0,
       "created_at": "2026-04-16T19:02:59.323529+00:00",
       "created_at_display": "2026-04-16 19:02",
-      "created_ago": "23h",
+      "created_ago": "1d",
       "updated_at": "2026-04-16T13:31:13.578939",
       "scheduled_for": "2026-04-16 20:02",
       "error": null,
@@ -337,7 +382,7 @@
       "attempt": 0,
       "created_at": "2026-04-15T18:18:34.717039",
       "created_at_display": "2026-04-15 18:18",
-      "created_ago": "1d",
+      "created_ago": "2d",
       "updated_at": "2026-04-15T19:06:49.578003",
       "scheduled_for": "2026-04-15 19:00",
       "error": null,
@@ -412,7 +457,7 @@
       "attempt": 0,
       "created_at": "2026-04-15T19:17:00.153018+00:00",
       "created_at_display": "2026-04-15 19:17",
-      "created_ago": "1d",
+      "created_ago": "2d",
       "updated_at": "2026-04-15T16:35:51.799184",
       "scheduled_for": "2026-04-15 20:17",
       "error": null,
@@ -427,7 +472,7 @@
       "attempt": 0,
       "created_at": "2026-04-15T19:16:08.787741+00:00",
       "created_at_display": "2026-04-15 19:16",
-      "created_ago": "1d",
+      "created_ago": "2d",
       "updated_at": "2026-04-15T16:02:18.044728",
       "scheduled_for": "2026-04-15 20:16",
       "error": null,
@@ -442,7 +487,7 @@
       "attempt": 0,
       "created_at": "2026-04-15T19:15:14.367434+00:00",
       "created_at_display": "2026-04-15 19:15",
-      "created_ago": "1d",
+      "created_ago": "2d",
       "updated_at": "2026-04-15T15:34:30.790553",
       "scheduled_for": "2026-04-15 20:15",
       "error": null,
@@ -457,7 +502,7 @@
       "attempt": 0,
       "created_at": "2026-04-15T19:13:50.766092+00:00",
       "created_at_display": "2026-04-15 19:13",
-      "created_ago": "1d",
+      "created_ago": "2d",
       "updated_at": "2026-04-15T15:03:55.633396",
       "scheduled_for": "2026-04-15 20:13",
       "error": null,
@@ -472,7 +517,7 @@
       "attempt": 0,
       "created_at": "2026-04-15T19:12:55.660149+00:00",
       "created_at_display": "2026-04-15 19:12",
-      "created_ago": "1d",
+      "created_ago": "2d",
       "updated_at": "2026-04-15T14:34:06.979705",
       "scheduled_for": "2026-04-15 20:12",
       "error": null,
@@ -487,7 +532,7 @@
       "attempt": 0,
       "created_at": "2026-04-15T19:11:49.052620+00:00",
       "created_at_display": "2026-04-15 19:11",
-      "created_ago": "1d",
+      "created_ago": "2d",
       "updated_at": "2026-04-15T14:02:01.047610",
       "scheduled_for": "2026-04-15 20:11",
       "error": null,
@@ -502,7 +547,7 @@
       "attempt": 0,
       "created_at": "2026-04-15T19:10:55.932880+00:00",
       "created_at_display": "2026-04-15 19:10",
-      "created_ago": "1d",
+      "created_ago": "2d",
       "updated_at": "2026-04-15T13:36:28.306111",
       "scheduled_for": "2026-04-15 20:10",
       "error": null,
@@ -712,7 +757,7 @@
       "attempt": 0,
       "created_at": "2026-04-14T19:01:22.284278+00:00",
       "created_at_display": "2026-04-14 19:01",
-      "created_ago": "2d",
+      "created_ago": "3d",
       "updated_at": "2026-04-14T13:31:20.822946",
       "scheduled_for": "2026-04-14 20:01",
       "error": null,
@@ -862,7 +907,7 @@
       "attempt": 0,
       "created_at": "2026-04-13T19:01:36.493865+00:00",
       "created_at_display": "2026-04-13 19:01",
-      "created_ago": "3d",
+      "created_ago": "4d",
       "updated_at": "2026-04-13T13:31:14.212112",
       "scheduled_for": "2026-04-13 20:01",
       "error": null,
@@ -1042,7 +1087,7 @@
       "attempt": 0,
       "created_at": "2026-04-12T19:01:54.570374+00:00",
       "created_at_display": "2026-04-12 19:01",
-      "created_ago": "4d",
+      "created_ago": "5d",
       "updated_at": "2026-04-12T14:01:01.862952",
       "scheduled_for": "2026-04-12 20:01",
       "error": null,
@@ -1057,7 +1102,7 @@
       "attempt": 0,
       "created_at": "2026-04-12T19:01:11.892551+00:00",
       "created_at_display": "2026-04-12 19:01",
-      "created_ago": "4d",
+      "created_ago": "5d",
       "updated_at": "2026-04-12T13:31:19.326861",
       "scheduled_for": "2026-04-12 20:01",
       "error": null,
@@ -1462,7 +1507,7 @@
       "attempt": 0,
       "created_at": "2026-04-11T19:02:10.943063+00:00",
       "created_at_display": "2026-04-11 19:02",
-      "created_ago": "5d",
+      "created_ago": "6d",
       "updated_at": "2026-04-11T13:31:02.091255",
       "scheduled_for": "2026-04-11 20:02",
       "error": null,
@@ -1498,51 +1543,6 @@
       "error": null,
       "has_error": false,
       "post_url": "https://youtube.com/shorts/jGgNTTuTOco"
-    },
-    {
-      "job_id": "e7fe9737-8a48-4f02-a787-9420a3266c8d",
-      "job_id_short": "e7fe9737",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "attempt": 0,
-      "created_at": "2026-04-11T14:03:12.386150+00:00",
-      "created_at_display": "2026-04-11 14:03",
-      "created_ago": "6d",
-      "updated_at": "2026-04-11T09:02:01.754104",
-      "scheduled_for": "2026-04-11 15:03",
-      "error": null,
-      "has_error": false,
-      "post_url": "https://youtube.com/shorts/5kxyJ1sox-c"
-    },
-    {
-      "job_id": "c19ce707-97de-4ce7-85ae-f6ca3d3f206e",
-      "job_id_short": "c19ce707",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "attempt": 0,
-      "created_at": "2026-04-11T14:02:02.195780+00:00",
-      "created_at_display": "2026-04-11 14:02",
-      "created_ago": "6d",
-      "updated_at": "2026-04-11T08:30:55.546665",
-      "scheduled_for": "2026-04-11 15:02",
-      "error": null,
-      "has_error": false,
-      "post_url": "https://youtube.com/shorts/th1ffCRDexo"
-    },
-    {
-      "job_id": "b8b077bc-7340-4617-8d0d-5f1dbf4bd3e3",
-      "job_id_short": "b8b077bc",
-      "channel": "arc_highlightz",
-      "status": "succeeded",
-      "attempt": 0,
-      "created_at": "2026-04-11T06:02:45.050209",
-      "created_at_display": "2026-04-11 06:02",
-      "created_ago": "6d",
-      "updated_at": "2026-04-11T06:31:27.173935",
-      "scheduled_for": "2026-04-11 10:00",
-      "error": null,
-      "has_error": false,
-      "post_url": "https://youtube.com/shorts/sASbBUrqgYA"
     }
   ],
   "queue": {
@@ -1581,7 +1581,7 @@
       "category": "Gaming",
       "target_per_day": 8,
       "published_24h": 6,
-      "queue_depth": 1,
+      "queue_depth": 3,
       "running_jobs": 0,
       "failed_7d": 0,
       "avg_views": 7304,
@@ -1590,9 +1590,9 @@
       "completion_rate": 75.0,
       "lagging": true,
       "views_source": "source_clips_proxy",
-      "latest_title": "BND Pays $0.25/Share \u00e2\u20ac\u201d While Stocks Panic, Bonds Pay \u00f0\u0178\u2019\u00b5\u00f0\u0178\u201c\u0160",
-      "latest_url": "https://youtube.com/shorts/taC39qpAs_Y",
-      "latest_uploaded_at": "2026-04-17 12:01"
+      "latest_title": "Long Bond ETF Pays $0.28/Share \u00e2\u20ac\u201d Best Rate Cut Bet? \u00f0\u0178\u2019\u00b0\u00f0\u0178\u201c\u02c6",
+      "latest_url": "https://youtube.com/shorts/BRjgOpEOyCA",
+      "latest_uploaded_at": "2026-04-17 12:31"
     },
     {
       "channel": "test_channel",
@@ -7759,6 +7759,20 @@
   },
   "top_clips": [
     {
+      "clip_id": "e9ac9841-101b-429d-a9e0-7eb5cfa66c4f",
+      "clip_id_short": "e9ac9841-101",
+      "title": "Long Bond ETF Pays $0.28/Share \u00e2\u20ac\u201d Best Rate Cut Bet? \u00f0\u0178\u2019\u00b0\u00f0\u0178\u201c\u02c6",
+      "source_title": null,
+      "creator": null,
+      "channel": "fomo_highlights",
+      "views": 0,
+      "likes": null,
+      "ctr_percent": null,
+      "upload_date": "2026-04-17 12:31",
+      "youtube_url": "https://youtube.com/shorts/BRjgOpEOyCA",
+      "metric_mode": "unavailable"
+    },
+    {
       "clip_id": "5fe23040-d7cc-40c4-b840-3c62bbbae77d",
       "clip_id_short": "5fe23040-d7c",
       "title": "BND Pays $0.25/Share \u00e2\u20ac\u201d While Stocks Panic, Bonds Pay \u00f0\u0178\u2019\u00b5\u00f0\u0178\u201c\u0160",
@@ -8023,33 +8037,55 @@
       "upload_date": "2026-04-15 19:06",
       "youtube_url": "https://youtube.com/shorts/sW5-gbWyyDA",
       "metric_mode": "unavailable"
-    },
-    {
-      "clip_id": "engine_auto_edab988b",
-      "clip_id_short": "engine_auto_",
-      "title": "Ludwig Funny Moments #44",
-      "source_title": null,
-      "creator": null,
-      "channel": "viral_recaps",
-      "views": 0,
-      "likes": null,
-      "ctr_percent": null,
-      "upload_date": "2026-04-15 18:38",
-      "youtube_url": "https://youtube.com/shorts/gj35CV-Iv_0",
-      "metric_mode": "unavailable"
     }
   ],
   "recent_uploads": [
     {
+      "job_id": "18a5a1eb-c114-4fd2-b299-af367cb467b8",
+      "job_id_short": "18a5a1eb",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "updated_at": "2026-04-17T19:04:52.843467+00:00",
+      "updated_at_display": "2026-04-17 19:04",
+      "updated_ago": "13m",
+      "title": "Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet? \ud83d\udcb0\ud83d\udcc8",
+      "url": null,
+      "error": null
+    },
+    {
+      "job_id": "f7352621-e957-4da5-9b7f-d55a15c39d5a",
+      "job_id_short": "f7352621",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "updated_at": "2026-04-17T19:03:48.243153+00:00",
+      "updated_at_display": "2026-04-17 19:03",
+      "updated_ago": "14m",
+      "title": "BND Pays $0.25/Share \u2014 While Stocks Panic, Bonds Pay \ud83d\udcb5\ud83d\udcca",
+      "url": null,
+      "error": null
+    },
+    {
+      "job_id": "fef8f954-1c47-4765-b4a8-ccbfa8e19aa0",
+      "job_id_short": "fef8f954",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "updated_at": "2026-04-17T19:02:42.246221+00:00",
+      "updated_at_display": "2026-04-17 19:02",
+      "updated_ago": "15m",
+      "title": "$4 Gas = Rate CUTS? The Fed's Counterintuitive Move \ud83e\udd2f\ud83d\udcc9",
+      "url": null,
+      "error": null
+    },
+    {
       "job_id": "e9ac9841-101b-429d-a9e0-7eb5cfa66c4f",
       "job_id_short": "e9ac9841",
       "channel": "fomo_highlights",
-      "status": "queued",
-      "updated_at": "2026-04-17T16:59:30.328569+00:00",
-      "updated_at_display": "2026-04-17 16:59",
-      "updated_ago": "1h",
+      "status": "succeeded",
+      "updated_at": "2026-04-17T12:31:14.227625",
+      "updated_at_display": "2026-04-17 12:31",
+      "updated_ago": "6h",
       "title": "Long Bond ETF Pays $0.28/Share \u00e2\u20ac\u201d Best Rate Cut Bet? \u00f0\u0178\u2019\u00b0\u00f0\u0178\u201c\u02c6",
-      "url": null,
+      "url": "https://youtube.com/shorts/BRjgOpEOyCA",
       "error": null
     },
     {
@@ -8059,7 +8095,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-17T12:01:00.190255",
       "updated_at_display": "2026-04-17 12:01",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "BND Pays $0.25/Share \u00e2\u20ac\u201d While Stocks Panic, Bonds Pay \u00f0\u0178\u2019\u00b5\u00f0\u0178\u201c\u0160",
       "url": "https://youtube.com/shorts/taC39qpAs_Y",
       "error": null
@@ -8071,7 +8107,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-17T11:31:03.130314",
       "updated_at_display": "2026-04-17 11:31",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "$4 Gas = Rate CUTS? The Fed's Counterintuitive Move \u00f0\u0178\u00a4\u00af\u00f0\u0178\u201c\u2030",
       "url": "https://youtube.com/shorts/MGwLVZAu5AQ",
       "error": null
@@ -8083,7 +8119,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-16T22:30:55.477467",
       "updated_at_display": "2026-04-16 22:30",
-      "updated_ago": "19h",
+      "updated_ago": "20h",
       "title": "Long Bond ETF Pays $0.28/Share \u00e2\u20ac\u201d Best Rate Cut Bet? \u00f0\u0178\u2019\u00b0\u00f0\u0178\u201c\u02c6",
       "url": "https://youtube.com/shorts/1DqxRkSIiag",
       "error": null
@@ -8095,7 +8131,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-16T22:01:01.859704",
       "updated_at_display": "2026-04-16 22:01",
-      "updated_ago": "20h",
+      "updated_ago": "21h",
       "title": "BND Pays $0.25/Share \u00e2\u20ac\u201d While Stocks Panic, Bonds Pay \u00f0\u0178\u2019\u00b5\u00f0\u0178\u201c\u0160",
       "url": "https://youtube.com/shorts/PghV8WdzQ6U",
       "error": null
@@ -8107,7 +8143,7 @@
       "status": "succeeded",
       "updated_at": "2026-04-16T21:31:07.512126",
       "updated_at_display": "2026-04-16 21:31",
-      "updated_ago": "20h",
+      "updated_ago": "21h",
       "title": "$4 Gas = Rate CUTS? The Fed's Counterintuitive Move \u00f0\u0178\u00a4\u00af\u00f0\u0178\u201c\u2030",
       "url": "https://youtube.com/shorts/3OjUWbsYjLs",
       "error": null
@@ -8119,49 +8155,27 @@
       "status": "succeeded",
       "updated_at": "2026-04-16T18:30:53.242547",
       "updated_at_display": "2026-04-16 18:30",
-      "updated_ago": "23h",
+      "updated_ago": "1d",
       "title": "Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet? \ud83d\udcb0\ud83d\udcc8",
       "url": "https://youtube.com/shorts/AlmCGBNU25Q",
-      "error": null
-    },
-    {
-      "job_id": "490aff3f-6020-4c71-b88b-1c541c3f2bbb",
-      "job_id_short": "490aff3f",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "updated_at": "2026-04-16T18:00:53.807609",
-      "updated_at_display": "2026-04-16 18:00",
-      "updated_ago": "1d",
-      "title": "BND Pays $0.25/Share \u2014 While Stocks Panic, Bonds Pay \ud83d\udcb5\ud83d\udcca",
-      "url": "https://youtube.com/shorts/r-iUhAbwGoA",
-      "error": null
-    },
-    {
-      "job_id": "d47e8045-34ee-4ce6-9a10-2dfde12f361a",
-      "job_id_short": "d47e8045",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "updated_at": "2026-04-16T17:31:12.656460",
-      "updated_at_display": "2026-04-16 17:31",
-      "updated_ago": "1d",
-      "title": "$4 Gas = Rate CUTS? The Fed's Counterintuitive Move \ud83e\udd2f\ud83d\udcc9",
-      "url": "https://youtube.com/shorts/Um9qWsJNKTg",
-      "error": null
-    },
-    {
-      "job_id": "d098c214-2476-4f56-ac32-ab1fed63bed2",
-      "job_id_short": "d098c214",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "updated_at": "2026-04-16T14:01:00.387967",
-      "updated_at_display": "2026-04-16 14:01",
-      "updated_ago": "1d",
-      "title": "\ud83c\uddec\ud83c\udde7 UK GDP Just Crushed Forecasts by 5x \u2014 Big Surprise for Markets",
-      "url": "https://youtube.com/shorts/jybpS06si2o",
       "error": null
     }
   ],
   "recent_clips": [
+    {
+      "job_id": "e9ac9841-101b-429d-a9e0-7eb5cfa66c4f",
+      "job_id_short": "e9ac9841",
+      "channel": "fomo_highlights",
+      "title": "Long Bond ETF Pays $0.28/Share \u00e2\u20ac\u201d Best Rate Cut Bet? \u00f0\u0178\u2019\u00b0\u00f0\u0178\u201c\u02c6",
+      "title_truncated": "Long Bond ETF Pays $0.28/Share \u00e2\u20ac\u201d Best Rate Cut Bet? \u00f0\u0178\u2019\u00b0\u00f0\u0178...",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/BRjgOpEOyCA",
+      "views": 0,
+      "views_display": "\u00e2\u20ac\u201d",
+      "published_at": "2026-04-17T12:31:14.227625",
+      "published_at_display": "2026-04-17 12:31",
+      "published_ago": "6h"
+    },
     {
       "job_id": "5fe23040-d7cc-40c4-b840-3c62bbbae77d",
       "job_id_short": "5fe23040",
@@ -8174,7 +8188,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-17T12:01:00.190255",
       "published_at_display": "2026-04-17 12:01",
-      "published_ago": "6h"
+      "published_ago": "7h"
     },
     {
       "job_id": "2142ac7a-9b43-4016-baf0-8dc650a93e03",
@@ -8188,7 +8202,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-17T11:31:03.130314",
       "published_at_display": "2026-04-17 11:31",
-      "published_ago": "6h"
+      "published_ago": "7h"
     },
     {
       "job_id": "e66ebb3d-1953-44b7-a02d-94c7a1a233d6",
@@ -8202,7 +8216,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-16T22:30:55.477467",
       "published_at_display": "2026-04-16 22:30",
-      "published_ago": "19h"
+      "published_ago": "20h"
     },
     {
       "job_id": "2d35ce2b-d0be-4156-b7b3-58120e651400",
@@ -8216,7 +8230,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-16T22:01:01.859704",
       "published_at_display": "2026-04-16 22:01",
-      "published_ago": "20h"
+      "published_ago": "21h"
     },
     {
       "job_id": "256906fa-342a-4c6c-b88a-eab5e655d304",
@@ -8230,7 +8244,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-16T21:31:07.512126",
       "published_at_display": "2026-04-16 21:31",
-      "published_ago": "20h"
+      "published_ago": "21h"
     },
     {
       "job_id": "4a367e35-e723-4d62-ba6c-211b3957fdf5",
@@ -8244,7 +8258,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-04-16T18:30:53.242547",
       "published_at_display": "2026-04-16 18:30",
-      "published_ago": "23h"
+      "published_ago": "1d"
     },
     {
       "job_id": "490aff3f-6020-4c71-b88b-1c541c3f2bbb",
@@ -8287,28 +8301,25 @@
       "published_at": "2026-04-16T14:01:00.387967",
       "published_at_display": "2026-04-16 14:01",
       "published_ago": "1d"
-    },
-    {
-      "job_id": "371afc9d-0ea1-4259-a2ef-7bda6c4972ed",
-      "job_id_short": "371afc9d",
-      "channel": "fomo_highlights",
-      "title": "\ud83d\udcc8 Stocks Jump After Ceasefire Headline \u2014 Here's Why Markets Snapped Back",
-      "title_truncated": "\ud83d\udcc8 Stocks Jump After Ceasefire Headline \u2014 Here's Why Markets ...",
-      "thumbnail_path": null,
-      "post_url": "https://youtube.com/shorts/9ZYLulnsoH8",
-      "views": 0,
-      "views_display": "\u00e2\u20ac\u201d",
-      "published_at": "2026-04-16T13:31:13.578939",
-      "published_at_display": "2026-04-16 13:31",
-      "published_ago": "1d"
     }
   ],
   "upload_timeline": {
     "buckets": [
       {
         "name": "Today",
-        "count": 2,
+        "count": 3,
         "items": [
+          {
+            "job_id": "e9ac9841-101b-429d-a9e0-7eb5cfa66c4f",
+            "job_id_short": "e9ac9841",
+            "channel": "fomo_highlights",
+            "title": "Long Bond ETF Pays $0.28/Share \u00e2\u20ac\u201d Best Rate Cut Bet? \u00f0\u0178\u2019...",
+            "published_at": "2026-04-17T12:31:14.227625",
+            "published_at_display": "2026-04-17 12:31",
+            "published_ago": "6h",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/BRjgOpEOyCA"
+          },
           {
             "job_id": "5fe23040-d7cc-40c4-b840-3c62bbbae77d",
             "job_id_short": "5fe23040",
@@ -8316,7 +8327,7 @@
             "title": "BND Pays $0.25/Share \u00e2\u20ac\u201d While Stocks Panic, Bonds Pay \u00f0\u0178...",
             "published_at": "2026-04-17T12:01:00.190255",
             "published_at_display": "2026-04-17 12:01",
-            "published_ago": "6h",
+            "published_ago": "7h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/taC39qpAs_Y"
           },
@@ -8327,7 +8338,7 @@
             "title": "$4 Gas = Rate CUTS? The Fed's Counterintuitive Move \u00f0\u0178\u00a4\u00af\u00f0\u0178\u201c\u2030",
             "published_at": "2026-04-17T11:31:03.130314",
             "published_at_display": "2026-04-17 11:31",
-            "published_ago": "6h",
+            "published_ago": "7h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/MGwLVZAu5AQ"
           }
@@ -8344,7 +8355,7 @@
             "title": "Long Bond ETF Pays $0.28/Share \u00e2\u20ac\u201d Best Rate Cut Bet? \u00f0\u0178\u2019...",
             "published_at": "2026-04-16T22:30:55.477467",
             "published_at_display": "2026-04-16 22:30",
-            "published_ago": "19h",
+            "published_ago": "20h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/1DqxRkSIiag"
           },
@@ -8355,7 +8366,7 @@
             "title": "BND Pays $0.25/Share \u00e2\u20ac\u201d While Stocks Panic, Bonds Pay \u00f0\u0178...",
             "published_at": "2026-04-16T22:01:01.859704",
             "published_at_display": "2026-04-16 22:01",
-            "published_ago": "20h",
+            "published_ago": "21h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/PghV8WdzQ6U"
           },
@@ -8366,7 +8377,7 @@
             "title": "$4 Gas = Rate CUTS? The Fed's Counterintuitive Move \u00f0\u0178\u00a4\u00af\u00f0\u0178\u201c\u2030",
             "published_at": "2026-04-16T21:31:07.512126",
             "published_at_display": "2026-04-16 21:31",
-            "published_ago": "20h",
+            "published_ago": "21h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/3OjUWbsYjLs"
           },
@@ -8377,7 +8388,7 @@
             "title": "Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet? \ud83d\udcb0\ud83d\udcc8",
             "published_at": "2026-04-16T18:30:53.242547",
             "published_at_display": "2026-04-16 18:30",
-            "published_ago": "23h",
+            "published_ago": "1d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/AlmCGBNU25Q"
           },
@@ -8473,7 +8484,7 @@
       },
       {
         "name": "This Week",
-        "count": 36,
+        "count": 35,
         "items": [
           {
             "job_id": "32586823-475a-4e0e-9f7e-6520ea659186",
@@ -8526,7 +8537,7 @@
             "title": "Ludwig Funny Moments #45",
             "published_at": "2026-04-15T19:06:49.578003",
             "published_at_display": "2026-04-15 19:06",
-            "published_ago": "1d",
+            "published_ago": "2d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/sW5-gbWyyDA"
           },
@@ -8537,7 +8548,7 @@
             "title": "Ludwig Funny Moments #44",
             "published_at": "2026-04-15T18:38:44.904078",
             "published_at_display": "2026-04-15 18:38",
-            "published_ago": "1d",
+            "published_ago": "2d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/gj35CV-Iv_0"
           },
@@ -8779,7 +8790,7 @@
             "title": "Wholesale Inflation Cools \u2014 Bullish for Stocks? \ud83d\udcc9\ud83d\udcc8",
             "published_at": "2026-04-14T18:31:10.874988",
             "published_at_display": "2026-04-14 18:31",
-            "published_ago": "2d",
+            "published_ago": "3d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/o2DlDYkT3s0"
           },
@@ -8859,17 +8870,6 @@
             "published_ago": "3d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/XLGAtpYt5lY"
-          },
-          {
-            "job_id": "1e030ead-2dc2-4ea7-ac01-644935d709ee",
-            "job_id_short": "1e030ead",
-            "channel": "fomo_highlights",
-            "title": "Tanker Stocks Are Surging on the Hormuz Blockade \ud83d\udea2\ud83d\udcc8",
-            "published_at": "2026-04-13T21:30:55.064177",
-            "published_at_display": "2026-04-13 21:30",
-            "published_ago": "3d",
-            "views": 0,
-            "post_url": "https://youtube.com/shorts/0sqwnMzJ4Wo"
           }
         ]
       },
@@ -9120,12 +9120,30 @@
   "schedule": {
     "2026-04-17": [
       {
-        "job_id": "e9ac9841-101b-429d-a9e0-7eb5cfa66c4f",
-        "job_id_short": "e9ac9841",
+        "job_id": "fef8f954-1c47-4765-b4a8-ccbfa8e19aa0",
+        "job_id_short": "fef8f954",
         "channel": "fomo_highlights",
-        "title": "Long Bond ETF Pays $0.28/Share \u00e2\u20ac\u201d Best Rate Cut B",
-        "scheduled_at": "2026-04-17T17:59:30",
-        "scheduled_at_iso": "2026-04-17T17:59:30",
+        "title": "$4 Gas = Rate CUTS? The Fed's Counterintuitive Mov",
+        "scheduled_at": "2026-04-17T20:02:42",
+        "scheduled_at_iso": "2026-04-17T20:02:42",
+        "status": "queued"
+      },
+      {
+        "job_id": "f7352621-e957-4da5-9b7f-d55a15c39d5a",
+        "job_id_short": "f7352621",
+        "channel": "fomo_highlights",
+        "title": "BND Pays $0.25/Share \u2014 While Stocks Panic, Bonds P",
+        "scheduled_at": "2026-04-17T20:03:48",
+        "scheduled_at_iso": "2026-04-17T20:03:48",
+        "status": "queued"
+      },
+      {
+        "job_id": "18a5a1eb-c114-4fd2-b299-af367cb467b8",
+        "job_id_short": "18a5a1eb",
+        "channel": "fomo_highlights",
+        "title": "Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet",
+        "scheduled_at": "2026-04-17T20:04:52",
+        "scheduled_at_iso": "2026-04-17T20:04:52",
         "status": "queued"
       },
       {
@@ -9144,6 +9162,15 @@
         "title": "BND Pays $0.25/Share \u00e2\u20ac\u201d While Stocks Panic, Bonds",
         "scheduled_at": "2026-04-17T12:01:00.190255",
         "scheduled_at_iso": "2026-04-17T12:01:00.190255",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "e9ac9841-101b-429d-a9e0-7eb5cfa66c4f",
+        "job_id_short": "e9ac9841",
+        "channel": "fomo_highlights",
+        "title": "Long Bond ETF Pays $0.28/Share \u00e2\u20ac\u201d Best Rate Cut B",
+        "scheduled_at": "2026-04-17T12:31:14.227625",
+        "scheduled_at_iso": "2026-04-17T12:31:14.227625",
         "status": "succeeded"
       }
     ],
@@ -10358,9 +10385,9 @@
     ],
     "any_channel_high": false,
     "all_channels_safe": true,
-    "reset_time_hours": 13,
+    "reset_time_hours": 12,
     "reset_time_minutes": 41,
-    "reset_time_display": "13h 41m"
+    "reset_time_display": "12h 41m"
   },
   "revenue": {
     "total_views_30d": 0,
@@ -10380,8 +10407,8 @@
       "discovered": 0,
       "downloaded": 0,
       "processed": 0,
-      "queued": 1,
-      "uploaded": 425
+      "queued": 3,
+      "uploaded": 426
     },
     "by_channel": [
       {
@@ -10397,8 +10424,8 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 1,
-        "uploaded": 178
+        "queued": 3,
+        "uploaded": 179
       },
       {
         "channel": "market_meltdowns",
@@ -10431,11 +10458,11 @@
     },
     "stage_timings": {
       "discovered_to_downloaded_hours": 0.0,
-      "queued_to_uploaded_hours": 2.07
+      "queued_to_uploaded_hours": 2.05
     },
     "bottleneck": {
       "stage": "queued",
-      "backlog": 1
+      "backlog": 3
     }
   },
   "disk": {
@@ -10457,9 +10484,9 @@
       {
         "name": "renders",
         "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\renders",
-        "size_bytes": 9801141185,
+        "size_bytes": 9816090368,
         "size_human": "9.1GB",
-        "file_count": 1185
+        "file_count": 1188
       },
       {
         "name": "renders/thumbnails",
@@ -10469,7 +10496,7 @@
         "file_count": 287
       }
     ],
-    "total_disk_bytes": 428632675171,
+    "total_disk_bytes": 428652697290,
     "total_disk_human": "399.2GB",
     "percent_of_500gb": 79.8,
     "warning_threshold_pct": 70,
@@ -10577,7 +10604,7 @@
         "post_url": "https://youtube.com/shorts/1lJD83MpQew",
         "published_at": "2026-04-03T18:34:55.861982",
         "published_at_display": "2026-04-03 18:34",
-        "published_ago": "13d",
+        "published_ago": "14d",
         "thumbnail_path": null
       },
       {
@@ -10590,7 +10617,7 @@
         "post_url": "https://youtube.com/shorts/5NGLHOsQ5t4",
         "published_at": "2026-04-02T18:32:21.483793",
         "published_at_display": "2026-04-02 18:32",
-        "published_ago": "14d",
+        "published_ago": "15d",
         "thumbnail_path": null
       },
       {
@@ -10642,7 +10669,7 @@
         "post_url": "https://youtube.com/shorts/y3Ng1YGaMIw",
         "published_at": "2026-04-06T18:31:23.525626",
         "published_at_display": "2026-04-06 18:31",
-        "published_ago": "10d",
+        "published_ago": "11d",
         "thumbnail_path": null
       }
     ],
@@ -10730,7 +10757,7 @@
     {
       "channel_name": "fomo_highlights",
       "total_views": 1092,
-      "uploads_30d": 170,
+      "uploads_30d": 171,
       "avg_views": 6,
       "best_clip_title": "No clips yet",
       "best_clip_views": 0,
@@ -11985,13 +12012,13 @@
   ],
   "daily_summary": {
     "date": "2026-04-17",
-    "uploads_today": 2,
-    "uploads_yesterday": 14,
+    "uploads_today": 3,
+    "uploads_yesterday": 15,
     "views_gained_today": 0,
     "views_yesterday": 0,
     "errors_today": 0,
-    "quota_pct": 32.0,
-    "quota_units_used": 3200,
+    "quota_pct": 48.0,
+    "quota_units_used": 4800,
     "delta_uploads": -12,
     "delta_views": 0,
     "top_clip_today": {
@@ -12002,22 +12029,22 @@
     "top_3_channels": [
       {
         "channel": "fomo_highlights",
-        "uploads": 2
+        "uploads": 3
       }
     ],
-    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-04-17\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 2 (-12 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 32.0% used (3200/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  $4 Gas = Rate CUTS? The Fed's Counterintuitive Move \u00f0\u0178\u00a4\u00af\u00f0\u0178\u201c\u2030\n  0 views \u00e2\u20ac\u00a2 fomo_highlights\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. fomo_highlights: 2 uploads",
-    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-04-17\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 2 (-12 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 32.0% used (`3200/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_$4 Gas = Rate CUTS? The Fed's Counterintuitive Move \u00f0\u0178\u00a4\u00af\u00f0\u0178\u201c\u2030_\n**0 views** \u00e2\u20ac\u00a2 **fomo_highlights**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **fomo_highlights** \u00e2\u20ac\u201d 2 uploads"
+    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-04-17\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 3 (-12 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 48.0% used (4800/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  $4 Gas = Rate CUTS? The Fed's Counterintuitive Move \u00f0\u0178\u00a4\u00af\u00f0\u0178\u201c\u2030\n  0 views \u00e2\u20ac\u00a2 fomo_highlights\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. fomo_highlights: 3 uploads",
+    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-04-17\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 3 (-12 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 48.0% used (`4800/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_$4 Gas = Rate CUTS? The Fed's Counterintuitive Move \u00f0\u0178\u00a4\u00af\u00f0\u0178\u201c\u2030_\n**0 views** \u00e2\u20ac\u00a2 **fomo_highlights**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **fomo_highlights** \u00e2\u20ac\u201d 3 uploads"
   },
   "title_performance": {
     "pattern_analysis": {
       "has_numbers": {
         "avg_views": 0.0,
-        "count": 322,
+        "count": 323,
         "total_views": 0
       },
       "has_question": {
         "avg_views": 0.0,
-        "count": 36,
+        "count": 37,
         "total_views": 0
       },
       "has_caps": {
@@ -12179,12 +12206,12 @@
         "channel": "fomo_highlights",
         "best_title": "Watch this before scrolling: Nobody plays like this",
         "best_views": 0,
-        "total_titles_analyzed": 178,
+        "total_titles_analyzed": 179,
         "pattern_breakdown": {
-          "numbers_pct": 57.9,
-          "questions_pct": 18.0,
+          "numbers_pct": 58.1,
+          "questions_pct": 18.4,
           "caps_pct": 0.6,
-          "emoji_pct": 78.7
+          "emoji_pct": 78.2
         }
       },
       {
@@ -12230,7 +12257,7 @@
       {
         "style_name": "Gaming/Clips",
         "avg_views": 0,
-        "total_clips": 418,
+        "total_clips": 419,
         "best_clip": null,
         "total_views": 0,
         "is_best": true
@@ -12255,7 +12282,7 @@
     "best_style_overall": "Gaming/Clips",
     "summary_stats": {
       "total_styles": 3,
-      "total_clips_all": 425,
+      "total_clips_all": 426,
       "total_views_all": 0,
       "avg_views_overall": 0
     }
@@ -12367,8 +12394,8 @@
       {
         "hour": 17,
         "hour_label": "17:00",
-        "posts": 12,
-        "avg_views": 983.0
+        "posts": 13,
+        "avg_views": 977.0
       },
       {
         "hour": 18,
@@ -12435,8 +12462,8 @@
       {
         "day": 4,
         "day_name": "Friday",
-        "posts": 48,
-        "avg_views": 682.0
+        "posts": 49,
+        "avg_views": 687.0
       },
       {
         "day": 5,
@@ -13392,7 +13419,7 @@
           "hour": 17,
           "day": 4,
           "views": 900.0,
-          "posts": 3,
+          "posts": 4,
           "intensity": 52.2
         },
         {
@@ -13717,7 +13744,35 @@
         }
       ]
     ],
-    "scheduled_posts": [],
+    "scheduled_posts": [
+      {
+        "job_id": "fef8f954",
+        "channel": "fomo_highlights",
+        "title": "$4 Gas = Rate CUTS? The Fed's Counterintuitive Mov",
+        "scheduled_at": "2026-04-17T20:02:42",
+        "hour": 20,
+        "day": 4,
+        "day_name": "Friday"
+      },
+      {
+        "job_id": "f7352621",
+        "channel": "fomo_highlights",
+        "title": "BND Pays $0.25/Share \u2014 While Stocks Panic, Bonds P",
+        "scheduled_at": "2026-04-17T20:03:48",
+        "hour": 20,
+        "day": 4,
+        "day_name": "Friday"
+      },
+      {
+        "job_id": "18a5a1eb",
+        "channel": "fomo_highlights",
+        "title": "Long Bond ETF Pays $0.28/Share \u2014 Best Rate Cut Bet",
+        "scheduled_at": "2026-04-17T20:04:52",
+        "hour": 20,
+        "day": 4,
+        "day_name": "Friday"
+      }
+    ],
     "next_best_slot": {
       "date": "2026-04-21",
       "hour": 23,
@@ -13725,7 +13780,7 @@
       "day_name": "Tuesday",
       "est_views": 1725.0
     },
-    "job_count": 425
+    "job_count": 426
   },
   "benchmarks": {
     "current_tier": "Starter",
@@ -13816,81 +13871,81 @@
     {
       "type": "warning",
       "title": "Channel \"market_meltdowns\" paused for 24+ hours",
-      "message": "market_meltdowns has been paused for 954 hours",
+      "message": "market_meltdowns has been paused for 955 hours",
       "channel": "market_meltdowns",
-      "created_at": "2026-04-17T18:18:10.527152",
+      "created_at": "2026-04-17T19:18:10.453240",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"self_made_clips\" paused for 24+ hours",
-      "message": "self_made_clips has been paused for 950 hours",
+      "message": "self_made_clips has been paused for 951 hours",
       "channel": "self_made_clips",
-      "created_at": "2026-04-17T18:18:10.527152",
+      "created_at": "2026-04-17T19:18:10.453240",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"rich_or_ruined\" paused for 24+ hours",
-      "message": "rich_or_ruined has been paused for 948 hours",
+      "message": "rich_or_ruined has been paused for 949 hours",
       "channel": "rich_or_ruined",
-      "created_at": "2026-04-17T18:18:10.527152",
+      "created_at": "2026-04-17T19:18:10.453240",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"startup_graveyard\" paused for 24+ hours",
-      "message": "startup_graveyard has been paused for 948 hours",
+      "message": "startup_graveyard has been paused for 949 hours",
       "channel": "startup_graveyard",
-      "created_at": "2026-04-17T18:18:10.527152",
+      "created_at": "2026-04-17T19:18:10.453240",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_sirens\" paused for 24+ hours",
-      "message": "stream_sirens has been paused for 927 hours",
+      "message": "stream_sirens has been paused for 928 hours",
       "channel": "stream_sirens",
-      "created_at": "2026-04-17T18:18:10.527152",
+      "created_at": "2026-04-17T19:18:10.453240",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_queens\" paused for 24+ hours",
-      "message": "stream_queens has been paused for 927 hours",
+      "message": "stream_queens has been paused for 928 hours",
       "channel": "stream_queens",
-      "created_at": "2026-04-17T18:18:10.527152",
+      "created_at": "2026-04-17T19:18:10.453240",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"ai_did_what\" paused for 24+ hours",
-      "message": "ai_did_what has been paused for 893 hours",
+      "message": "ai_did_what has been paused for 894 hours",
       "channel": "ai_did_what",
-      "created_at": "2026-04-17T18:18:10.527152",
+      "created_at": "2026-04-17T19:18:10.453240",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"gym_moments\" paused for 24+ hours",
-      "message": "gym_moments has been paused for 893 hours",
+      "message": "gym_moments has been paused for 894 hours",
       "channel": "gym_moments",
-      "created_at": "2026-04-17T18:18:10.527152",
+      "created_at": "2026-04-17T19:18:10.453240",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"kitchen_chaos\" paused for 24+ hours",
-      "message": "kitchen_chaos has been paused for 746 hours",
+      "message": "kitchen_chaos has been paused for 747 hours",
       "channel": "kitchen_chaos",
-      "created_at": "2026-04-17T18:18:10.527152",
+      "created_at": "2026-04-17T19:18:10.453240",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"unfiltered_clips\" paused for 24+ hours",
-      "message": "unfiltered_clips has been paused for 746 hours",
+      "message": "unfiltered_clips has been paused for 747 hours",
       "channel": "unfiltered_clips",
-      "created_at": "2026-04-17T18:18:10.527152",
+      "created_at": "2026-04-17T19:18:10.453240",
       "read": false
     }
   ],
@@ -14476,7 +14531,7 @@
         "category": "Gaming",
         "target_per_day": 8,
         "published_24h": 6,
-        "queue_depth": 1,
+        "queue_depth": 3,
         "running_jobs": 0,
         "failed_7d": 0,
         "avg_views": 7304,
@@ -14485,9 +14540,9 @@
         "completion_rate": 75.0,
         "lagging": true,
         "views_source": "source_clips_proxy",
-        "latest_title": "BND Pays $0.25/Share \u00e2\u20ac\u201d While Stocks Panic, Bonds Pay \u00f0\u0178\u2019\u00b5\u00f0\u0178\u201c\u0160",
-        "latest_url": "https://youtube.com/shorts/taC39qpAs_Y",
-        "latest_uploaded_at": "2026-04-17 12:01"
+        "latest_title": "Long Bond ETF Pays $0.28/Share \u00e2\u20ac\u201d Best Rate Cut Bet? \u00f0\u0178\u2019\u00b0\u00f0\u0178\u201c\u02c6",
+        "latest_url": "https://youtube.com/shorts/BRjgOpEOyCA",
+        "latest_uploaded_at": "2026-04-17 12:31"
       },
       {
         "channel": "test_channel",
@@ -14548,13 +14603,13 @@
       }
     ],
     "lagging_count": 4,
-    "queue_backlog": 1,
+    "queue_backlog": 3,
     "analytics_channels": 13
   },
   "meta": {
     "refresh_seconds": 30,
     "channel_count": 14,
-    "job_count": 608,
+    "job_count": 611,
     "has_metrics_daily": false,
     "has_clip_assets": false,
     "note": "Trend analytics prefer metrics_daily and fall back to source clip proxy series when upload analytics are sparse."

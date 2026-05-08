@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-05-08T08:18:05.600890Z",
+  "generated_at": "2026-05-08T09:18:05.564813Z",
   "repo_root": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire",
   "database_path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\data\\clip_empire.db",
   "health_score": {
-    "score": 67.9,
+    "score": 68.6,
     "grade": "C",
     "status": "Needs Attention",
     "color": "yellow",
     "breakdown": {
-      "pipeline_health": 0.0,
+      "pipeline_health": 0.7,
       "error_rate": 20.0,
       "quota_safety": 15,
       "queue_depth": 15,
@@ -16,13 +16,13 @@
       "channel_uptime": 2.9
     },
     "metrics": {
-      "uploads_today": 0,
+      "uploads_today": 1,
       "target_today": 34,
-      "pipeline_health_ratio": 0.0,
+      "pipeline_health_ratio": 0.03,
       "errors_today": 0,
       "total_jobs_today": 2,
       "error_rate": 0.0,
-      "queue_depth": 2,
+      "queue_depth": 1,
       "active_channels": 4,
       "total_channels": 14,
       "fresh_sources": 0,
@@ -34,16 +34,31 @@
     "total_channels": 14,
     "jobs_today": {
       "total": 2,
-      "queued": 2,
+      "queued": 1,
       "running": 0,
-      "succeeded": 0,
+      "succeeded": 1,
       "failed": 0,
       "cancelled": 0
     },
-    "render_queue_depth": 2,
-    "last_updated": "2026-05-08T08:18:05.600890Z"
+    "render_queue_depth": 1,
+    "last_updated": "2026-05-08T09:18:05.565846Z"
   },
   "queue_monitor": [
+    {
+      "job_id": "066fbfb0-0946-4581-8070-2b0ac8bd853f",
+      "job_id_short": "066fbfb0",
+      "channel": "arc_highlightz",
+      "status": "succeeded",
+      "attempt": 0,
+      "created_at": "2026-05-08T02:06:24.933814",
+      "created_at_display": "2026-05-08 02:06",
+      "created_ago": "7h",
+      "updated_at": "2026-05-08T03:01:54.562027",
+      "scheduled_for": "2026-05-08 07:00",
+      "error": null,
+      "has_error": false,
+      "post_url": "https://youtube.com/shorts/W6XO5839YoQ"
+    },
     {
       "job_id": "2e55379c-2a24-461a-b1f9-1adcc2733b89",
       "job_id_short": "2e55379c",
@@ -52,24 +67,9 @@
       "attempt": 0,
       "created_at": "2026-05-08T02:08:11.958609",
       "created_at_display": "2026-05-08 02:08",
-      "created_ago": "6h",
+      "created_ago": "7h",
       "updated_at": "2026-05-08T02:08:11.958609",
       "scheduled_for": "2026-05-08 09:00",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "066fbfb0-0946-4581-8070-2b0ac8bd853f",
-      "job_id_short": "066fbfb0",
-      "channel": "arc_highlightz",
-      "status": "queued",
-      "attempt": 0,
-      "created_at": "2026-05-08T02:06:24.933814",
-      "created_at_display": "2026-05-08 02:06",
-      "created_ago": "6h",
-      "updated_at": "2026-05-08T02:06:24.933814",
-      "scheduled_for": "2026-05-08 07:00",
       "error": null,
       "has_error": false,
       "post_url": null
@@ -82,7 +82,7 @@
       "attempt": 0,
       "created_at": "2026-05-07T12:13:24.858540",
       "created_at_display": "2026-05-07 12:13",
-      "created_ago": "20h",
+      "created_ago": "21h",
       "updated_at": "2026-05-07T13:01:27.476047",
       "scheduled_for": "2026-05-07 15:00",
       "error": null,
@@ -97,7 +97,7 @@
       "attempt": 0,
       "created_at": "2026-05-07T12:10:31.469166",
       "created_at_display": "2026-05-07 12:10",
-      "created_ago": "20h",
+      "created_ago": "21h",
       "updated_at": "2026-05-07T12:32:04.572234",
       "scheduled_for": "2026-05-07 13:00",
       "error": null,
@@ -172,7 +172,7 @@
       "attempt": 0,
       "created_at": "2026-05-06T08:40:59.820985",
       "created_at_display": "2026-05-06 08:40",
-      "created_ago": "1d",
+      "created_ago": "2d",
       "updated_at": "2026-05-06T09:32:02.172421",
       "scheduled_for": "2026-05-06 11:00",
       "error": null,
@@ -187,7 +187,7 @@
       "attempt": 0,
       "created_at": "2026-05-06T08:34:18.637970",
       "created_at_display": "2026-05-06 08:34",
-      "created_ago": "1d",
+      "created_ago": "2d",
       "updated_at": "2026-05-06T09:02:31.611273",
       "scheduled_for": "2026-05-06 10:00",
       "error": null,
@@ -202,7 +202,7 @@
       "attempt": 0,
       "created_at": "2026-05-06T08:31:26.838572",
       "created_at_display": "2026-05-06 08:31",
-      "created_ago": "1d",
+      "created_ago": "2d",
       "updated_at": "2026-05-06T08:43:22.013979",
       "scheduled_for": "2026-05-06 09:00",
       "error": null,
@@ -1637,19 +1637,19 @@
       "status": "active",
       "category": "Gaming",
       "target_per_day": 15,
-      "published_24h": 1,
-      "queue_depth": 1,
+      "published_24h": 2,
+      "queue_depth": 0,
       "running_jobs": 0,
       "failed_7d": 0,
       "avg_views": 1777,
       "rpm": 1.51,
-      "deficit": 14,
-      "completion_rate": 6.7,
+      "deficit": 13,
+      "completion_rate": 13.3,
       "lagging": true,
       "views_source": "source_clips_proxy",
-      "latest_title": "Taxi2g Crazy Moments #29",
-      "latest_url": "https://youtube.com/shorts/E7aeB-EC2e8",
-      "latest_uploaded_at": "2026-05-07 12:32"
+      "latest_title": "Nickmercs Wild Moments #15",
+      "latest_url": "https://youtube.com/shorts/W6XO5839YoQ",
+      "latest_uploaded_at": "2026-05-08 03:01"
     },
     {
       "channel": "stream_queens",
@@ -6611,7 +6611,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-08 08:06:31",
       "last_fetch_display": "2026-05-08 08:06",
-      "last_fetch_ago": "11m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.583,
@@ -6639,7 +6639,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-08 08:06:39",
       "last_fetch_display": "2026-05-08 08:06",
-      "last_fetch_ago": "11m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.572,
@@ -7003,7 +7003,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-26 08:21:08",
       "last_fetch_display": "2026-03-26 08:21",
-      "last_fetch_ago": "42d",
+      "last_fetch_ago": "43d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -7283,7 +7283,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-08 08:02:48",
       "last_fetch_display": "2026-05-08 08:02",
-      "last_fetch_ago": "15m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.103,
@@ -7311,7 +7311,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-07 18:12:51",
       "last_fetch_display": "2026-05-07 18:12",
-      "last_fetch_ago": "14h",
+      "last_fetch_ago": "15h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.058,
@@ -7325,7 +7325,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-08 08:07:46",
       "last_fetch_display": "2026-05-08 08:07",
-      "last_fetch_ago": "10m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.05,
@@ -7339,7 +7339,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-08 08:06:40",
       "last_fetch_display": "2026-05-08 08:06",
-      "last_fetch_ago": "11m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.285,
@@ -7353,7 +7353,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-08 08:05:01",
       "last_fetch_display": "2026-05-08 08:05",
-      "last_fetch_ago": "13m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.037,
@@ -7367,7 +7367,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-08 08:05:40",
       "last_fetch_display": "2026-05-08 08:05",
-      "last_fetch_ago": "12m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.087,
@@ -7381,7 +7381,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-08 08:03:26",
       "last_fetch_display": "2026-05-08 08:03",
-      "last_fetch_ago": "14m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.079,
@@ -7395,7 +7395,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-26 09:07:11",
       "last_fetch_display": "2026-03-26 09:07",
-      "last_fetch_ago": "42d",
+      "last_fetch_ago": "43d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.25,
@@ -7409,7 +7409,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-08 08:04:15",
       "last_fetch_display": "2026-05-08 08:04",
-      "last_fetch_ago": "13m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.088,
@@ -7437,7 +7437,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-08 08:02:15",
       "last_fetch_display": "2026-05-08 08:02",
-      "last_fetch_ago": "15m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.077,
@@ -7465,7 +7465,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-08 08:06:27",
       "last_fetch_display": "2026-05-08 08:06",
-      "last_fetch_ago": "11m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.368,
@@ -7759,6 +7759,20 @@
   },
   "top_clips": [
     {
+      "clip_id": "engine_auto_ed93bc31",
+      "clip_id_short": "engine_auto_",
+      "title": "Nickmercs Wild Moments #15",
+      "source_title": null,
+      "creator": null,
+      "channel": "arc_highlightz",
+      "views": 0,
+      "likes": null,
+      "ctr_percent": null,
+      "upload_date": "2026-05-08 03:01",
+      "youtube_url": "https://youtube.com/shorts/W6XO5839YoQ",
+      "metric_mode": "unavailable"
+    },
+    {
       "clip_id": "engine_auto_6f8306c1",
       "clip_id_short": "engine_auto_",
       "title": "Hasanabi Clutch Moments #15",
@@ -7929,26 +7943,26 @@
   ],
   "recent_uploads": [
     {
+      "job_id": "066fbfb0-0946-4581-8070-2b0ac8bd853f",
+      "job_id_short": "066fbfb0",
+      "channel": "arc_highlightz",
+      "status": "succeeded",
+      "updated_at": "2026-05-08T03:01:54.562027",
+      "updated_at_display": "2026-05-08 03:01",
+      "updated_ago": "6h",
+      "title": "Nickmercs Wild Moments #15",
+      "url": "https://youtube.com/shorts/W6XO5839YoQ",
+      "error": null
+    },
+    {
       "job_id": "2e55379c-2a24-461a-b1f9-1adcc2733b89",
       "job_id_short": "2e55379c",
       "channel": "viral_recaps",
       "status": "queued",
       "updated_at": "2026-05-08T02:08:11.958609",
       "updated_at_display": "2026-05-08 02:08",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "Ludwig Chaotic Moments #75",
-      "url": null,
-      "error": null
-    },
-    {
-      "job_id": "066fbfb0-0946-4581-8070-2b0ac8bd853f",
-      "job_id_short": "066fbfb0",
-      "channel": "arc_highlightz",
-      "status": "queued",
-      "updated_at": "2026-05-08T02:06:24.933814",
-      "updated_at_display": "2026-05-08 02:06",
-      "updated_ago": "6h",
-      "title": "Nickmercs Wild Moments #15",
       "url": null,
       "error": null
     },
@@ -7959,7 +7973,7 @@
       "status": "succeeded",
       "updated_at": "2026-05-07T13:01:27.476047",
       "updated_at_display": "2026-05-07 13:01",
-      "updated_ago": "19h",
+      "updated_ago": "20h",
       "title": "Hasanabi Clutch Moments #15",
       "url": "https://youtube.com/shorts/FOOnfc_pP6c",
       "error": null
@@ -7971,7 +7985,7 @@
       "status": "succeeded",
       "updated_at": "2026-05-07T12:32:04.572234",
       "updated_at_display": "2026-05-07 12:32",
-      "updated_ago": "19h",
+      "updated_ago": "20h",
       "title": "Taxi2g Crazy Moments #29",
       "url": "https://youtube.com/shorts/E7aeB-EC2e8",
       "error": null
@@ -8043,13 +8057,27 @@
       "status": "succeeded",
       "updated_at": "2026-05-06T09:02:31.611273",
       "updated_at_display": "2026-05-06 09:02",
-      "updated_ago": "1d",
+      "updated_ago": "2d",
       "title": "Cloakzy Funny Moments #39",
       "url": "https://youtube.com/shorts/jvt9GpNsP0A",
       "error": null
     }
   ],
   "recent_clips": [
+    {
+      "job_id": "066fbfb0-0946-4581-8070-2b0ac8bd853f",
+      "job_id_short": "066fbfb0",
+      "channel": "arc_highlightz",
+      "title": "Nickmercs Wild Moments #15",
+      "title_truncated": "Nickmercs Wild Moments #15",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/W6XO5839YoQ",
+      "views": 108,
+      "views_display": "108",
+      "published_at": "2026-05-08T03:01:54.562027",
+      "published_at_display": "2026-05-08 03:01",
+      "published_ago": "6h"
+    },
     {
       "job_id": "00cc63d8-6f96-4946-a3e7-45eb935bfec9",
       "job_id_short": "00cc63d8",
@@ -8062,7 +8090,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-05-07T13:01:27.476047",
       "published_at_display": "2026-05-07 13:01",
-      "published_ago": "19h"
+      "published_ago": "20h"
     },
     {
       "job_id": "2481e4d5-0244-4c95-a739-d47c7822bec3",
@@ -8076,7 +8104,7 @@
       "views_display": "2",
       "published_at": "2026-05-07T12:32:04.572234",
       "published_at_display": "2026-05-07 12:32",
-      "published_ago": "19h"
+      "published_ago": "20h"
     },
     {
       "job_id": "aa39ca35-d512-4255-b491-5c4744ef30a9",
@@ -8160,7 +8188,7 @@
       "views_display": "3",
       "published_at": "2026-05-06T09:02:31.611273",
       "published_at_display": "2026-05-06 09:02",
-      "published_ago": "1d"
+      "published_ago": "2d"
     },
     {
       "job_id": "21acccf0-44f4-440f-b5d3-0aa644ae78d9",
@@ -8174,29 +8202,27 @@
       "views_display": "107",
       "published_at": "2026-05-06T08:43:22.013979",
       "published_at_display": "2026-05-06 08:43",
-      "published_ago": "1d"
-    },
-    {
-      "job_id": "f080f473-e20c-463c-a9e0-be2c8e48ea9e",
-      "job_id_short": "f080f473",
-      "channel": "viral_recaps",
-      "title": "Ludwig Clutch Moments #73",
-      "title_truncated": "Ludwig Clutch Moments #73",
-      "thumbnail_path": null,
-      "post_url": "https://youtube.com/shorts/PjKaZTjgEOU",
-      "views": 0,
-      "views_display": "\u00e2\u20ac\u201d",
-      "published_at": "2026-05-01T15:31:22.722583",
-      "published_at_display": "2026-05-01 15:31",
-      "published_ago": "6d"
+      "published_ago": "2d"
     }
   ],
   "upload_timeline": {
     "buckets": [
       {
         "name": "Today",
-        "count": 0,
-        "items": []
+        "count": 1,
+        "items": [
+          {
+            "job_id": "066fbfb0-0946-4581-8070-2b0ac8bd853f",
+            "job_id_short": "066fbfb0",
+            "channel": "arc_highlightz",
+            "title": "Nickmercs Wild Moments #15",
+            "published_at": "2026-05-08T03:01:54.562027",
+            "published_at_display": "2026-05-08 03:01",
+            "published_ago": "6h",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/W6XO5839YoQ"
+          }
+        ]
       },
       {
         "name": "Yesterday",
@@ -8209,7 +8235,7 @@
             "title": "Hasanabi Clutch Moments #15",
             "published_at": "2026-05-07T13:01:27.476047",
             "published_at_display": "2026-05-07 13:01",
-            "published_ago": "19h",
+            "published_ago": "20h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/FOOnfc_pP6c"
           },
@@ -8220,7 +8246,7 @@
             "title": "Taxi2g Crazy Moments #29",
             "published_at": "2026-05-07T12:32:04.572234",
             "published_at_display": "2026-05-07 12:32",
-            "published_ago": "19h",
+            "published_ago": "20h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/E7aeB-EC2e8"
           }
@@ -8292,7 +8318,7 @@
             "title": "Cloakzy Funny Moments #39",
             "published_at": "2026-05-06T09:02:31.611273",
             "published_at_display": "2026-05-06 09:02",
-            "published_ago": "1d",
+            "published_ago": "2d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/jvt9GpNsP0A"
           },
@@ -8303,7 +8329,7 @@
             "title": "Tfue Clutch Moments #47",
             "published_at": "2026-05-06T08:43:22.013979",
             "published_at_display": "2026-05-06 08:43",
-            "published_ago": "1d",
+            "published_ago": "2d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/-xOF9UQEYzQ"
           }
@@ -8614,7 +8640,7 @@
       },
       {
         "name": "Older",
-        "count": 14,
+        "count": 13,
         "items": [
           {
             "job_id": "4f341f55-bee2-45cf-97b5-3418d2b94be2",
@@ -8733,7 +8759,7 @@
             "title": "Taxi2g Funny Moments #27",
             "published_at": "2026-04-26T09:02:07.895452",
             "published_at_display": "2026-04-26 09:02",
-            "published_ago": "11d",
+            "published_ago": "12d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/S3NVxT77C9Y"
           },
@@ -8758,17 +8784,6 @@
             "published_ago": "12d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/BrWBAoM3G1c"
-          },
-          {
-            "job_id": "b4e724ac-811e-45bb-8dab-5de79ed77b2a",
-            "job_id_short": "b4e724ac",
-            "channel": "arc_highlightz",
-            "title": "Taxi2g Funny Moments #24",
-            "published_at": "2026-04-26T06:01:23.273657",
-            "published_at_display": "2026-04-26 06:01",
-            "published_ago": "12d",
-            "views": 0,
-            "post_url": "https://youtube.com/shorts/NBhucaoV0W8"
           }
         ]
       }
@@ -9009,15 +9024,6 @@
   "schedule": {
     "2026-05-08": [
       {
-        "job_id": "066fbfb0-0946-4581-8070-2b0ac8bd853f",
-        "job_id_short": "066fbfb0",
-        "channel": "arc_highlightz",
-        "title": "Nickmercs Wild Moments #15",
-        "scheduled_at": "2026-05-08T07:00:00-06:00",
-        "scheduled_at_iso": "2026-05-08T07:00:00",
-        "status": "queued"
-      },
-      {
         "job_id": "2e55379c-2a24-461a-b1f9-1adcc2733b89",
         "job_id_short": "2e55379c",
         "channel": "viral_recaps",
@@ -9025,6 +9031,15 @@
         "scheduled_at": "2026-05-08T09:00:00-06:00",
         "scheduled_at_iso": "2026-05-08T09:00:00",
         "status": "queued"
+      },
+      {
+        "job_id": "066fbfb0-0946-4581-8070-2b0ac8bd853f",
+        "job_id_short": "066fbfb0",
+        "channel": "arc_highlightz",
+        "title": "Nickmercs Wild Moments #15",
+        "scheduled_at": "2026-05-08T03:01:54.562027",
+        "scheduled_at_iso": "2026-05-08T03:01:54.562027",
+        "status": "succeeded"
       }
     ],
     "2026-05-01": [
@@ -9322,9 +9337,9 @@
     ],
     "any_channel_high": false,
     "all_channels_safe": true,
-    "reset_time_hours": 23,
+    "reset_time_hours": 22,
     "reset_time_minutes": 41,
-    "reset_time_display": "23h 41m"
+    "reset_time_display": "22h 41m"
   },
   "revenue": {
     "total_views_30d": 0,
@@ -9344,8 +9359,8 @@
       "discovered": 0,
       "downloaded": 0,
       "processed": 0,
-      "queued": 2,
-      "uploaded": 562
+      "queued": 1,
+      "uploaded": 563
     },
     "by_channel": [
       {
@@ -9353,8 +9368,8 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 1,
-        "uploaded": 194
+        "queued": 0,
+        "uploaded": 195
       },
       {
         "channel": "fomo_highlights",
@@ -9390,8 +9405,8 @@
       }
     ],
     "throughput": {
-      "uploads_per_hour": 0.08,
-      "uploads_last_24h": 2
+      "uploads_per_hour": 0.12,
+      "uploads_last_24h": 3
     },
     "stage_timings": {
       "discovered_to_downloaded_hours": 0.0,
@@ -9399,7 +9414,7 @@
     },
     "bottleneck": {
       "stage": "queued",
-      "backlog": 2
+      "backlog": 1
     }
   },
   "disk": {
@@ -9433,7 +9448,7 @@
         "file_count": 65
       }
     ],
-    "total_disk_bytes": 94135561683,
+    "total_disk_bytes": 94140689662,
     "total_disk_human": "87.7GB",
     "percent_of_500gb": 17.5,
     "warning_threshold_pct": 70,
@@ -9682,9 +9697,9 @@
   "leaderboard": [
     {
       "channel_name": "arc_highlightz",
-      "total_views": 44066,
-      "uploads_30d": 62,
-      "avg_views": 710,
+      "total_views": 44174,
+      "uploads_30d": 63,
+      "avg_views": 701,
       "best_clip_title": "No clips yet",
       "best_clip_views": 0,
       "best_clip_url": "",
@@ -9694,7 +9709,7 @@
     {
       "channel_name": "fomo_highlights",
       "total_views": 1092,
-      "uploads_30d": 154,
+      "uploads_30d": 152,
       "avg_views": 7,
       "best_clip_title": "No clips yet",
       "best_clip_views": 0,
@@ -9714,7 +9729,7 @@
       "trend": "stable"
     },
     {
-      "channel_name": "market_meltdowns",
+      "channel_name": "test_channel",
       "total_views": 0,
       "uploads_30d": 0,
       "avg_views": 0,
@@ -9725,7 +9740,7 @@
       "trend": "stable"
     },
     {
-      "channel_name": "test_channel",
+      "channel_name": "market_meltdowns",
       "total_views": 0,
       "uploads_30d": 0,
       "avg_views": 0,
@@ -10775,7 +10790,7 @@
           "priority": 3,
           "clips_fetched": 29,
           "last_fetched_at": "2026-05-07T18:10:31.492007",
-          "last_fetched_rel": "14h",
+          "last_fetched_rel": "15h",
           "enabled": true,
           "url": "vod://taxi2g",
           "type": "vod_highlights"
@@ -10808,7 +10823,7 @@
           "priority": 1,
           "clips_fetched": 15,
           "last_fetched_at": "2026-05-07T18:13:24.883478",
-          "last_fetched_rel": "14h",
+          "last_fetched_rel": "15h",
           "enabled": true,
           "url": "https://www.youtube.com/@HasanAbi/videos",
           "type": "transcript"
@@ -10822,7 +10837,7 @@
           "priority": 1,
           "clips_fetched": 74,
           "last_fetched_at": "2026-05-08T08:08:11.975960",
-          "last_fetched_rel": "9m",
+          "last_fetched_rel": "1h",
           "enabled": true,
           "url": "https://www.youtube.com/@Ludwig/videos",
           "type": "transcript"
@@ -10949,25 +10964,34 @@
   ],
   "daily_summary": {
     "date": "2026-05-08",
-    "uploads_today": 0,
-    "uploads_yesterday": 2,
+    "uploads_today": 1,
+    "uploads_yesterday": 3,
     "views_gained_today": 0,
     "views_yesterday": 0,
     "errors_today": 0,
-    "quota_pct": 0.0,
-    "quota_units_used": 0,
+    "quota_pct": 16.0,
+    "quota_units_used": 1600,
     "delta_uploads": -2,
     "delta_views": 0,
-    "top_clip_today": null,
-    "top_3_channels": [],
-    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-05-08\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 0 (-2 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 0.0% used (0/10000 units)",
-    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-05-08\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 0 (-2 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 0.0% used (`0/10000` units)"
+    "top_clip_today": {
+      "title": "Nickmercs Wild Moments #15",
+      "views": 0,
+      "channel": "arc_highlightz"
+    },
+    "top_3_channels": [
+      {
+        "channel": "arc_highlightz",
+        "uploads": 1
+      }
+    ],
+    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-05-08\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 1 (-2 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 16.0% used (1600/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Nickmercs Wild Moments #15\n  0 views \u00e2\u20ac\u00a2 arc_highlightz\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. arc_highlightz: 1 uploads",
+    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-05-08\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 1 (-2 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 16.0% used (`1600/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Nickmercs Wild Moments #15_\n**0 views** \u00e2\u20ac\u00a2 **arc_highlightz**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **arc_highlightz** \u00e2\u20ac\u201d 1 uploads"
   },
   "title_performance": {
     "pattern_analysis": {
       "has_numbers": {
         "avg_views": 0.0,
-        "count": 428,
+        "count": 429,
         "total_views": 0
       },
       "has_question": {
@@ -11122,9 +11146,9 @@
         "channel": "arc_highlightz",
         "best_title": "Watch this before scrolling: Nobody plays like this",
         "best_views": 0,
-        "total_titles_analyzed": 194,
+        "total_titles_analyzed": 195,
         "pattern_breakdown": {
-          "numbers_pct": 94.3,
+          "numbers_pct": 94.4,
           "questions_pct": 0.5,
           "caps_pct": 0.5,
           "emoji_pct": 1.5
@@ -11185,7 +11209,7 @@
       {
         "style_name": "Gaming/Clips",
         "avg_views": 0,
-        "total_clips": 555,
+        "total_clips": 556,
         "best_clip": null,
         "total_views": 0,
         "is_best": true
@@ -11210,7 +11234,7 @@
     "best_style_overall": "Gaming/Clips",
     "summary_stats": {
       "total_styles": 3,
-      "total_clips_all": 562,
+      "total_clips_all": 563,
       "total_views_all": 0,
       "avg_views_overall": 0
     }
@@ -11262,8 +11286,8 @@
       {
         "hour": 7,
         "hour_label": "07:00",
-        "posts": 19,
-        "avg_views": 572.0
+        "posts": 20,
+        "avg_views": 570.0
       },
       {
         "hour": 8,
@@ -11390,8 +11414,8 @@
       {
         "day": 4,
         "day_name": "Friday",
-        "posts": 63,
-        "avg_views": 740.0
+        "posts": 64,
+        "avg_views": 737.0
       },
       {
         "day": 5,
@@ -11837,7 +11861,7 @@
           "hour": 7,
           "day": 4,
           "views": 540.0,
-          "posts": 3,
+          "posts": 4,
           "intensity": 32.7
         },
         {
@@ -12672,17 +12696,7 @@
         }
       ]
     ],
-    "scheduled_posts": [
-      {
-        "job_id": "2e55379c",
-        "channel": "viral_recaps",
-        "title": "Ludwig Chaotic Moments #75",
-        "scheduled_at": "2026-05-08T09:00:00-06:00",
-        "hour": 9,
-        "day": 4,
-        "day_name": "Friday"
-      }
-    ],
+    "scheduled_posts": [],
     "next_best_slot": {
       "date": "2026-05-12",
       "hour": 22,
@@ -12690,7 +12704,7 @@
       "day_name": "Tuesday",
       "est_views": 1650.0
     },
-    "job_count": 562
+    "job_count": 563
   },
   "benchmarks": {
     "current_tier": "Starter",
@@ -12781,87 +12795,87 @@
     {
       "type": "warning",
       "title": "Channel \"market_meltdowns\" paused for 24+ hours",
-      "message": "market_meltdowns has been paused for 1448 hours",
+      "message": "market_meltdowns has been paused for 1449 hours",
       "channel": "market_meltdowns",
-      "created_at": "2026-05-08T08:18:05.600890",
+      "created_at": "2026-05-08T09:18:05.561706",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"self_made_clips\" paused for 24+ hours",
-      "message": "self_made_clips has been paused for 1444 hours",
+      "message": "self_made_clips has been paused for 1445 hours",
       "channel": "self_made_clips",
-      "created_at": "2026-05-08T08:18:05.600890",
+      "created_at": "2026-05-08T09:18:05.561706",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"rich_or_ruined\" paused for 24+ hours",
-      "message": "rich_or_ruined has been paused for 1442 hours",
+      "message": "rich_or_ruined has been paused for 1443 hours",
       "channel": "rich_or_ruined",
-      "created_at": "2026-05-08T08:18:05.600890",
+      "created_at": "2026-05-08T09:18:05.561706",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"startup_graveyard\" paused for 24+ hours",
-      "message": "startup_graveyard has been paused for 1442 hours",
+      "message": "startup_graveyard has been paused for 1443 hours",
       "channel": "startup_graveyard",
-      "created_at": "2026-05-08T08:18:05.600890",
+      "created_at": "2026-05-08T09:18:05.561706",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_sirens\" paused for 24+ hours",
-      "message": "stream_sirens has been paused for 1421 hours",
+      "message": "stream_sirens has been paused for 1422 hours",
       "channel": "stream_sirens",
-      "created_at": "2026-05-08T08:18:05.600890",
+      "created_at": "2026-05-08T09:18:05.561706",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_queens\" paused for 24+ hours",
-      "message": "stream_queens has been paused for 1421 hours",
+      "message": "stream_queens has been paused for 1422 hours",
       "channel": "stream_queens",
-      "created_at": "2026-05-08T08:18:05.600890",
+      "created_at": "2026-05-08T09:18:05.561706",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"ai_did_what\" paused for 24+ hours",
-      "message": "ai_did_what has been paused for 1387 hours",
+      "message": "ai_did_what has been paused for 1388 hours",
       "channel": "ai_did_what",
-      "created_at": "2026-05-08T08:18:05.600890",
+      "created_at": "2026-05-08T09:18:05.561706",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"gym_moments\" paused for 24+ hours",
-      "message": "gym_moments has been paused for 1387 hours",
+      "message": "gym_moments has been paused for 1388 hours",
       "channel": "gym_moments",
-      "created_at": "2026-05-08T08:18:05.600890",
+      "created_at": "2026-05-08T09:18:05.561706",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"kitchen_chaos\" paused for 24+ hours",
-      "message": "kitchen_chaos has been paused for 1240 hours",
+      "message": "kitchen_chaos has been paused for 1241 hours",
       "channel": "kitchen_chaos",
-      "created_at": "2026-05-08T08:18:05.600890",
+      "created_at": "2026-05-08T09:18:05.561706",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"unfiltered_clips\" paused for 24+ hours",
-      "message": "unfiltered_clips has been paused for 1240 hours",
+      "message": "unfiltered_clips has been paused for 1241 hours",
       "channel": "unfiltered_clips",
-      "created_at": "2026-05-08T08:18:05.600890",
+      "created_at": "2026-05-08T09:18:05.561706",
       "read": false
     }
   ],
   "checklists": [
     {
-      "channel": "arc_highlightz",
+      "channel": "viral_recaps",
       "readiness_score": 6,
       "total_checks": 6,
       "badge": "launch_ready",
@@ -12901,12 +12915,12 @@
       ]
     },
     {
-      "channel": "viral_recaps",
-      "readiness_score": 6,
+      "channel": "arc_highlightz",
+      "readiness_score": 5,
       "total_checks": 6,
-      "badge": "launch_ready",
-      "badge_text": "Launch Ready",
-      "badge_color": "green",
+      "badge": "needs_attention",
+      "badge_text": "Needs Attention",
+      "badge_color": "orange",
       "checks": [
         {
           "label": "Has YouTube account linked",
@@ -12930,8 +12944,8 @@
         },
         {
           "label": "Has clips in queue",
-          "passed": true,
-          "icon": "\u00e2\u0153\u2026"
+          "passed": false,
+          "icon": "\u00e2\u009d\u0152"
         },
         {
           "label": "Quota not exhausted (< 90% used)",
@@ -13497,23 +13511,23 @@
         "status": "active",
         "category": "Gaming",
         "target_per_day": 15,
-        "published_24h": 1,
-        "queue_depth": 1,
+        "published_24h": 2,
+        "queue_depth": 0,
         "running_jobs": 0,
         "failed_7d": 0,
         "avg_views": 1777,
         "rpm": 1.51,
-        "deficit": 14,
-        "completion_rate": 6.7,
+        "deficit": 13,
+        "completion_rate": 13.3,
         "lagging": true,
         "views_source": "source_clips_proxy",
-        "latest_title": "Taxi2g Crazy Moments #29",
-        "latest_url": "https://youtube.com/shorts/E7aeB-EC2e8",
-        "latest_uploaded_at": "2026-05-07 12:32"
+        "latest_title": "Nickmercs Wild Moments #15",
+        "latest_url": "https://youtube.com/shorts/W6XO5839YoQ",
+        "latest_uploaded_at": "2026-05-08 03:01"
       }
     ],
     "lagging_count": 4,
-    "queue_backlog": 2,
+    "queue_backlog": 1,
     "analytics_channels": 13
   },
   "meta": {

@@ -153,6 +153,57 @@ def init_db():
         )
     """)
 
+    # Clients table (Phase 1 Intake)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS clients (
+            client_id TEXT PRIMARY KEY,
+            display_name TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        )
+    """)
+
+    # Intake Jobs table (Phase 1 Intake)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS intake_jobs (
+            job_id TEXT PRIMARY KEY,
+            client_id TEXT NOT NULL,
+            source_type TEXT NOT NULL, -- 'url' or 'file'
+            source_path TEXT NOT NULL, -- youtube url, or local path
+            status TEXT NOT NULL DEFAULT 'pending', -- 'pending', 'analyzing', 'generating', 'done', 'failed'
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL,
+            FOREIGN KEY (client_id) REFERENCES clients (client_id)
+        )
+    """)
+
+    # Clip Candidates table (Phase 1 Intake)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS clip_candidates (
+            candidate_id TEXT PRIMARY KEY,
+            job_id TEXT NOT NULL,
+            clip_path TEXT NOT NULL,
+            title TEXT,
+            description TEXT,
+            hashtags TEXT, -- JSON array
+            status TEXT NOT NULL DEFAULT 'pending_review', -- 'pending_review', 'approved', 'rejected', 'published'
+            created_at TEXT NOT NULL,
+            FOREIGN KEY (job_id) REFERENCES intake_jobs (job_id)
+        )
+    """)
+
+    # Intake Audit log (Phase 1 Intake)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS intake_audit (
+            audit_id TEXT PRIMARY KEY,
+            job_id TEXT NOT NULL,
+            action TEXT NOT NULL,
+            details TEXT,
+            at TEXT NOT NULL,
+            FOREIGN KEY (job_id) REFERENCES intake_jobs (job_id)
+        )
+    """)
+
     conn.commit()
     conn.close()
     print(f"Database initialized at {DATABASE_PATH}")

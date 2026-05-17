@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-17T00:18:06.066261Z",
+  "generated_at": "2026-05-17T01:18:05.743374Z",
   "repo_root": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire",
   "database_path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\data\\clip_empire.db",
   "health_score": {
@@ -22,7 +22,7 @@
       "errors_today": 0,
       "total_jobs_today": 0,
       "error_rate": 0.0,
-      "queue_depth": 2,
+      "queue_depth": 1,
       "active_channels": 4,
       "total_channels": 14,
       "fresh_sources": 0,
@@ -34,16 +34,31 @@
     "total_channels": 14,
     "jobs_today": {
       "total": 5,
-      "queued": 2,
+      "queued": 1,
       "running": 0,
-      "succeeded": 3,
+      "succeeded": 4,
       "failed": 0,
       "cancelled": 0
     },
-    "render_queue_depth": 2,
-    "last_updated": "2026-05-17T00:18:06.066261Z"
+    "render_queue_depth": 1,
+    "last_updated": "2026-05-17T01:18:05.743374Z"
   },
   "queue_monitor": [
+    {
+      "job_id": "b8273af0-02b8-42ff-ae69-030e5a010885",
+      "job_id_short": "b8273af0",
+      "channel": "arc_highlightz",
+      "status": "succeeded",
+      "attempt": 0,
+      "created_at": "2026-05-16T18:07:13.845111",
+      "created_at_display": "2026-05-16 18:07",
+      "created_ago": "7h",
+      "updated_at": "2026-05-16T18:33:01.528530",
+      "scheduled_for": "2026-05-16 19:00",
+      "error": null,
+      "has_error": false,
+      "post_url": "https://youtube.com/shorts/Gfh76nEDaGg"
+    },
     {
       "job_id": "6e5bf9da-51c4-4216-9b53-2eaa7ca28cc4",
       "job_id_short": "6e5bf9da",
@@ -52,23 +67,8 @@
       "attempt": 0,
       "created_at": "2026-05-16T18:08:13.134735",
       "created_at_display": "2026-05-16 18:08",
-      "created_ago": "6h",
+      "created_ago": "7h",
       "updated_at": "2026-05-16T18:08:13.134735",
-      "scheduled_for": "2026-05-16 19:00",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "b8273af0-02b8-42ff-ae69-030e5a010885",
-      "job_id_short": "b8273af0",
-      "channel": "arc_highlightz",
-      "status": "queued",
-      "attempt": 0,
-      "created_at": "2026-05-16T18:07:13.845111",
-      "created_at_display": "2026-05-16 18:07",
-      "created_ago": "6h",
-      "updated_at": "2026-05-16T18:07:13.845111",
       "scheduled_for": "2026-05-16 19:00",
       "error": null,
       "has_error": false,
@@ -82,7 +82,7 @@
       "attempt": 0,
       "created_at": "2026-05-16T16:03:35.372650",
       "created_at_display": "2026-05-16 16:03",
-      "created_ago": "8h",
+      "created_ago": "9h",
       "updated_at": "2026-05-16T18:02:42.891678",
       "scheduled_for": "2026-05-16 17:00",
       "error": null,
@@ -97,7 +97,7 @@
       "attempt": 0,
       "created_at": "2026-05-16T16:04:24.486352",
       "created_at_display": "2026-05-16 16:04",
-      "created_ago": "8h",
+      "created_ago": "9h",
       "updated_at": "2026-05-16T16:32:49.525921",
       "scheduled_for": "2026-05-16 16:30",
       "error": null,
@@ -1637,19 +1637,19 @@
       "status": "active",
       "category": "Gaming",
       "target_per_day": 15,
-      "published_24h": 2,
-      "queue_depth": 1,
+      "published_24h": 3,
+      "queue_depth": 0,
       "running_jobs": 0,
       "failed_7d": 0,
       "avg_views": 579,
       "rpm": 0.49,
-      "deficit": 13,
-      "completion_rate": 13.3,
+      "deficit": 12,
+      "completion_rate": 20.0,
       "lagging": true,
       "views_source": "source_clips_proxy",
-      "latest_title": "Cloakzy Wild Moments #43",
-      "latest_url": "https://youtube.com/shorts/GN-6w7lVBMc",
-      "latest_uploaded_at": "2026-05-16 18:02"
+      "latest_title": "Cloakzy Clutch Moments #44",
+      "latest_url": "https://youtube.com/shorts/Gfh76nEDaGg",
+      "latest_uploaded_at": "2026-05-16 18:33"
     },
     {
       "channel": "stream_queens",
@@ -3965,7 +3965,7 @@
       "platform": "tiktok",
       "last_fetch": "2026-03-09 01:04:56",
       "last_fetch_display": "2026-03-09 01:04",
-      "last_fetch_ago": "68d",
+      "last_fetch_ago": "69d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -4007,7 +4007,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-09 01:04:57",
       "last_fetch_display": "2026-03-09 01:04",
-      "last_fetch_ago": "68d",
+      "last_fetch_ago": "69d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -4161,7 +4161,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-17 00:07:21",
       "last_fetch_display": "2026-05-17 00:07",
-      "last_fetch_ago": "10m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.637,
@@ -4189,7 +4189,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-17 00:07:24",
       "last_fetch_display": "2026-05-17 00:07",
-      "last_fetch_ago": "10m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.585,
@@ -4273,7 +4273,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-09 00:52:58",
       "last_fetch_display": "2026-03-09 00:52",
-      "last_fetch_ago": "68d",
+      "last_fetch_ago": "69d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -4287,7 +4287,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-09 01:04:55",
       "last_fetch_display": "2026-03-09 01:04",
-      "last_fetch_ago": "68d",
+      "last_fetch_ago": "69d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -4315,7 +4315,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-09 01:04:53",
       "last_fetch_display": "2026-03-09 01:04",
-      "last_fetch_ago": "68d",
+      "last_fetch_ago": "69d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -4427,7 +4427,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-09 00:52:52",
       "last_fetch_display": "2026-03-09 00:52",
-      "last_fetch_ago": "68d",
+      "last_fetch_ago": "69d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -4833,7 +4833,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-17 00:06:52",
       "last_fetch_display": "2026-05-17 00:06",
-      "last_fetch_ago": "11m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.096,
@@ -4875,7 +4875,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-17 00:07:44",
       "last_fetch_display": "2026-05-17 00:07",
-      "last_fetch_ago": "10m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.057,
@@ -4889,7 +4889,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-17 00:07:27",
       "last_fetch_display": "2026-05-17 00:07",
-      "last_fetch_ago": "10m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.288,
@@ -4987,7 +4987,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-17 00:06:41",
       "last_fetch_display": "2026-05-17 00:06",
-      "last_fetch_ago": "11m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.073,
@@ -5015,7 +5015,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-17 00:07:16",
       "last_fetch_display": "2026-05-17 00:07",
-      "last_fetch_ago": "10m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.445,
@@ -5057,7 +5057,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-09 01:03:36",
       "last_fetch_display": "2026-03-09 01:03",
-      "last_fetch_ago": "68d",
+      "last_fetch_ago": "69d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.333,
@@ -5308,6 +5308,20 @@
     "log_viewer_target": "logs_dialog"
   },
   "top_clips": [
+    {
+      "clip_id": "engine_auto_6f4b8c88",
+      "clip_id_short": "engine_auto_",
+      "title": "Cloakzy Clutch Moments #44",
+      "source_title": null,
+      "creator": null,
+      "channel": "arc_highlightz",
+      "views": 0,
+      "likes": null,
+      "ctr_percent": null,
+      "upload_date": "2026-05-16 18:33",
+      "youtube_url": "https://youtube.com/shorts/Gfh76nEDaGg",
+      "metric_mode": "unavailable"
+    },
     {
       "clip_id": "engine_auto_48e94313",
       "clip_id_short": "engine_auto_",
@@ -5573,23 +5587,21 @@
       "upload_date": "2026-05-13 21:32",
       "youtube_url": "https://youtube.com/shorts/VfDL-uStGEU",
       "metric_mode": "unavailable"
-    },
-    {
-      "clip_id": "engine_auto_9efbb931",
-      "clip_id_short": "engine_auto_",
-      "title": "Ludwig Chaotic Moments #88",
-      "source_title": null,
-      "creator": null,
-      "channel": "viral_recaps",
-      "views": 0,
-      "likes": null,
-      "ctr_percent": null,
-      "upload_date": "2026-05-13 21:02",
-      "youtube_url": "https://youtube.com/shorts/GxFxRjInMao",
-      "metric_mode": "unavailable"
     }
   ],
   "recent_uploads": [
+    {
+      "job_id": "b8273af0-02b8-42ff-ae69-030e5a010885",
+      "job_id_short": "b8273af0",
+      "channel": "arc_highlightz",
+      "status": "succeeded",
+      "updated_at": "2026-05-16T18:33:01.528530",
+      "updated_at_display": "2026-05-16 18:33",
+      "updated_ago": "6h",
+      "title": "Cloakzy Clutch Moments #44",
+      "url": "https://youtube.com/shorts/Gfh76nEDaGg",
+      "error": null
+    },
     {
       "job_id": "6e5bf9da-51c4-4216-9b53-2eaa7ca28cc4",
       "job_id_short": "6e5bf9da",
@@ -5597,20 +5609,8 @@
       "status": "queued",
       "updated_at": "2026-05-16T18:08:13.134735",
       "updated_at_display": "2026-05-16 18:08",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "Ludwig Wild Moments #101",
-      "url": null,
-      "error": null
-    },
-    {
-      "job_id": "b8273af0-02b8-42ff-ae69-030e5a010885",
-      "job_id_short": "b8273af0",
-      "channel": "arc_highlightz",
-      "status": "queued",
-      "updated_at": "2026-05-16T18:07:13.845111",
-      "updated_at_display": "2026-05-16 18:07",
-      "updated_ago": "6h",
-      "title": "Cloakzy Clutch Moments #44",
       "url": null,
       "error": null
     },
@@ -5621,7 +5621,7 @@
       "status": "succeeded",
       "updated_at": "2026-05-16T18:02:42.891678",
       "updated_at_display": "2026-05-16 18:02",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "Cloakzy Wild Moments #43",
       "url": "https://youtube.com/shorts/GN-6w7lVBMc",
       "error": null
@@ -5633,7 +5633,7 @@
       "status": "succeeded",
       "updated_at": "2026-05-16T16:32:49.525921",
       "updated_at_display": "2026-05-16 16:32",
-      "updated_ago": "7h",
+      "updated_ago": "8h",
       "title": "Ludwig Funny Moments #100",
       "url": "https://youtube.com/shorts/mtBCi3y3OzQ",
       "error": null
@@ -5645,7 +5645,7 @@
       "status": "succeeded",
       "updated_at": "2026-05-16T15:15:04.007272",
       "updated_at_display": "2026-05-16 15:15",
-      "updated_ago": "9h",
+      "updated_ago": "10h",
       "title": "Cloakzy Wild Moments #42",
       "url": "https://youtube.com/shorts/sLPhlqoFGD8",
       "error": null
@@ -5713,6 +5713,20 @@
   ],
   "recent_clips": [
     {
+      "job_id": "b8273af0-02b8-42ff-ae69-030e5a010885",
+      "job_id_short": "b8273af0",
+      "channel": "arc_highlightz",
+      "title": "Cloakzy Clutch Moments #44",
+      "title_truncated": "Cloakzy Clutch Moments #44",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/Gfh76nEDaGg",
+      "views": 0,
+      "views_display": "\u00e2\u20ac\u201d",
+      "published_at": "2026-05-16T18:33:01.528530",
+      "published_at_display": "2026-05-16 18:33",
+      "published_ago": "6h"
+    },
+    {
       "job_id": "eaa6f20a-3867-4586-b9e4-8cdb91a3dad9",
       "job_id_short": "eaa6f20a",
       "channel": "arc_highlightz",
@@ -5720,11 +5734,11 @@
       "title_truncated": "Cloakzy Wild Moments #43",
       "thumbnail_path": null,
       "post_url": "https://youtube.com/shorts/GN-6w7lVBMc",
-      "views": 111,
-      "views_display": "111",
+      "views": 112,
+      "views_display": "112",
       "published_at": "2026-05-16T18:02:42.891678",
       "published_at_display": "2026-05-16 18:02",
-      "published_ago": "6h"
+      "published_ago": "7h"
     },
     {
       "job_id": "5095a04c-d3f7-4e83-91cb-22dc52503998",
@@ -5738,7 +5752,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-05-16T16:32:49.525921",
       "published_at_display": "2026-05-16 16:32",
-      "published_ago": "7h"
+      "published_ago": "8h"
     },
     {
       "job_id": "db69e5f5-ad35-4f2a-9ac3-f162a054438b",
@@ -5748,11 +5762,11 @@
       "title_truncated": "Cloakzy Wild Moments #42",
       "thumbnail_path": null,
       "post_url": "https://youtube.com/shorts/sLPhlqoFGD8",
-      "views": 184,
-      "views_display": "184",
+      "views": 253,
+      "views_display": "253",
       "published_at": "2026-05-16T15:15:04.007272",
       "published_at_display": "2026-05-16 15:15",
-      "published_ago": "9h"
+      "published_ago": "10h"
     },
     {
       "job_id": "4dda3605-28cd-4ca3-893b-3ea59b3811f9",
@@ -5837,20 +5851,6 @@
       "published_at": "2026-05-14T16:01:51.545148",
       "published_at_display": "2026-05-14 16:01",
       "published_ago": "2d"
-    },
-    {
-      "job_id": "7a6e0d3e-f2fa-40f9-989a-134b2bee0752",
-      "job_id_short": "7a6e0d3e",
-      "channel": "viral_recaps",
-      "title": "Ludwig Funny Moments #93",
-      "title_truncated": "Ludwig Funny Moments #93",
-      "thumbnail_path": null,
-      "post_url": "https://youtube.com/shorts/4idfvFyYtu4",
-      "views": 0,
-      "views_display": "\u00e2\u20ac\u201d",
-      "published_at": "2026-05-14T15:31:51.251189",
-      "published_at_display": "2026-05-14 15:31",
-      "published_ago": "2d"
     }
   ],
   "upload_timeline": {
@@ -5862,8 +5862,19 @@
       },
       {
         "name": "Yesterday",
-        "count": 3,
+        "count": 4,
         "items": [
+          {
+            "job_id": "b8273af0-02b8-42ff-ae69-030e5a010885",
+            "job_id_short": "b8273af0",
+            "channel": "arc_highlightz",
+            "title": "Cloakzy Clutch Moments #44",
+            "published_at": "2026-05-16T18:33:01.528530",
+            "published_at_display": "2026-05-16 18:33",
+            "published_ago": "6h",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/Gfh76nEDaGg"
+          },
           {
             "job_id": "eaa6f20a-3867-4586-b9e4-8cdb91a3dad9",
             "job_id_short": "eaa6f20a",
@@ -5871,7 +5882,7 @@
             "title": "Cloakzy Wild Moments #43",
             "published_at": "2026-05-16T18:02:42.891678",
             "published_at_display": "2026-05-16 18:02",
-            "published_ago": "6h",
+            "published_ago": "7h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/GN-6w7lVBMc"
           },
@@ -5882,7 +5893,7 @@
             "title": "Ludwig Funny Moments #100",
             "published_at": "2026-05-16T16:32:49.525921",
             "published_at_display": "2026-05-16 16:32",
-            "published_ago": "7h",
+            "published_ago": "8h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/mtBCi3y3OzQ"
           },
@@ -5893,7 +5904,7 @@
             "title": "Cloakzy Wild Moments #42",
             "published_at": "2026-05-16T15:15:04.007272",
             "published_at_display": "2026-05-16 15:15",
-            "published_ago": "9h",
+            "published_ago": "10h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/sLPhlqoFGD8"
           }
@@ -6149,7 +6160,7 @@
       },
       {
         "name": "Last Week",
-        "count": 25,
+        "count": 24,
         "items": [
           {
             "job_id": "e71c02a8-0da4-4c7a-a450-8a1f3af3e28a",
@@ -6414,17 +6425,6 @@
             "published_ago": "10d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/jvt9GpNsP0A"
-          },
-          {
-            "job_id": "21acccf0-44f4-440f-b5d3-0aa644ae78d9",
-            "job_id_short": "21acccf0",
-            "channel": "arc_highlightz",
-            "title": "Tfue Clutch Moments #47",
-            "published_at": "2026-05-06T08:43:22.013979",
-            "published_at_display": "2026-05-06 08:43",
-            "published_ago": "10d",
-            "views": 0,
-            "post_url": "https://youtube.com/shorts/-xOF9UQEYzQ"
           }
         ]
       },
@@ -6670,15 +6670,6 @@
   "schedule": {
     "2026-05-16": [
       {
-        "job_id": "b8273af0-02b8-42ff-ae69-030e5a010885",
-        "job_id_short": "b8273af0",
-        "channel": "arc_highlightz",
-        "title": "Cloakzy Clutch Moments #44",
-        "scheduled_at": "2026-05-16T19:00:00-06:00",
-        "scheduled_at_iso": "2026-05-16T19:00:00",
-        "status": "queued"
-      },
-      {
         "job_id": "6e5bf9da-51c4-4216-9b53-2eaa7ca28cc4",
         "job_id_short": "6e5bf9da",
         "channel": "viral_recaps",
@@ -6712,6 +6703,15 @@
         "title": "Cloakzy Wild Moments #43",
         "scheduled_at": "2026-05-16T18:02:42.891678",
         "scheduled_at_iso": "2026-05-16T18:02:42.891678",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "b8273af0-02b8-42ff-ae69-030e5a010885",
+        "job_id_short": "b8273af0",
+        "channel": "arc_highlightz",
+        "title": "Cloakzy Clutch Moments #44",
+        "scheduled_at": "2026-05-16T18:33:01.528530",
+        "scheduled_at_iso": "2026-05-16T18:33:01.528530",
         "status": "succeeded"
       }
     ],
@@ -7093,9 +7093,9 @@
     ],
     "any_channel_high": false,
     "all_channels_safe": true,
-    "reset_time_hours": 7,
+    "reset_time_hours": 6,
     "reset_time_minutes": 41,
-    "reset_time_display": "7h 41m"
+    "reset_time_display": "6h 41m"
   },
   "revenue": {
     "total_views_30d": 0,
@@ -7115,8 +7115,8 @@
       "discovered": 0,
       "downloaded": 0,
       "processed": 0,
-      "queued": 2,
-      "uploaded": 603
+      "queued": 1,
+      "uploaded": 604
     },
     "by_channel": [
       {
@@ -7124,8 +7124,8 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 1,
-        "uploaded": 204
+        "queued": 0,
+        "uploaded": 205
       },
       {
         "channel": "fomo_highlights",
@@ -7161,8 +7161,8 @@
       }
     ],
     "throughput": {
-      "uploads_per_hour": 0.12,
-      "uploads_last_24h": 3
+      "uploads_per_hour": 0.17,
+      "uploads_last_24h": 4
     },
     "stage_timings": {
       "discovered_to_downloaded_hours": 0.0,
@@ -7170,7 +7170,7 @@
     },
     "bottleneck": {
       "stage": "queued",
-      "backlog": 2
+      "backlog": 1
     }
   },
   "disk": {
@@ -7204,7 +7204,7 @@
         "file_count": 104
       }
     ],
-    "total_disk_bytes": 86233883104,
+    "total_disk_bytes": 86230219650,
     "total_disk_human": "80.3GB",
     "percent_of_500gb": 16.1,
     "warning_threshold_pct": 70,
@@ -7453,9 +7453,9 @@
   "leaderboard": [
     {
       "channel_name": "arc_highlightz",
-      "total_views": 45360,
-      "uploads_30d": 39,
-      "avg_views": 1163,
+      "total_views": 45430,
+      "uploads_30d": 40,
+      "avg_views": 1135,
       "best_clip_title": "No clips yet",
       "best_clip_views": 0,
       "best_clip_url": "",
@@ -7485,7 +7485,7 @@
       "trend": "stable"
     },
     {
-      "channel_name": "test_channel",
+      "channel_name": "market_meltdowns",
       "total_views": 0,
       "uploads_30d": 0,
       "avg_views": 0,
@@ -7496,7 +7496,7 @@
       "trend": "stable"
     },
     {
-      "channel_name": "market_meltdowns",
+      "channel_name": "test_channel",
       "total_views": 0,
       "uploads_30d": 0,
       "avg_views": 0,
@@ -8518,7 +8518,7 @@
           "priority": 3,
           "clips_fetched": 42,
           "last_fetched_at": "2026-05-17T00:07:13.868788",
-          "last_fetched_rel": "10m",
+          "last_fetched_rel": "1h",
           "enabled": true,
           "url": "vod://cloakzy",
           "type": "vod_highlights"
@@ -8593,7 +8593,7 @@
           "priority": 1,
           "clips_fetched": 100,
           "last_fetched_at": "2026-05-17T00:08:13.154036",
-          "last_fetched_rel": "9m",
+          "last_fetched_rel": "1h",
           "enabled": true,
           "url": "https://www.youtube.com/@Ludwig/videos",
           "type": "transcript"
@@ -8720,13 +8720,13 @@
   ],
   "daily_summary": {
     "date": "2026-05-16",
-    "uploads_today": 3,
-    "uploads_yesterday": 5,
+    "uploads_today": 4,
+    "uploads_yesterday": 6,
     "views_gained_today": 0,
     "views_yesterday": 0,
     "errors_today": 0,
-    "quota_pct": 48.0,
-    "quota_units_used": 4800,
+    "quota_pct": 64.0,
+    "quota_units_used": 6400,
     "delta_uploads": -2,
     "delta_views": 0,
     "top_clip_today": {
@@ -8737,21 +8737,21 @@
     "top_3_channels": [
       {
         "channel": "arc_highlightz",
-        "uploads": 2
+        "uploads": 3
       },
       {
         "channel": "viral_recaps",
         "uploads": 1
       }
     ],
-    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-05-16\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 3 (-2 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 48.0% used (4800/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Cloakzy Wild Moments #42\n  0 views \u00e2\u20ac\u00a2 arc_highlightz\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. arc_highlightz: 2 uploads\n  2. viral_recaps: 1 uploads",
-    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-05-16\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 3 (-2 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 48.0% used (`4800/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Cloakzy Wild Moments #42_\n**0 views** \u00e2\u20ac\u00a2 **arc_highlightz**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **arc_highlightz** \u00e2\u20ac\u201d 2 uploads\n2. **viral_recaps** \u00e2\u20ac\u201d 1 uploads"
+    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-05-16\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 4 (-2 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 64.0% used (6400/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Cloakzy Wild Moments #42\n  0 views \u00e2\u20ac\u00a2 arc_highlightz\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. arc_highlightz: 3 uploads\n  2. viral_recaps: 1 uploads",
+    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-05-16\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 4 (-2 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 64.0% used (`6400/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Cloakzy Wild Moments #42_\n**0 views** \u00e2\u20ac\u00a2 **arc_highlightz**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **arc_highlightz** \u00e2\u20ac\u201d 3 uploads\n2. **viral_recaps** \u00e2\u20ac\u201d 1 uploads"
   },
   "title_performance": {
     "pattern_analysis": {
       "has_numbers": {
         "avg_views": 0.0,
-        "count": 467,
+        "count": 468,
         "total_views": 0
       },
       "has_question": {
@@ -8809,7 +8809,7 @@
       {
         "word": "cloakzy",
         "avg_views": 0.0,
-        "occurrences": 47
+        "occurrences": 48
       },
       {
         "word": "made",
@@ -8861,7 +8861,7 @@
       {
         "word": "cloakzy",
         "avg_views": 0.0,
-        "occurrences": 47
+        "occurrences": 48
       },
       {
         "word": "made",
@@ -8906,7 +8906,7 @@
         "channel": "arc_highlightz",
         "best_title": "Watch this before scrolling: Nobody plays like this",
         "best_views": 0,
-        "total_titles_analyzed": 204,
+        "total_titles_analyzed": 205,
         "pattern_breakdown": {
           "numbers_pct": 94.6,
           "questions_pct": 0.5,
@@ -8969,7 +8969,7 @@
       {
         "style_name": "Gaming/Clips",
         "avg_views": 0,
-        "total_clips": 596,
+        "total_clips": 597,
         "best_clip": null,
         "total_views": 0,
         "is_best": true
@@ -8994,7 +8994,7 @@
     "best_style_overall": "Gaming/Clips",
     "summary_stats": {
       "total_styles": 3,
-      "total_clips_all": 603,
+      "total_clips_all": 604,
       "total_views_all": 0,
       "avg_views_overall": 0
     }
@@ -9118,8 +9118,8 @@
       {
         "hour": 19,
         "hour_label": "19:00",
-        "posts": 63,
-        "avg_views": 1460.0
+        "posts": 64,
+        "avg_views": 1455.0
       },
       {
         "hour": 20,
@@ -9180,8 +9180,8 @@
       {
         "day": 5,
         "day_name": "Saturday",
-        "posts": 85,
-        "avg_views": 757.0
+        "posts": 86,
+        "avg_views": 762.0
       },
       {
         "day": 6,
@@ -10240,7 +10240,7 @@
           "hour": 19,
           "day": 5,
           "views": 1200.0,
-          "posts": 10,
+          "posts": 11,
           "intensity": 72.7
         },
         {
@@ -10464,7 +10464,7 @@
       "day_name": "Tuesday",
       "est_views": 1650.0
     },
-    "job_count": 603
+    "job_count": 604
   },
   "benchmarks": {
     "current_tier": "Starter",
@@ -10555,87 +10555,87 @@
     {
       "type": "warning",
       "title": "Channel \"market_meltdowns\" paused for 24+ hours",
-      "message": "market_meltdowns has been paused for 1656 hours",
+      "message": "market_meltdowns has been paused for 1657 hours",
       "channel": "market_meltdowns",
-      "created_at": "2026-05-17T00:18:06.061708",
+      "created_at": "2026-05-17T01:18:05.738977",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"self_made_clips\" paused for 24+ hours",
-      "message": "self_made_clips has been paused for 1652 hours",
+      "message": "self_made_clips has been paused for 1653 hours",
       "channel": "self_made_clips",
-      "created_at": "2026-05-17T00:18:06.061708",
+      "created_at": "2026-05-17T01:18:05.738977",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"rich_or_ruined\" paused for 24+ hours",
-      "message": "rich_or_ruined has been paused for 1650 hours",
+      "message": "rich_or_ruined has been paused for 1651 hours",
       "channel": "rich_or_ruined",
-      "created_at": "2026-05-17T00:18:06.061708",
+      "created_at": "2026-05-17T01:18:05.738977",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"startup_graveyard\" paused for 24+ hours",
-      "message": "startup_graveyard has been paused for 1650 hours",
+      "message": "startup_graveyard has been paused for 1651 hours",
       "channel": "startup_graveyard",
-      "created_at": "2026-05-17T00:18:06.061708",
+      "created_at": "2026-05-17T01:18:05.738977",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_sirens\" paused for 24+ hours",
-      "message": "stream_sirens has been paused for 1629 hours",
+      "message": "stream_sirens has been paused for 1630 hours",
       "channel": "stream_sirens",
-      "created_at": "2026-05-17T00:18:06.061708",
+      "created_at": "2026-05-17T01:18:05.738977",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_queens\" paused for 24+ hours",
-      "message": "stream_queens has been paused for 1629 hours",
+      "message": "stream_queens has been paused for 1630 hours",
       "channel": "stream_queens",
-      "created_at": "2026-05-17T00:18:06.061708",
+      "created_at": "2026-05-17T01:18:05.738977",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"ai_did_what\" paused for 24+ hours",
-      "message": "ai_did_what has been paused for 1595 hours",
+      "message": "ai_did_what has been paused for 1596 hours",
       "channel": "ai_did_what",
-      "created_at": "2026-05-17T00:18:06.061708",
+      "created_at": "2026-05-17T01:18:05.738977",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"gym_moments\" paused for 24+ hours",
-      "message": "gym_moments has been paused for 1595 hours",
+      "message": "gym_moments has been paused for 1596 hours",
       "channel": "gym_moments",
-      "created_at": "2026-05-17T00:18:06.061708",
+      "created_at": "2026-05-17T01:18:05.738977",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"kitchen_chaos\" paused for 24+ hours",
-      "message": "kitchen_chaos has been paused for 1448 hours",
+      "message": "kitchen_chaos has been paused for 1449 hours",
       "channel": "kitchen_chaos",
-      "created_at": "2026-05-17T00:18:06.061708",
+      "created_at": "2026-05-17T01:18:05.738977",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"unfiltered_clips\" paused for 24+ hours",
-      "message": "unfiltered_clips has been paused for 1448 hours",
+      "message": "unfiltered_clips has been paused for 1449 hours",
       "channel": "unfiltered_clips",
-      "created_at": "2026-05-17T00:18:06.061708",
+      "created_at": "2026-05-17T01:18:05.738977",
       "read": false
     }
   ],
   "checklists": [
     {
-      "channel": "arc_highlightz",
+      "channel": "viral_recaps",
       "readiness_score": 6,
       "total_checks": 6,
       "badge": "launch_ready",
@@ -10675,12 +10675,12 @@
       ]
     },
     {
-      "channel": "viral_recaps",
-      "readiness_score": 6,
+      "channel": "arc_highlightz",
+      "readiness_score": 5,
       "total_checks": 6,
-      "badge": "launch_ready",
-      "badge_text": "Launch Ready",
-      "badge_color": "green",
+      "badge": "needs_attention",
+      "badge_text": "Needs Attention",
+      "badge_color": "orange",
       "checks": [
         {
           "label": "Has YouTube account linked",
@@ -10704,8 +10704,8 @@
         },
         {
           "label": "Has clips in queue",
-          "passed": true,
-          "icon": "\u00e2\u0153\u2026"
+          "passed": false,
+          "icon": "\u00e2\u009d\u0152"
         },
         {
           "label": "Quota not exhausted (< 90% used)",
@@ -11271,23 +11271,23 @@
         "status": "active",
         "category": "Gaming",
         "target_per_day": 15,
-        "published_24h": 2,
-        "queue_depth": 1,
+        "published_24h": 3,
+        "queue_depth": 0,
         "running_jobs": 0,
         "failed_7d": 0,
         "avg_views": 579,
         "rpm": 0.49,
-        "deficit": 13,
-        "completion_rate": 13.3,
+        "deficit": 12,
+        "completion_rate": 20.0,
         "lagging": true,
         "views_source": "source_clips_proxy",
-        "latest_title": "Cloakzy Wild Moments #43",
-        "latest_url": "https://youtube.com/shorts/GN-6w7lVBMc",
-        "latest_uploaded_at": "2026-05-16 18:02"
+        "latest_title": "Cloakzy Clutch Moments #44",
+        "latest_url": "https://youtube.com/shorts/Gfh76nEDaGg",
+        "latest_uploaded_at": "2026-05-16 18:33"
       }
     ],
     "lagging_count": 4,
-    "queue_backlog": 2,
+    "queue_backlog": 1,
     "analytics_channels": 6
   },
   "meta": {

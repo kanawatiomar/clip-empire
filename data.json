@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-05-16T23:18:05.978096Z",
+  "generated_at": "2026-05-17T00:18:06.066261Z",
   "repo_root": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire",
   "database_path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\data\\clip_empire.db",
   "health_score": {
-    "score": 69.3,
+    "score": 67.9,
     "grade": "C",
     "status": "Needs Attention",
     "color": "yellow",
     "breakdown": {
-      "pipeline_health": 1.5,
+      "pipeline_health": 0.0,
       "error_rate": 20.0,
       "quota_safety": 15,
       "queue_depth": 15,
@@ -16,13 +16,13 @@
       "channel_uptime": 2.9
     },
     "metrics": {
-      "uploads_today": 2,
+      "uploads_today": 0,
       "target_today": 34,
-      "pipeline_health_ratio": 0.06,
+      "pipeline_health_ratio": 0.0,
       "errors_today": 0,
-      "total_jobs_today": 3,
+      "total_jobs_today": 0,
       "error_rate": 0.0,
-      "queue_depth": 1,
+      "queue_depth": 2,
       "active_channels": 4,
       "total_channels": 14,
       "fresh_sources": 0,
@@ -33,17 +33,62 @@
     "active_channels": 4,
     "total_channels": 14,
     "jobs_today": {
-      "total": 3,
-      "queued": 1,
+      "total": 5,
+      "queued": 2,
       "running": 0,
-      "succeeded": 2,
+      "succeeded": 3,
       "failed": 0,
       "cancelled": 0
     },
-    "render_queue_depth": 1,
-    "last_updated": "2026-05-16T23:18:05.978096Z"
+    "render_queue_depth": 2,
+    "last_updated": "2026-05-17T00:18:06.066261Z"
   },
   "queue_monitor": [
+    {
+      "job_id": "6e5bf9da-51c4-4216-9b53-2eaa7ca28cc4",
+      "job_id_short": "6e5bf9da",
+      "channel": "viral_recaps",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-05-16T18:08:13.134735",
+      "created_at_display": "2026-05-16 18:08",
+      "created_ago": "6h",
+      "updated_at": "2026-05-16T18:08:13.134735",
+      "scheduled_for": "2026-05-16 19:00",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "b8273af0-02b8-42ff-ae69-030e5a010885",
+      "job_id_short": "b8273af0",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-05-16T18:07:13.845111",
+      "created_at_display": "2026-05-16 18:07",
+      "created_ago": "6h",
+      "updated_at": "2026-05-16T18:07:13.845111",
+      "scheduled_for": "2026-05-16 19:00",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "eaa6f20a-3867-4586-b9e4-8cdb91a3dad9",
+      "job_id_short": "eaa6f20a",
+      "channel": "arc_highlightz",
+      "status": "succeeded",
+      "attempt": 0,
+      "created_at": "2026-05-16T16:03:35.372650",
+      "created_at_display": "2026-05-16 16:03",
+      "created_ago": "8h",
+      "updated_at": "2026-05-16T18:02:42.891678",
+      "scheduled_for": "2026-05-16 17:00",
+      "error": null,
+      "has_error": false,
+      "post_url": "https://youtube.com/shorts/GN-6w7lVBMc"
+    },
     {
       "job_id": "5095a04c-d3f7-4e83-91cb-22dc52503998",
       "job_id_short": "5095a04c",
@@ -52,27 +97,12 @@
       "attempt": 0,
       "created_at": "2026-05-16T16:04:24.486352",
       "created_at_display": "2026-05-16 16:04",
-      "created_ago": "7h",
+      "created_ago": "8h",
       "updated_at": "2026-05-16T16:32:49.525921",
       "scheduled_for": "2026-05-16 16:30",
       "error": null,
       "has_error": false,
       "post_url": "https://youtube.com/shorts/mtBCi3y3OzQ"
-    },
-    {
-      "job_id": "eaa6f20a-3867-4586-b9e4-8cdb91a3dad9",
-      "job_id_short": "eaa6f20a",
-      "channel": "arc_highlightz",
-      "status": "queued",
-      "attempt": 0,
-      "created_at": "2026-05-16T16:03:35.372650",
-      "created_at_display": "2026-05-16 16:03",
-      "created_ago": "7h",
-      "updated_at": "2026-05-16T16:03:35.372650",
-      "scheduled_for": "2026-05-16 17:00",
-      "error": null,
-      "has_error": false,
-      "post_url": null
     },
     {
       "job_id": "db69e5f5-ad35-4f2a-9ac3-f162a054438b",
@@ -112,7 +142,7 @@
       "attempt": 0,
       "created_at": "2026-05-15T00:07:20.314360",
       "created_at_display": "2026-05-15 00:07",
-      "created_ago": "1d",
+      "created_ago": "2d",
       "updated_at": "2026-05-15T05:03:00.066686",
       "scheduled_for": "2026-05-15 09:00",
       "error": null,
@@ -232,7 +262,7 @@
       "attempt": 0,
       "created_at": "2026-05-14T00:09:58.373794",
       "created_at_display": "2026-05-14 00:09",
-      "created_ago": "2d",
+      "created_ago": "3d",
       "updated_at": "2026-05-14T05:01:56.462508",
       "scheduled_for": "2026-05-14 09:00",
       "error": null,
@@ -247,7 +277,7 @@
       "attempt": 0,
       "created_at": "2026-05-14T00:08:18.300646",
       "created_at_display": "2026-05-14 00:08",
-      "created_ago": "2d",
+      "created_ago": "3d",
       "updated_at": "2026-05-14T03:03:17.164816",
       "scheduled_for": "2026-05-14 07:00",
       "error": null,
@@ -877,7 +907,7 @@
       "attempt": 0,
       "created_at": "2026-05-01T00:02:33.062982",
       "created_at_display": "2026-05-01 00:02",
-      "created_ago": "15d",
+      "created_ago": "16d",
       "updated_at": "2026-05-01T03:01:00.792804",
       "scheduled_for": "2026-05-01 07:00",
       "error": null,
@@ -1027,7 +1057,7 @@
       "attempt": 0,
       "created_at": "2026-04-30T00:03:14.471301",
       "created_at_display": "2026-04-30 00:03",
-      "created_ago": "16d",
+      "created_ago": "17d",
       "updated_at": "2026-04-30T05:01:18.632951",
       "scheduled_for": "2026-04-30 09:00",
       "error": null,
@@ -1042,7 +1072,7 @@
       "attempt": 0,
       "created_at": "2026-04-30T00:02:10.782731",
       "created_at_display": "2026-04-30 00:02",
-      "created_ago": "16d",
+      "created_ago": "17d",
       "updated_at": "2026-04-30T03:01:47.586713",
       "scheduled_for": "2026-04-30 07:00",
       "error": null,
@@ -1072,7 +1102,7 @@
       "attempt": 0,
       "created_at": "2026-04-29T00:02:08.751857",
       "created_at_display": "2026-04-29 00:02",
-      "created_ago": "17d",
+      "created_ago": "18d",
       "updated_at": "2026-04-29T03:01:33.252586",
       "scheduled_for": "2026-04-29 07:00",
       "error": null,
@@ -1162,7 +1192,7 @@
       "attempt": 0,
       "created_at": "2026-04-28T00:04:00.260013",
       "created_at_display": "2026-04-28 00:04",
-      "created_ago": "18d",
+      "created_ago": "19d",
       "updated_at": "2026-04-28T05:01:28.776013",
       "scheduled_for": "2026-04-28 09:00",
       "error": null,
@@ -1192,7 +1222,7 @@
       "attempt": 0,
       "created_at": "2026-04-27T00:16:47.155280",
       "created_at_display": "2026-04-27 00:16",
-      "created_ago": "19d",
+      "created_ago": "20d",
       "updated_at": "2026-04-27T05:04:08.571025",
       "scheduled_for": "2026-04-27 09:00",
       "error": null,
@@ -1417,7 +1447,7 @@
       "attempt": 0,
       "created_at": "2026-04-26T00:13:25.976072",
       "created_at_display": "2026-04-26 00:13",
-      "created_ago": "20d",
+      "created_ago": "21d",
       "updated_at": "2026-04-26T05:31:18.957704",
       "scheduled_for": "2026-04-26 09:00",
       "error": null,
@@ -1432,7 +1462,7 @@
       "attempt": 0,
       "created_at": "2026-04-26T00:12:21.860743",
       "created_at_display": "2026-04-26 00:12",
-      "created_ago": "20d",
+      "created_ago": "21d",
       "updated_at": "2026-04-26T05:01:21.492594",
       "scheduled_for": "2026-04-26 09:00",
       "error": null,
@@ -1447,7 +1477,7 @@
       "attempt": 0,
       "created_at": "2026-04-26T00:04:38.633116",
       "created_at_display": "2026-04-26 00:04",
-      "created_ago": "20d",
+      "created_ago": "21d",
       "updated_at": "2026-04-26T04:01:33.072621",
       "scheduled_for": "2026-04-26 08:00",
       "error": null,
@@ -1462,7 +1492,7 @@
       "attempt": 0,
       "created_at": "2026-04-26T00:02:33.120793",
       "created_at_display": "2026-04-26 00:02",
-      "created_ago": "20d",
+      "created_ago": "21d",
       "updated_at": "2026-04-26T03:01:46.489361",
       "scheduled_for": "2026-04-26 07:00",
       "error": null,
@@ -1513,36 +1543,6 @@
       "error": null,
       "has_error": false,
       "post_url": "https://youtube.com/shorts/uFRlmPeUdw4"
-    },
-    {
-      "job_id": "fabe4358-9e31-4590-a6f9-6388f9cf1796",
-      "job_id_short": "fabe4358",
-      "channel": "arc_highlightz",
-      "status": "succeeded",
-      "attempt": 0,
-      "created_at": "2026-04-25T18:04:05.452966",
-      "created_at_display": "2026-04-25 18:04",
-      "created_ago": "21d",
-      "updated_at": "2026-04-25T19:31:23.212100",
-      "scheduled_for": "2026-04-25 19:00",
-      "error": null,
-      "has_error": false,
-      "post_url": "https://youtube.com/shorts/q6jfKwvJ2RA"
-    },
-    {
-      "job_id": "1e511e22-1329-4977-b053-56f283d14445",
-      "job_id_short": "1e511e22",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "attempt": 0,
-      "created_at": "2026-04-25T23:05:40.265375+00:00",
-      "created_at_display": "2026-04-25 23:05",
-      "created_ago": "21d",
-      "updated_at": "2026-04-25T19:01:04.701123",
-      "scheduled_for": "2026-04-26 00:05",
-      "error": null,
-      "has_error": false,
-      "post_url": "https://youtube.com/shorts/tB-lbTXOX7U"
     }
   ],
   "queue": {
@@ -1600,11 +1600,11 @@
       "category": "Comedy",
       "target_per_day": 8,
       "published_24h": 1,
-      "queue_depth": 0,
+      "queue_depth": 1,
       "running_jobs": 0,
       "failed_7d": 0,
-      "avg_views": 264,
-      "rpm": 0.22,
+      "avg_views": 282,
+      "rpm": 0.24,
       "deficit": 7,
       "completion_rate": 12.5,
       "lagging": true,
@@ -1637,19 +1637,19 @@
       "status": "active",
       "category": "Gaming",
       "target_per_day": 15,
-      "published_24h": 1,
+      "published_24h": 2,
       "queue_depth": 1,
       "running_jobs": 0,
       "failed_7d": 0,
-      "avg_views": 597,
-      "rpm": 0.51,
-      "deficit": 14,
-      "completion_rate": 6.7,
+      "avg_views": 579,
+      "rpm": 0.49,
+      "deficit": 13,
+      "completion_rate": 13.3,
       "lagging": true,
       "views_source": "source_clips_proxy",
-      "latest_title": "Cloakzy Wild Moments #42",
-      "latest_url": "https://youtube.com/shorts/sLPhlqoFGD8",
-      "latest_uploaded_at": "2026-05-16 15:15"
+      "latest_title": "Cloakzy Wild Moments #43",
+      "latest_url": "https://youtube.com/shorts/GN-6w7lVBMc",
+      "latest_uploaded_at": "2026-05-16 18:02"
     },
     {
       "channel": "stream_queens",
@@ -1849,11 +1849,6 @@
       "views": {
         "series_30d": [
           {
-            "date": "2026-04-17",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-04-18",
             "views": null,
             "rpm": null
@@ -1997,36 +1992,36 @@
             "date": "2026-05-16",
             "views": 344.0,
             "rpm": 0.2924
+          },
+          {
+            "date": "2026-05-17",
+            "views": 301.0,
+            "rpm": 0.2558
           }
         ],
         "window_7d": {
           "window_days": 7,
-          "avg": 560.02,
-          "previous_avg": 1472.9,
-          "delta": -912.88,
-          "delta_pct": -62.0,
+          "avg": 546.4,
+          "previous_avg": 1392.09,
+          "delta": -845.69,
+          "delta_pct": -60.7,
           "direction": "down",
           "points": 7
         },
         "window_30d": {
           "window_days": 30,
-          "avg": 1991.77,
-          "previous_avg": 5856.35,
-          "delta": -3864.58,
-          "delta_pct": -66.0,
+          "avg": 762.59,
+          "previous_avg": 9982.52,
+          "delta": -9219.93,
+          "delta_pct": -92.4,
           "direction": "down",
           "points": 30
         },
-        "latest": 344.0
+        "latest": 301.0
       },
       "rpm": {
         "series_30d": [
           {
-            "date": "2026-04-17",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-04-18",
             "views": null,
             "rpm": null
@@ -2170,27 +2165,32 @@
             "date": "2026-05-16",
             "views": 344.0,
             "rpm": 0.2924
+          },
+          {
+            "date": "2026-05-17",
+            "views": 301.0,
+            "rpm": 0.2558
           }
         ],
         "window_7d": {
           "window_days": 7,
-          "avg": 0.48,
-          "previous_avg": 1.25,
-          "delta": -0.77,
-          "delta_pct": -61.6,
+          "avg": 0.46,
+          "previous_avg": 1.18,
+          "delta": -0.72,
+          "delta_pct": -61.0,
           "direction": "down",
           "points": 7
         },
         "window_30d": {
           "window_days": 30,
-          "avg": 1.69,
-          "previous_avg": 4.98,
-          "delta": -3.29,
-          "delta_pct": -66.1,
+          "avg": 0.65,
+          "previous_avg": 8.49,
+          "delta": -7.84,
+          "delta_pct": -92.3,
           "direction": "down",
           "points": 30
         },
-        "latest": 0.2924
+        "latest": 0.2558
       }
     },
     {
@@ -2199,11 +2199,6 @@
       "views": {
         "series_30d": [
           {
-            "date": "2026-04-17",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-04-18",
             "views": null,
             "rpm": null
@@ -2347,36 +2342,36 @@
             "date": "2026-05-16",
             "views": null,
             "rpm": null
+          },
+          {
+            "date": "2026-05-17",
+            "views": null,
+            "rpm": null
           }
         ],
         "window_7d": {
           "window_days": 7,
-          "avg": 14773.33,
-          "previous_avg": 16245.8,
-          "delta": -1472.47,
-          "delta_pct": -9.1,
+          "avg": 17364.4,
+          "previous_avg": 19852.75,
+          "delta": -2488.35,
+          "delta_pct": -12.5,
           "direction": "down",
-          "points": 6
+          "points": 5
         },
         "window_30d": {
           "window_days": 30,
-          "avg": 14773.33,
-          "previous_avg": 16245.8,
-          "delta": -1472.47,
-          "delta_pct": -9.1,
+          "avg": 17364.4,
+          "previous_avg": 19852.75,
+          "delta": -2488.35,
+          "delta_pct": -12.5,
           "direction": "down",
-          "points": 6
+          "points": 5
         },
         "latest": 7411.0
       },
       "rpm": {
         "series_30d": [
           {
-            "date": "2026-04-17",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-04-18",
             "views": null,
             "rpm": null
@@ -2520,25 +2515,30 @@
             "date": "2026-05-16",
             "views": null,
             "rpm": null
+          },
+          {
+            "date": "2026-05-17",
+            "views": null,
+            "rpm": null
           }
         ],
         "window_7d": {
           "window_days": 7,
-          "avg": 12.56,
-          "previous_avg": 13.81,
-          "delta": -1.25,
-          "delta_pct": -9.1,
+          "avg": 14.76,
+          "previous_avg": 16.87,
+          "delta": -2.11,
+          "delta_pct": -12.5,
           "direction": "down",
-          "points": 6
+          "points": 5
         },
         "window_30d": {
           "window_days": 30,
-          "avg": 12.56,
-          "previous_avg": 13.81,
-          "delta": -1.25,
-          "delta_pct": -9.1,
+          "avg": 14.76,
+          "previous_avg": 16.87,
+          "delta": -2.11,
+          "delta_pct": -12.5,
           "direction": "down",
-          "points": 6
+          "points": 5
         },
         "latest": 6.2993
       }
@@ -2549,11 +2549,6 @@
       "views": {
         "series_30d": [
           {
-            "date": "2026-04-17",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-04-18",
             "views": null,
             "rpm": null
@@ -2697,36 +2692,36 @@
             "date": "2026-05-16",
             "views": null,
             "rpm": null
+          },
+          {
+            "date": "2026-05-17",
+            "views": null,
+            "rpm": null
           }
         ],
         "window_7d": {
           "window_days": 7,
-          "avg": 57025.0,
-          "previous_avg": 48350.0,
-          "delta": 8675.0,
-          "delta_pct": 17.9,
+          "avg": 65700.0,
+          "previous_avg": 0.0,
+          "delta": 65700.0,
+          "delta_pct": null,
           "direction": "up",
-          "points": 2
+          "points": 1
         },
         "window_30d": {
           "window_days": 30,
-          "avg": 57025.0,
-          "previous_avg": 48350.0,
-          "delta": 8675.0,
-          "delta_pct": 17.9,
+          "avg": 65700.0,
+          "previous_avg": 0.0,
+          "delta": 65700.0,
+          "delta_pct": null,
           "direction": "up",
-          "points": 2
+          "points": 1
         },
         "latest": 65700.0
       },
       "rpm": {
         "series_30d": [
           {
-            "date": "2026-04-17",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-04-18",
             "views": null,
             "rpm": null
@@ -2870,377 +2865,32 @@
             "date": "2026-05-16",
             "views": null,
             "rpm": null
+          },
+          {
+            "date": "2026-05-17",
+            "views": null,
+            "rpm": null
           }
         ],
         "window_7d": {
           "window_days": 7,
-          "avg": 48.47,
-          "previous_avg": 41.1,
-          "delta": 7.37,
-          "delta_pct": 17.9,
+          "avg": 55.84,
+          "previous_avg": 0.0,
+          "delta": 55.84,
+          "delta_pct": null,
           "direction": "up",
-          "points": 2
+          "points": 1
         },
         "window_30d": {
           "window_days": 30,
-          "avg": 48.47,
-          "previous_avg": 41.1,
-          "delta": 7.37,
-          "delta_pct": 17.9,
+          "avg": 55.84,
+          "previous_avg": 0.0,
+          "delta": 55.84,
+          "delta_pct": null,
           "direction": "up",
-          "points": 2
+          "points": 1
         },
         "latest": 55.845
-      }
-    },
-    {
-      "channel": "kitchen_chaos",
-      "source": "source_clips_proxy",
-      "views": {
-        "series_30d": [
-          {
-            "date": "2026-04-17",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-18",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-19",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-20",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-21",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-22",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-23",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-24",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-25",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-26",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-27",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-28",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-29",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-30",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-01",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-02",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-03",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-04",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-05",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-06",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-07",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-08",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-09",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-10",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-11",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-12",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-13",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-14",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-15",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-16",
-            "views": null,
-            "rpm": null
-          }
-        ],
-        "window_7d": {
-          "window_days": 7,
-          "avg": 1158450.0,
-          "previous_avg": 0.0,
-          "delta": 1158450.0,
-          "delta_pct": null,
-          "direction": "up",
-          "points": 1
-        },
-        "window_30d": {
-          "window_days": 30,
-          "avg": 1158450.0,
-          "previous_avg": 0.0,
-          "delta": 1158450.0,
-          "delta_pct": null,
-          "direction": "up",
-          "points": 1
-        },
-        "latest": 1158450.0
-      },
-      "rpm": {
-        "series_30d": [
-          {
-            "date": "2026-04-17",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-18",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-19",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-20",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-21",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-22",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-23",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-24",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-25",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-26",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-27",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-28",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-29",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-30",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-01",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-02",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-03",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-04",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-05",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-06",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-07",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-08",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-09",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-10",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-11",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-12",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-13",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-14",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-15",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-16",
-            "views": null,
-            "rpm": null
-          }
-        ],
-        "window_7d": {
-          "window_days": 7,
-          "avg": 984.68,
-          "previous_avg": 0.0,
-          "delta": 984.68,
-          "delta_pct": null,
-          "direction": "up",
-          "points": 1
-        },
-        "window_30d": {
-          "window_days": 30,
-          "avg": 984.68,
-          "previous_avg": 0.0,
-          "delta": 984.68,
-          "delta_pct": null,
-          "direction": "up",
-          "points": 1
-        },
-        "latest": 984.6825
       }
     },
     {
@@ -3249,11 +2899,6 @@
       "views": {
         "series_30d": [
           {
-            "date": "2026-04-17",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-04-18",
             "views": null,
             "rpm": null
@@ -3397,36 +3042,36 @@
             "date": "2026-05-16",
             "views": null,
             "rpm": null
+          },
+          {
+            "date": "2026-05-17",
+            "views": null,
+            "rpm": null
           }
         ],
         "window_7d": {
           "window_days": 7,
-          "avg": 1614.5,
-          "previous_avg": 821.0,
-          "delta": 793.5,
-          "delta_pct": 96.7,
+          "avg": 2408.0,
+          "previous_avg": 0.0,
+          "delta": 2408.0,
+          "delta_pct": null,
           "direction": "up",
-          "points": 2
+          "points": 1
         },
         "window_30d": {
           "window_days": 30,
-          "avg": 1614.5,
-          "previous_avg": 821.0,
-          "delta": 793.5,
-          "delta_pct": 96.7,
+          "avg": 2408.0,
+          "previous_avg": 0.0,
+          "delta": 2408.0,
+          "delta_pct": null,
           "direction": "up",
-          "points": 2
+          "points": 1
         },
         "latest": 2408.0
       },
       "rpm": {
         "series_30d": [
           {
-            "date": "2026-04-17",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-04-18",
             "views": null,
             "rpm": null
@@ -3570,25 +3215,30 @@
             "date": "2026-05-16",
             "views": null,
             "rpm": null
+          },
+          {
+            "date": "2026-05-17",
+            "views": null,
+            "rpm": null
           }
         ],
         "window_7d": {
           "window_days": 7,
-          "avg": 1.37,
-          "previous_avg": 0.7,
-          "delta": 0.67,
-          "delta_pct": 95.7,
+          "avg": 2.05,
+          "previous_avg": 0.0,
+          "delta": 2.05,
+          "delta_pct": null,
           "direction": "up",
-          "points": 2
+          "points": 1
         },
         "window_30d": {
           "window_days": 30,
-          "avg": 1.37,
-          "previous_avg": 0.7,
-          "delta": 0.67,
-          "delta_pct": 95.7,
+          "avg": 2.05,
+          "previous_avg": 0.0,
+          "delta": 2.05,
+          "delta_pct": null,
           "direction": "up",
-          "points": 2
+          "points": 1
         },
         "latest": 2.0468
       }
@@ -3599,11 +3249,6 @@
       "views": {
         "series_30d": [
           {
-            "date": "2026-04-17",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-04-18",
             "views": null,
             "rpm": null
@@ -3747,36 +3392,36 @@
             "date": "2026-05-16",
             "views": null,
             "rpm": null
+          },
+          {
+            "date": "2026-05-17",
+            "views": null,
+            "rpm": null
           }
         ],
         "window_7d": {
           "window_days": 7,
-          "avg": 614325.94,
-          "previous_avg": 884251.42,
-          "delta": -269925.48,
-          "delta_pct": -30.5,
-          "direction": "down",
-          "points": 3
+          "avg": 39843.75,
+          "previous_avg": 5212.5,
+          "delta": 34631.25,
+          "delta_pct": 664.4,
+          "direction": "up",
+          "points": 2
         },
         "window_30d": {
           "window_days": 30,
-          "avg": 614325.94,
-          "previous_avg": 884251.42,
-          "delta": -269925.48,
-          "delta_pct": -30.5,
-          "direction": "down",
-          "points": 3
+          "avg": 39843.75,
+          "previous_avg": 5212.5,
+          "delta": 34631.25,
+          "delta_pct": 664.4,
+          "direction": "up",
+          "points": 2
         },
         "latest": 74475.0
       },
       "rpm": {
         "series_30d": [
           {
-            "date": "2026-04-17",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-04-18",
             "views": null,
             "rpm": null
@@ -3920,1077 +3565,32 @@
             "date": "2026-05-16",
             "views": null,
             "rpm": null
+          },
+          {
+            "date": "2026-05-17",
+            "views": null,
+            "rpm": null
           }
         ],
         "window_7d": {
           "window_days": 7,
-          "avg": 522.18,
-          "previous_avg": 751.61,
-          "delta": -229.43,
-          "delta_pct": -30.5,
-          "direction": "down",
-          "points": 3
+          "avg": 33.87,
+          "previous_avg": 4.43,
+          "delta": 29.44,
+          "delta_pct": 664.6,
+          "direction": "up",
+          "points": 2
         },
         "window_30d": {
           "window_days": 30,
-          "avg": 522.18,
-          "previous_avg": 751.61,
-          "delta": -229.43,
-          "delta_pct": -30.5,
-          "direction": "down",
-          "points": 3
+          "avg": 33.87,
+          "previous_avg": 4.43,
+          "delta": 29.44,
+          "delta_pct": 664.6,
+          "direction": "up",
+          "points": 2
         },
         "latest": 63.3037
-      }
-    },
-    {
-      "channel": "stream_queens",
-      "source": "source_clips_proxy",
-      "views": {
-        "series_30d": [
-          {
-            "date": "2026-04-17",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-18",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-19",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-20",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-21",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-22",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-23",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-24",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-25",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-26",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-27",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-28",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-29",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-30",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-01",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-02",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-03",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-04",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-05",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-06",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-07",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-08",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-09",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-10",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-11",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-12",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-13",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-14",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-15",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-16",
-            "views": null,
-            "rpm": null
-          }
-        ],
-        "window_7d": {
-          "window_days": 7,
-          "avg": 2833.0,
-          "previous_avg": 0.0,
-          "delta": 2833.0,
-          "delta_pct": null,
-          "direction": "up",
-          "points": 1
-        },
-        "window_30d": {
-          "window_days": 30,
-          "avg": 2833.0,
-          "previous_avg": 0.0,
-          "delta": 2833.0,
-          "delta_pct": null,
-          "direction": "up",
-          "points": 1
-        },
-        "latest": 2833.0
-      },
-      "rpm": {
-        "series_30d": [
-          {
-            "date": "2026-04-17",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-18",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-19",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-20",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-21",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-22",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-23",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-24",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-25",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-26",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-27",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-28",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-29",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-30",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-01",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-02",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-03",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-04",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-05",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-06",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-07",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-08",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-09",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-10",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-11",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-12",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-13",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-14",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-15",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-16",
-            "views": null,
-            "rpm": null
-          }
-        ],
-        "window_7d": {
-          "window_days": 7,
-          "avg": 2.41,
-          "previous_avg": 0.0,
-          "delta": 2.41,
-          "delta_pct": null,
-          "direction": "up",
-          "points": 1
-        },
-        "window_30d": {
-          "window_days": 30,
-          "avg": 2.41,
-          "previous_avg": 0.0,
-          "delta": 2.41,
-          "delta_pct": null,
-          "direction": "up",
-          "points": 1
-        },
-        "latest": 2.4081
-      }
-    },
-    {
-      "channel": "stream_sirens",
-      "source": "source_clips_proxy",
-      "views": {
-        "series_30d": [
-          {
-            "date": "2026-04-17",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-18",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-19",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-20",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-21",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-22",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-23",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-24",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-25",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-26",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-27",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-28",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-29",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-30",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-01",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-02",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-03",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-04",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-05",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-06",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-07",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-08",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-09",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-10",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-11",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-12",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-13",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-14",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-15",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-16",
-            "views": null,
-            "rpm": null
-          }
-        ],
-        "window_7d": {
-          "window_days": 7,
-          "avg": 3628.0,
-          "previous_avg": 0.0,
-          "delta": 3628.0,
-          "delta_pct": null,
-          "direction": "up",
-          "points": 1
-        },
-        "window_30d": {
-          "window_days": 30,
-          "avg": 3628.0,
-          "previous_avg": 0.0,
-          "delta": 3628.0,
-          "delta_pct": null,
-          "direction": "up",
-          "points": 1
-        },
-        "latest": 3628.0
-      },
-      "rpm": {
-        "series_30d": [
-          {
-            "date": "2026-04-17",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-18",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-19",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-20",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-21",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-22",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-23",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-24",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-25",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-26",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-27",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-28",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-29",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-30",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-01",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-02",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-03",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-04",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-05",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-06",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-07",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-08",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-09",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-10",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-11",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-12",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-13",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-14",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-15",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-16",
-            "views": null,
-            "rpm": null
-          }
-        ],
-        "window_7d": {
-          "window_days": 7,
-          "avg": 3.08,
-          "previous_avg": 0.0,
-          "delta": 3.08,
-          "delta_pct": null,
-          "direction": "up",
-          "points": 1
-        },
-        "window_30d": {
-          "window_days": 30,
-          "avg": 3.08,
-          "previous_avg": 0.0,
-          "delta": 3.08,
-          "delta_pct": null,
-          "direction": "up",
-          "points": 1
-        },
-        "latest": 3.0838
-      }
-    },
-    {
-      "channel": "unfiltered_clips",
-      "source": "source_clips_proxy",
-      "views": {
-        "series_30d": [
-          {
-            "date": "2026-04-17",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-18",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-19",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-20",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-21",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-22",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-23",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-24",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-25",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-26",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-27",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-28",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-29",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-30",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-01",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-02",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-03",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-04",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-05",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-06",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-07",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-08",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-09",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-10",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-11",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-12",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-13",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-14",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-15",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-16",
-            "views": null,
-            "rpm": null
-          }
-        ],
-        "window_7d": {
-          "window_days": 7,
-          "avg": 1161.0,
-          "previous_avg": 0.0,
-          "delta": 1161.0,
-          "delta_pct": null,
-          "direction": "up",
-          "points": 1
-        },
-        "window_30d": {
-          "window_days": 30,
-          "avg": 1161.0,
-          "previous_avg": 0.0,
-          "delta": 1161.0,
-          "delta_pct": null,
-          "direction": "up",
-          "points": 1
-        },
-        "latest": 1161.0
-      },
-      "rpm": {
-        "series_30d": [
-          {
-            "date": "2026-04-17",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-18",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-19",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-20",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-21",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-22",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-23",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-24",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-25",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-26",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-27",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-28",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-29",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-04-30",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-01",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-02",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-03",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-04",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-05",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-06",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-07",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-08",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-09",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-10",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-11",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-12",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-13",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-14",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-15",
-            "views": null,
-            "rpm": null
-          },
-          {
-            "date": "2026-05-16",
-            "views": null,
-            "rpm": null
-          }
-        ],
-        "window_7d": {
-          "window_days": 7,
-          "avg": 0.99,
-          "previous_avg": 0.0,
-          "delta": 0.99,
-          "delta_pct": null,
-          "direction": "up",
-          "points": 1
-        },
-        "window_30d": {
-          "window_days": 30,
-          "avg": 0.99,
-          "previous_avg": 0.0,
-          "delta": 0.99,
-          "delta_pct": null,
-          "direction": "up",
-          "points": 1
-        },
-        "latest": 0.9869
       }
     },
     {
@@ -4999,11 +3599,6 @@
       "views": {
         "series_30d": [
           {
-            "date": "2026-04-17",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-04-18",
             "views": null,
             "rpm": null
@@ -5147,36 +3742,36 @@
             "date": "2026-05-16",
             "views": 474.0,
             "rpm": 0.4029
+          },
+          {
+            "date": "2026-05-17",
+            "views": 853.0,
+            "rpm": 0.725
           }
         ],
         "window_7d": {
           "window_days": 7,
-          "avg": 455.5,
-          "previous_avg": 489.0,
-          "delta": -33.5,
-          "delta_pct": -6.9,
-          "direction": "down",
+          "avg": 566.5,
+          "previous_avg": 416.8,
+          "delta": 149.7,
+          "delta_pct": 35.9,
+          "direction": "up",
           "points": 7
         },
         "window_30d": {
           "window_days": 30,
-          "avg": 324.5,
-          "previous_avg": 568.67,
-          "delta": -244.17,
-          "delta_pct": -42.9,
+          "avg": 336.05,
+          "previous_avg": 650.08,
+          "delta": -314.03,
+          "delta_pct": -48.3,
           "direction": "down",
           "points": 30
         },
-        "latest": 474.0
+        "latest": 853.0
       },
       "rpm": {
         "series_30d": [
           {
-            "date": "2026-04-17",
-            "views": null,
-            "rpm": null
-          },
-          {
             "date": "2026-04-18",
             "views": null,
             "rpm": null
@@ -5320,27 +3915,32 @@
             "date": "2026-05-16",
             "views": 474.0,
             "rpm": 0.4029
+          },
+          {
+            "date": "2026-05-17",
+            "views": 853.0,
+            "rpm": 0.725
           }
         ],
         "window_7d": {
           "window_days": 7,
-          "avg": 0.39,
-          "previous_avg": 0.42,
-          "delta": -0.03,
-          "delta_pct": -7.1,
-          "direction": "down",
+          "avg": 0.48,
+          "previous_avg": 0.35,
+          "delta": 0.13,
+          "delta_pct": 37.1,
+          "direction": "up",
           "points": 7
         },
         "window_30d": {
           "window_days": 30,
-          "avg": 0.28,
-          "previous_avg": 0.48,
-          "delta": -0.2,
-          "delta_pct": -41.7,
+          "avg": 0.29,
+          "previous_avg": 0.55,
+          "delta": -0.26,
+          "delta_pct": -47.3,
           "direction": "down",
           "points": 30
         },
-        "latest": 0.4029
+        "latest": 0.725
       }
     }
   ],
@@ -5351,7 +3951,7 @@
       "platform": "tiktok",
       "last_fetch": "2026-03-10 00:17:19",
       "last_fetch_display": "2026-03-10 00:17",
-      "last_fetch_ago": "67d",
+      "last_fetch_ago": "68d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -5379,7 +3979,7 @@
       "platform": "tiktok",
       "last_fetch": "2026-03-09 00:10:23",
       "last_fetch_display": "2026-03-09 00:10",
-      "last_fetch_ago": "68d",
+      "last_fetch_ago": "69d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -5393,7 +3993,7 @@
       "platform": "tiktok",
       "last_fetch": "2026-03-17 23:29:56",
       "last_fetch_display": "2026-03-17 23:29",
-      "last_fetch_ago": "59d",
+      "last_fetch_ago": "60d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -5449,7 +4049,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-17 23:31:27",
       "last_fetch_display": "2026-03-17 23:31",
-      "last_fetch_ago": "59d",
+      "last_fetch_ago": "60d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -5463,7 +4063,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-17 23:31:26",
       "last_fetch_display": "2026-03-17 23:31",
-      "last_fetch_ago": "59d",
+      "last_fetch_ago": "60d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -5477,7 +4077,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-17 23:31:26",
       "last_fetch_display": "2026-03-17 23:31",
-      "last_fetch_ago": "59d",
+      "last_fetch_ago": "60d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -5519,7 +4119,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-17 23:33:18",
       "last_fetch_display": "2026-03-17 23:33",
-      "last_fetch_ago": "59d",
+      "last_fetch_ago": "60d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.5,
@@ -5533,7 +4133,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-17 23:33:34",
       "last_fetch_display": "2026-03-17 23:33",
-      "last_fetch_ago": "59d",
+      "last_fetch_ago": "60d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.5,
@@ -5547,7 +4147,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-17 23:33:23",
       "last_fetch_display": "2026-03-17 23:33",
-      "last_fetch_ago": "59d",
+      "last_fetch_ago": "60d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.5,
@@ -5559,14 +4159,14 @@
       "source_id": "https://www.twitch.tv/nickmercs/clips",
       "source_key": "https://www.twitch.tv/nickmercs/clips",
       "platform": "unknown",
-      "last_fetch": "2026-05-16 22:03:43",
-      "last_fetch_display": "2026-05-16 22:03",
-      "last_fetch_ago": "1h",
+      "last_fetch": "2026-05-17 00:07:21",
+      "last_fetch_display": "2026-05-17 00:07",
+      "last_fetch_ago": "10m",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.637,
       "success_count": 145,
-      "failure_count": 254,
+      "failure_count": 255,
       "last_error": "no clips returned"
     },
     {
@@ -5575,7 +4175,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-17 23:33:16",
       "last_fetch_display": "2026-03-17 23:33",
-      "last_fetch_ago": "59d",
+      "last_fetch_ago": "60d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.5,
@@ -5587,14 +4187,14 @@
       "source_id": "https://www.twitch.tv/shroud/clips",
       "source_key": "https://www.twitch.tv/shroud/clips",
       "platform": "unknown",
-      "last_fetch": "2026-05-16 22:03:46",
-      "last_fetch_display": "2026-05-16 22:03",
-      "last_fetch_ago": "1h",
+      "last_fetch": "2026-05-17 00:07:24",
+      "last_fetch_display": "2026-05-17 00:07",
+      "last_fetch_ago": "10m",
       "clips_24h": 0,
       "status": "error",
-      "error_rate": 0.584,
+      "error_rate": 0.585,
       "success_count": 160,
-      "failure_count": 225,
+      "failure_count": 226,
       "last_error": "no clips returned"
     },
     {
@@ -5659,7 +4259,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-09 00:05:17",
       "last_fetch_display": "2026-03-09 00:05",
-      "last_fetch_ago": "68d",
+      "last_fetch_ago": "69d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -5729,7 +4329,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-17 23:29:54",
       "last_fetch_display": "2026-03-17 23:29",
-      "last_fetch_ago": "59d",
+      "last_fetch_ago": "60d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -5743,7 +4343,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-17 23:29:53",
       "last_fetch_display": "2026-03-17 23:29",
-      "last_fetch_ago": "59d",
+      "last_fetch_ago": "60d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -5771,7 +4371,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-09 00:17:34",
       "last_fetch_display": "2026-03-09 00:17",
-      "last_fetch_ago": "68d",
+      "last_fetch_ago": "69d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.667,
@@ -5813,7 +4413,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-09 00:10:17",
       "last_fetch_display": "2026-03-09 00:10",
-      "last_fetch_ago": "68d",
+      "last_fetch_ago": "69d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -5855,7 +4455,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-10 00:17:16",
       "last_fetch_display": "2026-03-10 00:17",
-      "last_fetch_ago": "67d",
+      "last_fetch_ago": "68d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -5967,7 +4567,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-09 00:10:36",
       "last_fetch_display": "2026-03-09 00:10",
-      "last_fetch_ago": "68d",
+      "last_fetch_ago": "69d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6037,7 +4637,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-17 23:38:34",
       "last_fetch_display": "2026-03-17 23:38",
-      "last_fetch_ago": "59d",
+      "last_fetch_ago": "60d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6065,7 +4665,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-09 00:15:07",
       "last_fetch_display": "2026-03-09 00:15",
-      "last_fetch_ago": "68d",
+      "last_fetch_ago": "69d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.667,
@@ -6093,7 +4693,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-17 23:31:26",
       "last_fetch_display": "2026-03-17 23:31",
-      "last_fetch_ago": "59d",
+      "last_fetch_ago": "60d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 1.0,
@@ -6149,7 +4749,7 @@
       "platform": "tiktok",
       "last_fetch": "2026-03-17 23:28:50",
       "last_fetch_display": "2026-03-17 23:28",
-      "last_fetch_ago": "59d",
+      "last_fetch_ago": "60d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.0,
@@ -6191,7 +4791,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-17 23:32:34",
       "last_fetch_display": "2026-03-17 23:32",
-      "last_fetch_ago": "59d",
+      "last_fetch_ago": "60d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.0,
@@ -6231,13 +4831,13 @@
       "source_id": "https://www.twitch.tv/cloakzy/clips?filter=clips&range=30d",
       "source_key": "https://www.twitch.tv/cloakzy/clips?filter=clips&range=30d",
       "platform": "unknown",
-      "last_fetch": "2026-05-16 22:03:00",
-      "last_fetch_display": "2026-05-16 22:03",
-      "last_fetch_ago": "1h",
+      "last_fetch": "2026-05-17 00:06:52",
+      "last_fetch_display": "2026-05-17 00:06",
+      "last_fetch_ago": "11m",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.096,
-      "success_count": 544,
+      "success_count": 545,
       "failure_count": 58,
       "last_error": "no clips returned"
     },
@@ -6261,7 +4861,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-16 00:07:31",
       "last_fetch_display": "2026-05-16 00:07",
-      "last_fetch_ago": "23h",
+      "last_fetch_ago": "1d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.082,
@@ -6273,13 +4873,13 @@
       "source_id": "https://www.twitch.tv/ludwig/clips",
       "source_key": "https://www.twitch.tv/ludwig/clips",
       "platform": "unknown",
-      "last_fetch": "2026-05-16 22:04:03",
-      "last_fetch_display": "2026-05-16 22:04",
-      "last_fetch_ago": "1h",
+      "last_fetch": "2026-05-17 00:07:44",
+      "last_fetch_display": "2026-05-17 00:07",
+      "last_fetch_ago": "10m",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.057,
-      "success_count": 347,
+      "success_count": 348,
       "failure_count": 21,
       "last_error": "no clips returned"
     },
@@ -6287,14 +4887,14 @@
       "source_id": "https://www.twitch.tv/moistcr1tikal/clips",
       "source_key": "https://www.twitch.tv/moistcr1tikal/clips",
       "platform": "unknown",
-      "last_fetch": "2026-05-16 22:03:48",
-      "last_fetch_display": "2026-05-16 22:03",
-      "last_fetch_ago": "1h",
+      "last_fetch": "2026-05-17 00:07:27",
+      "last_fetch_display": "2026-05-17 00:07",
+      "last_fetch_ago": "10m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.285,
+      "error_rate": 0.288,
       "success_count": 213,
-      "failure_count": 85,
+      "failure_count": 86,
       "last_error": "no clips returned"
     },
     {
@@ -6385,13 +4985,13 @@
       "source_id": "https://www.twitch.tv/tfue/clips?filter=clips&range=30d",
       "source_key": "https://www.twitch.tv/tfue/clips?filter=clips&range=30d",
       "platform": "unknown",
-      "last_fetch": "2026-05-16 22:02:50",
-      "last_fetch_display": "2026-05-16 22:02",
-      "last_fetch_ago": "1h",
+      "last_fetch": "2026-05-17 00:06:41",
+      "last_fetch_display": "2026-05-17 00:06",
+      "last_fetch_ago": "11m",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.073,
-      "success_count": 582,
+      "success_count": 583,
       "failure_count": 46,
       "last_error": "no clips returned"
     },
@@ -6413,14 +5013,14 @@
       "source_id": "https://www.twitch.tv/timthetatman/clips",
       "source_key": "https://www.twitch.tv/timthetatman/clips",
       "platform": "unknown",
-      "last_fetch": "2026-05-16 22:03:38",
-      "last_fetch_display": "2026-05-16 22:03",
-      "last_fetch_ago": "1h",
+      "last_fetch": "2026-05-17 00:07:16",
+      "last_fetch_display": "2026-05-17 00:07",
+      "last_fetch_ago": "10m",
       "clips_24h": 0,
       "status": "warning",
-      "error_rate": 0.444,
+      "error_rate": 0.445,
       "success_count": 234,
-      "failure_count": 187,
+      "failure_count": 188,
       "last_error": "no clips returned"
     },
     {
@@ -6429,7 +5029,7 @@
       "platform": "unknown",
       "last_fetch": "2026-03-17 23:33:26",
       "last_fetch_display": "2026-03-17 23:33",
-      "last_fetch_ago": "59d",
+      "last_fetch_ago": "60d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.0,
@@ -6555,7 +5155,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-17 23:42:35",
       "last_fetch_display": "2026-03-17 23:42",
-      "last_fetch_ago": "59d",
+      "last_fetch_ago": "60d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.0,
@@ -6611,7 +5211,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-17 23:32:32",
       "last_fetch_display": "2026-03-17 23:32",
-      "last_fetch_ago": "59d",
+      "last_fetch_ago": "60d",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.0,
@@ -6708,6 +5308,20 @@
     "log_viewer_target": "logs_dialog"
   },
   "top_clips": [
+    {
+      "clip_id": "engine_auto_48e94313",
+      "clip_id_short": "engine_auto_",
+      "title": "Cloakzy Wild Moments #43",
+      "source_title": null,
+      "creator": null,
+      "channel": "arc_highlightz",
+      "views": 0,
+      "likes": null,
+      "ctr_percent": null,
+      "upload_date": "2026-05-16 18:02",
+      "youtube_url": "https://youtube.com/shorts/GN-6w7lVBMc",
+      "metric_mode": "unavailable"
+    },
     {
       "clip_id": "engine_auto_8c9d408c",
       "clip_id_short": "engine_auto_",
@@ -6973,23 +5587,45 @@
       "upload_date": "2026-05-13 21:02",
       "youtube_url": "https://youtube.com/shorts/GxFxRjInMao",
       "metric_mode": "unavailable"
-    },
-    {
-      "clip_id": "engine_auto_e31b0dc0",
-      "clip_id_short": "engine_auto_",
-      "title": "Ludwig Clutch Moments #87",
-      "source_title": null,
-      "creator": null,
-      "channel": "viral_recaps",
-      "views": 0,
-      "likes": null,
-      "ctr_percent": null,
-      "upload_date": "2026-05-13 20:32",
-      "youtube_url": "https://youtube.com/shorts/9MmD6Ngqewk",
-      "metric_mode": "unavailable"
     }
   ],
   "recent_uploads": [
+    {
+      "job_id": "6e5bf9da-51c4-4216-9b53-2eaa7ca28cc4",
+      "job_id_short": "6e5bf9da",
+      "channel": "viral_recaps",
+      "status": "queued",
+      "updated_at": "2026-05-16T18:08:13.134735",
+      "updated_at_display": "2026-05-16 18:08",
+      "updated_ago": "6h",
+      "title": "Ludwig Wild Moments #101",
+      "url": null,
+      "error": null
+    },
+    {
+      "job_id": "b8273af0-02b8-42ff-ae69-030e5a010885",
+      "job_id_short": "b8273af0",
+      "channel": "arc_highlightz",
+      "status": "queued",
+      "updated_at": "2026-05-16T18:07:13.845111",
+      "updated_at_display": "2026-05-16 18:07",
+      "updated_ago": "6h",
+      "title": "Cloakzy Clutch Moments #44",
+      "url": null,
+      "error": null
+    },
+    {
+      "job_id": "eaa6f20a-3867-4586-b9e4-8cdb91a3dad9",
+      "job_id_short": "eaa6f20a",
+      "channel": "arc_highlightz",
+      "status": "succeeded",
+      "updated_at": "2026-05-16T18:02:42.891678",
+      "updated_at_display": "2026-05-16 18:02",
+      "updated_ago": "6h",
+      "title": "Cloakzy Wild Moments #43",
+      "url": "https://youtube.com/shorts/GN-6w7lVBMc",
+      "error": null
+    },
     {
       "job_id": "5095a04c-d3f7-4e83-91cb-22dc52503998",
       "job_id_short": "5095a04c",
@@ -6997,21 +5633,9 @@
       "status": "succeeded",
       "updated_at": "2026-05-16T16:32:49.525921",
       "updated_at_display": "2026-05-16 16:32",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "Ludwig Funny Moments #100",
       "url": "https://youtube.com/shorts/mtBCi3y3OzQ",
-      "error": null
-    },
-    {
-      "job_id": "eaa6f20a-3867-4586-b9e4-8cdb91a3dad9",
-      "job_id_short": "eaa6f20a",
-      "channel": "arc_highlightz",
-      "status": "queued",
-      "updated_at": "2026-05-16T16:03:35.372650",
-      "updated_at_display": "2026-05-16 16:03",
-      "updated_ago": "7h",
-      "title": "Cloakzy Wild Moments #43",
-      "url": null,
       "error": null
     },
     {
@@ -7021,7 +5645,7 @@
       "status": "succeeded",
       "updated_at": "2026-05-16T15:15:04.007272",
       "updated_at_display": "2026-05-16 15:15",
-      "updated_ago": "8h",
+      "updated_ago": "9h",
       "title": "Cloakzy Wild Moments #42",
       "url": "https://youtube.com/shorts/sLPhlqoFGD8",
       "error": null
@@ -7085,33 +5709,23 @@
       "title": "Ludwig Unreal Moments #95",
       "url": "https://youtube.com/shorts/Il7T06fVIM8",
       "error": null
-    },
-    {
-      "job_id": "0da94db9-4cf1-4f01-a95a-7903a92e3090",
-      "job_id_short": "0da94db9",
-      "channel": "viral_recaps",
-      "status": "succeeded",
-      "updated_at": "2026-05-14T16:01:51.545148",
-      "updated_at_display": "2026-05-14 16:01",
-      "updated_ago": "2d",
-      "title": "Ludwig Unreal Moments #94",
-      "url": "https://youtube.com/shorts/yudElWEy3QI",
-      "error": null
-    },
-    {
-      "job_id": "7a6e0d3e-f2fa-40f9-989a-134b2bee0752",
-      "job_id_short": "7a6e0d3e",
-      "channel": "viral_recaps",
-      "status": "succeeded",
-      "updated_at": "2026-05-14T15:31:51.251189",
-      "updated_at_display": "2026-05-14 15:31",
-      "updated_ago": "2d",
-      "title": "Ludwig Funny Moments #93",
-      "url": "https://youtube.com/shorts/4idfvFyYtu4",
-      "error": null
     }
   ],
   "recent_clips": [
+    {
+      "job_id": "eaa6f20a-3867-4586-b9e4-8cdb91a3dad9",
+      "job_id_short": "eaa6f20a",
+      "channel": "arc_highlightz",
+      "title": "Cloakzy Wild Moments #43",
+      "title_truncated": "Cloakzy Wild Moments #43",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/GN-6w7lVBMc",
+      "views": 111,
+      "views_display": "111",
+      "published_at": "2026-05-16T18:02:42.891678",
+      "published_at_display": "2026-05-16 18:02",
+      "published_ago": "6h"
+    },
     {
       "job_id": "5095a04c-d3f7-4e83-91cb-22dc52503998",
       "job_id_short": "5095a04c",
@@ -7124,7 +5738,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-05-16T16:32:49.525921",
       "published_at_display": "2026-05-16 16:32",
-      "published_ago": "6h"
+      "published_ago": "7h"
     },
     {
       "job_id": "db69e5f5-ad35-4f2a-9ac3-f162a054438b",
@@ -7134,11 +5748,11 @@
       "title_truncated": "Cloakzy Wild Moments #42",
       "thumbnail_path": null,
       "post_url": "https://youtube.com/shorts/sLPhlqoFGD8",
-      "views": 110,
-      "views_display": "110",
+      "views": 184,
+      "views_display": "184",
       "published_at": "2026-05-16T15:15:04.007272",
       "published_at_display": "2026-05-16 15:15",
-      "published_ago": "8h"
+      "published_ago": "9h"
     },
     {
       "job_id": "4dda3605-28cd-4ca3-893b-3ea59b3811f9",
@@ -7237,28 +5851,30 @@
       "published_at": "2026-05-14T15:31:51.251189",
       "published_at_display": "2026-05-14 15:31",
       "published_ago": "2d"
-    },
-    {
-      "job_id": "adc44bb7-e981-4e3d-aab9-6917ee220273",
-      "job_id_short": "adc44bb7",
-      "channel": "viral_recaps",
-      "title": "Moistcr1tikal Crazy Moments #12",
-      "title_truncated": "Moistcr1tikal Crazy Moments #12",
-      "thumbnail_path": null,
-      "post_url": "https://youtube.com/shorts/g4KR_JnVrRM",
-      "views": 0,
-      "views_display": "\u00e2\u20ac\u201d",
-      "published_at": "2026-05-14T15:03:01.495203",
-      "published_at_display": "2026-05-14 15:03",
-      "published_ago": "2d"
     }
   ],
   "upload_timeline": {
     "buckets": [
       {
         "name": "Today",
-        "count": 2,
+        "count": 0,
+        "items": []
+      },
+      {
+        "name": "Yesterday",
+        "count": 3,
         "items": [
+          {
+            "job_id": "eaa6f20a-3867-4586-b9e4-8cdb91a3dad9",
+            "job_id_short": "eaa6f20a",
+            "channel": "arc_highlightz",
+            "title": "Cloakzy Wild Moments #43",
+            "published_at": "2026-05-16T18:02:42.891678",
+            "published_at_display": "2026-05-16 18:02",
+            "published_ago": "6h",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/GN-6w7lVBMc"
+          },
           {
             "job_id": "5095a04c-d3f7-4e83-91cb-22dc52503998",
             "job_id_short": "5095a04c",
@@ -7266,7 +5882,7 @@
             "title": "Ludwig Funny Moments #100",
             "published_at": "2026-05-16T16:32:49.525921",
             "published_at_display": "2026-05-16 16:32",
-            "published_ago": "6h",
+            "published_ago": "7h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/mtBCi3y3OzQ"
           },
@@ -7277,15 +5893,15 @@
             "title": "Cloakzy Wild Moments #42",
             "published_at": "2026-05-16T15:15:04.007272",
             "published_at_display": "2026-05-16 15:15",
-            "published_ago": "8h",
+            "published_ago": "9h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/sLPhlqoFGD8"
           }
         ]
       },
       {
-        "name": "Yesterday",
-        "count": 2,
+        "name": "This Week",
+        "count": 22,
         "items": [
           {
             "job_id": "4dda3605-28cd-4ca3-893b-3ea59b3811f9",
@@ -7308,13 +5924,7 @@
             "published_ago": "1d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/oUQWVk4Rt4Y"
-          }
-        ]
-      },
-      {
-        "name": "This Week",
-        "count": 20,
-        "items": [
+          },
           {
             "job_id": "33dffd0c-6cde-4448-9980-6029b1e052fa",
             "job_id_short": "33dffd0c",
@@ -7421,7 +6031,7 @@
             "title": "Myth Clutch Moments #20",
             "published_at": "2026-05-13T23:32:34.548704",
             "published_at_display": "2026-05-13 23:32",
-            "published_ago": "2d",
+            "published_ago": "3d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/fpKy2ZH74rY"
           },
@@ -7746,7 +6356,7 @@
             "title": "Ninja Crazy Moments #21",
             "published_at": "2026-05-06T23:32:11.335089",
             "published_at_display": "2026-05-06 23:32",
-            "published_ago": "9d",
+            "published_ago": "10d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/1Fxm44MTzkc"
           },
@@ -7820,20 +6430,8 @@
       },
       {
         "name": "Older",
-        "count": 1,
-        "items": [
-          {
-            "job_id": "f080f473-e20c-463c-a9e0-be2c8e48ea9e",
-            "job_id_short": "f080f473",
-            "channel": "viral_recaps",
-            "title": "Ludwig Clutch Moments #73",
-            "published_at": "2026-05-01T15:31:22.722583",
-            "published_at_display": "2026-05-01 15:31",
-            "published_ago": "15d",
-            "views": 0,
-            "post_url": "https://youtube.com/shorts/PjKaZTjgEOU"
-          }
-        ]
+        "count": 0,
+        "items": []
       }
     ],
     "total_count": 50
@@ -8072,12 +6670,21 @@
   "schedule": {
     "2026-05-16": [
       {
-        "job_id": "eaa6f20a-3867-4586-b9e4-8cdb91a3dad9",
-        "job_id_short": "eaa6f20a",
+        "job_id": "b8273af0-02b8-42ff-ae69-030e5a010885",
+        "job_id_short": "b8273af0",
         "channel": "arc_highlightz",
-        "title": "Cloakzy Wild Moments #43",
-        "scheduled_at": "2026-05-16T17:00:00-06:00",
-        "scheduled_at_iso": "2026-05-16T17:00:00",
+        "title": "Cloakzy Clutch Moments #44",
+        "scheduled_at": "2026-05-16T19:00:00-06:00",
+        "scheduled_at_iso": "2026-05-16T19:00:00",
+        "status": "queued"
+      },
+      {
+        "job_id": "6e5bf9da-51c4-4216-9b53-2eaa7ca28cc4",
+        "job_id_short": "6e5bf9da",
+        "channel": "viral_recaps",
+        "title": "Ludwig Wild Moments #101",
+        "scheduled_at": "2026-05-16T19:00:00-06:00",
+        "scheduled_at_iso": "2026-05-16T19:00:00",
         "status": "queued"
       },
       {
@@ -8097,34 +6704,14 @@
         "scheduled_at": "2026-05-16T16:32:49.525921",
         "scheduled_at_iso": "2026-05-16T16:32:49.525921",
         "status": "succeeded"
-      }
-    ],
-    "2026-05-09": [
-      {
-        "job_id": "27d5b7e5-adbf-4259-a730-10ef93601436",
-        "job_id_short": "27d5b7e5",
-        "channel": "viral_recaps",
-        "title": "Ludwig Funny Moments #82",
-        "scheduled_at": "2026-05-09T08:32:17.562073",
-        "scheduled_at_iso": "2026-05-09T08:32:17.562073",
-        "status": "succeeded"
       },
       {
-        "job_id": "1d88d5ff-6a5a-488b-a9a5-ff29dfd496a1",
-        "job_id_short": "1d88d5ff",
-        "channel": "viral_recaps",
-        "title": "Ludwig Clutch Moments #83",
-        "scheduled_at": "2026-05-09T11:01:54.501096",
-        "scheduled_at_iso": "2026-05-09T11:01:54.501096",
-        "status": "succeeded"
-      },
-      {
-        "job_id": "9470a3f0-1b31-4611-8313-b32e7bcac19d",
-        "job_id_short": "9470a3f0",
+        "job_id": "eaa6f20a-3867-4586-b9e4-8cdb91a3dad9",
+        "job_id_short": "eaa6f20a",
         "channel": "arc_highlightz",
-        "title": "Nickmercs Clutch Moments #16",
-        "scheduled_at": "2026-05-09T12:31:27.578400",
-        "scheduled_at_iso": "2026-05-09T12:31:27.578400",
+        "title": "Cloakzy Wild Moments #43",
+        "scheduled_at": "2026-05-16T18:02:42.891678",
+        "scheduled_at_iso": "2026-05-16T18:02:42.891678",
         "status": "succeeded"
       }
     ],
@@ -8358,7 +6945,8 @@
     "2026-05-20": [],
     "2026-05-21": [],
     "2026-05-22": [],
-    "2026-05-23": []
+    "2026-05-23": [],
+    "2026-05-24": []
   },
   "quota": {
     "quota_by_channel": [
@@ -8505,9 +7093,9 @@
     ],
     "any_channel_high": false,
     "all_channels_safe": true,
-    "reset_time_hours": 8,
+    "reset_time_hours": 7,
     "reset_time_minutes": 41,
-    "reset_time_display": "8h 41m"
+    "reset_time_display": "7h 41m"
   },
   "revenue": {
     "total_views_30d": 0,
@@ -8527,8 +7115,8 @@
       "discovered": 0,
       "downloaded": 0,
       "processed": 0,
-      "queued": 1,
-      "uploaded": 602
+      "queued": 2,
+      "uploaded": 603
     },
     "by_channel": [
       {
@@ -8537,7 +7125,7 @@
         "downloaded": 0,
         "processed": 0,
         "queued": 1,
-        "uploaded": 203
+        "uploaded": 204
       },
       {
         "channel": "fomo_highlights",
@@ -8568,13 +7156,13 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 0,
+        "queued": 1,
         "uploaded": 137
       }
     ],
     "throughput": {
-      "uploads_per_hour": 0.08,
-      "uploads_last_24h": 2
+      "uploads_per_hour": 0.12,
+      "uploads_last_24h": 3
     },
     "stage_timings": {
       "discovered_to_downloaded_hours": 0.0,
@@ -8582,7 +7170,7 @@
     },
     "bottleneck": {
       "stage": "queued",
-      "backlog": 1
+      "backlog": 2
     }
   },
   "disk": {
@@ -8590,9 +7178,9 @@
       {
         "name": "raw_clips",
         "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\raw_clips",
-        "size_bytes": 76958550274,
-        "size_human": "71.7GB",
-        "file_count": 5242
+        "size_bytes": 77485576670,
+        "size_human": "72.2GB",
+        "file_count": 5285
       },
       {
         "name": "intermediate",
@@ -8604,21 +7192,21 @@
       {
         "name": "renders",
         "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\renders",
-        "size_bytes": 2394347036,
-        "size_human": "2.2GB",
-        "file_count": 311
+        "size_bytes": 2416079789,
+        "size_human": "2.3GB",
+        "file_count": 315
       },
       {
         "name": "renders/thumbnails",
         "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\renders\\thumbnails",
-        "size_bytes": 4434236,
-        "size_human": "4.2MB",
-        "file_count": 102
+        "size_bytes": 4521774,
+        "size_human": "4.3MB",
+        "file_count": 104
       }
     ],
-    "total_disk_bytes": 85707477917,
-    "total_disk_human": "79.8GB",
-    "percent_of_500gb": 16.0,
+    "total_disk_bytes": 86233883104,
+    "total_disk_human": "80.3GB",
+    "percent_of_500gb": 16.1,
     "warning_threshold_pct": 70,
     "error_threshold_pct": 85,
     "largest_files": [
@@ -8815,7 +7403,7 @@
         "post_url": "https://youtube.com/shorts/IcaWcciAOzM",
         "published_at": "2026-03-08T23:18:37.825820",
         "published_at_display": "2026-03-08 23:18",
-        "published_ago": "68d",
+        "published_ago": "69d",
         "thumbnail_path": null
       }
     ],
@@ -8865,9 +7453,9 @@
   "leaderboard": [
     {
       "channel_name": "arc_highlightz",
-      "total_views": 45175,
-      "uploads_30d": 38,
-      "avg_views": 1188,
+      "total_views": 45360,
+      "uploads_30d": 39,
+      "avg_views": 1163,
       "best_clip_title": "No clips yet",
       "best_clip_views": 0,
       "best_clip_url": "",
@@ -9928,9 +8516,9 @@
           "creator_name": "cloakzy",
           "min_views": 0,
           "priority": 3,
-          "clips_fetched": 41,
-          "last_fetched_at": "2026-05-16T22:03:35.407181",
-          "last_fetched_rel": "1h",
+          "clips_fetched": 42,
+          "last_fetched_at": "2026-05-17T00:07:13.868788",
+          "last_fetched_rel": "10m",
           "enabled": true,
           "url": "vod://cloakzy",
           "type": "vod_highlights"
@@ -10003,9 +8591,9 @@
           "creator_name": "ludwig",
           "min_views": 0,
           "priority": 1,
-          "clips_fetched": 99,
-          "last_fetched_at": "2026-05-16T22:04:24.538596",
-          "last_fetched_rel": "1h",
+          "clips_fetched": 100,
+          "last_fetched_at": "2026-05-17T00:08:13.154036",
+          "last_fetched_rel": "9m",
           "enabled": true,
           "url": "https://www.youtube.com/@Ludwig/videos",
           "type": "transcript"
@@ -10132,13 +8720,13 @@
   ],
   "daily_summary": {
     "date": "2026-05-16",
-    "uploads_today": 2,
-    "uploads_yesterday": 4,
+    "uploads_today": 3,
+    "uploads_yesterday": 5,
     "views_gained_today": 0,
     "views_yesterday": 0,
     "errors_today": 0,
-    "quota_pct": 32.0,
-    "quota_units_used": 3200,
+    "quota_pct": 48.0,
+    "quota_units_used": 4800,
     "delta_uploads": -2,
     "delta_views": 0,
     "top_clip_today": {
@@ -10148,22 +8736,22 @@
     },
     "top_3_channels": [
       {
-        "channel": "viral_recaps",
-        "uploads": 1
+        "channel": "arc_highlightz",
+        "uploads": 2
       },
       {
-        "channel": "arc_highlightz",
+        "channel": "viral_recaps",
         "uploads": 1
       }
     ],
-    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-05-16\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 2 (-2 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 32.0% used (3200/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Cloakzy Wild Moments #42\n  0 views \u00e2\u20ac\u00a2 arc_highlightz\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. viral_recaps: 1 uploads\n  2. arc_highlightz: 1 uploads",
-    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-05-16\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 2 (-2 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 32.0% used (`3200/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Cloakzy Wild Moments #42_\n**0 views** \u00e2\u20ac\u00a2 **arc_highlightz**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **viral_recaps** \u00e2\u20ac\u201d 1 uploads\n2. **arc_highlightz** \u00e2\u20ac\u201d 1 uploads"
+    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-05-16\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 3 (-2 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 48.0% used (4800/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Cloakzy Wild Moments #42\n  0 views \u00e2\u20ac\u00a2 arc_highlightz\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. arc_highlightz: 2 uploads\n  2. viral_recaps: 1 uploads",
+    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-05-16\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 3 (-2 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 48.0% used (`4800/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Cloakzy Wild Moments #42_\n**0 views** \u00e2\u20ac\u00a2 **arc_highlightz**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **arc_highlightz** \u00e2\u20ac\u201d 2 uploads\n2. **viral_recaps** \u00e2\u20ac\u201d 1 uploads"
   },
   "title_performance": {
     "pattern_analysis": {
       "has_numbers": {
         "avg_views": 0.0,
-        "count": 466,
+        "count": 467,
         "total_views": 0
       },
       "has_question": {
@@ -10221,7 +8809,7 @@
       {
         "word": "cloakzy",
         "avg_views": 0.0,
-        "occurrences": 46
+        "occurrences": 47
       },
       {
         "word": "made",
@@ -10273,7 +8861,7 @@
       {
         "word": "cloakzy",
         "avg_views": 0.0,
-        "occurrences": 46
+        "occurrences": 47
       },
       {
         "word": "made",
@@ -10318,7 +8906,7 @@
         "channel": "arc_highlightz",
         "best_title": "Watch this before scrolling: Nobody plays like this",
         "best_views": 0,
-        "total_titles_analyzed": 203,
+        "total_titles_analyzed": 204,
         "pattern_breakdown": {
           "numbers_pct": 94.6,
           "questions_pct": 0.5,
@@ -10381,7 +8969,7 @@
       {
         "style_name": "Gaming/Clips",
         "avg_views": 0,
-        "total_clips": 595,
+        "total_clips": 596,
         "best_clip": null,
         "total_views": 0,
         "is_best": true
@@ -10406,7 +8994,7 @@
     "best_style_overall": "Gaming/Clips",
     "summary_stats": {
       "total_styles": 3,
-      "total_clips_all": 602,
+      "total_clips_all": 603,
       "total_views_all": 0,
       "avg_views_overall": 0
     }
@@ -10518,8 +9106,8 @@
       {
         "hour": 17,
         "hour_label": "17:00",
-        "posts": 16,
-        "avg_views": 962.0
+        "posts": 17,
+        "avg_views": 953.0
       },
       {
         "hour": 18,
@@ -10592,8 +9180,8 @@
       {
         "day": 5,
         "day_name": "Saturday",
-        "posts": 84,
-        "avg_views": 756.0
+        "posts": 85,
+        "avg_views": 757.0
       },
       {
         "day": 6,
@@ -11550,7 +10138,7 @@
           "hour": 17,
           "day": 5,
           "views": 800.0,
-          "posts": 3,
+          "posts": 4,
           "intensity": 48.5
         },
         {
@@ -11876,7 +10464,7 @@
       "day_name": "Tuesday",
       "est_views": 1650.0
     },
-    "job_count": 602
+    "job_count": 603
   },
   "benchmarks": {
     "current_tier": "Starter",
@@ -11967,81 +10555,81 @@
     {
       "type": "warning",
       "title": "Channel \"market_meltdowns\" paused for 24+ hours",
-      "message": "market_meltdowns has been paused for 1655 hours",
+      "message": "market_meltdowns has been paused for 1656 hours",
       "channel": "market_meltdowns",
-      "created_at": "2026-05-16T23:18:05.973268",
+      "created_at": "2026-05-17T00:18:06.061708",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"self_made_clips\" paused for 24+ hours",
-      "message": "self_made_clips has been paused for 1651 hours",
+      "message": "self_made_clips has been paused for 1652 hours",
       "channel": "self_made_clips",
-      "created_at": "2026-05-16T23:18:05.973268",
+      "created_at": "2026-05-17T00:18:06.061708",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"rich_or_ruined\" paused for 24+ hours",
-      "message": "rich_or_ruined has been paused for 1649 hours",
+      "message": "rich_or_ruined has been paused for 1650 hours",
       "channel": "rich_or_ruined",
-      "created_at": "2026-05-16T23:18:05.973268",
+      "created_at": "2026-05-17T00:18:06.061708",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"startup_graveyard\" paused for 24+ hours",
-      "message": "startup_graveyard has been paused for 1649 hours",
+      "message": "startup_graveyard has been paused for 1650 hours",
       "channel": "startup_graveyard",
-      "created_at": "2026-05-16T23:18:05.973268",
+      "created_at": "2026-05-17T00:18:06.061708",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_sirens\" paused for 24+ hours",
-      "message": "stream_sirens has been paused for 1628 hours",
+      "message": "stream_sirens has been paused for 1629 hours",
       "channel": "stream_sirens",
-      "created_at": "2026-05-16T23:18:05.973268",
+      "created_at": "2026-05-17T00:18:06.061708",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_queens\" paused for 24+ hours",
-      "message": "stream_queens has been paused for 1628 hours",
+      "message": "stream_queens has been paused for 1629 hours",
       "channel": "stream_queens",
-      "created_at": "2026-05-16T23:18:05.973268",
+      "created_at": "2026-05-17T00:18:06.061708",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"ai_did_what\" paused for 24+ hours",
-      "message": "ai_did_what has been paused for 1594 hours",
+      "message": "ai_did_what has been paused for 1595 hours",
       "channel": "ai_did_what",
-      "created_at": "2026-05-16T23:18:05.973268",
+      "created_at": "2026-05-17T00:18:06.061708",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"gym_moments\" paused for 24+ hours",
-      "message": "gym_moments has been paused for 1594 hours",
+      "message": "gym_moments has been paused for 1595 hours",
       "channel": "gym_moments",
-      "created_at": "2026-05-16T23:18:05.973268",
+      "created_at": "2026-05-17T00:18:06.061708",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"kitchen_chaos\" paused for 24+ hours",
-      "message": "kitchen_chaos has been paused for 1447 hours",
+      "message": "kitchen_chaos has been paused for 1448 hours",
       "channel": "kitchen_chaos",
-      "created_at": "2026-05-16T23:18:05.973268",
+      "created_at": "2026-05-17T00:18:06.061708",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"unfiltered_clips\" paused for 24+ hours",
-      "message": "unfiltered_clips has been paused for 1447 hours",
+      "message": "unfiltered_clips has been paused for 1448 hours",
       "channel": "unfiltered_clips",
-      "created_at": "2026-05-16T23:18:05.973268",
+      "created_at": "2026-05-17T00:18:06.061708",
       "read": false
     }
   ],
@@ -12087,12 +10675,12 @@
       ]
     },
     {
-      "channel": "fomo_highlights",
-      "readiness_score": 5,
+      "channel": "viral_recaps",
+      "readiness_score": 6,
       "total_checks": 6,
-      "badge": "needs_attention",
-      "badge_text": "Needs Attention",
-      "badge_color": "orange",
+      "badge": "launch_ready",
+      "badge_text": "Launch Ready",
+      "badge_color": "green",
       "checks": [
         {
           "label": "Has YouTube account linked",
@@ -12116,8 +10704,8 @@
         },
         {
           "label": "Has clips in queue",
-          "passed": false,
-          "icon": "\u00e2\u009d\u0152"
+          "passed": true,
+          "icon": "\u00e2\u0153\u2026"
         },
         {
           "label": "Quota not exhausted (< 90% used)",
@@ -12127,7 +10715,7 @@
       ]
     },
     {
-      "channel": "viral_recaps",
+      "channel": "fomo_highlights",
       "readiness_score": 5,
       "total_checks": 6,
       "badge": "needs_attention",
@@ -12646,11 +11234,11 @@
         "category": "Comedy",
         "target_per_day": 8,
         "published_24h": 1,
-        "queue_depth": 0,
+        "queue_depth": 1,
         "running_jobs": 0,
         "failed_7d": 0,
-        "avg_views": 264,
-        "rpm": 0.22,
+        "avg_views": 282,
+        "rpm": 0.24,
         "deficit": 7,
         "completion_rate": 12.5,
         "lagging": true,
@@ -12683,29 +11271,29 @@
         "status": "active",
         "category": "Gaming",
         "target_per_day": 15,
-        "published_24h": 1,
+        "published_24h": 2,
         "queue_depth": 1,
         "running_jobs": 0,
         "failed_7d": 0,
-        "avg_views": 597,
-        "rpm": 0.51,
-        "deficit": 14,
-        "completion_rate": 6.7,
+        "avg_views": 579,
+        "rpm": 0.49,
+        "deficit": 13,
+        "completion_rate": 13.3,
         "lagging": true,
         "views_source": "source_clips_proxy",
-        "latest_title": "Cloakzy Wild Moments #42",
-        "latest_url": "https://youtube.com/shorts/sLPhlqoFGD8",
-        "latest_uploaded_at": "2026-05-16 15:15"
+        "latest_title": "Cloakzy Wild Moments #43",
+        "latest_url": "https://youtube.com/shorts/GN-6w7lVBMc",
+        "latest_uploaded_at": "2026-05-16 18:02"
       }
     ],
     "lagging_count": 4,
-    "queue_backlog": 1,
-    "analytics_channels": 10
+    "queue_backlog": 2,
+    "analytics_channels": 6
   },
   "meta": {
     "refresh_seconds": 30,
     "channel_count": 14,
-    "job_count": 785,
+    "job_count": 787,
     "has_metrics_daily": false,
     "has_clip_assets": false,
     "note": "Trend analytics prefer metrics_daily and fall back to source clip proxy series when upload analytics are sparse."

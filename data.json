@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-05-27T21:18:06.960750Z",
+  "generated_at": "2026-05-27T22:18:07.025642Z",
   "repo_root": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire",
   "database_path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\data\\clip_empire.db",
   "health_score": {
-    "score": 70.1,
+    "score": 71.5,
     "grade": "C",
     "status": "Needs Attention",
     "color": "yellow",
     "breakdown": {
-      "pipeline_health": 2.2,
+      "pipeline_health": 3.7,
       "error_rate": 20.0,
       "quota_safety": 15,
       "queue_depth": 15,
@@ -16,13 +16,13 @@
       "channel_uptime": 2.9
     },
     "metrics": {
-      "uploads_today": 3,
+      "uploads_today": 5,
       "target_today": 34,
-      "pipeline_health_ratio": 0.09,
+      "pipeline_health_ratio": 0.15,
       "errors_today": 0,
       "total_jobs_today": 8,
       "error_rate": 0.0,
-      "queue_depth": 5,
+      "queue_depth": 3,
       "active_channels": 4,
       "total_channels": 14,
       "fresh_sources": 0,
@@ -34,16 +34,46 @@
     "total_channels": 14,
     "jobs_today": {
       "total": 8,
-      "queued": 5,
+      "queued": 3,
       "running": 0,
-      "succeeded": 3,
+      "succeeded": 5,
       "failed": 0,
       "cancelled": 0
     },
-    "render_queue_depth": 5,
-    "last_updated": "2026-05-27T21:18:06.961241Z"
+    "render_queue_depth": 3,
+    "last_updated": "2026-05-27T22:18:07.026674Z"
   },
   "queue_monitor": [
+    {
+      "job_id": "7cd09d65-190a-414d-bebb-81326f80f84f",
+      "job_id_short": "7cd09d65",
+      "channel": "viral_recaps",
+      "status": "succeeded",
+      "attempt": 0,
+      "created_at": "2026-05-27T08:06:01.231249",
+      "created_at_display": "2026-05-27 08:06",
+      "created_ago": "14h",
+      "updated_at": "2026-05-27T16:01:56.348753",
+      "scheduled_for": "2026-05-27 19:00",
+      "error": null,
+      "has_error": false,
+      "post_url": "https://youtube.com/shorts/CLYDSHAnva4"
+    },
+    {
+      "job_id": "0bfe31be-f6c6-4f21-b5fc-d6e4638472f5",
+      "job_id_short": "0bfe31be",
+      "channel": "viral_recaps",
+      "status": "succeeded",
+      "attempt": 0,
+      "created_at": "2026-05-27T06:06:06.554537",
+      "created_at_display": "2026-05-27 06:06",
+      "created_ago": "16h",
+      "updated_at": "2026-05-27T15:31:51.305725",
+      "scheduled_for": "2026-05-27 19:00",
+      "error": null,
+      "has_error": false,
+      "post_url": "https://youtube.com/shorts/oJeHp2Im6Pk"
+    },
     {
       "job_id": "b117a98b-8985-4537-aac4-9ad0c120913f",
       "job_id_short": "b117a98b",
@@ -52,7 +82,7 @@
       "attempt": 0,
       "created_at": "2026-05-27T04:05:56.697913",
       "created_at_display": "2026-05-27 04:05",
-      "created_ago": "17h",
+      "created_ago": "18h",
       "updated_at": "2026-05-27T15:02:33.086887",
       "scheduled_for": "2026-05-27 19:00",
       "error": null,
@@ -67,7 +97,7 @@
       "attempt": 0,
       "created_at": "2026-05-27T12:05:10.589390",
       "created_at_display": "2026-05-27 12:05",
-      "created_ago": "9h",
+      "created_ago": "10h",
       "updated_at": "2026-05-27T12:05:10.589390",
       "scheduled_for": "2026-05-27 19:30",
       "error": null,
@@ -82,7 +112,7 @@
       "attempt": 0,
       "created_at": "2026-05-27T12:04:36.580615",
       "created_at_display": "2026-05-27 12:04",
-      "created_ago": "9h",
+      "created_ago": "10h",
       "updated_at": "2026-05-27T12:04:36.580615",
       "scheduled_for": "2026-05-27 19:30",
       "error": null,
@@ -97,7 +127,7 @@
       "attempt": 0,
       "created_at": "2026-05-27T02:04:34.611566",
       "created_at_display": "2026-05-27 02:04",
-      "created_ago": "19h",
+      "created_ago": "20h",
       "updated_at": "2026-05-27T11:02:06.003543",
       "scheduled_for": "2026-05-27 15:00",
       "error": null,
@@ -112,39 +142,9 @@
       "attempt": 0,
       "created_at": "2026-05-27T10:13:14.868010",
       "created_at_display": "2026-05-27 10:13",
-      "created_ago": "11h",
+      "created_ago": "12h",
       "updated_at": "2026-05-27T10:13:14.868010",
       "scheduled_for": "2026-05-27 19:30",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "7cd09d65-190a-414d-bebb-81326f80f84f",
-      "job_id_short": "7cd09d65",
-      "channel": "viral_recaps",
-      "status": "queued",
-      "attempt": 0,
-      "created_at": "2026-05-27T08:06:01.231249",
-      "created_at_display": "2026-05-27 08:06",
-      "created_ago": "13h",
-      "updated_at": "2026-05-27T08:06:01.231249",
-      "scheduled_for": "2026-05-27 19:00",
-      "error": null,
-      "has_error": false,
-      "post_url": null
-    },
-    {
-      "job_id": "0bfe31be-f6c6-4f21-b5fc-d6e4638472f5",
-      "job_id_short": "0bfe31be",
-      "channel": "viral_recaps",
-      "status": "queued",
-      "attempt": 0,
-      "created_at": "2026-05-27T06:06:06.554537",
-      "created_at_display": "2026-05-27 06:06",
-      "created_ago": "15h",
-      "updated_at": "2026-05-27T06:06:06.554537",
-      "scheduled_for": "2026-05-27 19:00",
       "error": null,
       "has_error": false,
       "post_url": null
@@ -157,7 +157,7 @@
       "attempt": 0,
       "created_at": "2026-05-27T00:04:22.798771",
       "created_at_display": "2026-05-27 00:04",
-      "created_ago": "21h",
+      "created_ago": "22h",
       "updated_at": "2026-05-27T05:02:06.217169",
       "scheduled_for": "2026-05-27 09:00",
       "error": null,
@@ -982,7 +982,7 @@
       "attempt": 0,
       "created_at": "2026-05-18T22:04:26.253357",
       "created_at_display": "2026-05-18 22:04",
-      "created_ago": "8d",
+      "created_ago": "9d",
       "updated_at": "2026-05-18T22:32:08.368070",
       "scheduled_for": "2026-05-18 16:45",
       "error": null,
@@ -1222,7 +1222,7 @@
       "attempt": 0,
       "created_at": "2026-05-16T22:04:03.344787",
       "created_at_display": "2026-05-16 22:04",
-      "created_ago": "10d",
+      "created_ago": "11d",
       "updated_at": "2026-05-16T23:02:28.569804",
       "scheduled_for": "2026-05-16 23:00",
       "error": null,
@@ -1237,7 +1237,7 @@
       "attempt": 0,
       "created_at": "2026-05-16T22:05:01.379609",
       "created_at_display": "2026-05-16 22:05",
-      "created_ago": "10d",
+      "created_ago": "11d",
       "updated_at": "2026-05-16T22:32:56.601003",
       "scheduled_for": "2026-05-16 18:15",
       "error": null,
@@ -1522,7 +1522,7 @@
       "attempt": 0,
       "created_at": "2026-05-13T22:10:46.943021",
       "created_at_display": "2026-05-13 22:10",
-      "created_ago": "13d",
+      "created_ago": "14d",
       "updated_at": "2026-05-13T23:32:34.548704",
       "scheduled_for": "2026-05-13 23:00",
       "error": null,
@@ -1576,6 +1576,25 @@
   },
   "channel_performance": [
     {
+      "channel": "viral_recaps",
+      "status": "active",
+      "category": "Comedy",
+      "target_per_day": 8,
+      "published_24h": 5,
+      "queue_depth": 3,
+      "running_jobs": 0,
+      "failed_7d": 0,
+      "avg_views": 387,
+      "rpm": 0.33,
+      "deficit": 3,
+      "completion_rate": 62.5,
+      "lagging": true,
+      "views_source": "source_clips_proxy",
+      "latest_title": "Ludwig Funny Moments #146",
+      "latest_url": "https://youtube.com/shorts/CLYDSHAnva4",
+      "latest_uploaded_at": "2026-05-27 16:01"
+    },
+    {
       "channel": "test_channel",
       "status": "active",
       "category": "experimental",
@@ -1593,25 +1612,6 @@
       "latest_title": "Test Caption 1",
       "latest_url": "https://youtube.com/test",
       "latest_uploaded_at": "2026-03-30 22:14"
-    },
-    {
-      "channel": "viral_recaps",
-      "status": "active",
-      "category": "Comedy",
-      "target_per_day": 8,
-      "published_24h": 3,
-      "queue_depth": 5,
-      "running_jobs": 0,
-      "failed_7d": 0,
-      "avg_views": 387,
-      "rpm": 0.33,
-      "deficit": 5,
-      "completion_rate": 37.5,
-      "lagging": true,
-      "views_source": "source_clips_proxy",
-      "latest_title": "Ludwig Wild Moments #144",
-      "latest_url": "https://youtube.com/shorts/w_6iQkskfoE",
-      "latest_uploaded_at": "2026-05-27 15:02"
     },
     {
       "channel": "fomo_highlights",
@@ -3111,7 +3111,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-27 20:02:57",
       "last_fetch_display": "2026-05-27 20:02",
-      "last_fetch_ago": "1h",
+      "last_fetch_ago": "2h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.726,
@@ -3139,7 +3139,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-27 20:03:00",
       "last_fetch_display": "2026-05-27 20:03",
-      "last_fetch_ago": "1h",
+      "last_fetch_ago": "2h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.689,
@@ -3153,7 +3153,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-27 20:02:54",
       "last_fetch_display": "2026-05-27 20:02",
-      "last_fetch_ago": "1h",
+      "last_fetch_ago": "2h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.575,
@@ -3265,7 +3265,7 @@
       "platform": "youtube",
       "last_fetch": "2026-03-09 22:10:23",
       "last_fetch_display": "2026-03-09 22:10",
-      "last_fetch_ago": "78d",
+      "last_fetch_ago": "79d",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.5,
@@ -3797,7 +3797,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-27 20:01:54",
       "last_fetch_display": "2026-05-27 20:01",
-      "last_fetch_ago": "1h",
+      "last_fetch_ago": "2h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.081,
@@ -3811,7 +3811,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-27 20:02:53",
       "last_fetch_display": "2026-05-27 20:02",
-      "last_fetch_ago": "1h",
+      "last_fetch_ago": "2h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.066,
@@ -3825,7 +3825,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-27 04:04:36",
       "last_fetch_display": "2026-05-27 04:04",
-      "last_fetch_ago": "17h",
+      "last_fetch_ago": "18h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.149,
@@ -3839,7 +3839,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-27 18:04:10",
       "last_fetch_display": "2026-05-27 18:04",
-      "last_fetch_ago": "3h",
+      "last_fetch_ago": "4h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.045,
@@ -3853,7 +3853,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-27 04:04:24",
       "last_fetch_display": "2026-05-27 04:04",
-      "last_fetch_ago": "17h",
+      "last_fetch_ago": "18h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.359,
@@ -3867,7 +3867,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-27 20:02:06",
       "last_fetch_display": "2026-05-27 20:02",
-      "last_fetch_ago": "1h",
+      "last_fetch_ago": "2h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.034,
@@ -3881,7 +3881,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-27 20:02:20",
       "last_fetch_display": "2026-05-27 20:02",
-      "last_fetch_ago": "1h",
+      "last_fetch_ago": "2h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.068,
@@ -3895,7 +3895,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-27 20:02:00",
       "last_fetch_display": "2026-05-27 20:02",
-      "last_fetch_ago": "1h",
+      "last_fetch_ago": "2h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.062,
@@ -3923,7 +3923,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-27 20:01:56",
       "last_fetch_display": "2026-05-27 20:01",
-      "last_fetch_ago": "1h",
+      "last_fetch_ago": "2h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.098,
@@ -3951,7 +3951,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-27 20:01:48",
       "last_fetch_display": "2026-05-27 20:01",
-      "last_fetch_ago": "1h",
+      "last_fetch_ago": "2h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.062,
@@ -3965,7 +3965,7 @@
       "platform": "unknown",
       "last_fetch": "2026-05-27 20:02:36",
       "last_fetch_display": "2026-05-27 20:02",
-      "last_fetch_ago": "1h",
+      "last_fetch_ago": "2h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.067,
@@ -4259,6 +4259,34 @@
   },
   "top_clips": [
     {
+      "clip_id": "engine_auto_6abf5e4c",
+      "clip_id_short": "engine_auto_",
+      "title": "Ludwig Funny Moments #146",
+      "source_title": null,
+      "creator": null,
+      "channel": "viral_recaps",
+      "views": 0,
+      "likes": null,
+      "ctr_percent": null,
+      "upload_date": "2026-05-27 16:01",
+      "youtube_url": "https://youtube.com/shorts/CLYDSHAnva4",
+      "metric_mode": "unavailable"
+    },
+    {
+      "clip_id": "engine_auto_2e2c5046",
+      "clip_id_short": "engine_auto_",
+      "title": "Ludwig Crazy Moments #145",
+      "source_title": null,
+      "creator": null,
+      "channel": "viral_recaps",
+      "views": 0,
+      "likes": null,
+      "ctr_percent": null,
+      "upload_date": "2026-05-27 15:31",
+      "youtube_url": "https://youtube.com/shorts/oJeHp2Im6Pk",
+      "metric_mode": "unavailable"
+    },
+    {
       "clip_id": "engine_auto_6644d62e",
       "clip_id_short": "engine_auto_",
       "title": "Ludwig Wild Moments #144",
@@ -4509,37 +4537,33 @@
       "upload_date": "2026-05-23 17:01",
       "youtube_url": "https://youtube.com/shorts/pJaI1afYuww",
       "metric_mode": "unavailable"
-    },
-    {
-      "clip_id": "engine_auto_5e0a22d8",
-      "clip_id_short": "engine_auto_",
-      "title": "Ludwig Funny Moments #132",
-      "source_title": null,
-      "creator": null,
-      "channel": "viral_recaps",
-      "views": 0,
-      "likes": null,
-      "ctr_percent": null,
-      "upload_date": "2026-05-23 16:31",
-      "youtube_url": "https://youtube.com/shorts/mvUfrWP5pYw",
-      "metric_mode": "unavailable"
-    },
-    {
-      "clip_id": "engine_auto_6ec28d38",
-      "clip_id_short": "engine_auto_",
-      "title": "Ludwig Unreal Moments #131",
-      "source_title": null,
-      "creator": null,
-      "channel": "viral_recaps",
-      "views": 0,
-      "likes": null,
-      "ctr_percent": null,
-      "upload_date": "2026-05-23 16:01",
-      "youtube_url": "https://youtube.com/shorts/uQ-UBajtMLM",
-      "metric_mode": "unavailable"
     }
   ],
   "recent_uploads": [
+    {
+      "job_id": "7cd09d65-190a-414d-bebb-81326f80f84f",
+      "job_id_short": "7cd09d65",
+      "channel": "viral_recaps",
+      "status": "succeeded",
+      "updated_at": "2026-05-27T16:01:56.348753",
+      "updated_at_display": "2026-05-27 16:01",
+      "updated_ago": "6h",
+      "title": "Ludwig Funny Moments #146",
+      "url": "https://youtube.com/shorts/CLYDSHAnva4",
+      "error": null
+    },
+    {
+      "job_id": "0bfe31be-f6c6-4f21-b5fc-d6e4638472f5",
+      "job_id_short": "0bfe31be",
+      "channel": "viral_recaps",
+      "status": "succeeded",
+      "updated_at": "2026-05-27T15:31:51.305725",
+      "updated_at_display": "2026-05-27 15:31",
+      "updated_ago": "6h",
+      "title": "Ludwig Crazy Moments #145",
+      "url": "https://youtube.com/shorts/oJeHp2Im6Pk",
+      "error": null
+    },
     {
       "job_id": "b117a98b-8985-4537-aac4-9ad0c120913f",
       "job_id_short": "b117a98b",
@@ -4547,7 +4571,7 @@
       "status": "succeeded",
       "updated_at": "2026-05-27T15:02:33.086887",
       "updated_at_display": "2026-05-27 15:02",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "Ludwig Wild Moments #144",
       "url": "https://youtube.com/shorts/w_6iQkskfoE",
       "error": null
@@ -4559,7 +4583,7 @@
       "status": "queued",
       "updated_at": "2026-05-27T12:05:10.589390",
       "updated_at_display": "2026-05-27 12:05",
-      "updated_ago": "9h",
+      "updated_ago": "10h",
       "title": "Ludwig Chaotic Moments #149",
       "url": null,
       "error": null
@@ -4571,7 +4595,7 @@
       "status": "queued",
       "updated_at": "2026-05-27T12:04:36.580615",
       "updated_at_display": "2026-05-27 12:04",
-      "updated_ago": "9h",
+      "updated_ago": "10h",
       "title": "Ludwig Chaotic Moments #148",
       "url": null,
       "error": null
@@ -4583,7 +4607,7 @@
       "status": "succeeded",
       "updated_at": "2026-05-27T11:02:06.003543",
       "updated_at_display": "2026-05-27 11:02",
-      "updated_ago": "10h",
+      "updated_ago": "11h",
       "title": "Ludwig Crazy Moments #143",
       "url": "https://youtube.com/shorts/VTp0qcrZKN4",
       "error": null
@@ -4595,32 +4619,8 @@
       "status": "queued",
       "updated_at": "2026-05-27T10:13:14.868010",
       "updated_at_display": "2026-05-27 10:13",
-      "updated_ago": "11h",
+      "updated_ago": "12h",
       "title": "Ludwig Wild Moments #147",
-      "url": null,
-      "error": null
-    },
-    {
-      "job_id": "7cd09d65-190a-414d-bebb-81326f80f84f",
-      "job_id_short": "7cd09d65",
-      "channel": "viral_recaps",
-      "status": "queued",
-      "updated_at": "2026-05-27T08:06:01.231249",
-      "updated_at_display": "2026-05-27 08:06",
-      "updated_ago": "13h",
-      "title": "Ludwig Funny Moments #146",
-      "url": null,
-      "error": null
-    },
-    {
-      "job_id": "0bfe31be-f6c6-4f21-b5fc-d6e4638472f5",
-      "job_id_short": "0bfe31be",
-      "channel": "viral_recaps",
-      "status": "queued",
-      "updated_at": "2026-05-27T06:06:06.554537",
-      "updated_at_display": "2026-05-27 06:06",
-      "updated_ago": "15h",
-      "title": "Ludwig Crazy Moments #145",
       "url": null,
       "error": null
     },
@@ -4631,7 +4631,7 @@
       "status": "succeeded",
       "updated_at": "2026-05-27T05:02:06.217169",
       "updated_at_display": "2026-05-27 05:02",
-      "updated_ago": "16h",
+      "updated_ago": "17h",
       "title": "Ludwig Clutch Moments #142",
       "url": "https://youtube.com/shorts/Zv0LGraeISM",
       "error": null
@@ -4663,6 +4663,34 @@
   ],
   "recent_clips": [
     {
+      "job_id": "7cd09d65-190a-414d-bebb-81326f80f84f",
+      "job_id_short": "7cd09d65",
+      "channel": "viral_recaps",
+      "title": "Ludwig Funny Moments #146",
+      "title_truncated": "Ludwig Funny Moments #146",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/CLYDSHAnva4",
+      "views": 0,
+      "views_display": "\u00e2\u20ac\u201d",
+      "published_at": "2026-05-27T16:01:56.348753",
+      "published_at_display": "2026-05-27 16:01",
+      "published_ago": "6h"
+    },
+    {
+      "job_id": "0bfe31be-f6c6-4f21-b5fc-d6e4638472f5",
+      "job_id_short": "0bfe31be",
+      "channel": "viral_recaps",
+      "title": "Ludwig Crazy Moments #145",
+      "title_truncated": "Ludwig Crazy Moments #145",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/oJeHp2Im6Pk",
+      "views": 0,
+      "views_display": "\u00e2\u20ac\u201d",
+      "published_at": "2026-05-27T15:31:51.305725",
+      "published_at_display": "2026-05-27 15:31",
+      "published_ago": "6h"
+    },
+    {
       "job_id": "b117a98b-8985-4537-aac4-9ad0c120913f",
       "job_id_short": "b117a98b",
       "channel": "viral_recaps",
@@ -4674,7 +4702,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-05-27T15:02:33.086887",
       "published_at_display": "2026-05-27 15:02",
-      "published_ago": "6h"
+      "published_ago": "7h"
     },
     {
       "job_id": "bfa5bce6-832c-4724-a205-0dc17ad65177",
@@ -4688,7 +4716,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-05-27T11:02:06.003543",
       "published_at_display": "2026-05-27 11:02",
-      "published_ago": "10h"
+      "published_ago": "11h"
     },
     {
       "job_id": "20e4ad6c-8915-4d9c-8b6b-52063d747c13",
@@ -4702,7 +4730,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-05-27T05:02:06.217169",
       "published_at_display": "2026-05-27 05:02",
-      "published_ago": "16h"
+      "published_ago": "17h"
     },
     {
       "job_id": "e33c9fe3-22d9-4e31-9770-8c27bf09ead2",
@@ -4773,42 +4801,36 @@
       "published_at": "2026-05-26T11:01:55.517985",
       "published_at_display": "2026-05-26 11:01",
       "published_ago": "1d"
-    },
-    {
-      "job_id": "552f7dbc-e682-4d10-8c6b-7412756f4b3a",
-      "job_id_short": "552f7dbc",
-      "channel": "viral_recaps",
-      "title": "Ludwig Chaotic Moments #137",
-      "title_truncated": "Ludwig Chaotic Moments #137",
-      "thumbnail_path": null,
-      "post_url": "https://youtube.com/shorts/dTXpev6ag8Y",
-      "views": 0,
-      "views_display": "\u00e2\u20ac\u201d",
-      "published_at": "2026-05-26T05:01:41.657189",
-      "published_at_display": "2026-05-26 05:01",
-      "published_ago": "1d"
-    },
-    {
-      "job_id": "cde6029a-ef22-4648-8f82-9ad737b914fb",
-      "job_id_short": "cde6029a",
-      "channel": "viral_recaps",
-      "title": "Hasanabi Clutch Moments #19",
-      "title_truncated": "Hasanabi Clutch Moments #19",
-      "thumbnail_path": null,
-      "post_url": "https://youtube.com/shorts/wIAr1POHbSg",
-      "views": 0,
-      "views_display": "\u00e2\u20ac\u201d",
-      "published_at": "2026-05-25T14:32:08.353471",
-      "published_at_display": "2026-05-25 14:32",
-      "published_ago": "2d"
     }
   ],
   "upload_timeline": {
     "buckets": [
       {
         "name": "Today",
-        "count": 3,
+        "count": 5,
         "items": [
+          {
+            "job_id": "7cd09d65-190a-414d-bebb-81326f80f84f",
+            "job_id_short": "7cd09d65",
+            "channel": "viral_recaps",
+            "title": "Ludwig Funny Moments #146",
+            "published_at": "2026-05-27T16:01:56.348753",
+            "published_at_display": "2026-05-27 16:01",
+            "published_ago": "6h",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/CLYDSHAnva4"
+          },
+          {
+            "job_id": "0bfe31be-f6c6-4f21-b5fc-d6e4638472f5",
+            "job_id_short": "0bfe31be",
+            "channel": "viral_recaps",
+            "title": "Ludwig Crazy Moments #145",
+            "published_at": "2026-05-27T15:31:51.305725",
+            "published_at_display": "2026-05-27 15:31",
+            "published_ago": "6h",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/oJeHp2Im6Pk"
+          },
           {
             "job_id": "b117a98b-8985-4537-aac4-9ad0c120913f",
             "job_id_short": "b117a98b",
@@ -4816,7 +4838,7 @@
             "title": "Ludwig Wild Moments #144",
             "published_at": "2026-05-27T15:02:33.086887",
             "published_at_display": "2026-05-27 15:02",
-            "published_ago": "6h",
+            "published_ago": "7h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/w_6iQkskfoE"
           },
@@ -4827,7 +4849,7 @@
             "title": "Ludwig Crazy Moments #143",
             "published_at": "2026-05-27T11:02:06.003543",
             "published_at_display": "2026-05-27 11:02",
-            "published_ago": "10h",
+            "published_ago": "11h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/VTp0qcrZKN4"
           },
@@ -4838,7 +4860,7 @@
             "title": "Ludwig Clutch Moments #142",
             "published_at": "2026-05-27T05:02:06.217169",
             "published_at_display": "2026-05-27 05:02",
-            "published_ago": "16h",
+            "published_ago": "17h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/Zv0LGraeISM"
           }
@@ -4946,7 +4968,7 @@
       },
       {
         "name": "Last Week",
-        "count": 39,
+        "count": 37,
         "items": [
           {
             "job_id": "315ff012-bad5-47f0-82ea-bb798e235a0d",
@@ -5354,28 +5376,6 @@
             "published_ago": "7d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/uazNf-TqbFE"
-          },
-          {
-            "job_id": "f0b5997e-6400-4324-ba05-3f79d10720fc",
-            "job_id_short": "f0b5997e",
-            "channel": "viral_recaps",
-            "title": "Hasanabi Funny Moments #17",
-            "published_at": "2026-05-19T20:31:46.398072",
-            "published_at_display": "2026-05-19 20:31",
-            "published_ago": "8d",
-            "views": 0,
-            "post_url": "https://youtube.com/shorts/nNTVPXdipGA"
-          },
-          {
-            "job_id": "64c3c3a3-bb2d-4ae9-a64c-fe9b2cbeb2b2",
-            "job_id_short": "64c3c3a3",
-            "channel": "viral_recaps",
-            "title": "Ludwig Clutch Moments #114",
-            "published_at": "2026-05-19T17:02:00.248194",
-            "published_at_display": "2026-05-19 17:02",
-            "published_ago": "8d",
-            "views": 0,
-            "post_url": "https://youtube.com/shorts/rj-nQNS2RIY"
           }
         ]
       },
@@ -5621,24 +5621,6 @@
   "schedule": {
     "2026-05-27": [
       {
-        "job_id": "0bfe31be-f6c6-4f21-b5fc-d6e4638472f5",
-        "job_id_short": "0bfe31be",
-        "channel": "viral_recaps",
-        "title": "Ludwig Crazy Moments #145",
-        "scheduled_at": "2026-05-27T19:00:00-06:00",
-        "scheduled_at_iso": "2026-05-27T19:00:00",
-        "status": "queued"
-      },
-      {
-        "job_id": "7cd09d65-190a-414d-bebb-81326f80f84f",
-        "job_id_short": "7cd09d65",
-        "channel": "viral_recaps",
-        "title": "Ludwig Funny Moments #146",
-        "scheduled_at": "2026-05-27T19:00:00-06:00",
-        "scheduled_at_iso": "2026-05-27T19:00:00",
-        "status": "queued"
-      },
-      {
         "job_id": "9fb0e8a2-9903-4c63-a535-ae9152e5efcb",
         "job_id_short": "9fb0e8a2",
         "channel": "viral_recaps",
@@ -5690,6 +5672,24 @@
         "title": "Ludwig Wild Moments #144",
         "scheduled_at": "2026-05-27T15:02:33.086887",
         "scheduled_at_iso": "2026-05-27T15:02:33.086887",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "0bfe31be-f6c6-4f21-b5fc-d6e4638472f5",
+        "job_id_short": "0bfe31be",
+        "channel": "viral_recaps",
+        "title": "Ludwig Crazy Moments #145",
+        "scheduled_at": "2026-05-27T15:31:51.305725",
+        "scheduled_at_iso": "2026-05-27T15:31:51.305725",
+        "status": "succeeded"
+      },
+      {
+        "job_id": "7cd09d65-190a-414d-bebb-81326f80f84f",
+        "job_id_short": "7cd09d65",
+        "channel": "viral_recaps",
+        "title": "Ludwig Funny Moments #146",
+        "scheduled_at": "2026-05-27T16:01:56.348753",
+        "scheduled_at_iso": "2026-05-27T16:01:56.348753",
         "status": "succeeded"
       }
     ],
@@ -6265,9 +6265,9 @@
     ],
     "any_channel_high": false,
     "all_channels_safe": true,
-    "reset_time_hours": 10,
+    "reset_time_hours": 9,
     "reset_time_minutes": 41,
-    "reset_time_display": "10h 41m"
+    "reset_time_display": "9h 41m"
   },
   "revenue": {
     "total_views_30d": 0,
@@ -6287,8 +6287,8 @@
       "discovered": 0,
       "downloaded": 0,
       "processed": 0,
-      "queued": 5,
-      "uploaded": 682
+      "queued": 3,
+      "uploaded": 684
     },
     "by_channel": [
       {
@@ -6328,21 +6328,21 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 5,
-        "uploaded": 189
+        "queued": 3,
+        "uploaded": 191
       }
     ],
     "throughput": {
-      "uploads_per_hour": 0.12,
-      "uploads_last_24h": 3
+      "uploads_per_hour": 0.21,
+      "uploads_last_24h": 5
     },
     "stage_timings": {
       "discovered_to_downloaded_hours": 0.0,
-      "queued_to_uploaded_hours": 1.56
+      "queued_to_uploaded_hours": 1.59
     },
     "bottleneck": {
       "stage": "queued",
-      "backlog": 5
+      "backlog": 3
     }
   },
   "disk": {
@@ -6376,7 +6376,7 @@
         "file_count": 46
       }
     ],
-    "total_disk_bytes": 70205993002,
+    "total_disk_bytes": 70208587245,
     "total_disk_human": "65.4GB",
     "percent_of_500gb": 13.1,
     "warning_threshold_pct": 70,
@@ -6648,7 +6648,7 @@
     {
       "channel_name": "viral_recaps",
       "total_views": 0,
-      "uploads_30d": 101,
+      "uploads_30d": 103,
       "avg_views": 0,
       "best_clip_title": "No clips yet",
       "best_clip_views": 0,
@@ -7676,7 +7676,7 @@
           "priority": 3,
           "clips_fetched": 51,
           "last_fetched_at": "2026-05-18T22:03:34.567751",
-          "last_fetched_rel": "8d",
+          "last_fetched_rel": "9d",
           "enabled": true,
           "url": "vod://tfue",
           "type": "vod_highlights"
@@ -7690,7 +7690,7 @@
           "priority": 3,
           "clips_fetched": 46,
           "last_fetched_at": "2026-05-21T22:03:37.409288",
-          "last_fetched_rel": "5d",
+          "last_fetched_rel": "6d",
           "enabled": true,
           "url": "vod://cloakzy",
           "type": "vod_highlights"
@@ -7765,7 +7765,7 @@
           "priority": 1,
           "clips_fetched": 148,
           "last_fetched_at": "2026-05-27T18:05:10.604246",
-          "last_fetched_rel": "3h",
+          "last_fetched_rel": "4h",
           "enabled": true,
           "url": "https://www.youtube.com/@Ludwig/videos",
           "type": "transcript"
@@ -7892,13 +7892,13 @@
   ],
   "daily_summary": {
     "date": "2026-05-27",
-    "uploads_today": 3,
-    "uploads_yesterday": 9,
+    "uploads_today": 5,
+    "uploads_yesterday": 11,
     "views_gained_today": 0,
     "views_yesterday": 0,
     "errors_today": 0,
-    "quota_pct": 48.0,
-    "quota_units_used": 4800,
+    "quota_pct": 80.0,
+    "quota_units_used": 8000,
     "delta_uploads": -6,
     "delta_views": 0,
     "top_clip_today": {
@@ -7909,17 +7909,17 @@
     "top_3_channels": [
       {
         "channel": "viral_recaps",
-        "uploads": 3
+        "uploads": 5
       }
     ],
-    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-05-27\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 3 (-6 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 48.0% used (4800/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Ludwig Clutch Moments #142\n  0 views \u00e2\u20ac\u00a2 viral_recaps\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. viral_recaps: 3 uploads",
-    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-05-27\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 3 (-6 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 48.0% used (`4800/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Ludwig Clutch Moments #142_\n**0 views** \u00e2\u20ac\u00a2 **viral_recaps**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **viral_recaps** \u00e2\u20ac\u201d 3 uploads"
+    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-05-27\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 5 (-6 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 80.0% used (8000/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Ludwig Clutch Moments #142\n  0 views \u00e2\u20ac\u00a2 viral_recaps\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. viral_recaps: 5 uploads",
+    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-05-27\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 5 (-6 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 80.0% used (`8000/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Ludwig Clutch Moments #142_\n**0 views** \u00e2\u20ac\u00a2 **viral_recaps**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **viral_recaps** \u00e2\u20ac\u201d 5 uploads"
   },
   "title_performance": {
     "pattern_analysis": {
       "has_numbers": {
         "avg_views": 0.0,
-        "count": 542,
+        "count": 544,
         "total_views": 0
       },
       "has_question": {
@@ -8122,12 +8122,12 @@
         "channel": "viral_recaps",
         "best_title": "Watch this before scrolling: The most unexpected moment of the day",
         "best_views": 0,
-        "total_titles_analyzed": 189,
+        "total_titles_analyzed": 191,
         "pattern_breakdown": {
           "numbers_pct": 94.2,
           "questions_pct": 0.5,
           "caps_pct": 0.0,
-          "emoji_pct": 1.1
+          "emoji_pct": 1.0
         }
       }
     ]
@@ -8137,7 +8137,7 @@
       {
         "style_name": "Gaming/Clips",
         "avg_views": 0,
-        "total_clips": 675,
+        "total_clips": 677,
         "best_clip": null,
         "total_views": 0,
         "is_best": true
@@ -8162,7 +8162,7 @@
     "best_style_overall": "Gaming/Clips",
     "summary_stats": {
       "total_styles": 3,
-      "total_clips_all": 682,
+      "total_clips_all": 684,
       "total_views_all": 0,
       "avg_views_overall": 0
     }
@@ -8286,8 +8286,8 @@
       {
         "hour": 19,
         "hour_label": "19:00",
-        "posts": 91,
-        "avg_views": 1488.0
+        "posts": 93,
+        "avg_views": 1492.0
       },
       {
         "hour": 20,
@@ -8330,8 +8330,8 @@
       {
         "day": 2,
         "day_name": "Wednesday",
-        "posts": 97,
-        "avg_views": 1044.0
+        "posts": 99,
+        "avg_views": 1057.0
       },
       {
         "day": 3,
@@ -8392,9 +8392,9 @@
         "avg_views": 1088.0
       },
       {
-        "day": 3,
-        "day_name": "Thursday",
-        "posts": 88,
+        "day": 2,
+        "day_name": "Wednesday",
+        "posts": 99,
         "avg_views": 1057.0
       }
     ],
@@ -9387,7 +9387,7 @@
           "hour": 19,
           "day": 2,
           "views": 1650.0,
-          "posts": 8,
+          "posts": 10,
           "intensity": 100.0
         },
         {
@@ -9632,7 +9632,7 @@
       "day_name": "Tuesday",
       "est_views": 1650.0
     },
-    "job_count": 682
+    "job_count": 684
   },
   "benchmarks": {
     "current_tier": "Starter",
@@ -9723,81 +9723,81 @@
     {
       "type": "warning",
       "title": "Channel \"market_meltdowns\" paused for 24+ hours",
-      "message": "market_meltdowns has been paused for 1917 hours",
+      "message": "market_meltdowns has been paused for 1918 hours",
       "channel": "market_meltdowns",
-      "created_at": "2026-05-27T21:18:06.955186",
+      "created_at": "2026-05-27T22:18:07.021422",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"self_made_clips\" paused for 24+ hours",
-      "message": "self_made_clips has been paused for 1913 hours",
+      "message": "self_made_clips has been paused for 1914 hours",
       "channel": "self_made_clips",
-      "created_at": "2026-05-27T21:18:06.955186",
+      "created_at": "2026-05-27T22:18:07.021422",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"rich_or_ruined\" paused for 24+ hours",
-      "message": "rich_or_ruined has been paused for 1911 hours",
+      "message": "rich_or_ruined has been paused for 1912 hours",
       "channel": "rich_or_ruined",
-      "created_at": "2026-05-27T21:18:06.955186",
+      "created_at": "2026-05-27T22:18:07.021422",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"startup_graveyard\" paused for 24+ hours",
-      "message": "startup_graveyard has been paused for 1911 hours",
+      "message": "startup_graveyard has been paused for 1912 hours",
       "channel": "startup_graveyard",
-      "created_at": "2026-05-27T21:18:06.955186",
+      "created_at": "2026-05-27T22:18:07.021422",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_sirens\" paused for 24+ hours",
-      "message": "stream_sirens has been paused for 1890 hours",
+      "message": "stream_sirens has been paused for 1891 hours",
       "channel": "stream_sirens",
-      "created_at": "2026-05-27T21:18:06.955186",
+      "created_at": "2026-05-27T22:18:07.021422",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_queens\" paused for 24+ hours",
-      "message": "stream_queens has been paused for 1890 hours",
+      "message": "stream_queens has been paused for 1891 hours",
       "channel": "stream_queens",
-      "created_at": "2026-05-27T21:18:06.955186",
+      "created_at": "2026-05-27T22:18:07.021422",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"ai_did_what\" paused for 24+ hours",
-      "message": "ai_did_what has been paused for 1856 hours",
+      "message": "ai_did_what has been paused for 1857 hours",
       "channel": "ai_did_what",
-      "created_at": "2026-05-27T21:18:06.955186",
+      "created_at": "2026-05-27T22:18:07.021422",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"gym_moments\" paused for 24+ hours",
-      "message": "gym_moments has been paused for 1856 hours",
+      "message": "gym_moments has been paused for 1857 hours",
       "channel": "gym_moments",
-      "created_at": "2026-05-27T21:18:06.955186",
+      "created_at": "2026-05-27T22:18:07.021422",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"kitchen_chaos\" paused for 24+ hours",
-      "message": "kitchen_chaos has been paused for 1709 hours",
+      "message": "kitchen_chaos has been paused for 1710 hours",
       "channel": "kitchen_chaos",
-      "created_at": "2026-05-27T21:18:06.955186",
+      "created_at": "2026-05-27T22:18:07.021422",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"unfiltered_clips\" paused for 24+ hours",
-      "message": "unfiltered_clips has been paused for 1709 hours",
+      "message": "unfiltered_clips has been paused for 1710 hours",
       "channel": "unfiltered_clips",
-      "created_at": "2026-05-27T21:18:06.955186",
+      "created_at": "2026-05-27T22:18:07.021422",
       "read": false
     }
   ],
@@ -10378,6 +10378,25 @@
   "insights": {
     "lagging_channels": [
       {
+        "channel": "viral_recaps",
+        "status": "active",
+        "category": "Comedy",
+        "target_per_day": 8,
+        "published_24h": 5,
+        "queue_depth": 3,
+        "running_jobs": 0,
+        "failed_7d": 0,
+        "avg_views": 387,
+        "rpm": 0.33,
+        "deficit": 3,
+        "completion_rate": 62.5,
+        "lagging": true,
+        "views_source": "source_clips_proxy",
+        "latest_title": "Ludwig Funny Moments #146",
+        "latest_url": "https://youtube.com/shorts/CLYDSHAnva4",
+        "latest_uploaded_at": "2026-05-27 16:01"
+      },
+      {
         "channel": "test_channel",
         "status": "active",
         "category": "experimental",
@@ -10395,25 +10414,6 @@
         "latest_title": "Test Caption 1",
         "latest_url": "https://youtube.com/test",
         "latest_uploaded_at": "2026-03-30 22:14"
-      },
-      {
-        "channel": "viral_recaps",
-        "status": "active",
-        "category": "Comedy",
-        "target_per_day": 8,
-        "published_24h": 3,
-        "queue_depth": 5,
-        "running_jobs": 0,
-        "failed_7d": 0,
-        "avg_views": 387,
-        "rpm": 0.33,
-        "deficit": 5,
-        "completion_rate": 37.5,
-        "lagging": true,
-        "views_source": "source_clips_proxy",
-        "latest_title": "Ludwig Wild Moments #144",
-        "latest_url": "https://youtube.com/shorts/w_6iQkskfoE",
-        "latest_uploaded_at": "2026-05-27 15:02"
       },
       {
         "channel": "fomo_highlights",
@@ -10455,7 +10455,7 @@
       }
     ],
     "lagging_count": 4,
-    "queue_backlog": 5,
+    "queue_backlog": 3,
     "analytics_channels": 3
   },
   "meta": {

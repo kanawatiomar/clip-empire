@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-06-05T22:18:05.001295Z",
+  "generated_at": "2026-06-05T23:18:05.210633Z",
   "repo_root": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire",
   "database_path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\data\\clip_empire.db",
   "health_score": {
-    "score": 73.0,
+    "score": 73.7,
     "grade": "C",
     "status": "Needs Attention",
     "color": "yellow",
     "breakdown": {
-      "pipeline_health": 5.1,
+      "pipeline_health": 5.9,
       "error_rate": 20.0,
       "quota_safety": 15,
       "queue_depth": 15,
@@ -16,13 +16,13 @@
       "channel_uptime": 2.9
     },
     "metrics": {
-      "uploads_today": 7,
+      "uploads_today": 8,
       "target_today": 34,
-      "pipeline_health_ratio": 0.21,
+      "pipeline_health_ratio": 0.24,
       "errors_today": 0,
-      "total_jobs_today": 9,
+      "total_jobs_today": 11,
       "error_rate": 0.0,
-      "queue_depth": 2,
+      "queue_depth": 3,
       "active_channels": 4,
       "total_channels": 14,
       "fresh_sources": 0,
@@ -33,17 +33,62 @@
     "active_channels": 4,
     "total_channels": 14,
     "jobs_today": {
-      "total": 9,
-      "queued": 2,
+      "total": 11,
+      "queued": 3,
       "running": 0,
-      "succeeded": 7,
+      "succeeded": 8,
       "failed": 0,
       "cancelled": 0
     },
-    "render_queue_depth": 2,
-    "last_updated": "2026-06-05T22:18:05.001295Z"
+    "render_queue_depth": 3,
+    "last_updated": "2026-06-05T23:18:05.213835Z"
   },
   "queue_monitor": [
+    {
+      "job_id": "e7bdc3c6-e649-432a-a7ae-0527c62fb48f",
+      "job_id_short": "e7bdc3c6",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-06-05T23:05:05.891191+00:00",
+      "created_at_display": "2026-06-05 23:05",
+      "created_ago": "12m",
+      "updated_at": "2026-06-05T23:05:05.891191+00:00",
+      "scheduled_for": "2026-06-06 00:05",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "caf5ba38-7551-4425-b96f-ac445664600f",
+      "job_id_short": "caf5ba38",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "attempt": 0,
+      "created_at": "2026-06-05T23:04:04.337910+00:00",
+      "created_at_display": "2026-06-05 23:04",
+      "created_ago": "13m",
+      "updated_at": "2026-06-05T23:04:04.337910+00:00",
+      "scheduled_for": "2026-06-06 00:04",
+      "error": null,
+      "has_error": false,
+      "post_url": null
+    },
+    {
+      "job_id": "d9b1cc71-44e8-4ba0-a145-edaab94f8acc",
+      "job_id_short": "d9b1cc71",
+      "channel": "viral_recaps",
+      "status": "succeeded",
+      "attempt": 0,
+      "created_at": "2026-06-05T08:06:24.895689",
+      "created_at_display": "2026-06-05 08:06",
+      "created_ago": "15h",
+      "updated_at": "2026-06-05T17:02:03.870163",
+      "scheduled_for": "2026-06-05 19:30",
+      "error": null,
+      "has_error": false,
+      "post_url": "https://youtube.com/shorts/2b5qnfTKt9o"
+    },
     {
       "job_id": "af145ca0-15be-45df-960c-d40415bacdf5",
       "job_id_short": "af145ca0",
@@ -52,7 +97,7 @@
       "attempt": 0,
       "created_at": "2026-06-05T16:06:05.711910",
       "created_at_display": "2026-06-05 16:06",
-      "created_ago": "6h",
+      "created_ago": "7h",
       "updated_at": "2026-06-05T16:06:05.711910",
       "scheduled_for": "2026-06-05 19:30",
       "error": null,
@@ -67,7 +112,7 @@
       "attempt": 0,
       "created_at": "2026-06-05T06:06:19.615440",
       "created_at_display": "2026-06-05 06:06",
-      "created_ago": "16h",
+      "created_ago": "17h",
       "updated_at": "2026-06-05T16:02:15.907685",
       "scheduled_for": "2026-06-05 19:00",
       "error": null,
@@ -82,7 +127,7 @@
       "attempt": 0,
       "created_at": "2026-06-05T04:27:32.441869",
       "created_at_display": "2026-06-05 04:27",
-      "created_ago": "17h",
+      "created_ago": "18h",
       "updated_at": "2026-06-05T15:31:46.995514",
       "scheduled_for": "2026-06-05 19:00",
       "error": null,
@@ -97,7 +142,7 @@
       "attempt": 0,
       "created_at": "2026-06-05T02:06:29.127159",
       "created_at_display": "2026-06-05 02:06",
-      "created_ago": "20h",
+      "created_ago": "21h",
       "updated_at": "2026-06-05T15:04:00.145169",
       "scheduled_for": "2026-06-05 19:00",
       "error": null,
@@ -112,7 +157,7 @@
       "attempt": 0,
       "created_at": "2026-06-05T19:03:01.285461+00:00",
       "created_at_display": "2026-06-05 19:03",
-      "created_ago": "3h",
+      "created_ago": "4h",
       "updated_at": "2026-06-05T13:31:44.532070",
       "scheduled_for": "2026-06-05 20:03",
       "error": null,
@@ -127,7 +172,7 @@
       "attempt": 0,
       "created_at": "2026-06-05T02:04:34.680696",
       "created_at_display": "2026-06-05 02:04",
-      "created_ago": "20h",
+      "created_ago": "21h",
       "updated_at": "2026-06-05T11:02:41.262376",
       "scheduled_for": "2026-06-05 15:00",
       "error": null,
@@ -142,27 +187,12 @@
       "attempt": 0,
       "created_at": "2026-06-05T14:02:55.156038+00:00",
       "created_at_display": "2026-06-05 14:02",
-      "created_ago": "8h",
+      "created_ago": "9h",
       "updated_at": "2026-06-05T08:31:12.931700",
       "scheduled_for": "2026-06-05 15:02",
       "error": null,
       "has_error": false,
       "post_url": "https://youtube.com/shorts/yv-nBGsbpEI"
-    },
-    {
-      "job_id": "d9b1cc71-44e8-4ba0-a145-edaab94f8acc",
-      "job_id_short": "d9b1cc71",
-      "channel": "viral_recaps",
-      "status": "queued",
-      "attempt": 0,
-      "created_at": "2026-06-05T08:06:24.895689",
-      "created_at_display": "2026-06-05 08:06",
-      "created_ago": "14h",
-      "updated_at": "2026-06-05T08:06:24.895689",
-      "scheduled_for": "2026-06-05 19:30",
-      "error": null,
-      "has_error": false,
-      "post_url": null
     },
     {
       "job_id": "6bda4901-83cf-4d82-902d-efdead55816c",
@@ -172,7 +202,7 @@
       "attempt": 0,
       "created_at": "2026-06-05T00:04:22.665720",
       "created_at_display": "2026-06-05 00:04",
-      "created_ago": "22h",
+      "created_ago": "23h",
       "updated_at": "2026-06-05T05:02:14.781876",
       "scheduled_for": "2026-06-05 09:00",
       "error": null,
@@ -187,7 +217,7 @@
       "attempt": 0,
       "created_at": "2026-06-05T03:04:19.764276+00:00",
       "created_at_display": "2026-06-05 03:04",
-      "created_ago": "19h",
+      "created_ago": "20h",
       "updated_at": "2026-06-04T22:31:30.415140",
       "scheduled_for": "2026-06-05 04:04",
       "error": null,
@@ -202,7 +232,7 @@
       "attempt": 0,
       "created_at": "2026-06-05T03:03:06.402110+00:00",
       "created_at_display": "2026-06-05 03:03",
-      "created_ago": "19h",
+      "created_ago": "20h",
       "updated_at": "2026-06-04T21:31:44.017975",
       "scheduled_for": "2026-06-05 04:03",
       "error": null,
@@ -352,7 +382,7 @@
       "attempt": 0,
       "created_at": "2026-06-03T23:06:12.712097+00:00",
       "created_at_display": "2026-06-03 23:06",
-      "created_ago": "1d",
+      "created_ago": "2d",
       "updated_at": "2026-06-03T19:01:16.935860",
       "scheduled_for": "2026-06-04 00:06",
       "error": null,
@@ -367,7 +397,7 @@
       "attempt": 0,
       "created_at": "2026-06-03T23:05:08.069097+00:00",
       "created_at_display": "2026-06-03 23:05",
-      "created_ago": "1d",
+      "created_ago": "2d",
       "updated_at": "2026-06-03T18:31:35.472520",
       "scheduled_for": "2026-06-04 00:05",
       "error": null,
@@ -382,7 +412,7 @@
       "attempt": 0,
       "created_at": "2026-06-03T23:04:03.961195+00:00",
       "created_at_display": "2026-06-03 23:04",
-      "created_ago": "1d",
+      "created_ago": "2d",
       "updated_at": "2026-06-03T18:01:21.455790",
       "scheduled_for": "2026-06-04 00:04",
       "error": null,
@@ -1513,36 +1543,6 @@
       "error": null,
       "has_error": false,
       "post_url": "https://youtube.com/shorts/WH-ownz4fWE"
-    },
-    {
-      "job_id": "f7429434-aa85-431d-a607-dffaa7cbc467",
-      "job_id_short": "f7429434",
-      "channel": "viral_recaps",
-      "status": "succeeded",
-      "attempt": 0,
-      "created_at": "2026-05-21T18:04:51.990167",
-      "created_at_display": "2026-05-21 18:04",
-      "created_ago": "15d",
-      "updated_at": "2026-05-21T18:32:21.964374",
-      "scheduled_for": "2026-05-21 19:30",
-      "error": null,
-      "has_error": false,
-      "post_url": "https://youtube.com/shorts/8Gwgl0YsetI"
-    },
-    {
-      "job_id": "ee6862d0-f116-4aca-aa25-ee9b246290dc",
-      "job_id_short": "ee6862d0",
-      "channel": "viral_recaps",
-      "status": "succeeded",
-      "attempt": 0,
-      "created_at": "2026-05-21T16:04:39.773954",
-      "created_at_display": "2026-05-21 16:04",
-      "created_ago": "15d",
-      "updated_at": "2026-05-21T17:31:39.585198",
-      "scheduled_for": "2026-05-21 19:30",
-      "error": null,
-      "has_error": false,
-      "post_url": "https://youtube.com/shorts/gn3xUJKO-Vc"
     }
   ],
   "queue": {
@@ -1580,19 +1580,19 @@
       "status": "active",
       "category": "Comedy",
       "target_per_day": 8,
-      "published_24h": 5,
-      "queue_depth": 2,
+      "published_24h": 6,
+      "queue_depth": 1,
       "running_jobs": 0,
       "failed_7d": 0,
       "avg_views": 161,
       "rpm": 0.14,
-      "deficit": 3,
-      "completion_rate": 62.5,
+      "deficit": 2,
+      "completion_rate": 75.0,
       "lagging": true,
       "views_source": "source_clips_proxy",
-      "latest_title": "Ludwig Funny Moments #177",
-      "latest_url": "https://youtube.com/shorts/R4wbKrByi3E",
-      "latest_uploaded_at": "2026-06-05 16:02"
+      "latest_title": "Hasanabi Wild Moments #22",
+      "latest_url": "https://youtube.com/shorts/2b5qnfTKt9o",
+      "latest_uploaded_at": "2026-06-05 17:02"
     },
     {
       "channel": "test_channel",
@@ -1618,14 +1618,14 @@
       "status": "active",
       "category": "Gaming",
       "target_per_day": 8,
-      "published_24h": 3,
-      "queue_depth": 0,
+      "published_24h": 2,
+      "queue_depth": 2,
       "running_jobs": 0,
       "failed_7d": 0,
       "avg_views": 0,
       "rpm": 0.0,
-      "deficit": 5,
-      "completion_rate": 37.5,
+      "deficit": 6,
+      "completion_rate": 25.0,
       "lagging": true,
       "views_source": "none",
       "latest_title": "Bitcoin breaks $60K \ud83d\ude33 Is this the real crypto flush?",
@@ -3111,7 +3111,7 @@
       "platform": "unknown",
       "last_fetch": "2026-06-05 22:05:09",
       "last_fetch_display": "2026-06-05 22:05",
-      "last_fetch_ago": "12m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.764,
@@ -3139,7 +3139,7 @@
       "platform": "unknown",
       "last_fetch": "2026-06-05 22:05:11",
       "last_fetch_display": "2026-06-05 22:05",
-      "last_fetch_ago": "12m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.734,
@@ -3153,7 +3153,7 @@
       "platform": "unknown",
       "last_fetch": "2026-06-05 22:05:06",
       "last_fetch_display": "2026-06-05 22:05",
-      "last_fetch_ago": "12m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "error",
       "error_rate": 0.633,
@@ -3797,7 +3797,7 @@
       "platform": "unknown",
       "last_fetch": "2026-06-05 22:03:47",
       "last_fetch_display": "2026-06-05 22:03",
-      "last_fetch_ago": "14m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.078,
@@ -3811,7 +3811,7 @@
       "platform": "unknown",
       "last_fetch": "2026-06-05 22:05:03",
       "last_fetch_display": "2026-06-05 22:05",
-      "last_fetch_ago": "12m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.066,
@@ -3825,7 +3825,7 @@
       "platform": "unknown",
       "last_fetch": "2026-06-05 20:04:21",
       "last_fetch_display": "2026-06-05 20:04",
-      "last_fetch_ago": "2h",
+      "last_fetch_ago": "3h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.18,
@@ -3839,7 +3839,7 @@
       "platform": "unknown",
       "last_fetch": "2026-06-05 22:05:25",
       "last_fetch_display": "2026-06-05 22:05",
-      "last_fetch_ago": "12m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.047,
@@ -3853,7 +3853,7 @@
       "platform": "unknown",
       "last_fetch": "2026-06-05 22:05:29",
       "last_fetch_display": "2026-06-05 22:05",
-      "last_fetch_ago": "12m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.438,
@@ -3867,7 +3867,7 @@
       "platform": "unknown",
       "last_fetch": "2026-06-05 22:04:08",
       "last_fetch_display": "2026-06-05 22:04",
-      "last_fetch_ago": "13m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.039,
@@ -3881,7 +3881,7 @@
       "platform": "unknown",
       "last_fetch": "2026-06-05 22:04:25",
       "last_fetch_display": "2026-06-05 22:04",
-      "last_fetch_ago": "13m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.067,
@@ -3895,7 +3895,7 @@
       "platform": "unknown",
       "last_fetch": "2026-06-05 22:03:58",
       "last_fetch_display": "2026-06-05 22:03",
-      "last_fetch_ago": "14m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.119,
@@ -3923,7 +3923,7 @@
       "platform": "unknown",
       "last_fetch": "2026-06-05 22:03:49",
       "last_fetch_display": "2026-06-05 22:03",
-      "last_fetch_ago": "14m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.215,
@@ -3951,7 +3951,7 @@
       "platform": "unknown",
       "last_fetch": "2026-06-05 22:03:42",
       "last_fetch_display": "2026-06-05 22:03",
-      "last_fetch_ago": "14m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.061,
@@ -3965,7 +3965,7 @@
       "platform": "unknown",
       "last_fetch": "2026-06-05 22:04:44",
       "last_fetch_display": "2026-06-05 22:04",
-      "last_fetch_ago": "13m",
+      "last_fetch_ago": "1h",
       "clips_24h": 0,
       "status": "warning",
       "error_rate": 0.067,
@@ -4259,6 +4259,20 @@
   },
   "top_clips": [
     {
+      "clip_id": "engine_auto_06e540c7",
+      "clip_id_short": "engine_auto_",
+      "title": "Hasanabi Wild Moments #22",
+      "source_title": null,
+      "creator": null,
+      "channel": "viral_recaps",
+      "views": 0,
+      "likes": null,
+      "ctr_percent": null,
+      "upload_date": "2026-06-05 17:02",
+      "youtube_url": "https://youtube.com/shorts/2b5qnfTKt9o",
+      "metric_mode": "unavailable"
+    },
+    {
       "clip_id": "engine_auto_4c90c721",
       "clip_id_short": "engine_auto_",
       "title": "Ludwig Funny Moments #177",
@@ -4523,23 +4537,45 @@
       "upload_date": "2026-06-03 20:01",
       "youtube_url": "https://youtube.com/shorts/g2MSpujoVRE",
       "metric_mode": "unavailable"
-    },
-    {
-      "clip_id": "9f9553b3-b327-43ee-b530-bd9545cae06b",
-      "clip_id_short": "9f9553b3-b32",
-      "title": "Chapter 11 hits 69-year-old furniture chain \ud83e\ude91",
-      "source_title": null,
-      "creator": null,
-      "channel": "fomo_highlights",
-      "views": 0,
-      "likes": null,
-      "ctr_percent": null,
-      "upload_date": "2026-06-03 19:01",
-      "youtube_url": "https://youtube.com/shorts/Va8H44u9ifg",
-      "metric_mode": "unavailable"
     }
   ],
   "recent_uploads": [
+    {
+      "job_id": "e7bdc3c6-e649-432a-a7ae-0527c62fb48f",
+      "job_id_short": "e7bdc3c6",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "updated_at": "2026-06-05T23:05:05.891191+00:00",
+      "updated_at_display": "2026-06-05 23:05",
+      "updated_ago": "12m",
+      "title": "$1B buyback: Nu just flashed confidence \ud83d\udcb0",
+      "url": null,
+      "error": null
+    },
+    {
+      "job_id": "caf5ba38-7551-4425-b96f-ac445664600f",
+      "job_id_short": "caf5ba38",
+      "channel": "fomo_highlights",
+      "status": "queued",
+      "updated_at": "2026-06-05T23:04:04.337910+00:00",
+      "updated_at_display": "2026-06-05 23:04",
+      "updated_ago": "14m",
+      "title": "Anthropic's IPO move just raised the AI stakes \ud83d\ude80",
+      "url": null,
+      "error": null
+    },
+    {
+      "job_id": "d9b1cc71-44e8-4ba0-a145-edaab94f8acc",
+      "job_id_short": "d9b1cc71",
+      "channel": "viral_recaps",
+      "status": "succeeded",
+      "updated_at": "2026-06-05T17:02:03.870163",
+      "updated_at_display": "2026-06-05 17:02",
+      "updated_ago": "6h",
+      "title": "Hasanabi Wild Moments #22",
+      "url": "https://youtube.com/shorts/2b5qnfTKt9o",
+      "error": null
+    },
     {
       "job_id": "af145ca0-15be-45df-960c-d40415bacdf5",
       "job_id_short": "af145ca0",
@@ -4547,7 +4583,7 @@
       "status": "queued",
       "updated_at": "2026-06-05T16:06:05.711910",
       "updated_at_display": "2026-06-05 16:06",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "Moistcr1tikal Chaotic Moments #17",
       "url": null,
       "error": null
@@ -4559,7 +4595,7 @@
       "status": "succeeded",
       "updated_at": "2026-06-05T16:02:15.907685",
       "updated_at_display": "2026-06-05 16:02",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "Ludwig Funny Moments #177",
       "url": "https://youtube.com/shorts/R4wbKrByi3E",
       "error": null
@@ -4571,7 +4607,7 @@
       "status": "succeeded",
       "updated_at": "2026-06-05T15:31:46.995514",
       "updated_at_display": "2026-06-05 15:31",
-      "updated_ago": "6h",
+      "updated_ago": "7h",
       "title": "Ludwig Clutch Moments #176",
       "url": "https://youtube.com/shorts/3mavcY2t-80",
       "error": null
@@ -4583,7 +4619,7 @@
       "status": "succeeded",
       "updated_at": "2026-06-05T15:04:00.145169",
       "updated_at_display": "2026-06-05 15:04",
-      "updated_ago": "7h",
+      "updated_ago": "8h",
       "title": "Ludwig Funny Moments #175",
       "url": "https://youtube.com/shorts/RRENqrmXsFQ",
       "error": null
@@ -4595,7 +4631,7 @@
       "status": "succeeded",
       "updated_at": "2026-06-05T13:31:44.532070",
       "updated_at_display": "2026-06-05 13:31",
-      "updated_ago": "8h",
+      "updated_ago": "9h",
       "title": "Bitcoin breaks $60K \ud83d\ude33 Is this the real crypto flush?",
       "url": "https://youtube.com/shorts/DjiTqxz7Sgw",
       "error": null
@@ -4607,7 +4643,7 @@
       "status": "succeeded",
       "updated_at": "2026-06-05T11:02:41.262376",
       "updated_at_display": "2026-06-05 11:02",
-      "updated_ago": "11h",
+      "updated_ago": "12h",
       "title": "Ludwig Wild Moments #174",
       "url": "https://youtube.com/shorts/cWwl5EDpW5M",
       "error": null
@@ -4619,49 +4655,27 @@
       "status": "succeeded",
       "updated_at": "2026-06-05T08:31:12.931700",
       "updated_at_display": "2026-06-05 08:31",
-      "updated_ago": "13h",
+      "updated_ago": "14h",
       "title": "80K jobs? Friday's report could move everything \ud83d\udcca",
       "url": "https://youtube.com/shorts/yv-nBGsbpEI",
-      "error": null
-    },
-    {
-      "job_id": "d9b1cc71-44e8-4ba0-a145-edaab94f8acc",
-      "job_id_short": "d9b1cc71",
-      "channel": "viral_recaps",
-      "status": "queued",
-      "updated_at": "2026-06-05T08:06:24.895689",
-      "updated_at_display": "2026-06-05 08:06",
-      "updated_ago": "14h",
-      "title": "Hasanabi Wild Moments #22",
-      "url": null,
-      "error": null
-    },
-    {
-      "job_id": "6bda4901-83cf-4d82-902d-efdead55816c",
-      "job_id_short": "6bda4901",
-      "channel": "viral_recaps",
-      "status": "succeeded",
-      "updated_at": "2026-06-05T05:02:14.781876",
-      "updated_at_display": "2026-06-05 05:02",
-      "updated_ago": "17h",
-      "title": "Ludwig Crazy Moments #173",
-      "url": "https://youtube.com/shorts/7cNMZ10npoU",
-      "error": null
-    },
-    {
-      "job_id": "fe733659-05ef-4151-8186-dd747e48df15",
-      "job_id_short": "fe733659",
-      "channel": "fomo_highlights",
-      "status": "succeeded",
-      "updated_at": "2026-06-04T22:31:30.415140",
-      "updated_at_display": "2026-06-04 22:31",
-      "updated_ago": "23h",
-      "title": "80K jobs? Friday's report could move everything \ud83d\udcca",
-      "url": "https://youtube.com/shorts/t2vBQJyL4C0",
       "error": null
     }
   ],
   "recent_clips": [
+    {
+      "job_id": "d9b1cc71-44e8-4ba0-a145-edaab94f8acc",
+      "job_id_short": "d9b1cc71",
+      "channel": "viral_recaps",
+      "title": "Hasanabi Wild Moments #22",
+      "title_truncated": "Hasanabi Wild Moments #22",
+      "thumbnail_path": null,
+      "post_url": "https://youtube.com/shorts/2b5qnfTKt9o",
+      "views": 0,
+      "views_display": "\u00e2\u20ac\u201d",
+      "published_at": "2026-06-05T17:02:03.870163",
+      "published_at_display": "2026-06-05 17:02",
+      "published_ago": "6h"
+    },
     {
       "job_id": "edde5a1d-cef2-49cd-a32b-0b4abfab3654",
       "job_id_short": "edde5a1d",
@@ -4674,7 +4688,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-06-05T16:02:15.907685",
       "published_at_display": "2026-06-05 16:02",
-      "published_ago": "6h"
+      "published_ago": "7h"
     },
     {
       "job_id": "d9cccc12-b9ba-4aea-a4e2-05f5c5bf0e54",
@@ -4688,7 +4702,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-06-05T15:31:46.995514",
       "published_at_display": "2026-06-05 15:31",
-      "published_ago": "6h"
+      "published_ago": "7h"
     },
     {
       "job_id": "ace0fc88-b1c5-47f1-bbea-868d6821e474",
@@ -4702,7 +4716,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-06-05T15:04:00.145169",
       "published_at_display": "2026-06-05 15:04",
-      "published_ago": "7h"
+      "published_ago": "8h"
     },
     {
       "job_id": "b80235c1-0437-442a-8bee-54291e7e7e39",
@@ -4716,7 +4730,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-06-05T13:31:44.532070",
       "published_at_display": "2026-06-05 13:31",
-      "published_ago": "8h"
+      "published_ago": "9h"
     },
     {
       "job_id": "457ce34c-1f1c-47b2-9f4d-967be8ba4778",
@@ -4730,7 +4744,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-06-05T11:02:41.262376",
       "published_at_display": "2026-06-05 11:02",
-      "published_ago": "11h"
+      "published_ago": "12h"
     },
     {
       "job_id": "8479ec28-8a4f-4a1f-85c9-de29e87eb28b",
@@ -4744,7 +4758,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-06-05T08:31:12.931700",
       "published_at_display": "2026-06-05 08:31",
-      "published_ago": "13h"
+      "published_ago": "14h"
     },
     {
       "job_id": "6bda4901-83cf-4d82-902d-efdead55816c",
@@ -4758,7 +4772,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-06-05T05:02:14.781876",
       "published_at_display": "2026-06-05 05:02",
-      "published_ago": "17h"
+      "published_ago": "18h"
     },
     {
       "job_id": "fe733659-05ef-4151-8186-dd747e48df15",
@@ -4772,7 +4786,7 @@
       "views_display": "\u00e2\u20ac\u201d",
       "published_at": "2026-06-04T22:31:30.415140",
       "published_at_display": "2026-06-04 22:31",
-      "published_ago": "23h"
+      "published_ago": "1d"
     },
     {
       "job_id": "d5837cf7-c6c7-4a8b-820d-aaf97d3f17d6",
@@ -4787,28 +4801,25 @@
       "published_at": "2026-06-04T21:31:44.017975",
       "published_at_display": "2026-06-04 21:31",
       "published_ago": "1d"
-    },
-    {
-      "job_id": "58ea9069-2d3b-4eb4-822d-d3d2ee3eb04c",
-      "job_id_short": "58ea9069",
-      "channel": "fomo_highlights",
-      "title": "U.S.-Iran tensions could hit markets fast \u26a0\ufe0f",
-      "title_truncated": "U.S.-Iran tensions could hit markets fast \u26a0\ufe0f",
-      "thumbnail_path": null,
-      "post_url": "https://youtube.com/shorts/gBk24GFbGjQ",
-      "views": 0,
-      "views_display": "\u00e2\u20ac\u201d",
-      "published_at": "2026-06-04T14:31:58.625924",
-      "published_at_display": "2026-06-04 14:31",
-      "published_ago": "1d"
     }
   ],
   "upload_timeline": {
     "buckets": [
       {
         "name": "Today",
-        "count": 7,
+        "count": 8,
         "items": [
+          {
+            "job_id": "d9b1cc71-44e8-4ba0-a145-edaab94f8acc",
+            "job_id_short": "d9b1cc71",
+            "channel": "viral_recaps",
+            "title": "Hasanabi Wild Moments #22",
+            "published_at": "2026-06-05T17:02:03.870163",
+            "published_at_display": "2026-06-05 17:02",
+            "published_ago": "6h",
+            "views": 0,
+            "post_url": "https://youtube.com/shorts/2b5qnfTKt9o"
+          },
           {
             "job_id": "edde5a1d-cef2-49cd-a32b-0b4abfab3654",
             "job_id_short": "edde5a1d",
@@ -4816,7 +4827,7 @@
             "title": "Ludwig Funny Moments #177",
             "published_at": "2026-06-05T16:02:15.907685",
             "published_at_display": "2026-06-05 16:02",
-            "published_ago": "6h",
+            "published_ago": "7h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/R4wbKrByi3E"
           },
@@ -4827,7 +4838,7 @@
             "title": "Ludwig Clutch Moments #176",
             "published_at": "2026-06-05T15:31:46.995514",
             "published_at_display": "2026-06-05 15:31",
-            "published_ago": "6h",
+            "published_ago": "7h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/3mavcY2t-80"
           },
@@ -4838,7 +4849,7 @@
             "title": "Ludwig Funny Moments #175",
             "published_at": "2026-06-05T15:04:00.145169",
             "published_at_display": "2026-06-05 15:04",
-            "published_ago": "7h",
+            "published_ago": "8h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/RRENqrmXsFQ"
           },
@@ -4849,7 +4860,7 @@
             "title": "Bitcoin breaks $60K \ud83d\ude33 Is this the real crypto flush?",
             "published_at": "2026-06-05T13:31:44.532070",
             "published_at_display": "2026-06-05 13:31",
-            "published_ago": "8h",
+            "published_ago": "9h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/DjiTqxz7Sgw"
           },
@@ -4860,7 +4871,7 @@
             "title": "Ludwig Wild Moments #174",
             "published_at": "2026-06-05T11:02:41.262376",
             "published_at_display": "2026-06-05 11:02",
-            "published_ago": "11h",
+            "published_ago": "12h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/cWwl5EDpW5M"
           },
@@ -4871,7 +4882,7 @@
             "title": "80K jobs? Friday's report could move everything \ud83d\udcca",
             "published_at": "2026-06-05T08:31:12.931700",
             "published_at_display": "2026-06-05 08:31",
-            "published_ago": "13h",
+            "published_ago": "14h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/yv-nBGsbpEI"
           },
@@ -4882,7 +4893,7 @@
             "title": "Ludwig Crazy Moments #173",
             "published_at": "2026-06-05T05:02:14.781876",
             "published_at_display": "2026-06-05 05:02",
-            "published_ago": "17h",
+            "published_ago": "18h",
             "views": 0,
             "post_url": "https://youtube.com/shorts/7cNMZ10npoU"
           }
@@ -4899,7 +4910,7 @@
             "title": "80K jobs? Friday's report could move everything \ud83d\udcca",
             "published_at": "2026-06-04T22:31:30.415140",
             "published_at_display": "2026-06-04 22:31",
-            "published_ago": "23h",
+            "published_ago": "1d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/t2vBQJyL4C0"
           },
@@ -5276,7 +5287,7 @@
       },
       {
         "name": "Last Week",
-        "count": 9,
+        "count": 8,
         "items": [
           {
             "job_id": "6145bf92-13c7-4ee6-a145-a256c6feb520",
@@ -5285,7 +5296,7 @@
             "title": "Myth Chaotic Moments #29",
             "published_at": "2026-05-31T23:01:35.090501",
             "published_at_display": "2026-05-31 23:01",
-            "published_ago": "4d",
+            "published_ago": "5d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/cQbdnzRtAQc"
           },
@@ -5365,17 +5376,6 @@
             "published_ago": "6d",
             "views": 0,
             "post_url": "https://youtube.com/shorts/pGHEnFjySQk"
-          },
-          {
-            "job_id": "c635dd24-1e9f-4467-ab93-a660599b444c",
-            "job_id_short": "c635dd24",
-            "channel": "viral_recaps",
-            "title": "Ludwig Unreal Moments #155",
-            "published_at": "2026-05-30T05:01:58.673445",
-            "published_at_display": "2026-05-30 05:01",
-            "published_ago": "6d",
-            "views": 0,
-            "post_url": "https://youtube.com/shorts/6mwSidJHkzk"
           }
         ]
       },
@@ -5387,7 +5387,68 @@
     ],
     "total_count": 50
   },
-  "discord_feed": [],
+  "discord_feed": [
+    {
+      "id": "1481889609037385788",
+      "channel_id": "1475223354066600036",
+      "channel_name": "bot-logs",
+      "author": "Aidan Bot",
+      "timestamp": "2026-03-13T05:40:14.972000+00:00",
+      "timestamp_display": "2026-03-13 05:40",
+      "timestamp_ago": "84d",
+      "message": "[Dashboard Test] Feature #5 Discord Feed integration smoke test at 2026-03-13 05:44 UTC",
+      "message_snippet": "[Dashboard Test] Feature #5 Discord Feed integration smoke test at 2026-03-13 05:44 UTC",
+      "url": "https://discord.com/channels/1468193294432604326/1475223354066600036/1481889609037385788"
+    },
+    {
+      "id": "1480053718010564800",
+      "channel_id": "1475223354066600036",
+      "channel_name": "bot-logs",
+      "author": "Aidan Bot",
+      "timestamp": "2026-03-08T04:05:04.442000+00:00",
+      "timestamp_display": "2026-03-08 04:05",
+      "timestamp_ago": "89d",
+      "message": "MODEL AUDIT ERROR: [WinError 2] The system cannot find the file specified",
+      "message_snippet": "MODEL AUDIT ERROR: [WinError 2] The system cannot find the file specified",
+      "url": "https://discord.com/channels/1468193294432604326/1475223354066600036/1480053718010564800"
+    },
+    {
+      "id": "1480052753446207550",
+      "channel_id": "1475223354066600036",
+      "channel_name": "bot-logs",
+      "author": "Aidan Bot",
+      "timestamp": "2026-03-08T04:01:14.472000+00:00",
+      "timestamp_display": "2026-03-08 04:01",
+      "timestamp_ago": "89d",
+      "message": "\ud83d\udcca **Bot Health Report** (21:01)\n\u26a1 Analysis by: **Local Keyword Scan**\n\n**Clip Engine**: \u26a0\ufe0f **Warning** detected (check logs)\n**Clip Engine Rage**: \u26a0\ufe0f **Warning** detected (check logs)\n**Clip Engine Viral**: \u26a0\ufe0f **Error** detected\n**Hype Scout**: \u2705 **Operational** (No system errors)",
+      "message_snippet": "\ud83d\udcca **Bot Health Report** (21:01)\n\u26a1 Analysis by: **Local Keyword Scan**\n\n**Clip Engine**: \u26a0\ufe0f **Warning** detected (check logs)\n**Clip Engine R",
+      "url": "https://discord.com/channels/1468193294432604326/1475223354066600036/1480052753446207550"
+    },
+    {
+      "id": "1480008431782985912",
+      "channel_id": "1475223354066600036",
+      "channel_name": "bot-logs",
+      "author": "Aidan Bot",
+      "timestamp": "2026-03-08T01:05:07.364000+00:00",
+      "timestamp_display": "2026-03-08 01:05",
+      "timestamp_ago": "89d",
+      "message": "MODEL AUDIT ERROR: [WinError 2] The system cannot find the file specified",
+      "message_snippet": "MODEL AUDIT ERROR: [WinError 2] The system cannot find the file specified",
+      "url": "https://discord.com/channels/1468193294432604326/1475223354066600036/1480008431782985912"
+    },
+    {
+      "id": "1479993323396661360",
+      "channel_id": "1475223354066600036",
+      "channel_name": "bot-logs",
+      "author": "Aidan Bot",
+      "timestamp": "2026-03-08T00:05:05.244000+00:00",
+      "timestamp_display": "2026-03-08 00:05",
+      "timestamp_ago": "89d",
+      "message": "MODEL AUDIT ERROR: [WinError 2] The system cannot find the file specified",
+      "message_snippet": "MODEL AUDIT ERROR: [WinError 2] The system cannot find the file specified",
+      "url": "https://discord.com/channels/1468193294432604326/1475223354066600036/1479993323396661360"
+    }
+  ],
   "logs_preview": [
     {
       "channel": "viral_recaps",
@@ -5621,15 +5682,6 @@
   "schedule": {
     "2026-06-05": [
       {
-        "job_id": "d9b1cc71-44e8-4ba0-a145-edaab94f8acc",
-        "job_id_short": "d9b1cc71",
-        "channel": "viral_recaps",
-        "title": "Hasanabi Wild Moments #22",
-        "scheduled_at": "2026-06-05T19:30:00-06:00",
-        "scheduled_at_iso": "2026-06-05T19:30:00",
-        "status": "queued"
-      },
-      {
         "job_id": "af145ca0-15be-45df-960c-d40415bacdf5",
         "job_id_short": "af145ca0",
         "channel": "viral_recaps",
@@ -5700,6 +5752,35 @@
         "scheduled_at": "2026-06-05T16:02:15.907685",
         "scheduled_at_iso": "2026-06-05T16:02:15.907685",
         "status": "succeeded"
+      },
+      {
+        "job_id": "d9b1cc71-44e8-4ba0-a145-edaab94f8acc",
+        "job_id_short": "d9b1cc71",
+        "channel": "viral_recaps",
+        "title": "Hasanabi Wild Moments #22",
+        "scheduled_at": "2026-06-05T17:02:03.870163",
+        "scheduled_at_iso": "2026-06-05T17:02:03.870163",
+        "status": "succeeded"
+      }
+    ],
+    "2026-06-06": [
+      {
+        "job_id": "caf5ba38-7551-4425-b96f-ac445664600f",
+        "job_id_short": "caf5ba38",
+        "channel": "fomo_highlights",
+        "title": "Anthropic's IPO move just raised the AI stakes \ud83d\ude80",
+        "scheduled_at": "2026-06-06T00:04:04",
+        "scheduled_at_iso": "2026-06-06T00:04:04",
+        "status": "queued"
+      },
+      {
+        "job_id": "e7bdc3c6-e649-432a-a7ae-0527c62fb48f",
+        "job_id_short": "e7bdc3c6",
+        "channel": "fomo_highlights",
+        "title": "$1B buyback: Nu just flashed confidence \ud83d\udcb0",
+        "scheduled_at": "2026-06-06T00:05:05",
+        "scheduled_at_iso": "2026-06-06T00:05:05",
+        "status": "queued"
       }
     ],
     "2026-05-29": [
@@ -6148,7 +6229,6 @@
         "status": "succeeded"
       }
     ],
-    "2026-06-06": [],
     "2026-06-07": [],
     "2026-06-08": [],
     "2026-06-09": [],
@@ -6301,9 +6381,9 @@
     ],
     "any_channel_high": false,
     "all_channels_safe": true,
-    "reset_time_hours": 9,
+    "reset_time_hours": 8,
     "reset_time_minutes": 41,
-    "reset_time_display": "9h 41m"
+    "reset_time_display": "8h 41m"
   },
   "revenue": {
     "total_views_30d": 0,
@@ -6323,8 +6403,8 @@
       "discovered": 0,
       "downloaded": 0,
       "processed": 0,
-      "queued": 2,
-      "uploaded": 745
+      "queued": 3,
+      "uploaded": 746
     },
     "by_channel": [
       {
@@ -6340,7 +6420,7 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 0,
+        "queued": 2,
         "uploaded": 275
       },
       {
@@ -6364,8 +6444,8 @@
         "discovered": 0,
         "downloaded": 0,
         "processed": 0,
-        "queued": 2,
-        "uploaded": 224
+        "queued": 1,
+        "uploaded": 225
       }
     ],
     "throughput": {
@@ -6374,11 +6454,11 @@
     },
     "stage_timings": {
       "discovered_to_downloaded_hours": 0.0,
-      "queued_to_uploaded_hours": 1.65
+      "queued_to_uploaded_hours": 1.66
     },
     "bottleneck": {
       "stage": "queued",
-      "backlog": 2
+      "backlog": 3
     }
   },
   "disk": {
@@ -6400,9 +6480,9 @@
       {
         "name": "renders",
         "path": "C:\\Users\\kanaw\\.openclaw\\workspace\\ventures\\clip_empire\\renders",
-        "size_bytes": 721616704,
-        "size_human": "688.2MB",
-        "file_count": 101
+        "size_bytes": 732323655,
+        "size_human": "698.4MB",
+        "file_count": 103
       },
       {
         "name": "renders/thumbnails",
@@ -6412,7 +6492,7 @@
         "file_count": 36
       }
     ],
-    "total_disk_bytes": 64137201491,
+    "total_disk_bytes": 64150579270,
     "total_disk_human": "59.7GB",
     "percent_of_500gb": 11.9,
     "warning_threshold_pct": 70,
@@ -6661,7 +6741,7 @@
   "leaderboard": [
     {
       "channel_name": "arc_highlightz",
-      "total_views": 47641,
+      "total_views": 47644,
       "uploads_30d": 47,
       "avg_views": 1013,
       "best_clip_title": "No clips yet",
@@ -6673,8 +6753,8 @@
     {
       "channel_name": "fomo_highlights",
       "total_views": 1092,
-      "uploads_30d": 23,
-      "avg_views": 47,
+      "uploads_30d": 22,
+      "avg_views": 49,
       "best_clip_title": "No clips yet",
       "best_clip_views": 0,
       "best_clip_url": "",
@@ -6693,7 +6773,7 @@
       "trend": "stable"
     },
     {
-      "channel_name": "test_channel",
+      "channel_name": "market_meltdowns",
       "total_views": 0,
       "uploads_30d": 0,
       "avg_views": 0,
@@ -6704,7 +6784,7 @@
       "trend": "stable"
     },
     {
-      "channel_name": "market_meltdowns",
+      "channel_name": "test_channel",
       "total_views": 0,
       "uploads_30d": 0,
       "avg_views": 0,
@@ -7773,7 +7853,7 @@
           "priority": 1,
           "clips_fetched": 17,
           "last_fetched_at": "2026-06-05T22:06:05.733105",
-          "last_fetched_rel": "11m",
+          "last_fetched_rel": "1h",
           "enabled": true,
           "url": "https://www.youtube.com/@penguinz0/videos",
           "type": "transcript"
@@ -7787,7 +7867,7 @@
           "priority": 1,
           "clips_fetched": 22,
           "last_fetched_at": "2026-06-05T14:06:24.912181",
-          "last_fetched_rel": "8h",
+          "last_fetched_rel": "9h",
           "enabled": true,
           "url": "https://www.youtube.com/@HasanAbi/videos",
           "type": "transcript"
@@ -7801,7 +7881,7 @@
           "priority": 1,
           "clips_fetched": 176,
           "last_fetched_at": "2026-06-05T12:06:19.634609",
-          "last_fetched_rel": "10h",
+          "last_fetched_rel": "11h",
           "enabled": true,
           "url": "https://www.youtube.com/@Ludwig/videos",
           "type": "transcript"
@@ -7928,13 +8008,13 @@
   ],
   "daily_summary": {
     "date": "2026-06-05",
-    "uploads_today": 7,
-    "uploads_yesterday": 14,
+    "uploads_today": 8,
+    "uploads_yesterday": 15,
     "views_gained_today": 0,
     "views_yesterday": 0,
     "errors_today": 0,
-    "quota_pct": 112.0,
-    "quota_units_used": 11200,
+    "quota_pct": 128.0,
+    "quota_units_used": 12800,
     "delta_uploads": -7,
     "delta_views": 0,
     "top_clip_today": {
@@ -7945,21 +8025,21 @@
     "top_3_channels": [
       {
         "channel": "viral_recaps",
-        "uploads": 5
+        "uploads": 6
       },
       {
         "channel": "fomo_highlights",
         "uploads": 2
       }
     ],
-    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-06-05\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 7 (-7 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 112.0% used (11200/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Ludwig Crazy Moments #173\n  0 views \u00e2\u20ac\u00a2 viral_recaps\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. viral_recaps: 5 uploads\n  2. fomo_highlights: 2 uploads",
-    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-06-05\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 7 (-7 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 112.0% used (`11200/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Ludwig Crazy Moments #173_\n**0 views** \u00e2\u20ac\u00a2 **viral_recaps**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **viral_recaps** \u00e2\u20ac\u201d 5 uploads\n2. **fomo_highlights** \u00e2\u20ac\u201d 2 uploads"
+    "summary_text": "\u00f0\u0178\u201c\u0160 Daily Summary for 2026-06-05\n\n\u00f0\u0178\u201c\u02c6 Stats:\n  Uploads: 8 (-7 vs yesterday)\n  Views: 0 (+0 vs yesterday)\n  Errors: 0\n  API Quota: 128.0% used (12800/10000 units)\n\n\u00f0\u0178\u0152\u0178 Top Clip:\n  Ludwig Crazy Moments #173\n  0 views \u00e2\u20ac\u00a2 viral_recaps\n\n\u00f0\u0178\u008f\u2020 Top Channels:\n  1. viral_recaps: 6 uploads\n  2. fomo_highlights: 2 uploads",
+    "summary_discord": "## \u00f0\u0178\u201c\u0160 Daily Summary \u00e2\u20ac\u201d 2026-06-05\n\n**\u00f0\u0178\u201c\u02c6 Today's Stats:**\n\u00e2\u20ac\u00a2 **Uploads:** 8 (-7 vs yesterday)\n\u00e2\u20ac\u00a2 **Views:** 0 (+0 vs yesterday)\n\u00e2\u20ac\u00a2 **Errors:** 0\n\u00e2\u20ac\u00a2 **API Quota:** 128.0% used (`12800/10000` units)\n\n**\u00f0\u0178\u0152\u0178 Top Performer Today:**\n_Ludwig Crazy Moments #173_\n**0 views** \u00e2\u20ac\u00a2 **viral_recaps**\n\n**\u00f0\u0178\u008f\u2020 Top Channels:**\n1. **viral_recaps** \u00e2\u20ac\u201d 6 uploads\n2. **fomo_highlights** \u00e2\u20ac\u201d 2 uploads"
   },
   "title_performance": {
     "pattern_analysis": {
       "has_numbers": {
         "avg_views": 0.0,
-        "count": 599,
+        "count": 600,
         "total_views": 0
       },
       "has_question": {
@@ -8162,7 +8242,7 @@
         "channel": "viral_recaps",
         "best_title": "Watch this before scrolling: The most unexpected moment of the day",
         "best_views": 0,
-        "total_titles_analyzed": 224,
+        "total_titles_analyzed": 225,
         "pattern_breakdown": {
           "numbers_pct": 95.1,
           "questions_pct": 0.4,
@@ -8177,7 +8257,7 @@
       {
         "style_name": "Gaming/Clips",
         "avg_views": 0,
-        "total_clips": 738,
+        "total_clips": 739,
         "best_clip": null,
         "total_views": 0,
         "is_best": true
@@ -8202,7 +8282,7 @@
     "best_style_overall": "Gaming/Clips",
     "summary_stats": {
       "total_styles": 3,
-      "total_clips_all": 745,
+      "total_clips_all": 746,
       "total_views_all": 0,
       "avg_views_overall": 0
     }
@@ -8326,8 +8406,8 @@
       {
         "hour": 19,
         "hour_label": "19:00",
-        "posts": 110,
-        "avg_views": 1486.0
+        "posts": 111,
+        "avg_views": 1485.0
       },
       {
         "hour": 20,
@@ -8382,8 +8462,8 @@
       {
         "day": 4,
         "day_name": "Friday",
-        "posts": 98,
-        "avg_views": 813.0
+        "posts": 99,
+        "avg_views": 818.0
       },
       {
         "day": 5,
@@ -9441,7 +9521,7 @@
           "hour": 19,
           "day": 4,
           "views": 1350.0,
-          "posts": 14,
+          "posts": 15,
           "intensity": 81.8
         },
         {
@@ -9664,7 +9744,26 @@
         }
       ]
     ],
-    "scheduled_posts": [],
+    "scheduled_posts": [
+      {
+        "job_id": "caf5ba38",
+        "channel": "fomo_highlights",
+        "title": "Anthropic's IPO move just raised the AI stakes \ud83d\ude80",
+        "scheduled_at": "2026-06-06T00:04:04",
+        "hour": 0,
+        "day": 5,
+        "day_name": "Saturday"
+      },
+      {
+        "job_id": "e7bdc3c6",
+        "channel": "fomo_highlights",
+        "title": "$1B buyback: Nu just flashed confidence \ud83d\udcb0",
+        "scheduled_at": "2026-06-06T00:05:05",
+        "hour": 0,
+        "day": 5,
+        "day_name": "Saturday"
+      }
+    ],
     "next_best_slot": {
       "date": "2026-06-09",
       "hour": 22,
@@ -9672,7 +9771,7 @@
       "day_name": "Tuesday",
       "est_views": 1650.0
     },
-    "job_count": 745
+    "job_count": 746
   },
   "benchmarks": {
     "current_tier": "Starter",
@@ -9763,87 +9862,87 @@
     {
       "type": "warning",
       "title": "Channel \"market_meltdowns\" paused for 24+ hours",
-      "message": "market_meltdowns has been paused for 2134 hours",
+      "message": "market_meltdowns has been paused for 2135 hours",
       "channel": "market_meltdowns",
-      "created_at": "2026-06-05T22:18:04.997017",
+      "created_at": "2026-06-05T23:18:05.204423",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"self_made_clips\" paused for 24+ hours",
-      "message": "self_made_clips has been paused for 2130 hours",
+      "message": "self_made_clips has been paused for 2131 hours",
       "channel": "self_made_clips",
-      "created_at": "2026-06-05T22:18:04.997017",
+      "created_at": "2026-06-05T23:18:05.204423",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"rich_or_ruined\" paused for 24+ hours",
-      "message": "rich_or_ruined has been paused for 2128 hours",
+      "message": "rich_or_ruined has been paused for 2129 hours",
       "channel": "rich_or_ruined",
-      "created_at": "2026-06-05T22:18:04.997017",
+      "created_at": "2026-06-05T23:18:05.204423",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"startup_graveyard\" paused for 24+ hours",
-      "message": "startup_graveyard has been paused for 2128 hours",
+      "message": "startup_graveyard has been paused for 2129 hours",
       "channel": "startup_graveyard",
-      "created_at": "2026-06-05T22:18:04.997017",
+      "created_at": "2026-06-05T23:18:05.204423",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_sirens\" paused for 24+ hours",
-      "message": "stream_sirens has been paused for 2107 hours",
+      "message": "stream_sirens has been paused for 2108 hours",
       "channel": "stream_sirens",
-      "created_at": "2026-06-05T22:18:04.997017",
+      "created_at": "2026-06-05T23:18:05.204423",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"stream_queens\" paused for 24+ hours",
-      "message": "stream_queens has been paused for 2107 hours",
+      "message": "stream_queens has been paused for 2108 hours",
       "channel": "stream_queens",
-      "created_at": "2026-06-05T22:18:04.997017",
+      "created_at": "2026-06-05T23:18:05.204423",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"ai_did_what\" paused for 24+ hours",
-      "message": "ai_did_what has been paused for 2073 hours",
+      "message": "ai_did_what has been paused for 2074 hours",
       "channel": "ai_did_what",
-      "created_at": "2026-06-05T22:18:04.997017",
+      "created_at": "2026-06-05T23:18:05.204423",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"gym_moments\" paused for 24+ hours",
-      "message": "gym_moments has been paused for 2073 hours",
+      "message": "gym_moments has been paused for 2074 hours",
       "channel": "gym_moments",
-      "created_at": "2026-06-05T22:18:04.997017",
+      "created_at": "2026-06-05T23:18:05.204423",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"kitchen_chaos\" paused for 24+ hours",
-      "message": "kitchen_chaos has been paused for 1926 hours",
+      "message": "kitchen_chaos has been paused for 1927 hours",
       "channel": "kitchen_chaos",
-      "created_at": "2026-06-05T22:18:04.997017",
+      "created_at": "2026-06-05T23:18:05.204423",
       "read": false
     },
     {
       "type": "warning",
       "title": "Channel \"unfiltered_clips\" paused for 24+ hours",
-      "message": "unfiltered_clips has been paused for 1926 hours",
+      "message": "unfiltered_clips has been paused for 1927 hours",
       "channel": "unfiltered_clips",
-      "created_at": "2026-06-05T22:18:04.997017",
+      "created_at": "2026-06-05T23:18:05.204423",
       "read": false
     }
   ],
   "checklists": [
     {
-      "channel": "viral_recaps",
+      "channel": "fomo_highlights",
       "readiness_score": 6,
       "total_checks": 6,
       "badge": "launch_ready",
@@ -9923,7 +10022,7 @@
       ]
     },
     {
-      "channel": "fomo_highlights",
+      "channel": "viral_recaps",
       "readiness_score": 5,
       "total_checks": 6,
       "badge": "needs_attention",
@@ -9952,13 +10051,13 @@
         },
         {
           "label": "Has clips in queue",
-          "passed": false,
-          "icon": "\u00e2\u009d\u0152"
+          "passed": true,
+          "icon": "\u00e2\u0153\u2026"
         },
         {
           "label": "Quota not exhausted (< 90% used)",
-          "passed": true,
-          "icon": "\u00e2\u0153\u2026"
+          "passed": false,
+          "icon": "\u00e2\u009d\u0152"
         }
       ]
     },
@@ -10422,19 +10521,19 @@
         "status": "active",
         "category": "Comedy",
         "target_per_day": 8,
-        "published_24h": 5,
-        "queue_depth": 2,
+        "published_24h": 6,
+        "queue_depth": 1,
         "running_jobs": 0,
         "failed_7d": 0,
         "avg_views": 161,
         "rpm": 0.14,
-        "deficit": 3,
-        "completion_rate": 62.5,
+        "deficit": 2,
+        "completion_rate": 75.0,
         "lagging": true,
         "views_source": "source_clips_proxy",
-        "latest_title": "Ludwig Funny Moments #177",
-        "latest_url": "https://youtube.com/shorts/R4wbKrByi3E",
-        "latest_uploaded_at": "2026-06-05 16:02"
+        "latest_title": "Hasanabi Wild Moments #22",
+        "latest_url": "https://youtube.com/shorts/2b5qnfTKt9o",
+        "latest_uploaded_at": "2026-06-05 17:02"
       },
       {
         "channel": "test_channel",
@@ -10460,14 +10559,14 @@
         "status": "active",
         "category": "Gaming",
         "target_per_day": 8,
-        "published_24h": 3,
-        "queue_depth": 0,
+        "published_24h": 2,
+        "queue_depth": 2,
         "running_jobs": 0,
         "failed_7d": 0,
         "avg_views": 0,
         "rpm": 0.0,
-        "deficit": 5,
-        "completion_rate": 37.5,
+        "deficit": 6,
+        "completion_rate": 25.0,
         "lagging": true,
         "views_source": "none",
         "latest_title": "Bitcoin breaks $60K \ud83d\ude33 Is this the real crypto flush?",
@@ -10495,13 +10594,13 @@
       }
     ],
     "lagging_count": 4,
-    "queue_backlog": 2,
+    "queue_backlog": 3,
     "analytics_channels": 3
   },
   "meta": {
     "refresh_seconds": 30,
     "channel_count": 14,
-    "job_count": 929,
+    "job_count": 931,
     "has_metrics_daily": false,
     "has_clip_assets": false,
     "note": "Trend analytics prefer metrics_daily and fall back to source clip proxy series when upload analytics are sparse."
